@@ -122,12 +122,12 @@ namespace TooManyItems
         //        DropItem(CarvingBlade.itemDef);
         //        DropItem(DebitCard.itemDef);
         //        DropItem(EdibleGlue.itemDef);
-        //        DropItem(ArmorItem.itemDef);
+        //        DropItem(RubberDucky.itemDef);
         //        DropItem(GlassMarble.itemDef);
         //        DropItem(HolyWater.itemDef);
         //        DropItem(IronHeart.itemDef);
         //        DropItem(MilkCarton.itemDef);
-        //        DropItem(ProfaneCrucifix.itemDef);
+        //        DropItem(Crucifix.itemDef);
         //        DropItem(Photodiode.itemDef);
         //        DropItem(RedBlueGlasses.itemDef);
         //        DropItem(RustyTrowel.itemDef);
