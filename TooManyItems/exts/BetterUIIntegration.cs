@@ -15,17 +15,7 @@ namespace TooManyItems
         {
             public static void RegisterItemStats()
             {
-                // Armor Item
-                ItemStats.RegisterStat(
-                    itemDef: RubberDucky.itemDef,
-                    "Bonus Armor",
-                    RubberDucky.armorPerStack.Value,
-                    RubberDucky.armorPerStack.Value,
-                    stackingFormula: ItemStats.LinearStacking,
-                    statFormatter: ItemStats.StatFormatter.Armor
-                );
-
-                // Bottle Cap
+                // Ancient Coin
                 ItemStats.RegisterStat(
                     itemDef: AncientCoin.itemDef,
                     "Gold Gain",
@@ -178,6 +168,16 @@ namespace TooManyItems
                     RedBlueGlasses.critDamagePercent,
                     stackingFormula: ItemStats.LinearStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
+                );
+
+                // Rubber Ducky
+                ItemStats.RegisterStat(
+                    itemDef: RubberDucky.itemDef,
+                    "Bonus Armor",
+                    RubberDucky.armorPerStack.Value,
+                    RubberDucky.armorPerStack.Value,
+                    stackingFormula: ItemStats.LinearStacking,
+                    statFormatter: ItemStats.StatFormatter.Armor
                 );
 
                 // Rusted Trowel
