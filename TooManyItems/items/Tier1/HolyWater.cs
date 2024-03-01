@@ -1,7 +1,9 @@
 ﻿using R2API;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -9,12 +11,12 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 20% (+20% per stack) bonus experience.
+        // Upon killing a boss, gain 6% (+6% per stack) of your level experience cap as bonus experience.
         public static ConfigurableValue<float> experienceMultiplierPerStack = new(
             "Item: Holy Water",
             "XP Multiplier",
-            20f,
-            "Bonus experience generation as a percentage.",
+            6f,
+            "Bonus experience gained on boss kill as a percentage of the level cap.",
             new List<string>()
             {
                 "ITEM_HOLYWATER_DESC"
@@ -56,28 +58,41 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.CharacterMaster.GiveExperience += (orig, self, amount) =>
+            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
             {
-                if (self.inventory == null) return;
+                orig(eventManager, damageReport);
 
-                int count = self.inventory.GetItemCount(itemDef);
-                if (count > 0)
+                if (!NetworkServer.active) return;
+
+                CharacterMaster atkMaster = damageReport.attackerMaster;
+                CharacterBody atkBody = damageReport.attackerBody;
+
+                if (atkBody && atkMaster && atkBody.inventory && damageReport.victimBody.isBoss)
                 {
-                    float multiplier = 1 + count * experienceMultiplierAsPercent;
-                    amount = (uint)(amount * multiplier);
+                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        float hyperbolicExperienceMultiplier = 1 - (1 / (1 + (experienceMultiplierAsPercent * count)));
+                        float bonusXP = GetExperienceCap(atkBody.level) * count * hyperbolicExperienceMultiplier;
+                        atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
+                    }
                 }
-
-                orig(self, amount);
             };
+        }
+
+        private static float GetExperienceCap(float level)
+        {
+            return (-4f / 0.11f) * (1f - Mathf.Pow(1.55f, level));
         }
 
         private static void AddTokens()
         {
             LanguageAPI.Add("HOLY_WATER", "Holy Water");
             LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_PICKUP", "Gain bonus experience.");
+            LanguageAPI.Add("HOLY_WATER_PICKUP", "Gain bonus experience upon killing bosses.");
 
-            string desc = $"Gain <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> <style=cStack>(+{experienceMultiplierPerStack.Value}% per stack)</style> bonus experience.";
+            string desc = $"Upon killing a boss, gain <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> " +
+                $"<style=cStack>(+{experienceMultiplierPerStack.Value}% per stack)</style> of your current level experience cap as bonus experience.";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
             string lore = "";

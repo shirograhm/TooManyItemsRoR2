@@ -48,7 +48,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
-            50,
+            80,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -117,6 +117,7 @@ namespace TooManyItems
             On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
             {
                 orig(eventManager, damageReport);
+
                 if (!NetworkServer.active || damageReport.victimBody == null || damageReport.attackerMaster == null) return;
 
                 if (damageReport.victimBody.HasBuff(curseDebuff))

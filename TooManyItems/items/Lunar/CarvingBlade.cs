@@ -15,11 +15,11 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.09f, 0.67f, 0.42f, 1f));
 
-        // Deal 0.8% (+0.8% per stack) enemy current health as bonus on-hit damage. You cannot crit.
+        // Deal 0.6% (+0.6% per stack) enemy current health as bonus on-hit damage. You cannot crit.
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Carving Blade",
             "On-Hit Damage Scaling",
-            0.8f,
+            0.6f,
             "Percent of enemy's current health dealt as bonus on-hit damage.",
             new List<string>()
             {

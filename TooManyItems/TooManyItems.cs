@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -23,7 +24,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.1.0";
+        public const string PluginVersion = "0.1.1";
 
         public static ExpansionDef voidDLC;
 
@@ -110,54 +111,54 @@ namespace TooManyItems
             };
         }
 
-        //private void Update()
-        //{
-        //    if (!NetworkServer.active) return;
+        private void Update()
+        {
+            if (!NetworkServer.active) return;
 
-        //    if (Input.GetKeyDown(KeyCode.F2))
-        //    {
-        //        DropItem(AncientCoin.itemDef);
-        //        DropItem(BottleCap.itemDef);
-        //        DropItem(BrokenMask.itemDef);
-        //        DropItem(CarvingBlade.itemDef);
-        //        DropItem(DebitCard.itemDef);
-        //        DropItem(EdibleGlue.itemDef);
-        //        DropItem(RubberDucky.itemDef);
-        //        DropItem(GlassMarble.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(IronHeart.itemDef);
-        //        DropItem(MilkCarton.itemDef);
-        //        DropItem(Crucifix.itemDef);
-        //        DropItem(Photodiode.itemDef);
-        //        DropItem(RedBlueGlasses.itemDef);
-        //        DropItem(RustyTrowel.itemDef);
-        //        DropItem(SoulRing.itemDef);
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.F3))
-        //    {
-        //        // Single key testing
-        //        DropItem(TatteredScroll.equipmentDef);
-        //        //DropItem(Stopwatch.equipmentDef);
-        //        //DropItem(TwinFlame.equipmentDef);
-        //        //DropItem(Slingshot.equipmentDef);
-        //    }
-        //}
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                //DropItem(AncientCoin.itemDef);
+                //DropItem(BottleCap.itemDef);
+                //DropItem(BrokenMask.itemDef);
+                //DropItem(CarvingBlade.itemDef);
+                //DropItem(DebitCard.itemDef);
+                //DropItem(EdibleGlue.itemDef);
+                //DropItem(RubberDucky.itemDef);
+                //DropItem(GlassMarble.itemDef);
+                DropItem(HolyWater.itemDef);
+                //DropItem(IronHeart.itemDef);
+                //DropItem(MilkCarton.itemDef);
+                //DropItem(Crucifix.itemDef);
+                //DropItem(Photodiode.itemDef);
+                //DropItem(RedBlueGlasses.itemDef);
+                //DropItem(RustyTrowel.itemDef);
+                //DropItem(SoulRing.itemDef);
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                // Single key testing
+                DropItem(TatteredScroll.equipmentDef);
+                //DropItem(Stopwatch.equipmentDef);
+                //DropItem(TwinFlame.equipmentDef);
+                //DropItem(Slingshot.equipmentDef);
+            }
+        }
 
-        //private void DropItem(ItemDef def)
-        //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        private void DropItem(ItemDef def)
+        {
+            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
-        //}
+            Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
+        }
 
-        //private void DropItem(EquipmentDef def)
-        //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        private void DropItem(EquipmentDef def)
+        {
+            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
-        //}
+            Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
+        }
 
         public struct GenericCharacterInfo
         {

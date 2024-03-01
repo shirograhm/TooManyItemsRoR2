@@ -9,11 +9,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce damage taken by 50%. Taking damage set you on fire for 5% max health over 3 seconds.
+        // Reduce damage taken by 40%. Taking damage set you on fire for 5% max health over 3 seconds.
         public static ConfigurableValue<float> damageReduction = new(
             "Item: Crucifix",
             "Damage Reduction",
-            50f,
+            40f,
             "Percentage of damage reduced.",
             new List<string>()
             {

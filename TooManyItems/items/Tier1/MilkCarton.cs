@@ -9,11 +9,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce damage from elite enemies by 3% (+3% per stack).
-        public static ConfigurableValue<int> eliteDamageReduction = new(
+        // Reduce damage from elite enemies by 5% (+5% per stack).
+        public static ConfigurableValue<float> eliteDamageReduction = new(
             "Item: Milk Carton",
             "Percent Damage Reduction",
-            3,
+            5f,
             "Percent damage reduction agains elite enemies.",
             new List<string>()
             {

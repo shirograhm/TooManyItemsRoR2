@@ -112,7 +112,7 @@ namespace TooManyItems
                     "Bonus Experience",
                     HolyWater.experienceMultiplierAsPercent,
                     HolyWater.experienceMultiplierAsPercent,
-                    stackingFormula: ItemStats.LinearStacking,
+                    stackingFormula: ItemStats.HyperbolicStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 

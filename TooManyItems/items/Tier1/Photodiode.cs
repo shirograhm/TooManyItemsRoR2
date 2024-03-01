@@ -11,7 +11,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef attackSpeedBuff;
 
-        // On-hit, gain 2.5% attack speed for 10 seconds, up to a max of 25% (+25% per stack).
+        // On-hit, gain 2.5% attack speed for 10 seconds, up to a max of 20% (+20% per stack).
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
             "Attack Speed On-Hit",
@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> maxAttackSpeedStacks = new(
             "Item: Photodiode",
             "Max Stacks",
-            10,
+            8,
             "Max attack speed stacks allowed per stack of item.",
             new List<string>()
             {
