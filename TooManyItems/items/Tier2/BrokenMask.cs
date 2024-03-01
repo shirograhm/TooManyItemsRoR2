@@ -18,11 +18,11 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.38f, 0.38f, 0.82f, 1f));
 
-        // Dealing damage burns enemies for 1.5% (+1.5% per stack) max health over 3 seconds.
+        // Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 3 seconds.
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
-            1.5f,
+            1.2f,
             "Burn damage dealt over the duration as a percentage of enemy max health.",
             new List<string>()
             {
@@ -39,7 +39,8 @@ namespace TooManyItems
                 "ITEM_BROKENMASK_DESC"
             }
         );
-        public static float burnDamagePercent = (burnDamage.Value / burnDuration.Value) / 100f;
+        public static float burnDamagePercent = burnDamage.Value / 100f;
+        public static float burnTickInterval = 0.5f;
 
         public class Statistics : MonoBehaviour
         {
@@ -132,10 +133,10 @@ namespace TooManyItems
                     count = attackerBody.inventory.GetItemCount(itemDef);
                 }
 
+                float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                float baseBurnDamage = self.victimBody.maxHealth * burnDamagePercent * count;
+                dotStack.damage = self.victimBody.maxHealth * burnPercentPerTick * count;
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
-                dotStack.damage = baseBurnDamage / burnDuration.Value;
 
                 var stats = attackerBody.inventory.GetComponent<Statistics>();
                 stats.TotalDamageDealt += dotStack.damage;
@@ -184,8 +185,7 @@ namespace TooManyItems
                 terminalTimedBuff = burnDebuff,
                 terminalTimedBuffDuration = burnDuration,
                 resetTimerOnAdd = true,
-                interval = 1f,
-                damageCoefficient = 1f / burnDuration.Value
+                interval = burnTickInterval
             };
         }
 

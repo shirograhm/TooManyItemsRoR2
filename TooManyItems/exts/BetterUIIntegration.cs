@@ -152,6 +152,15 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
+                // Blood Dice
+                ItemStats.RegisterStat(
+                    itemDef: BloodDice.itemDef,
+                    "Health Gained",
+                    1f,
+                    1f,
+                    statFormatter: BloodDiceHealthFormatter
+                );
+
                 // Red-Blue Glasses
                 ItemStats.RegisterStat(
                     itemDef: RedBlueGlasses.itemDef,
@@ -358,6 +367,31 @@ namespace TooManyItems
                     }
 
                     sb.Append(" health");
+                }
+            };
+
+            private static ItemStats.StatFormatter BloodDiceHealthFormatter = new()
+            {
+                suffix = "",
+                style = ItemStats.Styles.Health,
+                statFormatter = (sb, value, master) =>
+                {
+                    if (!master.inventory) return;
+
+                    var component = master.inventory.GetComponent<BloodDice.Statistics>();
+                    if (component)
+                    {
+                        string temp = String.Format("{0:#}", component.PermanentHealth);
+                        temp = temp == String.Empty ? "0" : temp;
+
+                        sb.AppendFormat(temp);
+                    }
+                    else
+                    {
+                        sb.Append("0");
+                    }
+
+                    sb.Append(" ");
                 }
             };
 

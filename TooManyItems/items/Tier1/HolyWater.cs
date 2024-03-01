@@ -11,12 +11,12 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Upon killing a boss, gain 6% (+6% per stack) of your level experience cap as bonus experience.
+        // Upon killing an elite enemy, gain 6% (+6% per stack) of your level experience cap as bonus experience.
         public static ConfigurableValue<float> experienceMultiplierPerStack = new(
             "Item: Holy Water",
             "XP Multiplier",
             6f,
-            "Bonus experience gained on boss kill as a percentage of the level cap.",
+            "Bonus experience gained on elite kill as a percentage of the level cap.",
             new List<string>()
             {
                 "ITEM_HOLYWATER_DESC"
@@ -89,9 +89,9 @@ namespace TooManyItems
         {
             LanguageAPI.Add("HOLY_WATER", "Holy Water");
             LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_PICKUP", "Gain bonus experience upon killing bosses.");
+            LanguageAPI.Add("HOLY_WATER_PICKUP", "Gain bonus experience upon killing elite enemies.");
 
-            string desc = $"Upon killing a boss, gain <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> " +
+            string desc = $"Upon killing an elite enemy, gain <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> " +
                 $"<style=cStack>(+{experienceMultiplierPerStack.Value}% per stack)</style> of your current level experience cap as bonus experience.";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 

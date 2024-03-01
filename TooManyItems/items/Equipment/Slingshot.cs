@@ -22,7 +22,7 @@ namespace TooManyItems
             "Time between using the equipment and blinking back.",
             new List<string>()
             {
-                "ITEM_TSLINGSHOT_DESC"
+                "ITEM_SLINGSHOT_DESC"
             }
         );
 

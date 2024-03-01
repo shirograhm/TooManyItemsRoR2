@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 886462480
+CRC: 43998665
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 31a4cfb14348119e8d0fb4e1af567101
+    Hash: 1e1fba00ccee56e403d296dac501f1e9
   TypeTreeHash:
     serializedVersion: 2
     Hash: 10def29c998ab6d8bfcfd7beeec5d09d
@@ -66,8 +66,10 @@ Assets:
 - Assets/Models/Prefabs/Item/SoulRing/eye-ring.obj
 - Assets/Models/Prefabs/Item/RubberDucky/RubberDucky.prefab
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Metallic.png
+- Assets/Models/Prefabs/Item/BloodDice/Mat.1.mat
 - Assets/Models/Prefabs/Item/CarvingBlade/viego.fbx
 - Assets/Models/Prefabs/Item/HolyWater/Holy Water Bottle.obj
+- Assets/Textures/Icons/Item/HealTotem.png
 - Assets/Models/Prefabs/Item/Stopwatch/stopwatch_DefaultMaterial_AlbedoTransparency.png
 - Assets/Models/Prefabs/Item/HolyWater/pCube2Mat.mat
 - Assets/Models/Prefabs/Item/HolyWater/HolyWater.prefab
@@ -88,6 +90,7 @@ Assets:
 - Assets/Models/Prefabs/Item/MilkCarton/Milk_Box_v1_001_Tex.mat
 - Assets/Textures/Icons/Item/AncientCoin.png
 - Assets/Models/Prefabs/Item/Stopwatch/Stopwatch.prefab
+- Assets/Models/Prefabs/Item/HealTotem/HealTotem.prefab
 - Assets/Models/Prefabs/Item/ProfaneCrucifix/Satin Finish.mat
 - Assets/Models/Prefabs/Item/TatteredScroll/TatteredScroll.prefab
 - Assets/Models/Prefabs/Item/IronHeart/IronHeart.prefab
@@ -96,15 +99,18 @@ Assets:
 - Assets/Models/Prefabs/Item/HolyWater/Holy_Water_Bottle_Albedo.tga.png
 - Assets/Models/Prefabs/Item/DebitCard/DebitCard.prefab
 - Assets/Models/Prefabs/Item/MilkCarton/material.png
+- Assets/Models/Prefabs/Item/HealTotem/uploads_files_2753089_Praying.OBJ
 - Assets/Textures/Icons/Item/SoulRing.png
 - Assets/Textures/Icons/Item/IronHeart.png
 - Assets/Textures/Icons/Buff/TatteredCurse.png
+- Assets/Models/Prefabs/Item/BloodDice/uploads_files_2131787_Dice.fbx
 - Assets/Models/Prefabs/Item/ProfaneCrucifix/Blood Pearl.mat
 - Assets/Textures/Icons/Item/RubberDucky.png
 - Assets/Models/Prefabs/Item/AncientCoin/uploads_files_4364824_coin.fbx
 - Assets/Models/Prefabs/Item/BottleCap/09 - Default.mat
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleNormal.png
 - Assets/Textures/Icons/Item/RustedTrowel.png
+- Assets/Models/Prefabs/Item/HealTotem/Group38563Mat.mat
 - Assets/Textures/Icons/Item/DebitCard.png
 - Assets/Models/Prefabs/Item/BottleCap/uploads_files_2622639_cap_low.FBX
 - Assets/Textures/Icons/Buff/Mulch.png
@@ -112,6 +118,7 @@ Assets:
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleMetal.png
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Height.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottle.mat
+- Assets/Models/Prefabs/Item/BloodDice/BloodDice.prefab
 - Assets/Textures/Icons/Item/ProfaneCrucifix.png
 - Assets/Models/Prefabs/Item/SoulRing/RingMaterial.mat
 - Assets/Models/Prefabs/Item/GlassMarbles/Glass.mat
@@ -126,6 +133,7 @@ Assets:
 - Assets/Models/Prefabs/Item/RustedTrowel/uploads_files_2158579_Trowel.FBX
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleRough.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleAlbedo.png
+- Assets/Models/Prefabs/Item/BloodDice/Mat.mat
 - Assets/Models/Prefabs/Item/GlassMarbles/GlassMarbles.FBX
 - Assets/Models/Prefabs/Item/HolyWater/Holy_Water_Bottle_Metallic.tga.png
 - Assets/Models/Prefabs/Item/TatteredScroll/map_Manuscript1_BaseColor.png
@@ -138,6 +146,7 @@ Assets:
 - Assets/Models/Prefabs/Item/TatteredScroll/scroll_MAT.mat
 - Assets/Models/Prefabs/Item/HolyWater/Holy_Water_Bottle_Normal.tga.png
 - Assets/Models/Prefabs/Item/Photodiode/AnodeMat.mat
+- Assets/Textures/Icons/Item/BloodDice.png
 - Assets/Models/Prefabs/Item/BrokenMask/Mask.mat
 - Assets/Models/Prefabs/Item/TatteredScroll/manuscript1_01.FBX
 - Assets/Textures/Icons/Item/CarvingBlade.png

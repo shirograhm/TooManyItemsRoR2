@@ -60,22 +60,24 @@ namespace TooManyItems
             // Items
             AncientCoin.Init();
             BottleCap.Init();
+            BrokenMask.Init();
             CarvingBlade.Init();
+            Crucifix.Init();
             DebitCard.Init();
             EdibleGlue.Init();
-            RubberDucky.Init();
             GlassMarble.Init();
             HolyWater.Init();
             IronHeart.Init();
             MilkCarton.Init();
             Photodiode.Init();
-            Crucifix.Init();
+            BloodDice.Init();
             RedBlueGlasses.Init();
+            RubberDucky.Init();
             RustyTrowel.Init();
             SoulRing.Init();
-            BrokenMask.Init();
 
             // Equipment
+            //HealTotem.Init();
             TatteredScroll.Init();
             //Stopwatch.Init();
             //TwinFlame.Init();
@@ -118,8 +120,9 @@ namespace TooManyItems
             if (Input.GetKeyDown(KeyCode.F2))
             {
                 //DropItem(AncientCoin.itemDef);
+                DropItem(BloodDice.itemDef);
                 //DropItem(BottleCap.itemDef);
-                //DropItem(BrokenMask.itemDef);
+                DropItem(BrokenMask.itemDef);
                 //DropItem(CarvingBlade.itemDef);
                 //DropItem(DebitCard.itemDef);
                 //DropItem(EdibleGlue.itemDef);
@@ -139,6 +142,7 @@ namespace TooManyItems
                 // Single key testing
                 DropItem(TatteredScroll.equipmentDef);
                 //DropItem(Stopwatch.equipmentDef);
+                //DropItem(HealTotem.equipmentDef);
                 //DropItem(TwinFlame.equipmentDef);
                 //DropItem(Slingshot.equipmentDef);
             }
