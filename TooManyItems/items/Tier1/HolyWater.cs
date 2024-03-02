@@ -11,11 +11,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Upon killing an elite enemy, gain 6% (+6% per stack) of your level experience cap as bonus experience.
+        // Upon killing an elite enemy, gain 3% (+3% per stack) of your level experience cap as bonus experience.
         public static ConfigurableValue<float> experienceMultiplierPerStack = new(
             "Item: Holy Water",
             "XP Multiplier",
-            6f,
+            3f,
             "Bonus experience gained on elite kill as a percentage of the level cap.",
             new List<string>()
             {

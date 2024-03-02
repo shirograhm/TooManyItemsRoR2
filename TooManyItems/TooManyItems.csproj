@@ -95,6 +95,7 @@
 
   <ItemGroup>
     <Folder Include="exts\" />
+    <Folder Include="items\notier\" />
   </ItemGroup>
 
 </Project>

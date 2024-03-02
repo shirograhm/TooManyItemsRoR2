@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 43998665
+CRC: 3613824591
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 1e1fba00ccee56e403d296dac501f1e9
+    Hash: 8b63edaa151cc157cc2909a82e2e4a63
   TypeTreeHash:
     serializedVersion: 2
     Hash: 10def29c998ab6d8bfcfd7beeec5d09d
@@ -49,7 +49,6 @@ Assets:
 - Assets/Models/Prefabs/Item/Stopwatch/stopwatch_DefaultMaterial_MetallicSmoothness.png
 - Assets/Textures/Icons/Buff/Voltage.png
 - Assets/Models/Prefabs/Item/AncientCoin/Coin_metal.png
-- Assets/Textures/Icons/Item/BottleCap.png
 - Assets/Textures/Icons/Item/MilkCarton.png
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Mixed_AO.png
 - Assets/Models/Prefabs/Item/3DGlasses/test 9.png
@@ -69,7 +68,7 @@ Assets:
 - Assets/Models/Prefabs/Item/BloodDice/Mat.1.mat
 - Assets/Models/Prefabs/Item/CarvingBlade/viego.fbx
 - Assets/Models/Prefabs/Item/HolyWater/Holy Water Bottle.obj
-- Assets/Textures/Icons/Item/HealTotem.png
+- Assets/Textures/Icons/Item/BottleCap.png
 - Assets/Models/Prefabs/Item/Stopwatch/stopwatch_DefaultMaterial_AlbedoTransparency.png
 - Assets/Models/Prefabs/Item/HolyWater/pCube2Mat.mat
 - Assets/Models/Prefabs/Item/HolyWater/HolyWater.prefab
@@ -90,6 +89,7 @@ Assets:
 - Assets/Models/Prefabs/Item/MilkCarton/Milk_Box_v1_001_Tex.mat
 - Assets/Textures/Icons/Item/AncientCoin.png
 - Assets/Models/Prefabs/Item/Stopwatch/Stopwatch.prefab
+- Assets/Textures/Icons/Item/HealTotem.png
 - Assets/Models/Prefabs/Item/HealTotem/HealTotem.prefab
 - Assets/Models/Prefabs/Item/ProfaneCrucifix/Satin Finish.mat
 - Assets/Models/Prefabs/Item/TatteredScroll/TatteredScroll.prefab
@@ -106,6 +106,7 @@ Assets:
 - Assets/Models/Prefabs/Item/BloodDice/uploads_files_2131787_Dice.fbx
 - Assets/Models/Prefabs/Item/ProfaneCrucifix/Blood Pearl.mat
 - Assets/Textures/Icons/Item/RubberDucky.png
+- Assets/Textures/Icons/Buff/DefensePrayer.png
 - Assets/Models/Prefabs/Item/AncientCoin/uploads_files_4364824_coin.fbx
 - Assets/Models/Prefabs/Item/BottleCap/09 - Default.mat
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleNormal.png
@@ -122,15 +123,18 @@ Assets:
 - Assets/Textures/Icons/Item/ProfaneCrucifix.png
 - Assets/Models/Prefabs/Item/SoulRing/RingMaterial.mat
 - Assets/Models/Prefabs/Item/GlassMarbles/Glass.mat
+- Assets/Textures/Icons/Buff/DamagePrayer.png
 - Assets/Models/Prefabs/Item/ProfaneCrucifix/uploads_files_4048812_CR187...obj
 - Assets/Textures/Icons/Item/Stopwatch.png
 - Assets/Models/Prefabs/Item/SoulRing/SoulRing.prefab
 - Assets/Textures/Icons/Item/BrokenMask.png
 - Assets/Models/Prefabs/Item/IronHeart/uploads_files_189436_Heart_OBJ.obj
+- Assets/Textures/Icons/Buff/CadencePrayer.png
 - Assets/Models/Prefabs/Item/AncientCoin/Coin_roughness.png
 - Assets/Models/Prefabs/Item/RustedTrowel/rusty.png
 - Assets/Models/Prefabs/Item/DebitCard/uploads_files_3945656_kartu+card.fbx
 - Assets/Models/Prefabs/Item/RustedTrowel/uploads_files_2158579_Trowel.FBX
+- Assets/Textures/Icons/Buff/RemedyPrayer.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleRough.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleAlbedo.png
 - Assets/Models/Prefabs/Item/BloodDice/Mat.mat

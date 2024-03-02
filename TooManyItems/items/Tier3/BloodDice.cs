@@ -183,7 +183,7 @@ namespace TooManyItems
 
         private static int GetDiceRoll(CharacterMaster atkMaster)
         {
-            int diceRoll = Random.Range(1, 6);
+            int diceRoll = TooManyItems.rand.Next(1, 7);
 
             if (affectedByLuck)
             {
@@ -191,7 +191,7 @@ namespace TooManyItems
 
                 for (int i = 0; i < Mathf.Abs(luckStat); i++)
                 {
-                    int newRoll = Random.Range(1, 6);
+                    int newRoll = TooManyItems.rand.Next(1, 7);
 
                     if (luckStat > 0)
                     {
@@ -213,8 +213,8 @@ namespace TooManyItems
             LanguageAPI.Add("BLOOD_DICE_NAME", "Blood Dice");
             LanguageAPI.Add("BLOOD_DICE_PICKUP", "Gain permanent health on kill.");
 
-            string desc = $"On kill, permanently gain <style=cIsHealth>1</style> to <style=cIsHealth>6</style> max health, up to a maximum of " +
-                $"<style=cIsHealth>{maxHealthPerStack.Value}</style> <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> health.";
+            string desc = $"On kill, gain <style=cIsHealth>1</style> to <style=cIsHealth>6</style> permanent max health, up to a maximum of " +
+                $"<style=cIsHealth>{maxHealthPerStack.Value}</style> <style=cStack>(+{maxHealthPerStack.Value} per stack)</style>.";
             LanguageAPI.Add("BLOOD_DICE_DESCRIPTION", desc);
 
             string lore = "";

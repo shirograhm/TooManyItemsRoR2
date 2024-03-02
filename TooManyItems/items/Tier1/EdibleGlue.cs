@@ -67,7 +67,7 @@ namespace TooManyItems
                 {
                     HurtBox[] hurtboxes = new SphereSearch
                     {
-                        mask = LayerIndex.entityPrecise.mask,
+                        mask = LayerIndex.enemyBody.mask,
                         origin = damageReport.attackerBody.corePosition,
                         queryTriggerInteraction = QueryTriggerInteraction.Collide,
                         radius = slowRadiusPerStack.Value * count
