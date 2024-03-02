@@ -18,7 +18,7 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.38f, 0.38f, 0.82f, 1f));
 
-        // Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 3 seconds.
+        // Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 6 seconds.
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
@@ -32,7 +32,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
-            3,
+            6,
             "Total duration of the burn in seconds.",
             new List<string>()
             {

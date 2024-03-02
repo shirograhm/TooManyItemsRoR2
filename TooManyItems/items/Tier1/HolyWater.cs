@@ -11,11 +11,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Upon killing an elite enemy, gain 3% (+3% per stack) of your level experience cap as bonus experience.
+        // Upon killing an elite enemy, gain 1% (+1% per stack) of your level experience cap as bonus experience.
         public static ConfigurableValue<float> experienceMultiplierPerStack = new(
             "Item: Holy Water",
             "XP Multiplier",
-            3f,
+            1f,
             "Bonus experience gained on elite kill as a percentage of the level cap.",
             new List<string>()
             {
@@ -73,7 +73,7 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         float hyperbolicExperienceMultiplier = 1 - (1 / (1 + (experienceMultiplierAsPercent * count)));
-                        float bonusXP = GetExperienceCap(atkBody.level) * count * hyperbolicExperienceMultiplier;
+                        float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;
                         atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
                     }
                 }
