@@ -22,7 +22,7 @@ These values are configurable. To do so, run the game once with the mod installe
 
 ### Green Items
 > **Broken Mask**  
-> Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 3 seconds. Does not apply itself.  
+> Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 6 seconds. Does not apply itself.  
 > **Glass Marbles**  
 > Gain 1 (+1 per stack) damage per level.  
 
@@ -36,7 +36,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Edible Glue**  
 > On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.  
 > **Holy Water**  
-> Upon killing an elite enemy, gain 3% (+3% per stack) of your level experience cap as bonus experience.  
+> Upon killing an elite enemy, gain 1% (+1% per stack) of your level experience cap as bonus experience.  
 > **Milk Carton**  
 > Reduce damage taken from elite enemies by 5% (+5% per stack).  
 > **Photodiode**  
