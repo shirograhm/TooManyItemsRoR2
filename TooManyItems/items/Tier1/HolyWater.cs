@@ -67,7 +67,7 @@ namespace TooManyItems
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
 
-                if (atkBody && atkMaster && atkBody.inventory && damageReport.victimBody.isBoss)
+                if (atkBody && atkMaster && atkBody.inventory && damageReport.victimBody.isElite)
                 {
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0)
