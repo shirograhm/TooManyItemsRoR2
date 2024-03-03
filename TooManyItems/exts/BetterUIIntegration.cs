@@ -193,9 +193,10 @@ namespace TooManyItems
                 ItemStats.RegisterStat(
                     itemDef: RustyTrowel.itemDef,
                     "Cooldown",
-                    1f,
-                    1f,
-                    statFormatter: RustedTrowelCooldownFormatter
+                    RustyTrowel.rechargeTime,
+                    RustyTrowel.rechargeTimeReductionPercent,
+                    stackingFormula: ItemStats.NegativeExponentialStacking,
+                    statFormatter: ItemStats.StatFormatter.Seconds
                 );
                 ItemStats.RegisterStat(
                     itemDef: RustyTrowel.itemDef,
@@ -299,29 +300,6 @@ namespace TooManyItems
                 }
             };
 
-            private static ItemStats.StatFormatter RustedTrowelCooldownFormatter = new()
-            {
-                suffix = "",
-                style = ItemStats.Styles.Sub,
-                statFormatter = (sb, value, master) =>
-                {
-                    if (!master.inventory) return;
-
-                    int count = master.inventory.GetItemCount(RustyTrowel.itemDef);
-                    if (count > 0)
-                    {
-                        string temp = String.Format("{0:#.#}", RustyTrowel.CalculateCooldownInSec(count));
-                        temp = temp == String.Empty ? "0.0" : temp;
-
-                        sb.AppendFormat(temp);
-                    }
-                    else
-                    {
-                        sb.Append("0.0");
-                    }
-                }
-            };
-
             private static ItemStats.StatFormatter RustedTrowelHealingFormatter = new()
             {
                 suffix = "",
@@ -366,7 +344,7 @@ namespace TooManyItems
                         sb.Append("0");
                     }
 
-                    sb.Append(" health");
+                    sb.Append(" HP/s");
                 }
             };
 
