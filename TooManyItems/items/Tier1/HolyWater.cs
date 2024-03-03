@@ -73,7 +73,13 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         float hyperbolicExperienceMultiplier = 1 - (1 / (1 + (experienceMultiplierAsPercent * count)));
-                        float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;
+                        float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;   // XP scales with killer (minion or player) level bar
+
+                        // Reroute XP from minions to players
+                        if (atkMaster && atkMaster.minionOwnership && atkMaster.minionOwnership.ownerMaster)
+                        {
+                            atkMaster = atkMaster.minionOwnership.ownerMaster;
+                        }
                         atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
                     }
                 }

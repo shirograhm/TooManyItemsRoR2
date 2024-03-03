@@ -138,6 +138,15 @@ namespace TooManyItems
                 dotStack.damage = self.victimBody.maxHealth * burnPercentPerTick * count;
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
+                // Damage calculation takes minions into account
+                if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
+                {
+                    if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
+                    {
+                        attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
+                    }
+                }
+
                 var stats = attackerBody.inventory.GetComponent<Statistics>();
                 stats.TotalDamageDealt += dotStack.damage;
             }
