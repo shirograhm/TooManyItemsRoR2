@@ -143,6 +143,8 @@ namespace TooManyItems
                 if (count > 0)
                 {
                     var component = sender.inventory.GetComponent<Statistics>();
+                    // Take Math.min incase item was dropped or removed from inventory
+                    component.PermanentHealth = Mathf.Min(component.PermanentHealth, maxHealthPerStack.Value * count);
                     args.baseHealthAdd += component.PermanentHealth;
                 }
             };
