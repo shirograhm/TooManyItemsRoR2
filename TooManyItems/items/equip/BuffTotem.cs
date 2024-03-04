@@ -221,7 +221,7 @@ namespace TooManyItems
         {
             LanguageAPI.Add("BUFF_TOTEM", "Totem of Prayer");
             LanguageAPI.Add("BUFF_TOTEM_NAME", "Totem of Prayer");
-            LanguageAPI.Add("BUFF_TOTEM_PICKUP", "Gain a random buff, <style=cDeath>but lose max health.</style>");
+            LanguageAPI.Add("BUFF_TOTEM_PICKUP", "Pray to the totem to receive a random buff.");
 
             string desc = $"On activation, permanently gain " +
                 $"<style=cIsUtility>{armorIncrease.Value}</style> armor, " +
