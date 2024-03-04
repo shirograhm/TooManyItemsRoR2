@@ -40,12 +40,12 @@ namespace TooManyItems
                 {
                     MainAssets = AssetBundle.LoadFromStream(stream);
 
-                    Log.Message($"[{PluginName} v{PluginVersion}]: Successfully loaded assets.");
+                    Log.Message("Successfully loaded assets.");
 
                 }
                 else
                 {
-                    Log.Error($"[{PluginName} v{PluginVersion}]: Assets failed to load.");
+                    Log.Error("Assets failed to load.");
                 }
             }
 
@@ -87,7 +87,7 @@ namespace TooManyItems
             BuffTotem.Init();
             TatteredScroll.Init();
 
-            Log.Message($"[{PluginName} v{PluginVersion}]: Finished initializations.");
+            Log.Message("Finished initializations.");
         }
 
         private void InjectVoidItems()
@@ -110,7 +110,7 @@ namespace TooManyItems
                 ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = voidPairs.Union(newVoidPairs).ToArray();
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
-                Debug.Log($"[{PluginName} v{PluginVersion}]: Injected void item transformations.");
+                Debug.Log("Injected void item transformations.");
 
                 orig();
             };
@@ -127,6 +127,7 @@ namespace TooManyItems
         //        DropItem(BottleCap.itemDef);
         //        DropItem(BrokenMask.itemDef);
         //        DropItem(CarvingBlade.itemDef);
+        //        DropItem(Crucifix.itemDef);
         //        DropItem(DebitCard.itemDef);
         //        DropItem(EdibleGlue.itemDef);
         //        DropItem(RubberDucky.itemDef);
@@ -134,7 +135,6 @@ namespace TooManyItems
         //        DropItem(HolyWater.itemDef);
         //        DropItem(IronHeart.itemDef);
         //        DropItem(MilkCarton.itemDef);
-        //        DropItem(Crucifix.itemDef);
         //        DropItem(Photodiode.itemDef);
         //        DropItem(RedBlueGlasses.itemDef);
         //        DropItem(RustyTrowel.itemDef);
@@ -162,6 +162,14 @@ namespace TooManyItems
 
         //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
         //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
+        //}
+
+        //private void DropItem(MiscPickupDef def)
+        //{
+        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+
+        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);
         //}
 
         public struct GenericCharacterInfo
