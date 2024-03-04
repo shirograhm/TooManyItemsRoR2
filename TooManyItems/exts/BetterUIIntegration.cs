@@ -341,7 +341,7 @@ namespace TooManyItems
                     }
                     else
                     {
-                        sb.Append("0");
+                        sb.Append("0.0");
                     }
 
                     sb.Append(" HP/s");
