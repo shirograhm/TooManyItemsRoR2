@@ -16,11 +16,11 @@ namespace TooManyItems
         public static BuffDef attackSpeedBuff;
         public static BuffDef healthRegenBuff;
 
-        // On activation, grants either 80 armor, 30% damage, 60% attack speed, or 200% health regeneration for 15 seconds. (55 sec)
+        // On activation, grants either 100 armor, 45% damage, 75% attack speed, or 300% health regeneration for 15 seconds. (40 sec)
         public static ConfigurableValue<float> armorIncrease = new(
             "Equipment: Totem of Prayer",
             "Armor Increase",
-            80f,
+            100f,
             "Armor increase if rolled.",
             new List<string>()
             {
@@ -30,7 +30,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageIncrease = new(
             "Equipment: Totem of Prayer",
             "Damage Increase",
-            30f,
+            45f,
             "Percent damage increase if rolled.",
             new List<string>()
             {
@@ -40,7 +40,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedIncrease = new(
             "Equipment: Totem of Prayer",
             "Attack Speed Increase",
-            60f,
+            75f,
             "Percent attack speed increase if rolled.",
             new List<string>()
             {
@@ -50,7 +50,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenIncrease = new(
             "Equipment: Totem of Prayer",
             "Health Regen Increase",
-            200f,
+            300f,
             "Percent regeneration increase if rolled.",
             new List<string>()
             {
@@ -60,7 +60,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> buffDuration = new(
             "Equipment: Totem of Prayer",
             "Buff Duration",
-            15f,
+            12f,
             "Duration of the buff given.",
             new List<string>()
             {
@@ -70,7 +70,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Totem of Prayer",
             "Cooldown",
-            55,
+            40,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -130,6 +130,7 @@ namespace TooManyItems
             armorBuff = ScriptableObject.CreateInstance<BuffDef>();
             armorBuff.name = "Prayer of Defense";
             armorBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DefensePrayer.png");
+            armorBuff.buffColor = new Color(0.115f, 0.52f, 0.818f, 1f);
             armorBuff.canStack = false;
             armorBuff.isDebuff = false;
             armorBuff.isHidden = false;
@@ -137,6 +138,7 @@ namespace TooManyItems
             damageBuff = ScriptableObject.CreateInstance<BuffDef>();
             damageBuff.name = "Prayer of Power";
             damageBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DamagePrayer.png");
+            damageBuff.buffColor = new Color(0.763f, 0.21f, 0.21f, 1f);
             damageBuff.canStack = false;
             damageBuff.isDebuff = false;
             damageBuff.isHidden = false;
@@ -144,6 +146,7 @@ namespace TooManyItems
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
             attackSpeedBuff.name = "Prayer of Cadence";
             attackSpeedBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("CadencePrayer.png");
+            attackSpeedBuff.buffColor = new Color(0.774f, 0.774f, 0.159f, 1f);
             attackSpeedBuff.canStack = false;
             attackSpeedBuff.isDebuff = false;
             attackSpeedBuff.isHidden = false;
@@ -151,6 +154,7 @@ namespace TooManyItems
             healthRegenBuff = ScriptableObject.CreateInstance<BuffDef>();
             healthRegenBuff.name = "Prayer of Remedy";
             healthRegenBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("RemedyPrayer.png");
+            healthRegenBuff.buffColor = new Color(0.338f, 0.854f, 0.369f, 1f);
             healthRegenBuff.canStack = false;
             healthRegenBuff.isDebuff = false;
             healthRegenBuff.isHidden = false;

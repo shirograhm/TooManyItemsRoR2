@@ -87,6 +87,7 @@ namespace TooManyItems
 
             attackSpeedBuff.name = "Voltage";
             attackSpeedBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Voltage.png");
+            attackSpeedBuff.buffColor = new Color(1f, 0.984f, 0.478f, 1f);
             attackSpeedBuff.canStack = true;
             attackSpeedBuff.isDebuff = false;
         }

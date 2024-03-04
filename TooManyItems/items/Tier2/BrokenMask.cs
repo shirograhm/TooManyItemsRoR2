@@ -15,8 +15,10 @@ namespace TooManyItems
         private static DotController.DotDef burnDotDef;
         private static DotController.DotIndex burnIndex;
 
+        public static Color maskColor = new Color(0.376f, 0.376f, 0.816f, 1f);
+
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.38f, 0.38f, 0.82f, 1f));
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(maskColor);
 
         // Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 6 seconds.
         public static ConfigurableValue<float> burnDamage = new(
@@ -179,9 +181,9 @@ namespace TooManyItems
 
             burnDebuff.name = "Torment";
             burnDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("MaskDebuff.png");
+            burnDebuff.buffColor = maskColor;
             burnDebuff.canStack = false;
             burnDebuff.isDebuff = true;
-            burnDebuff.isCooldown = true;
             burnDebuff.isHidden = false;
         }
 

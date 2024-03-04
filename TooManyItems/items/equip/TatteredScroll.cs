@@ -12,9 +12,11 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef curseDebuff;
 
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.93f, 0.95f, 0.89f, 1f));
+        public static Color siphonColor = new Color(0.902f, 0.78f, 0.573f, 1f);
 
-        // On activation, curse all enemies in a 60m radius for 10 seconds. Killing cursed enemies grants 15 additional gold.
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(siphonColor);
+
+        // On activation, curse all enemies in a 60m radius for 10 seconds. Killing cursed enemies grants 15 additional gold. (80 sec)
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
@@ -98,6 +100,7 @@ namespace TooManyItems
 
             curseDebuff.name = "Siphon";
             curseDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("TatteredCurse.png");
+            curseDebuff.buffColor = siphonColor;
             curseDebuff.canStack = false;
             curseDebuff.isDebuff = true;
             curseDebuff.isHidden = false;

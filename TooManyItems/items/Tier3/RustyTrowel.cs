@@ -151,6 +151,7 @@ namespace TooManyItems
 
             mulchBuff.name = "Mulch";
             mulchBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Mulch.png");
+            mulchBuff.buffColor = new Color(0.192f, 0.435f, 0.22f, 1f);
             mulchBuff.canStack = true;
             mulchBuff.isDebuff = false;
 
@@ -158,7 +159,8 @@ namespace TooManyItems
 
             healingTimer.name = "Mulch Cooldown";
             healingTimer.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("MulchCooldown.png");
-            mulchBuff.isDebuff = false;
+            healingTimer.buffColor = new Color(0.192f, 0.435f, 0.22f, 1f);
+            healingTimer.isDebuff = false;
             healingTimer.canStack = false;
             healingTimer.isCooldown = true;
         }
