@@ -100,7 +100,6 @@ namespace TooManyItems
 
             curseDebuff.name = "Siphon";
             curseDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("TatteredCurse.png");
-            curseDebuff.buffColor = siphonColor;
             curseDebuff.canStack = false;
             curseDebuff.isDebuff = true;
             curseDebuff.isHidden = false;

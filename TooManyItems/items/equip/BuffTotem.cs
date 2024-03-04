@@ -130,7 +130,6 @@ namespace TooManyItems
             armorBuff = ScriptableObject.CreateInstance<BuffDef>();
             armorBuff.name = "Prayer of Defense";
             armorBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DefensePrayer.png");
-            armorBuff.buffColor = new Color(0.115f, 0.52f, 0.818f, 1f);
             armorBuff.canStack = false;
             armorBuff.isDebuff = false;
             armorBuff.isHidden = false;
@@ -138,7 +137,6 @@ namespace TooManyItems
             damageBuff = ScriptableObject.CreateInstance<BuffDef>();
             damageBuff.name = "Prayer of Power";
             damageBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DamagePrayer.png");
-            damageBuff.buffColor = new Color(0.763f, 0.21f, 0.21f, 1f);
             damageBuff.canStack = false;
             damageBuff.isDebuff = false;
             damageBuff.isHidden = false;
@@ -146,7 +144,6 @@ namespace TooManyItems
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
             attackSpeedBuff.name = "Prayer of Cadence";
             attackSpeedBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("CadencePrayer.png");
-            attackSpeedBuff.buffColor = new Color(0.774f, 0.774f, 0.159f, 1f);
             attackSpeedBuff.canStack = false;
             attackSpeedBuff.isDebuff = false;
             attackSpeedBuff.isHidden = false;
@@ -154,7 +151,6 @@ namespace TooManyItems
             healthRegenBuff = ScriptableObject.CreateInstance<BuffDef>();
             healthRegenBuff.name = "Prayer of Remedy";
             healthRegenBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("RemedyPrayer.png");
-            healthRegenBuff.buffColor = new Color(0.338f, 0.854f, 0.369f, 1f);
             healthRegenBuff.canStack = false;
             healthRegenBuff.isDebuff = false;
             healthRegenBuff.isHidden = false;
