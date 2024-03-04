@@ -40,11 +40,12 @@ namespace TooManyItems
                 {
                     MainAssets = AssetBundle.LoadFromStream(stream);
 
-                    Log.Info("Assets loaded successfully.");
+                    Log.Message($"[{PluginName} v{PluginVersion}]: Successfully loaded assets.");
+
                 }
                 else
                 {
-                    Log.Error("Assets failed to load.");
+                    Log.Error($"[{PluginName} v{PluginVersion}]: Assets failed to load.");
                 }
             }
 
@@ -57,30 +58,36 @@ namespace TooManyItems
 
             RoR2.ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
 
-            // Items
-            AncientCoin.Init();
-            BottleCap.Init();
-            BrokenMask.Init();
-            CarvingBlade.Init();
-            Crucifix.Init();
-            DebitCard.Init();
-            EdibleGlue.Init();
-            GlassMarble.Init();
-            HolyWater.Init();
-            IronHeart.Init();
-            MilkCarton.Init();
-            Photodiode.Init();
+            //Red Items
             BloodDice.Init();
-            RedBlueGlasses.Init();
-            RubberDucky.Init();
+            IronHeart.Init();
             RustyTrowel.Init();
             SoulRing.Init();
+
+            // Green Items
+            BrokenMask.Init();
+            GlassMarble.Init();
+
+            // White Items
+            BottleCap.Init();
+            DebitCard.Init();
+            EdibleGlue.Init();
+            HolyWater.Init();
+            MilkCarton.Init();
+            Photodiode.Init();
+            RedBlueGlasses.Init();
+            RubberDucky.Init();
+
+            // Lunar
+            AncientCoin.Init();
+            CarvingBlade.Init();
+            Crucifix.Init();
 
             // Equipment
             BuffTotem.Init();
             TatteredScroll.Init();
 
-            Log.Message(nameof(Awake) + " routine for TMI done.");
+            Log.Message($"[{PluginName} v{PluginVersion}]: Finished initializations.");
         }
 
         private void InjectVoidItems()
@@ -89,7 +96,6 @@ namespace TooManyItems
             {
                 List<ItemDef.Pair> newVoidPairs = new List<ItemDef.Pair>();
 
-                Debug.Log("Injecting void item corruption...");
                 // 3D Glasses => Instakill Glasses
                 newVoidPairs.Add(new ItemDef.Pair()
                 {
@@ -104,7 +110,7 @@ namespace TooManyItems
                 ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = voidPairs.Union(newVoidPairs).ToArray();
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
-                Debug.Log("Finished injecting void item transformations.");
+                Debug.Log($"[{PluginName} v{PluginVersion}]: Injected void item transformations.");
 
                 orig();
             };
@@ -116,36 +122,29 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        //DropItem(AncientCoin.itemDef);
-        //        //DropItem(BloodDice.itemDef);
-        //        //DropItem(BottleCap.itemDef);
+        //        DropItem(AncientCoin.itemDef);
+        //        DropItem(BloodDice.itemDef);
+        //        DropItem(BottleCap.itemDef);
         //        DropItem(BrokenMask.itemDef);
-        //        //DropItem(CarvingBlade.itemDef);
-        //        //DropItem(DebitCard.itemDef);
-        //        //DropItem(EdibleGlue.itemDef);
-        //        //DropItem(RubberDucky.itemDef);
-        //        //DropItem(GlassMarble.itemDef);
+        //        DropItem(CarvingBlade.itemDef);
+        //        DropItem(DebitCard.itemDef);
+        //        DropItem(EdibleGlue.itemDef);
+        //        DropItem(RubberDucky.itemDef);
+        //        DropItem(GlassMarble.itemDef);
         //        DropItem(HolyWater.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        //DropItem(IronHeart.itemDef);
-        //        //DropItem(MilkCarton.itemDef);
-        //        //DropItem(Crucifix.itemDef);
-        //        //DropItem(Photodiode.itemDef);
-        //        //DropItem(RedBlueGlasses.itemDef);
-        //        //DropItem(RustyTrowel.itemDef);
-        //        //DropItem(SoulRing.itemDef);
+        //        DropItem(IronHeart.itemDef);
+        //        DropItem(MilkCarton.itemDef);
+        //        DropItem(Crucifix.itemDef);
+        //        DropItem(Photodiode.itemDef);
+        //        DropItem(RedBlueGlasses.itemDef);
+        //        DropItem(RustyTrowel.itemDef);
+        //        DropItem(SoulRing.itemDef);
         //    }
         //    if (Input.GetKeyDown(KeyCode.F3))
         //    {
         //        // Single key testing
-        //        //DropItem(TatteredScroll.equipmentDef);
-        //        //DropItem(Stopwatch.equipmentDef);
+        //        DropItem(TatteredScroll.equipmentDef);
         //        DropItem(BuffTotem.equipmentDef);
-        //        //DropItem(TwinFlame.equipmentDef);
-        //        //DropItem(Slingshot.equipmentDef);
         //    }
         //}
 
