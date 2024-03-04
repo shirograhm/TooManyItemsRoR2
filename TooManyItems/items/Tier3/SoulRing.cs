@@ -12,11 +12,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently increase your health regeneration by 0.1 health, up to a maximum of 10 (+10 per stack).
+        // On kill, permanently increase your health regeneration by 0.2 health, up to a maximum of 20 (+20 per stack).
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
             "Health Regen On Kill",
-            0.1f,
+            0.2f,
             "Amount of permanent health regeneration gained on kill.",
             new List<string>()
             {
@@ -26,7 +26,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxRegenPerStack = new(
             "Item: Soul Ring",
             "Maximum Regen Per Stack",
-            10f,
+            20f,
             "Maximum amount of permanent health regeneration allowed per stack.",
             new List<string>()
             {
