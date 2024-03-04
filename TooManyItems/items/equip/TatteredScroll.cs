@@ -16,7 +16,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(siphonColor);
 
-        // On activation, curse all enemies in a 60m radius for 10 seconds. Killing cursed enemies grants 15 additional gold. (80 sec)
+        // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 25 additional gold. (65 sec)
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
@@ -30,7 +30,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> curseDuration = new(
             "Equipment: Tattered Scroll",
             "Curse Duration",
-            10f,
+            12f,
             "Duration of the curse.",
             new List<string>()
             {
@@ -40,7 +40,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
-            15,
+            25,
             "Gold gained for each cursed enemy killed.",
             new List<string>()
             {
@@ -50,7 +50,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
-            80,
+            65,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -133,7 +133,7 @@ namespace TooManyItems
         {
             HurtBox[] hurtboxes = new SphereSearch
             {
-                mask = LayerIndex.enemyBody.mask,
+                mask = LayerIndex.entityPrecise.mask,
                 origin = slot.characterBody.corePosition,
                 queryTriggerInteraction = QueryTriggerInteraction.Collide,
                 radius = curseDistance.Value
@@ -142,7 +142,7 @@ namespace TooManyItems
             foreach (HurtBox hb in hurtboxes)
             {
                 CharacterBody parent = hb.healthComponent.body;
-                if (parent && parent != slot.characterBody)
+                if (parent && parent != slot.characterBody && !parent.isPlayerControlled)
                 {
                     DamageInfo info = new()
                     {
