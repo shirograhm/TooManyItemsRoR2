@@ -192,8 +192,8 @@ namespace TooManyItems
             {
                 damageColorIndex = damageColor,
                 associatedBuff = burnDebuff,
-                terminalTimedBuff = burnDebuff,
-                terminalTimedBuffDuration = burnDuration,
+                terminalTimedBuff = null,
+                terminalTimedBuffDuration = 0,
                 resetTimerOnAdd = true,
                 interval = burnTickInterval
             };
