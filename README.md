@@ -18,7 +18,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Rusty Trowel**  
 > On kill, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 12 HP per stack.  
 > **Soul Ring**  
-> On kill, permanently increase your health regeneration by 0.1 health, up to a maximum of 10 (+10 per stack).  
+> On kill, permanently increase your health regeneration by 0.2 health, up to a maximum of 20 (+20 per stack).  
 
 ### Green Items
 > **Broken Mask**  
@@ -46,6 +46,6 @@ These values are configurable. To do so, run the game once with the mod installe
 
 ### Equipment
 > **Tattered Scroll**  
-> On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 15 additional gold.  
+> On activation, curse enemies within 60m of you for 12 seconds. Killing cursed enemies grants 25 additional gold.  
 > **Totem of Prayer**  
-> On activation, grants either 80 armor, 30% damage, 60% attack speed, or 200% health regeneration for 15 seconds.  
+> On activation, grants either 100 armor, 45% damage, 75% attack speed, or 300% health regeneration for 12 seconds.  
