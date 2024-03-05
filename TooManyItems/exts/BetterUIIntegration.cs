@@ -213,7 +213,7 @@ namespace TooManyItems
                 ItemStats.RegisterStat(
                     itemDef: RustyTrowel.itemDef,
                     "Cooldown",
-                    RustyTrowel.rechargeTime,
+                    RustyTrowel.rechargeTime.Value,
                     RustyTrowel.rechargeTimeReductionPercent,
                     stackingFormula: ItemStats.NegativeExponentialStacking,
                     statFormatter: ItemStats.StatFormatter.Seconds
@@ -242,7 +242,7 @@ namespace TooManyItems
                 style = ItemStats.Styles.Damage,
                 statFormatter = (sb, value, master) =>
                 {
-                    if (!master.inventory) return;
+                    if (!master.inventory || !master.hasBody) return;
 
                     int count = master.inventory.GetItemCount(GlassMarble.itemDef);
                     if (count > 0)
