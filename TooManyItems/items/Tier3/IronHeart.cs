@@ -152,7 +152,7 @@ namespace TooManyItems
 
                 if (sender.inventory.GetItemCount(itemDef) > 0)
                 {
-                    args.baseHealthAdd += healthIncrease;
+                    args.baseHealthAdd += healthIncrease.Value;
                 }
             };
 

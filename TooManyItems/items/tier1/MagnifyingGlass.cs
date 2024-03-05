@@ -99,7 +99,7 @@ namespace TooManyItems
                 int count = sender.inventory.GetItemCount(itemDef);
                 if (count > 0)
                 {
-                    args.critAdd += critBonus;
+                    args.critAdd += critBonus.Value;
                 }
             };
 

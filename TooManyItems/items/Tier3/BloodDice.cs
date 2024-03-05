@@ -192,7 +192,7 @@ namespace TooManyItems
         {
             int diceRoll = TooManyItems.rand.Next(1, 7);
 
-            if (affectedByLuck)
+            if (affectedByLuck.Value)
             {
                 int luckStat = (int)atkMaster.luck;
 
