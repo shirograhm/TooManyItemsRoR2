@@ -195,14 +195,8 @@ namespace TooManyItems
                 {
                     int newRoll = TooManyItems.rand.Next(1, 7);
 
-                    if (luckStat > 0)
-                    {
-                        diceRoll = newRoll > diceRoll ? newRoll : diceRoll;
-                    }
-                    if (luckStat < 0)
-                    {
-                        diceRoll = newRoll < diceRoll ? newRoll : diceRoll;
-                    }
+                    if (luckStat > 0) diceRoll = newRoll > diceRoll ? newRoll : diceRoll;
+                    if (luckStat < 0) diceRoll = newRoll < diceRoll ? newRoll : diceRoll;
                 }
             }
 

@@ -14,11 +14,11 @@ namespace TooManyItems
         public static BuffDef mulchBuff;
         public static BuffDef healingTimer;
 
-        // On kill, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 12 HP per stack.
+        // On-hit, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 3 HP per stack.
         public static ConfigurableValue<float> healingPerStack = new(
             "Item: Rusty Trowel",
             "Heal Per Stack",
-            12f,
+            3f,
             "Health recovered per stack of Mulch.",
             new List<string>()
             {
@@ -211,15 +211,23 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
             {
-                orig(eventManager, damageReport);
-                if (!NetworkServer.active || damageReport.attackerBody == null) return;
+                orig(self, damageInfo, victim);
 
-                int itemCount = damageReport.attackerBody.inventory.GetItemCount(itemDef);
-                if (itemCount > 0)
+                if (!NetworkServer.active) return;
+
+                if (damageInfo.attacker)
                 {
-                    damageReport.attackerBody.AddBuff(mulchBuff);
+                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+                    if (attackerBody && attackerBody.inventory)
+                    {
+                        int count = attackerBody.inventory.GetItemCount(itemDef);
+                        if (count > 0)
+                        {
+                            attackerBody.AddBuff(mulchBuff);
+                        }
+                    }
                 }
             };
         }
@@ -228,9 +236,9 @@ namespace TooManyItems
         {
             LanguageAPI.Add("RUSTED_TROWEL", "Rusty Trowel");
             LanguageAPI.Add("RUSTED_TROWEL_NAME", "Rusty Trowel");
-            LanguageAPI.Add("RUSTED_TROWEL_PICKUP", "Harvest Mulch from killing enemies. Heal periodically based on Mulch stacks.");
+            LanguageAPI.Add("RUSTED_TROWEL_PICKUP", "Harvest Mulch on-hit. Heal periodically based on Mulch stacks.");
 
-            string desc = $"On kill, gain a stack of Mulch. Every <style=cIsUtility>{rechargeTime.Value}</style> <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds, " +
+            string desc = $"On-hit, gain a stack of Mulch. Every <style=cIsUtility>{rechargeTime.Value}</style> <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds, " +
                 $"consume all Mulch to heal <style=cIsHealing>{healingPerStack.Value}</style> per stack.";
             LanguageAPI.Add("RUSTED_TROWEL_DESCRIPTION", desc);
 

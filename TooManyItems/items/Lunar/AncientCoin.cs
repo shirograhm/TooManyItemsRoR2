@@ -9,11 +9,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 75% (+75% per stack) more gold. Take 35% (+35% per stack) more damage.
+        // Gain 90% (+90% per stack) more gold. Take 35% (+35% per stack) more damage.
         public static ConfigurableValue<float> goldMultiplierPerStack = new(
             "Item: Ancient Coin",
             "Gold Multiplier",
-            75f,
+            90f,
             "Gold generation increase as a percentage.",
             new List<string>()
             {
