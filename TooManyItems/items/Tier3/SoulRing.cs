@@ -126,6 +126,11 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("SoulRing.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
+
+            itemDef.tags = new ItemTag[]
+            {
+                ItemTag.OnKillEffect
+            };
         }
 
         public static void Hooks()
