@@ -68,12 +68,14 @@ namespace TooManyItems
             BrokenMask.Init();
             GlassMarble.Init();
             HereticSeal.Init();
+            Hoodie.Init();
 
             // White Items
             BottleCap.Init();
             DebitCard.Init();
             EdibleGlue.Init();
             HolyWater.Init();
+            InstructionManual.Init();
             MilkCarton.Init();
             MagnifyingGlass.Init();
             Photodiode.Init();

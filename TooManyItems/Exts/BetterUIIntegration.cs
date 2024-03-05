@@ -33,6 +33,15 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
+                // Blood Dice
+                ItemStats.RegisterStat(
+                    itemDef: BloodDice.itemDef,
+                    "Health Gained",
+                    1f,
+                    1f,
+                    statFormatter: BloodDiceHealthFormatter
+                );
+
                 // Bottle Cap
                 ItemStats.RegisterStat(
                     itemDef: BottleCap.itemDef,
@@ -126,6 +135,16 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
+                // Instruction Manual
+                ItemStats.RegisterStat(
+                    itemDef: InstructionManual.itemDef,
+                    "Cooldown Reduction",
+                    InstructionManual.equipmentCDRPercent,
+                    InstructionManual.equipmentCDRPercent,
+                    stackingFormula: ItemStats.HyperbolicStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent
+                );
+
                 // Iron Heart
                 ItemStats.RegisterStat(
                     itemDef: IronHeart.itemDef,
@@ -172,15 +191,6 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
-                // Blood Dice
-                ItemStats.RegisterStat(
-                    itemDef: BloodDice.itemDef,
-                    "Health Gained",
-                    1f,
-                    1f,
-                    statFormatter: BloodDiceHealthFormatter
-                );
-
                 // Red-Blue Glasses
                 ItemStats.RegisterStat(
                     itemDef: RedBlueGlasses.itemDef,
@@ -209,7 +219,7 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Armor
                 );
 
-                // Rusted Trowel
+                // Rusty Trowel
                 ItemStats.RegisterStat(
                     itemDef: RustyTrowel.itemDef,
                     "Cooldown",
@@ -233,6 +243,16 @@ namespace TooManyItems
                     1f,
                     1f,
                     statFormatter: SoulRingRegenFormatter
+                );
+
+                // Suspicious Hoodie
+                ItemStats.RegisterStat(
+                    itemDef: Hoodie.itemDef,
+                    "Cooldown",
+                    Hoodie.rechargeTime.Value,
+                    Hoodie.rechargeTimeReductionPercent,
+                    stackingFormula: ItemStats.NegativeExponentialStacking,
+                    statFormatter: ItemStats.StatFormatter.Seconds
                 );
             }
 

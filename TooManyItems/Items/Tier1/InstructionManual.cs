@@ -5,22 +5,22 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class BottleCap
+    internal class InstructionManual
     {
         public static ItemDef itemDef;
 
-        // Reduce your ultimate skill cooldown by 4% (+4% per stack).
-        public static ConfigurableValue<float> ultimateCDR = new(
-            "Item: Bottle Cap",
+        // Reduce your equipment cooldown by 6% (+6% per stack).
+        public static ConfigurableValue<float> equipmentCDR = new(
+            "Item: Instruction Manual",
             "Cooldown Reduction",
-            4f,
-            "Cooldown reduction on ultimate skill.",
+            6f,
+            "Cooldown reduction on equipment.",
             new List<string>()
             {
-                "ITEM_BOTTLECAP_DESC"
+                "ITEM_INSTRUCTIONMANUAL_DESC"
             }
         );
-        public static float ultimateCDRPercent = ultimateCDR.Value / 100f;
+        public static float equipmentCDRPercent = equipmentCDR.Value / 100f;
 
         internal static void Init()
         {
@@ -37,19 +37,19 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BOTTLE_CAP";
-            itemDef.nameToken = "BOTTLE_CAP_NAME";
-            itemDef.pickupToken = "BOTTLE_CAP_PICKUP";
-            itemDef.descriptionToken = "BOTTLE_CAP_DESCRIPTION";
-            itemDef.loreToken = "BOTTLE_CAP_LORE";
+            itemDef.name = "INSTRUCTION_MANUAL";
+            itemDef.nameToken = "INSTRUCTION_MANUAL_NAME";
+            itemDef.pickupToken = "INSTRUCTION_MANUAL_PICKUP";
+            itemDef.descriptionToken = "INSTRUCTION_MANUAL_DESCRIPTION";
+            itemDef.loreToken = "INSTRUCTION_MANUAL_LORE";
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = ItemTier.Tier1;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("BottleCap.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("BottleCap.prefab");
+            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("InstructionManual.png");
+            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("InstructionManual.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -63,24 +63,25 @@ namespace TooManyItems
                 int count = sender.inventory.GetItemCount(itemDef);
                 if (count > 0)
                 {
-                    float cdr = 1 - (1 / (1 + (ultimateCDRPercent * count)));
-                    args.specialCooldownMultAdd -= cdr;
+                    float cdr = 1 - (1 / (1 + (equipmentCDRPercent * count)));
+                    // Reduce equipment cooldown by cdr
+                    // args.specialCooldownMultAdd -= cdr;
                 }
             };
         }
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("BOTTLE_CAP", "Bottle Cap");
-            LanguageAPI.Add("BOTTLE_CAP_NAME", "Bottle Cap");
-            LanguageAPI.Add("BOTTLE_CAP_PICKUP", "Reduce the cooldown of your ultimate skill.");
+            LanguageAPI.Add("INSTRUCTION_MANUAL", "Instruction Manual");
+            LanguageAPI.Add("INSTRUCTION_MANUAL_NAME", "Instruction Manual");
+            LanguageAPI.Add("INSTRUCTION_MANUAL_PICKUP", "Reduce the cooldown of your equipment.");
 
-            string desc = $"Reduce your ultimate skill cooldown by <style=cIsUtility>{ultimateCDR.Value}%</style> " +
-                "<style=cStack>(+{ultimateCDR.Value}% per stack)</style>.";
-            LanguageAPI.Add("BOTTLE_CAP_DESCRIPTION", desc);
+            string desc = $"Reduce your equipment cooldown by <style=cIsUtility>{equipmentCDR.Value}%</style> " +
+                $"<style=cStack>(+{equipmentCDR.Value}% per stack)</style>.";
+            LanguageAPI.Add("INSTRUCTION_MANUAL_DESCRIPTION", desc);
 
             string lore = "";
-            LanguageAPI.Add("BOTTLE_CAP_LORE", lore);
+            LanguageAPI.Add("INSTRUCTION_MANUAL_LORE", lore);
         }
     }
 }
