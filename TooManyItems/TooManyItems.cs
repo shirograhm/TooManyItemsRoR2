@@ -67,6 +67,7 @@ namespace TooManyItems
             // Green Items
             BrokenMask.Init();
             GlassMarble.Init();
+            HereticSeal.Init();
 
             // White Items
             BottleCap.Init();
@@ -74,6 +75,7 @@ namespace TooManyItems
             EdibleGlue.Init();
             HolyWater.Init();
             MilkCarton.Init();
+            MagnifyingGlass.Init();
             Photodiode.Init();
             RedBlueGlasses.Init();
             RubberDucky.Init();
@@ -130,13 +132,15 @@ namespace TooManyItems
         //        DropItem(Crucifix.itemDef);
         //        DropItem(DebitCard.itemDef);
         //        DropItem(EdibleGlue.itemDef);
-        //        DropItem(RubberDucky.itemDef);
         //        DropItem(GlassMarble.itemDef);
+        //        DropItem(HereticSeal.itemDef);
         //        DropItem(HolyWater.itemDef);
         //        DropItem(IronHeart.itemDef);
         //        DropItem(MilkCarton.itemDef);
+        //        DropItem(MagnifyingGlass.itemDef);
         //        DropItem(Photodiode.itemDef);
         //        DropItem(RedBlueGlasses.itemDef);
+        //        DropItem(RubberDucky.itemDef);
         //        DropItem(RustyTrowel.itemDef);
         //        DropItem(SoulRing.itemDef);
         //    }

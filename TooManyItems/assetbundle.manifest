@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 3613824591
+CRC: 3481301108
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8b63edaa151cc157cc2909a82e2e4a63
+    Hash: 0faffd6cf640a86bdc0968265e4ff9f6
   TypeTreeHash:
     serializedVersion: 2
     Hash: 10def29c998ab6d8bfcfd7beeec5d09d
@@ -33,7 +33,9 @@ ClassTypes:
   Script: {instanceID: 0}
 Assets:
 - Assets/Models/Prefabs/Item/AncientCoin/Coin_normal.png
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001_Height.tif
 - Assets/Models/Prefabs/Item/RubberDucky/RubberDucky.mat
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001.mat
 - Assets/Models/Prefabs/Item/GlassMarbles/GlassMarbles.prefab
 - Assets/Models/Prefabs/Item/Stopwatch/stopwatch_DefaultMaterial_Normal.png
 - Assets/Models/Prefabs/Item/HolyWater/Holy_Water_Bottle_Height.tga.png
@@ -43,17 +45,22 @@ Assets:
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Normal_OpenGL.png
 - Assets/Models/Prefabs/Item/Photodiode/Flat_SpotMat.mat
 - Assets/Models/Prefabs/Item/Photodiode/Photodiode.prefab
+- Assets/Models/Prefabs/Item/MagnifyingGlass/uploads_files_4661286_Magnifier001.fbx
 - Assets/Models/Prefabs/Item/Stopwatch/uploads_files_3223146_stopwatch.obj
 - Assets/Models/Prefabs/Item/AncientCoin/AncientCoin.prefab
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Roughness.png
 - Assets/Models/Prefabs/Item/Stopwatch/stopwatch_DefaultMaterial_MetallicSmoothness.png
 - Assets/Textures/Icons/Buff/Voltage.png
 - Assets/Models/Prefabs/Item/AncientCoin/Coin_metal.png
+- Assets/Models/Prefabs/Item/HereticSeal/uploads_files_3275359_purity_seal_blood_angels.fbx
 - Assets/Textures/Icons/Item/MilkCarton.png
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001_Metallic.png
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Mixed_AO.png
 - Assets/Models/Prefabs/Item/3DGlasses/test 9.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottle.obj
 - Assets/Models/Prefabs/Item/RustedTrowel/RustyTrowel.prefab
+- Assets/Models/Prefabs/Item/HereticSeal/HereticSeal.prefab
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001_Roughness.png
 - Assets/Models/Prefabs/Item/MilkCarton/MilkCarton.prefab
 - Assets/Models/Prefabs/Item/BrokenMask/mask3.fbx
 - Assets/Models/Prefabs/Item/3DGlasses/3DGlasses.prefab
@@ -62,6 +69,7 @@ Assets:
 - Assets/Models/Prefabs/Item/BottleCap/BottleCap.prefab
 - Assets/Models/Prefabs/Item/CarvingBlade/blade_material.mat
 - Assets/Textures/Icons/Item/TatteredScroll.png
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001_Normal-directX.tif
 - Assets/Models/Prefabs/Item/SoulRing/eye-ring.obj
 - Assets/Models/Prefabs/Item/RubberDucky/RubberDucky.prefab
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Metallic.png
@@ -81,13 +89,17 @@ Assets:
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleAO.jpg
 - Assets/Models/Prefabs/Item/CarvingBlade/lambert1_Normal.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottle.prefab
+- Assets/Textures/Icons/Buff/Analyzed.png
+- Assets/Textures/Icons/Item/HereticSeal.png
 - Assets/Models/Prefabs/Item/3DGlasses/3d_glasses_3d_glasses_3d_glassesMat.mat
 - Assets/Textures/Icons/Buff/Stasis.png
 - Assets/Models/Prefabs/Item/RustedTrowel/Trowel.mat
 - Assets/Models/Prefabs/Item/3DGlasses/test 9.mat
+- "Assets/Models/Prefabs/Item/HereticSeal/\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B.2.mat"
 - Assets/Models/Prefabs/Item/BrokenMask/BrokenMask.prefab
 - Assets/Models/Prefabs/Item/MilkCarton/Milk_Box_v1_001_Tex.mat
 - Assets/Textures/Icons/Item/AncientCoin.png
+- Assets/Textures/Icons/Item/MagnifyingGlass.png
 - Assets/Models/Prefabs/Item/Stopwatch/Stopwatch.prefab
 - Assets/Textures/Icons/Item/HealTotem.png
 - Assets/Models/Prefabs/Item/HealTotem/HealTotem.prefab
@@ -95,12 +107,15 @@ Assets:
 - Assets/Models/Prefabs/Item/TatteredScroll/TatteredScroll.prefab
 - Assets/Models/Prefabs/Item/IronHeart/IronHeart.prefab
 - Assets/Models/Prefabs/Item/3DGlasses/3d_glasses.obj
+- Assets/Models/Prefabs/Item/MagnifyingGlass/MagnifyingGlass.prefab
 - Assets/Models/Prefabs/Item/MilkCarton/uploads_files_2350990_Milk+Box_v1_001.fbx
 - Assets/Models/Prefabs/Item/HolyWater/Holy_Water_Bottle_Albedo.tga.png
 - Assets/Models/Prefabs/Item/DebitCard/DebitCard.prefab
+- "Assets/Models/Prefabs/Item/HereticSeal/\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B.3.mat"
 - Assets/Models/Prefabs/Item/MilkCarton/material.png
 - Assets/Models/Prefabs/Item/HealTotem/uploads_files_2753089_Praying.OBJ
 - Assets/Textures/Icons/Item/SoulRing.png
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001_Normal.tif
 - Assets/Textures/Icons/Item/IronHeart.png
 - Assets/Textures/Icons/Buff/TatteredCurse.png
 - Assets/Models/Prefabs/Item/BloodDice/uploads_files_2131787_Dice.fbx
@@ -131,11 +146,13 @@ Assets:
 - Assets/Models/Prefabs/Item/IronHeart/uploads_files_189436_Heart_OBJ.obj
 - Assets/Textures/Icons/Buff/CadencePrayer.png
 - Assets/Models/Prefabs/Item/AncientCoin/Coin_roughness.png
+- "Assets/Models/Prefabs/Item/HereticSeal/\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B.1.mat"
 - Assets/Models/Prefabs/Item/RustedTrowel/rusty.png
 - Assets/Models/Prefabs/Item/DebitCard/uploads_files_3945656_kartu+card.fbx
 - Assets/Models/Prefabs/Item/RustedTrowel/uploads_files_2158579_Trowel.FBX
 - Assets/Textures/Icons/Buff/RemedyPrayer.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleRough.png
+- Assets/Models/Prefabs/Item/MagnifyingGlass/Magnifier001_BaseColor.png
 - Assets/Models/Prefabs/Item/EdibleGlue/GlueBottleAlbedo.png
 - Assets/Models/Prefabs/Item/BloodDice/Mat.mat
 - Assets/Models/Prefabs/Item/GlassMarbles/GlassMarbles.FBX

@@ -106,6 +106,16 @@ namespace TooManyItems
                     statFormatter: GlassMarbleBonusFormatter
                 );
 
+                // Heretic Seal
+                ItemStats.RegisterStat(
+                    itemDef: HereticSeal.itemDef,
+                    "Damage Gain",
+                    HereticSeal.damagePerMissing.Value / 100f,
+                    HereticSeal.damagePerMissing.Value / 100f,
+                    stackingFormula: ItemStats.LinearStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent
+                );
+
                 // Holy Water
                 ItemStats.RegisterStat(
                     itemDef: HolyWater.itemDef,
@@ -139,6 +149,16 @@ namespace TooManyItems
                     MilkCarton.eliteDamageReductionPercent,
                     MilkCarton.eliteDamageReductionPercent,
                     stackingFormula: ItemStats.HyperbolicStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent
+                );
+
+                // Magnifying Glass
+                ItemStats.RegisterStat(
+                    itemDef: MagnifyingGlass.itemDef,
+                    "Analyze Chance",
+                    MagnifyingGlass.analyzeChancePercent,
+                    MagnifyingGlass.analyzeChancePercent,
+                    stackingFormula: ItemStats.LinearStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
