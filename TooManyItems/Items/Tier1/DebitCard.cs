@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Get a 6% (+6% per stack) rebate on chest and multishop purchases.
+        // Get a 6% (+6% per stack) rebate on purchases.
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
             "Rebate Amount",
@@ -80,7 +80,7 @@ namespace TooManyItems
             LanguageAPI.Add("DEBIT_CARD_NAME", "Debit Card");
             LanguageAPI.Add("DEBIT_CARD_PICKUP", "Get a rebate on purchases.");
 
-            string desc = $"Get a <style=cIsUtility>{rebate.Value}%</style> <style=cStack>(+{rebate.Value}% per stack) rebate</style> on multishop and chest purchases.";
+            string desc = $"Get a <style=cIsUtility>{rebate.Value}%</style> <style=cStack>(+{rebate.Value}% per stack) rebate</style> on purchases.";
             LanguageAPI.Add("DEBIT_CARD_DESCRIPTION", desc);
 
             string lore = "";
