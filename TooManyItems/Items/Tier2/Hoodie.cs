@@ -16,7 +16,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> rechargeTime = new(
             "Item: Suspicious Hoodie",
             "Recharge Time",
-            4f,
+            8f,
             "Time this item takes to recharge.",
             new List<string>()
             {
@@ -34,6 +34,8 @@ namespace TooManyItems
             }
         );
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
+
+        public static List<BuffDef> ignoredBuffDefs = new List<BuffDef>();
 
         internal static void Init()
         {
@@ -99,6 +101,13 @@ namespace TooManyItems
 
         public static void Hooks()
         {
+            RoR2Application.onLoad += () =>
+            {
+                // Buffs that this item shouldn't affect
+                ignoredBuffDefs.Add(RoR2Content.Buffs.MedkitHeal);
+                ignoredBuffDefs.Add(RoR2Content.Buffs.HiddenInvincibility);
+            };
+
             On.RoR2.CharacterBody.OnBuffFinalStackLost += (orig, self, buffDef) =>
             {
                 orig(self, buffDef);
@@ -123,7 +132,6 @@ namespace TooManyItems
                         }
                     }
                 }
-
                 orig(self, itemIndex, count);
             };
 
@@ -132,7 +140,7 @@ namespace TooManyItems
                 if (self && self.inventory)
                 {
 
-                    if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive))
+                    if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                     {
                         int count = self.inventory.GetItemCount(itemDef);
                         duration *= 2f;
