@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 598140717
+CRC: 2639587010
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 32be861bf59da34264329f6e0c96b7c1
+    Hash: 7a73a145b6cd9675881ddf50cf8285b6
   TypeTreeHash:
     serializedVersion: 2
     Hash: 10def29c998ab6d8bfcfd7beeec5d09d
@@ -67,15 +67,19 @@ Assets:
 - Assets/Textures/Buffs/HoodieActive.png
 - Assets/Prefabs/MilkCarton/MilkCarton.prefab
 - Assets/Prefabs/BrokenMask/mask3.fbx
+- Assets/Prefabs/Chalice/ChaliceMaterial.mat
 - Assets/Prefabs/3DGlasses/3DGlasses.prefab
 - Assets/Textures/Items/BottleCap.png
 - Assets/Prefabs/EdibleGlue/GlueBottleUVW.jpg
 - Assets/Textures/Buffs/CadencePrayer.png
+- Assets/Prefabs/Chalice/obj.obj
 - Assets/Prefabs/BottleCap/BottleCap.prefab
 - Assets/Prefabs/CarvingBlade/blade_material.mat
 - Assets/Prefabs/MagnifyingGlass/Magnifier001_Normal-directX.tif
 - Assets/Prefabs/SoulRing/eye-ring.obj
+- Assets/Prefabs/Chalice/Chalice.prefab
 - Assets/Prefabs/RubberDucky/RubberDucky.prefab
+- Assets/Textures/Items/Chalice.png
 - Assets/Prefabs/CarvingBlade/lambert1_Metallic.png
 - Assets/Prefabs/BloodDice/Mat.1.mat
 - Assets/Prefabs/CarvingBlade/viego.fbx
@@ -101,8 +105,8 @@ Assets:
 - Assets/Prefabs/EdibleGlue/GlueBottleAO.jpg
 - Assets/Prefabs/CarvingBlade/lambert1_Normal.png
 - Assets/Prefabs/EdibleGlue/GlueBottle.prefab
+- Assets/Prefabs/Chalice/uploads_files_3778260_chalice.obj
 - Assets/Prefabs/3DGlasses/3d_glasses_3d_glasses_3d_glassesMat.mat
-- Assets/Textures/Buffs/Stasis.png
 - Assets/Prefabs/RustedTrowel/Trowel.mat
 - Assets/Prefabs/3DGlasses/test 9.mat
 - "Assets/Prefabs/HereticSeal/\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B.2.mat"
@@ -139,6 +143,7 @@ Assets:
 - Assets/Textures/Items/Photodiode.png
 - Assets/Prefabs/EdibleGlue/GlueBottleMetal.png
 - Assets/Prefabs/CarvingBlade/lambert1_Height.png
+- Assets/Prefabs/Chalice/CrownMaterial.mat
 - Assets/Prefabs/EdibleGlue/GlueBottle.mat
 - Assets/Prefabs/BloodDice/BloodDice.prefab
 - Assets/Textures/Items/AncientCoin.png
@@ -150,6 +155,7 @@ Assets:
 - Assets/Textures/Items/ProfaneCrucifix.png
 - Assets/Textures/Buffs/TatteredCurse.png
 - Assets/Prefabs/IronHeart/uploads_files_189436_Heart_OBJ.obj
+- Assets/Prefabs/Chalice/Crown.prefab
 - Assets/Prefabs/AncientCoin/Coin_roughness.png
 - "Assets/Prefabs/HereticSeal/\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B.1.mat"
 - Assets/Prefabs/RustedTrowel/rusty.png
@@ -174,6 +180,7 @@ Assets:
 - Assets/Prefabs/TatteredScroll/scroll_MAT.mat
 - Assets/Textures/Buffs/MulchCooldown.png
 - Assets/Prefabs/HolyWater/Holy_Water_Bottle_Normal.tga.png
+- Assets/Textures/Buffs/ConsecratedBuff.png
 - Assets/Textures/Items/BrokenMask.png
 - Assets/Prefabs/Photodiode/AnodeMat.mat
 - Assets/Prefabs/BrokenMask/Mask.mat
