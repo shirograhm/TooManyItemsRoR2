@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -34,7 +35,7 @@ namespace TooManyItems
         {
             Log.Init(Logger);
 
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("TooManyItems.assetbundle"))
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("TooManyItems.tmiassets"))
             {
                 if (stream != null)
                 {
@@ -75,7 +76,7 @@ namespace TooManyItems
             DebitCard.Init();
             EdibleGlue.Init();
             HolyWater.Init();
-            InstructionManual.Init();
+            //InstructionManual.Init();
             MilkCarton.Init();
             MagnifyingGlass.Init();
             Photodiode.Init();
@@ -120,63 +121,65 @@ namespace TooManyItems
             };
         }
 
-        //private void Update()
-        //{
-        //    if (!NetworkServer.active) return;
+        private void Update()
+        {
+            if (!NetworkServer.active) return;
 
-        //    if (Input.GetKeyDown(KeyCode.F2))
-        //    {
-        //        DropItem(AncientCoin.itemDef);
-        //        DropItem(BloodDice.itemDef);
-        //        DropItem(BottleCap.itemDef);
-        //        DropItem(BrokenMask.itemDef);
-        //        DropItem(CarvingBlade.itemDef);
-        //        DropItem(Crucifix.itemDef);
-        //        DropItem(DebitCard.itemDef);
-        //        DropItem(EdibleGlue.itemDef);
-        //        DropItem(GlassMarble.itemDef);
-        //        DropItem(HereticSeal.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(IronHeart.itemDef);
-        //        DropItem(MilkCarton.itemDef);
-        //        DropItem(MagnifyingGlass.itemDef);
-        //        DropItem(Photodiode.itemDef);
-        //        DropItem(RedBlueGlasses.itemDef);
-        //        DropItem(RubberDucky.itemDef);
-        //        DropItem(RustyTrowel.itemDef);
-        //        DropItem(SoulRing.itemDef);
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.F3))
-        //    {
-        //        // Single key testing
-        //        DropItem(TatteredScroll.equipmentDef);
-        //        DropItem(BuffTotem.equipmentDef);
-        //    }
-        //}
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                DropItem(AncientCoin.itemDef);
+                DropItem(BloodDice.itemDef);
+                DropItem(BottleCap.itemDef);
+                DropItem(BrokenMask.itemDef);
+                DropItem(CarvingBlade.itemDef);
+                DropItem(Crucifix.itemDef);
+                DropItem(DebitCard.itemDef);
+                DropItem(EdibleGlue.itemDef);
+                DropItem(GlassMarble.itemDef);
+                DropItem(HereticSeal.itemDef);
+                DropItem(HolyWater.itemDef);
+                DropItem(Hoodie.itemDef);
+                //DropItem(InstructionManual.itemDef);
+                DropItem(IronHeart.itemDef);
+                DropItem(MilkCarton.itemDef);
+                DropItem(MagnifyingGlass.itemDef);
+                DropItem(Photodiode.itemDef);
+                DropItem(RedBlueGlasses.itemDef);
+                DropItem(RubberDucky.itemDef);
+                DropItem(RustyTrowel.itemDef);
+                DropItem(SoulRing.itemDef);
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                // Single key testing
+                //DropItem(TatteredScroll.equipmentDef);
+                DropItem(BuffTotem.equipmentDef);
+            }
+        }
 
-        //private void DropItem(ItemDef def)
-        //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        private void DropItem(ItemDef def)
+        {
+            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
-        //}
+            Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
+        }
 
-        //private void DropItem(EquipmentDef def)
-        //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        private void DropItem(EquipmentDef def)
+        {
+            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
-        //}
+            Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
+        }
 
-        //private void DropItem(MiscPickupDef def)
-        //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        private void DropItem(MiscPickupDef def)
+        {
+            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);
-        //}
+            Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+            PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);
+        }
 
         public struct GenericCharacterInfo
         {

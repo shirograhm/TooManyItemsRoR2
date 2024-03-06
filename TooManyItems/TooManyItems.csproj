@@ -14,11 +14,12 @@
 
   <ItemGroup>
     <None Remove="assetbundle" />
+    <None Remove="tmiassets" />
     <None Remove="TooManyItems" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="assetbundle" />
+    <EmbeddedResource Include="tmiassets" />
     <EmbeddedResource Include="TooManyItems" />
   </ItemGroup>
 
@@ -95,7 +96,6 @@
 
   <ItemGroup>
     <Folder Include="exts\" />
-    <Folder Include="items\notier\" />
   </ItemGroup>
 
 </Project>
