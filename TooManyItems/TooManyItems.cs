@@ -23,7 +23,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.1.4";
+        public const string PluginVersion = "0.1.4.1";
 
         public static System.Random rand = new();
 
