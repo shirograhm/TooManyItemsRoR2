@@ -2,6 +2,7 @@ using R2API;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -37,6 +38,7 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
+            GenerateBuff();
             AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
@@ -75,17 +77,18 @@ namespace TooManyItems
 
             hoodieBuffActive.name = "Hoodie Active";
             hoodieBuffActive.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieBuffActive.png");
-            hoodieBuffActive.maxStacks = 1;
-            hoodieBuffActive.canStack = true;
+            hoodieBuffActive.canStack = false;
+            hoodieBuffActive.isHidden = false;
             hoodieBuffActive.isDebuff = false;
+            hoodieBuffActive.isCooldown = false;
 
             hoodieBuffCooldown = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffCooldown.name = "Hoodie Cooldown";
             hoodieBuffCooldown.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieBuffCooldown.png");
-            hoodieBuffCooldown.maxStacks = 1;
-            hoodieBuffCooldown.isDebuff = false;
             hoodieBuffCooldown.canStack = false;
+            hoodieBuffCooldown.isHidden = false;
+            hoodieBuffCooldown.isDebuff = false;
             hoodieBuffCooldown.isCooldown = true;
         }
 
@@ -108,22 +111,29 @@ namespace TooManyItems
 
             On.RoR2.Inventory.GiveItem_ItemIndex_int += (orig, self, itemIndex, count) =>
             {
-                if (NetworkServer.active) {
+                if (NetworkServer.active)
+                {
                     CharacterMaster master = self.GetComponent<CharacterMaster>();
-                    if (master) {
+                    if (master && itemIndex == itemDef.itemIndex)
+                    {
                         CharacterBody body = master.GetBody();
-                        if (body && !body.HasBuff(hoodieBuffActive) && !body.HasBuff(hoodieBuffCooldown)) {
+                        if (body && !body.HasBuff(hoodieBuffActive) && !body.HasBuff(hoodieBuffCooldown))
+                        {
                             body.AddBuff(hoodieBuffActive);
                         }
                     }
                 }
+
+                orig(self, itemIndex, count);
             };
-            
+
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
             {
-                if (self && self.inventory) {
+                if (self && self.inventory)
+                {
 
-                    if (!buffDef.isDebuff && self.HasBuff(hoodieBuffActive)) {
+                    if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive))
+                    {
                         int count = self.inventory.GetItemCount(itemDef);
                         duration *= 2f;
 
