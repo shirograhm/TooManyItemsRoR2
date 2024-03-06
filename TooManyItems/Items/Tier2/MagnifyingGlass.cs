@@ -86,8 +86,9 @@ namespace TooManyItems
             analyzedDebuff.name = "Analyzed";
             analyzedDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Analyzed.png");
             analyzedDebuff.canStack = false;
-            analyzedDebuff.isDebuff = true;
             analyzedDebuff.isHidden = false;
+            analyzedDebuff.isDebuff = true;
+            analyzedDebuff.isCooldown = false;
         }
 
         public static void Hooks()

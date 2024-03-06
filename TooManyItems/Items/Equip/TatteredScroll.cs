@@ -101,8 +101,9 @@ namespace TooManyItems
             curseDebuff.name = "Siphon";
             curseDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("TatteredCurse.png");
             curseDebuff.canStack = false;
-            curseDebuff.isDebuff = true;
             curseDebuff.isHidden = false;
+            curseDebuff.isDebuff = true;
+            curseDebuff.isCooldown = false;
         }
 
         public static void Hooks()

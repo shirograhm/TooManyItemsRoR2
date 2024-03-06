@@ -88,7 +88,9 @@ namespace TooManyItems
             attackSpeedBuff.name = "Voltage";
             attackSpeedBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Voltage.png");
             attackSpeedBuff.canStack = true;
+            attackSpeedBuff.isHidden = false;
             attackSpeedBuff.isDebuff = false;
+            attackSpeedBuff.isCooldown = false;
         }
 
         public static void Hooks()

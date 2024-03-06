@@ -131,29 +131,33 @@ namespace TooManyItems
             armorBuff.name = "Prayer of Defense";
             armorBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DefensePrayer.png");
             armorBuff.canStack = false;
-            armorBuff.isDebuff = false;
             armorBuff.isHidden = false;
+            armorBuff.isDebuff = false;
+            armorBuff.isCooldown = false;
 
             damageBuff = ScriptableObject.CreateInstance<BuffDef>();
             damageBuff.name = "Prayer of Power";
             damageBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DamagePrayer.png");
             damageBuff.canStack = false;
-            damageBuff.isDebuff = false;
             damageBuff.isHidden = false;
+            damageBuff.isDebuff = false;
+            damageBuff.isCooldown = false;
 
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
             attackSpeedBuff.name = "Prayer of Cadence";
             attackSpeedBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("CadencePrayer.png");
             attackSpeedBuff.canStack = false;
-            attackSpeedBuff.isDebuff = false;
             attackSpeedBuff.isHidden = false;
+            attackSpeedBuff.isDebuff = false;
+            attackSpeedBuff.isCooldown = false;
 
             healthRegenBuff = ScriptableObject.CreateInstance<BuffDef>();
             healthRegenBuff.name = "Prayer of Remedy";
             healthRegenBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("RemedyPrayer.png");
             healthRegenBuff.canStack = false;
-            healthRegenBuff.isDebuff = false;
             healthRegenBuff.isHidden = false;
+            healthRegenBuff.isDebuff = false;
+            healthRegenBuff.isCooldown = false;
         }
 
         public static void Hooks()

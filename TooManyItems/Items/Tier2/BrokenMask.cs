@@ -182,8 +182,9 @@ namespace TooManyItems
             burnDebuff.name = "Torment";
             burnDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("MaskDebuff.png");
             burnDebuff.canStack = false;
-            burnDebuff.isDebuff = true;
             burnDebuff.isHidden = false;
+            burnDebuff.isDebuff = true;
+            burnDebuff.isCooldown = false;
         }
 
         private static void GenerateDot()

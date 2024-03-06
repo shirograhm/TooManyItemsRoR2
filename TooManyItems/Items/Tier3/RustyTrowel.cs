@@ -152,14 +152,17 @@ namespace TooManyItems
             mulchBuff.name = "Mulch";
             mulchBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Mulch.png");
             mulchBuff.canStack = true;
+            mulchBuff.isHidden = false;
             mulchBuff.isDebuff = false;
+            mulchBuff.isCooldown = false;
 
             healingTimer = ScriptableObject.CreateInstance<BuffDef>();
 
             healingTimer.name = "Mulch Cooldown";
             healingTimer.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("MulchCooldown.png");
-            healingTimer.isDebuff = false;
             healingTimer.canStack = false;
+            healingTimer.isHidden = false;
+            healingTimer.isDebuff = false;
             healingTimer.isCooldown = true;
         }
 
