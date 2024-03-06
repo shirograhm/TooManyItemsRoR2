@@ -130,13 +130,10 @@ namespace TooManyItems
             On.RoR2.HealthComponent.GetHealthBarValues += (orig, self) =>
             {
                 HealthComponent.HealthBarValues values = orig(self);
-                if (self.body && self.body.equipmentSlot)
+                if (self.body && self.body.HasBuff(consecratedBuff))
                 {
-                    if (self.body.HasBuff(consecratedBuff))
-                    {
-                        values.curseFraction += (1f - values.curseFraction) * consecrateMaxHealthLost.Value / 100f;
-                        values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
-                    }
+                    values.curseFraction += (1f - values.curseFraction) * consecrateMaxHealthLost.Value / 100f;
+                    values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
                 }
                 return values;
             };

@@ -3,7 +3,6 @@ using RoR2;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -128,38 +127,23 @@ namespace TooManyItems
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
             };
 
-            On.RoR2.CharacterBody.OnBuffFinalStackLost += (orig, self, buffDef) =>
+            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
             {
-                orig(self, buffDef);
+                orig(self);
 
-                if (buffDef == hoodieBuffCooldown && self.inventory && self.inventory.GetItemCount(itemDef) > 0)
+                if (self && self.inventory)
                 {
-                    self.AddBuff(hoodieBuffActive);
-                }
-            };
-
-            On.RoR2.Inventory.GiveItem_ItemIndex_int += (orig, self, itemIndex, count) =>
-            {
-                if (NetworkServer.active)
-                {
-                    CharacterMaster master = self.GetComponent<CharacterMaster>();
-                    if (master && itemIndex == itemDef.itemIndex)
+                    if (!self.HasBuff(hoodieBuffActive) && !self.HasBuff(hoodieBuffCooldown) && self.inventory.GetItemCount(itemDef) > 0)
                     {
-                        CharacterBody body = master.GetBody();
-                        if (body && !body.HasBuff(hoodieBuffActive) && !body.HasBuff(hoodieBuffCooldown))
-                        {
-                            body.AddBuff(hoodieBuffActive);
-                        }
+                        self.AddBuff(hoodieBuffActive);
                     }
                 }
-                orig(self, itemIndex, count);
             };
 
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
             {
                 if (self && self.inventory)
                 {
-
                     if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                     {
                         int count = self.inventory.GetItemCount(itemDef);
