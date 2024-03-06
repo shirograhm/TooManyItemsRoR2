@@ -53,6 +53,11 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("GlueBottle.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
+
+            itemDef.tags = new ItemTag[]
+            {
+                ItemTag.OnKillEffect
+            };
         }
 
         public static void Hooks()
