@@ -109,6 +109,14 @@ namespace TooManyItems
                 // Fleece Hoodie
                 ItemStats.RegisterStat(
                     itemDef: Hoodie.itemDef,
+                    "Duration Bonus",
+                    Hoodie.durationIncreasePercent,
+                    Hoodie.durationIncreasePercent,
+                    stackingFormula: ItemStats.LinearStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent
+                );
+                ItemStats.RegisterStat(
+                    itemDef: Hoodie.itemDef,
                     "Cooldown",
                     Hoodie.rechargeTime.Value,
                     Hoodie.rechargeTimeReductionPercent,

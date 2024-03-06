@@ -13,11 +13,21 @@ namespace TooManyItems
         public static BuffDef hoodieBuffActive;
         public static BuffDef hoodieBuffCooldown;
 
-        // The next timed buff received has its duration doubled. Recharges every 8 (-10% per stack) seconds.
+        // The next timed buff received has its duration increased by 35% (+35% per stack). Recharges every 5 (-15% per stack) seconds.
+        public static ConfigurableValue<float> durationIncrease = new(
+            "Item: Fleece Hoodie",
+            "Duration Increase",
+            35f,
+            "Buff duration percentage multiplier per stack.",
+            new List<string>()
+            {
+                "ITEM_HOODIE_DESC"
+            }
+        );
         public static ConfigurableValue<float> rechargeTime = new(
             "Item: Fleece Hoodie",
             "Recharge Time",
-            8f,
+            5f,
             "Time this item takes to recharge.",
             new List<string>()
             {
@@ -27,13 +37,14 @@ namespace TooManyItems
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
             "Item: Fleece Hoodie",
             "Recharge Time Reduction",
-            10f,
+            15f,
             "Percent of recharge time removed for every additional stack of this item.",
             new List<string>()
             {
                 "ITEM_HOODIE_DESC"
             }
         );
+        public static float durationIncreasePercent = durationIncrease.Value / 100f;
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
 
         public static List<BuffDef> ignoredBuffDefs = new List<BuffDef>();
@@ -152,7 +163,7 @@ namespace TooManyItems
                     if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                     {
                         int count = self.inventory.GetItemCount(itemDef);
-                        duration *= 2f;
+                        duration *= 1 + durationIncreasePercent * count;
 
                         self.RemoveBuff(hoodieBuffActive);
                         self.AddTimedBuff(hoodieBuffCooldown, CalculateHoodieCooldown(count));
@@ -166,9 +177,10 @@ namespace TooManyItems
         {
             LanguageAPI.Add("HOODIE", "Fleece Hoodie");
             LanguageAPI.Add("HOODIE_NAME", "Fleece Hoodie");
-            LanguageAPI.Add("HOODIE_PICKUP", "The next buff received is doubled. Recharges over time.");
+            LanguageAPI.Add("HOODIE_PICKUP", "The next timed buff received lasts longer. Recharges over time.");
 
-            string desc = $"The next timed buff received has its duration doubled. " +
+            string desc = $"The next timed buff received has its duration increased by " +
+                $"<style=cIsUtility>{durationIncrease.Value}%</style> <style=cStack>(+{durationIncrease.Value}% per stack)</style>. " +
                 $"Recharges every <style=cIsUtility>{rechargeTime.Value}</style> <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds.";
             LanguageAPI.Add("HOODIE_DESCRIPTION", desc);
 
