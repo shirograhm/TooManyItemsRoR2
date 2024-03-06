@@ -13,11 +13,11 @@ namespace TooManyItems
         public static BuffDef hoodieBuffActive;
         public static BuffDef hoodieBuffCooldown;
 
-        // The next timed buff received has its duration increased by 35% (+35% per stack). Recharges every 5 (-15% per stack) seconds.
+        // The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 5 (-15% per stack) seconds.
         public static ConfigurableValue<float> durationIncrease = new(
             "Item: Fleece Hoodie",
             "Duration Increase",
-            35f,
+            40f,
             "Buff duration percentage multiplier per stack.",
             new List<string>()
             {

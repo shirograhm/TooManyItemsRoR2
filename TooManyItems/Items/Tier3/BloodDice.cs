@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently gain 1 to 6 bonus health, up to a max of 500 (+500 per stack) health.
+        // On kill, permanently gain 2 to 12 bonus health, up to a max of 550 (+550 per stack) health.
         public static ConfigurableValue<bool> affectedByLuck = new(
             "Item: Blood Dice",
             "Affected By Luck",
@@ -33,6 +33,8 @@ namespace TooManyItems
                 "ITEM_BLOODDICE_DESC"
             }
         );
+        public static int minHealthGain = 2;
+        public static int maxHealthGain = 12;
 
         public class Statistics : MonoBehaviour
         {
@@ -203,7 +205,7 @@ namespace TooManyItems
 
         private static int GetDiceRoll(CharacterMaster atkMaster)
         {
-            int diceRoll = TooManyItems.rand.Next(1, 7);
+            int diceRoll = TooManyItems.rand.Next(minHealthGain, maxHealthGain + 1);
 
             if (affectedByLuck.Value)
             {
@@ -211,7 +213,7 @@ namespace TooManyItems
 
                 for (int i = 0; i < Mathf.Abs(luckStat); i++)
                 {
-                    int newRoll = TooManyItems.rand.Next(1, 7);
+                    int newRoll = TooManyItems.rand.Next(minHealthGain, maxHealthGain + 1);
 
                     if (luckStat > 0) diceRoll = newRoll > diceRoll ? newRoll : diceRoll;
                     if (luckStat < 0) diceRoll = newRoll < diceRoll ? newRoll : diceRoll;
