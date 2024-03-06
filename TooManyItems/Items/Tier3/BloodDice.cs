@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently gain 2 to 12 bonus health, up to a max of 550 (+550 per stack) health.
+        // On kill, permanently gain 2 to 12 bonus health, up to a max of 500 (+500 per stack) health.
         public static ConfigurableValue<bool> affectedByLuck = new(
             "Item: Blood Dice",
             "Affected By Luck",
@@ -229,7 +229,7 @@ namespace TooManyItems
             LanguageAPI.Add("BLOOD_DICE_NAME", "Blood Dice");
             LanguageAPI.Add("BLOOD_DICE_PICKUP", "Gain permanent health on kill.");
 
-            string desc = $"On kill, gain <style=cIsHealth>1</style> to <style=cIsHealth>6</style> permanent max health, up to a maximum of " +
+            string desc = $"On kill, gain <style=cIsHealth>{minHealthGain}</style> to <style=cIsHealth>{maxHealthGain}</style> permanent max health, up to a maximum of " +
                 $"<style=cIsHealth>{maxHealthPerStack.Value}</style> <style=cStack>(+{maxHealthPerStack.Value} per stack)</style>.";
             LanguageAPI.Add("BLOOD_DICE_DESCRIPTION", desc);
 
