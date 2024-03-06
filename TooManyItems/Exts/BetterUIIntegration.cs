@@ -106,6 +106,16 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Range
                 );
 
+                // Fleece Hoodie
+                ItemStats.RegisterStat(
+                    itemDef: Hoodie.itemDef,
+                    "Cooldown",
+                    Hoodie.rechargeTime.Value,
+                    Hoodie.rechargeTimeReductionPercent,
+                    stackingFormula: ItemStats.NegativeExponentialStacking,
+                    statFormatter: ItemStats.StatFormatter.Seconds
+                );
+
                 // Glass Marble
                 ItemStats.RegisterStat(
                     itemDef: GlassMarble.itemDef,
@@ -131,16 +141,6 @@ namespace TooManyItems
                     "Bonus Experience",
                     HolyWater.experienceMultiplierAsPercent,
                     HolyWater.experienceMultiplierAsPercent,
-                    stackingFormula: ItemStats.HyperbolicStacking,
-                    statFormatter: ItemStats.StatFormatter.Percent
-                );
-
-                // Instruction Manual
-                ItemStats.RegisterStat(
-                    itemDef: InstructionManual.itemDef,
-                    "Cooldown Reduction",
-                    InstructionManual.equipmentCDRPercent,
-                    InstructionManual.equipmentCDRPercent,
                     stackingFormula: ItemStats.HyperbolicStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
@@ -243,16 +243,6 @@ namespace TooManyItems
                     1f,
                     1f,
                     statFormatter: SoulRingRegenFormatter
-                );
-
-                // Suspicious Hoodie
-                ItemStats.RegisterStat(
-                    itemDef: Hoodie.itemDef,
-                    "Cooldown",
-                    Hoodie.rechargeTime.Value,
-                    Hoodie.rechargeTimeReductionPercent,
-                    stackingFormula: ItemStats.NegativeExponentialStacking,
-                    statFormatter: ItemStats.StatFormatter.Seconds
                 );
             }
 

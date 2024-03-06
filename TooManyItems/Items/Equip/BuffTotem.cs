@@ -113,8 +113,8 @@ namespace TooManyItems
             equipmentDef.descriptionToken = "BUFF_TOTEM_DESCRIPTION";
             equipmentDef.loreToken = "BUFF_TOTEM_LORE";
 
-            equipmentDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HealTotem.png");
-            equipmentDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("HealTotem.prefab");
+            equipmentDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("BuffTotem.png");
+            equipmentDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("BuffTotem.prefab");
 
             equipmentDef.appearsInMultiPlayer = true;
             equipmentDef.appearsInSinglePlayer = true;
