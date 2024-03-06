@@ -20,7 +20,7 @@ namespace TooManyItems
                 "! Important !",
                 "Use Custom Config",
                 false,
-                "If true, items will use the custom values in this config file instead of the default values."
+                "Set to true to enable custom configurations."
             );
         }
     }
