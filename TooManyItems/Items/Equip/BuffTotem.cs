@@ -86,6 +86,8 @@ namespace TooManyItems
             ARMOR, DAMAGE, ATTACK_SPEED, HEALTH_REGEN
         }
 
+        public static Result lastBuffGiven = Result.ARMOR;
+
         internal static void Init()
         {
             GenerateEquipment();
@@ -201,6 +203,12 @@ namespace TooManyItems
             Array values = Enum.GetValues(typeof(Result));
             Result r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
 
+            while (r == lastBuffGiven)
+            {
+                r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
+            }
+            lastBuffGiven = r;
+
             switch (r)
             {
                 case Result.ARMOR:
@@ -231,7 +239,7 @@ namespace TooManyItems
                 $"<style=cIsUtility>{armorIncrease.Value}</style> armor, " +
                 $"<style=cIsDamage>{damageIncrease.Value}%</style> damage, " +
                 $"<style=cIsUtility>{attackSpeedIncrease.Value}%</style> attack speed, " +
-                $"or <style=cIsUtility>{regenIncrease.Value}%</style> health regeneration " +
+                $"or <style=cIsHealing>{regenIncrease.Value}%</style> health regeneration " +
                 $"for {buffDuration.Value} seconds.";
             LanguageAPI.Add("BUFF_TOTEM_DESCRIPTION", desc);
 
