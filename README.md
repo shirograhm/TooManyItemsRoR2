@@ -4,7 +4,7 @@ These values are configurable. To do so, run the game once with the mod installe
 
 ### Lunar Items
 > **Ancient Coin**  
-> Gain 75% (+75% per stack) more gold. Take 35% (+35% per stack) more damage.  
+> Gain 90% (+90% per stack) more gold. Take 35% (+35% per stack) more damage.  
 > **Carving Blade**  
 > Deal 0.6% (+0.6% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike.  
 > **Crucifix**  
@@ -16,7 +16,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Iron Heart**  
 > Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
 > **Rusty Trowel**  
-> On kill, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 12 HP per stack.  
+> On-hit, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 3 HP per stack.  
 > **Soul Ring**  
 > On kill, permanently increase your health regeneration by 0.2 health, up to a maximum of 20 (+20 per stack).  
 
@@ -25,6 +25,12 @@ These values are configurable. To do so, run the game once with the mod installe
 > Dealing damage burns enemies for 1.2% (+1.2% per stack) max health over 6 seconds. Does not apply itself.  
 > **Glass Marbles**  
 > Gain 1 (+1 per stack) damage per level.  
+> **Seal of the Heretic**  
+> Gain 1% (+1% per stack) bonus damage for every 1% msising health.  
+> **Magnifying Glass**  
+> Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 10% from all sources.  
+> **Fleece Hoodie**  
+> The next timed buff received has its duration increased by 35% (+35% per stack). Recharges every 5 (-15% per stack) seconds.  
 
 ### White Items
 > **3D Glasses**  
@@ -32,7 +38,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Bottle Cap**  
 > Reduce your ultimate skill cooldown by 4% (+4% per stack).  
 > **Debit Card**  
-> Get an 6% (+6% per stack) rebate on multishop and chest purchases.  
+> Get an 6% (+6% per stack) rebate on purchases.  
 > **Edible Glue**  
 > On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.  
 > **Holy Water**  
