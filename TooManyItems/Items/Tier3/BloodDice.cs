@@ -140,6 +140,19 @@ namespace TooManyItems
                 obj.inventory?.gameObject.AddComponent<Statistics>();
             };
 
+            On.RoR2.HealthComponent.GetHealthBarValues += (orig, self) =>
+            {
+                HealthComponent.HealthBarValues values = orig(self);
+                if (self.body && self.body.inventory)
+                {
+                    if (self.body.inventory.GetItemCount(itemDef) > 0)
+                    {
+                        values.hasInfusion = true;
+                    }
+                }
+                return values;
+            };
+
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender == null || sender.inventory == null) return;
