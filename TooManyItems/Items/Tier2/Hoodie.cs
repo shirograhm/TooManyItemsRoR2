@@ -1,6 +1,7 @@
 using R2API;
 using RoR2;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -14,7 +15,7 @@ namespace TooManyItems
 
         // The next timed buff received has its duration doubled. Recharges every 8 (-10% per stack) seconds.
         public static ConfigurableValue<float> rechargeTime = new(
-            "Item: Suspicious Hoodie",
+            "Item: Fleece Hoodie",
             "Recharge Time",
             8f,
             "Time this item takes to recharge.",
@@ -24,7 +25,7 @@ namespace TooManyItems
             }
         );
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
-            "Item: Suspicious Hoodie",
+            "Item: Fleece Hoodie",
             "Recharge Time Reduction",
             10f,
             "Percent of recharge time removed for every additional stack of this item.",
@@ -78,7 +79,7 @@ namespace TooManyItems
             hoodieBuffActive = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffActive.name = "Hoodie Active";
-            hoodieBuffActive.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieBuffActive.png");
+            hoodieBuffActive.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieActive.png");
             hoodieBuffActive.canStack = false;
             hoodieBuffActive.isHidden = false;
             hoodieBuffActive.isDebuff = false;
@@ -87,7 +88,7 @@ namespace TooManyItems
             hoodieBuffCooldown = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffCooldown.name = "Hoodie Cooldown";
-            hoodieBuffCooldown.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieBuffCooldown.png");
+            hoodieBuffCooldown.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieCooldown.png");
             hoodieBuffCooldown.canStack = false;
             hoodieBuffCooldown.isHidden = false;
             hoodieBuffCooldown.isDebuff = false;
@@ -106,6 +107,14 @@ namespace TooManyItems
                 // Buffs that this item shouldn't affect
                 ignoredBuffDefs.Add(RoR2Content.Buffs.MedkitHeal);
                 ignoredBuffDefs.Add(RoR2Content.Buffs.HiddenInvincibility);
+
+                // Ignore dot effects that use Buffs to keep track of them
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+                foreach (var dotDebuff in DotController.dotDefs.Where(x => x.associatedBuff != null).Select(x => x.associatedBuff).Distinct())
+                    ignoredBuffDefs.Add(dotDebuff);
+                foreach (var dotDebuff in DotController.dotDefs.Where(x => x.terminalTimedBuff != null).Select(x => x.terminalTimedBuff).Distinct())
+                    ignoredBuffDefs.Add(dotDebuff);
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
             };
 
             On.RoR2.CharacterBody.OnBuffFinalStackLost += (orig, self, buffDef) =>
@@ -155,8 +164,8 @@ namespace TooManyItems
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("HOODIE", "Suspicious Hoodie");
-            LanguageAPI.Add("HOODIE_NAME", "Suspicious Hoodie");
+            LanguageAPI.Add("HOODIE", "Fleece Hoodie");
+            LanguageAPI.Add("HOODIE_NAME", "Fleece Hoodie");
             LanguageAPI.Add("HOODIE_PICKUP", "The next buff received is doubled. Recharges over time.");
 
             string desc = $"The next timed buff received has its duration doubled. " +

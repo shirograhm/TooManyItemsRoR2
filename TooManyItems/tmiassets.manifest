@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2777186071
+CRC: 598140717
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: e6085196ca1a79a242754387aace5ccc
+    Hash: 32be861bf59da34264329f6e0c96b7c1
   TypeTreeHash:
     serializedVersion: 2
     Hash: 10def29c998ab6d8bfcfd7beeec5d09d
@@ -53,7 +53,7 @@ Assets:
 - Assets/Prefabs/CarvingBlade/lambert1_Roughness.png
 - Assets/Prefabs/Stopwatch/stopwatch_DefaultMaterial_MetallicSmoothness.png
 - Assets/Prefabs/AncientCoin/Coin_metal.png
-- Assets/Textures/Items/HealTotem.png
+- Assets/Textures/Items/BuffTotem.png
 - Assets/Prefabs/HereticSeal/uploads_files_3275359_purity_seal_blood_angels.fbx
 - Assets/Prefabs/MagnifyingGlass/Magnifier001_Metallic.png
 - Assets/Prefabs/CarvingBlade/lambert1_Mixed_AO.png
@@ -64,6 +64,7 @@ Assets:
 - Assets/Prefabs/RustedTrowel/RustyTrowel.prefab
 - Assets/Prefabs/HereticSeal/HereticSeal.prefab
 - Assets/Prefabs/MagnifyingGlass/Magnifier001_Roughness.png
+- Assets/Textures/Buffs/HoodieActive.png
 - Assets/Prefabs/MilkCarton/MilkCarton.prefab
 - Assets/Prefabs/BrokenMask/mask3.fbx
 - Assets/Prefabs/3DGlasses/3DGlasses.prefab
@@ -78,6 +79,7 @@ Assets:
 - Assets/Prefabs/CarvingBlade/lambert1_Metallic.png
 - Assets/Prefabs/BloodDice/Mat.1.mat
 - Assets/Prefabs/CarvingBlade/viego.fbx
+- Assets/Prefabs/Hoodie/Hoodie.prefab
 - Assets/Prefabs/HolyWater/Holy Water Bottle.obj
 - Assets/Prefabs/Stopwatch/stopwatch_DefaultMaterial_AlbedoTransparency.png
 - Assets/Textures/Buffs/RemedyPrayer.png
@@ -91,6 +93,7 @@ Assets:
 - Assets/Prefabs/TatteredScroll/map_Manuscript1_Metallic.png
 - Assets/Textures/Items/HereticSeal.png
 - Assets/Textures/Items/SoulRing.png
+- Assets/Textures/Items/Hoodie.png
 - Assets/Prefabs/CarvingBlade/lambert1_Base_Color.png
 - Assets/Textures/Items/3DGlasses.png
 - Assets/Textures/Items/EdibleGlue.png
@@ -103,13 +106,14 @@ Assets:
 - Assets/Prefabs/RustedTrowel/Trowel.mat
 - Assets/Prefabs/3DGlasses/test 9.mat
 - "Assets/Prefabs/HereticSeal/\u041C\u0430\u0442\u0435\u0440\u0438\u0430\u043B.2.mat"
+- Assets/Prefabs/Hoodie/defaultMat.mat
 - Assets/Textures/Items/DebitCard.png
 - Assets/Prefabs/BrokenMask/BrokenMask.prefab
 - Assets/Prefabs/MilkCarton/Milk_Box_v1_001_Tex.mat
 - Assets/Textures/Items/RustedTrowel.png
 - Assets/Prefabs/Stopwatch/Stopwatch.prefab
 - Assets/Textures/Items/BloodDice.png
-- Assets/Prefabs/HealTotem/HealTotem.prefab
+- Assets/Prefabs/HealTotem/BuffTotem.prefab
 - Assets/Textures/Items/Stopwatch.png
 - Assets/Prefabs/ProfaneCrucifix/Satin Finish.mat
 - Assets/Prefabs/TatteredScroll/TatteredScroll.prefab
@@ -139,6 +143,7 @@ Assets:
 - Assets/Prefabs/BloodDice/BloodDice.prefab
 - Assets/Textures/Items/AncientCoin.png
 - Assets/Prefabs/SoulRing/RingMaterial.mat
+- Assets/Prefabs/Hoodie/uploads_files_3382474_Sweatshirt.OBJ
 - Assets/Prefabs/GlassMarbles/Glass.mat
 - Assets/Prefabs/ProfaneCrucifix/uploads_files_4048812_CR187...obj
 - Assets/Prefabs/SoulRing/SoulRing.prefab
@@ -161,6 +166,7 @@ Assets:
 - Assets/Prefabs/TatteredScroll/map_Manuscript1_BaseColor.png
 - Assets/Textures/Buffs/Analyzed.png
 - Assets/Prefabs/AncientCoin/Coin_color.png
+- Assets/Textures/Buffs/HoodieCooldown.png
 - Assets/Prefabs/HolyWater/Holy_Water_Bottle_Emission.tga.png
 - Assets/Prefabs/Stopwatch/defaultMat.mat
 - Assets/Prefabs/Photodiode/uploads_files_4411672_L.E.D.obj
