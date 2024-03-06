@@ -77,6 +77,7 @@ namespace TooManyItems
                     damageInfo.damage *= (1 + count * damageMultiplierAsPercent);
                 }
             };
+
             On.RoR2.CharacterMaster.GiveMoney += (orig, self, amount) =>
             {
                 if (self.inventory == null) return;

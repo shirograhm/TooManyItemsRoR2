@@ -91,7 +91,7 @@ namespace TooManyItems
             equipmentDef.enigmaCompatible = true;
             equipmentDef.canDrop = true;
 
-            equipmentDef.cooldown = equipCooldown;
+            equipmentDef.cooldown = equipCooldown.Value;
         }
 
         private static void GenerateBuff()
@@ -145,9 +145,9 @@ namespace TooManyItems
                 CharacterBody parent = hb.healthComponent.body;
                 if (parent && parent != slot.characterBody && !parent.isPlayerControlled)
                 {
-                    DamageInfo info = new()
+                    parent.healthComponent.TakeDamage(new DamageInfo
                     {
-                        damage = 1f,
+                        damage = slot.characterBody.damage,
                         attacker = slot.characterBody.gameObject,
                         inflictor = slot.characterBody.gameObject,
                         procCoefficient = 0f,
@@ -156,8 +156,7 @@ namespace TooManyItems
                         damageColorIndex = damageColor,
                         procChainMask = new ProcChainMask(),
                         damageType = DamageType.Silent
-                    };
-                    parent.healthComponent.TakeDamage(info);
+                    });
 
                     parent.AddTimedBuff(curseDebuff, curseDuration.Value);
                 }

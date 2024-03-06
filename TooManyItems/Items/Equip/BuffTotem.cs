@@ -124,7 +124,7 @@ namespace TooManyItems
             equipmentDef.enigmaCompatible = true;
             equipmentDef.canDrop = true;
 
-            equipmentDef.cooldown = equipCooldown;
+            equipmentDef.cooldown = equipCooldown.Value;
         }
 
         private static void GenerateBuff()

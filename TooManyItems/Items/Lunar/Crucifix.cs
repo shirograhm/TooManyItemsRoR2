@@ -83,7 +83,6 @@ namespace TooManyItems
                         duration = fireDuration.Value,
                         damageMultiplier = 1f
                     };
-
                     DotController.InflictDot(ref dotInfo);
                 }
             };
