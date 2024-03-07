@@ -137,7 +137,7 @@ namespace TooManyItems
 
                 float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                dotStack.damage = self.victimBody.maxHealth * burnPercentPerTick * count;
+                dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * burnPercentPerTick * count;
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 // Damage calculation takes minions into account

@@ -78,7 +78,7 @@ namespace TooManyItems
                     {
                         victimObject = victimInfo.body.gameObject,
                         attackerObject = victimInfo.body.gameObject,
-                        totalDamage = victimInfo.body.maxHealth * 0.05f,
+                        totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * 0.05f,
                         dotIndex = DotController.DotIndex.Burn,
                         duration = fireDuration.Value,
                         damageMultiplier = 1f
