@@ -20,6 +20,16 @@ namespace TooManyItems
                 "ITEM_CRUCIFIX_DESC"
             }
         );
+        public static ConfigurableValue<float> maxHealthBurnAmount = new(
+            "Item: Crucifix",
+            "Burn Amount",
+            5f,
+            "Percentage of max health taken over the duration of the burn.",
+            new List<string>()
+            {
+                "ITEM_CRUCIFIX_DESC"
+            }
+        );
         public static ConfigurableValue<int> fireDuration = new(
             "Item: Crucifix",
             "Duration of Fire",
@@ -78,7 +88,7 @@ namespace TooManyItems
                     {
                         victimObject = victimInfo.body.gameObject,
                         attackerObject = victimInfo.body.gameObject,
-                        totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * 0.05f,
+                        totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * maxHealthBurnAmount.Value / 100f,
                         dotIndex = DotController.DotIndex.Burn,
                         duration = fireDuration.Value,
                         damageMultiplier = 1f
@@ -94,7 +104,8 @@ namespace TooManyItems
             LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire.</style>");
 
             string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
-                $"<style=cDeath>Taking damage sets you on fire for {fireDuration.Value} seconds.</style>";
+                $"<style=cDeath>Taking damage sets you on fire for " +
+                $"{maxHealthBurnAmount.Value}% max health over {fireDuration.Value} seconds.</style>";
             LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
 
             string lore = "";
