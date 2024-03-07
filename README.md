@@ -12,7 +12,7 @@ These values are configurable. To do so, run the game once with the mod installe
 
 ### Red Items
 > **Blood Dice**  
-> On kill, gain 1 to 6 permanent max health, up to a max of 500 (+500 per stack).  
+> On kill, gain 2 to 12 permanent max health, up to a max of 500 (+500 per stack).  
 > **Iron Heart**  
 > Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
 > **Rusty Trowel**  
@@ -30,7 +30,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Magnifying Glass**  
 > Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 10% from all sources.  
 > **Fleece Hoodie**  
-> The next timed buff received has its duration increased by 35% (+35% per stack). Recharges every 5 (-15% per stack) seconds.  
+> The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 5 (-15% per stack) seconds.  
 
 ### White Items
 > **3D Glasses**  
@@ -51,7 +51,12 @@ These values are configurable. To do so, run the game once with the mod installe
 > Gain 3 (+3 per stack) armor.  
 
 ### Equipment
+> **Chalice**  
+> [Cooldown: 55 seconds]  
+> Consecrate yourself and all allies. Consecrated allies gain 65% damage and 130% attack speed for 8 seconds, but lose 35% max health.  
 > **Tattered Scroll**  
+> [Cooldown: 65 seconds]  
 > On activation, curse enemies within 60m of you for 12 seconds. Killing cursed enemies grants 25 additional gold.  
 > **Totem of Prayer**  
+> [Cooldown: 45 seconds]  
 > On activation, grants either 100 armor, 45% damage, 75% attack speed, or 300% health regeneration for 12 seconds.  
