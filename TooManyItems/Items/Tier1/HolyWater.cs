@@ -67,20 +67,24 @@ namespace TooManyItems
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
 
-                if (atkBody && atkMaster && atkBody.inventory && damageReport.victimBody.isElite)
+                if (atkBody && atkMaster && damageReport.victimBody.isElite)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    // Check if attacker is minion and if we can switch to player
+                    if (atkMaster.minionOwnership && atkMaster.minionOwnership.ownerMaster && atkMaster.minionOwnership.ownerMaster.hasBody)
                     {
-                        float hyperbolicExperienceMultiplier = 1 - (1 / (1 + (experienceMultiplierAsPercent * count)));
-                        float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;   // XP scales with killer (minion or player) level bar
-
-                        // Reroute XP from minions to players
-                        if (atkMaster && atkMaster.minionOwnership && atkMaster.minionOwnership.ownerMaster)
+                        atkMaster = atkMaster.minionOwnership.ownerMaster;
+                        atkBody = atkMaster.GetBody();
+                    }
+                    if (atkBody.inventory)
+                    {
+                        int count = atkBody.inventory.GetItemCount(itemDef);
+                        if (count > 0)
                         {
-                            atkMaster = atkMaster.minionOwnership.ownerMaster;
+                            float hyperbolicExperienceMultiplier = 1 - (1 / (1 + (experienceMultiplierAsPercent * count)));
+                            float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;
+
+                            atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
                         }
-                        atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
                     }
                 }
             };
