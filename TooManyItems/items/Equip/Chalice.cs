@@ -134,6 +134,7 @@ namespace TooManyItems
                 {
                     values.curseFraction += (1f - values.curseFraction) * consecrateMaxHealthLost.Value / 100f;
                     values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
+                    values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
                 }
                 return values;
             };
