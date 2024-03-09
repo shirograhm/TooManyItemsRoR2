@@ -11,12 +11,12 @@ namespace TooManyItems
     internal class SpiritStone
     {
         public static ItemDef itemDef;
-        // On-kill, gain 1% (+1% per stack) of your max health as permanent shield. All your cooldowns are increased by 4 seconds.
+        // Killing an elite enemy grants 1% (+1% per stack) of your max health as permanent shield. Some damage you take is permanent.
         public static ConfigurableValue<float> maxHealthShield = new(
             "Item: Spirit Stone",
             "Shield Amount",
             1f,
-            "Percent of max health given as shield for each lunar item in inventory.",
+            "Percent of max health given as shield for every elite kill.",
             new List<string>()
             {
                 "ITEM_SPIRITSTONE_DESC"
@@ -116,11 +116,6 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.OnKillEffect
-            };
         }
 
         public static void Hooks()
@@ -149,7 +144,7 @@ namespace TooManyItems
 
                 if (!NetworkServer.active) return;
 
-                if (damageReport.attackerBody)
+                if (damageReport.attackerBody && damageReport.victimBody && damageReport.victimBody.isElite)
                 {
                     CharacterBody atkBody = damageReport.attackerBody;
                     if (atkBody.inventory)
@@ -185,11 +180,11 @@ namespace TooManyItems
         {
             LanguageAPI.Add("SPIRIT_STONE", "Spirit Stone");
             LanguageAPI.Add("SPIRIT_STONE_NAME", "Spirit Stone");
-            LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Taking damage reduces your max health.</style>");
+            LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing elite enemies. <style=cDeath>Taking damage reduces your max health.</style>");
 
-            string desc = $"On-kill, gain <style=cIsUtility>{maxHealthShield.Value}%</style> " +
+            string desc = $"Killing an elite enemy grants <style=cIsUtility>{maxHealthShield.Value}%</style> " +
                 $"(+<style=cIsUtility>{maxHealthShield.Value}%</style> per stack) of your max health as permanent shield. " +
-                $"<style=cDeath>Taking damage applies a stacking curse, which lowers your max health.</style>";
+                $"<style=cDeath>Taking damage applies a stacking curse that lowers your max health.</style>";
             LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
 
             string lore = "";
