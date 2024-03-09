@@ -58,6 +58,7 @@ namespace TooManyItems
             GlassMarble.Init();
             HereticSeal.Init();
             Hoodie.Init();
+            MagnifyingGlass.Init();
 
             // White Items
             BottleCap.Init();
@@ -65,7 +66,6 @@ namespace TooManyItems
             EdibleGlue.Init();
             HolyWater.Init();
             MilkCarton.Init();
-            MagnifyingGlass.Init();
             Photodiode.Init();
             RedBlueGlasses.Init();
             RubberDucky.Init();
