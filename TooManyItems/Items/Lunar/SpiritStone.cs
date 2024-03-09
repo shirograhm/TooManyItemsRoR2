@@ -183,7 +183,7 @@ namespace TooManyItems
             LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing elite enemies. <style=cDeath>Taking damage reduces your max health.</style>");
 
             string desc = $"Killing an elite enemy grants <style=cIsUtility>{maxHealthShield.Value}%</style> " +
-                $"(+<style=cIsUtility>{maxHealthShield.Value}%</style> per stack) of your max health as permanent shield. " +
+                $"<style=cStack>(+{maxHealthShield.Value}% per stack)</style> of your max health as permanent shield. " +
                 $"<style=cDeath>Taking damage applies a stacking curse that lowers your max health.</style>";
             LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
 
