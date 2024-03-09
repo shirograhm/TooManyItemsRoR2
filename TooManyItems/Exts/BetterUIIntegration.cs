@@ -252,6 +252,24 @@ namespace TooManyItems
                     1f,
                     statFormatter: SoulRingRegenFormatter
                 );
+
+
+                // Spirit Stone
+                ItemStats.RegisterStat(
+                    itemDef: SpiritStone.itemDef,
+                    "Shield On Kill",
+                    SpiritStone.maxHealthShieldPercent,
+                    SpiritStone.maxHealthShieldPercent,
+                    stackingFormula: ItemStats.LinearStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent
+                );
+                ItemStats.RegisterStat(
+                    itemDef: SpiritStone.itemDef,
+                    "Shield Gained",
+                    1f,
+                    1f,
+                    statFormatter: SpiritStoneFormatter
+                );
             }
 
             public static ItemStats.StatFormatter GlassMarbleBonusFormatter = new()
@@ -423,6 +441,29 @@ namespace TooManyItems
                     if (component)
                     {
                         string temp = String.Format("{0:#}", component.TotalDamageDealt);
+                        temp = temp == String.Empty ? "0" : temp;
+
+                        sb.AppendFormat(temp);
+                    }
+                    else
+                    {
+                        sb.Append("0");
+                    }
+                }
+            };
+
+            private static ItemStats.StatFormatter SpiritStoneFormatter = new()
+            {
+                suffix = "",
+                style = "cIsUtility",
+                statFormatter = (sb, value, master) =>
+                {
+                    if (!master.inventory) return;
+
+                    var component = master.inventory.GetComponent<SpiritStone.Statistics>();
+                    if (component)
+                    {
+                        string temp = String.Format("{0:#}", component.PermanentShield);
                         temp = temp == String.Empty ? "0" : temp;
 
                         sb.AppendFormat(temp);

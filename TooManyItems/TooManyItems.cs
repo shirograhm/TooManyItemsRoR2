@@ -74,6 +74,7 @@ namespace TooManyItems
             AncientCoin.Init();
             CarvingBlade.Init();
             Crucifix.Init();
+            SpiritStone.Init();
 
             // Equipment
             BuffTotem.Init();
@@ -117,9 +118,9 @@ namespace TooManyItems
         //    {
         //        int i;
 
-        //        for (i = 0; i < 16; i++) DropItem(RoR2Content.Items.EquipmentMagazine);
-        //        for (i = 0; i < 4; i++) DropItem(DLC1Content.Items.MissileVoid);
-        //        DropItem(RoR2Content.Items.PersonalShield);
+        //        for (i = 0; i < 6; i++) DropItem(CarvingBlade.itemDef);
+        //        for (i = 0; i < 6; i++) DropItem(AncientCoin.itemDef);
+        //        DropItem(SpiritStone.itemDef);
 
         //        DropItem(Chalice.equipmentDef);
         //    }
