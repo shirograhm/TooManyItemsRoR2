@@ -253,16 +253,7 @@ namespace TooManyItems
                     statFormatter: SoulRingRegenFormatter
                 );
 
-
                 // Spirit Stone
-                ItemStats.RegisterStat(
-                    itemDef: SpiritStone.itemDef,
-                    "Shield On Kill",
-                    SpiritStone.maxHealthShieldPercent,
-                    SpiritStone.maxHealthShieldPercent,
-                    stackingFormula: ItemStats.LinearStacking,
-                    statFormatter: ItemStats.StatFormatter.Percent
-                );
                 ItemStats.RegisterStat(
                     itemDef: SpiritStone.itemDef,
                     "Shield Gained",
