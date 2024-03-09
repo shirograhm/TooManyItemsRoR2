@@ -10,11 +10,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Get a 6% (+6% per stack) rebate on purchases.
+        // Get a 5% (+5% per stack) rebate on purchases.
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
             "Rebate Amount",
-            6f,
+            5f,
             "Percentage of spent gold refunded as rebate.",
             new List<string>()
             {

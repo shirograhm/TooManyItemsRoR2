@@ -13,7 +13,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.55f, 0.12f, 0.09f, 1f));
 
-        // Consecrate yourself and all allies. Consecrated allies gain 65% damage and 130% attack speed for 8 seconds, but lose 35% max health. (55 sec)
+        // Consecrate yourself and all allies. Consecrated allies gain 40% damage and 110% attack speed for 8 seconds, but lose 35% max health. (55 sec)
         public static ConfigurableValue<float> consecrateDuration = new(
             "Equipment: Chalice",
             "Consecrate Duration",
@@ -27,7 +27,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> consecrateDamageBonus = new(
             "Equipment: Chalice",
             "Consecrate Damage Bonus",
-            65f,
+            40f,
             "Percent bonus damage dealt while Consecrated.",
             new List<string>()
             {
@@ -37,7 +37,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
             "Equipment: Chalice",
             "Consecrate Attack Speed Bonus",
-            130f,
+            110f,
             "Percent bonus attack speed gained while Consecrated.",
             new List<string>()
             {
