@@ -116,10 +116,6 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        int i;
-
-        //        for (i = 0; i < 6; i++) DropItem(CarvingBlade.itemDef);
-        //        for (i = 0; i < 6; i++) DropItem(AncientCoin.itemDef);
         //        DropItem(SpiritStone.itemDef);
 
         //        DropItem(Chalice.equipmentDef);
