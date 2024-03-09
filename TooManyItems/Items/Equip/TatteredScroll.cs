@@ -82,8 +82,8 @@ namespace TooManyItems
             equipmentDef.descriptionToken = "TATTERED_SCROLL_DESCRIPTION";
             equipmentDef.loreToken = "TATTERED_SCROLL_LORE";
 
-            equipmentDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("TatteredScroll.png");
-            equipmentDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("TatteredScroll.prefab");
+            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("TatteredScroll.png");
+            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
 
             equipmentDef.appearsInMultiPlayer = true;
             equipmentDef.appearsInSinglePlayer = true;
@@ -99,7 +99,7 @@ namespace TooManyItems
             curseDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             curseDebuff.name = "Siphon";
-            curseDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("TatteredCurse.png");
+            curseDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("TatteredCurse.png");
             curseDebuff.canStack = false;
             curseDebuff.isHidden = false;
             curseDebuff.isDebuff = true;

@@ -122,8 +122,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier3;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("SoulRing.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("SoulRing.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("SoulRing.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("SoulRing.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

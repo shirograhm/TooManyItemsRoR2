@@ -47,8 +47,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier2;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("GlassMarbles.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("GlassMarbles.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("GlassMarbles.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("GlassMarbles.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

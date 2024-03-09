@@ -139,8 +139,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier3;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("RustedTrowel.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("RustyTrowel.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("RustedTrowel.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -150,7 +150,7 @@ namespace TooManyItems
             mulchBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             mulchBuff.name = "Mulch";
-            mulchBuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Mulch.png");
+            mulchBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Mulch.png");
             mulchBuff.canStack = true;
             mulchBuff.isHidden = false;
             mulchBuff.isDebuff = false;
@@ -159,7 +159,7 @@ namespace TooManyItems
             healingTimer = ScriptableObject.CreateInstance<BuffDef>();
 
             healingTimer.name = "Mulch Cooldown";
-            healingTimer.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("MulchCooldown.png");
+            healingTimer.iconSprite = Assets.bundle.LoadAsset<Sprite>("MulchCooldown.png");
             healingTimer.canStack = false;
             healingTimer.isHidden = false;
             healingTimer.isDebuff = false;

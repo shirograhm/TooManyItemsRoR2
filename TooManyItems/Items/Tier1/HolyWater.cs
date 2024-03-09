@@ -50,8 +50,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier1;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HolyWater.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("HolyWater.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HolyWater.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HolyWater.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

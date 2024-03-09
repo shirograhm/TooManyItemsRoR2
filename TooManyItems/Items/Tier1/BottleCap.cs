@@ -48,8 +48,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier1;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("BottleCap.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("BottleCap.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BottleCap.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BottleCap.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

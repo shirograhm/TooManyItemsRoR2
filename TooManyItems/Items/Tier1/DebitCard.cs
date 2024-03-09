@@ -49,8 +49,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier1;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("DebitCard.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("DebitCard.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("DebitCard.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("DebitCard.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

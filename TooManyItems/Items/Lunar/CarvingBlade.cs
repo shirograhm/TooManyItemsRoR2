@@ -118,8 +118,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Lunar;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("CarvingBlade.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("CarvingBlade.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("CarvingBlade.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("CarvingBlade.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

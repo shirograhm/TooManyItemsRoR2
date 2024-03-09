@@ -47,8 +47,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier2;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HereticSeal.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("HereticSeal.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HereticSeal.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HereticSeal.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

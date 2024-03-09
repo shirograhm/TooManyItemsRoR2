@@ -4,7 +4,6 @@ using RoR2;
 using RoR2.ExpansionManagement;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -25,29 +24,19 @@ namespace TooManyItems
         public const string PluginName = "TooManyItems";
         public const string PluginVersion = "0.1.5";
 
+        public static PluginInfo PInfo { get; private set; }
+
         public static System.Random rand = new();
 
         public static ExpansionDef voidDLC;
-        public static AssetBundle MainAssets;
 
         public void Awake()
         {
+            PInfo = Info;
+
             Log.Init(Logger);
 
-            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("TooManyItems.tmiassets"))
-            {
-                if (stream != null)
-                {
-                    MainAssets = AssetBundle.LoadFromStream(stream);
-
-                    Log.Message("Successfully loaded assets.");
-
-                }
-                else
-                {
-                    Log.Error("Assets failed to load.");
-                }
-            }
+            Assets.Init();
 
             voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
             RoR2.ItemCatalog.availability.CallWhenAvailable(InjectVoidItems);
@@ -124,35 +113,14 @@ namespace TooManyItems
         //{
         //    if (!NetworkServer.active) return;
 
-        //    if (Input.GetKeyDown(KeyCode.F4))
+        //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        DropItem(AncientCoin.itemDef);
-        //        DropItem(BloodDice.itemDef);
-        //        DropItem(BottleCap.itemDef);
-        //        DropItem(RoR2Content.Items.LunarDagger);
-        //        DropItem(BrokenMask.itemDef);
-        //        DropItem(CarvingBlade.itemDef);
-        //        DropItem(Crucifix.itemDef);
-        //        DropItem(DebitCard.itemDef);
-        //        DropItem(EdibleGlue.itemDef);
-        //        DropItem(GlassMarble.itemDef);
-        //        DropItem(HereticSeal.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(Hoodie.itemDef);
-        //        DropItem(IronHeart.itemDef);
-        //        DropItem(MilkCarton.itemDef);
-        //        DropItem(MagnifyingGlass.itemDef);
-        //        DropItem(Photodiode.itemDef);
-        //        DropItem(RedBlueGlasses.itemDef);
-        //        DropItem(RubberDucky.itemDef);
-        //        DropItem(RustyTrowel.itemDef);
-        //        DropItem(SoulRing.itemDef);
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.F5))
-        //    {
-        //        // Single key testing
-        //        DropItem(TatteredScroll.equipmentDef);
-        //        DropItem(BuffTotem.equipmentDef);
+        //        int i;
+
+        //        for (i = 0; i < 16; i++) DropItem(RoR2Content.Items.EquipmentMagazine);
+        //        for (i = 0; i < 4; i++) DropItem(DLC1Content.Items.MissileVoid);
+        //        DropItem(RoR2Content.Items.PersonalShield);
+
         //        DropItem(Chalice.equipmentDef);
         //    }
         //}

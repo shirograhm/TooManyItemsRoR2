@@ -73,8 +73,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier2;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("MagnifyingGlass.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("MagnifyingGlass.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("MagnifyingGlass.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("MagnifyingGlass.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -84,7 +84,7 @@ namespace TooManyItems
             analyzedDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             analyzedDebuff.name = "Analyzed";
-            analyzedDebuff.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Analyzed.png");
+            analyzedDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Analyzed.png");
             analyzedDebuff.canStack = false;
             analyzedDebuff.isHidden = false;
             analyzedDebuff.isDebuff = true;

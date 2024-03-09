@@ -59,8 +59,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Lunar;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("AncientCoin.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("AncientCoin.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("AncientCoin.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("AncientCoin.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

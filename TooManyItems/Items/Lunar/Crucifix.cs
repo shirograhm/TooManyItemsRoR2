@@ -68,8 +68,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Lunar;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("ProfaneCrucifix.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("ProfaneCrucifix.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("ProfaneCrucifix.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("ProfaneCrucifix.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

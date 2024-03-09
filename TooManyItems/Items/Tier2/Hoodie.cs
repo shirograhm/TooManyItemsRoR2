@@ -78,8 +78,8 @@ namespace TooManyItems
                 if (itemDef) itemDef.tier = ItemTier.Tier2;
             });
 
-            itemDef.pickupIconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("Hoodie.png");
-            itemDef.pickupModelPrefab = TooManyItems.MainAssets.LoadAsset<GameObject>("Hoodie.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Hoodie.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Hoodie.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -89,7 +89,7 @@ namespace TooManyItems
             hoodieBuffActive = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffActive.name = "Hoodie Active";
-            hoodieBuffActive.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieActive.png");
+            hoodieBuffActive.iconSprite = Assets.bundle.LoadAsset<Sprite>("HoodieActive.png");
             hoodieBuffActive.canStack = false;
             hoodieBuffActive.isHidden = false;
             hoodieBuffActive.isDebuff = false;
@@ -98,7 +98,7 @@ namespace TooManyItems
             hoodieBuffCooldown = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffCooldown.name = "Hoodie Cooldown";
-            hoodieBuffCooldown.iconSprite = TooManyItems.MainAssets.LoadAsset<Sprite>("HoodieCooldown.png");
+            hoodieBuffCooldown.iconSprite = Assets.bundle.LoadAsset<Sprite>("HoodieCooldown.png");
             hoodieBuffCooldown.canStack = false;
             hoodieBuffCooldown.isHidden = false;
             hoodieBuffCooldown.isDebuff = false;
