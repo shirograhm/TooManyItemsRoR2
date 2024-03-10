@@ -117,7 +117,6 @@ namespace TooManyItems
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
         //        DropItem(SpiritStone.itemDef);
-
         //        DropItem(Chalice.equipmentDef);
         //    }
         //}
