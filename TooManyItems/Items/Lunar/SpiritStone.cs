@@ -16,7 +16,7 @@ namespace TooManyItems
             "Item: Spirit Stone",
             "Shield Amount",
             1f,
-            "Percent of max health given as shield for every elite kill.",
+            "Health given as shield for every elite kill.",
             new List<string>()
             {
                 "ITEM_SPIRITSTONE_DESC"
