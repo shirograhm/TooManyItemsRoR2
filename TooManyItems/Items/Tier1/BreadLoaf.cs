@@ -58,10 +58,10 @@ namespace TooManyItems
         {
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (victimInfo.inventory)
+                if (victimInfo.inventory && damageInfo.damageType == RoR2.DamageType.FallDamage)
                 {
                     int count = victimInfo.inventory.GetItemCount(itemDef);
-                    if (damageInfo.damageType == RoR2.DamageType.FallDamage && count > 0)
+                    if (count > 0)
                     {
                         float damageReductionPercent = 1 - (1 / (1 + (fallDamageReductionPercent * count)));
                         damageInfo.damage *= 1 - damageReductionPercent;
