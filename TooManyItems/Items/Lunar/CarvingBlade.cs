@@ -167,8 +167,8 @@ namespace TooManyItems
                         DamageInfo damageProc = new()
                         {
                             damage = damageAmount,
-                            attacker = damageInfo.attacker,
-                            inflictor = damageInfo.attacker,
+                            attacker = damageInfo.attacker.gameObject,
+                            inflictor = damageInfo.attacker.gameObject,
                             procCoefficient = 0f,
                             position = damageInfo.position,
                             crit = false,
