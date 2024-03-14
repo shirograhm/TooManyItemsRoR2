@@ -16,7 +16,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(siphonColor);
 
-        // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 25 additional gold. (65 sec)
+        // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 25 additional gold. (75 sec)
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
@@ -50,7 +50,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
-            65,
+            75,
             "Equipment cooldown.",
             new List<string>()
             {
