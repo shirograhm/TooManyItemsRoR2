@@ -52,6 +52,16 @@ namespace TooManyItems
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
+                // Bread
+                ItemStats.RegisterStat(
+                    itemDef: BreadLoaf.itemDef,
+                    "Fall Damage Reduction",
+                    BreadLoaf.fallDamageReductionPercent,
+                    BreadLoaf.fallDamageReductionPercent,
+                    stackingFormula: ItemStats.HyperbolicStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent
+                );
+
                 // Broken Mask
                 ItemStats.RegisterStat(
                     itemDef: BrokenMask.itemDef,
