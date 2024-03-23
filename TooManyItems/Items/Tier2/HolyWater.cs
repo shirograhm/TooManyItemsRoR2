@@ -11,11 +11,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Killing an elite enemy grants 2.5% (+2.5% per stack) of your level experience cap as bonus experience.
+        // Killing an elite enemy grants all allies 2% (+2% per stack) of their level experience cap as bonus experience.
         public static ConfigurableValue<float> experienceMultiplierPerStack = new(
             "Item: Holy Water",
             "XP Multiplier",
-            2.5f,
+            2f,
             "Bonus experience gained on elite kill as a percentage of the level cap.",
             new List<string>()
             {
@@ -47,7 +47,7 @@ namespace TooManyItems
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
+                if (itemDef) itemDef.tier = ItemTier.Tier2;
             });
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HolyWater.png");
@@ -80,7 +80,7 @@ namespace TooManyItems
                         int count = atkBody.inventory.GetItemCount(itemDef);
                         if (count > 0)
                         {
-                            float hyperbolicExperienceMultiplier = 1 - (1 / (1 + (experienceMultiplierAsPercent * count)));
+                            float hyperbolicExperienceMultiplier = 1 - 1 / (1 + experienceMultiplierAsPercent * count);
                             float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;
 
                             atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
@@ -92,16 +92,16 @@ namespace TooManyItems
 
         private static float GetExperienceCap(float level)
         {
-            return (-4f / 0.11f) * (1f - Mathf.Pow(1.55f, level));
+            return -4f / 0.11f * (1f - Mathf.Pow(1.55f, level));
         }
 
         private static void AddTokens()
         {
             LanguageAPI.Add("HOLY_WATER", "Holy Water");
             LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_PICKUP", "Gain bonus experience upon killing elite enemies.");
+            LanguageAPI.Add("HOLY_WATER_PICKUP", "Grant all allies bonus experience upon killing elite enemies.");
 
-            string desc = $"Killing an elite enemy grants <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> " +
+            string desc = $"Killing an elite enemy grants all allies <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> " +
                 $"<style=cStack>(+{experienceMultiplierPerStack.Value}% per stack)</style> of your current level experience cap as bonus experience.";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
