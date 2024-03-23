@@ -1,5 +1,6 @@
 ﻿using R2API;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -86,7 +87,7 @@ namespace TooManyItems
                 if (count > 0)
                 {
                     float multiplier = 1 + count * goldMultiplierAsPercent;
-                    amount = (uint)(amount * multiplier);
+                    amount = Convert.ToUInt32(amount * multiplier);
                 }
 
                 orig(self, amount);
