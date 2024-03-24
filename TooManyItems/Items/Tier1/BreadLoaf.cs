@@ -2,6 +2,7 @@
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -9,18 +10,18 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce fall damage by 11% (+11% per stack).
-        public static ConfigurableValue<float> fallDamageReduction = new(
+        // While the teleporter is charging, killing enemies heals you for 6% of your missing health.
+        public static ConfigurableValue<float> healthGainOnKill = new(
             "Item: Loaf of Bread",
-            "Fall Damage Reduction",
-            11f,
-            "Percentage of fall damage reduced per stack.",
+            "Healing On Kill",
+            6f,
+            "Percent missing health gained after killing an enemy during the teleporter event.",
             new List<string>()
             {
                 "ITEM_BREADLOAF_DESC"
             }
         );
-        public static float fallDamageReductionPercent = fallDamageReduction.Value / 100f;
+        public static float healthGainOnKillPercent = healthGainOnKill.Value / 100f;
 
         internal static void Init()
         {
@@ -52,19 +53,33 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BreadLoaf.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
+
+            itemDef.tags = new ItemTag[]
+            {
+                ItemTag.OnKillEffect
+            };
         }
 
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
             {
-                if (victimInfo.inventory && damageInfo.damageType == RoR2.DamageType.FallDamage)
+                orig(eventManager, damageReport);
+
+                if (!NetworkServer.active) return;
+
+                CharacterBody atkBody = damageReport.attackerBody;
+
+                foreach (var holdoutZoneController in InstanceTracker.GetInstancesList<HoldoutZoneController>())
                 {
-                    int count = victimInfo.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    if (holdoutZoneController.isActiveAndEnabled && holdoutZoneController.IsBodyInChargingRadius(atkBody))
                     {
-                        float damageReductionPercent = 1 - (1 / (1 + (fallDamageReductionPercent * count)));
-                        damageInfo.damage *= 1 - damageReductionPercent;
+                        int itemCount = atkBody.inventory.GetItemCount(itemDef);
+                        if (itemCount > 0)
+                        {
+                            float healing = healthGainOnKillPercent * itemCount * atkBody.healthComponent.missingCombinedHealth;
+                            atkBody.healthComponent.Heal(healing, new ProcChainMask());
+                        }
                     }
                 }
             };
@@ -74,10 +89,11 @@ namespace TooManyItems
         {
             LanguageAPI.Add("BREAD_LOAF", "Loaf of Bread");
             LanguageAPI.Add("BREAD_LOAF_NAME", "Loaf of Bread");
-            LanguageAPI.Add("BREAD_LOAF_PICKUP", "Reduce fall damage.");
+            LanguageAPI.Add("BREAD_LOAF_PICKUP", "While the teleporter is charging, killing enemies heals you.");
 
-            string desc = $"Reduce fall damage by <style=cIsUtility>{fallDamageReduction.Value}%</style> " +
-                $"<style=cStack>(+{fallDamageReduction.Value}% per stack)</style>.";
+            string desc = $"While the teleporter is charging, killing enemies heals you for " +
+                $"<style=cIsUtility>{healthGainOnKill.Value}%</style> " +
+                $"<style=cStack>(+{healthGainOnKill.Value}% per stack)</style> of your missing health.";
             LanguageAPI.Add("BREAD_LOAF_DESCRIPTION", desc);
 
             string lore = "";
