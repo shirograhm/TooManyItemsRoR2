@@ -46,7 +46,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Edible Glue**  
 > On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.  
 > **Loaf of Bread**  
-While the teleporter is charging, killing enemies heals you for 4% (+4% per stack) of your missing health.  
+> While the teleporter is charging, killing enemies heals you for 4% (+4% per stack) of your missing health.  
 > **Milk Carton**  
 > Reduce damage taken from elite enemies by 5% (+5% per stack).  
 > **Paper Plane**  
