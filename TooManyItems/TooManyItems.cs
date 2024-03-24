@@ -57,6 +57,7 @@ namespace TooManyItems
             BrokenMask.Init();
             GlassMarble.Init();
             HereticSeal.Init();
+            HolyWater.Init();
             Hoodie.Init();
             MagnifyingGlass.Init();
 
@@ -65,8 +66,8 @@ namespace TooManyItems
             BreadLoaf.Init();
             DebitCard.Init();
             EdibleGlue.Init();
-            HolyWater.Init();
             MilkCarton.Init();
+            PaperPlane.Init();
             Photodiode.Init();
             RedBlueGlasses.Init();
             RubberDucky.Init();
@@ -117,8 +118,15 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        DropItem(SpiritStone.itemDef);
         //        DropItem(BreadLoaf.itemDef);
+        //        DropItem(RoR2Content.Equipment.DeathProjectile);
+        //        DropItem(RoR2Content.Items.AutoCastEquipment);
+        //        DropItem(RoR2Content.Items.EquipmentMagazine);
+        //        DropItem(RoR2Content.Items.EquipmentMagazine);
+        //        DropItem(RoR2Content.Items.EquipmentMagazine);
+        //        DropItem(BuffTotem.equipmentDef);
+        //        DropItem(PaperPlane.itemDef);
+        //        DropItem(PaperPlane.itemDef);
         //    }
         //}
 
