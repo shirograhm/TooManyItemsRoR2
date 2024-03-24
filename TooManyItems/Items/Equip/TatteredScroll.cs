@@ -12,7 +12,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef curseDebuff;
 
-        public static Color siphonColor = new Color(0.902f, 0.78f, 0.573f, 1f);
+        public static Color siphonColor = new(0.902f, 0.78f, 0.573f, 1f);
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(siphonColor);
 

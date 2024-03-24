@@ -106,15 +106,16 @@ namespace TooManyItems
 
             GenericGameEvents.OnTakeDamage += (damageReport) =>
             {
-                if (damageReport.attackerBody && damageReport.victimBody)
+                if (damageReport.attackerBody && damageReport.attackerBody.master && damageReport.victimBody)
                 {
                     CharacterBody vicBody = damageReport.victimBody;
                     CharacterBody atkBody = damageReport.attackerBody;
+                    CharacterMaster atkMaster = damageReport.attackerBody.master;
 
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0 && damageReport.damageInfo.crit)
                     {
-                        if (RollForAnalyze(atkBody.master, count))
+                        if (Util.CheckRoll(analyzeChance.Value * count, atkMaster.luck, atkMaster))
                         {
                             vicBody.AddBuff(analyzedDebuff);
                         }
@@ -129,22 +130,6 @@ namespace TooManyItems
                     damageInfo.damage *= 1 + damageTakenBonusPercent;
                 }
             };
-        }
-
-        private static bool RollForAnalyze(CharacterMaster master, int itemCount)
-        {
-            double roll = TooManyItems.rand.NextDouble();
-
-            int luck = (int)master.luck;
-            for (int i = 0; i < Mathf.Abs(luck); i++)
-            {
-                double newRoll = TooManyItems.rand.NextDouble();
-
-                if (luck > 0) roll = newRoll < roll ? newRoll : roll;   // Lower values are better for this roll
-                if (luck < 0) roll = newRoll > roll ? newRoll : roll;
-            }
-
-            return roll <= analyzeChancePercent * itemCount;
         }
 
         private static void AddTokens()
