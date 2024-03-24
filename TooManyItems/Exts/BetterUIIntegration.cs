@@ -55,10 +55,10 @@ namespace TooManyItems
                 // Bread
                 ItemStats.RegisterStat(
                     itemDef: BreadLoaf.itemDef,
-                    "Fall Damage Reduction",
-                    BreadLoaf.fallDamageReductionPercent,
-                    BreadLoaf.fallDamageReductionPercent,
-                    stackingFormula: ItemStats.HyperbolicStacking,
+                    "Healing On Kill",
+                    BreadLoaf.healthGainOnKillPercent,
+                    BreadLoaf.healthGainOnKillPercent,
+                    stackingFormula: ItemStats.LinearStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
 
@@ -85,7 +85,7 @@ namespace TooManyItems
                     "Damage On-Hit",
                     CarvingBlade.multiplierPerStack,
                     CarvingBlade.multiplierPerStack,
-                    stackingFormula: ItemStats.LinearStacking,
+                    stackingFormula: ItemStats.HyperbolicStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
                 ItemStats.RegisterStat(
@@ -195,6 +195,17 @@ namespace TooManyItems
                     "Analyze Chance",
                     MagnifyingGlass.analyzeChancePercent,
                     MagnifyingGlass.analyzeChancePercent,
+                    stackingFormula: ItemStats.LinearStacking,
+                    statFormatter: ItemStats.StatFormatter.Percent,
+                    itemTag: ItemStats.ItemTag.Luck
+                );
+
+                // Paper Plane
+                ItemStats.RegisterStat(
+                    itemDef: PaperPlane.itemDef,
+                    "Movement Speed",
+                    PaperPlane.movespeedIncreasePercent,
+                    PaperPlane.movespeedIncreasePercent,
                     stackingFormula: ItemStats.LinearStacking,
                     statFormatter: ItemStats.StatFormatter.Percent
                 );
