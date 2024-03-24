@@ -10,11 +10,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // While the teleporter is charging, killing enemies heals you for 6% of your missing health.
+        // While the teleporter is charging, killing enemies heals you for 4% of your missing health.
         public static ConfigurableValue<float> healthGainOnKill = new(
             "Item: Loaf of Bread",
             "Healing On Kill",
-            6f,
+            4f,
             "Percent missing health gained after killing an enemy during the teleporter event.",
             new List<string>()
             {
