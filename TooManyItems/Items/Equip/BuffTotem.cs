@@ -239,7 +239,7 @@ namespace TooManyItems
                 $"<style=cIsUtility>{armorIncrease.Value}</style> armor, " +
                 $"<style=cIsDamage>{damageIncrease.Value}%</style> damage, " +
                 $"<style=cIsUtility>{attackSpeedIncrease.Value}%</style> attack speed, " +
-                $"or <style=cIsHealing>{regenIncrease.Value}%</style> max HP/s regeneration " +
+                $"or <style=cIsHealing>{regenIncrease.Value}% max HP/s</style> regeneration " +
                 $"for {buffDuration.Value} seconds.";
             LanguageAPI.Add("BUFF_TOTEM_DESCRIPTION", desc);
 
