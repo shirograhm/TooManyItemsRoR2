@@ -30,7 +30,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageIncrease = new(
             "Equipment: Totem of Prayer",
             "Damage Increase",
-            25f,
+            30f,
             "Percent damage increase if rolled.",
             new List<string>()
             {
