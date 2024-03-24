@@ -9,11 +9,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 3 (+3) armor.
+        // Gain 5 (+5) armor.
         public static ConfigurableValue<int> armorPerStack = new(
             "Item: Rubber Ducky",
             "Armor Increase",
-            3,
+            5,
             "Amount of flat armor gained per stack.",
             new List<string>()
             {

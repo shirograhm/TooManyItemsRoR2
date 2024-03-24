@@ -16,7 +16,7 @@ namespace TooManyItems
         public static BuffDef attackSpeedBuff;
         public static BuffDef healthRegenBuff;
 
-        // On activation, grants either 100 armor, 30% damage, 75% attack speed, or 300% health regeneration for 12 seconds. (45 sec)
+        // On activation, grants either 100 armor, 30% damage, 75% attack speed, or 12% max HP/s regeneration for 12 seconds. (45 sec)
         public static ConfigurableValue<float> armorIncrease = new(
             "Equipment: Totem of Prayer",
             "Armor Increase",
@@ -50,8 +50,8 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenIncrease = new(
             "Equipment: Totem of Prayer",
             "Health Regen Increase",
-            300f,
-            "Percent regeneration increase if rolled.",
+            12f,
+            "Health regeneration bonus (as max HP/s) if rolled.",
             new List<string>()
             {
                 "ITEM_BUFFTOTEM_DESC"
@@ -79,7 +79,7 @@ namespace TooManyItems
         );
         public static float damageIncreasePercent = damageIncrease.Value / 100f;
         public static float attackSpeedIncreasePercent = attackSpeedIncrease.Value / 100f;
-        public static float healthRegenIncreasePercent = regenIncrease.Value / 100f;
+        public static float regenIncreasePercent = regenIncrease.Value / 100f;
 
         public enum Result
         {
@@ -191,7 +191,7 @@ namespace TooManyItems
                 }
                 if (sender.HasBuff(healthRegenBuff))
                 {
-                    args.regenMultAdd += healthRegenIncreasePercent;
+                    args.baseRegenAdd += regenIncreasePercent * sender.healthComponent.fullCombinedHealth;
                 }
             };
         }
@@ -239,7 +239,7 @@ namespace TooManyItems
                 $"<style=cIsUtility>{armorIncrease.Value}</style> armor, " +
                 $"<style=cIsDamage>{damageIncrease.Value}%</style> damage, " +
                 $"<style=cIsUtility>{attackSpeedIncrease.Value}%</style> attack speed, " +
-                $"or <style=cIsHealing>{regenIncrease.Value}%</style> health regeneration " +
+                $"or <style=cIsHealing>{regenIncrease.Value}%</style> max HP/s regeneration " +
                 $"for {buffDuration.Value} seconds.";
             LanguageAPI.Add("BUFF_TOTEM_DESCRIPTION", desc);
 
