@@ -70,15 +70,18 @@ namespace TooManyItems
 
                 CharacterBody atkBody = damageReport.attackerBody;
 
-                foreach (var holdoutZoneController in InstanceTracker.GetInstancesList<HoldoutZoneController>())
+                if (atkBody && atkBody.inventory)
                 {
-                    if (holdoutZoneController.isActiveAndEnabled && holdoutZoneController.IsBodyInChargingRadius(atkBody))
+                    int itemCount = atkBody.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
-                        int itemCount = atkBody.inventory.GetItemCount(itemDef);
-                        if (itemCount > 0)
+                        foreach (var holdoutZoneController in InstanceTracker.GetInstancesList<HoldoutZoneController>())
                         {
-                            float healing = healthGainOnKillPercent * itemCount * atkBody.healthComponent.missingCombinedHealth;
-                            atkBody.healthComponent.Heal(healing, new ProcChainMask());
+                            if (holdoutZoneController.isActiveAndEnabled && holdoutZoneController.IsBodyInChargingRadius(atkBody))
+                            {
+                                float healing = healthGainOnKillPercent * itemCount * atkBody.healthComponent.missingCombinedHealth;
+                                atkBody.healthComponent.Heal(healing, new ProcChainMask());
+                            }
                         }
                     }
                 }
