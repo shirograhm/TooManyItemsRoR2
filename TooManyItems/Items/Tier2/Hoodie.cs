@@ -82,6 +82,11 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Hoodie.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
+
+            itemDef.tags = new ItemTag[]
+            {
+                ItemTag.Utility
+            };
         }
 
         private static void GenerateBuff()

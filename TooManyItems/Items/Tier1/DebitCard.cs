@@ -53,6 +53,11 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("DebitCard.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
+
+            itemDef.tags = new ItemTag[]
+            {
+                ItemTag.Utility
+            };
         }
 
         public static void Hooks()

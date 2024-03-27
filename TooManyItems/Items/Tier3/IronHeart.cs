@@ -132,6 +132,12 @@ namespace TooManyItems
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("IronHeart.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
+
+            itemDef.tags = new ItemTag[]
+            {
+                ItemTag.Damage,
+                ItemTag.Utility
+            };
         }
 
         public static float CalculateDamageOnHit(CharacterBody sender, float itemCount)

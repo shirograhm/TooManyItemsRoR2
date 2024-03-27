@@ -129,6 +129,8 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
+                ItemTag.Healing,
+
                 ItemTag.OnKillEffect
             };
         }
