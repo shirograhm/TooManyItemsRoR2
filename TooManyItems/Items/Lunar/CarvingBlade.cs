@@ -26,11 +26,11 @@ namespace TooManyItems
                 "ITEM_CARVINGBLADE_DESC"
             }
         );
-        // This damage is capped at 200x of the player's base damage.
+        // This damage is capped at 20000% of the player's base damage.
         public static ConfigurableValue<float> damageCapMultiplier = new(
             "Item: Carving Blade",
             "Damage Cap",
-            2f,
+            200f,
             "Maximum damage on-hit. This value is multiplied by the user's base damage.\nSet this value to -1 to remove the cap.",
             new List<string>()
             {
