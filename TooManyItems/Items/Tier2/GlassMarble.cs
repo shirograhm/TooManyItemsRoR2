@@ -62,13 +62,13 @@ namespace TooManyItems
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                int count = sender.inventory.GetItemCount(itemDef);
-
-                if (count > 0)
+                if (sender && sender.inventory)
                 {
-                    args.levelDamageAdd += count * damagePerLevelPerStack.Value;
+                    int count = sender.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        args.levelDamageAdd += count * damagePerLevelPerStack.Value;
+                    }
                 }
             };
         }

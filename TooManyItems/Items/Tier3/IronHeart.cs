@@ -154,11 +154,12 @@ namespace TooManyItems
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                if (sender.inventory.GetItemCount(itemDef) > 0)
+                if (sender && sender.inventory)
                 {
-                    args.baseHealthAdd += healthIncrease.Value;
+                    if (sender.inventory.GetItemCount(itemDef) > 0)
+                    {
+                        args.baseHealthAdd += healthIncrease.Value;
+                    }
                 }
             };
 

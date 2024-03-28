@@ -175,23 +175,24 @@ namespace TooManyItems
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                if (sender.HasBuff(armorBuff))
+                if (sender && sender.inventory)
                 {
-                    args.armorAdd += armorIncrease.Value;
-                }
-                if (sender.HasBuff(damageBuff))
-                {
-                    args.damageMultAdd += damageIncreasePercent;
-                }
-                if (sender.HasBuff(attackSpeedBuff))
-                {
-                    args.attackSpeedMultAdd += attackSpeedIncreasePercent;
-                }
-                if (sender.HasBuff(healthRegenBuff))
-                {
-                    args.baseRegenAdd += regenIncreasePercent * sender.healthComponent.fullCombinedHealth;
+                    if (sender.HasBuff(armorBuff))
+                    {
+                        args.armorAdd += armorIncrease.Value;
+                    }
+                    if (sender.HasBuff(damageBuff))
+                    {
+                        args.damageMultAdd += damageIncreasePercent;
+                    }
+                    if (sender.HasBuff(attackSpeedBuff))
+                    {
+                        args.attackSpeedMultAdd += attackSpeedIncreasePercent;
+                    }
+                    if (sender.HasBuff(healthRegenBuff))
+                    {
+                        args.baseRegenAdd += regenIncreasePercent * sender.healthComponent.fullCombinedHealth;
+                    }
                 }
             };
         }
@@ -225,7 +226,7 @@ namespace TooManyItems
                     break;
             }
 
-            body.RecalculateStats();
+            Utils.ForceRecalculate(body);
             return true;
         }
 

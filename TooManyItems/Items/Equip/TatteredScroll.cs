@@ -121,11 +121,14 @@ namespace TooManyItems
             {
                 orig(eventManager, damageReport);
 
-                if (!NetworkServer.active || damageReport.victimBody == null || damageReport.attackerMaster == null) return;
+                if (!NetworkServer.active) return;
 
-                if (damageReport.victimBody.HasBuff(curseDebuff))
+                if (damageReport.victimBody || damageReport.victimBody.HasBuff(curseDebuff))
                 {
-                    damageReport.attackerMaster.GiveMoney(Convert.ToUInt32(goldGranted.Value));
+                    if (damageReport.attackerMaster)
+                    {
+                        damageReport.attackerMaster.GiveMoney(Convert.ToUInt32(goldGranted.Value));
+                    }
                 }
             };
         }

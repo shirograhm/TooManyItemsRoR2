@@ -148,20 +148,18 @@ namespace TooManyItems
 
                 if (!NetworkServer.active) return;
 
-                if (damageReport.attackerBody)
+                CharacterBody atkBody = damageReport.attackerBody;
+                if (atkBody && atkBody.inventory)
                 {
-                    CharacterBody atkBody = damageReport.attackerBody;
-                    if (atkBody.inventory)
+                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    if (count > 0)
                     {
-                        int count = atkBody.inventory.GetItemCount(itemDef);
-                        if (count > 0)
-                        {
-                            var component = atkBody.inventory.GetComponent<Statistics>();
-                            component.PermanentShield += shieldPerKill * count;
+                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        component.PermanentShield += shieldPerKill * count;
 
-                            atkBody.RecalculateStats();
-                        }
+                        Utils.ForceRecalculate(atkBody);
                     }
+
                 }
             };
 

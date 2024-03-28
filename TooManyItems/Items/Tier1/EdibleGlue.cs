@@ -67,25 +67,29 @@ namespace TooManyItems
             On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
             {
                 orig(eventManager, damageReport);
-                if (!NetworkServer.active || damageReport.attackerBody == null) return;
+                if (!NetworkServer.active) return;
 
-                int count = damageReport.attackerBody.inventory.GetItemCount(itemDef);
-                if (count > 0)
+                CharacterBody atkBody = damageReport.attackerBody;
+                if (atkBody && atkBody.inventory)
                 {
-                    HurtBox[] hurtboxes = new SphereSearch
+                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    if (count > 0)
                     {
-                        mask = LayerIndex.enemyBody.mask,
-                        origin = damageReport.attackerBody.corePosition,
-                        queryTriggerInteraction = QueryTriggerInteraction.Collide,
-                        radius = slowRadiusPerStack.Value * count
-                    }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
-
-                    foreach (HurtBox hb in hurtboxes)
-                    {
-                        CharacterBody parent = hb.healthComponent.body;
-                        if (parent && parent != damageReport.attackerBody)
+                        HurtBox[] hurtboxes = new SphereSearch
                         {
-                            parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration);
+                            mask = LayerIndex.enemyBody.mask,
+                            origin = atkBody.corePosition,
+                            queryTriggerInteraction = QueryTriggerInteraction.Collide,
+                            radius = slowRadiusPerStack.Value * count
+                        }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
+
+                        foreach (HurtBox hb in hurtboxes)
+                        {
+                            CharacterBody parent = hb.healthComponent.body;
+                            if (parent && parent != atkBody)
+                            {
+                                parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration);
+                            }
                         }
                     }
                 }

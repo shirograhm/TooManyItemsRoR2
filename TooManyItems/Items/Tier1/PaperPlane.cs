@@ -69,19 +69,20 @@ namespace TooManyItems
                 {
                     if (self.inventory.GetItemCount(itemDef) > 0)
                     {
-                        self.RecalculateStats();
+                        Utils.ForceRecalculate(self);
                     }
                 }
             };
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                int count = sender.inventory.GetItemCount(itemDef);
-                if (count > 0 && !sender.characterMotor.isGrounded)
+                if (sender && sender.inventory)
                 {
-                    args.moveSpeedMultAdd += movespeedIncreasePercent * count;
+                    int count = sender.inventory.GetItemCount(itemDef);
+                    if (count > 0 && sender.characterMotor && !sender.characterMotor.isGrounded)
+                    {
+                        args.moveSpeedMultAdd += movespeedIncreasePercent * count;
+                    }
                 }
             };
         }

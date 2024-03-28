@@ -141,13 +141,14 @@ namespace TooManyItems
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                if (sender.HasBuff(consecratedBuff))
+                if (sender && sender.inventory)
                 {
-                    args.healthMultAdd -= consecrateMaxHealthLost.Value / 100f;
-                    args.attackSpeedMultAdd += consecrateAttackSpeedBonus.Value / 100f;
-                    args.damageMultAdd += consecrateDamageBonus.Value / 100f;
+                    if (sender.HasBuff(consecratedBuff))
+                    {
+                        args.healthMultAdd -= consecrateMaxHealthLost.Value / 100f;
+                        args.attackSpeedMultAdd += consecrateAttackSpeedBonus.Value / 100f;
+                        args.damageMultAdd += consecrateDamageBonus.Value / 100f;
+                    }
                 }
             };
         }

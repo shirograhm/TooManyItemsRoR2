@@ -69,19 +69,20 @@ namespace TooManyItems
                     int count = self.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        self.RecalculateStats();
+                        Utils.ForceRecalculate(self);
                     }
                 }
             };
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                int count = sender.inventory.GetItemCount(itemDef);
-                if (count > 0)
+                if (sender && sender.inventory)
                 {
-                    args.damageMultAdd += count * damagePerMissing.Value * (1 - sender.healthComponent.combinedHealthFraction);
+                    int count = sender.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        args.damageMultAdd += count * damagePerMissing.Value * (1 - sender.healthComponent.combinedHealthFraction);
+                    }
                 }
             };
         }

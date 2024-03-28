@@ -159,15 +159,16 @@ namespace TooManyItems
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                int count = sender.inventory.GetItemCount(itemDef);
-                if (count > 0)
+                if (sender && sender.inventory)
                 {
-                    var component = sender.inventory.GetComponent<Statistics>();
-                    // Take Math.min incase item was dropped or removed from inventory
-                    component.PermanentHealth = Mathf.Min(component.PermanentHealth, maxHealthPerStack.Value * count);
-                    args.baseHealthAdd += component.PermanentHealth;
+                    int count = sender.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        var component = sender.inventory.GetComponent<Statistics>();
+                        // Take Math.min incase item was dropped or removed from inventory
+                        component.PermanentHealth = Mathf.Min(component.PermanentHealth, maxHealthPerStack.Value * count);
+                        args.baseHealthAdd += component.PermanentHealth;
+                    }
                 }
             };
 
@@ -180,12 +181,12 @@ namespace TooManyItems
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
 
-                if (atkMaster && atkBody)
+                if (atkMaster && atkBody && atkBody.inventory)
                 {
-                    int itemCount = atkBody.inventory.GetItemCount(itemDef);
-                    if (itemCount > 0)
+                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    if (count > 0)
                     {
-                        float maxHealthAllowed = maxHealthPerStack.Value * itemCount;
+                        float maxHealthAllowed = maxHealthPerStack.Value * count;
                         int roll = GetDiceRoll(atkMaster);
 
                         var component = atkBody.inventory.GetComponent<Statistics>();
@@ -199,7 +200,7 @@ namespace TooManyItems
                             component.PermanentHealth = maxHealthAllowed;
                         }
 
-                        atkBody.RecalculateStats();
+                        Utils.ForceRecalculate(atkBody);
                     }
                 }
             };

@@ -144,37 +144,41 @@ namespace TooManyItems
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender == null || sender.inventory == null) return;
-
-                int count = sender.inventory.GetItemCount(itemDef);
-                if (count > 0)
+                if (sender && sender.inventory)
                 {
-                    var component = sender.inventory.GetComponent<Statistics>();
+                    int count = sender.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        var component = sender.inventory.GetComponent<Statistics>();
 
-                    args.baseRegenAdd += component.HealthRegen;
                 }
             };
 
             On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
             {
                 orig(eventManager, damageReport);
-                if (!NetworkServer.active || damageReport.victim == null || damageReport.attackerBody == null) return;
 
-                int itemCount = damageReport.attackerBody.inventory.GetItemCount(itemDef);
+                if (!NetworkServer.active) return;
 
-                if (itemCount > 0)
+                CharacterBody atkBody = damageReport.attackerBody;
+                if (atkBody && atkBody.inventory)
                 {
-                    var component = damageReport.attackerBody.inventory.GetComponent<Statistics>();
-                    float maxRegenAllowed = maxRegenPerStack.Value * itemCount;
+                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        float maxRegenAllowed = maxRegenPerStack.Value * count;
 
-                    if (component.HealthRegen + healthRegenOnKill.Value < maxRegenAllowed)
-                    {
-                        component.HealthRegen += healthRegenOnKill.Value;
+                        if (component.HealthRegen + healthRegenOnKill.Value <= maxRegenAllowed)
+                        {
+                            component.HealthRegen += healthRegenOnKill.Value;
+                        }
+                        else
+                        {
+                            component.HealthRegen = maxRegenAllowed;
+                        }
                     }
-                    else
-                    {
-                        component.HealthRegen = maxRegenAllowed;
-                    }
+
                 }
             };
         }
