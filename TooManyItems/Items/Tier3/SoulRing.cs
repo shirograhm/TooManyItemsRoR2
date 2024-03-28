@@ -151,6 +151,8 @@ namespace TooManyItems
                     {
                         var component = sender.inventory.GetComponent<Statistics>();
 
+                        args.baseRegenAdd += component.HealthRegen;
+                    }
                 }
             };
 
@@ -189,8 +191,8 @@ namespace TooManyItems
             LanguageAPI.Add("SOUL_RING_NAME", "Soul Ring");
             LanguageAPI.Add("SOUL_RING_PICKUP", "Gain permanent health regen on kill.");
 
-            string desc = $"On kill, permanently increase your health regeneration by <style=cIsHealing>{healthRegenOnKill.Value} health</style>, " +
-                $"up to a maximum of <style=cIsHealing>{maxRegenPerStack.Value}</style> <style=cStack>(+{maxRegenPerStack.Value} per stack)</style>.";
+            string desc = $"On kill, permanently increase your health regeneration by <style=cIsHealing>{healthRegenOnKill.Value} HP/s</style>, " +
+                $"up to a maximum of <style=cIsHealing>{maxRegenPerStack.Value} <style=cStack>(+{maxRegenPerStack.Value} per stack)</style> HP/s</style>.";
             LanguageAPI.Add("SOUL_RING_DESCRIPTION", desc);
 
             string lore = "";
