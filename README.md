@@ -4,7 +4,7 @@ These values are configurable. To do so, run the game once with the mod installe
 
 ### Lunar Items
 > **Ancient Coin**  
-> Gain 90% (+90% per stack) more gold. Take 35% (+35% per stack) more damage.  
+> Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.  
 > **Carving Blade**  
 > Deal 0.75% (+0.75% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike.  
 > **Crucifix**  
@@ -13,6 +13,8 @@ These values are configurable. To do so, run the game once with the mod installe
 > Killing an enemy grants 1 (+1 per stack) health as permanent shield. Taking damage reduces your max health.  
 
 ### Red Items
+> **Abacus**  
+> Killing an enemy grants 1% (+1% per stack) crit chance until the end of the stage.  
 > **Blood Dice**  
 > On kill, gain 2 to 12 permanent max health, up to a max of 500 (+500 per stack).  
 > **Iron Heart**  
@@ -20,7 +22,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Rusty Trowel**  
 > On-hit, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 3 HP per stack.  
 > **Soul Ring**  
-> On kill, permanently increase your health regeneration by 0.2 health, up to a maximum of 20 (+20 per stack).  
+> On kill, permanently increase your health regeneration by 0.2 health, up to a maximum of 25 (+25 per stack).  
 
 ### Green Items
 > **Broken Mask**  
@@ -32,7 +34,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Holy Water**  
 > Upon killing an elite enemy, grant all allies 2% (+2% per stack) of their level experience cap as bonus experience.  
 > **Magnifying Glass**  
-> Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 10% from all sources.  
+> Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 12% from all sources.  
 > **Seal of the Heretic**  
 > Gain 1% (+1% per stack) bonus damage for every 1% msising health.  
 
