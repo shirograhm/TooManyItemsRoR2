@@ -59,7 +59,7 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Damage
             };
         }
 
