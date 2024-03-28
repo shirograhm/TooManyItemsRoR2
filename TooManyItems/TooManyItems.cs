@@ -52,7 +52,7 @@ namespace TooManyItems
             IronHeart.Init();
             RustyTrowel.Init();
             SoulRing.Init();
-            TallyCounter.Init();
+            Abacus.Init();
 
             // Green Items
             BrokenMask.Init();

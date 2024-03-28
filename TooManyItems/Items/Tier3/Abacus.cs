@@ -6,20 +6,20 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class TallyCounter
+    internal class Abacus
     {
         public static ItemDef itemDef;
         public static BuffDef countedBuff;
 
         // Killing an enemy grants 1% (+1% per stack) crit chance for the rest of the stage.
         public static ConfigurableValue<float> critChancePerStack = new(
-            "Item: Tally Counter",
+            "Item: Abacus",
             "Crit Chance On Kill",
             1f,
-            "Crit chance gained on kill for each stack of the Counted buff.",
+            "Crit chance gained on kill per stack of item.",
             new List<string>()
             {
-                "ITEM_TALLYCOUNTER_DESC"
+                "ITEM_ABACUS_DESC"
             }
         );
 
@@ -41,19 +41,19 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "TALLY_COUNTER";
-            itemDef.nameToken = "TALLY_COUNTER_NAME";
-            itemDef.pickupToken = "TALLY_COUNTER_PICKUP";
-            itemDef.descriptionToken = "TALLY_COUNTER_DESCRIPTION";
-            itemDef.loreToken = "TALLY_COUNTER_LORE";
+            itemDef.name = "ABACUS";
+            itemDef.nameToken = "ABACUS_NAME";
+            itemDef.pickupToken = "ABACUS_PICKUP";
+            itemDef.descriptionToken = "ABACUS_DESCRIPTION";
+            itemDef.loreToken = "ABACUS_LORE";
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = ItemTier.Tier3;
             });
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("TallyCounter.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("TallyCounter.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Abacus.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Abacus.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -111,16 +111,16 @@ namespace TooManyItems
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("TALLY_COUNTER", "Tally Counter");
-            LanguageAPI.Add("TALLY_COUNTER_NAME", "Tally Counter");
-            LanguageAPI.Add("TALLY_COUNTER_PICKUP", "Killing enemies grants stacking crit chance. Resets each stage.");
+            LanguageAPI.Add("ABACUS", "Tally Counter");
+            LanguageAPI.Add("ABACUS_NAME", "Tally Counter");
+            LanguageAPI.Add("ABACUS_PICKUP", "Killing enemies grants stacking crit chance. Resets each stage.");
 
             string desc = $"Killing an enemy grants <style=cIsUtility>{critChancePerStack.Value}%</style> " +
                 $"<style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance until the next stage.";
-            LanguageAPI.Add("TALLY_COUNTER_DESCRIPTION", desc);
+            LanguageAPI.Add("ABACUS_DESCRIPTION", desc);
 
             string lore = "";
-            LanguageAPI.Add("TALLY_COUNTER_LORE", lore);
+            LanguageAPI.Add("ABACUS_LORE", lore);
         }
     }
 }
