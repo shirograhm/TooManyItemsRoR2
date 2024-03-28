@@ -111,8 +111,8 @@ namespace TooManyItems
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("ABACUS", "Tally Counter");
-            LanguageAPI.Add("ABACUS_NAME", "Tally Counter");
+            LanguageAPI.Add("ABACUS", "Abacus");
+            LanguageAPI.Add("ABACUS_NAME", "Abacus");
             LanguageAPI.Add("ABACUS_PICKUP", "Killing enemies grants stacking crit chance. Resets each stage.");
 
             string desc = $"Killing an enemy grants <style=cIsUtility>{critChancePerStack.Value}%</style> " +
