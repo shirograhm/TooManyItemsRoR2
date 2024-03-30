@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -22,7 +23,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.1.9";
+        public const string PluginVersion = "0.1.10";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -119,15 +120,6 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        DropItem(BreadLoaf.itemDef);
-        //        DropItem(RoR2Content.Equipment.DeathProjectile);
-        //        DropItem(RoR2Content.Items.AutoCastEquipment);
-        //        DropItem(RoR2Content.Items.EquipmentMagazine);
-        //        DropItem(RoR2Content.Items.EquipmentMagazine);
-        //        DropItem(RoR2Content.Items.EquipmentMagazine);
-        //        DropItem(BuffTotem.equipmentDef);
-        //        DropItem(PaperPlane.itemDef);
-        //        DropItem(PaperPlane.itemDef);
         //    }
         //}
 
