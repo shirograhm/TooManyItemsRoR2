@@ -246,8 +246,8 @@ namespace TooManyItems
             LanguageAPI.Add("RUSTED_TROWEL_NAME", "Rusty Trowel");
             LanguageAPI.Add("RUSTED_TROWEL_PICKUP", "Harvest Mulch on-hit. Heal periodically based on Mulch stacks.");
 
-            string desc = $"On-hit, gain a stack of Mulch. Every <style=cIsUtility>{rechargeTime.Value}</style> <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds, " +
-                $"consume all Mulch to heal <style=cIsHealing>{healingPerStack.Value}</style> per stack.";
+            string desc = $"On-hit, gain a stack of Mulch. Every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>, " +
+                $"consume all Mulch to heal <style=cIsHealing>{healingPerStack.Value} HP</style> per stack.";
             LanguageAPI.Add("RUSTED_TROWEL_DESCRIPTION", desc);
 
             string lore = "";

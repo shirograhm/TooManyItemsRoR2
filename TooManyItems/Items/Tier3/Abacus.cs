@@ -11,7 +11,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef countedBuff;
 
-        // Killing an enemy grants 1% (+1% per stack) crit chance for the rest of the stage.
+        // Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Excess crit chance grants bonus crit damage.
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: Abacus",
             "Crit Chance On Kill",
@@ -81,11 +81,13 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    // Process buffs regardless of item in inventory or not
+                    int buffCount = sender.GetBuffCount(countedBuff);
+                    args.critAdd += buffCount * critChancePerStack.Value;
+                    
+                    if (sender.inventory.GetItemCount(itemDef) > 0 && sender.crit > 100.0f)
                     {
-                        int buffCount = sender.GetBuffCount(countedBuff);
-                        args.critAdd += buffCount * critChancePerStack.Value;
+                        args.critDamageMultAdd += sender.crit / 100f - 1f;
                     }
                 }
             };
@@ -113,10 +115,12 @@ namespace TooManyItems
         {
             LanguageAPI.Add("ABACUS", "Abacus");
             LanguageAPI.Add("ABACUS_NAME", "Abacus");
-            LanguageAPI.Add("ABACUS_PICKUP", "Killing enemies grants stacking crit chance. Resets each stage.");
+            LanguageAPI.Add("ABACUS_PICKUP", "Killing enemies grants stacking crit chance until the next stage. Excess crit chance grants bonus crit damage.");
 
-            string desc = $"Killing an enemy grants <style=cIsUtility>{critChancePerStack.Value}%</style> " +
-                $"<style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance until the next stage.";
+            string desc = $"Killing an enemy grants <style=cIsDamage>{critChancePerStack.Value}% " +
+                $"<style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance</style> until the next stage. " +
+                $"Every <style=cIsDamage>1% crit chance</style> above <style=cIsUtility>100%</style> grants " +
+                $"<style=cIsDamage>1%</style> bonus <style=cIsDamage>crit damage</style>.";
             LanguageAPI.Add("ABACUS_DESCRIPTION", desc);
 
             string lore = "";

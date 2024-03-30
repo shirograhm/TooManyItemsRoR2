@@ -92,8 +92,8 @@ namespace TooManyItems
             LanguageAPI.Add("REDBLUE_GLASSES_NAME", "3D Glasses");
             LanguageAPI.Add("REDBLUE_GLASSES_PICKUP", "Gain a small amount of crit chance and crit damage.");
 
-            string desc = $"Gain <style=cIsUtility>{critChancePerStack.Value}%</style> <style=cStack>(+{critChancePerStack.Value}% per stack)</style> critical strike chance and " +
-                $"<style=cIsUtility>{critDamagePerStack.Value}%</style> <style=cStack>(+{critDamagePerStack.Value}% per stack)</style> critical strike damage.";
+            string desc = $"Gain <style=cIsDamage>{critChancePerStack.Value}% <style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance</style> and " +
+                $"<style=cIsDamage>{critDamagePerStack.Value}% <style=cStack>(+{critDamagePerStack.Value}% per stack)</style> crit damage</style>.";
             LanguageAPI.Add("REDBLUE_GLASSES_DESCRIPTION", desc);
 
             string lore = "";
