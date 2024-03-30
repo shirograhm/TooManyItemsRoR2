@@ -59,7 +59,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+
+                ItemTag.OnKillEffect
             };
         }
 
