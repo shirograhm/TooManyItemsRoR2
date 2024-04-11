@@ -123,7 +123,7 @@ namespace TooManyItems
 
                 if (!NetworkServer.active) return;
 
-                if (damageReport.victimBody || damageReport.victimBody.HasBuff(curseDebuff))
+                if (damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
                 {
                     if (damageReport.attackerMaster)
                     {
