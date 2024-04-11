@@ -14,7 +14,7 @@ namespace TooManyItems
         public static BuffDef mulchBuff;
         public static BuffDef healingTimer;
 
-        // On-hit, gain a stack of Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack.
+        // On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, heal 3 HP for each stack of Mulch received.
         public static ConfigurableValue<float> healingPerStack = new(
             "Item: Rusty Trowel",
             "Heal Per Stack",
@@ -230,10 +230,13 @@ namespace TooManyItems
                     CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                     if (attackerBody && attackerBody.inventory)
                     {
-                        int count = attackerBody.inventory.GetItemCount(itemDef);
-                        if (count > 0)
+                        int itemCount = attackerBody.inventory.GetItemCount(itemDef);
+                        if (itemCount > 0)
                         {
-                            attackerBody.AddBuff(mulchBuff);
+                            int newBuffCount = attackerBody.GetBuffCount(mulchBuff) + itemCount;
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+                            attackerBody.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
                         }
                     }
                 }
@@ -246,8 +249,9 @@ namespace TooManyItems
             LanguageAPI.Add("RUSTED_TROWEL_NAME", "Rusty Trowel");
             LanguageAPI.Add("RUSTED_TROWEL_PICKUP", "Harvest Mulch on-hit. Heal periodically based on Mulch stacks.");
 
-            string desc = $"On-hit, gain a stack of Mulch. Every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>, " +
-                $"consume all Mulch to heal <style=cIsHealing>{healingPerStack.Value} HP</style> per stack.";
+            string desc = $"On-hit, gain <style=cIsUtility>1 <style=cStack>(+1 per stack)</style> Mulch</style>. " +
+                $"Every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>, " +
+                $"heal <style=cIsHealing>{healingPerStack.Value} HP</style> for each stack of Mulch received.";
             LanguageAPI.Add("RUSTED_TROWEL_DESCRIPTION", desc);
 
             string lore = "";
