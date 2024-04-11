@@ -58,6 +58,7 @@ namespace TooManyItems
             {
                 ItemTag.Healing,
 
+                ItemTag.HoldoutZoneRelated,
                 ItemTag.OnKillEffect
             };
         }
