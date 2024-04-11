@@ -14,7 +14,7 @@ namespace TooManyItems
         public static BuffDef mulchBuff;
         public static BuffDef healingTimer;
 
-        // On-hit, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 3 HP per stack.
+        // On-hit, gain a stack of Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack.
         public static ConfigurableValue<float> healingPerStack = new(
             "Item: Rusty Trowel",
             "Heal Per Stack",
@@ -38,7 +38,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
             "Item: Rusty Trowel",
             "Recharge Time Reduction",
-            10f,
+            30f,
             "Percent of recharge time removed for every additional stack of this item.",
             new List<string>()
             {
