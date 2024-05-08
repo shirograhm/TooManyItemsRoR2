@@ -6,7 +6,7 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Ancient Coin**  
 > Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.  
 > **Carving Blade**  
-> Deal 0.75% (+0.75% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike.  
+> Deal 1% (+1% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike.  
 > **Crucifix**  
 > Reduce damage taken by 40%. Taking damage sets you on fire for 5% max health over 3 seconds.  
 > **Spirit Stone**  
@@ -14,15 +14,15 @@ These values are configurable. To do so, run the game once with the mod installe
 
 ### Red Items
 > **Abacus**  
-> Killing an enemy grants 1% (+1% per stack) crit chance until the end of the stage.  
+> Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Every 1% crit chance above 100% grants 1% bonus crit damage.  
 > **Blood Dice**  
 > On kill, gain 2 to 12 permanent max health, up to a max of 500 (+500 per stack).  
 > **Iron Heart**  
 > Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
 > **Rusty Trowel**  
-> On-hit, gain a stack of Mulch. Every 8 (-10% per stack) seconds, consume all stacks and heal for 3 HP per stack.  
+> On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack.  
 > **Soul Ring**  
-> On kill, permanently increase your health regeneration by 0.2 health, up to a maximum of 25 (+25 per stack).  
+> On kill, permanently increase your health regeneration by 0.2 HP/s, up to a maximum of 25 (+25 per stack) HP/s.  
 
 ### Green Items
 > **Broken Mask**  
@@ -42,15 +42,15 @@ These values are configurable. To do so, run the game once with the mod installe
 > **3D Glasses**  
 > Gain 6% (+6% per stack) critical strike chance and 6% (+6% per stack) critical strike damage.  
 > **Bottle Cap**  
-> Reduce your ultimate skill cooldown by 5% (+5% per stack).  
+> Reduce your ultimate skill cooldown by 8% (+8% per stack).  
 > **Debit Card**  
-> Get an 5% (+5% per stack) rebate on purchases.  
+> Get an 8% (+8% per stack) rebate on purchases.  
 > **Edible Glue**  
 > On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.  
 > **Loaf of Bread**  
 > While the teleporter is charging, killing enemies heals you for 4% (+4% per stack) of your missing health.  
 > **Milk Carton**  
-> Reduce damage taken from elite enemies by 5% (+5% per stack).  
+> Reduce damage taken from elite enemies by 8% (+8% per stack).  
 > **Paper Plane**  
 > Gain 18% (+18% per stack) movement speed while airborne.  
 > **Photodiode**  
