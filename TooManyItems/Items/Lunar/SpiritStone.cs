@@ -11,7 +11,7 @@ namespace TooManyItems
     internal class SpiritStone
     {
         public static ItemDef itemDef;
-        // Killing an enemy grants 1 (+1 per stack) health as permanent shield. Some damage you take is permanent.
+        // Killing an enemy grants 1 (+1 per stack) permanent shield. Some damage you take is permanent.
         public static ConfigurableValue<float> shieldPerKill = new(
             "Item: Spirit Stone",
             "Shield Amount",
@@ -183,7 +183,7 @@ namespace TooManyItems
             LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Taking damage reduces your max health.</style>");
 
             string desc = $"Killing an enemy grants <style=cIsUtility>{shieldPerKill.Value}</style> " +
-                $"<style=cStack>(+{shieldPerKill.Value} per stack)</style> health as permanent shield. " +
+                $"<style=cStack>(+{shieldPerKill.Value} per stack)</style> permanent shield. " +
                 $"<style=cDeath>Taking damage applies a stacking curse that lowers your max health.</style>";
             LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
 
