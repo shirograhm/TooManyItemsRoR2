@@ -97,7 +97,7 @@ namespace TooManyItems
 
             equipmentDef.appearsInMultiPlayer = true;
             equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = true;
+            equipmentDef.canBeRandomlyTriggered = false;
             equipmentDef.enigmaCompatible = true;
             equipmentDef.canDrop = true;
 
