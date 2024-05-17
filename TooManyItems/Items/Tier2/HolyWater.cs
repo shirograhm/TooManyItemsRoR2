@@ -11,18 +11,42 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Killing an elite enemy grants all allies 2% (+2% per stack) of their level experience cap as bonus experience.
-        public static ConfigurableValue<float> experienceMultiplierPerStack = new(
+        // Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its' max health as bonus experience, scaling with difficulty.
+        public static ConfigurableValue<float> minExperienceMultiplierPerStack = new(
             "Item: Holy Water",
-            "XP Multiplier",
-            2f,
-            "Bonus experience gained on elite kill as a percentage of the level cap.",
+            "Minimum XP Multiplier",
+            5f,
+            "Minimum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
             {
                 "ITEM_HOLYWATER_DESC"
             }
         );
-        public static float experienceMultiplierAsPercent = experienceMultiplierPerStack.Value / 100f;
+        public static float minExperienceMultiplierAsPercent = minExperienceMultiplierPerStack.Value / 100f;
+
+        public static ConfigurableValue<float> maxExperienceMultiplierPerStack = new(
+            "Item: Holy Water",
+            "Maximum XP Multiplier",
+            50f,
+            "Maximum enemy max health converted to bonus experience when killing an elite.",
+            new List<string>()
+            {
+                "ITEM_HOLYWATER_DESC"
+            }
+        );
+        public static float maxExperienceMultiplierAsPercent = maxExperienceMultiplierPerStack.Value / 100f;
+
+        public static ConfigurableValue<float> extraStacksMultiplier = new(
+            "Item: Holy Water",
+            "Extra Stack Scaling",
+            20f,
+            "Experience bonus for additional stacks.",
+            new List<string>()
+            {
+                "ITEM_HOLYWATER_DESC"
+            }
+        );
+        public static float extraStacksMultiplierPercent = extraStacksMultiplier.Value / 100f;
 
         internal static void Init()
         {
@@ -71,8 +95,9 @@ namespace TooManyItems
 
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
+                CharacterBody vicBody = damageReport.victimBody;
 
-                if (atkBody && atkMaster && damageReport.victimBody.isElite)
+                if (atkBody && atkMaster && vicBody && vicBody.isElite)
                 {
                     // Check if attacker is minion and if we can switch to player
                     if (atkMaster.minionOwnership && atkMaster.minionOwnership.ownerMaster && atkMaster.minionOwnership.ownerMaster.hasBody)
@@ -85,8 +110,7 @@ namespace TooManyItems
                         int count = atkBody.inventory.GetItemCount(itemDef);
                         if (count > 0)
                         {
-                            float hyperbolicExperienceMultiplier = 1 - 1 / (1 + experienceMultiplierAsPercent * count);
-                            float bonusXP = GetExperienceCap(atkBody.level) * hyperbolicExperienceMultiplier;
+                            float bonusXP = vicBody.healthComponent.fullCombinedHealth * CalculateExperienceMultiplier(count);
 
                             atkMaster.GiveExperience(Convert.ToUInt64(bonusXP));
                         }
@@ -95,19 +119,23 @@ namespace TooManyItems
             };
         }
 
-        private static float GetExperienceCap(float level)
+        public static float CalculateExperienceMultiplier(int itemCount)
         {
-            return -4f / 0.11f * (1f - Mathf.Pow(1.55f, level));
+            float difficulty = (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
+            float difference = maxExperienceMultiplierAsPercent - minExperienceMultiplierAsPercent;
+            float multiplier = minExperienceMultiplierAsPercent + difference * difficulty;
+
+            return multiplier * (1 + extraStacksMultiplierPercent * (itemCount - 1));
         }
 
         private static void AddTokens()
         {
             LanguageAPI.Add("HOLY_WATER", "Holy Water");
             LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_PICKUP", "Grant all allies bonus experience upon killing elite enemies.");
+            LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
 
-            string desc = $"Killing an elite enemy grants all allies <style=cIsUtility>{experienceMultiplierPerStack.Value}%</style> " +
-                $"<style=cStack>(+{experienceMultiplierPerStack.Value}% per stack)</style> of your current level experience cap as bonus experience.";
+            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}% to {maxExperienceMultiplierPerStack.Value}% " +
+                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its' max health</style> as bonus experience, <style=cShrine>scaling with difficulty.</style>";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
             string lore = "";

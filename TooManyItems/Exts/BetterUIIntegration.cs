@@ -146,11 +146,10 @@ namespace TooManyItems
                 // Holy Water
                 ItemStats.RegisterStat(
                     itemDef: HolyWater.itemDef,
-                    "Bonus Experience",
-                    HolyWater.experienceMultiplierAsPercent,
-                    HolyWater.experienceMultiplierAsPercent,
-                    stackingFormula: ItemStats.HyperbolicStacking,
-                    statFormatter: ItemStats.StatFormatter.Percent
+                    "Experience Gained",
+                    1,
+                    1,
+                    statFormatter: HolyWaterBonusFormatter
                 );
 
                 // Iron Heart
@@ -294,6 +293,31 @@ namespace TooManyItems
                     {
                         sb.Append("0");
                     }
+                }
+            };
+
+            public static ItemStats.StatFormatter HolyWaterBonusFormatter = new()
+            {
+                suffix = "",
+                style = "cIsHealth",
+                statFormatter = (sb, value, master) =>
+                {
+                    if (!master.inventory || !master.hasBody) return;
+
+                    int count = master.inventory.GetItemCount(HolyWater.itemDef);
+                    if (count > 0)
+                    {
+                        string temp = String.Format("{0:#.#}", HolyWater.CalculateExperienceMultiplier(count) * 100);
+                        temp = temp == String.Empty ? "0.0" : temp;
+
+                        sb.AppendFormat(temp);
+                    }
+                    else
+                    {
+                        sb.Append("0.0");
+                    }
+
+                    sb.Append("% enemy max HP");
                 }
             };
 
