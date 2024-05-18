@@ -16,7 +16,9 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Abacus**  
 > Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Every 1% crit chance above 100% grants 1% bonus crit damage.  
 > **Blood Dice**  
-> On kill, gain 2 to 12 permanent max health, up to a max of 500 (+500 per stack).  
+> On kill, gain 2 to 12 permanent max health, up to a max of 600 (+600 per stack).  
+> **Glass Marbles**  
+> Gain 2.5 (+2.5 per stack) damage per level.  
 > **Iron Heart**  
 > Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
 > **Rusty Trowel**  
@@ -28,11 +30,9 @@ These values are configurable. To do so, run the game once with the mod installe
 > **Broken Mask**  
 > Dealing damage burns enemies for 1.5% (+1.5% per stack) max health over 5 seconds. Does not apply itself.  
 > **Fleece Hoodie**  
-> The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 5 (-15% per stack) seconds.  
-> **Glass Marbles**  
-> Gain 1 (+1 per stack) damage per level.  
+> The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 8 (-15% per stack) seconds.  
 > **Holy Water**  
-> Upon killing an elite enemy, grant all allies 2% (+2% per stack) of their level experience cap as bonus experience.  
+> Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its' max health as bonus experience, scaling with difficulty.  
 > **Magnifying Glass**  
 > Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 12% from all sources.  
 > **Seal of the Heretic**  
