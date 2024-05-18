@@ -80,8 +80,8 @@ namespace TooManyItems
                     ItemStats.RegisterStat(
                         itemDef: BrokenMask.itemDef,
                         "Burn Damage",
-                        BrokenMask.burnDamage.Value / 100f,
-                        BrokenMask.burnDamage.Value / 100f,
+                        BrokenMask.burnDamagePercent,
+                        BrokenMask.burnDamagePercent,
                         stackingFormula: ItemStats.LinearStacking,
                         statFormatter: ItemStats.StatFormatter.Percent
                     );

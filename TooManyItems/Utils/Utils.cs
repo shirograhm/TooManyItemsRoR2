@@ -13,6 +13,11 @@ namespace TooManyItems
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
         }
 
+        public static float GetHyperbolicStacking(float percent, float count)
+        {
+            return 1f - 1f / (1f + percent * count);
+        }
+
         public static void ForceRecalculate(CharacterBody body)
         {
             body.RecalculateStats();

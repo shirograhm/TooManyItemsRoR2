@@ -4,7 +4,8 @@ namespace TooManyItems
 {
     internal class Integrations
     {
-        internal static bool itemStatsEnabled = false;
+        internal static bool betterUIEnabled = false;
+        internal static bool lookingGlassEnabled = false;
 
         internal static void Init()
         {
@@ -13,8 +14,22 @@ namespace TooManyItems
             {
                 try
                 {
+                    Log.Debug("Better UI Initialized.");
                     BetterUIIntegration.Init();
-                    itemStatsEnabled = true;
+                    betterUIEnabled = true;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
+            if (pluginInfos.ContainsKey("droppod.lookingglass"))
+            {
+                try
+                {
+                    Log.Debug("Looking Glass Enabled.");
+                    LookingGlassIntegration.Init();
+                    lookingGlassEnabled = true;
                 }
                 catch (Exception e)
                 {

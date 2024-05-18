@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="assetbundle" />
     <None Remove="tmiassets" />
     <None Remove="TooManyItems" />
   </ItemGroup>
@@ -44,6 +43,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="LookingGlass">
+      <HintPath>libs\LookingGlass.dll</HintPath>
+    </Reference>
     <Reference Include="BetterUI">
       <HintPath>libs\BetterUI.dll</HintPath>
     </Reference>
@@ -91,10 +93,6 @@
       <HintPath>libs\Zio.dll</HintPath>
       <Private>false</Private>
     </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Exts\" />
   </ItemGroup>
 
 </Project>

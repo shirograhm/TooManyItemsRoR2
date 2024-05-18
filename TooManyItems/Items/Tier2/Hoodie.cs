@@ -120,7 +120,7 @@ namespace TooManyItems
             hoodieBuffCooldown.isCooldown = true;
         }
 
-        private static float CalculateHoodieCooldown(int itemCount)
+        public static float CalculateHoodieCooldown(int itemCount)
         {
             return rechargeTime.Value * Mathf.Pow(1 - rechargeTimeReductionPercent, itemCount - 1);
         }
