@@ -9,11 +9,21 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 1 (+1) damage per level.
-        public static ConfigurableValue<int> damagePerLevelPerStack = new(
+        // Gain 2.5 (+2.5) damage per level.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Glass Marbles",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_GLASSMARBLES_DESC"
+            }
+        );
+        public static ConfigurableValue<float> damagePerLevelPerStack = new(
             "Item: Glass Marbles",
             "Damage Increase",
-            1,
+            2.5f,
             "Amount of base damage gained per level per stack.",
             new List<string>()
             {
@@ -44,7 +54,7 @@ namespace TooManyItems
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
-                if (itemDef) itemDef.tier = ItemTier.Tier2;
+                if (itemDef) itemDef.tier = ItemTier.Tier3;
             });
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("GlassMarbles.png");
@@ -67,7 +77,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        args.levelDamageAdd += count * damagePerLevelPerStack.Value;
+                        args.levelDamageAdd += count * damagePerLevelPerStack.Value + damagePerLevelPerStack.Value;
                     }
                 }
             };
