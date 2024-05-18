@@ -1,6 +1,8 @@
 ## TooManyItems - RoR2
-Adds extra items for Risk of Rain 2.
-These values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
+Adds 27 extra items for Risk of Rain 2!
+Supports integration with ~~Better UI~~ LookingGlass & RiskUI.
+
+The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
 
 ### Lunar Items
 > **Ancient Coin**  
