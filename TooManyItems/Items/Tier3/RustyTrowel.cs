@@ -15,6 +15,16 @@ namespace TooManyItems
         public static BuffDef healingTimer;
 
         // On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, heal 3 HP for each stack of Mulch received.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Rusty Trowel",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_RUSTYTROWEL_DESC"
+            }
+        );
         public static ConfigurableValue<float> healingPerStack = new(
             "Item: Rusty Trowel",
             "Heal Per Stack",

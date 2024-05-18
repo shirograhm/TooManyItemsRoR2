@@ -12,6 +12,16 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
         // Killing an enemy grants 1 (+1 per stack) permanent shield. Some damage you take is permanent.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Spirit Stone",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_SPIRITSTONE_DESC"
+            }
+        );
         public static ConfigurableValue<float> shieldPerKill = new(
             "Item: Spirit Stone",
             "Shield Amount",

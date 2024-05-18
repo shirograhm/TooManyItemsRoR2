@@ -11,6 +11,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Edible Glue",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_EDIBLEGLUE_DESC"
+            }
+        );
         public static ConfigurableValue<float> slowRadiusPerStack = new(
             "Item: Edible Glue",
             "Slow Radius",

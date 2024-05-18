@@ -16,6 +16,16 @@ namespace TooManyItems
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.09f, 0.67f, 0.42f, 1f));
 
         // Deal 1% (+1% per stack) enemy current health as bonus on-hit damage. You cannot crit.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Carving Blade",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_CARVINGBLADE_DESC"
+            }
+        );
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Carving Blade",
             "On-Hit Damage Scaling",

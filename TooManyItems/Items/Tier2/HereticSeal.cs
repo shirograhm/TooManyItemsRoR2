@@ -10,6 +10,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Gain 1% (+1% per stack) bonus damage for every 1% msising health.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Seal of the Heretic",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_HERETICSEAL_DESC"
+            }
+        );
         public static ConfigurableValue<float> damagePerMissing = new(
             "Item: Seal of the Heretic",
             "Damage Increase",

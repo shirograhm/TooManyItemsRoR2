@@ -49,41 +49,68 @@ namespace TooManyItems
             RoR2.ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
 
             //Red Items
-            BloodDice.Init();
-            IronHeart.Init();
-            RustyTrowel.Init();
-            SoulRing.Init();
-            Abacus.Init();
+            if (BloodDice.isEnabled.Value)
+                BloodDice.Init();
+            if (IronHeart.isEnabled.Value)
+                IronHeart.Init();
+            if (RustyTrowel.isEnabled.Value)
+                RustyTrowel.Init();
+            if (SoulRing.isEnabled.Value)
+                SoulRing.Init();
+            if (Abacus.isEnabled.Value)
+                Abacus.Init();
 
             // Green Items
-            BrokenMask.Init();
-            GlassMarble.Init();
-            HereticSeal.Init();
-            HolyWater.Init();
-            Hoodie.Init();
-            MagnifyingGlass.Init();
+            if (BrokenMask.isEnabled.Value)
+                BrokenMask.Init();
+            if (GlassMarble.isEnabled.Value)
+                GlassMarble.Init();
+            if (HereticSeal.isEnabled.Value)
+                HereticSeal.Init();
+            if (HolyWater.isEnabled.Value)
+                HolyWater.Init();
+            if (Hoodie.isEnabled.Value)
+                Hoodie.Init();
+            if (MagnifyingGlass.isEnabled.Value)
+                MagnifyingGlass.Init();
 
             // White Items
-            BottleCap.Init();
-            BreadLoaf.Init();
-            DebitCard.Init();
-            EdibleGlue.Init();
-            MilkCarton.Init();
-            PaperPlane.Init();
-            Photodiode.Init();
-            RedBlueGlasses.Init();
-            RubberDucky.Init();
+            if (BottleCap.isEnabled.Value)
+                BottleCap.Init();
+            if (BreadLoaf.isEnabled.Value)
+                BreadLoaf.Init();
+            if (DebitCard.isEnabled.Value)
+                DebitCard.Init();
+            if (EdibleGlue.isEnabled.Value)
+                EdibleGlue.Init();
+            if (MilkCarton.isEnabled.Value)
+                MilkCarton.Init();
+            if (PaperPlane.isEnabled.Value)
+                PaperPlane.Init();
+            if (Photodiode.isEnabled.Value)
+                Photodiode.Init();
+            if (RedBlueGlasses.isEnabled.Value)
+                RedBlueGlasses.Init();
+            if (RubberDucky.isEnabled.Value)
+                RubberDucky.Init();
 
             // Lunar
-            AncientCoin.Init();
-            CarvingBlade.Init();
-            Crucifix.Init();
-            SpiritStone.Init();
+            if (AncientCoin.isEnabled.Value)
+                AncientCoin.Init();
+            if (CarvingBlade.isEnabled.Value)
+                CarvingBlade.Init();
+            if (Crucifix.isEnabled.Value)
+                Crucifix.Init();
+            if (SpiritStone.isEnabled.Value)
+                SpiritStone.Init();
 
             // Equipment
-            BuffTotem.Init();
-            TatteredScroll.Init();
-            Chalice.Init();
+            if (BuffTotem.isEnabled.Value)
+                BuffTotem.Init();
+            if (TatteredScroll.isEnabled.Value)
+                TatteredScroll.Init();
+            if (Chalice.isEnabled.Value)
+                Chalice.Init();
 
             Log.Message("Finished initializations.");
         }

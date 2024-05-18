@@ -11,6 +11,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Get a 8% (+8% per stack) rebate on purchases.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Debit Card",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_DEBITCARD_DESC"
+            }
+        );
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
             "Rebate Amount",

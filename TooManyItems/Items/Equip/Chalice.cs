@@ -14,6 +14,16 @@ namespace TooManyItems
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.55f, 0.12f, 0.09f, 1f));
 
         // Consecrate yourself and all allies. Consecrated allies gain 40% damage and 110% attack speed for 8 seconds, but lose 50% max health. (60 sec)
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Equipment: Chalice",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_CHALICE_DESC"
+            }
+        );
         public static ConfigurableValue<float> consecrateDuration = new(
             "Equipment: Chalice",
             "Consecrate Duration",

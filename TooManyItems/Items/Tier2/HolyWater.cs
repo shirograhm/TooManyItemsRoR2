@@ -12,6 +12,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its' max health as bonus experience, scaling with difficulty.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Holy Water",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_HOLYWATER_DESC"
+            }
+        );
         public static ConfigurableValue<float> minExperienceMultiplierPerStack = new(
             "Item: Holy Water",
             "Minimum XP Multiplier",

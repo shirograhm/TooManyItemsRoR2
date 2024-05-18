@@ -11,6 +11,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Ancient Coin",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_ANCIENTCOIN_DESC"
+            }
+        );
         public static ConfigurableValue<float> goldMultiplierPerStack = new(
             "Item: Ancient Coin",
             "Gold Multiplier",

@@ -12,6 +12,16 @@ namespace TooManyItems
         public static BuffDef attackSpeedBuff;
 
         // On-hit, gain 2.5% attack speed for 10 seconds, up to a max of 20% (+20% per stack).
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Photodiode",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_PHOTODIODE_DESC"
+            }
+        );
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
             "Attack Speed On-Hit",

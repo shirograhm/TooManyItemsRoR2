@@ -13,6 +13,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // On kill, permanently increase your health regeneration by 0.2 HP/s, up to a maximum of 25 (+25 per stack) HP/s.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Soul Ring",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_SOULRING_DESC"
+            }
+        );
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
             "Health Regen On Kill",

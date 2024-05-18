@@ -10,6 +10,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Reduce damage taken by 40%. Taking damage set you on fire for 5% max health over 3 seconds.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Crucifix",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_CRUCIFIX_DESC"
+            }
+        );
         public static ConfigurableValue<float> damageReduction = new(
             "Item: Crucifix",
             "Damage Reduction",

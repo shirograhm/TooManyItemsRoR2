@@ -16,7 +16,17 @@ namespace TooManyItems
         public static BuffDef attackSpeedBuff;
         public static BuffDef healthRegenBuff;
 
-        // On activation, grants either 100 armor, 30% damage, 75% attack speed, or 12% max HP/s regeneration for 12 seconds. (45 sec)
+        // On activation, grants either 100 armor, 30% damage, 75% attack speed, or 12% max HP/s regeneration for 12 seconds. (55 sec)
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Equipment: Totem of Prayer",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_BUFFTOTEM_DESC"
+            }
+        );
         public static ConfigurableValue<float> armorIncrease = new(
             "Equipment: Totem of Prayer",
             "Armor Increase",

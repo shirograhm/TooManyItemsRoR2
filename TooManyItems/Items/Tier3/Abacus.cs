@@ -12,6 +12,16 @@ namespace TooManyItems
         public static BuffDef countedBuff;
 
         // Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Excess crit chance grants bonus crit damage.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Abacus",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_ABACUS_DESC"
+            }
+        );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: Abacus",
             "Crit Chance On Kill",

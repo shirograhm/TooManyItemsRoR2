@@ -10,6 +10,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Gain 5 (+5) armor.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: Rubber Ducky",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_ARMORITEM_DESC"
+            }
+        );
         public static ConfigurableValue<int> armorPerStack = new(
             "Item: Rubber Ducky",
             "Armor Increase",

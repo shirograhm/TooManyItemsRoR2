@@ -10,6 +10,16 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         // Gain 6% (+6%) crit chance and 6% (+6%) crit damage.
+        public static ConfigurableValue<bool> isEnabled = new(
+            "Item: 3D Glasses",
+            "Enabled",
+            true,
+            "Whether or not the item is enabled.",
+            new List<string>()
+            {
+                "ITEM_REDBLUEGLASSES_DESC"
+            }
+        );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: 3D Glasses",
             "Crit Chance Increase",
