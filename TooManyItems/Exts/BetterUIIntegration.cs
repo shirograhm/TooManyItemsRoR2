@@ -107,7 +107,7 @@ namespace TooManyItems
                     );
                     ItemStats.RegisterStat(
                         itemDef: CarvingBlade.itemDef,
-                        "Total Damage Dealt",
+                        "Damage Dealt",
                         1f,
                         1f,
                         statFormatter: CarvingBladeDamageFormatter
@@ -162,10 +162,10 @@ namespace TooManyItems
                 }
 
                 // Glass Marble
-                if (GlassMarble.isEnabled.Value)
+                if (GlassMarbles.isEnabled.Value)
                 {
                     ItemStats.RegisterStat(
-                        itemDef: GlassMarble.itemDef,
+                        itemDef: GlassMarbles.itemDef,
                         "Base Damage",
                         1f,
                         1f,
@@ -197,7 +197,7 @@ namespace TooManyItems
                     );
                     ItemStats.RegisterStat(
                         itemDef: IronHeart.itemDef,
-                        "Total Damage Dealt",
+                        "Damage Dealt",
                         1f,
                         1f,
                         statFormatter: IronHeartDamageFormatter
@@ -344,10 +344,10 @@ namespace TooManyItems
                 {
                     if (!master.inventory || !master.hasBody) return;
 
-                    int count = master.inventory.GetItemCount(GlassMarble.itemDef);
+                    int count = master.inventory.GetItemCount(GlassMarbles.itemDef);
                     if (count > 0)
                     {
-                        string temp = String.Format("{0:#.#}", count * master.GetBody().level * GlassMarble.damagePerLevelPerStack.Value);
+                        string temp = String.Format("{0:#.#}", count * master.GetBody().level * GlassMarbles.damagePerLevelPerStack.Value);
                         temp = temp == String.Empty ? "0.0" : temp;
 
                         sb.AppendFormat(temp);
