@@ -15,7 +15,7 @@ namespace TooManyItems
         private static DotController.DotDef burnDotDef;
         private static DotController.DotIndex burnIndex;
 
-        public static Color maskColor = new Color(0.376f, 0.376f, 0.816f, 1f);
+        public static Color maskColor = new(0.376f, 0.376f, 0.816f, 1f);
 
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(maskColor);

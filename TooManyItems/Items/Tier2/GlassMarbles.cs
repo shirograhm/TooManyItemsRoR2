@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class GlassMarble
+    internal class GlassMarbles
     {
         public static ItemDef itemDef;
 
@@ -77,7 +77,8 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        args.levelDamageAdd += count * damagePerLevelPerStack.Value + damagePerLevelPerStack.Value;
+                        args.baseDamageAdd += count * damagePerLevelPerStack.Value;
+                        args.levelDamageAdd += count * damagePerLevelPerStack.Value;
                     }
                 }
             };

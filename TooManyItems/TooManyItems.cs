@@ -64,8 +64,8 @@ namespace TooManyItems
             // Green Items
             if (BrokenMask.isEnabled.Value)
                 BrokenMask.Init();
-            if (GlassMarble.isEnabled.Value)
-                GlassMarble.Init();
+            if (GlassMarbles.isEnabled.Value)
+                GlassMarbles.Init();
             if (HereticSeal.isEnabled.Value)
                 HereticSeal.Init();
             if (HolyWater.isEnabled.Value)

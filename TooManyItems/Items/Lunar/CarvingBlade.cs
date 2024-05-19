@@ -147,8 +147,7 @@ namespace TooManyItems
 
         public static float CalculateDamageOnHit(CharacterBody sender, float itemCount)
         {
-            float hyperbolicMultiplier = 1 - 1 / (1 + multiplierPerStack * itemCount);
-            return sender.healthComponent.health * hyperbolicMultiplier;
+            return sender.healthComponent.health * Utils.GetHyperbolicStacking(multiplierPerStack, itemCount);
         }
 
         public static void Hooks()
