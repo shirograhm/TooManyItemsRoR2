@@ -2,7 +2,6 @@ using BepInEx;
 using R2API;
 using RoR2;
 using RoR2.ExpansionManagement;
-using RoR2.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
