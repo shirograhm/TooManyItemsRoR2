@@ -153,6 +153,22 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("HOODIE"), stats);
                 }
 
+                // Glass Marbles
+                if (GlassMarbles.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Base Damage per Level: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (itemCount) =>
+                    {
+                        return new List<float> {
+                            GlassMarbles.damagePerLevelPerStack * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("GLASS_MARBLES"), stats);
+                }
+
                 // Holy Water
                 if (HolyWater.isEnabled.Value)
                 {
@@ -289,12 +305,16 @@ namespace TooManyItems
                 if (RustyTrowel.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Stacks On-Hit: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number); 
                     stats.descriptions.Add("Cooldown: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
                     stats.calculateValues = (itemCount) =>
                     {
                         return new List<float> {
+                            itemCount,
                             RustyTrowel.CalculateCooldownInSec(itemCount)
                         };
                     };
