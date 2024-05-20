@@ -2,6 +2,7 @@ using BepInEx;
 using R2API;
 using RoR2;
 using RoR2.ExpansionManagement;
+using RoR2.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -25,6 +26,7 @@ namespace TooManyItems
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
         public const string PluginVersion = "0.1.14";
+        public const string PluginVersion = "0.1.15";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -42,12 +44,14 @@ namespace TooManyItems
 
             voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
             RoR2.ItemCatalog.availability.CallWhenAvailable(InjectVoidItems);
+            ItemCatalog.availability.CallWhenAvailable(InjectVoidItems);
 
             GenericGameEvents.Init();
             ConfigOptions.Init();
             DamageColorAPI.Init();
 
             RoR2.ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
+            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
 
             //Red Items
             if (BloodDice.isEnabled.Value)
