@@ -14,7 +14,7 @@ namespace TooManyItems
             {
                 try
                 {
-                    Log.Debug("Better UI Initialized.");
+                    Log.Debug("Better UI enabled.");
                     BetterUIIntegration.Init();
                     betterUIEnabled = true;
                 }
@@ -27,7 +27,7 @@ namespace TooManyItems
             {
                 try
                 {
-                    Log.Debug("Looking Glass Enabled.");
+                    Log.Debug("Looking Glass enabled.");
                     LookingGlassIntegration.Init();
                     lookingGlassEnabled = true;
                 }

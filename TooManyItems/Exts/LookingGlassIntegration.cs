@@ -89,7 +89,7 @@ namespace TooManyItems
                 if (BreadLoaf.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Healing On Kill: ");
+                    stats.descriptions.Add("Healing On-Kill: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
