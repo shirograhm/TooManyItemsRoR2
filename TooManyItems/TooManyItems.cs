@@ -24,7 +24,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.2.0";
+        public const string PluginVersion = "0.2.1";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -52,6 +52,10 @@ namespace TooManyItems
             //Red Items
             if (BloodDice.isEnabled.Value)
                 BloodDice.Init();
+            if (GlassMarbles.isEnabled.Value)
+                GlassMarbles.Init();
+            if (Hamstringer.isEnabled.Value)
+                Hamstringer.Init();
             if (IronHeart.isEnabled.Value)
                 IronHeart.Init();
             if (RustyTrowel.isEnabled.Value)
@@ -64,8 +68,6 @@ namespace TooManyItems
             // Green Items
             if (BrokenMask.isEnabled.Value)
                 BrokenMask.Init();
-            if (GlassMarbles.isEnabled.Value)
-                GlassMarbles.Init();
             if (HereticSeal.isEnabled.Value)
                 HereticSeal.Init();
             if (HolyWater.isEnabled.Value)
