@@ -22,7 +22,7 @@ namespace TooManyItems
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Gold Gain: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.HumanObjective);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.descriptions.Add("Damage Taken: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
@@ -47,7 +47,6 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-
                         if (master && master.inventory)
                         {
                             var component = master.inventory.GetComponent<BloodDice.Statistics>();
@@ -114,7 +113,6 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-
                         if (master && master.inventory)
                         {
                             values.Add(BrokenMask.burnDamagePercent * itemCount);
@@ -152,7 +150,6 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> {  };
-
                         if (master && master.inventory)
                         {
                             values.Add(Utils.GetHyperbolicStacking(CarvingBlade.multiplierPerStack, itemCount));
@@ -239,7 +236,6 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-
                         if (master && master.GetBody())
                         {
                             values.Add(GlassMarbles.damagePerLevelPerStack * itemCount * master.GetBody().level);
@@ -251,6 +247,29 @@ namespace TooManyItems
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("GLASS_MARBLES"), stats);
+                }
+
+                // The Hamstringer
+                if (Hamstringer.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Freeze Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        var values = new List<float> { };
+                        if (master)
+                        {
+                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Hamstringer.freezeChancePercent, itemCount), (int) master.luck));
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                        }
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("HAMSTRINGER"), stats);
                 }
 
                 // Holy Water
@@ -282,7 +301,6 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-
                         if (master && master.inventory)
                         {
                             values.Add(IronHeart.multiplierPerStack * itemCount);
@@ -332,9 +350,16 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, (int) master.luck)
-                        };
+                        var values = new List<float> { };
+                        if (master)
+                        {
+                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, (int)master.luck));
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                        }
+                        return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("MAGNIFYING_GLASS"), stats);
                 }
