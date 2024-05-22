@@ -11,7 +11,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its' max health as bonus experience, scaling with difficulty.
+        // Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its max health as bonus experience, scaling with difficulty.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Holy Water",
             "Enabled",
@@ -145,7 +145,7 @@ namespace TooManyItems
             LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
 
             string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}% to {maxExperienceMultiplierPerStack.Value}% " +
-                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its' max health</style> as bonus experience, <style=cShrine>scaling with difficulty.</style>";
+                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its max health</style> as bonus experience, <style=cShrine>scaling with difficulty.</style>";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
             string lore = "";
