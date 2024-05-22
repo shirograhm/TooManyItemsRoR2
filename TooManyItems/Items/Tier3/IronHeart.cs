@@ -13,7 +13,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.85f, 0.2f, 0.52f, 1f));
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.IRON_HEART_COLOR);
 
         // Gain 150 health. Deal 1% (+1% per stack) of your max health as on-hit damage.
         public static ConfigurableValue<bool> isEnabled = new(

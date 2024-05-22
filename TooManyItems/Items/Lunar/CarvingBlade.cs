@@ -13,7 +13,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(new(0.09f, 0.67f, 0.42f, 1f));
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
 
         // Deal 1% (+1% per stack) enemy current health as bonus on-hit damage. You cannot crit.
         public static ConfigurableValue<bool> isEnabled = new(

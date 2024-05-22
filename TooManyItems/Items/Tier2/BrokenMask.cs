@@ -15,10 +15,8 @@ namespace TooManyItems
         private static DotController.DotDef burnDotDef;
         private static DotController.DotIndex burnIndex;
 
-        public static Color maskColor = new(0.376f, 0.376f, 0.816f, 1f);
-
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(maskColor);
+        public static DamageColorIndex maskDamageColor = DamageColorAPI.RegisterDamageColor(Utils.BROKEN_MASK_COLOR);
 
         // Dealing damage burns enemies for 1.5% (+1.5% per stack) max health over 5 seconds.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -206,7 +204,7 @@ namespace TooManyItems
         {
             burnDotDef = new DotController.DotDef
             {
-                damageColorIndex = damageColor,
+                damageColorIndex = maskDamageColor,
                 associatedBuff = burnDebuff,
                 terminalTimedBuff = null,
                 terminalTimedBuffDuration = 0,

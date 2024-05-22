@@ -12,9 +12,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef curseDebuff;
 
-        public static Color siphonColor = new(0.902f, 0.78f, 0.573f, 1f);
-
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(siphonColor);
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.TATTERED_SCROLL_COLOR);
 
         // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 25 additional gold. (75 sec)
         public static ConfigurableValue<bool> isEnabled = new(
