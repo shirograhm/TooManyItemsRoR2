@@ -1,9 +1,14 @@
-## TooManyItems - RoR2
+# TooManyItems - RoR2
 Adds 27 extra items for Risk of Rain 2!
-Supports integration with ~~Better UI~~ LookingGlass & RiskUI.
+Supports integration with ~~[Better UI](https://www.youtube.com/watch?v=dQw4w9WgXcQ)~~ [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) & [RiskUI](https://thunderstore.io/package/Bubbet/RiskUI/). See below for compatibility issues.
+| TooManyItems | LookingGlass |
+| ------------ |------|
+| v0.1.x           | v1.5.0 |
+| v0.2.0 and after | v1.5.1 and after |
 
+
+## Items Added
 The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
-
 ### Lunar Items
 > **Ancient Coin**  
 > Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.  
@@ -18,7 +23,7 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Abacus**  
 > Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Every 1% crit chance above 100% grants 1% bonus crit damage.  
 > **Blood Dice**  
-> On kill, gain 2 to 12 permanent max health, up to a max of 600 (+600 per stack).  
+> On kill, gain 2 to 12 permanent max health, up to a max of 550 (+550 per stack).  
 > **Glass Marbles**  
 > Gain 2.5 (+2.5 per stack) damage per level.  
 > **Iron Heart**  
@@ -50,7 +55,7 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Edible Glue**  
 > On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.  
 > **Loaf of Bread**  
-> While the teleporter is charging, killing enemies heals you for 4% (+4% per stack) of your missing health.  
+> While the teleporter is charging, killing enemies heals you for 3% (+3% per stack) of your missing health.  
 > **Milk Carton**  
 > Reduce damage taken from elite enemies by 8% (+8% per stack).  
 > **Paper Plane**  
