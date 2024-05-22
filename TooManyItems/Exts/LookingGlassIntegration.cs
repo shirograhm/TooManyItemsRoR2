@@ -27,7 +27,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Damage Taken: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             AncientCoin.goldMultiplierAsPercent * itemCount,
@@ -37,6 +37,38 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("ANCIENT_COIN"), stats);
                 }
 
+                // Blood Dice
+                if (BloodDice.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Permanent Health: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        var values = new List<float> { };
+
+                        if (master && master.inventory)
+                        {
+                            var component = master.inventory.GetComponent<BloodDice.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.PermanentHealth);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                        }
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("BLOOD_DICE"), stats);
+                }
+
                 // Bottle Cap
                 if (BottleCap.isEnabled.Value)
                 {
@@ -44,7 +76,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Cooldown Reduction: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             Utils.GetHyperbolicStacking(BottleCap.ultimateCDRPercent, itemCount)
@@ -60,7 +92,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Healing On Kill: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             BreadLoaf.healthGainOnKillPercent * itemCount
@@ -76,11 +108,33 @@ namespace TooManyItems
                     stats.descriptions.Add("Burn Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.descriptions.Add("Damage Dealt: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            BrokenMask.burnDamagePercent * itemCount
-                        };
+                        var values = new List<float> { };
+
+                        if (master && master.inventory)
+                        {
+                            values.Add(BrokenMask.burnDamagePercent * itemCount);
+
+                            var component = master.inventory.GetComponent<BrokenMask.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.TotalDamageDealt);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                            values.Add(0f);
+                        }
+                        return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("BROKEN_MASK"), stats);
                 }
@@ -92,11 +146,33 @@ namespace TooManyItems
                     stats.descriptions.Add("Damage On-Hit: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.descriptions.Add("Damage Dealt: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            Utils.GetHyperbolicStacking(CarvingBlade.multiplierPerStack, itemCount)
-                        };
+                        var values = new List<float> {  };
+
+                        if (master && master.inventory)
+                        {
+                            values.Add(Utils.GetHyperbolicStacking(CarvingBlade.multiplierPerStack, itemCount));
+
+                            var component = master.inventory.GetComponent<CarvingBlade.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.TotalDamageDealt);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                            values.Add(0f);
+                        }
+                        return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("CARVING_BLADE"), stats);
                 }
@@ -108,7 +184,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Rebate on Purchase: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             DebitCard.rebatePercent * itemCount
@@ -124,7 +200,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Slow Range: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Meters);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             EdibleGlue.slowRadiusPerStack * itemCount
@@ -143,7 +219,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Cooldown: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             Hoodie.durationIncreasePercent * itemCount,
@@ -157,14 +233,22 @@ namespace TooManyItems
                 if (GlassMarbles.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Base Damage per Level: ");
+                    stats.descriptions.Add("Bonus Base Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            GlassMarbles.damagePerLevelPerStack * itemCount
-                        };
+                        var values = new List<float> { };
+
+                        if (master && master.GetBody())
+                        {
+                            values.Add(GlassMarbles.damagePerLevelPerStack * itemCount * master.GetBody().level);
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                        }
+                        return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("GLASS_MARBLES"), stats);
                 }
@@ -176,7 +260,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Experience Gained: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             HolyWater.CalculateExperienceMultiplier(itemCount)
@@ -192,11 +276,33 @@ namespace TooManyItems
                     stats.descriptions.Add("On-Hit Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.descriptions.Add("Damage Dealt: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            IronHeart.multiplierPerStack * itemCount
-                        };
+                        var values = new List<float> { };
+
+                        if (master && master.inventory)
+                        {
+                            values.Add(IronHeart.multiplierPerStack * itemCount);
+
+                            var component = master.inventory.GetComponent<IronHeart.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.TotalDamageDealt);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                            values.Add(0f);
+                        }
+                        return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("IRON_HEART"), stats);
                 }
@@ -208,7 +314,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Damage Reduction: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             Utils.GetHyperbolicStacking(MilkCarton.eliteDamageReductionPercent, itemCount)
@@ -224,10 +330,10 @@ namespace TooManyItems
                     stats.descriptions.Add("Analyze Chance: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            MagnifyingGlass.analyzeChancePercent * itemCount
+                            Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, (int) master.luck)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("MAGNIFYING_GLASS"), stats);
@@ -240,7 +346,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             PaperPlane.movespeedIncreasePercent * itemCount
@@ -256,7 +362,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Max Attack Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             Photodiode.maxAttackSpeedAllowedPercent * itemCount
@@ -275,7 +381,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Crit Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             RedBlueGlasses.critChancePercent * itemCount,
@@ -292,7 +398,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Bonus Armor: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.calculateValues = (itemCount) =>
+                    stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
                             RubberDucky.armorPerStack * itemCount
@@ -305,20 +411,102 @@ namespace TooManyItems
                 if (RustyTrowel.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Stacks On-Hit: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number); 
                     stats.descriptions.Add("Cooldown: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
-                    stats.calculateValues = (itemCount) =>
+                    stats.descriptions.Add("Health Recovered: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            itemCount,
-                            RustyTrowel.CalculateCooldownInSec(itemCount)
-                        };
-                    };
+                        var values = new List<float> { };
+
+                        if (master && master.inventory)
+                        {
+                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
+
+                            var component = master.inventory.GetComponent<RustyTrowel.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.TotalHealingDone);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                            values.Add(0f);
+                        }
+                        return values;
+                    }; 
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("RUSTED_TROWEL"), stats);
+                }
+
+                // Soul Ring
+                if (SoulRing.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Bonus Regeneration: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        var values = new List<float> { };
+
+                        if (master && master.inventory)
+                        {
+                            var component = master.inventory.GetComponent<SoulRing.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.HealthRegen);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                        }
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("SOUL_RING"), stats);
+                }
+
+                // Spirit Stone
+                if (SoulRing.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Permanent Shield: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        var values = new List<float> { };
+
+                        if (master && master.inventory)
+                        {
+                            var component = master.inventory.GetComponent<SpiritStone.Statistics>();
+                            if (component)
+                            {
+                                values.Add(component.PermanentShield);
+                            }
+                            else
+                            {
+                                values.Add(0f);
+                            }
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                        }
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("SPIRIT_STONE"), stats);
                 }
             }
         }

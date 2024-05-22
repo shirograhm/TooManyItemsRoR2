@@ -13,6 +13,11 @@ namespace TooManyItems
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
         }
 
+        public static float GetChanceAfterLuck(float percent, int luck)
+        {
+            return 1f - Mathf.Pow(1f - percent, luck + 1);
+        }
+
         public static float GetHyperbolicStacking(float percent, float count)
         {
             return 1f - 1f / (1f + percent * count);

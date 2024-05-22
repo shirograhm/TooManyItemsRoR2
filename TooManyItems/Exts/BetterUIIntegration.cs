@@ -166,7 +166,7 @@ namespace TooManyItems
                 {
                     ItemStats.RegisterStat(
                         itemDef: GlassMarbles.itemDef,
-                        "Base Damage",
+                        "Bonus Base Damage",
                         1f,
                         1f,
                         statFormatter: GlassMarbleBonusFormatter
@@ -304,7 +304,7 @@ namespace TooManyItems
                     );
                     ItemStats.RegisterStat(
                         itemDef: RustyTrowel.itemDef,
-                        "Healing Done",
+                        "Health Recovered",
                         1f,
                         1f,
                         statFormatter: RustedTrowelHealingFormatter
@@ -328,7 +328,7 @@ namespace TooManyItems
                 {
                     ItemStats.RegisterStat(
                         itemDef: SpiritStone.itemDef,
-                        "Shield Gained",
+                        "Permanent Shield",
                         1f,
                         1f,
                         statFormatter: SpiritStoneFormatter
