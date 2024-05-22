@@ -14,7 +14,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.HAMSTRINGER_COLOR);
 
-        // Your attacks have a 6% (+2% per stack) chance on-hit to Cripple enemies for 3 (+3 per stack) seconds. Deal 90% bonus damage to Cripple enemies.
+        // Gain 3% (+3% per stack) chance to freeze enemies on-hit. You deal 90% (+90% per stack) bonus damage to frozen enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: The Hamstringer",
             "Enabled",
@@ -25,48 +25,28 @@ namespace TooManyItems
                 "ITEM_HAMSTRINGER_DESC"
             }
         );
-        public static ConfigurableValue<float> crippleChance = new(
+        public static ConfigurableValue<float> freezeChance = new(
             "Item: The Hamstringer",
-            "Cripple Chance",
-            6f,
-            "Chance to Cripple enemies on-hit.",
-            new List<string>()
-            {
-                "ITEM_HAMSTRINGER_DESC"
-            }
-        );
-        public static ConfigurableValue<float> crippleChanceExtra = new(
-            "Item: The Hamstringer",
-            "Cripple Chance Additional Stacks",
-            2f,
-            "Chance to Cripple enemies on-hit for each additional stack of this item.",
-            new List<string>()
-            {
-                "ITEM_HAMSTRINGER_DESC"
-            }
-        );
-        public static ConfigurableValue<float> crippleDuration = new(
-            "Item: The Hamstringer",
-            "Cripple Duration",
+            "Freeze Chance",
             3f,
-            "Duration of Cripple debuff.",
+            "Chance on-hit to apply freeze.",
             new List<string>()
             {
                 "ITEM_HAMSTRINGER_DESC"
             }
         );
-        public static ConfigurableValue<float> crippleDamageBonus = new(
+        public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: The Hamstringer",
-            "Cripple Damage Bonus",
+            "Bonus Damage to Frozen Enemies",
             90f,
-            "Percent bonus damage dealt to Crippleed enemies.",
+            "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
             {
                 "ITEM_HAMSTRINGER_DESC"
             }
         );
-        public static float crippleChancePercent = crippleChance.Value / 100.0f;
-        public static float crippleDamageBonusPercent = crippleDamageBonus.Value / 100.0f;
+        public static float freezeChancePercent = freezeChance.Value / 100.0f;
+        public static float frozenDamageMultiplierPercent = frozenDamageMultiplier.Value / 100.0f;
 
         internal static void Init()
         {
@@ -108,41 +88,26 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-            {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-
-                if (attackerBody != null && attackerBody.inventory != null)
-                {
-                    CharacterMaster atkMaster = attackerBody.master;
-
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
-                    if (count > 0)
-                    {
-                        if (Util.CheckRoll(crippleChance.Value + crippleChanceExtra.Value, atkMaster.luck, atkMaster))
-                        {
-                            victimBody.AddTimedBuff(RoR2Content.Buffs.Weak, crippleDuration * count);
-                        }
-                    }
-                }
-            };
-
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (attackerInfo.inventory == null || victimInfo.body == null) return;
-
-                int count = attackerInfo.inventory.GetItemCount(itemDef);
-                if (count > 0 && victimInfo.body.HasBuff(RoR2Content.Buffs.Weak))
+                CharacterBody attackerBody = attackerInfo.body;
+                CharacterBody victimBody = victimInfo.body;
+                if (attackerBody && victimBody && attackerBody.inventory)
                 {
-                    float percentMultiplier = 1f + crippleDamageBonusPercent + crippleDamageBonusExtraPercent * count;
-                    damageInfo.damage *= percentMultiplier;
-                    damageInfo.damageColorIndex = damageColor;
+                    int count = attackerBody.inventory.GetItemCount(itemDef);
+                    if (count > 0 && attackerBody.master)
+                    {
+                        if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f, attackerBody.master.luck, attackerBody.master))
+                        {
+                            damageInfo.damageType |= DamageType.Freeze2s;
+                        }
+
+                        if (victimBody.healthComponent.isInFrozenState)
+                        {
+                            damageInfo.damage *= 1 + frozenDamageMultiplierPercent * count;
+                            damageInfo.damageColorIndex = damageColor;
+                        }
+                    }
                 }
             };
         }
@@ -151,12 +116,12 @@ namespace TooManyItems
         {
             LanguageAPI.Add("HAMSTRINGER", "The Hamstringer");
             LanguageAPI.Add("HAMSTRINGER_NAME", "The Hamstringer");
-            LanguageAPI.Add("HAMSTRINGER_PICKUP", "Chance to Cripple enemies on-hit. Deal bonus damage to Crippleed enemies.");
+            LanguageAPI.Add("HAMSTRINGER_PICKUP", "Chance to Cripple enemies on-hit. Deal bonus damage to Crippled enemies.");
 
-            string desc = $"Your attacks have a " +
-                $"<style=cIsUtility>{crippleChance.Value}%</style> chance on-hit to Cripple enemies for " +
-                $"<style=cIsUtility>{crippleDuration.Value} <style=cStack>(+{crippleDuration.Value} per stack)</style> seconds</style>. Deal " +
-                $"<style=cIsDamage>{crippleDamageBonus.Value}% <style=cStack>(+{crippleDamageBonusExtraStack.Value}% per stack)</style> bonus damage</style> to Crippleed enemies.";
+            string desc = $"Gain <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
+                $"chance to freeze enemies on-hit. " +
+                $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}% <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style> " +
+                $"bonus damage</style> to frozen enemies.";
             LanguageAPI.Add("HAMSTRINGER_DESCRIPTION", desc);
 
             string lore = "";
