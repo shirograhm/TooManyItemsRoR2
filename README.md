@@ -1,6 +1,6 @@
 # TooManyItems - RoR2
-Adds 27 extra items for Risk of Rain 2!
-Supports integration with ~~[Better UI](https://www.youtube.com/watch?v=dQw4w9WgXcQ)~~ [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) & [RiskUI](https://thunderstore.io/package/Bubbet/RiskUI/). See below for compatibility issues.
+Adds 28 extra items for Risk of Rain 2!
+Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) & [RiskUI](https://thunderstore.io/package/Bubbet/RiskUI/). See below for compatibility issues.
 | TooManyItems | LookingGlass |
 | ------------ |------|
 | v0.1.x           | v1.5.0 |
@@ -28,10 +28,10 @@ The following values are configurable. To do so, run the game once with the mod 
 > Gain 2.5 (+2.5 per stack) damage per level.  
 > **Iron Heart**  
 > Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
+> **Permafrost**  
+> Gain 7% (+7% per stack) chance to freeze enemies on-hit. You deal 70% (+70% per stack) bonus damage to frozen enemies.  
 > **Rusty Trowel**  
 > On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack.  
-> **Soul Ring**  
-> On kill, permanently increase your health regeneration by 0.2 HP/s, up to a maximum of 25 (+25 per stack) HP/s.  
 
 ### Green Items
 > **Broken Mask**  
@@ -44,6 +44,8 @@ The following values are configurable. To do so, run the game once with the mod 
 > Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 12% from all sources.  
 > **Seal of the Heretic**  
 > Gain 1% (+1% per stack) bonus damage for every 1% msising health.  
+> **Soul Ring**  
+> On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 6 (+6 per stack) HP/s.  
 
 ### White Items
 > **3D Glasses**  
