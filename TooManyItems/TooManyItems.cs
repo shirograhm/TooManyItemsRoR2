@@ -13,7 +13,6 @@ namespace TooManyItems
     // Dependencies
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
-    [BepInDependency("com.xoxfaby.BetterUI", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
 
     // This attribute is required, and lists metadata for your plugin.

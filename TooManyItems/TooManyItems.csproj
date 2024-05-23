@@ -46,9 +46,6 @@
     <Reference Include="LookingGlass">
       <HintPath>libs\LookingGlass.dll</HintPath>
     </Reference>
-    <Reference Include="BetterUI">
-      <HintPath>libs\BetterUI.dll</HintPath>
-    </Reference>
     <Reference Include="Facepunch.Steamworks">
       <HintPath>libs\Facepunch.Steamworks.dll</HintPath>
       <Private>false</Private>
