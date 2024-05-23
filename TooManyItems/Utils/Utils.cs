@@ -8,10 +8,10 @@ namespace TooManyItems
 {
     public static class Utils
     {
-        public static Color BROKEN_MASK_COLOR        = new(0.38f, 0.58f, 0.92f, 1f);
-        public static Color CARVING_BLADE_COLOR      = new(0.09f, 0.67f, 0.42f, 1f);
-        public static Color HAMSTRINGER_COLOR        = new(0.96f, 0.84f, 0.11f, 1f);
-        public static Color IRON_HEART_COLOR         = new(0.85f, 0.16f, 0.32f, 1f);
+        public static Color BROKEN_MASK_COLOR        = new(0.38f, 0.38f, 0.82f, 1f);
+        public static Color CARVING_BLADE_COLOR      = new(0.09f, 0.67f, 0.62f, 1f);
+        public static Color PERMAFROST_COLOR         = new(0.76f, 0.80f, 0.98f, 1f);
+        public static Color IRON_HEART_COLOR         = new(0.85f, 0.20f, 0.22f, 1f);
         public static Color TATTERED_SCROLL_COLOR    = new(0.80f, 0.78f, 0.57f, 1f);
 
         internal static void Init()

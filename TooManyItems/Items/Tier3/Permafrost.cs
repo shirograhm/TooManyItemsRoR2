@@ -8,41 +8,41 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class Hamstringer
+    internal class Permafrost
     {
         public static ItemDef itemDef;
 
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.HAMSTRINGER_COLOR);
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.PERMAFROST_COLOR);
 
-        // Gain 3% (+3% per stack) chance to freeze enemies on-hit. You deal 90% (+90% per stack) bonus damage to frozen enemies.
+        // Gain 8% (+8% per stack) chance to freeze enemies on-hit. You deal 80% (+80% per stack) bonus damage to frozen enemies.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: The Hamstringer",
+            "Item: Permafrost",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_HAMSTRINGER_DESC"
+                "ITEM_PERMAFROST_DESC"
             }
         );
         public static ConfigurableValue<float> freezeChance = new(
-            "Item: The Hamstringer",
+            "Item: Permafrost",
             "Freeze Chance",
-            3f,
+            8f,
             "Chance on-hit to apply freeze.",
             new List<string>()
             {
-                "ITEM_HAMSTRINGER_DESC"
+                "ITEM_PERMAFROST_DESC"
             }
         );
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
-            "Item: The Hamstringer",
+            "Item: Permafrost",
             "Bonus Damage to Frozen Enemies",
-            90f,
+            80f,
             "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
             {
-                "ITEM_HAMSTRINGER_DESC"
+                "ITEM_PERMAFROST_DESC"
             }
         );
         public static float freezeChancePercent = freezeChance.Value / 100.0f;
@@ -63,19 +63,19 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "HAMSTRINGER";
-            itemDef.nameToken = "HAMSTRINGER_NAME";
-            itemDef.pickupToken = "HAMSTRINGER_PICKUP";
-            itemDef.descriptionToken = "HAMSTRINGER_DESCRIPTION";
-            itemDef.loreToken = "HAMSTRINGER_LORE";
+            itemDef.name = "PERMAFROST";
+            itemDef.nameToken = "PERMAFROST_NAME";
+            itemDef.pickupToken = "PERMAFROST_PICKUP";
+            itemDef.descriptionToken = "PERMAFROST_DESCRIPTION";
+            itemDef.loreToken = "PERMAFROST_LORE";
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = ItemTier.Tier3;
             });
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Hamstringer.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Hamstringer.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Permafrost.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Permafrost.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -114,18 +114,18 @@ namespace TooManyItems
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("HAMSTRINGER", "The Hamstringer");
-            LanguageAPI.Add("HAMSTRINGER_NAME", "The Hamstringer");
-            LanguageAPI.Add("HAMSTRINGER_PICKUP", "Chance to Cripple enemies on-hit. Deal bonus damage to Crippled enemies.");
+            LanguageAPI.Add("PERMAFROST", "Permafrost");
+            LanguageAPI.Add("PERMAFROST_NAME", "Permafrost");
+            LanguageAPI.Add("PERMAFROST_PICKUP", "Chance to freeze enemies on-hit. Deal bonus damage to frozen enemies.");
 
             string desc = $"Gain <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
                 $"chance to freeze enemies on-hit. " +
                 $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}% <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style> " +
                 $"bonus damage</style> to frozen enemies.";
-            LanguageAPI.Add("HAMSTRINGER_DESCRIPTION", desc);
+            LanguageAPI.Add("PERMAFROST_DESCRIPTION", desc);
 
             string lore = "";
-            LanguageAPI.Add("HAMSTRINGER_LORE", lore);
+            LanguageAPI.Add("PERMAFROST_LORE", lore);
         }
     }
 }

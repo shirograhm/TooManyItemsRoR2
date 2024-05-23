@@ -249,29 +249,6 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("GLASS_MARBLES"), stats);
                 }
 
-                // The Hamstringer
-                if (Hamstringer.isEnabled.Value)
-                {
-                    ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Freeze Chance: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.calculateValues = (master, itemCount) =>
-                    {
-                        var values = new List<float> { };
-                        if (master)
-                        {
-                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Hamstringer.freezeChancePercent, itemCount), (int) master.luck));
-                        }
-                        else
-                        {
-                            values.Add(0f);
-                        }
-                        return values;
-                    };
-                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("HAMSTRINGER"), stats);
-                }
-
                 // Holy Water
                 if (HolyWater.isEnabled.Value)
                 {
@@ -351,14 +328,12 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
+                        // Check if we can use luck
                         if (master)
-                        {
                             values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, (int)master.luck));
-                        }
                         else
-                        {
-                            values.Add(0f);
-                        }
+                            values.Add(MagnifyingGlass.analyzeChancePercent * itemCount);
+                        
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("MAGNIFYING_GLASS"), stats);
@@ -380,11 +355,36 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("PAPER_PLANE"), stats);
                 }
 
+                // Permafrost
+                if (Permafrost.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Freeze Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Bonus Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        var values = new List<float> { };
+                        // Check if we can calculate using luck
+                        if (master)
+                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), (int)master.luck));
+                        else
+                            values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
+                        
+                        values.Add(Permafrost.frozenDamageMultiplierPercent * itemCount);
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("PERMAFROST"), stats);
+                }
+
                 // Photodiode
                 if (Photodiode.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Max Attack Speed: ");
+                    stats.descriptions.Add("Max Bonus Attack Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>

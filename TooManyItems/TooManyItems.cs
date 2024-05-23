@@ -54,8 +54,8 @@ namespace TooManyItems
                 BloodDice.Init();
             if (GlassMarbles.isEnabled.Value)
                 GlassMarbles.Init();
-            if (Hamstringer.isEnabled.Value)
-                Hamstringer.Init();
+            if (Permafrost.isEnabled.Value)
+                Permafrost.Init();
             if (IronHeart.isEnabled.Value)
                 IronHeart.Init();
             if (RustyTrowel.isEnabled.Value)
