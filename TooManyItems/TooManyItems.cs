@@ -155,6 +155,7 @@ namespace TooManyItems
         //        DropItem(GlassMarbles.itemDef);
         //        DropItem(HolyWater.itemDef);
         //        DropItem(IronHeart.itemDef);
+        //        DropItem(Permafrost.itemDef);
         //        DropItem(RustyTrowel.itemDef);
         //        DropItem(SoulRing.itemDef);
         //        DropItem(SpiritStone.itemDef);
