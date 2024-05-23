@@ -129,7 +129,7 @@ namespace TooManyItems
                         }
                         else
                         {
-                            values.Add(0f);
+                            values.Add(BrokenMask.burnDamagePercent * itemCount);
                             values.Add(0f);
                         }
                         return values;
@@ -166,7 +166,7 @@ namespace TooManyItems
                         }
                         else
                         {
-                            values.Add(0f);
+                            values.Add(Utils.GetHyperbolicStacking(CarvingBlade.multiplierPerStack, itemCount));
                             values.Add(0f);
                         }
                         return values;
@@ -294,7 +294,7 @@ namespace TooManyItems
                         }
                         else
                         {
-                            values.Add(0f);
+                            values.Add(IronHeart.multiplierPerStack * itemCount);
                             values.Add(0f);
                         }
                         return values;
@@ -370,7 +370,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can calculate using luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), (int)master.luck));
+                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), (int) master.luck));
                         else
                             values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
                         
@@ -462,7 +462,7 @@ namespace TooManyItems
                         }
                         else
                         {
-                            values.Add(0f);
+                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
                             values.Add(0f);
                         }
                         return values;
