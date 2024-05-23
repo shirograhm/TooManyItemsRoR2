@@ -509,6 +509,9 @@ namespace TooManyItems
                     stats.descriptions.Add("Permanent Shield: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.descriptions.Add("Max Health Sacrificed: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage); 
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
@@ -517,18 +520,16 @@ namespace TooManyItems
                         {
                             var component = master.inventory.GetComponent<SpiritStone.Statistics>();
                             if (component)
-                            {
                                 values.Add(component.PermanentShield);
-                            }
                             else
-                            {
                                 values.Add(0f);
-                            }
                         }
                         else
                         {
                             values.Add(0f);
                         }
+                        values.Add(Utils.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount));
+
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("SPIRIT_STONE"), stats);

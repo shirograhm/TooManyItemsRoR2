@@ -11,7 +11,7 @@ namespace TooManyItems
     internal class SpiritStone
     {
         public static ItemDef itemDef;
-        // Killing an enemy grants 1 (+1 per stack) permanent shield. Some damage you take is permanent.
+        // Killing an enemy grants 1 (+1 per stack) permanent shield. Lose 25% (+25% per stack) max HP.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
             "Enabled",
@@ -32,6 +32,17 @@ namespace TooManyItems
                 "ITEM_SPIRITSTONE_DESC"
             }
         );
+        public static ConfigurableValue<float> maxHealthLost = new(
+            "Item: Spirit Stone",
+            "Max Health Reduction",
+            25f,
+            "Max health lost as a penalty for holding this item.",
+            new List<string>()
+            {
+                "ITEM_SPIRITSTONE_DESC"
+            }
+        );
+        public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
 
         public class Statistics : MonoBehaviour
         {
@@ -148,6 +159,8 @@ namespace TooManyItems
                     {
                         var component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
+
+                        args.healthMultAdd *= Utils.GetExponentialStacking(1 - maxHealthLostPercent, itemCount);
                     }
                 }
             };
@@ -172,18 +185,6 @@ namespace TooManyItems
 
                 }
             };
-
-            GenericGameEvents.OnTakeDamage += (damageReport) =>
-            {
-                if (damageReport.victimBody)
-                {
-                    CharacterBody vicBody = damageReport.victimBody;
-                    if (vicBody.inventory && vicBody.inventory.GetItemCount(itemDef) > 0)
-                    {
-                        vicBody.AddBuff(RoR2Content.Buffs.PermanentCurse);
-                    }
-                }
-            };
         }
 
         private static void AddTokens()
@@ -192,9 +193,10 @@ namespace TooManyItems
             LanguageAPI.Add("SPIRIT_STONE_NAME", "Spirit Stone");
             LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Taking damage reduces your max health.</style>");
 
-            string desc = $"Killing an enemy grants <style=cIsUtility>{shieldPerKill.Value}</style> " +
-                $"<style=cStack>(+{shieldPerKill.Value} per stack)</style> permanent shield. " +
-                $"<style=cDeath>Taking damage applies a stacking curse that lowers your max health.</style>";
+            string desc = $"Killing an enemy grants " +
+                $"<style=cIsUtility>{shieldPerKill.Value}</style> <style=cStack>(+{shieldPerKill.Value} per stack)</style> " +
+                $"permanent shield. " +
+                $"<style=cDeath>Lose {maxHealthLost.Value} <style=cStack>(+{maxHealthLost.Value} per stack)</style> max HP</style>.";
             LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
 
             string lore = "";

@@ -24,7 +24,12 @@ namespace TooManyItems
             return 1f - Mathf.Pow(1f - percent, luck + 1);
         }
 
-        public static float GetHyperbolicStacking(float percent, float count)
+        public static float GetExponentialStacking(float percent, int count)
+        {
+            return Mathf.Pow(percent, count);
+        }
+
+        public static float GetHyperbolicStacking(float percent, int count)
         {
             return 1f - 1f / (1f + percent * count);
         }
