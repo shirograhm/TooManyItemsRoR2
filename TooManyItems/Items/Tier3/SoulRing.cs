@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently increase your health regeneration by 0.2 HP/s, up to a maximum of 25 (+25 per stack) HP/s.
+        // On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 7 (+7 per stack) HP/s.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Soul Ring",
             "Enabled",
@@ -26,7 +26,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
             "Health Regen On Kill",
-            0.2f,
+            0.1f,
             "Amount of permanent health regeneration gained on kill.",
             new List<string>()
             {
@@ -36,7 +36,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxRegenPerStack = new(
             "Item: Soul Ring",
             "Maximum Regen Per Stack",
-            25f,
+            7f,
             "Maximum amount of permanent health regeneration allowed per stack.",
             new List<string>()
             {
@@ -129,7 +129,7 @@ namespace TooManyItems
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
+                if (itemDef) itemDef.tier = ItemTier.Tier2;
             });
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("SoulRing.png");
