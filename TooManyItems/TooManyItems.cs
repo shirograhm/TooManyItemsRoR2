@@ -49,20 +49,18 @@ namespace TooManyItems
             ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
 
             //Red Items
+            if (Abacus.isEnabled.Value)
+                Abacus.Init();
             if (BloodDice.isEnabled.Value)
                 BloodDice.Init();
             if (GlassMarbles.isEnabled.Value)
                 GlassMarbles.Init();
-            if (Permafrost.isEnabled.Value)
-                Permafrost.Init();
             if (IronHeart.isEnabled.Value)
                 IronHeart.Init();
+            if (Permafrost.isEnabled.Value)
+                Permafrost.Init();
             if (RustyTrowel.isEnabled.Value)
                 RustyTrowel.Init();
-            if (SoulRing.isEnabled.Value)
-                SoulRing.Init();
-            if (Abacus.isEnabled.Value)
-                Abacus.Init();
 
             // Green Items
             if (BrokenMask.isEnabled.Value)
@@ -75,6 +73,8 @@ namespace TooManyItems
                 Hoodie.Init();
             if (MagnifyingGlass.isEnabled.Value)
                 MagnifyingGlass.Init();
+            if (SoulRing.isEnabled.Value)
+                SoulRing.Init();
 
             // White Items
             if (BottleCap.isEnabled.Value)
