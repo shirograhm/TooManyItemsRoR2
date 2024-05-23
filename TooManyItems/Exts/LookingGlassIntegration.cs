@@ -191,7 +191,7 @@ namespace TooManyItems
                 }
 
                 // Edible Glue
-                if (BreadLoaf.isEnabled.Value)
+                if (EdibleGlue.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Slow Range: ");
