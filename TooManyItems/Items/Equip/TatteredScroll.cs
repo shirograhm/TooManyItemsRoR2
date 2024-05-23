@@ -182,8 +182,9 @@ namespace TooManyItems
             LanguageAPI.Add("TATTERED_SCROLL_NAME", "Tattered Scroll");
             LanguageAPI.Add("TATTERED_SCROLL_PICKUP", "Curse nearby enemies when activated. Killing cursed enemies grants extra gold.");
 
-            string desc = $"On activation, curse enemies within a <style=cIsUtility>{curseDistance.Value}m</style> radius for {curseDuration.Value} seconds. " +
-                $"Killing cursed enemies grants <style=cIsUtility>{goldGranted.Value}</style> extra gold.";
+            string desc = $"On activation, curse enemies within a <style=cIsUtility>{curseDistance.Value}m</style> radius " +
+                $"for <style=cIsUtility>{curseDuration.Value} seconds</style>. " +
+                $"Killing cursed enemies grants an additional <style=cHumanObjective>{goldGranted.Value} gold</style>.";
             LanguageAPI.Add("TATTERED_SCROLL_DESCRIPTION", desc);
 
             string lore = "";

@@ -108,10 +108,10 @@ namespace TooManyItems
         {
             LanguageAPI.Add("ANCIENT_COIN", "Ancient Coin");
             LanguageAPI.Add("ANCIENT_COIN_NAME", "Ancient Coin");
-            LanguageAPI.Add("ANCIENT_COIN_PICKUP", "Gain more gold. <style=cDeath>Take more damage.</style>");
+            LanguageAPI.Add("ANCIENT_COIN_PICKUP", "Gain more gold. <style=cDeath>Take more damage</style>.");
 
-            string desc = $"Gain <style=cHumanObjective>{goldMultiplierPerStack.Value}%</style> <style=cStack>(+{goldMultiplierPerStack.Value}% per stack)</style> more gold. " +
-                $"<style=cDeath>Take {damageMultiplierPerStack.Value}% <style=cStack>(+{damageMultiplierPerStack.Value}% per stack)</style> more damage.</style>";
+            string desc = $"Gain an additional <style=cHumanObjective>{goldMultiplierPerStack.Value}% <style=cStack>(+{goldMultiplierPerStack.Value}% per stack)</style> gold</style>. " +
+                $"<style=cDeath>Take {damageMultiplierPerStack.Value}% <style=cStack>(+{damageMultiplierPerStack.Value}% per stack)</style> more damage</style>.";
             LanguageAPI.Add("ANCIENT_COIN_DESCRIPTION", desc);
 
             string lore = "";

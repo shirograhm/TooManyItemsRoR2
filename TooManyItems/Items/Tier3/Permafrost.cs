@@ -120,8 +120,8 @@ namespace TooManyItems
 
             string desc = $"Gain <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
                 $"chance to freeze enemies on-hit. " +
-                $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}% <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style> " +
-                $"bonus damage</style> to frozen enemies.";
+                $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}%</style> <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style>" +
+                $" bonus damage to frozen enemies.";
             LanguageAPI.Add("PERMAFROST_DESCRIPTION", desc);
 
             string lore = "";

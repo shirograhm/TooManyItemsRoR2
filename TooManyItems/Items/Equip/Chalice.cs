@@ -184,8 +184,8 @@ namespace TooManyItems
             string desc = $"Consecrate yourself and all allies. Consecrated allies gain " +
                 $"<style=cIsDamage>{consecrateDamageBonus.Value}%</style> damage and " +
                 $"<style=cIsUtility>{consecrateAttackSpeedBonus.Value}%</style> attack speed for " +
-                $"<style=cIsUtility>{consecrateDuration.Value}</style> seconds, " +
-                $"<style=cDeath>but lose {consecrateMaxHealthLost.Value}% max health.</style>";
+                $"<style=cIsUtility>{consecrateDuration.Value} seconds</style>, " +
+                $"<style=cDeath>but lose {consecrateMaxHealthLost.Value}% max health</style>.";
             LanguageAPI.Add("CHALICE_DESCRIPTION", desc);
 
             string lore = "";
