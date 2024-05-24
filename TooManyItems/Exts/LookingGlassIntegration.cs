@@ -557,7 +557,7 @@ namespace TooManyItems
                     stats.descriptions.Add("<style=cIsHealing>Regeneration:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
-                    stats.descriptions.Add("<style=cIsHealth>Max Health:</style> ");
+                    stats.descriptions.Add("<style=cIsHealth>Health:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
                     stats.descriptions.Add("<style=cIsUtility>Shield:</style> ");

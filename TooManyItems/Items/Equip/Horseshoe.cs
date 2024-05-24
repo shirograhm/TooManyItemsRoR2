@@ -217,6 +217,7 @@ namespace TooManyItems
                 HorseshoeHelperItem.Reroll(body.inventory, body);
             }
 
+            Utils.ForceRecalculate(body);
             return true;
         }
 
@@ -233,8 +234,8 @@ namespace TooManyItems
                 $"<style=cIsDamage>crit damage</style>, " +
                 $"<style=cEvent>armor</style>, " +
                 $"<style=cIsHealing>regeneration</style>, " +
-                $"<style=cIsHealth>max health</style>, " +
-                $"<style=cIsUtility>max shield</style>, " +
+                $"<style=cIsHealth>health</style>, " +
+                $"<style=cIsUtility>shield</style>, " +
                 $"<style=cIsUtility>movement speed</style>, and " +
                 $"<style=cIsUtility>cooldown reduction</style>. " +
                 $"These stats are <style=cWorldEvent>rerolled</style> upon <style=cIsUtility>level up</style>. " +

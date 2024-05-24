@@ -23,7 +23,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.2.1";
+        public const string PluginVersion = "0.2.2";
 
         public static PluginInfo PInfo { get; private set; }
 
