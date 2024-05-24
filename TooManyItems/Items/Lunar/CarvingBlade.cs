@@ -145,7 +145,7 @@ namespace TooManyItems
             itemDef.hidden = false;
         }
 
-        public static float CalculateDamageOnHit(CharacterBody sender, float itemCount)
+        public static float CalculateDamageOnHit(CharacterBody sender, int itemCount)
         {
             return sender.healthComponent.health * Utils.GetHyperbolicStacking(multiplierPerStack, itemCount);
         }
