@@ -155,7 +155,7 @@ namespace TooManyItems
             LanguageAPI.Add("MAGNIFYING_GLASS_PICKUP", "Critical strikes sometimes cause enemies to take more damage.");
 
             string desc = $"Gain <style=cIsUtility>{critBonus.Value}%</style> crit chance. " +
-                $"Critical strikes have a <style=cIsUtility>{analyzeChance.Value}%</style> <style=cStack>(+{analyzeChance.Value}% per stack)</style> chance to Analyze the enemy, " +
+                $"Critical strikes have a <style=cIsUtility>{analyzeChance.Value}%</style> <style=cStack>(+{analyzeChance.Value}% per stack)</style> chance to <style=cWorldEvent>Analyze</style> the enemy, " +
                 $"increasing their damage taken by <style=cIsDamage>{damageTakenBonus.Value}%</style> from all sources.";
             LanguageAPI.Add("MAGNIFYING_GLASS_DESCRIPTION", desc);
 

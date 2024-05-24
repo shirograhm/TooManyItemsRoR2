@@ -191,12 +191,12 @@ namespace TooManyItems
         {
             LanguageAPI.Add("SPIRIT_STONE", "Spirit Stone");
             LanguageAPI.Add("SPIRIT_STONE_NAME", "Spirit Stone");
-            LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Taking damage reduces your max health.</style>");
+            LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Lose a portion of your max health</style>.");
 
             string desc = $"Killing an enemy grants " +
-                $"<style=cIsUtility>{shieldPerKill.Value}</style> <style=cStack>(+{shieldPerKill.Value} per stack)</style> " +
-                $"permanent shield. " +
-                $"<style=cDeath>Lose {maxHealthLost.Value} <style=cStack>(+{maxHealthLost.Value} per stack)</style> max HP</style>.";
+                $"<style=cIsUtility>{shieldPerKill.Value} <style=cStack>(+{shieldPerKill.Value} per stack)</style> " +
+                $"shield</style> permanently. " +
+                $"<style=cDeath>Lose {maxHealthLost.Value}% <style=cStack>(+{maxHealthLost.Value}% per stack)</style> max health</style>.";
             LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
 
             string lore = "";
