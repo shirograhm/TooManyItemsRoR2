@@ -89,7 +89,7 @@ namespace TooManyItems
             LanguageAPI.Add("RUBBER_DUCKY_NAME", "Rubber Ducky");
             LanguageAPI.Add("RUBBER_DUCKY_PICKUP", "Gain flat armor.");
 
-            string desc = $"Gain <style=cIsUtility>{armorPerStack.Value}</style> <style=cStack>(+{armorPerStack.Value} per stack)</style> armor.";
+            string desc = $"Gain <style=cEvent>{armorPerStack.Value}</style> <style=cStack>(+{armorPerStack.Value} per stack) armor</style>.";
             LanguageAPI.Add("RUBBER_DUCKY_DESCRIPTION", desc);
 
             string lore = "";

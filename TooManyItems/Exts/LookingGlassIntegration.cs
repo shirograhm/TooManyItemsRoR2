@@ -421,7 +421,7 @@ namespace TooManyItems
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Bonus Armor: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Event);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
@@ -503,7 +503,7 @@ namespace TooManyItems
                 }
 
                 // Spirit Stone
-                if (SoulRing.isEnabled.Value)
+                if (SpiritStone.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Permanent Shield: ");

@@ -131,9 +131,8 @@ namespace TooManyItems
 
         public static float CalculateExperienceMultiplier(int itemCount)
         {
-            float difficulty = (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
             float difference = maxExperienceMultiplierAsPercent - minExperienceMultiplierAsPercent;
-            float multiplier = minExperienceMultiplierAsPercent + difference * difficulty;
+            float multiplier = minExperienceMultiplierAsPercent + difference * Utils.getDifficultyAsPercentage();
 
             return multiplier * (1 + extraStacksMultiplierPercent * (itemCount - 1));
         }
@@ -145,7 +144,7 @@ namespace TooManyItems
             LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
 
             string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}% to {maxExperienceMultiplierPerStack.Value}% " +
-                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its max health</style> as bonus experience, <style=cShrine>scaling with difficulty.</style>";
+                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its max health</style> as bonus experience, <style=cShrine>scaling with difficulty</style>.";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
             string lore = "";

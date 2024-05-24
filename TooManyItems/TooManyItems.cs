@@ -109,10 +109,14 @@ namespace TooManyItems
             // Equipment
             if (BuffTotem.isEnabled.Value)
                 BuffTotem.Init();
-            if (TatteredScroll.isEnabled.Value)
-                TatteredScroll.Init();
             if (Chalice.isEnabled.Value)
                 Chalice.Init();
+            if (TalismanEquipment.isEnabled.Value)
+                TalismanEquipment.Init();
+                TalismanItem.Init();
+            if (TatteredScroll.isEnabled.Value)
+                TatteredScroll.Init();
+
 
             Log.Message("Finished initializations.");
         }

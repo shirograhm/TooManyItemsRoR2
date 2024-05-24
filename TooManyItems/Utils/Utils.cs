@@ -19,6 +19,11 @@ namespace TooManyItems
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
         }
 
+        public static float getDifficultyAsPercentage()
+        {
+            return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
+        }
+
         public static float GetChanceAfterLuck(float percent, int luck)
         {
             return 1f - Mathf.Pow(1f - percent, luck + 1);
