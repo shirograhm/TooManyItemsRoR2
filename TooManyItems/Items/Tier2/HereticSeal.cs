@@ -89,9 +89,9 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1
-                        if (sender.healthComponent.combinedHealthFraction < 1)
+                        if (sender.healthComponent.combinedHealthFraction < 1f)
                         {
-                            args.damageMultAdd += count * damagePerMissing.Value * (1 - sender.healthComponent.combinedHealthFraction);
+                            args.damageMultAdd += count * damagePerMissing.Value * (1f - sender.healthComponent.combinedHealthFraction);
                         }
                     }
                 }
