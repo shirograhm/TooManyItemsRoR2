@@ -157,9 +157,25 @@ namespace TooManyItems
                         var component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
 
-                        args.healthMultAdd -= 1 - Utils.GetExponentialStacking(1 - maxHealthLostPercent, itemCount);
+                        args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
                     }
                 }
+            };
+
+            On.RoR2.HealthComponent.GetHealthBarValues += (orig, self) =>
+            {
+                HealthComponent.HealthBarValues values = orig(self);
+                if (self.body && self.body.inventory)
+                {
+                    int count = self.body.inventory.GetItemCount(itemDef);
+                    if (count > 0)
+                    {
+                        values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, count);
+                        values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
+                        values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
+                    }
+                }
+                return values;
             };
 
             On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
