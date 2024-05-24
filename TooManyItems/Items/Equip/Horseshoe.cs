@@ -186,10 +186,18 @@ namespace TooManyItems
                 {
                     if (self.GetEquipmentIndex() != equipmentDef.equipmentIndex)
                     {
-                        if(self.GetItemCount(HorseshoeHelperItem.itemDef) > 0)
+                        // Remove stacks of horseshoe helper item if wrong equip
+                        if (self.GetItemCount(HorseshoeHelperItem.itemDef) > 0)
                         {
-                            // Remove stacks of horseshoe helper item if still present
                             self.RemoveItem(HorseshoeHelperItem.itemDef);
+                        }
+                    }
+                    else
+                    {
+                        // Give a stack if equipped and stack does not yet exist
+                        if (self.GetItemCount(HorseshoeHelperItem.itemDef) == 0)
+                        {
+                            self.GiveItem(HorseshoeHelperItem.itemDef);
                         }
                     }
                 }
@@ -210,10 +218,6 @@ namespace TooManyItems
             CharacterBody body = slot.characterBody;
             if (body && body.inventory)
             {
-                int count = body.inventory.GetItemCount(HorseshoeHelperItem.itemDef);
-                if (count == 0)
-                    body.inventory.GiveItem(HorseshoeHelperItem.itemDef);
-             
                 HorseshoeHelperItem.Reroll(body.inventory, body);
             }
 

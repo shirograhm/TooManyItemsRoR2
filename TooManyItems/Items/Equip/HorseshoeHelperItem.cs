@@ -86,6 +86,11 @@ namespace TooManyItems
 
         public static void Reroll(Inventory inventory, CharacterBody body)
         {
+            if (inventory.GetItemCount(itemDef) == 0 && body.equipmentSlot.equipmentIndex == Horseshoe.equipmentDef.equipmentIndex)
+            {
+                body.inventory.GiveItem(itemDef);
+            }
+
             var component = inventory.GetComponent<HorseshoeStatistics>();
             if (component)
             {
@@ -95,7 +100,7 @@ namespace TooManyItems
                 while (pointsRemaining > 0)
                 {
                     float randomPoints;
-                    float step = 1.8f;
+                    float step = 2.3f;
                     if (pointsRemaining > step)
                         randomPoints = Random.Range(0, step * 2);
                     else
@@ -156,7 +161,7 @@ namespace TooManyItems
             {
                 orig(self);
 
-                if (self && self.inventory && self.inventory.GetItemCount(itemDef) > 0)
+                if (self && self.inventory)
                 {
                     Reroll(self.inventory, self);
                 }
