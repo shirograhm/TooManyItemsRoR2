@@ -91,7 +91,11 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        args.damageMultAdd += count * damagePerMissing.Value * (1 - sender.healthComponent.combinedHealthFraction);
+                        // Make sure this calculation only runs when healthFraction is below 1, not above 1
+                        if (sender.healthComponent.combinedHealthFraction < 1)
+                        {
+                            args.damageMultAdd += count * damagePerMissing.Value * (1 - sender.healthComponent.combinedHealthFraction);
+                        }
                     }
                 }
             };
