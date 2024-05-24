@@ -539,34 +539,34 @@ namespace TooManyItems
                 if (Horseshoe.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("<style=cIsDamage>Base Damage:</style> ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.descriptions.Add("<style=cIsDamage>Attack Speed:</style> ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("<style=cIsDamage>Crit Chance:</style> ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("<style=cIsDamage>Crit Damage:</style> ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("<style=cEvent>Armor:</style> ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Event);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.descriptions.Add("<style=cIsHealing>Regeneration:</style> ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
-                    stats.descriptions.Add("<style=cIsHealth>Health:</style> ");
+                    stats.descriptions.Add("Health: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
-                    stats.descriptions.Add("<style=cIsUtility>Shield:</style> ");
+                    stats.descriptions.Add("Base Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.descriptions.Add("Attack Speed: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Crit Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Crit Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Armor: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Event);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.descriptions.Add("Regeneration: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
+                    stats.descriptions.Add("Shield: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
-                    stats.descriptions.Add("<style=cIsUtility>Movement Speed:</style> ");
+                    stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("<style=cIsUtility>Cooldown Reduction:</style> ");
+                    stats.descriptions.Add("Cooldown Reduction: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
@@ -577,13 +577,13 @@ namespace TooManyItems
                         var component = master.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
+                            values.Add(component.MaxHealthBonus);
                             values.Add(component.BaseDamageBonus);
                             values.Add(component.AttackSpeedPercentBonus);
                             values.Add(component.CritChanceBonus / 100f);
                             values.Add(component.CritDamageBonus);
                             values.Add(component.ArmorBonus);
                             values.Add(component.RegenerationBonus);
-                            values.Add(component.MaxHealthBonus);
                             values.Add(component.ShieldBonus);
                             values.Add(component.MoveSpeedPercentBonus);
                             values.Add(component.CooldownReductionBonus);
