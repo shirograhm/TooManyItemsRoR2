@@ -134,10 +134,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "CARVING_BLADE_DESCRIPTION";
             itemDef.loreToken = "CARVING_BLADE_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Lunar;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("CarvingBlade.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("CarvingBlade.prefab");

@@ -144,10 +144,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "RUSTED_TROWEL_DESCRIPTION";
             itemDef.loreToken = "RUSTED_TROWEL_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("RustedTrowel.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");

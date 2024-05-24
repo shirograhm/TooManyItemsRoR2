@@ -56,11 +56,8 @@ namespace TooManyItems
             itemDef.pickupToken = "ABACUS_PICKUP";
             itemDef.descriptionToken = "ABACUS_DESCRIPTION";
             itemDef.loreToken = "ABACUS_LORE";
-
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
-            });
+            
+            Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Abacus.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Abacus.prefab");

@@ -52,10 +52,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "GLASS_MARBLES_DESCRIPTION";
             itemDef.loreToken = "GLASS_MARBLES_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("GlassMarbles.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("GlassMarbles.prefab");

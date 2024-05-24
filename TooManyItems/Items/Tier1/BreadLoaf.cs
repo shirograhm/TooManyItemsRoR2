@@ -54,10 +54,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "BREAD_LOAF_DESCRIPTION";
             itemDef.loreToken = "BREAD_LOAF_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BreadLoaf.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BreadLoaf.prefab");

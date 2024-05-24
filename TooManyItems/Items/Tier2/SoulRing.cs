@@ -127,10 +127,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "SOUL_RING_DESCRIPTION";
             itemDef.loreToken = "SOUL_RING_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier2;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("SoulRing.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("SoulRing.prefab");

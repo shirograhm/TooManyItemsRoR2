@@ -133,10 +133,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "IRON_HEART_DESCRIPTION";
             itemDef.loreToken = "IRON_HEART_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("IronHeart.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("IronHeart.prefab");

@@ -52,10 +52,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "RUBBER_DUCKY_DESCRIPTION";
             itemDef.loreToken = "RUBBER_DUCKY_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("RubberDucky.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("RubberDucky.prefab");

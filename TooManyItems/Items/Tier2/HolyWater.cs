@@ -79,10 +79,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "HOLY_WATER_DESCRIPTION";
             itemDef.loreToken = "HOLY_WATER_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier2;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HolyWater.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HolyWater.prefab");

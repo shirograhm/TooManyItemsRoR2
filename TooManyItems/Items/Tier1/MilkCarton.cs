@@ -53,10 +53,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "MILK_CARTON_DESCRIPTION";
             itemDef.loreToken = "MILK_CARTON_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("MilkCarton.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("MilkCarton.prefab");

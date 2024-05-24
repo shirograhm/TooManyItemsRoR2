@@ -65,10 +65,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "ANCIENT_COIN_DESCRIPTION";
             itemDef.loreToken = "ANCIENT_COIN_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Lunar;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("AncientCoin.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("AncientCoin.prefab");

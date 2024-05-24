@@ -53,10 +53,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "PAPER_PLANE_DESCRIPTION";
             itemDef.loreToken = "PAPER_PLANE_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("PaperPlane.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("PaperPlane.prefab");

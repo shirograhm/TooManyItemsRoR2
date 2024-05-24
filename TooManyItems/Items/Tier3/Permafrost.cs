@@ -69,10 +69,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "PERMAFROST_DESCRIPTION";
             itemDef.loreToken = "PERMAFROST_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Permafrost.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Permafrost.prefab");

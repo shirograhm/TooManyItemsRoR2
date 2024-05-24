@@ -52,10 +52,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "HERETIC_SEAL_DESCRIPTION";
             itemDef.loreToken = "HERETIC_SEAL_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier2;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HereticSeal.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HereticSeal.prefab");

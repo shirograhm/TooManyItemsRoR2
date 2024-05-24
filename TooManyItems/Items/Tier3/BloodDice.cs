@@ -129,10 +129,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "BLOOD_DICE_DESCRIPTION";
             itemDef.loreToken = "BLOOD_DICE_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier3;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BloodDice.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BloodDice.prefab");

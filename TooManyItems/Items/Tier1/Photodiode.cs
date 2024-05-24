@@ -80,10 +80,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "PHOTODIODE_DESCRIPTION";
             itemDef.loreToken = "PHOTODIODE_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Photodiode.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Photodiode.prefab");

@@ -78,10 +78,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "MAGNIFYING_GLASS_DESCRIPTION";
             itemDef.loreToken = "MAGNIFYING_GLASS_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier2;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("MagnifyingGlass.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("MagnifyingGlass.prefab");

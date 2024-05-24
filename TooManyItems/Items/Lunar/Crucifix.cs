@@ -73,10 +73,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "CRUCIFIX_DESCRIPTION";
             itemDef.loreToken = "CRUCIFIX_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Lunar;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("ProfaneCrucifix.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("ProfaneCrucifix.prefab");

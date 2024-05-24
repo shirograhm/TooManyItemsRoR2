@@ -54,10 +54,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "DEBIT_CARD_DESCRIPTION";
             itemDef.loreToken = "DEBIT_CARD_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("DebitCard.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("DebitCard.prefab");

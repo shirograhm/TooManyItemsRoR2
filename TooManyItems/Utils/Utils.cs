@@ -19,6 +19,23 @@ namespace TooManyItems
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
         }
 
+        public static void SetItemTier(ItemDef itemDef, ItemTier tier)
+        {
+            try
+            {
+                itemDef.deprecatedTier = tier;
+            }
+            catch
+            {
+                Log.Debug("Unable to set deprecatedTier.");
+            }
+
+            ItemTierCatalog.availability.CallWhenAvailable(() =>
+            {
+                if (itemDef) itemDef.tier = tier;
+            });
+        }
+
         public static float getDifficultyAsPercentage()
         {
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;

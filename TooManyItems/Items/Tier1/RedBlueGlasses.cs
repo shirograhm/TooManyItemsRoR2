@@ -64,10 +64,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "REDBLUE_GLASSES_DESCRIPTION";
             itemDef.loreToken = "REDBLUE_GLASSES_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Tier1;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("3DGlasses.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("3DGlasses.prefab");

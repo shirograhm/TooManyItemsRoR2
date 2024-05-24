@@ -127,10 +127,7 @@ namespace TooManyItems
             itemDef.descriptionToken = "SPIRIT_STONE_DESCRIPTION";
             itemDef.loreToken = "SPIRIT_STONE_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.Lunar;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("SpiritStone.png");
             itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
