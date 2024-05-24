@@ -8,17 +8,41 @@ namespace TooManyItems
 {
     public class HorseshoeStatistics : MonoBehaviour
     {
+        private float _maxHealthBonus;
         private float _baseDamageBonus;
         private float _attackSpeedPercentBonus;
         private float _critChanceBonus;
         private float _critDamageBonus;
         private float _armorBonus;
         private float _regenerationBonus;
-        private float _maxHealthBonus;
         private float _shieldBonus;
         private float _moveSpeedPercentBonus;
         private float _cooldownReductionBonus;
-        
+
+        public float MaxHealthBonus
+        {
+            get { return _maxHealthBonus; }
+            set
+            {
+                _maxHealthBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        value,
+                        _shieldBonus,
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
         public float BaseDamageBonus
         {
             get { return _baseDamageBonus; }
@@ -163,30 +187,6 @@ namespace TooManyItems
                 }
             }
         }
-        public float MaxHealthBonus
-        {
-            get { return _maxHealthBonus; }
-            set
-            {
-                _maxHealthBonus = value;
-                if (NetworkServer.active)
-                {
-                    new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId,
-                        _baseDamageBonus,
-                        _attackSpeedPercentBonus,
-                        _critChanceBonus,
-                        _critDamageBonus,
-                        _armorBonus,
-                        _regenerationBonus,
-                        value,
-                        _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
-                    ).Send(NetworkDestination.Clients);
-                }
-            }
-        }
         public float ShieldBonus
         {
             get { return _shieldBonus; }
@@ -263,13 +263,13 @@ namespace TooManyItems
         public class Sync : INetMessage
         {
             NetworkInstanceId objId;
+            float maxHealthBonus;
             float baseDamageBonus;
             float attackSpeedPercentBonus;
             float critChanceBonus;
             float critDamageBonus;
             float armorBonus;
             float regenerationBonus;
-            float maxHealthBonus;
             float shieldBonus;
             float moveSpeedPercentBonus;
             float cooldownReductionBonus;
@@ -278,18 +278,18 @@ namespace TooManyItems
             {
             }
 
-            public Sync(NetworkInstanceId objId, 
-                float baseDamage, float attackSpeed, float critChance, float critDamage,
-                float armor, float regen, float maxHealth, float shield, float moveSpeed, float cooldown)
+            public Sync(NetworkInstanceId objId,
+                float maxHealth, float baseDamage, float attackSpeed, float critChance, float critDamage,
+                float armor, float regen, float shield, float moveSpeed, float cooldown)
             {
                 this.objId = objId;
+                maxHealthBonus = maxHealth;
                 baseDamageBonus = baseDamage;
                 attackSpeedPercentBonus = attackSpeed;
                 critChanceBonus = critChance;
                 critDamageBonus = critDamage;
                 armorBonus = armor;
                 regenerationBonus = regen;
-                maxHealthBonus = maxHealth;
                 shieldBonus = shield;
                 moveSpeedPercentBonus = moveSpeed;
                 cooldownReductionBonus = cooldown;
@@ -298,13 +298,13 @@ namespace TooManyItems
             public void Deserialize(NetworkReader reader)
             {
                 objId = reader.ReadNetworkId();
+                maxHealthBonus = reader.ReadSingle();
                 baseDamageBonus = reader.ReadSingle();
                 attackSpeedPercentBonus = reader.ReadSingle();
                 critChanceBonus = reader.ReadSingle();
                 critDamageBonus = reader.ReadSingle();
                 armorBonus = reader.ReadSingle();
                 regenerationBonus = reader.ReadSingle();
-                maxHealthBonus = reader.ReadSingle();
                 shieldBonus = reader.ReadSingle();
                 moveSpeedPercentBonus = reader.ReadSingle();
                 cooldownReductionBonus = reader.ReadSingle();
@@ -320,13 +320,13 @@ namespace TooManyItems
                     HorseshoeStatistics component = obj.GetComponent<HorseshoeStatistics>();
                     if (component != null)
                     {
+                        component.MaxHealthBonus = maxHealthBonus;
                         component.BaseDamageBonus = baseDamageBonus;
                         component.AttackSpeedPercentBonus = attackSpeedPercentBonus;
                         component.CritChanceBonus = critChanceBonus;
                         component.CritDamageBonus = critDamageBonus;
                         component.ArmorBonus = armorBonus;
                         component.RegenerationBonus = regenerationBonus;
-                        component.MaxHealthBonus = maxHealthBonus;
                         component.ShieldBonus = shieldBonus;
                         component.MoveSpeedPercentBonus = moveSpeedPercentBonus;
                         component.CooldownReductionBonus = cooldownReductionBonus;
@@ -337,13 +337,13 @@ namespace TooManyItems
             public void Serialize(NetworkWriter writer)
             {
                 writer.Write(objId);
+                writer.Write(maxHealthBonus);
                 writer.Write(baseDamageBonus);
                 writer.Write(attackSpeedPercentBonus);
                 writer.Write(critChanceBonus);
                 writer.Write(critDamageBonus);
                 writer.Write(armorBonus);
                 writer.Write(regenerationBonus);
-                writer.Write(maxHealthBonus);
                 writer.Write(shieldBonus);
                 writer.Write(moveSpeedPercentBonus);
                 writer.Write(cooldownReductionBonus);

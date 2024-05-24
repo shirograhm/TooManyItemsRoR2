@@ -125,7 +125,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> cooldownReductionPerPoint = new(
             "Equipment: Golden Horseshoe",
             "Cooldown Reduction Per Point",
-            3.5f,
+            4f,
             "Percent cooldown reduction gained per stat point invested.",
             new List<string>()
             {
@@ -229,21 +229,20 @@ namespace TooManyItems
         {
             LanguageAPI.Add("HORSESHOE_EQUIPMENT", "Golden Horseshoe");
             LanguageAPI.Add("HORSESHOE_EQUIPMENT_NAME", "Golden Horseshoe");
-            LanguageAPI.Add("HORSESHOE_EQUIPMENT_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon <style=cIsUtility>level up</style>. Activate to <style=cWorldEvent>reroll</style> manually.");
+            LanguageAPI.Add("HORSESHOE_EQUIPMENT_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon activation or <style=cIsUtility>level up</style>.");
 
             string desc = $"Gain a random assortment of " +
+                $"<style=cIsHealth>health</style>, " +
                 $"<style=cIsDamage>base damage</style>, " +
                 $"<style=cIsDamage>attack speed</style>, " +
                 $"<style=cIsDamage>crit chance</style>, " +
                 $"<style=cIsDamage>crit damage</style>, " +
                 $"<style=cEvent>armor</style>, " +
                 $"<style=cIsHealing>regeneration</style>, " +
-                $"<style=cIsHealth>health</style>, " +
                 $"<style=cIsUtility>shield</style>, " +
                 $"<style=cIsUtility>movement speed</style>, and " +
                 $"<style=cIsUtility>cooldown reduction</style>. " +
-                $"These stats are <style=cWorldEvent>rerolled</style> upon <style=cIsUtility>level up</style>. " +
-                $"Activate to <style=cWorldEvent>reroll</style> manually.";
+                $"These stats are <style=cWorldEvent>rerolled</style> upon activation or <style=cIsUtility>level up</style>. ";
             LanguageAPI.Add("HORSESHOE_EQUIPMENT_DESCRIPTION", desc);
 
             string lore = "";

@@ -1,11 +1,7 @@
 ﻿using R2API;
 using R2API.Networking;
-using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -15,13 +11,13 @@ namespace TooManyItems
 
         public enum Bonuses
         {
-            DAMAGE, 
+            HEALTH, 
+            DAMAGE,
             ATTACK_SPEED, 
             CRIT_CHANCE, 
             CRIT_DAMAGE, 
             ARMOR,
             HEALTH_REGEN,
-            HEALTH, 
             SHIELD,
             MOVEMENT_SPEED,
             COOLDOWN_REDUCTION,
@@ -71,13 +67,13 @@ namespace TooManyItems
             var component = inventory.GetComponent<HorseshoeStatistics>();
             if (component)
             {
+                component.MaxHealthBonus = 0;
                 component.BaseDamageBonus = 0;
                 component.AttackSpeedPercentBonus = 0;
                 component.CritChanceBonus = 0;
                 component.CritDamageBonus = 0;
                 component.ArmorBonus = 0;
                 component.RegenerationBonus = 0;
-                component.MaxHealthBonus = 0;
                 component.ShieldBonus = 0;
                 component.MoveSpeedPercentBonus = 0;
                 component.CooldownReductionBonus = 0;
@@ -96,11 +92,11 @@ namespace TooManyItems
             {
                 ClearStats(inventory);
 
-                float pointsRemaining = Horseshoe.totalPointsCap.Value * ((body.level + 5) / 6f);
+                float pointsRemaining = Horseshoe.totalPointsCap.Value * ((body.level + 3f) / 4f);
                 while (pointsRemaining > 0)
                 {
                     float randomPoints;
-                    float step = 2.3f;
+                    float step = 3.3f;
                     if (pointsRemaining > step)
                         randomPoints = Random.Range(0, step * 2);
                     else
@@ -109,6 +105,9 @@ namespace TooManyItems
                     Bonuses chosenStat = (Bonuses)Random.Range(0, (int)Bonuses.NUM_STATS);
                     switch (chosenStat)
                     {
+                        case Bonuses.HEALTH:
+                            component.MaxHealthBonus += randomPoints * Horseshoe.healthPerPoint.Value;
+                            break;
                         case Bonuses.DAMAGE:
                             component.BaseDamageBonus += randomPoints * Horseshoe.damagePerPoint.Value;
                             break;
@@ -126,9 +125,6 @@ namespace TooManyItems
                             break;
                         case Bonuses.HEALTH_REGEN:
                             component.RegenerationBonus += randomPoints * Horseshoe.regenPerPoint.Value;
-                            break;
-                        case Bonuses.HEALTH:
-                            component.MaxHealthBonus += randomPoints * Horseshoe.healthPerPoint.Value;
                             break;
                         case Bonuses.SHIELD:
                             component.ShieldBonus += randomPoints * Horseshoe.shieldPerPoint.Value;
@@ -177,13 +173,13 @@ namespace TooManyItems
                         var component = sender.inventory.GetComponent<HorseshoeStatistics>();
                         if(component)
                         {
+                            args.baseHealthAdd += component.MaxHealthBonus;
                             args.baseDamageAdd += component.BaseDamageBonus;
                             args.attackSpeedMultAdd += component.AttackSpeedPercentBonus;
                             args.critAdd += component.CritChanceBonus;
                             args.critDamageMultAdd += component.CritDamageBonus;
                             args.armorAdd += component.ArmorBonus;
                             args.baseRegenAdd += component.RegenerationBonus;
-                            args.baseHealthAdd += component.MaxHealthBonus;
                             args.baseShieldAdd += component.ShieldBonus;
                             args.moveSpeedMultAdd += component.MoveSpeedPercentBonus;
                             args.cooldownMultAdd -= component.CooldownReductionBonus;
