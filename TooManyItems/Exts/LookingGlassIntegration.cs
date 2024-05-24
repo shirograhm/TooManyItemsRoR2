@@ -534,6 +534,72 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("SPIRIT_STONE"), stats);
                 }
+
+                // Talisman
+                if (TalismanEquipment.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Base Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.descriptions.Add("Attack Speed: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Movement Speed: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Crit Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Crit Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Max Health: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.descriptions.Add("Regeneration: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
+                    stats.descriptions.Add("Shield: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.descriptions.Add("Armor: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Event);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        if (!master || !master.inventory) return new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        
+                        var values = new List<float> { };
+                        var component = master.inventory.GetComponent<TalismanStatistics>();
+                        if (component)
+                        {
+                            values.Add(component.BaseDamageBonus);
+                            values.Add(component.AttackSpeedPercentBonus);
+                            values.Add(component.MoveSpeedPercentBonus);
+                            values.Add(component.CritChanceBonus / 100f);
+                            values.Add(component.CritDamageBonus);
+                            values.Add(component.MaxHealthBonus);
+                            values.Add(component.RegenerationBonus);
+                            values.Add(component.ShieldBonus);
+                            values.Add(component.ArmorBonus);
+                        }
+                        else
+                        {
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                            values.Add(0f);
+                        }
+                        return values;
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("TALISMAN_ITEM"), stats);
+                }
             }
         }
     }
