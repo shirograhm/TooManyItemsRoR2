@@ -45,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
             "Equipment: Golden Horseshoe",
             "Attack Speed Per Point",
-            3f,
+            5f,
             "Percent attack speed gained per stat point invested.",
             new List<string>()
             {
@@ -55,7 +55,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> moveSpeedPerPoint = new(
             "Equipment: Golden Horseshoe",
             "Move Speed Per Point",
-            3f,
+            4f,
             "Percent movement speed gained per stat point invested.",
             new List<string>()
             {
@@ -65,7 +65,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critChancePerPoint = new(
             "Equipment: Golden Horseshoe",
             "Crit Chance Per Point",
-            1f,
+            3f,
             "Percent crit chance gained per stat point invested.",
             new List<string>()
             {
@@ -75,7 +75,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Equipment: Golden Horseshoe",
             "Crit Damage Per Point",
-            4f,
+            5f,
             "Percent crit damage gained per stat point invested.",
             new List<string>()
             {
@@ -85,7 +85,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthPerPoint = new(
             "Equipment: Golden Horseshoe",
             "Health Per Point",
-            12f,
+            8f,
             "Max health gained per stat point invested.",
             new List<string>()
             {
@@ -95,7 +95,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Equipment: Golden Horseshoe",
             "Regeneration Per Point",
-            0.8f,
+            0.7f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {

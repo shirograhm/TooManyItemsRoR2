@@ -52,15 +52,10 @@ namespace TooManyItems
             itemDef.descriptionToken = "HORSESHOE_ITEM_DESCRIPTION";
             itemDef.loreToken = "HORSESHOE_ITEM_LORE";
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = ItemTier.NoTier;
-            });
+            Utils.SetItemTier(itemDef, ItemTier.NoTier);
 
             itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HorseshoeItem.png");
-            itemDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
             itemDef.canRemove = false;
-            itemDef.hidden = false;
 
             itemDef.tags = new ItemTag[]
             {
@@ -78,13 +73,14 @@ namespace TooManyItems
             {
                 component.BaseDamageBonus = 0;
                 component.AttackSpeedPercentBonus = 0;
-                component.MoveSpeedPercentBonus = 0;
                 component.CritChanceBonus = 0;
                 component.CritDamageBonus = 0;
-                component.MaxHealthBonus = 0;
-                component.RegenerationBonus = 0;
-                component.ShieldBonus = 0;
                 component.ArmorBonus = 0;
+                component.RegenerationBonus = 0;
+                component.MaxHealthBonus = 0;
+                component.ShieldBonus = 0;
+                component.MoveSpeedPercentBonus = 0;
+                component.CooldownReductionBonus = 0;
             }
         }
 
@@ -99,7 +95,7 @@ namespace TooManyItems
                 while (pointsRemaining > 0)
                 {
                     float randomPoints;
-                    float step = 3.6f;
+                    float step = 1.8f;
                     if (pointsRemaining > step)
                         randomPoints = Random.Range(0, step * 2);
                     else
