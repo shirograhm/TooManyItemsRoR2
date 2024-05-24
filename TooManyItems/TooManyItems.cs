@@ -117,7 +117,6 @@ namespace TooManyItems
             if (TatteredScroll.isEnabled.Value)
                 TatteredScroll.Init();
 
-
             Log.Message("Finished initializations.");
         }
 
@@ -125,14 +124,15 @@ namespace TooManyItems
         {
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
-                List<ItemDef.Pair> newVoidPairs = new List<ItemDef.Pair>();
-
-                // 3D Glasses => Instakill Glasses
-                newVoidPairs.Add(new ItemDef.Pair()
+                List<ItemDef.Pair> newVoidPairs = new List<ItemDef.Pair>
                 {
-                    itemDef1 = RedBlueGlasses.itemDef,
-                    itemDef2 = DLC1Content.Items.CritGlassesVoid
-                });
+                    // 3D Glasses => Instakill Glasses
+                    new ItemDef.Pair()
+                    {
+                        itemDef1 = RedBlueGlasses.itemDef,
+                        itemDef2 = DLC1Content.Items.CritGlassesVoid
+                    }
+                };
 
                 var key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
