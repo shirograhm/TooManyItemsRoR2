@@ -11,7 +11,7 @@ namespace TooManyItems
     internal class SpiritStone
     {
         public static ItemDef itemDef;
-        // Killing an enemy grants 1 (+1 per stack) permanent shield. Lose 25% (+25% per stack) max HP.
+        // Killing an enemy grants 1 (+1 per stack) permanent shield. Lose 50% (+50% per stack) max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
             "Enabled",
@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
-            25f,
+            50f,
             "Max health lost as a penalty for holding this item.",
             new List<string>()
             {
@@ -160,7 +160,7 @@ namespace TooManyItems
                         var component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
 
-                        args.healthMultAdd *= Utils.GetExponentialStacking(1 - maxHealthLostPercent, itemCount);
+                        args.healthMultAdd -= 1 - Utils.GetExponentialStacking(1 - maxHealthLostPercent, itemCount);
                     }
                 }
             };
