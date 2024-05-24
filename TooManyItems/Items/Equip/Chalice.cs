@@ -11,7 +11,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef consecratedBuff;
 
-        // Consecrate yourself and all allies. Consecrated allies gain 40% damage and 110% attack speed for 8 seconds, but lose 50% max health. (60 sec)
+        // Pay 90% of your current health to consecrate yourself and all allies. Consecrated allies gain 20% damage and 80% attack speed for 8 seconds. (60 sec)
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Chalice",
             "Enabled",
@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> consecrateDamageBonus = new(
             "Equipment: Chalice",
             "Consecrate Damage Bonus",
-            40f,
+            20f,
             "Percent bonus damage dealt while Consecrated.",
             new List<string>()
             {
@@ -45,18 +45,18 @@ namespace TooManyItems
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
             "Equipment: Chalice",
             "Consecrate Attack Speed Bonus",
-            110f,
+            80f,
             "Percent bonus attack speed gained while Consecrated.",
             new List<string>()
             {
                 "ITEM_CHALICE_DESC"
             }
         );
-        public static ConfigurableValue<float> consecrateMaxHealthLost = new(
+        public static ConfigurableValue<float> currentHealthCost = new(
             "Equipment: Chalice",
-            "Max Health Loss",
-            50f,
-            "Percent of max health lost when Consecrated.",
+            "Current Health Loss",
+            90f,
+            "Percent of current health lost as payment when Consecrated.",
             new List<string>()
             {
                 "ITEM_CHALICE_DESC"
@@ -72,6 +72,7 @@ namespace TooManyItems
                 "ITEM_CHALICE_DESC"
             }
         );
+        public static float currentHealthCostPercent = currentHealthCost.Value / 100f;
 
         internal static void Init()
         {
@@ -135,25 +136,12 @@ namespace TooManyItems
                 return orig(self, equipDef);
             };
 
-            On.RoR2.HealthComponent.GetHealthBarValues += (orig, self) =>
-            {
-                HealthComponent.HealthBarValues values = orig(self);
-                if (self.body && self.body.HasBuff(consecratedBuff))
-                {
-                    values.curseFraction += (1f - values.curseFraction) * consecrateMaxHealthLost.Value / 100f;
-                    values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
-                    values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
-                }
-                return values;
-            };
-
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender && sender.inventory)
                 {
                     if (sender.HasBuff(consecratedBuff))
                     {
-                        args.healthMultAdd -= consecrateMaxHealthLost.Value / 100f;
                         args.attackSpeedMultAdd += consecrateAttackSpeedBonus.Value / 100f;
                         args.damageMultAdd += consecrateDamageBonus.Value / 100f;
                     }
@@ -163,9 +151,23 @@ namespace TooManyItems
 
         private static bool OnUse(EquipmentSlot slot)
         {
-            // Add consecrated buff to all allies and pay max health 
-            if (slot.characterBody)
+            CharacterBody body = slot.characterBody;
+            if (body)
             {
+                DamageInfo useCost = new()
+                {
+                    damage = body.healthComponent.combinedHealth * currentHealthCostPercent,
+                    attacker = null,
+                    inflictor = null,
+                    procCoefficient = 0f,
+                    position = body.corePosition,
+                    crit = false,
+                    damageColorIndex = DamageColorIndex.Default,
+                    procChainMask = new ProcChainMask(),
+                    damageType = DamageType.Silent
+                };
+                body.healthComponent.TakeDamage(useCost);
+                
                 foreach (TeamComponent component in TeamComponent.GetTeamMembers(slot.characterBody.teamComponent.teamIndex))
                 {
                     component.body.AddTimedBuff(consecratedBuff, consecrateDuration.Value);
@@ -178,14 +180,14 @@ namespace TooManyItems
         {
             LanguageAPI.Add("CHALICE", "Chalice");
             LanguageAPI.Add("CHALICE_NAME", "Chalice");
-            LanguageAPI.Add("CHALICE_PICKUP", "Consecrate all allies for a short duration. " +
-                "Consecrated allies gain bonus damage and attack speed, but lose max health.");
+            LanguageAPI.Add("CHALICE_PICKUP", "<style=cDeath>Pay a portion of your current health</style> to grant all allies bonus damage and attack speed.");
 
-            string desc = $"Consecrate yourself and all allies. Consecrated allies gain " +
+            string desc = $"<style=cDeath>Pay {currentHealthCost.Value}% of your current health</style> to " +
+                $"<style=cWorldEvent>Consecrate</style> yourself and all allies. " +
+                $"<style=cWorldEvent>Consecrated</style> units gain " +
                 $"<style=cIsDamage>{consecrateDamageBonus.Value}%</style> damage and " +
-                $"<style=cIsUtility>{consecrateAttackSpeedBonus.Value}%</style> attack speed for " +
-                $"<style=cIsUtility>{consecrateDuration.Value} seconds</style>, " +
-                $"<style=cDeath>but lose {consecrateMaxHealthLost.Value}% max health</style>.";
+                $"<style=cIsDamage>{consecrateAttackSpeedBonus.Value}%</style> attack speed for " +
+                $"<style=cIsUtility>{consecrateDuration.Value} seconds</style>.";
             LanguageAPI.Add("CHALICE_DESCRIPTION", desc);
 
             string lore = "";
