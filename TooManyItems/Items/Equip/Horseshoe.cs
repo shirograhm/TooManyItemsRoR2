@@ -7,129 +7,139 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class TalismanEquipment
+    internal class Horseshoe
     {
         public static EquipmentDef equipmentDef;
 
         // Gain a random assortment of stat bonuses on pickup. Activate to reroll. (190 seconds)
         public static ConfigurableValue<bool> isEnabled = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> totalPointsCap = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Stat Points Cap",
             20f,
             "Max value a reroll can have. This value is scaled by your level.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> damagePerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Damage Per Point",
             0.5f,
             "Base damage gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Attack Speed Per Point",
-            4f,
+            3f,
             "Percent attack speed gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> moveSpeedPerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Move Speed Per Point",
-            4f,
+            3f,
             "Percent movement speed gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> critChancePerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Crit Chance Per Point",
-            2f,
+            1f,
             "Percent crit chance gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> critDamagePerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Crit Damage Per Point",
-            5f,
+            4f,
             "Percent crit damage gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> healthPerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Health Per Point",
             12f,
             "Max health gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> regenPerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Regeneration Per Point",
-            1.2f,
+            0.8f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> shieldPerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Shield Per Point",
-            20f,
+            12f,
             "Shield gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<float> armorPerPoint = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Armor Per Point",
-            3f,
+            2f,
             "Armor gained per stat point invested.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
+            }
+        );
+        public static ConfigurableValue<float> cooldownReductionPerPoint = new(
+            "Equipment: Golden Horseshoe",
+            "Cooldown Reduction Per Point",
+            3.5f,
+            "Percent cooldown reduction gained per stat point invested.",
+            new List<string>()
+            {
+                "ITEM_HORSESHOE_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
-            "Equipment: Talisman Equipment",
+            "Equipment: Golden Horseshoe",
             "Cooldown",
-            190,
+            160,
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_TALISMANEQUIP_DESC"
+                "ITEM_HORSESHOE_DESC"
             }
         );
 
@@ -148,14 +158,14 @@ namespace TooManyItems
         {
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
-            equipmentDef.name = "TALISMAN_EQUIPMENT";
-            equipmentDef.nameToken = "TALISMAN_EQUIPMENT_NAME";
-            equipmentDef.pickupToken = "TALISMAN_EQUIPMENT_PICKUP";
-            equipmentDef.descriptionToken = "TALISMAN_EQUIPMENT_DESCRIPTION";
-            equipmentDef.loreToken = "TALISMAN_EQUIPMENT_LORE";
+            equipmentDef.name = "HORSESHOE_EQUIPMENT";
+            equipmentDef.nameToken = "HORSESHOE_EQUIPMENT_NAME";
+            equipmentDef.pickupToken = "HORSESHOE_EQUIPMENT_PICKUP";
+            equipmentDef.descriptionToken = "HORSESHOE_EQUIPMENT_DESCRIPTION";
+            equipmentDef.loreToken = "HORSESHOE_EQUIPMENT_LORE";
 
-            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("TalismanEquipment.png");
-            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("TalismanEquipment.prefab");
+            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Horseshoe.png");
+            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Horseshoe.prefab");
 
             equipmentDef.appearsInMultiPlayer = true;
             equipmentDef.appearsInSinglePlayer = true;
@@ -170,23 +180,16 @@ namespace TooManyItems
         {
             On.RoR2.Inventory.UpdateEquipment += (orig, self) =>
             {
-                CharacterBody body = self.GetComponentInParent<CharacterBody>();
+                CharacterMaster master = self.GetComponentInParent<CharacterMaster>();
 
-                if (self && body)
+                if (self && master && master.GetBody())
                 {
-                    if (self.GetEquipmentIndex() == equipmentDef.equipmentIndex)
+                    if (self.GetEquipmentIndex() != equipmentDef.equipmentIndex)
                     {
-                        if (self.GetItemCount(TalismanItem.itemDef) == 0)
+                        if(self.GetItemCount(HorseshoeHelperItem.itemDef) > 0)
                         {
-                            self.GiveItem(TalismanItem.itemDef);
-                            TalismanItem.Reroll(self, (int) body.level);
-                        }
-                    }
-                    else
-                    {
-                        if(self.GetItemCount(TalismanItem.itemDef) > 0)
-                        {
-                            self.RemoveItem(TalismanItem.itemDef);
+                            // Remove stacks of horseshoe helper item if still present
+                            self.RemoveItem(HorseshoeHelperItem.itemDef);
                         }
                     }
                 }
@@ -207,11 +210,11 @@ namespace TooManyItems
             CharacterBody body = slot.characterBody;
             if (body && body.inventory)
             {
-                int count = body.inventory.GetItemCount(TalismanItem.itemDef);
-                if (count > 0)
-                {
-                    TalismanItem.Reroll(body.inventory, (int) body.level);
-                }
+                int count = body.inventory.GetItemCount(HorseshoeHelperItem.itemDef);
+                if (count == 0)
+                    body.inventory.GiveItem(HorseshoeHelperItem.itemDef);
+             
+                HorseshoeHelperItem.Reroll(body.inventory, body);
             }
 
             return true;
@@ -219,16 +222,27 @@ namespace TooManyItems
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("TALISMAN_EQUIPMENT", "Talisman");
-            LanguageAPI.Add("TALISMAN_EQUIPMENT_NAME", "Talisman");
-            LanguageAPI.Add("TALISMAN_EQUIPMENT_PICKUP", "Gain a random assortment of stat bonuses. Activate this equipment to reroll.");
+            LanguageAPI.Add("HORSESHOE_EQUIPMENT", "Golden Horseshoe");
+            LanguageAPI.Add("HORSESHOE_EQUIPMENT_NAME", "Golden Horseshoe");
+            LanguageAPI.Add("HORSESHOE_EQUIPMENT_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon <style=cIsUtility>level up</style>. Activate to <style=cWorldEvent>reroll</style> manually.");
 
-            string desc = $"Gain a random assortment of damage, attack speed, movement speed, crit chance, crit damage, max health, health regeneration, max shield, and armor, <style=cShrine>scaling with difficulty</style>. " +
-                $"Activate this equipment to <style=cWorldEvent>reroll</style> your stat bonuses with the current difficulty modifier.";
-            LanguageAPI.Add("TALISMAN_EQUIPMENT_DESCRIPTION", desc);
+            string desc = $"Gain a random assortment of " +
+                $"<style=cIsDamage>base damage</style>, " +
+                $"<style=cIsDamage>attack speed</style>, " +
+                $"<style=cIsDamage>crit chance</style>, " +
+                $"<style=cIsDamage>crit damage</style>, " +
+                $"<style=cEvent>armor</style>, " +
+                $"<style=cIsHealing>regeneration</style>, " +
+                $"<style=cIsHealth>max health</style>, " +
+                $"<style=cIsUtility>max shield</style>, " +
+                $"<style=cIsUtility>movement speed</style>, and " +
+                $"<style=cIsUtility>cooldown reduction</style>. " +
+                $"These stats are <style=cWorldEvent>rerolled</style> upon <style=cIsUtility>level up</style>. " +
+                $"Activate to <style=cWorldEvent>reroll</style> manually.";
+            LanguageAPI.Add("HORSESHOE_EQUIPMENT_DESCRIPTION", desc);
 
             string lore = "";
-            LanguageAPI.Add("TALISMAN_EQUIPMENT_LORE", lore);
+            LanguageAPI.Add("HORSESHOE_EQUIPMENT_LORE", lore);
         }
     }
 }

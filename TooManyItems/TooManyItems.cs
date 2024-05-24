@@ -111,9 +111,9 @@ namespace TooManyItems
                 BuffTotem.Init();
             if (Chalice.isEnabled.Value)
                 Chalice.Init();
-            if (TalismanEquipment.isEnabled.Value)
-                TalismanEquipment.Init();
-                TalismanItem.Init();
+            if (Horseshoe.isEnabled.Value)
+                Horseshoe.Init();
+                HorseshoeHelperItem.Init();
             if (TatteredScroll.isEnabled.Value)
                 TatteredScroll.Init();
 

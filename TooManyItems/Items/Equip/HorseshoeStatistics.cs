@@ -6,17 +6,18 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    public class TalismanStatistics : MonoBehaviour
+    public class HorseshoeStatistics : MonoBehaviour
     {
         private float _baseDamageBonus;
         private float _attackSpeedPercentBonus;
-        private float _moveSpeedPercentBonus;
         private float _critChanceBonus;
         private float _critDamageBonus;
-        private float _maxHealthBonus;
-        private float _regenerationBonus;
-        private float _shieldBonus;
         private float _armorBonus;
+        private float _regenerationBonus;
+        private float _maxHealthBonus;
+        private float _shieldBonus;
+        private float _moveSpeedPercentBonus;
+        private float _cooldownReductionBonus;
         
         public float BaseDamageBonus
         {
@@ -27,16 +28,17 @@ namespace TooManyItems
                 if (NetworkServer.active)
                 {
                     new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId, 
-                        value, 
-                        _attackSpeedPercentBonus, 
-                        _moveSpeedPercentBonus, 
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        value,
+                        _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
-                        _maxHealthBonus,
+                        _armorBonus,
                         _regenerationBonus,
+                        _maxHealthBonus,
                         _shieldBonus,
-                        _armorBonus
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -53,36 +55,14 @@ namespace TooManyItems
                         gameObject.GetComponent<NetworkIdentity>().netId,
                         _baseDamageBonus,
                         value,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        _maxHealthBonus,
+                        _shieldBonus,
                         _moveSpeedPercentBonus,
-                        _critChanceBonus,
-                        _critDamageBonus,
-                        _maxHealthBonus,
-                        _regenerationBonus,
-                        _shieldBonus,
-                        _armorBonus
-                    ).Send(NetworkDestination.Clients);
-                }
-            }
-        }
-        public float MoveSpeedPercentBonus
-        {
-            get { return _moveSpeedPercentBonus; }
-            set
-            {
-                _moveSpeedPercentBonus = value;
-                if (NetworkServer.active)
-                {
-                    new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId,
-                        _baseDamageBonus,
-                        _attackSpeedPercentBonus,
-                        value,
-                        _critChanceBonus,
-                        _critDamageBonus,
-                        _maxHealthBonus,
-                        _regenerationBonus,
-                        _shieldBonus,
-                        _armorBonus
+                        _cooldownReductionBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -99,13 +79,14 @@ namespace TooManyItems
                         gameObject.GetComponent<NetworkIdentity>().netId,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
-                        _moveSpeedPercentBonus,
                         value,
                         _critDamageBonus,
-                        _maxHealthBonus,
+                        _armorBonus,
                         _regenerationBonus,
+                        _maxHealthBonus,
                         _shieldBonus,
-                        _armorBonus
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -122,82 +103,14 @@ namespace TooManyItems
                         gameObject.GetComponent<NetworkIdentity>().netId,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
-                        _moveSpeedPercentBonus,
                         _critChanceBonus,
                         value,
-                        _maxHealthBonus,
+                        _armorBonus,
                         _regenerationBonus,
-                        _shieldBonus,
-                        _armorBonus
-                    ).Send(NetworkDestination.Clients);
-                }
-            }
-        }
-        public float MaxHealthBonus
-        {
-            get { return _maxHealthBonus; }
-            set
-            {
-                _maxHealthBonus = value;
-                if (NetworkServer.active)
-                {
-                    new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId,
-                        _baseDamageBonus,
-                        _attackSpeedPercentBonus,
-                        _moveSpeedPercentBonus,
-                        _critChanceBonus,
-                        _critDamageBonus,
-                        value,
-                        _regenerationBonus,
-                        _shieldBonus,
-                        _armorBonus
-                    ).Send(NetworkDestination.Clients);
-                }
-            }
-        }
-        public float RegenerationBonus
-        {
-            get { return _regenerationBonus; }
-            set
-            {
-                _regenerationBonus = value;
-                if (NetworkServer.active)
-                {
-                    new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId,
-                        _baseDamageBonus,
-                        _attackSpeedPercentBonus,
-                        _moveSpeedPercentBonus,
-                        _critChanceBonus,
-                        _critDamageBonus,
                         _maxHealthBonus,
-                        value,
                         _shieldBonus,
-                        _armorBonus
-                    ).Send(NetworkDestination.Clients);
-                }
-            }
-        }
-        public float ShieldBonus
-        {
-            get { return _shieldBonus; }
-            set
-            {
-                _shieldBonus = value;
-                if (NetworkServer.active)
-                {
-                    new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId,
-                        _baseDamageBonus,
-                        _attackSpeedPercentBonus,
                         _moveSpeedPercentBonus,
-                        _critChanceBonus,
-                        _critDamageBonus,
-                        _maxHealthBonus,
-                        _regenerationBonus,
-                        value,
-                        _armorBonus
+                        _cooldownReductionBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -214,12 +127,133 @@ namespace TooManyItems
                         gameObject.GetComponent<NetworkIdentity>().netId,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
-                        _moveSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
-                        _maxHealthBonus,
+                        value,
                         _regenerationBonus,
+                        _maxHealthBonus,
                         _shieldBonus,
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
+        public float RegenerationBonus
+        {
+            get { return _regenerationBonus; }
+            set
+            {
+                _regenerationBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        value,
+                        _maxHealthBonus,
+                        _shieldBonus,
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
+        public float MaxHealthBonus
+        {
+            get { return _maxHealthBonus; }
+            set
+            {
+                _maxHealthBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        value,
+                        _shieldBonus,
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
+        public float ShieldBonus
+        {
+            get { return _shieldBonus; }
+            set
+            {
+                _shieldBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        _maxHealthBonus,
+                        value,
+                        _moveSpeedPercentBonus,
+                        _cooldownReductionBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
+        public float MoveSpeedPercentBonus
+        {
+            get { return _moveSpeedPercentBonus; }
+            set
+            {
+                _moveSpeedPercentBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        _maxHealthBonus,
+                        _shieldBonus,
+                        value,
+                        _cooldownReductionBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
+        public float CooldownReductionBonus
+        {
+            get { return _cooldownReductionBonus; }
+            set
+            {
+                _cooldownReductionBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        _maxHealthBonus,
+                        _shieldBonus,
+                        _moveSpeedPercentBonus,
                         value
                     ).Send(NetworkDestination.Clients);
                 }
@@ -231,30 +265,34 @@ namespace TooManyItems
             NetworkInstanceId objId;
             float baseDamageBonus;
             float attackSpeedPercentBonus;
-            float moveSpeedPercentBonus;
             float critChanceBonus;
             float critDamageBonus;
-            float maxHealthBonus;
-            float regenerationBonus;
-            float shieldBonus;
             float armorBonus;
+            float regenerationBonus;
+            float maxHealthBonus;
+            float shieldBonus;
+            float moveSpeedPercentBonus;
+            float cooldownReductionBonus;
 
             public Sync()
             {
             }
 
-            public Sync(NetworkInstanceId objId, float baseDamage, float attackSpeed, float moveSpeed, float critChance, float critDamage, float maxHealth, float regen, float shield, float armor)
+            public Sync(NetworkInstanceId objId, 
+                float baseDamage, float attackSpeed, float critChance, float critDamage,
+                float armor, float regen, float maxHealth, float shield, float moveSpeed, float cooldown)
             {
                 this.objId = objId;
                 baseDamageBonus = baseDamage;
                 attackSpeedPercentBonus = attackSpeed;
-                moveSpeedPercentBonus = moveSpeed;
                 critChanceBonus = critChance;
                 critDamageBonus = critDamage;
-                maxHealthBonus = maxHealth;
-                regenerationBonus = regen;
-                shieldBonus = shield;
                 armorBonus = armor;
+                regenerationBonus = regen;
+                maxHealthBonus = maxHealth;
+                shieldBonus = shield;
+                moveSpeedPercentBonus = moveSpeed;
+                cooldownReductionBonus = cooldown;
             }
 
             public void Deserialize(NetworkReader reader)
@@ -262,13 +300,14 @@ namespace TooManyItems
                 objId = reader.ReadNetworkId();
                 baseDamageBonus = reader.ReadSingle();
                 attackSpeedPercentBonus = reader.ReadSingle();
-                moveSpeedPercentBonus = reader.ReadSingle();
                 critChanceBonus = reader.ReadSingle();
                 critDamageBonus = reader.ReadSingle();
-                maxHealthBonus = reader.ReadSingle();
-                regenerationBonus = reader.ReadSingle();
-                shieldBonus = reader.ReadSingle();
                 armorBonus = reader.ReadSingle();
+                regenerationBonus = reader.ReadSingle();
+                maxHealthBonus = reader.ReadSingle();
+                shieldBonus = reader.ReadSingle();
+                moveSpeedPercentBonus = reader.ReadSingle();
+                cooldownReductionBonus = reader.ReadSingle();
             }
 
             public void OnReceived()
@@ -278,18 +317,19 @@ namespace TooManyItems
                 GameObject obj = Util.FindNetworkObject(objId);
                 if (obj != null)
                 {
-                    TalismanStatistics component = obj.GetComponent<TalismanStatistics>();
+                    HorseshoeStatistics component = obj.GetComponent<HorseshoeStatistics>();
                     if (component != null)
                     {
                         component.BaseDamageBonus = baseDamageBonus;
                         component.AttackSpeedPercentBonus = attackSpeedPercentBonus;
-                        component.MoveSpeedPercentBonus = moveSpeedPercentBonus;
                         component.CritChanceBonus = critChanceBonus;
                         component.CritDamageBonus = critDamageBonus;
-                        component.MaxHealthBonus = maxHealthBonus;
-                        component.RegenerationBonus = regenerationBonus;
-                        component.ShieldBonus = shieldBonus;
                         component.ArmorBonus = armorBonus;
+                        component.RegenerationBonus = regenerationBonus;
+                        component.MaxHealthBonus = maxHealthBonus;
+                        component.ShieldBonus = shieldBonus;
+                        component.MoveSpeedPercentBonus = moveSpeedPercentBonus;
+                        component.CooldownReductionBonus = cooldownReductionBonus;
                     }
                 }
             }
@@ -299,13 +339,14 @@ namespace TooManyItems
                 writer.Write(objId);
                 writer.Write(baseDamageBonus);
                 writer.Write(attackSpeedPercentBonus);
-                writer.Write(moveSpeedPercentBonus);
                 writer.Write(critChanceBonus);
                 writer.Write(critDamageBonus);
-                writer.Write(maxHealthBonus);
-                writer.Write(regenerationBonus);
-                writer.Write(shieldBonus);
                 writer.Write(armorBonus);
+                writer.Write(regenerationBonus);
+                writer.Write(maxHealthBonus);
+                writer.Write(shieldBonus);
+                writer.Write(moveSpeedPercentBonus);
+                writer.Write(cooldownReductionBonus);
             }
         }
     }

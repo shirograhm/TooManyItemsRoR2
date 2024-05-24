@@ -535,54 +535,58 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("SPIRIT_STONE"), stats);
                 }
 
-                // Talisman
-                if (TalismanEquipment.isEnabled.Value)
+                // Horseshoe
+                if (Horseshoe.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Base Damage: ");
+                    stats.descriptions.Add("<style=cIsDamage>Base Damage:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.descriptions.Add("Attack Speed: ");
+                    stats.descriptions.Add("<style=cIsDamage>Attack Speed:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Movement Speed: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Crit Chance: ");
+                    stats.descriptions.Add("<style=cIsDamage>Crit Chance:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Crit Damage: ");
+                    stats.descriptions.Add("<style=cIsDamage>Crit Damage:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Max Health: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
-                    stats.descriptions.Add("Regeneration: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
-                    stats.descriptions.Add("Shield: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
-                    stats.descriptions.Add("Armor: ");
+                    stats.descriptions.Add("<style=cEvent>Armor:</style> ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Event);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.descriptions.Add("<style=cIsHealing>Regeneration:</style> ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
+                    stats.descriptions.Add("<style=cIsHealth>Max Health:</style> ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.descriptions.Add("<style=cIsUtility>Shield:</style> ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.descriptions.Add("<style=cIsUtility>Movement Speed:</style> ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("<style=cIsUtility>Cooldown Reduction:</style> ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        if (!master || !master.inventory) return new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        if (!master || !master.inventory) return new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
                         
                         var values = new List<float> { };
-                        var component = master.inventory.GetComponent<TalismanStatistics>();
+                        var component = master.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
                             values.Add(component.BaseDamageBonus);
                             values.Add(component.AttackSpeedPercentBonus);
-                            values.Add(component.MoveSpeedPercentBonus);
                             values.Add(component.CritChanceBonus / 100f);
                             values.Add(component.CritDamageBonus);
-                            values.Add(component.MaxHealthBonus);
-                            values.Add(component.RegenerationBonus);
-                            values.Add(component.ShieldBonus);
                             values.Add(component.ArmorBonus);
+                            values.Add(component.RegenerationBonus);
+                            values.Add(component.MaxHealthBonus);
+                            values.Add(component.ShieldBonus);
+                            values.Add(component.MoveSpeedPercentBonus);
+                            values.Add(component.CooldownReductionBonus);
                         }
                         else
                         {
@@ -595,10 +599,11 @@ namespace TooManyItems
                             values.Add(0f);
                             values.Add(0f);
                             values.Add(0f);
+                            values.Add(0f);
                         }
                         return values;
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("TALISMAN_ITEM"), stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("HORSESHOE_ITEM"), stats);
                 }
             }
         }

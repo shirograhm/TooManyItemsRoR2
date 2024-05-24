@@ -4,17 +4,27 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class TalismanItem
+    internal class HorseshoeHelperItem
     {
         public static ItemDef itemDef;
 
         public enum Bonuses
         {
-            DAMAGE, ATTACK_SPEED, MOVEMENT_SPEED, CRIT_CHANCE, CRIT_DAMAGE, HEALTH, HEALTH_REGEN, SHIELD, ARMOR,
+            DAMAGE, 
+            ATTACK_SPEED, 
+            CRIT_CHANCE, 
+            CRIT_DAMAGE, 
+            ARMOR,
+            HEALTH_REGEN,
+            HEALTH, 
+            SHIELD,
+            MOVEMENT_SPEED,
+            COOLDOWN_REDUCTION,
 
             NUM_STATS
         }
@@ -27,7 +37,7 @@ namespace TooManyItems
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
-            NetworkingAPI.RegisterMessageType<TalismanStatistics.Sync>();
+            NetworkingAPI.RegisterMessageType<HorseshoeStatistics.Sync>();
 
             Hooks();
         }
@@ -36,32 +46,34 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "TALISMAN_ITEM";
-            itemDef.nameToken = "TALISMAN_ITEM_NAME";
-            itemDef.pickupToken = "TALISMAN_ITEM_PICKUP";
-            itemDef.descriptionToken = "TALISMAN_ITEM_DESCRIPTION";
-            itemDef.loreToken = "TALISMAN_ITEM_LORE";
+            itemDef.name = "HORSESHOE_ITEM";
+            itemDef.nameToken = "HORSESHOE_ITEM_NAME";
+            itemDef.pickupToken = "HORSESHOE_ITEM_PICKUP";
+            itemDef.descriptionToken = "HORSESHOE_ITEM_DESCRIPTION";
+            itemDef.loreToken = "HORSESHOE_ITEM_LORE";
 
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = ItemTier.NoTier;
             });
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("TalismanItem.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("TalismanItem.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HorseshoeItem.png");
+            itemDef.pickupModelPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/Mystery/PickupMystery.prefab").WaitForCompletion();
             itemDef.canRemove = false;
             itemDef.hidden = false;
 
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.AIBlacklist,
-                ItemTag.EquipmentRelated
+                ItemTag.CannotDuplicate,
+                ItemTag.CannotSteal,
+                ItemTag.CannotCopy
             };
         }
 
         public static void ClearStats(Inventory inventory)
         {
-            var component = inventory.GetComponent<TalismanStatistics>();
+            var component = inventory.GetComponent<HorseshoeStatistics>();
             if (component)
             {
                 component.BaseDamageBonus = 0;
@@ -76,19 +88,20 @@ namespace TooManyItems
             }
         }
 
-        public static void Reroll(Inventory inventory, int level)
+        public static void Reroll(Inventory inventory, CharacterBody body)
         {
-            var component = inventory.GetComponent<TalismanStatistics>();
+            var component = inventory.GetComponent<HorseshoeStatistics>();
             if (component)
             {
                 ClearStats(inventory);
 
-                float pointsRemaining = TalismanEquipment.totalPointsCap.Value * ((level + 3) / 4f);
+                float pointsRemaining = Horseshoe.totalPointsCap.Value * ((body.level + 5) / 6f);
                 while (pointsRemaining > 0)
                 {
                     float randomPoints;
-                    if (pointsRemaining > 2)
-                        randomPoints = Random.Range(0f, 4f);
+                    float step = 3.6f;
+                    if (pointsRemaining > step)
+                        randomPoints = Random.Range(0, step * 2);
                     else
                         randomPoints = pointsRemaining;
 
@@ -96,31 +109,34 @@ namespace TooManyItems
                     switch (chosenStat)
                     {
                         case Bonuses.DAMAGE:
-                            component.BaseDamageBonus += randomPoints * TalismanEquipment.damagePerPoint.Value;
+                            component.BaseDamageBonus += randomPoints * Horseshoe.damagePerPoint.Value;
                             break;
                         case Bonuses.ATTACK_SPEED:
-                            component.AttackSpeedPercentBonus += randomPoints * TalismanEquipment.attackSpeedPerPoint.Value / 100f;
-                            break;
-                        case Bonuses.MOVEMENT_SPEED:
-                            component.MoveSpeedPercentBonus += randomPoints * TalismanEquipment.moveSpeedPerPoint.Value / 100f;
+                            component.AttackSpeedPercentBonus += randomPoints * Horseshoe.attackSpeedPerPoint.Value / 100f;
                             break;
                         case Bonuses.CRIT_CHANCE:
-                            component.CritChanceBonus += randomPoints * TalismanEquipment.critChancePerPoint.Value;
+                            component.CritChanceBonus += randomPoints * Horseshoe.critChancePerPoint.Value;
                             break;
                         case Bonuses.CRIT_DAMAGE:
-                            component.CritDamageBonus += randomPoints * TalismanEquipment.critDamagePerPoint.Value / 100f;
-                            break;
-                        case Bonuses.HEALTH:
-                            component.MaxHealthBonus += randomPoints * TalismanEquipment.healthPerPoint.Value;
-                            break;
-                        case Bonuses.HEALTH_REGEN:
-                            component.RegenerationBonus += randomPoints * TalismanEquipment.regenPerPoint.Value;
-                            break;
-                        case Bonuses.SHIELD:
-                            component.ShieldBonus += randomPoints * TalismanEquipment.shieldPerPoint.Value;
+                            component.CritDamageBonus += randomPoints * Horseshoe.critDamagePerPoint.Value / 100f;
                             break;
                         case Bonuses.ARMOR:
-                            component.ArmorBonus += randomPoints * TalismanEquipment.armorPerPoint.Value;
+                            component.ArmorBonus += randomPoints * Horseshoe.armorPerPoint.Value;
+                            break;
+                        case Bonuses.HEALTH_REGEN:
+                            component.RegenerationBonus += randomPoints * Horseshoe.regenPerPoint.Value;
+                            break;
+                        case Bonuses.HEALTH:
+                            component.MaxHealthBonus += randomPoints * Horseshoe.healthPerPoint.Value;
+                            break;
+                        case Bonuses.SHIELD:
+                            component.ShieldBonus += randomPoints * Horseshoe.shieldPerPoint.Value;
+                            break;
+                        case Bonuses.MOVEMENT_SPEED:
+                            component.MoveSpeedPercentBonus += randomPoints * Horseshoe.moveSpeedPerPoint.Value / 100f;
+                            break;
+                        case Bonuses.COOLDOWN_REDUCTION:
+                            component.CooldownReductionBonus += randomPoints * Horseshoe.cooldownReductionPerPoint.Value / 100f;
                             break;
                         default:
                             Log.Error("Attempted to boost an invalid stat.\n");
@@ -130,13 +146,24 @@ namespace TooManyItems
                     pointsRemaining -= randomPoints;
                 }
             }
+            Utils.ForceRecalculate(body);
         }
 
         public static void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {
-                obj.inventory?.gameObject.AddComponent<TalismanStatistics>();
+                obj.inventory?.gameObject.AddComponent<HorseshoeStatistics>();
+            };
+
+            On.RoR2.CharacterBody.OnLevelUp += (orig, self) =>
+            {
+                orig(self);
+
+                if (self && self.inventory && self.inventory.GetItemCount(itemDef) > 0)
+                {
+                    Reroll(self.inventory, self);
+                }
             };
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
@@ -146,18 +173,19 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<TalismanStatistics>();
+                        var component = sender.inventory.GetComponent<HorseshoeStatistics>();
                         if(component)
                         {
                             args.baseDamageAdd += component.BaseDamageBonus;
                             args.attackSpeedMultAdd += component.AttackSpeedPercentBonus;
-                            args.moveSpeedMultAdd += component.MoveSpeedPercentBonus;
                             args.critAdd += component.CritChanceBonus;
                             args.critDamageMultAdd += component.CritDamageBonus;
-                            args.baseHealthAdd += component.MaxHealthBonus;
-                            args.baseRegenAdd += component.RegenerationBonus;
-                            args.baseShieldAdd += component.ShieldBonus;
                             args.armorAdd += component.ArmorBonus;
+                            args.baseRegenAdd += component.RegenerationBonus;
+                            args.baseHealthAdd += component.MaxHealthBonus;
+                            args.baseShieldAdd += component.ShieldBonus;
+                            args.moveSpeedMultAdd += component.MoveSpeedPercentBonus;
+                            args.cooldownMultAdd -= component.CooldownReductionBonus;
                         }
                     }
                 }
@@ -166,15 +194,15 @@ namespace TooManyItems
 
         private static void AddTokens()
         {
-            LanguageAPI.Add("TALISMAN_ITEM", "Talisman Stat Bonuses");
-            LanguageAPI.Add("TALISMAN_ITEM_NAME", "Talisman Stat Bonuses");
-            LanguageAPI.Add("TALISMAN_ITEM_PICKUP", "An assortment of stat bonuses.");
+            LanguageAPI.Add("HORSESHOE_ITEM", "Horseshoe\'s Handout");
+            LanguageAPI.Add("HORSESHOE_ITEM_NAME", "Horseshoe\'s Handout");
+            LanguageAPI.Add("HORSESHOE_ITEM_PICKUP", "An assortment of stat bonuses.");
 
-            string desc = $"An assortment of stat bonuses. Activate your equipment to reroll these stats.";
-            LanguageAPI.Add("TALISMAN_ITEM_DESCRIPTION", desc);
+            string desc = $"An assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon equipment activation or <style=cIsUtility>level up</style>.";
+            LanguageAPI.Add("HORSESHOE_ITEM_DESCRIPTION", desc);
 
             string lore = "";
-            LanguageAPI.Add("TALISMAN_LORE", lore);
+            LanguageAPI.Add("HORSESHOE_ITEM_LORE", lore);
         }
     }
 }
