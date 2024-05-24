@@ -193,7 +193,7 @@ namespace TooManyItems
                             damage = damageAmount,
                             attacker = damageInfo.attacker,
                             inflictor = damageInfo.attacker,
-                            procCoefficient = 0f,
+                            procCoefficient = 1f,
                             position = damageInfo.position,
                             crit = false,
                             damageColorIndex = damageColor,
