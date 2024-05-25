@@ -26,8 +26,7 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Glass Marbles**  
 > &nbsp;&nbsp;&nbsp;Gain 2.5 (+2.5 per stack) damage per level.  
 > **Golden Horseshoe**  
-> &nbsp;&nbsp;&nbsp;Gain a random assortment of stat bonuses that are rerolled upon entering a new stage.
-> &nbsp;&nbsp;&nbsp;These bonuses scale with level, and each additional stack increases all bonuses by 30%.  
+> &nbsp;&nbsp;&nbsp;Gain a random assortment of stat bonuses that are rerolled upon entering a new stage. These bonuses scale with level, and each additional stack increases all bonuses by 30%.  
 > **Iron Heart**  
 > &nbsp;&nbsp;&nbsp;Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
 > **Permafrost**  
