@@ -23,7 +23,9 @@ namespace TooManyItems
         {
             try
             {
-                itemDef.deprecatedTier = tier;
+#pragma warning disable Publicizer001
+                itemDef._itemTierDef.tier = tier;
+#pragma warning restore Publicizer001
             }
             catch
             {
