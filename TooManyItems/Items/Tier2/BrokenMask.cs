@@ -251,8 +251,8 @@ namespace TooManyItems
             LanguageAPI.Add("BROKEN_MASK_NAME", "Broken Mask");
             LanguageAPI.Add("BROKEN_MASK_PICKUP", "Dealing damage burns enemies for a portion of their max health.");
 
-            string desc = $"Dealing damage burns enemies for <style=cIsDamage>{burnDamage.Value}%</style> <style=cStack>(+{burnDamage.Value}% per stack)</style> " +
-                $"max health over <style=cIsUtility>{burnDuration.Value} seconds</style>.";
+            string desc = $"Dealing damage burns enemies for <style=cIsDamage>{burnDamage.Value}% <style=cStack>(+{burnDamage.Value}% per stack)</style> " +
+                $"</style> of their max health over <style=cIsUtility>{burnDuration.Value} seconds</style>.";
             LanguageAPI.Add("BROKEN_MASK_DESCRIPTION", desc);
 
             string lore = "";

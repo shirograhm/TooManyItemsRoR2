@@ -394,7 +394,7 @@ namespace TooManyItems
             LanguageAPI.Add("HORSESHOE_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> every stage.");
 
             string desc = $"Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon entering a new stage. " +
-                $"These bonuses scale with <style=cIsUtility>level</style>, and each additional <style=cStack>stack</style> <i>increases all bonuses received by <style=cIsUtility>20%</style></i>.";
+                $"These bonuses scale with <style=cIsUtility>level</style>, and each additional <style=cStack>stack</style> <i>increases all bonuses by <style=cIsUtility>20%</style></i>.";
             LanguageAPI.Add("HORSESHOE_DESCRIPTION", desc);
 
             string lore = "";

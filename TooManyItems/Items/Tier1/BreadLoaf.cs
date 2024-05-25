@@ -105,8 +105,8 @@ namespace TooManyItems
             LanguageAPI.Add("BREAD_LOAF_PICKUP", "While the teleporter is charging, killing enemies heals you.");
 
             string desc = $"While the teleporter is charging, killing enemies heals you for " +
-                $"<style=cIsUtility>{healthGainOnKill.Value}%</style> " +
-                $"<style=cStack>(+{healthGainOnKill.Value}% per stack)</style> of your missing health.";
+                $"<style=cIsHealing>{healthGainOnKill.Value}%</style> " +
+                $"<style=cStack>(+{healthGainOnKill.Value}% per stack)</style> of your <style=cIsHealing>missing HP</style>.";
             LanguageAPI.Add("BREAD_LOAF_DESCRIPTION", desc);
 
             string lore = "";
