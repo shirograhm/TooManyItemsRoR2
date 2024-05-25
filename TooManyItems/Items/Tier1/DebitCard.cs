@@ -92,7 +92,7 @@ namespace TooManyItems
             LanguageAPI.Add("DEBIT_CARD_NAME", "Debit Card");
             LanguageAPI.Add("DEBIT_CARD_PICKUP", "Get a rebate on purchases.");
 
-            string desc = $"Get a <style=cIsUtility>{rebate.Value}%</style> <style=cStack>(+{rebate.Value}% per stack) rebate</style> on purchases.";
+            string desc = $"Get a <style=cIsUtility>{rebate.Value}% <style=cStack>(+{rebate.Value}% per stack)</style> rebate</style> on purchases.";
             LanguageAPI.Add("DEBIT_CARD_DESCRIPTION", desc);
 
             string lore = "";

@@ -109,7 +109,7 @@ namespace TooManyItems
             LanguageAPI.Add("EDIBLE_GLUE_NAME", "Edible Glue");
             LanguageAPI.Add("EDIBLE_GLUE_PICKUP", "On kill, slow nearby enemies.");
 
-            string desc = $"On kill, slow enemies within <style=cIsUtility>{slowRadiusPerStack.Value}m</style> <style=cStack>(+{slowRadiusPerStack.Value}m per stack)</style> by 80% for <style=cIsUtility>2 seconds</style>.";
+            string desc = $"On kill, slow enemies within <style=cIsUtility>{slowRadiusPerStack.Value}m</style> <style=cStack>(+{slowRadiusPerStack.Value}m per stack)</style> by <style=cIsUtility>80%</style> for <style=cIsUtility>2 seconds</style>.";
             LanguageAPI.Add("EDIBLE_GLUE_DESCRIPTION", desc);
 
             string lore = "";
