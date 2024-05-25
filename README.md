@@ -10,7 +10,7 @@ Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod
 The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
 ### Lunar Items
 > **Ancient Coin**  
-> &nbsp;&nbsp;&nbsp;Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.  
+> > Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.  
 > **Carving Blade**  
 > &nbsp;&nbsp;&nbsp;Deal 1% (+1% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike.  
 > **Crucifix**  
