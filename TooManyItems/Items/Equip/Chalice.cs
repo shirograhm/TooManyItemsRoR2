@@ -45,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
             "Equipment: Chalice",
             "Consecrate Attack Speed Bonus",
-            80f,
+            50f,
             "Percent bonus attack speed gained while Consecrated.",
             new List<string>()
             {
