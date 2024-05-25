@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damagePerPoint = new(
             "Item: Golden Horseshoe",
             "Damage Per Point",
-            0.5f,
+            0.4f,
             "Base damage gained per stat point invested.",
             new List<string>()
             {
@@ -45,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Attack Speed Per Point",
-            4f,
+            3f,
             "Percent attack speed gained per stat point invested.",
             new List<string>()
             {
@@ -75,7 +75,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Damage Per Point",
-            5f,
+            4f,
             "Percent crit damage gained per stat point invested.",
             new List<string>()
             {
@@ -85,7 +85,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthPerPoint = new(
             "Item: Golden Horseshoe",
             "Health Per Point",
-            10f,
+            8f,
             "Max health gained per stat point invested.",
             new List<string>()
             {
@@ -95,7 +95,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.7f,
+            0.5f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
@@ -105,7 +105,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> shieldPerPoint = new(
             "Item: Golden Horseshoe",
             "Shield Per Point",
-            12f,
+            10f,
             "Shield gained per stat point invested.",
             new List<string>()
             {
@@ -135,7 +135,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
-            50,
+            30,
             "Percent increase to all bonuses given for each additional stack.",
             new List<string>()
             {
