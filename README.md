@@ -6,8 +6,6 @@ Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod
 | v0.1.x           | v1.5.0 |
 | v0.2.0 and after | v1.5.1 and after |
 
-![Picture of Added Items](https://imgur.com/a/7AdGOca)
-
 ## Items Added
 The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
 ### Lunar Items
