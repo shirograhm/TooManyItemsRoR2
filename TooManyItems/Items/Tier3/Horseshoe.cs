@@ -207,19 +207,16 @@ namespace TooManyItems
                 obj.inventory?.gameObject.AddComponent<HorseshoeStatistics>();
             };
 
-            On.RoR2.Stage.BeginServer += (orig, self) =>
+            Stage.onStageStartGlobal += (stage) =>
             {
-                orig(self);
-
                 foreach (NetworkUser user in NetworkUser.readOnlyInstancesList)
                 {
-                    CharacterMaster master = user.master;
+                    CharacterMaster master = user.masterController.master;
                     if (master)
                     {
-                        CharacterBody body = master.GetBody();
-                        if (body && body.inventory && body.inventory.GetItemCount(itemDef) > 0)
+                        if (master.inventory && master.inventory.GetItemCount(itemDef) > 0)
                         {
-                            Reroll(body.inventory, body);
+                            Reroll(master.inventory, master.GetBody());
                         }
                     }
                 }
