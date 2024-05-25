@@ -571,39 +571,65 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        if (!master || !master.inventory) return new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        if (!master || !master.inventory || !master.GetBody()) return empty;
                         
                         var values = new List<float> { };
                         var component = master.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
-                            values.Add(component.MaxHealthBonus);
-                            values.Add(component.BaseDamageBonus);
-                            values.Add(component.AttackSpeedPercentBonus);
-                            values.Add(component.CritChanceBonus / 100f);
-                            values.Add(component.CritDamageBonus);
-                            values.Add(component.ArmorBonus);
-                            values.Add(component.RegenerationBonus);
-                            values.Add(component.ShieldBonus);
-                            values.Add(component.MoveSpeedPercentBonus);
-                            values.Add(component.CooldownReductionBonus);
+                            var valueDict = Horseshoe.GetScaledValues(component, master.GetBody().level, itemCount);
+
+                            float temp = 0;
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.HEALTH, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.DAMAGE, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.ATTACK_SPEED, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.CRIT_CHANCE, out temp))
+                                values.Add(temp / 100f);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.CRIT_DAMAGE, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.ARMOR, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.HEALTH_REGEN, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.SHIELD, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.MOVEMENT_SPEED, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
+                            if (valueDict.TryGetValue(Horseshoe.Bonuses.COOLDOWN_REDUCTION, out temp))
+                                values.Add(temp);
+                            else
+                                values.Add(0f);
                         }
                         else
                         {
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
-                            values.Add(0f);
+                            values = empty;
                         }
+
                         return values;
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("HORSESHOE_ITEM"), stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("HORSESHOE"), stats);
                 }
             }
         }
