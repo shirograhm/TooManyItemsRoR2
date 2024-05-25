@@ -1,5 +1,5 @@
 # TooManyItems - RoR2
-Adds 29 extra items for Risk of Rain 2!
+Adds 29 new items to Risk of Rain 2!
 Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/). See below for compatibility issues.
 | TooManyItems | LookingGlass |
 | ------------ |------|
@@ -26,7 +26,7 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Glass Marbles**  
 > Gain 2.5 (+2.5 per stack) damage per level.  
 > **Golden Horseshoe**  
-> Gain a random assortment of stat bonuses that are rerolled upon entering a new stage. These bonuses scale with level, and each additional stack increases all bonuses by 20%.  
+> Gain a random assortment of stat bonuses that are rerolled upon entering a new stage. These bonuses scale with level, and each additional stack increases all bonuses by 30%.  
 > **Iron Heart**  
 > Increase max health by 150. Deal 1% (+1% per stack) of your max health as bonus on-hit damage.  
 > **Permafrost**  
@@ -42,11 +42,11 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Holy Water**  
 > Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its' max health as bonus experience, scaling with difficulty.  
 > **Magnifying Glass**  
-> Gain 5% crit chance. Critical strikes have an 8% (+8% per stack) chance to Analyze the enemy, increasing their damage taken by 12% from all sources.  
+> Gain 5% crit chance. Critical strikes have an 6% (+6% per stack) chance to Analyze the enemy, increasing their damage taken by 18% from all sources.  
 > **Seal of the Heretic**  
 > Gain 1% (+1% per stack) bonus damage for every 1% msising health.  
 > **Soul Ring**  
-> On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 7 (+7 per stack) HP/s.  
+> On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 5 (+2 per stack) HP/s.  
 
 ### White Items
 > **3D Glasses**  
