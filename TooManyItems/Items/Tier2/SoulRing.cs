@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 7 (+7 per stack) HP/s.
+        // On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 5 (+2 per stack) HP/s.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Soul Ring",
             "Enabled",
@@ -33,11 +33,21 @@ namespace TooManyItems
                 "ITEM_SOULRING_DESC"
             }
         );
-        public static ConfigurableValue<float> maxRegenPerStack = new(
+        public static ConfigurableValue<float> maxRegenOnFirstStack = new(
             "Item: Soul Ring",
-            "Maximum Regen Per Stack",
-            7f,
-            "Maximum amount of permanent health regeneration allowed per stack.",
+            "Maximum Regen On First Stack",
+            5f,
+            "Maximum amount of permanent health regeneration granted on first stack.",
+            new List<string>()
+            {
+                "ITEM_SOULRING_DESC"
+            }
+        );
+        public static ConfigurableValue<float> maxRegenForExtraStacks = new(
+            "Item: Soul Ring",
+            "Maximum Regen On Extra Stacks",
+            2f,
+            "Maximum amount of permanent health regeneration granted on additional stacks.",
             new List<string>()
             {
                 "ITEM_SOULRING_DESC"
@@ -142,6 +152,11 @@ namespace TooManyItems
             };
         }
 
+        public static float CalculateMaxRegenCap(int count)
+        {
+            return maxRegenOnFirstStack.Value + maxRegenForExtraStacks.Value * (count - 1);
+        }
+
         public static void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
@@ -176,7 +191,7 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         var component = atkBody.inventory.GetComponent<Statistics>();
-                        float maxRegenAllowed = maxRegenPerStack.Value * count;
+                        float maxRegenAllowed = CalculateMaxRegenCap(count);
 
                         if (component.HealthRegen + healthRegenOnKill.Value <= maxRegenAllowed)
                         {
@@ -199,7 +214,7 @@ namespace TooManyItems
             LanguageAPI.Add("SOUL_RING_PICKUP", "Gain permanent health regen on kill.");
 
             string desc = $"On kill, permanently increase your health regeneration by <style=cIsHealing>{healthRegenOnKill.Value} HP/s</style>, " +
-                $"up to a maximum of <style=cIsHealing>{maxRegenPerStack.Value} <style=cStack>(+{maxRegenPerStack.Value} per stack)</style> HP/s</style>.";
+                $"up to a maximum of <style=cIsHealing>{maxRegenOnFirstStack.Value} <style=cStack>(+{maxRegenForExtraStacks.Value} per stack)</style> HP/s</style>.";
             LanguageAPI.Add("SOUL_RING_DESCRIPTION", desc);
 
             string lore = "";

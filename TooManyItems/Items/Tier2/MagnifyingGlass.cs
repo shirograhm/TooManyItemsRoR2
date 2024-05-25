@@ -34,7 +34,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> analyzeChance = new(
             "Item: Magnifying Glass",
             "Analyze Chance",
-            8f,
+            6f,
             "Percent chance to Analyze an enemy on crit.",
             new List<string>()
             {
@@ -44,7 +44,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageTakenBonus = new(
             "Item: Magnifying Glass",
             "Damage Taken Bonus",
-            12f,
+            18f,
             "Percent damage taken bonus once Analyzed.",
             new List<string>()
             {
@@ -151,8 +151,8 @@ namespace TooManyItems
             LanguageAPI.Add("MAGNIFYING_GLASS_NAME", "Magnifying Glass");
             LanguageAPI.Add("MAGNIFYING_GLASS_PICKUP", "Critical strikes sometimes cause enemies to take more damage.");
 
-            string desc = $"Gain <style=cIsUtility>{critBonus.Value}%</style> crit chance. " +
-                $"Critical strikes have a <style=cIsUtility>{analyzeChance.Value}%</style> <style=cStack>(+{analyzeChance.Value}% per stack)</style> chance to <style=cWorldEvent>Analyze</style> the enemy, " +
+            string desc = $"Gain <style=cIsDamage>{critBonus.Value}% crit chance</style>. " +
+                $"<style=cIsDamage>Critical strikes</style> have a <style=cIsUtility>{analyzeChance.Value}%</style> <style=cStack>(+{analyzeChance.Value}% per stack)</style> chance to <style=cWorldEvent>Analyze</style> the enemy, " +
                 $"increasing their damage taken by <style=cIsDamage>{damageTakenBonus.Value}%</style> from all sources.";
             LanguageAPI.Add("MAGNIFYING_GLASS_DESCRIPTION", desc);
 

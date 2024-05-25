@@ -45,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Attack Speed Per Point",
-            3f,
+            4f,
             "Percent attack speed gained per stat point invested.",
             new List<string>()
             {
@@ -65,7 +65,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critChancePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Chance Per Point",
-            1.5f,
+            2f,
             "Percent crit chance gained per stat point invested.",
             new List<string>()
             {
@@ -75,7 +75,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Damage Per Point",
-            3f,
+            5f,
             "Percent crit damage gained per stat point invested.",
             new List<string>()
             {
@@ -95,7 +95,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.8f,
+            0.7f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
@@ -105,7 +105,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> shieldPerPoint = new(
             "Item: Golden Horseshoe",
             "Shield Per Point",
-            15f,
+            12f,
             "Shield gained per stat point invested.",
             new List<string>()
             {
@@ -125,7 +125,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> cooldownReductionPerPoint = new(
             "Item: Golden Horseshoe",
             "Cooldown Reduction Per Point",
-            4f,
+            5f,
             "Percent cooldown reduction gained per stat point invested.",
             new List<string>()
             {
@@ -135,7 +135,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
-            30,
+            50,
             "Percent increase to all bonuses given for each additional stack.",
             new List<string>()
             {
@@ -394,7 +394,7 @@ namespace TooManyItems
             LanguageAPI.Add("HORSESHOE_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> every stage.");
 
             string desc = $"Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon entering a new stage. " +
-                $"These bonuses scale with <style=cIsUtility>level</style>, and each additional <style=cStack>stack</style> <i>increases all bonuses by <style=cIsUtility>20%</style></i>.";
+                $"These bonuses scale with <style=cIsUtility>level</style>, and each <style=cStack>additional stack</style> increases all bonuses by <style=cIsUtility>{extraStackMultiplier.Value}%</style>.";
             LanguageAPI.Add("HORSESHOE_DESCRIPTION", desc);
 
             string lore = "";
