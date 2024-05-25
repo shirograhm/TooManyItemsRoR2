@@ -104,7 +104,7 @@ namespace TooManyItems
             LanguageAPI.Add("HERETIC_SEAL_NAME", "Seal of the Heretic");
             LanguageAPI.Add("HERETIC_SEAL_PICKUP", "Gain scaling damage based on missing health.");
 
-            string desc = $"Gain <style=cIsUtility>{damagePerMissing.Value}%</style> <style=cStack>(+{damagePerMissing.Value}% per stack)</style> bonus damage for every 1% missing health.";
+            string desc = $"Gain <style=cIsDamage>{damagePerMissing.Value}% <style=cStack>(+{damagePerMissing.Value}% per stack)</style> damage</style> for every 1% missing health.";
             LanguageAPI.Add("HERETIC_SEAL_DESCRIPTION", desc);
 
             string lore = "";

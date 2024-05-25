@@ -177,7 +177,7 @@ namespace TooManyItems
 
             string desc = $"The next timed buff received has its duration increased by " +
                 $"<style=cIsUtility>{durationIncrease.Value}%</style> <style=cStack>(+{durationIncrease.Value}% per stack)</style>. " +
-                $"Recharges every <style=cIsUtility>{rechargeTime.Value}</style> <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds.";
+                $"Recharges every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>.";
             LanguageAPI.Add("HOODIE_DESCRIPTION", desc);
 
             string lore = "";

@@ -225,7 +225,7 @@ namespace TooManyItems
             LanguageAPI.Add("IRON_HEART_NAME", "Iron Heart");
             LanguageAPI.Add("IRON_HEART_PICKUP", "Deal bonus damage on-hit based on your max health.");
 
-            string desc = $"Gain <style=cIsHealth>{healthIncrease.Value}</style> max health. " +
+            string desc = $"Gain <style=cIsHealth>{healthIncrease.Value} HP</style>. " +
                 $"Deal <style=cIsDamage>{percentDamagePerStack.Value}%</style> <style=cStack>(+{percentDamagePerStack.Value}% per stack)</style> of your max health as bonus on-hit damage.";
             LanguageAPI.Add("IRON_HEART_DESCRIPTION", desc);
 

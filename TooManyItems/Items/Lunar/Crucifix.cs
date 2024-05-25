@@ -75,8 +75,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("ProfaneCrucifix.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("ProfaneCrucifix.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Crucifix.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Crucifix.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -112,7 +112,7 @@ namespace TooManyItems
 
             string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
                 $"<style=cDeath>Taking damage sets you on fire for " +
-                $"{maxHealthBurnAmount.Value}% max health over {fireDuration.Value} seconds</style>.";
+                $"<style=cIsHealth>{maxHealthBurnAmount.Value}% max HP</style> over <style=cIsUtility>{fireDuration.Value} seconds</style></style>.";
             LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
 
             string lore = "";

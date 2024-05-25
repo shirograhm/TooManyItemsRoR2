@@ -230,7 +230,7 @@ namespace TooManyItems
                 if (GlassMarbles.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Bonus Base Damage: ");
+                    stats.descriptions.Add("Base Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
@@ -384,7 +384,7 @@ namespace TooManyItems
                 if (Photodiode.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Max Bonus Attack Speed: ");
+                    stats.descriptions.Add("Max Attack Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>

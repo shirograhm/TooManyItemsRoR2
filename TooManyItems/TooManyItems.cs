@@ -23,7 +23,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.2.2";
+        public const string PluginVersion = "0.3.0";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -55,6 +55,8 @@ namespace TooManyItems
                 BloodDice.Init();
             if (GlassMarbles.isEnabled.Value)
                 GlassMarbles.Init();
+            if (Horseshoe.isEnabled.Value)
+                Horseshoe.Init();
             if (IronHeart.isEnabled.Value)
                 IronHeart.Init();
             if (Permafrost.isEnabled.Value)
@@ -111,9 +113,6 @@ namespace TooManyItems
                 BuffTotem.Init();
             if (Chalice.isEnabled.Value)
                 Chalice.Init();
-            if (Horseshoe.isEnabled.Value)
-                Horseshoe.Init();
-                HorseshoeHelperItem.Init();
             if (TatteredScroll.isEnabled.Value)
                 TatteredScroll.Init();
 
@@ -153,16 +152,36 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
+        //        DropItem(Abacus.itemDef);
         //        DropItem(BloodDice.itemDef);
-        //        DropItem(BrokenMask.itemDef);
-        //        DropItem(CarvingBlade.itemDef);
         //        DropItem(GlassMarbles.itemDef);
-        //        DropItem(HolyWater.itemDef);
+        //        DropItem(Horseshoe.itemDef);
         //        DropItem(IronHeart.itemDef);
         //        DropItem(Permafrost.itemDef);
         //        DropItem(RustyTrowel.itemDef);
+        //        DropItem(BrokenMask.itemDef);
+        //        DropItem(HereticSeal.itemDef);
+        //        DropItem(HolyWater.itemDef);
+        //        DropItem(Hoodie.itemDef);
+        //        DropItem(MagnifyingGlass.itemDef);
         //        DropItem(SoulRing.itemDef);
+        //        DropItem(BottleCap.itemDef);
+        //        DropItem(BreadLoaf.itemDef);
+        //        DropItem(DebitCard.itemDef);
+        //        DropItem(EdibleGlue.itemDef);
+        //        DropItem(MilkCarton.itemDef);
+        //        DropItem(PaperPlane.itemDef);
+        //        DropItem(Photodiode.itemDef);
+        //        DropItem(RedBlueGlasses.itemDef);
+        //        DropItem(RubberDucky.itemDef);
+        //        DropItem(AncientCoin.itemDef);
+        //        DropItem(CarvingBlade.itemDef);
+        //        DropItem(Crucifix.itemDef);
         //        DropItem(SpiritStone.itemDef);
+
+        //        DropItem(BuffTotem.equipmentDef);
+        //        DropItem(Chalice.equipmentDef);
+        //        DropItem(TatteredScroll.equipmentDef);
         //    }
         //}
 

@@ -129,7 +129,7 @@ namespace TooManyItems
             string desc = $"Killing an enemy grants <style=cIsDamage>{critChancePerStack.Value}% " +
                 $"<style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance</style> until the next stage. " +
                 $"Every <style=cIsDamage>1% crit chance</style> above <style=cIsUtility>100%</style> grants " +
-                $"<style=cIsDamage>1%</style> bonus <style=cIsDamage>crit damage</style>.";
+                $"<style=cIsDamage>1% crit damage</style>.";
             LanguageAPI.Add("ABACUS_DESCRIPTION", desc);
 
             string lore = "";

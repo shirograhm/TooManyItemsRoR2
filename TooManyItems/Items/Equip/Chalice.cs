@@ -11,7 +11,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef consecratedBuff;
 
-        // Pay 90% of your current health to consecrate yourself and all allies. Consecrated allies gain 20% damage and 80% attack speed for 8 seconds. (60 sec)
+        // Pay 80% of your current health to consecrate yourself and all allies. Consecrated allies gain 20% damage and 50% attack speed for 8 seconds. (60 sec)
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Chalice",
             "Enabled",
@@ -154,6 +154,10 @@ namespace TooManyItems
             CharacterBody body = slot.characterBody;
             if (body)
             {
+                float damageToTake = body.healthComponent.combinedHealth * currentHealthCostPercent;
+                // Escape the method if the activation would kill ourself
+                if (body.healthComponent.fullCombinedHealth <= damageToTake) return false;
+
                 DamageInfo useCost = new()
                 {
                     damage = body.healthComponent.combinedHealth * currentHealthCostPercent,
@@ -172,8 +176,9 @@ namespace TooManyItems
                 {
                     component.body.AddTimedBuff(consecratedBuff, consecrateDuration.Value);
                 }
+                return true;
             }
-            return true;
+            return false;
         }
 
         private static void AddTokens()
@@ -185,8 +190,8 @@ namespace TooManyItems
             string desc = $"<style=cDeath>Pay {currentHealthCost.Value}% of your current health</style> to " +
                 $"<style=cWorldEvent>Consecrate</style> yourself and all allies. " +
                 $"<style=cWorldEvent>Consecrated</style> units gain " +
-                $"<style=cIsDamage>{consecrateDamageBonus.Value}%</style> damage and " +
-                $"<style=cIsDamage>{consecrateAttackSpeedBonus.Value}%</style> attack speed for " +
+                $"<style=cIsDamage>{consecrateDamageBonus.Value}% damage</style> and " +
+                $"<style=cIsDamage>{consecrateAttackSpeedBonus.Value}% attack speed</style> for " +
                 $"<style=cIsUtility>{consecrateDuration.Value} seconds</style>.";
             LanguageAPI.Add("CHALICE_DESCRIPTION", desc);
 
