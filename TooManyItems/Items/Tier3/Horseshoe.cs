@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damagePerPoint = new(
             "Item: Golden Horseshoe",
             "Damage Per Point",
-            0.4f,
+            0.5f,
             "Base damage gained per stat point invested.",
             new List<string>()
             {
@@ -65,7 +65,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critChancePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Chance Per Point",
-            2f,
+            1.5f,
             "Percent crit chance gained per stat point invested.",
             new List<string>()
             {
@@ -75,7 +75,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Damage Per Point",
-            4f,
+            3f,
             "Percent crit damage gained per stat point invested.",
             new List<string>()
             {
@@ -115,18 +115,8 @@ namespace TooManyItems
         public static ConfigurableValue<float> armorPerPoint = new(
             "Item: Golden Horseshoe",
             "Armor Per Point",
-            3f,
+            2.5f,
             "Armor gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
-        );
-        public static ConfigurableValue<float> cooldownReductionPerPoint = new(
-            "Item: Golden Horseshoe",
-            "Cooldown Reduction Per Point",
-            5f,
-            "Percent cooldown reduction gained per stat point invested.",
             new List<string>()
             {
                 "ITEM_HORSESHOE_DESC"
@@ -155,7 +145,6 @@ namespace TooManyItems
             HEALTH_REGEN,
             SHIELD,
             MOVEMENT_SPEED,
-            COOLDOWN_REDUCTION,
 
             NUM_STATS
         }
@@ -269,8 +258,6 @@ namespace TooManyItems
                             args.baseShieldAdd += temp;
                             if (!values.TryGetValue(Bonuses.MOVEMENT_SPEED, out temp)) Log.Error("Unable to set Horseshoe bonus for movement speed.");
                             args.moveSpeedMultAdd += temp;
-                            if (!values.TryGetValue(Bonuses.COOLDOWN_REDUCTION, out temp)) Log.Error("Unable to set Horseshoe bonus for cooldown reduction.");
-                            args.cooldownMultAdd -= temp;
                         }
                     }
                 }
@@ -279,8 +266,8 @@ namespace TooManyItems
 
         public static Dictionary<Bonuses, float> GetScaledValues(HorseshoeStatistics component, float level, int count)
         {
-            // Level 1 -> 100%, Level 6 -> 200%, Level 11 -> 300%, Level 16 -> 400%
-            float levelScaling = (level + 4) / 5f;
+            // Level 1 -> 100%, Level 11 -> 200%, Level 21 -> 300%, Level 31 -> 400%
+            float levelScaling = (level + 9) / 10f;
             float extraStackScaling = 1 + extraStackMultiplierPercent * count;
 
             return new Dictionary<Bonuses, float>
@@ -293,8 +280,7 @@ namespace TooManyItems
                 { Bonuses.ARMOR, component.ArmorBonus * levelScaling * extraStackScaling },
                 { Bonuses.HEALTH_REGEN, component.RegenerationBonus * levelScaling * extraStackScaling },
                 { Bonuses.SHIELD, component.ShieldBonus * levelScaling * extraStackScaling },
-                { Bonuses.MOVEMENT_SPEED, component.MoveSpeedPercentBonus * levelScaling * extraStackScaling },
-                { Bonuses.COOLDOWN_REDUCTION, component.CooldownReductionBonus * levelScaling * extraStackScaling }
+                { Bonuses.MOVEMENT_SPEED, component.MoveSpeedPercentBonus * levelScaling * extraStackScaling }
             };
         }
 
@@ -309,7 +295,6 @@ namespace TooManyItems
             if (bonuses.RegenerationBonus != 0) return false;
             if (bonuses.ShieldBonus != 0) return false;
             if (bonuses.MoveSpeedPercentBonus != 0) return false;
-            if (bonuses.CooldownReductionBonus != 0) return false;
 
             return true;
         }
@@ -328,13 +313,12 @@ namespace TooManyItems
                 component.RegenerationBonus = 0;
                 component.ShieldBonus = 0;
                 component.MoveSpeedPercentBonus = 0;
-                component.CooldownReductionBonus = 0;
 
                 float pointsRemaining = Horseshoe.totalPointsCap.Value;
                 while (pointsRemaining > 0)
                 {
                     float randomPoints;
-                    float step = 2.1f;
+                    float step = 2.3f;
                     if (pointsRemaining > step)
                         randomPoints = UnityEngine.Random.Range(0, step * 2);
                     else
@@ -369,9 +353,6 @@ namespace TooManyItems
                             break;
                         case Bonuses.MOVEMENT_SPEED:
                             component.MoveSpeedPercentBonus += randomPoints * Horseshoe.moveSpeedPerPoint.Value / 100f;
-                            break;
-                        case Bonuses.COOLDOWN_REDUCTION:
-                            component.CooldownReductionBonus += randomPoints * Horseshoe.cooldownReductionPerPoint.Value / 100f;
                             break;
                         default:
                             Log.Error("Attempted to boost an invalid stat.\n");

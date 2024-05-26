@@ -571,7 +571,7 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
                         if (!master || !master.inventory || !master.GetBody()) return empty;
                         
                         var values = new List<float> { };
@@ -614,10 +614,6 @@ namespace TooManyItems
                             else
                                 values.Add(0f);
                             if (valueDict.TryGetValue(Horseshoe.Bonuses.MOVEMENT_SPEED, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.COOLDOWN_REDUCTION, out temp))
                                 values.Add(temp);
                             else
                                 values.Add(0f);

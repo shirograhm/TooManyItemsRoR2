@@ -17,7 +17,6 @@ namespace TooManyItems
         private float _regenerationBonus;
         private float _shieldBonus;
         private float _moveSpeedPercentBonus;
-        private float _cooldownReductionBonus;
 
         public float MaxHealthBonus
         {
@@ -37,8 +36,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         value,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -61,8 +59,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -85,8 +82,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -109,8 +105,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -133,8 +128,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -157,8 +151,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -181,8 +174,7 @@ namespace TooManyItems
                         value,
                         _maxHealthBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -205,8 +197,7 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         value,
-                        _moveSpeedPercentBonus,
-                        _cooldownReductionBonus
+                        _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -229,31 +220,6 @@ namespace TooManyItems
                         _regenerationBonus,
                         _maxHealthBonus,
                         _shieldBonus,
-                        value,
-                        _cooldownReductionBonus
-                    ).Send(NetworkDestination.Clients);
-                }
-            }
-        }
-        public float CooldownReductionBonus
-        {
-            get { return _cooldownReductionBonus; }
-            set
-            {
-                _cooldownReductionBonus = value;
-                if (NetworkServer.active)
-                {
-                    new Sync(
-                        gameObject.GetComponent<NetworkIdentity>().netId,
-                        _baseDamageBonus,
-                        _attackSpeedPercentBonus,
-                        _critChanceBonus,
-                        _critDamageBonus,
-                        _armorBonus,
-                        _regenerationBonus,
-                        _maxHealthBonus,
-                        _shieldBonus,
-                        _moveSpeedPercentBonus,
                         value
                     ).Send(NetworkDestination.Clients);
                 }
@@ -272,7 +238,6 @@ namespace TooManyItems
             float regenerationBonus;
             float shieldBonus;
             float moveSpeedPercentBonus;
-            float cooldownReductionBonus;
 
             public Sync()
             {
@@ -280,7 +245,7 @@ namespace TooManyItems
 
             public Sync(NetworkInstanceId objId,
                 float maxHealth, float baseDamage, float attackSpeed, float critChance, float critDamage,
-                float armor, float regen, float shield, float moveSpeed, float cooldown)
+                float armor, float regen, float shield, float moveSpeed)
             {
                 this.objId = objId;
                 maxHealthBonus = maxHealth;
@@ -292,7 +257,6 @@ namespace TooManyItems
                 regenerationBonus = regen;
                 shieldBonus = shield;
                 moveSpeedPercentBonus = moveSpeed;
-                cooldownReductionBonus = cooldown;
             }
 
             public void Deserialize(NetworkReader reader)
@@ -307,7 +271,6 @@ namespace TooManyItems
                 regenerationBonus = reader.ReadSingle();
                 shieldBonus = reader.ReadSingle();
                 moveSpeedPercentBonus = reader.ReadSingle();
-                cooldownReductionBonus = reader.ReadSingle();
             }
 
             public void OnReceived()
@@ -329,7 +292,6 @@ namespace TooManyItems
                         component.RegenerationBonus = regenerationBonus;
                         component.ShieldBonus = shieldBonus;
                         component.MoveSpeedPercentBonus = moveSpeedPercentBonus;
-                        component.CooldownReductionBonus = cooldownReductionBonus;
                     }
                 }
             }
@@ -346,7 +308,6 @@ namespace TooManyItems
                 writer.Write(regenerationBonus);
                 writer.Write(shieldBonus);
                 writer.Write(moveSpeedPercentBonus);
-                writer.Write(cooldownReductionBonus);
             }
         }
     }
