@@ -95,7 +95,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.5f,
+            0.8f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
@@ -318,9 +318,9 @@ namespace TooManyItems
                 while (pointsRemaining > 0)
                 {
                     float randomPoints;
-                    float step = 2.3f;
+                    float step = 1.8f;
                     if (pointsRemaining > step)
-                        randomPoints = UnityEngine.Random.Range(0, step * 2);
+                        randomPoints = UnityEngine.Random.Range(step, step * 2);
                     else
                         randomPoints = pointsRemaining;
 

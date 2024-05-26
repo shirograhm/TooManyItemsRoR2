@@ -34,19 +34,16 @@ namespace TooManyItems
         public void Awake()
         {
             PInfo = Info;
+            voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
 
             Log.Init(Logger);
-
             Assets.Init();
-
-            voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
-            ItemCatalog.availability.CallWhenAvailable(InjectVoidItems);
-
             GenericGameEvents.Init();
             ConfigOptions.Init();
             DamageColorAPI.Init();
 
             ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
+            ItemCatalog.availability.CallWhenAvailable(InjectVoidItems);
 
             //Red Items
             if (Abacus.isEnabled.Value)
