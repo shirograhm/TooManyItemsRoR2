@@ -15,7 +15,7 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.IRON_HEART_COLOR);
 
-        // Gain 150 health. Deal 1% (+1% per stack) of your max health as on-hit damage.
+        // Gain 150 HP. Deal 2% (+2% per stack) of your max health as on-hit damage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Iron Heart",
             "Enabled",
@@ -39,7 +39,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Iron Heart",
             "On-Hit Damage Scaling",
-            1f,
+            2f,
             "Percent of maximum health dealt as bonus on-hit damage.",
             new List<string>()
             {
