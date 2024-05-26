@@ -32,6 +32,16 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
+        public static ConfigurableValue<float> healthPerPoint = new(
+            "Item: Golden Horseshoe",
+            "Health Per Point",
+            8f,
+            "Max health gained per stat point invested.",
+            new List<string>()
+            {
+                "ITEM_HORSESHOE_DESC"
+            }
+        );
         public static ConfigurableValue<float> damagePerPoint = new(
             "Item: Golden Horseshoe",
             "Damage Per Point",
@@ -45,18 +55,8 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Attack Speed Per Point",
-            3f,
+            4f,
             "Percent attack speed gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
-        );
-        public static ConfigurableValue<float> moveSpeedPerPoint = new(
-            "Item: Golden Horseshoe",
-            "Move Speed Per Point",
-            3f,
-            "Percent movement speed gained per stat point invested.",
             new List<string>()
             {
                 "ITEM_HORSESHOE_DESC"
@@ -65,7 +65,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> critChancePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Chance Per Point",
-            1.5f,
+            2f,
             "Percent crit chance gained per stat point invested.",
             new List<string>()
             {
@@ -75,27 +75,28 @@ namespace TooManyItems
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Damage Per Point",
-            3f,
+            2f,
             "Percent crit damage gained per stat point invested.",
             new List<string>()
             {
                 "ITEM_HORSESHOE_DESC"
             }
         );
-        public static ConfigurableValue<float> healthPerPoint = new(
+        public static ConfigurableValue<float> armorPerPoint = new(
             "Item: Golden Horseshoe",
-            "Health Per Point",
-            8f,
-            "Max health gained per stat point invested.",
+            "Armor Per Point",
+            2f,
+            "Armor gained per stat point invested.",
             new List<string>()
             {
                 "ITEM_HORSESHOE_DESC"
             }
         );
+        
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.8f,
+            0.6f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
@@ -112,11 +113,11 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
-        public static ConfigurableValue<float> armorPerPoint = new(
+        public static ConfigurableValue<float> moveSpeedPerPoint = new(
             "Item: Golden Horseshoe",
-            "Armor Per Point",
-            2.5f,
-            "Armor gained per stat point invested.",
+            "Move Speed Per Point",
+            3f,
+            "Percent movement speed gained per stat point invested.",
             new List<string>()
             {
                 "ITEM_HORSESHOE_DESC"
