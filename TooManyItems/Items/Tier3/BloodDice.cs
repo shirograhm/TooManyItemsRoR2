@@ -219,7 +219,7 @@ namespace TooManyItems
 
             if (affectedByLuck.Value)
             {
-                int luckStat = (int)atkMaster.luck;
+                int luckStat = Mathf.CeilToInt(atkMaster.luck);
 
                 for (int i = 0; i < Mathf.Abs(luckStat); i++)
                 {
