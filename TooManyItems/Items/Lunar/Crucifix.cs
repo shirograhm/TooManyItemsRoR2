@@ -112,7 +112,7 @@ namespace TooManyItems
 
             string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
                 $"<style=cDeath>Taking damage sets you on fire for " +
-                $"<style=cIsHealth>{maxHealthBurnAmount.Value}% max HP</style> over <style=cIsUtility>{fireDuration.Value} seconds</style></style>.";
+                $"<style=cIsHealth>{maxHealthBurnAmount.Value}%</style> max health over <style=cIsUtility>{fireDuration.Value} seconds</style></style>.";
             LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
 
             string lore = "";
