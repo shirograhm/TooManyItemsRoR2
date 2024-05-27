@@ -123,6 +123,16 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
+        public static ConfigurableValue<float> luckPerPoint = new(
+            "Item: Golden Horseshoe",
+            "Luck Per Point",
+            0.05f,
+            "Luck gained per stat point invested.",
+            new List<string>()
+            {
+                "ITEM_HORSESHOE_DESC"
+            }
+        );
         public static ConfigurableValue<int> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
@@ -135,6 +145,8 @@ namespace TooManyItems
         );
         public static float extraStackMultiplierPercent = extraStackMultiplier.Value / 100f;
 
+        public static bool notIncremented = true;
+
         public enum Bonuses
         {
             HEALTH,
@@ -146,6 +158,7 @@ namespace TooManyItems
             HEALTH_REGEN,
             SHIELD,
             MOVEMENT_SPEED,
+            LUCK,
 
             NUM_STATS
         }
@@ -220,7 +233,7 @@ namespace TooManyItems
                 if (component && master && index == itemDef.itemIndex)
                 {
                     // Check if rolled yet
-                    if (HasNotRolledYet(component) && master.GetBody())
+                    if (HasNotRolledYet(component) && master)
                     {
                         Reroll(self, master.GetBody());
                     }
@@ -238,51 +251,35 @@ namespace TooManyItems
                         var component = sender.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
-                            Dictionary<Bonuses, float> values = GetScaledValues(component, sender.level, count);
+                            args.baseHealthAdd += GetScaledValue(component.MaxHealthBonus, sender.level, count);
+                            args.baseDamageAdd += GetScaledValue(component.BaseDamageBonus, sender.level, count);
+                            args.attackSpeedMultAdd += GetScaledValue(component.AttackSpeedPercentBonus, sender.level, count);
+                            args.critAdd += GetScaledValue(component.CritChanceBonus, sender.level, count);
+                            args.critDamageMultAdd += GetScaledValue(component.CritDamageBonus, sender.level, count);
+                            args.armorAdd += GetScaledValue(component.ArmorBonus, sender.level, count);
+                            args.baseRegenAdd += GetScaledValue(component.RegenerationBonus, sender.level, count);
+                            args.baseShieldAdd += GetScaledValue(component.ShieldBonus, sender.level, count);
+                            args.moveSpeedMultAdd += GetScaledValue(component.MoveSpeedPercentBonus, sender.level, count);
 
-                            float temp = 0;
-                            if (!values.TryGetValue(Bonuses.HEALTH, out temp)) Log.Error("Unable to set Horseshoe bonus for max health.");
-                            args.baseHealthAdd += temp;
-                            if (!values.TryGetValue(Bonuses.DAMAGE, out temp)) Log.Error("Unable to set Horseshoe bonus for damage.");
-                            args.baseDamageAdd += temp;
-                            if (!values.TryGetValue(Bonuses.ATTACK_SPEED, out temp)) Log.Error("Unable to set Horseshoe bonus for attack speed.");
-                            args.attackSpeedMultAdd += temp;
-                            if (!values.TryGetValue(Bonuses.CRIT_CHANCE, out temp)) Log.Error("Unable to set Horseshoe bonus for crit chance.");
-                            args.critAdd += temp;
-                            if (!values.TryGetValue(Bonuses.CRIT_DAMAGE, out temp)) Log.Error("Unable to set Horseshoe bonus for crit damage.");
-                            args.critDamageMultAdd += temp;
-                            if (!values.TryGetValue(Bonuses.ARMOR, out temp)) Log.Error("Unable to set Horseshoe bonus for armor.");
-                            args.armorAdd += temp;
-                            if (!values.TryGetValue(Bonuses.HEALTH_REGEN, out temp)) Log.Error("Unable to set Horseshoe bonus for health regen.");
-                            args.baseRegenAdd += temp;
-                            if (!values.TryGetValue(Bonuses.SHIELD, out temp)) Log.Error("Unable to set Horseshoe bonus for shield.");
-                            args.baseShieldAdd += temp;
-                            if (!values.TryGetValue(Bonuses.MOVEMENT_SPEED, out temp)) Log.Error("Unable to set Horseshoe bonus for movement speed.");
-                            args.moveSpeedMultAdd += temp;
+                            sender.master.luck = CalculateLuck(component, sender.inventory);
                         }
                     }
                 }
             };
         }
 
-        public static Dictionary<Bonuses, float> GetScaledValues(HorseshoeStatistics component, float level, int count)
+        public static float CalculateLuck(HorseshoeStatistics component, Inventory inv)
+        {
+            return inv.GetItemCount(RoR2Content.Items.Clover) - inv.GetItemCount(RoR2Content.Items.LunarBadLuck) + component.LuckBonus;
+        }
+
+        public static float GetScaledValue(float value, float level, int count)
         {
             // Level 1 -> 100%, Level 11 -> 200%, Level 21 -> 300%, Level 31 -> 400%
             float levelScaling = (level + 9) / 10f;
             float extraStackScaling = 1 + extraStackMultiplierPercent * count;
 
-            return new Dictionary<Bonuses, float>
-            {
-                { Bonuses.HEALTH, component.MaxHealthBonus * levelScaling * extraStackScaling },
-                { Bonuses.DAMAGE, component.BaseDamageBonus * levelScaling * extraStackScaling },
-                { Bonuses.ATTACK_SPEED, component.AttackSpeedPercentBonus * levelScaling * extraStackScaling },
-                { Bonuses.CRIT_CHANCE, component.CritChanceBonus * levelScaling * extraStackScaling },
-                { Bonuses.CRIT_DAMAGE, component.CritDamageBonus * levelScaling * extraStackScaling },
-                { Bonuses.ARMOR, component.ArmorBonus * levelScaling * extraStackScaling },
-                { Bonuses.HEALTH_REGEN, component.RegenerationBonus * levelScaling * extraStackScaling },
-                { Bonuses.SHIELD, component.ShieldBonus * levelScaling * extraStackScaling },
-                { Bonuses.MOVEMENT_SPEED, component.MoveSpeedPercentBonus * levelScaling * extraStackScaling }
-            };
+            return value * levelScaling * extraStackScaling;
         }
 
         public static bool HasNotRolledYet(HorseshoeStatistics bonuses)
@@ -296,6 +293,7 @@ namespace TooManyItems
             if (bonuses.RegenerationBonus != 0) return false;
             if (bonuses.ShieldBonus != 0) return false;
             if (bonuses.MoveSpeedPercentBonus != 0) return false;
+            if (bonuses.LuckBonus != 0) return false;
 
             return true;
         }
@@ -314,6 +312,7 @@ namespace TooManyItems
                 component.RegenerationBonus = 0;
                 component.ShieldBonus = 0;
                 component.MoveSpeedPercentBonus = 0;
+                component.LuckBonus = 0;
 
                 float pointsRemaining = Horseshoe.totalPointsCap.Value;
                 while (pointsRemaining > 0)
@@ -355,15 +354,21 @@ namespace TooManyItems
                         case Bonuses.MOVEMENT_SPEED:
                             component.MoveSpeedPercentBonus += randomPoints * Horseshoe.moveSpeedPerPoint.Value / 100f;
                             break;
+                        case Bonuses.LUCK:
+                            component.LuckBonus += randomPoints * Horseshoe.luckPerPoint.Value;
+                            break;
                         default:
-                            Log.Error("Attempted to boost an invalid stat.\n");
+                            Log.Error("Attempted to boost an invalid stat.");
                             break;
                     }
-
                     pointsRemaining -= randomPoints;
                 }
+                Utils.ForceRecalculate(body);
             }
-            Utils.ForceRecalculate(body);
+            else
+            {
+                Log.Error("Unable to reroll Horseshoe statistics.");
+            }
         }
 
         private static void AddTokens()

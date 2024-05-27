@@ -17,6 +17,7 @@ namespace TooManyItems
         private float _regenerationBonus;
         private float _shieldBonus;
         private float _moveSpeedPercentBonus;
+        private float _luckBonus;
 
         public float MaxHealthBonus
         {
@@ -36,7 +37,8 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -59,7 +61,8 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -82,7 +85,8 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -105,7 +109,8 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -128,7 +133,8 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -151,7 +157,8 @@ namespace TooManyItems
                         value,
                         _regenerationBonus,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -174,7 +181,8 @@ namespace TooManyItems
                         _armorBonus,
                         value,
                         _shieldBonus,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -197,7 +205,8 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         value,
-                        _moveSpeedPercentBonus
+                        _moveSpeedPercentBonus,
+                        _luckBonus
                     ).Send(NetworkDestination.Clients);
                 }
             }
@@ -220,6 +229,31 @@ namespace TooManyItems
                         _armorBonus,
                         _regenerationBonus,
                         _shieldBonus,
+                        value,
+                        _luckBonus
+                    ).Send(NetworkDestination.Clients);
+                }
+            }
+        }
+        public float LuckBonus
+        {
+            get { return _luckBonus; }
+            set
+            {
+                _luckBonus = value;
+                if (NetworkServer.active)
+                {
+                    new Sync(
+                        gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
+                        _baseDamageBonus,
+                        _attackSpeedPercentBonus,
+                        _critChanceBonus,
+                        _critDamageBonus,
+                        _armorBonus,
+                        _regenerationBonus,
+                        _shieldBonus,
+                        _moveSpeedPercentBonus,
                         value
                     ).Send(NetworkDestination.Clients);
                 }
@@ -238,6 +272,7 @@ namespace TooManyItems
             float regenerationBonus;
             float shieldBonus;
             float moveSpeedPercentBonus;
+            float luckBonus;
 
             public Sync()
             {
@@ -245,7 +280,7 @@ namespace TooManyItems
 
             public Sync(NetworkInstanceId objId,
                 float maxHealth, float baseDamage, float attackSpeed, float critChance, float critDamage,
-                float armor, float regen, float shield, float moveSpeed)
+                float armor, float regen, float shield, float moveSpeed, float luck)
             {
                 this.objId = objId;
                 maxHealthBonus = maxHealth;
@@ -257,6 +292,7 @@ namespace TooManyItems
                 regenerationBonus = regen;
                 shieldBonus = shield;
                 moveSpeedPercentBonus = moveSpeed;
+                luckBonus = luck;
             }
 
             public void Deserialize(NetworkReader reader)
@@ -271,6 +307,7 @@ namespace TooManyItems
                 regenerationBonus = reader.ReadSingle();
                 shieldBonus = reader.ReadSingle();
                 moveSpeedPercentBonus = reader.ReadSingle();
+                luckBonus = reader.ReadSingle();
             }
 
             public void OnReceived()
@@ -292,6 +329,7 @@ namespace TooManyItems
                         component.RegenerationBonus = regenerationBonus;
                         component.ShieldBonus = shieldBonus;
                         component.MoveSpeedPercentBonus = moveSpeedPercentBonus;
+                        component.LuckBonus = luckBonus;
                     }
                 }
             }
@@ -308,6 +346,7 @@ namespace TooManyItems
                 writer.Write(regenerationBonus);
                 writer.Write(shieldBonus);
                 writer.Write(moveSpeedPercentBonus);
+                writer.Write(luckBonus);
             }
         }
     }
