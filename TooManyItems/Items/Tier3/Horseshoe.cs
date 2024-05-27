@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthPerPoint = new(
             "Item: Golden Horseshoe",
             "Health Per Point",
-            8f,
+            12f,
             "Max health gained per stat point invested.",
             new List<string>()
             {
@@ -96,7 +96,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.6f,
+            0.9f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
@@ -106,7 +106,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> shieldPerPoint = new(
             "Item: Golden Horseshoe",
             "Shield Per Point",
-            10f,
+            15f,
             "Shield gained per stat point invested.",
             new List<string>()
             {
@@ -116,7 +116,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> moveSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Move Speed Per Point",
-            3f,
+            4f,
             "Percent movement speed gained per stat point invested.",
             new List<string>()
             {
@@ -126,7 +126,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> luckPerPoint = new(
             "Item: Golden Horseshoe",
             "Luck Per Point",
-            0.05f,
+            0.08f,
             "Luck gained per stat point invested.",
             new List<string>()
             {
@@ -144,8 +144,6 @@ namespace TooManyItems
             }
         );
         public static float extraStackMultiplierPercent = extraStackMultiplier.Value / 100f;
-
-        public static bool notIncremented = true;
 
         public enum Bonuses
         {
