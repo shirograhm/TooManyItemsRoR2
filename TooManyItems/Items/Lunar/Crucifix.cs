@@ -109,10 +109,10 @@ namespace TooManyItems
         {
             LanguageAPI.Add("CRUCIFIX", "Crucifix");
             LanguageAPI.Add("CRUCIFIX_NAME", "Crucifix");
-            LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire.</style>");
+            LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire</style>.");
 
             string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
-                $"<style=cDeath>Taking damage burns you for {maxHealthBurnAmount.Value}% max HP over " +
+                $"<style=cDeath>Taking damage burns you for {maxHealthBurnAmount.Value}% max health over " +
                 $"<style=cIsUtility>{fireDuration.Value} <style=cStack>(+{fireDuration.Value} per stack)</style> seconds</style></style>.";
             LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
 

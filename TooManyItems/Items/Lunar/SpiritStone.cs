@@ -209,7 +209,7 @@ namespace TooManyItems
             string desc = $"Killing an enemy permanently grants " +
                 $"<style=cIsUtility>{shieldPerKill.Value} <style=cStack>(+{shieldPerKill.Value} per stack)</style> " +
                 $"shield</style>. " +
-                $"<style=cDeath>Lose {maxHealthLost.Value}% <style=cStack>(+{maxHealthLost.Value}% per stack)</style> max HP</style>.";
+                $"<style=cDeath>Lose {maxHealthLost.Value}% <style=cStack>(+{maxHealthLost.Value}% per stack)</style> max health</style>.";
             LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
 
             string lore = "";
