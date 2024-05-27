@@ -14,6 +14,7 @@ namespace TooManyItems
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInDependency("com.droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency("shirograhm.PartialLuckPlugin", BepInDependency.DependencyFlags.HardDependency)]
 
     // This attribute is required, and lists metadata for your plugin.
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
