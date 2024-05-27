@@ -140,7 +140,7 @@ namespace TooManyItems
             LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
             LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
 
-            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}%-{maxExperienceMultiplierPerStack.Value}%</style> " +
+            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}-{maxExperienceMultiplierPerStack.Value}%</style> " +
                 $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its <style=cIsHealth>max HP</style> as bonus experience, <style=cShrine>scaling with difficulty</style>.";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
