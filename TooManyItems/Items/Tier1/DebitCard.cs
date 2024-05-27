@@ -79,7 +79,7 @@ namespace TooManyItems
                     int count = activator.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        float refundScaling = 1 - (1 / (1 + (rebatePercent * count)));
+                        float refundScaling = Utils.GetHyperbolicStacking(rebatePercent, count);
                         activator.GiveMoney(Convert.ToUInt32(moneyCost * refundScaling));
                     }
                 }

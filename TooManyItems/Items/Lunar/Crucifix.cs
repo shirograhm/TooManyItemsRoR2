@@ -44,7 +44,7 @@ namespace TooManyItems
             "Item: Crucifix",
             "Duration of Fire",
             3,
-            "Duration of fire debuff when taking damage.",
+            "Duration of fire debuff after taking damage.",
             new List<string>()
             {
                 "ITEM_CRUCIFIX_DESC"
@@ -87,7 +87,8 @@ namespace TooManyItems
             {
                 if (victimInfo.inventory == null || victimInfo.body == null || attackerInfo.body == null) return;
 
-                if (victimInfo.inventory.GetItemCount(itemDef) > 0 && attackerInfo.body != victimInfo.body)
+                int count = victimInfo.inventory.GetItemCount(itemDef);
+                if (count > 0 && attackerInfo.body != victimInfo.body)
                 {
                     damageInfo.damage *= (1 - damageReductionPercent);
 
@@ -97,7 +98,7 @@ namespace TooManyItems
                         attackerObject = victimInfo.body.gameObject,
                         totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * maxHealthBurnAmount.Value / 100f,
                         dotIndex = DotController.DotIndex.Burn,
-                        duration = fireDuration.Value,
+                        duration = fireDuration.Value * count,
                         damageMultiplier = 1f
                     };
                     DotController.InflictDot(ref dotInfo);
@@ -108,11 +109,11 @@ namespace TooManyItems
         {
             LanguageAPI.Add("CRUCIFIX", "Crucifix");
             LanguageAPI.Add("CRUCIFIX_NAME", "Crucifix");
-            LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire.</style>");
+            LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire</style>.");
 
             string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
-                $"<style=cDeath>Taking damage sets you on fire for " +
-                $"<style=cIsHealth>{maxHealthBurnAmount.Value}% max HP</style> over <style=cIsUtility>{fireDuration.Value} seconds</style></style>.";
+                $"<style=cDeath>Taking damage burns you for {maxHealthBurnAmount.Value}% max health over " +
+                $"<style=cIsUtility>{fireDuration.Value} <style=cStack>(+{fireDuration.Value} per stack)</style> seconds</style></style>.";
             LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
 
             string lore = "";

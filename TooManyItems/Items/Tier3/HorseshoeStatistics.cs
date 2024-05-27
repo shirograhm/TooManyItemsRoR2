@@ -28,13 +28,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        value,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
                         _armorBonus,
                         _regenerationBonus,
-                        value,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -51,13 +51,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         value,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
                         _armorBonus,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -74,13 +74,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         value,
                         _critChanceBonus,
                         _critDamageBonus,
                         _armorBonus,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -97,13 +97,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         value,
                         _critDamageBonus,
                         _armorBonus,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -120,13 +120,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         value,
                         _armorBonus,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -143,13 +143,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
                         value,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -166,13 +166,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
                         _armorBonus,
                         value,
-                        _maxHealthBonus,
                         _shieldBonus,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -189,13 +189,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
                         _armorBonus,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         value,
                         _moveSpeedPercentBonus
                     ).Send(NetworkDestination.Clients);
@@ -212,13 +212,13 @@ namespace TooManyItems
                 {
                     new Sync(
                         gameObject.GetComponent<NetworkIdentity>().netId,
+                        _maxHealthBonus,
                         _baseDamageBonus,
                         _attackSpeedPercentBonus,
                         _critChanceBonus,
                         _critDamageBonus,
                         _armorBonus,
                         _regenerationBonus,
-                        _maxHealthBonus,
                         _shieldBonus,
                         value
                     ).Send(NetworkDestination.Clients);

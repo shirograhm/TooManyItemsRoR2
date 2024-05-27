@@ -330,7 +330,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can use luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, (int)master.luck));
+                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
                         else
                             values.Add(MagnifyingGlass.analyzeChancePercent * itemCount);
                         
@@ -370,7 +370,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can calculate using luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), (int) master.luck));
+                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
                         else
                             values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
                         

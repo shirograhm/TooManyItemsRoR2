@@ -219,7 +219,7 @@ namespace TooManyItems
         {
             LanguageAPI.Add("CARVING_BLADE", "Carving Blade");
             LanguageAPI.Add("CARVING_BLADE_NAME", "Carving Blade");
-            LanguageAPI.Add("CARVING_BLADE_PICKUP", "Deal bonus damage on-hit based on the enemy's current health. <style=cDeath>You cannot critically strike.</style>");
+            LanguageAPI.Add("CARVING_BLADE_PICKUP", "Deal damage on-hit based on the enemy's current health. <style=cDeath>You cannot critically strike</style>.");
 
             string desc = $"Deal <style=cIsDamage>{percentDamagePerStack.Value}%</style> <style=cStack>(+{percentDamagePerStack.Value}% per stack)</style> of the enemy's current health as bonus on-hit damage. " +
                 $"<style=cDeath>You cannot critically strike.</style>";

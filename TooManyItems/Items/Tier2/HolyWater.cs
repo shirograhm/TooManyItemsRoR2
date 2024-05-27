@@ -11,7 +11,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Killing an elite enemy grants all allies 5% to 50% (+20% per stack) of its max health as bonus experience, scaling with difficulty.
+        // Killing an elite enemy grants all allies 1% to 100% (+50% per stack) of its max health as bonus experience, scaling with difficulty.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Holy Water",
             "Enabled",
@@ -25,7 +25,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> minExperienceMultiplierPerStack = new(
             "Item: Holy Water",
             "Minimum XP Multiplier",
-            5f,
+            1f,
             "Minimum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
             {
@@ -37,7 +37,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxExperienceMultiplierPerStack = new(
             "Item: Holy Water",
             "Maximum XP Multiplier",
-            50f,
+            100f,
             "Maximum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
             {
@@ -49,7 +49,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> extraStacksMultiplier = new(
             "Item: Holy Water",
             "Extra Stack Scaling",
-            20f,
+            50f,
             "Experience bonus for additional stacks.",
             new List<string>()
             {
@@ -140,7 +140,7 @@ namespace TooManyItems
             LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
             LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
 
-            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}%-{maxExperienceMultiplierPerStack.Value}%</style> " +
+            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}-{maxExperienceMultiplierPerStack.Value}%</style> " +
                 $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its <style=cIsHealth>max HP</style> as bonus experience, <style=cShrine>scaling with difficulty</style>.";
             LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
 
