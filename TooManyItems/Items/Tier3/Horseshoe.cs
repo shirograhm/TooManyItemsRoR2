@@ -262,7 +262,7 @@ namespace TooManyItems
                             args.moveSpeedMultAdd += GetScaledValue(component.MoveSpeedPercentBonus, sender.level, count);
 
                             PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
-                            tracker.PartialLuck = GetScaledValue(component.LuckBonus, sender.level, count);
+                            tracker.PartialLuck += GetScaledValue(component.LuckBonus, sender.level, count);
                         }
                     }
                 }
@@ -320,7 +320,7 @@ namespace TooManyItems
                 {
                     float randomPoints;
                     float step = 1.8f;
-                    if (pointsRemaining > step)
+                    if (pointsRemaining > step * 2)
                         randomPoints = UnityEngine.Random.Range(step, step * 2);
                     else
                         randomPoints = pointsRemaining;

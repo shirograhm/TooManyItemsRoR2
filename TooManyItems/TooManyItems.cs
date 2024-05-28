@@ -1,5 +1,6 @@
 using BepInEx;
 using R2API;
+using R2API.Utils;
 using RoR2;
 using RoR2.ExpansionManagement;
 using System.Collections.Generic;
@@ -15,10 +16,9 @@ namespace TooManyItems
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInDependency("com.droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("shirograhm.PartialLuckPlugin", BepInDependency.DependencyFlags.HardDependency)]
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 
-    // This attribute is required, and lists metadata for your plugin.
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-
     public class TooManyItems : BaseUnityPlugin
     {
         public const string PluginGUID = PluginAuthor + "." + PluginName;
