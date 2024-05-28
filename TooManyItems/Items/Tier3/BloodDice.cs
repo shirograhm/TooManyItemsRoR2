@@ -215,22 +215,21 @@ namespace TooManyItems
 
         private static int GetDiceRoll(CharacterMaster atkMaster)
         {
-            int diceRoll = TooManyItems.rand.Next(minHealthGain, maxHealthGain + 1);
+            float mean = 7f, deviation = 2f;
+            if (affectedByLuck.Value) mean += atkMaster.luck * deviation;
+            
+            return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain, maxHealthGain);
+        }
 
-            if (affectedByLuck.Value)
-            {
-                int luckStat = Mathf.CeilToInt(atkMaster.luck);
+        private static int GenerateRollNormalDistribution(float mean, float deviation)
+        {
+            // Box-Mueller transform for normal distribution
+            float x = (float) (1.0 - TooManyItems.rand.NextDouble());
+            float y = (float) (1.0 - TooManyItems.rand.NextDouble());
 
-                for (int i = 0; i < Mathf.Abs(luckStat); i++)
-                {
-                    int newRoll = TooManyItems.rand.Next(minHealthGain, maxHealthGain + 1);
-
-                    if (luckStat > 0) diceRoll = newRoll > diceRoll ? newRoll : diceRoll;
-                    if (luckStat < 0) diceRoll = newRoll < diceRoll ? newRoll : diceRoll;
-                }
-            }
-
-            return diceRoll;
+            float randomSample = Mathf.Sqrt(-2f * Mathf.Log(x)) * Mathf.Sin(2f * Mathf.PI * y);
+            float scaledSample = mean + deviation * randomSample;
+            return Mathf.RoundToInt(scaledSample);
         }
 
         private static void AddTokens()
