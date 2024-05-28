@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using PartialLuckPlugin;
+using R2API;
 using R2API.Networking;
 using RoR2;
 using System;
@@ -235,6 +236,7 @@ namespace TooManyItems
                     {
                         Reroll(self, master.GetBody());
                     }
+
                 }
                 orig(self, index, count);
             };
@@ -259,16 +261,17 @@ namespace TooManyItems
                             args.baseShieldAdd += GetScaledValue(component.ShieldBonus, sender.level, count);
                             args.moveSpeedMultAdd += GetScaledValue(component.MoveSpeedPercentBonus, sender.level, count);
 
-                            sender.master.luck = CalculateLuck(component, sender.inventory);
+                            PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
+                            tracker.PartialLuck = GetScaledValue(component.LuckBonus, sender.level, count);
                         }
                     }
                 }
             };
         }
 
-        public static float CalculateLuck(HorseshoeStatistics component, Inventory inv)
+        public static float CalculateLuck(float bonusLuck, CharacterBody body)
         {
-            return inv.GetItemCount(RoR2Content.Items.Clover) - inv.GetItemCount(RoR2Content.Items.LunarBadLuck) + component.LuckBonus;
+            return body.inventory.GetItemCount(RoR2Content.Items.Clover) - body.inventory.GetItemCount(RoR2Content.Items.LunarBadLuck) + bonusLuck;
         }
 
         public static float GetScaledValue(float value, float level, int count)

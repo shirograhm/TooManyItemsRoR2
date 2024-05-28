@@ -1,7 +1,6 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
-using LookingGlass.StatsDisplay;
+using PartialLuckPlugin;
 using RoR2;
-using System;
 using System.Collections.Generic;
 
 namespace TooManyItems
@@ -330,10 +329,19 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can use luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
+                            if (Integrations.partialLuckEnabled)
+                            {
+                                values.Add(PartialUtils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
+                            }
+                            else
+                            {
+                                values.Add(Utils.GetChanceAfterLuckDiscrete(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
+                            }
                         else
+                        {
                             values.Add(MagnifyingGlass.analyzeChancePercent * itemCount);
-                        
+                        }
+
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("MAGNIFYING_GLASS"), stats);
@@ -370,7 +378,14 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can calculate using luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
+                            if (Integrations.partialLuckEnabled)
+                            {
+                                values.Add(PartialUtils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
+                            }
+                            else
+                            {
+                                values.Add(Utils.GetChanceAfterLuckDiscrete(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
+                            }
                         else
                             values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
                         
