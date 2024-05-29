@@ -11,7 +11,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef consecratedBuff;
 
-        // Pay 80% of your current health to consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. (60 sec)
+        // Pay 90% of your current health to consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. (60 sec)
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Chalice",
             "Enabled",
@@ -55,7 +55,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> currentHealthCost = new(
             "Equipment: Chalice",
             "Current Health Loss",
-            80f,
+            90f,
             "Percent of current health lost as payment when Consecrated.",
             new List<string>()
             {
