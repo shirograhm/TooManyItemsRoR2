@@ -213,10 +213,10 @@ namespace TooManyItems
             };
         }
 
-        private static int GetDiceRoll(CharacterMaster atkMaster)
+        private static int GetDiceRoll(CharacterMaster master)
         {
             float mean = 7f, deviation = 2f;
-            if (affectedByLuck.Value) mean += atkMaster.luck * deviation;
+            if (affectedByLuck.Value) mean += master.luck * deviation;
             
             return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain, maxHealthGain);
         }
