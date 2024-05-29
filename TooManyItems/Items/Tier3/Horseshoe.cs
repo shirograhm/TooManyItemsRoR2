@@ -97,7 +97,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.9f,
+            0.8f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
