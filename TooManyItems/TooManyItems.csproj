@@ -13,12 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="tmiassets" />
     <None Remove="TooManyItems" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="TooManyItems" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,11 +23,10 @@
     </PackageReference>
     <PackageReference Include="BepInEx.Core" Version="5.4.21" />
     <PackageReference Include="R2API" Version="5.0.5" />
-    <PackageReference Include="R2API.Colors" Version="1.0.1" />
-    <PackageReference Include="R2API.ContentManagement" Version="1.0.4" />
-    <PackageReference Include="R2API.DamageType" Version="1.0.4" />
-    <PackageReference Include="R2API.Elites" Version="1.0.3" />
+    <PackageReference Include="R2API.Dot" Version="1.0.*" />
     <PackageReference Include="R2API.Items" Version="1.0.*" />
+    <PackageReference Include="R2API.DamageType" Version="1.1.*" />
+    <PackageReference Include="R2API.Prefab" Version="1.0.3" />
     <PackageReference Include="R2API.Language" Version="1.0.*" />
     <PackageReference Include="R2API.RecalculateStats" Version="1.3.0" />
     <PackageReference Include="RiskOfRain2.GameLibs" Version="1.2.4-r.0" />

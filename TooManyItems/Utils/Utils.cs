@@ -21,17 +21,6 @@ namespace TooManyItems
 
         public static void SetItemTier(ItemDef itemDef, ItemTier tier)
         {
-            try
-            {
-#pragma warning disable Publicizer001
-                itemDef._itemTierDef.tier = tier;
-#pragma warning restore Publicizer001
-            }
-            catch
-            {
-                Log.Debug("Unable to set deprecatedTier.");
-            }
-
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = tier;
@@ -41,18 +30,6 @@ namespace TooManyItems
         public static float getDifficultyAsPercentage()
         {
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
-        }
-
-        public static float GetChanceAfterLuckDiscrete(float percent, float luck)
-        {
-            Mathf.CeilToInt(luck);
-
-            if (luck > 0)
-                return 1f - Mathf.Pow(1f - percent, luck + 1);
-            if (luck < 0)
-                return Mathf.Pow(percent, Mathf.Abs(luck) + 1);
-
-            return percent;
         }
 
         public static float GetExponentialStacking(float percent, int count)

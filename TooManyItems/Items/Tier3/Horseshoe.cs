@@ -261,11 +261,8 @@ namespace TooManyItems
                             args.baseShieldAdd += GetScaledValue(component.ShieldBonus, sender.level, count);
                             args.moveSpeedMultAdd += GetScaledValue(component.MoveSpeedPercentBonus, sender.level, count);
 
-                            if (Integrations.partialLuckEnabled)
-                            {
-                                PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
-                                tracker.PartialLuck += GetScaledValue(component.LuckBonus, sender.level, count);
-                            }
+                            PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
+                            tracker.PartialLuck += GetScaledValue(component.LuckBonus, sender.level, count);
                         }
                     }
                 }

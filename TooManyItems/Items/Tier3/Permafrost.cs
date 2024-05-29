@@ -14,7 +14,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.PERMAFROST_COLOR);
 
-        // Gain 7% (+7% per stack) chance to freeze enemies on-hit. You deal 70% (+70% per stack) bonus damage to frozen enemies.
+        // Dealing damage has a 3% (+3% per stack) chance to freeze enemies. You deal 60% (+30% per stack) bonus damage to frozen enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Permafrost",
             "Enabled",
@@ -28,8 +28,8 @@ namespace TooManyItems
         public static ConfigurableValue<float> freezeChance = new(
             "Item: Permafrost",
             "Freeze Chance",
-            7f,
-            "Chance on-hit to apply freeze.",
+            3f,
+            "Chance to apply freeze when dealing damage.",
             new List<string>()
             {
                 "ITEM_PERMAFROST_DESC"
@@ -38,7 +38,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
             "Bonus Damage to Frozen Enemies",
-            70f,
+            60f,
             "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
             {
@@ -115,8 +115,8 @@ namespace TooManyItems
             LanguageAPI.Add("PERMAFROST_NAME", "Permafrost");
             LanguageAPI.Add("PERMAFROST_PICKUP", "Chance to freeze enemies on-hit. Deal bonus damage to frozen enemies.");
 
-            string desc = $"Gain <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
-                $"chance to freeze enemies on-hit. " +
+            string desc = $"Dealing damage has a <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
+                $"chance to freeze enemies. " +
                 $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}%</style> <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style>" +
                 $" bonus damage to frozen enemies.";
             LanguageAPI.Add("PERMAFROST_DESCRIPTION", desc);
