@@ -581,12 +581,18 @@ namespace TooManyItems
                     stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Luck: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    if (Integrations.partialLuckEnabled)
+                    {
+                        stats.descriptions.Add("Luck: ");
+                        stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                        stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    }
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+
+                        if (Integrations.partialLuckEnabled) empty.Add(0f);
+
                         if (!master || !master.inventory || !master.GetBody()) return empty;
                         
                         var values = new List<float> { };
@@ -602,7 +608,7 @@ namespace TooManyItems
                             values.Add(Horseshoe.GetScaledValue(component.RegenerationBonus, master.GetBody().level, itemCount));
                             values.Add(Horseshoe.GetScaledValue(component.ShieldBonus, master.GetBody().level, itemCount));
                             values.Add(Horseshoe.GetScaledValue(component.MoveSpeedPercentBonus, master.GetBody().level, itemCount));
-                            values.Add(Horseshoe.GetScaledValue(component.LuckBonus, master.GetBody().level, itemCount));
+                            if (Integrations.partialLuckEnabled) values.Add(Horseshoe.GetScaledValue(component.LuckBonus, master.GetBody().level, itemCount));
                         }
                         else
                         {

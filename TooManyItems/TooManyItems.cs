@@ -14,10 +14,10 @@ namespace TooManyItems
     // Dependencies
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
-    [BepInDependency(PartialLuckPlugin.PartialLuckPlugin.PluginGUID)]
 
     [BepInDependency("com.droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
-    
+    [BepInDependency("shirograhm.PartialLuckPlugin", BepInDependency.DependencyFlags.SoftDependency)]
+
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
     public class TooManyItems : BaseUnityPlugin

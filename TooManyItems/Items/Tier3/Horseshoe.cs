@@ -232,7 +232,7 @@ namespace TooManyItems
                 if (component && master && index == itemDef.itemIndex)
                 {
                     // Check if rolled yet
-                    if (HasNotRolledYet(component) && master)
+                    if (HasNotRolledYet(component) && master.GetBody())
                     {
                         Reroll(self, master.GetBody());
                     }
@@ -261,8 +261,11 @@ namespace TooManyItems
                             args.baseShieldAdd += GetScaledValue(component.ShieldBonus, sender.level, count);
                             args.moveSpeedMultAdd += GetScaledValue(component.MoveSpeedPercentBonus, sender.level, count);
 
-                            PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
-                            tracker.PartialLuck += GetScaledValue(component.LuckBonus, sender.level, count);
+                            if (Integrations.partialLuckEnabled)
+                            {
+                                PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
+                                tracker.PartialLuck += GetScaledValue(component.LuckBonus, sender.level, count);
+                            }
                         }
                     }
                 }
