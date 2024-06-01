@@ -208,7 +208,7 @@ namespace TooManyItems
                             }
                         }
                         var stats = attackerBody.inventory.GetComponent<Statistics>();
-                        stats.TotalDamageDealt += damageAmount;
+                        if (stats) stats.TotalDamageDealt += damageAmount;
                     }
                 }
             };

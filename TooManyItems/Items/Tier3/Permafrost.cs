@@ -14,7 +14,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.PERMAFROST_COLOR);
 
-        // Dealing damage has a 5% (+5% per stack) chance to freeze enemies. You deal 75% (+75% per stack) bonus damage to frozen enemies.
+        // Dealing damage has a 3% (+3% per stack) chance to freeze enemies. You deal 90% (+90% per stack) bonus damage to frozen enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Permafrost",
             "Enabled",
@@ -28,7 +28,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> freezeChance = new(
             "Item: Permafrost",
             "Freeze Chance",
-            5f,
+            3f,
             "Chance to apply freeze when dealing damage.",
             new List<string>()
             {
@@ -38,7 +38,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
             "Bonus Damage to Frozen Enemies",
-            75f,
+            90f,
             "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
             {

@@ -46,7 +46,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damagePerPoint = new(
             "Item: Golden Horseshoe",
             "Damage Per Point",
-            1f,
+            0.75f,
             "Base damage gained per stat point invested.",
             new List<string>()
             {
@@ -97,7 +97,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
-            0.8f,
+            0.75f,
             "Regeneration gained per stat point invested.",
             new List<string>()
             {
@@ -127,7 +127,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> luckPerPoint = new(
             "Item: Golden Horseshoe",
             "Luck Per Point",
-            0.02f,
+            0.025f,
             "Luck gained per stat point invested.",
             new List<string>()
             {
