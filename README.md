@@ -53,7 +53,7 @@ Dealing damage burns enemies for 1.5% (+1.5% per stack) max health over 5 second
 - **Fleece Hoodie**  
 The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 8 (-15% per stack) seconds.
 
-**Holy Water**  
+- **Holy Water**  
 Killing an elite enemy grants all allies 1% to 100% (+50% per stack) of its' max health as bonus experience, scaling with difficulty.  
 
 - **Magnifying Glass**  
