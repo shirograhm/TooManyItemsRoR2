@@ -269,11 +269,6 @@ namespace TooManyItems
             };
         }
 
-        public static float CalculateLuck(float bonusLuck, CharacterBody body)
-        {
-            return body.inventory.GetItemCount(RoR2Content.Items.Clover) - body.inventory.GetItemCount(RoR2Content.Items.LunarBadLuck) + bonusLuck;
-        }
-
         public static float GetScaledValue(float value, float level, int count)
         {
             // Level 1 -> 100%, Level 11 -> 200%, Level 21 -> 300%, Level 31 -> 400%

@@ -239,7 +239,8 @@ namespace TooManyItems
             LanguageAPI.Add("BLOOD_DICE_PICKUP", "Gain permanent health on kill.");
 
             string desc = $"On kill, permanently gain <style=cIsHealth>{minHealthGain}-{maxHealthGain} HP</style>, " +
-                $"up to a maximum of <style=cIsHealth>{maxHealthPerStack.Value} <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> HP</style>.";
+                $"up to a maximum of <style=cIsHealth>{maxHealthPerStack.Value} <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> HP</style>. ";
+            if (affectedByLuck.Value) desc += "<style=cIsUtility>Affected by luck</style>.";
             LanguageAPI.Add("BLOOD_DICE_DESCRIPTION", desc);
 
             string lore = "";
