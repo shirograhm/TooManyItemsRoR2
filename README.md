@@ -6,8 +6,6 @@ Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod
 | v0.1.x           | v1.5.0 |
 | v0.2.0 and after | v1.5.1 and after |
 
-Requires [PartialLuckPlugin]() to run.
-
 ## Items Added
 The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
 
@@ -41,7 +39,7 @@ Gain a random assortment of stat bonuses that are rerolled upon entering a new s
 Increase max health by 150. Deal 2% (+2% per stack) of your max health as bonus on-hit damage.
 
 - **Permafrost**  
-Dealing damage has a 5% (+5% per stack) chance to freeze enemies. You deal 75% (+75% per stack) bonus damage to frozen enemies.
+Dealing damage has a 3% (+3% per stack) chance to freeze enemies. You deal 90% (+90% per stack) bonus damage to frozen enemies.
 
 - **Rusty Trowel**  
 On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack.
