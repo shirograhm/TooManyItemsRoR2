@@ -113,7 +113,7 @@ namespace TooManyItems
         {
             LanguageAPI.Add("PERMAFROST", "Permafrost");
             LanguageAPI.Add("PERMAFROST_NAME", "Permafrost");
-            LanguageAPI.Add("PERMAFROST_PICKUP", "Chance to freeze enemies on-hit. Deal bonus damage to frozen enemies.");
+            LanguageAPI.Add("PERMAFROST_PICKUP", "Dealing damage has a chance to freeze enemies. Deal bonus damage to frozen enemies.");
 
             string desc = $"Dealing damage has a <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
                 $"chance to freeze enemies. " +
