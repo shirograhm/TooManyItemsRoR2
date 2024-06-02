@@ -1,5 +1,4 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
-using PartialLuckPlugin;
 using RoR2;
 using System.Collections.Generic;
 
@@ -173,6 +172,22 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("CARVING_BLADE"), stats);
                 }
 
+                // Crucifix
+                if (Crucifix.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Burn Duration: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            Crucifix.fireDuration * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("CRUCIFIX"), stats);
+                }
+
                 // Debit Card
                 if (DebitCard.isEnabled.Value)
                 {
@@ -329,7 +344,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can use luck
                         if (master)
-                            values.Add(PartialUtils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
+                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
                         else
                             values.Add(MagnifyingGlass.analyzeChancePercent * itemCount);
 
@@ -369,7 +384,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can calculate using luck
                         if (master)
-                            values.Add(PartialUtils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
+                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
                         else
                             values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
                         
@@ -565,12 +580,12 @@ namespace TooManyItems
                     stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Luck: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    //stats.descriptions.Add("Luck: ");
+                    //stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    //stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
 
                         if (!master || !master.inventory || !master.GetBody()) return empty;
                         
@@ -587,7 +602,7 @@ namespace TooManyItems
                             values.Add(Horseshoe.GetScaledValue(component.RegenerationBonus, master.GetBody().level, itemCount));
                             values.Add(Horseshoe.GetScaledValue(component.ShieldBonus, master.GetBody().level, itemCount));
                             values.Add(Horseshoe.GetScaledValue(component.MoveSpeedPercentBonus, master.GetBody().level, itemCount));
-                            values.Add(Horseshoe.GetScaledValue(component.LuckBonus, master.GetBody().level, itemCount));
+                            //values.Add(Horseshoe.GetScaledValue(component.LuckBonus, master.GetBody().level, itemCount));
                         }
                         else
                         {

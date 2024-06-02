@@ -154,9 +154,9 @@ namespace TooManyItems
             CharacterBody body = slot.characterBody;
             if (body)
             {
-                float damageToTake = body.healthComponent.combinedHealth * currentHealthCostPercent;
+                float damageToTake = body.healthComponent.health * currentHealthCostPercent;
                 // Escape the method if the activation would kill ourself
-                if (body.healthComponent.fullCombinedHealth <= damageToTake) return false;
+                if (body.healthComponent.combinedHealth <= damageToTake) return false;
 
                 DamageInfo useCost = new()
                 {
