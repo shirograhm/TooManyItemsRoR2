@@ -213,24 +213,23 @@ namespace TooManyItems
             };
         }
 
-        private static int GetDiceRoll(CharacterMaster atkMaster)
+        private static int GetDiceRoll(CharacterMaster master)
         {
-            int diceRoll = TooManyItems.rand.Next(minHealthGain, maxHealthGain + 1);
+            float mean = 7f, deviation = 2f;
+            if (affectedByLuck.Value) mean += master.luck * deviation;
+            
+            return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain, maxHealthGain);
+        }
 
-            if (affectedByLuck.Value)
-            {
-                int luckStat = Mathf.CeilToInt(atkMaster.luck);
+        private static int GenerateRollNormalDistribution(float mean, float deviation)
+        {
+            // Box-Mueller transform for normal distribution
+            float x = (float) (1.0 - TooManyItems.rand.NextDouble());
+            float y = (float) (1.0 - TooManyItems.rand.NextDouble());
 
-                for (int i = 0; i < Mathf.Abs(luckStat); i++)
-                {
-                    int newRoll = TooManyItems.rand.Next(minHealthGain, maxHealthGain + 1);
-
-                    if (luckStat > 0) diceRoll = newRoll > diceRoll ? newRoll : diceRoll;
-                    if (luckStat < 0) diceRoll = newRoll < diceRoll ? newRoll : diceRoll;
-                }
-            }
-
-            return diceRoll;
+            float randomSample = Mathf.Sqrt(-2f * Mathf.Log(x)) * Mathf.Sin(2f * Mathf.PI * y);
+            float scaledSample = mean + deviation * randomSample;
+            return Mathf.RoundToInt(scaledSample);
         }
 
         private static void AddTokens()
@@ -240,8 +239,8 @@ namespace TooManyItems
             LanguageAPI.Add("BLOOD_DICE_PICKUP", "Gain permanent health on kill.");
 
             string desc = $"On kill, permanently gain <style=cIsHealth>{minHealthGain}-{maxHealthGain} HP</style>, " +
-                $"<style=cShrine>scaling with luck</style>. " +
-                $"Stacks up to a maximum of <style=cIsHealth>{maxHealthPerStack.Value} <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> HP</style>.";
+                $"up to a maximum of <style=cIsHealth>{maxHealthPerStack.Value} <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> HP</style>. ";
+            if (affectedByLuck.Value) desc += "<style=cIsUtility>Affected by luck</style>.";
             LanguageAPI.Add("BLOOD_DICE_DESCRIPTION", desc);
 
             string lore = "";

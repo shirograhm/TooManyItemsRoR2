@@ -169,15 +169,14 @@ namespace TooManyItems
                 orig(self, damageInfo, victim);
 
                 if (!NetworkServer.active) return;
+                // Return if no attacker or no victim
                 if (damageInfo.attacker == null || victim == null) return;
 
                 CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
                 CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-
                 if (attackerBody != null && attackerBody.inventory != null)
                 {
                     int count = attackerBody.inventory.GetItemCount(itemDef);
-
                     if (count > 0)
                     {
                         float damageAmount = CalculateDamageOnHit(victimBody, count);
@@ -209,7 +208,7 @@ namespace TooManyItems
                             }
                         }
                         var stats = attackerBody.inventory.GetComponent<Statistics>();
-                        stats.TotalDamageDealt += damageAmount;
+                        if (stats) stats.TotalDamageDealt += damageAmount;
                     }
                 }
             };

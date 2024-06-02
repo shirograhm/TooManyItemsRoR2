@@ -1,6 +1,7 @@
 ﻿using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -21,26 +22,10 @@ namespace TooManyItems
 
         public static void SetItemTier(ItemDef itemDef, ItemTier tier)
         {
-            try
-            {
-#pragma warning disable Publicizer001
-                itemDef._itemTierDef.tier = tier;
-#pragma warning restore Publicizer001
-            }
-            catch
-            {
-                Log.Debug("Unable to set deprecatedTier.");
-            }
-
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = tier;
             });
-        }
-
-        public static float getDifficultyAsPercentage()
-        {
-            return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
         }
 
         public static float GetChanceAfterLuck(float percent, float luckIn)
@@ -53,6 +38,11 @@ namespace TooManyItems
                 return Mathf.Pow(percent, Mathf.Abs(luck) + 1);
 
             return percent;
+        }
+
+        public static float getDifficultyAsPercentage()
+        {
+            return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
         }
 
         public static float GetExponentialStacking(float percent, int count)

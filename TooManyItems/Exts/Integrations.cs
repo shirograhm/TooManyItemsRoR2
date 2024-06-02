@@ -13,7 +13,7 @@ namespace TooManyItems
             {
                 try
                 {
-                    Log.Debug("LookingGlass detected, running integrations for TooManyItems.");
+                    Log.Debug("Running code injection for LookingGlass.");
                     LookingGlassIntegration.Init();
                     lookingGlassEnabled = true;
                 }

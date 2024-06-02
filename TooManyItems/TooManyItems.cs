@@ -1,5 +1,6 @@
 using BepInEx;
 using R2API;
+using R2API.Utils;
 using RoR2;
 using RoR2.ExpansionManagement;
 using System.Collections.Generic;
@@ -13,17 +14,19 @@ namespace TooManyItems
     // Dependencies
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
-    [BepInDependency("com.droppod.lookingglass", BepInDependency.DependencyFlags.SoftDependency)]
-
-    // This attribute is required, and lists metadata for your plugin.
+    [BepInDependency(RecalculateStatsAPI.PluginGUID)]
+    // Soft Dependencies
+    [BepInDependency(LookingGlass.PluginInfo.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
+    // Compatibility
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
+    
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
-
     public class TooManyItems : BaseUnityPlugin
     {
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.3.5";
+        public const string PluginVersion = "0.3.6";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -184,10 +187,13 @@ namespace TooManyItems
 
         //private void DropItem(ItemDef def)
         //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //    {
+        //        var transform = controller.master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
+        //        Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+        //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
+        //    }
         //}
 
         //private void DropItem(EquipmentDef def)

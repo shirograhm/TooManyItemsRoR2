@@ -1,7 +1,5 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
-using LookingGlass.StatsDisplay;
 using RoR2;
-using System;
 using System.Collections.Generic;
 
 namespace TooManyItems
@@ -174,6 +172,22 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("CARVING_BLADE"), stats);
                 }
 
+                // Crucifix
+                if (Crucifix.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Burn Duration: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            Crucifix.fireDuration * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("CRUCIFIX"), stats);
+                }
+
                 // Debit Card
                 if (DebitCard.isEnabled.Value)
                 {
@@ -333,7 +347,7 @@ namespace TooManyItems
                             values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
                         else
                             values.Add(MagnifyingGlass.analyzeChancePercent * itemCount);
-                        
+
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("MAGNIFYING_GLASS"), stats);
@@ -566,54 +580,29 @@ namespace TooManyItems
                     stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    //stats.descriptions.Add("Luck: ");
+                    //stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    //stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+
                         if (!master || !master.inventory || !master.GetBody()) return empty;
                         
                         var values = new List<float> { };
                         var component = master.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
-                            var valueDict = Horseshoe.GetScaledValues(component, master.GetBody().level, itemCount);
-
-                            float temp = 0;
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.HEALTH, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.DAMAGE, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.ATTACK_SPEED, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.CRIT_CHANCE, out temp))
-                                values.Add(temp / 100f);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.CRIT_DAMAGE, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.ARMOR, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.HEALTH_REGEN, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.SHIELD, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
-                            if (valueDict.TryGetValue(Horseshoe.Bonuses.MOVEMENT_SPEED, out temp))
-                                values.Add(temp);
-                            else
-                                values.Add(0f);
+                            values.Add(Horseshoe.GetScaledValue(component.MaxHealthBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.BaseDamageBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.AttackSpeedPercentBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.CritChanceBonus, master.GetBody().level, itemCount) / 100f);
+                            values.Add(Horseshoe.GetScaledValue(component.CritDamageBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.ArmorBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.RegenerationBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.ShieldBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.MoveSpeedPercentBonus, master.GetBody().level, itemCount));
+                            //values.Add(Horseshoe.GetScaledValue(component.LuckBonus, master.GetBody().level, itemCount));
                         }
                         else
                         {
