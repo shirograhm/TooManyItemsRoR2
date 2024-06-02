@@ -123,16 +123,16 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
-        public static ConfigurableValue<float> luckPerPoint = new(
-            "Item: Golden Horseshoe",
-            "Luck Per Point",
-            0.025f,
-            "Luck gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
-        );
+        //public static ConfigurableValue<float> luckPerPoint = new(
+        //    "Item: Golden Horseshoe",
+        //    "Luck Per Point",
+        //    0.025f,
+        //    "Luck gained per stat point invested.",
+        //    new List<string>()
+        //    {
+        //        "ITEM_HORSESHOE_DESC"
+        //    }
+        //);
         public static ConfigurableValue<int> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
