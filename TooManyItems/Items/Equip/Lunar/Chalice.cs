@@ -78,7 +78,6 @@ namespace TooManyItems
         {
             GenerateEquipment();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
@@ -179,24 +178,6 @@ namespace TooManyItems
                 return true;
             }
             return false;
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("CHALICE", "Chalice");
-            LanguageAPI.Add("CHALICE_NAME", "Chalice");
-            LanguageAPI.Add("CHALICE_PICKUP", "<style=cDeath>Pay a portion of your current health</style> to grant all allies bonus damage and attack speed.");
-
-            string desc = $"<style=cDeath>Pay {currentHealthCost.Value}% of your current health</style> to " +
-                $"<style=cWorldEvent>Consecrate</style> yourself and all allies. " +
-                $"<style=cWorldEvent>Consecrated</style> units gain " +
-                $"<style=cIsDamage>{consecrateDamageBonus.Value}% damage</style> and " +
-                $"<style=cIsDamage>{consecrateAttackSpeedBonus.Value}% attack speed</style> for " +
-                $"<style=cIsUtility>{consecrateDuration.Value} seconds</style>.";
-            LanguageAPI.Add("CHALICE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("CHALICE_LORE", lore);
         }
     }
 }

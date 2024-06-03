@@ -102,7 +102,6 @@ namespace TooManyItems
         {
             GenerateEquipment();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
@@ -238,24 +237,6 @@ namespace TooManyItems
 
             Utils.ForceRecalculate(body);
             return true;
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BUFF_TOTEM", "Totem of Prayer");
-            LanguageAPI.Add("BUFF_TOTEM_NAME", "Totem of Prayer");
-            LanguageAPI.Add("BUFF_TOTEM_PICKUP", "Pray to the totem to receive a random buff.");
-
-            string desc = $"On activation, gain " +
-                $"<style=cEvent>{armorIncrease.Value} armor</style>, " +
-                $"<style=cIsDamage>{damageIncrease.Value}% damage</style>, " +
-                $"<style=cIsUtility>{attackSpeedIncrease.Value}% attack speed</style>, " +
-                $"or <style=cIsHealing>{regenIncrease.Value}% max HP/s regeneration</style> " +
-                $"for <style=cIsUtility>{buffDuration.Value} seconds</style>.";
-            LanguageAPI.Add("BUFF_TOTEM_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BUFF_TOTEM_LORE", lore);
         }
     }
 }

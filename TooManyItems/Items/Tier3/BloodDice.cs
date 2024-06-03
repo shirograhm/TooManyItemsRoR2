@@ -109,7 +109,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -127,6 +126,7 @@ namespace TooManyItems
             itemDef.nameToken = "BLOOD_DICE_NAME";
             itemDef.pickupToken = "BLOOD_DICE_PICKUP";
             itemDef.descriptionToken = "BLOOD_DICE_DESCRIPTION";
+            if (affectedByLuck.Value) itemDef.descriptionToken += "BLOOD_DICE_DESCRIPTION_LUCK";
             itemDef.loreToken = "BLOOD_DICE_LORE";
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
@@ -230,21 +230,6 @@ namespace TooManyItems
             float randomSample = Mathf.Sqrt(-2f * Mathf.Log(x)) * Mathf.Sin(2f * Mathf.PI * y);
             float scaledSample = mean + deviation * randomSample;
             return Mathf.RoundToInt(scaledSample);
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BLOOD_DICE", "Blood Dice");
-            LanguageAPI.Add("BLOOD_DICE_NAME", "Blood Dice");
-            LanguageAPI.Add("BLOOD_DICE_PICKUP", "Gain permanent health on kill.");
-
-            string desc = $"On kill, permanently gain <style=cIsHealth>{minHealthGain}-{maxHealthGain} HP</style>, " +
-                $"up to a maximum of <style=cIsHealth>{maxHealthPerStack.Value} <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> HP</style>. ";
-            if (affectedByLuck.Value) desc += "<style=cIsUtility>Affected by luck</style>.";
-            LanguageAPI.Add("BLOOD_DICE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BLOOD_DICE_LORE", lore);
         }
     }
 }

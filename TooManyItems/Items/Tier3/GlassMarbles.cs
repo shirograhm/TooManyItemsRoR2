@@ -34,7 +34,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -79,19 +78,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("GLASS_MARBLES", "Glass Marbles");
-            LanguageAPI.Add("GLASS_MARBLES_NAME", "Glass Marbles");
-            LanguageAPI.Add("GLASS_MARBLES_PICKUP", "Gain base damage per level.");
-
-            string desc = $"Gain <style=cIsDamage>{damagePerLevelPerStack.Value}</style> <style=cStack>(+{damagePerLevelPerStack.Value} per stack)</style> base damage per level.";
-            LanguageAPI.Add("GLASS_MARBLES_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("GLASS_MARBLES_LORE", lore);
         }
     }
 }

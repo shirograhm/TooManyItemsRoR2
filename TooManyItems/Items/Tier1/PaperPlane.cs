@@ -35,7 +35,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -92,20 +91,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("PAPER_PLANE", "Paper Plane");
-            LanguageAPI.Add("PAPER_PLANE_NAME", "Paper Plane");
-            LanguageAPI.Add("PAPER_PLANE_PICKUP", "Gain movement speed while airborne.");
-
-            string desc = $"Gain <style=cIsUtility>{movespeedIncrease.Value}%</style> " +
-                $"<style=cStack>(+{movespeedIncrease.Value}% per stack)</style> movement speed while airborne.";
-            LanguageAPI.Add("PAPER_PLANE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("PAPER_PLANE_LORE", lore);
         }
     }
 }

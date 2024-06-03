@@ -35,7 +35,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -80,19 +79,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("MILK_CARTON", "Milk Carton");
-            LanguageAPI.Add("MILK_CARTON_NAME", "Milk Carton");
-            LanguageAPI.Add("MILK_CARTON_PICKUP", "Reduce damage taken from elites.");
-
-            string desc = $"Reduce damage taken from elite enemies by <style=cIsUtility>{eliteDamageReduction.Value}%</style> <style=cStack>(+{eliteDamageReduction.Value}% per stack)</style>.";
-            LanguageAPI.Add("MILK_CARTON_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("MILK_CARTON_LORE", lore);
         }
     }
 }

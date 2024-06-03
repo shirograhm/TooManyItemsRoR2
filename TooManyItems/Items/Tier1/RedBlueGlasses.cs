@@ -46,7 +46,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -91,20 +90,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("REDBLUE_GLASSES", "3D Glasses");
-            LanguageAPI.Add("REDBLUE_GLASSES_NAME", "3D Glasses");
-            LanguageAPI.Add("REDBLUE_GLASSES_PICKUP", "Gain a small amount of crit chance and crit damage.");
-
-            string desc = $"Gain <style=cIsDamage>{critChancePerStack.Value}% <style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance</style> and " +
-                $"<style=cIsDamage>{critDamagePerStack.Value}% <style=cStack>(+{critDamagePerStack.Value}% per stack)</style> crit damage</style>.";
-            LanguageAPI.Add("REDBLUE_GLASSES_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("REDBLUE_GLASSES_LORE", lore);
         }
     }
 }

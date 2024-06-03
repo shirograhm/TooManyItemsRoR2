@@ -31,12 +31,20 @@ namespace TooManyItems
                 "ITEM_EDIBLEGLUE_DESC"
             }
         );
-        public static float slowDuration = 4f;
+        public static ConfigurableValue<float> slowDuration = new(
+            "Item: Edible Glue",
+            "Slow Duration",
+            4f,
+            "Slow duration.",
+            new List<string>()
+            {
+                "ITE_EDIBLEGLUE_DESC",
+            }
+        );
 
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -95,25 +103,12 @@ namespace TooManyItems
                             CharacterBody parent = hb.healthComponent.body;
                             if (parent && parent != atkBody)
                             {
-                                parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration);
+                                parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
                             }
                         }
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("EDIBLE_GLUE", "Edible Glue");
-            LanguageAPI.Add("EDIBLE_GLUE_NAME", "Edible Glue");
-            LanguageAPI.Add("EDIBLE_GLUE_PICKUP", "On kill, slow nearby enemies.");
-
-            string desc = $"On kill, slow enemies within <style=cIsUtility>{slowRadiusPerStack.Value}m</style> <style=cStack>(+{slowRadiusPerStack.Value}m per stack)</style> by <style=cIsUtility>80%</style> for <style=cIsUtility>2 seconds</style>.";
-            LanguageAPI.Add("EDIBLE_GLUE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("EDIBLE_GLUE_LORE", lore);
         }
     }
 }

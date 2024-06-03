@@ -55,7 +55,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -104,20 +103,6 @@ namespace TooManyItems
                     DotController.InflictDot(ref dotInfo);
                 }
             };
-        }
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("CRUCIFIX", "Crucifix");
-            LanguageAPI.Add("CRUCIFIX_NAME", "Crucifix");
-            LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire</style>.");
-
-            string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
-                $"<style=cDeath>Taking damage burns you for {maxHealthBurnAmount.Value}% max health over " +
-                $"<style=cIsUtility>{fireDuration.Value} <style=cStack>(+{fireDuration.Value} per stack)</style> seconds</style></style>.";
-            LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("CRUCIFIX_LORE", lore);
         }
     }
 }

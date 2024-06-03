@@ -62,7 +62,6 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -167,21 +166,6 @@ namespace TooManyItems
                 }
                 orig(self, buffDef, duration);
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("HOODIE", "Fleece Hoodie");
-            LanguageAPI.Add("HOODIE_NAME", "Fleece Hoodie");
-            LanguageAPI.Add("HOODIE_PICKUP", "The next timed buff received lasts longer. Recharges over time.");
-
-            string desc = $"The next timed buff received has its duration increased by " +
-                $"<style=cIsUtility>{durationIncrease.Value}%</style> <style=cStack>(+{durationIncrease.Value}% per stack)</style>. " +
-                $"Recharges every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>.";
-            LanguageAPI.Add("HOODIE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("HOODIE_LORE", lore);
         }
     }
 }

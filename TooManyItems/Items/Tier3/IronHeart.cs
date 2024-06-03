@@ -111,7 +111,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -217,20 +216,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("IRON_HEART", "Iron Heart");
-            LanguageAPI.Add("IRON_HEART_NAME", "Iron Heart");
-            LanguageAPI.Add("IRON_HEART_PICKUP", "Deal bonus damage on-hit based on your max health.");
-
-            string desc = $"Gain <style=cIsHealth>{healthIncrease.Value} HP</style>. " +
-                $"Deal <style=cIsDamage>{percentDamagePerStack.Value}%</style> <style=cStack>(+{percentDamagePerStack.Value}% per stack)</style> of your max health as bonus on-hit damage.";
-            LanguageAPI.Add("IRON_HEART_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("IRON_HEART_LORE", lore);
         }
     }
 }

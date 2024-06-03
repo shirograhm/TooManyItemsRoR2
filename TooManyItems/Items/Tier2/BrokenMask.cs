@@ -117,7 +117,6 @@ namespace TooManyItems
             GenerateItem();
             GenerateBuff();
             GenerateDot();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -243,20 +242,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BROKEN_MASK", "Broken Mask");
-            LanguageAPI.Add("BROKEN_MASK_NAME", "Broken Mask");
-            LanguageAPI.Add("BROKEN_MASK_PICKUP", "Dealing damage burns enemies for a portion of their max health.");
-
-            string desc = $"Dealing damage burns enemies for <style=cIsDamage>{burnDamage.Value}%</style> <style=cStack>(+{burnDamage.Value}% per stack)</style> " +
-                $"of their max health over <style=cIsUtility>{burnDuration.Value} seconds</style>.";
-            LanguageAPI.Add("BROKEN_MASK_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BROKEN_MASK_LORE", lore);
         }
     }
 }

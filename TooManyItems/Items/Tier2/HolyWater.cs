@@ -61,7 +61,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -132,21 +131,6 @@ namespace TooManyItems
             float multiplier = minExperienceMultiplierAsPercent + difference * Utils.getDifficultyAsPercentage();
 
             return multiplier * (1 + extraStacksMultiplierPercent * (itemCount - 1));
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("HOLY_WATER", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
-
-            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}-{maxExperienceMultiplierPerStack.Value}%</style> " +
-                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its <style=cIsHealth>max HP</style> as bonus experience. " +
-                $"<style=cIsUtility>Scales over time.</style>.";
-            LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("HOLY_WATER_LORE", lore);
         }
     }
 }

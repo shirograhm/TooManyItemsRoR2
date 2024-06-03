@@ -58,7 +58,6 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -143,21 +142,6 @@ namespace TooManyItems
                     damageInfo.damage *= 1 + damageTakenBonusPercent;
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("MAGNIFYING_GLASS", "Magnifying Glass");
-            LanguageAPI.Add("MAGNIFYING_GLASS_NAME", "Magnifying Glass");
-            LanguageAPI.Add("MAGNIFYING_GLASS_PICKUP", "Critical strikes sometimes cause enemies to take more damage.");
-
-            string desc = $"Gain <style=cIsDamage>{critBonus.Value}% crit chance</style>. " +
-                $"<style=cIsDamage>Critical strikes</style> have a <style=cIsUtility>{analyzeChance.Value}%</style> <style=cStack>(+{analyzeChance.Value}% per stack)</style> chance to <style=cWorldEvent>Analyze</style> the enemy, " +
-                $"increasing their damage taken by <style=cIsDamage>{damageTakenBonus.Value}%</style> from all sources.";
-            LanguageAPI.Add("MAGNIFYING_GLASS_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("MAGNIFYING_GLASS_LORE", lore);
         }
     }
 }

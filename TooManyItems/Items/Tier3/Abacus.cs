@@ -37,7 +37,6 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -118,22 +117,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("ABACUS", "Abacus");
-            LanguageAPI.Add("ABACUS_NAME", "Abacus");
-            LanguageAPI.Add("ABACUS_PICKUP", "Killing enemies grants stacking crit chance until the next stage. Excess crit chance grants bonus crit damage.");
-
-            string desc = $"Killing an enemy grants <style=cIsDamage>{critChancePerStack.Value}% " +
-                $"<style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance</style> until the next stage. " +
-                $"Every <style=cIsDamage>1% crit chance</style> above <style=cIsUtility>100%</style> grants " +
-                $"<style=cIsDamage>1% crit damage</style>.";
-            LanguageAPI.Add("ABACUS_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("ABACUS_LORE", lore);
         }
     }
 }

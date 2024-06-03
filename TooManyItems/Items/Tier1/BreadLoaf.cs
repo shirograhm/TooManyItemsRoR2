@@ -36,7 +36,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -96,21 +95,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BREAD_LOAF", "Loaf of Bread");
-            LanguageAPI.Add("BREAD_LOAF_NAME", "Loaf of Bread");
-            LanguageAPI.Add("BREAD_LOAF_PICKUP", "While the teleporter is charging, killing enemies heals you.");
-
-            string desc = $"While the teleporter is charging, killing enemies heals you for " +
-                $"<style=cIsHealing>{healthGainOnKill.Value}%</style> " +
-                $"<style=cStack>(+{healthGainOnKill.Value}% per stack)</style> of your missing health.";
-            LanguageAPI.Add("BREAD_LOAF_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BREAD_LOAF_LORE", lore);
         }
     }
 }

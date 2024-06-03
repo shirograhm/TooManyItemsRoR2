@@ -35,7 +35,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -80,20 +79,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BOTTLE_CAP", "Bottle Cap");
-            LanguageAPI.Add("BOTTLE_CAP_NAME", "Bottle Cap");
-            LanguageAPI.Add("BOTTLE_CAP_PICKUP", "Reduce the cooldown of your ultimate skill.");
-
-            string desc = $"Reduce your ultimate skill cooldown by <style=cIsUtility>{ultimateCDR.Value}%</style> " +
-                $"<style=cStack>(+{ultimateCDR.Value}% per stack)</style>.";
-            LanguageAPI.Add("BOTTLE_CAP_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BOTTLE_CAP_LORE", lore);
         }
     }
 }

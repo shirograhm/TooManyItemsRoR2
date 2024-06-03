@@ -107,7 +107,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -198,22 +197,6 @@ namespace TooManyItems
 
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("SPIRIT_STONE", "Spirit Stone");
-            LanguageAPI.Add("SPIRIT_STONE_NAME", "Spirit Stone");
-            LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Lose a portion of your max health</style>.");
-
-            string desc = $"Killing an enemy permanently grants " +
-                $"<style=cIsUtility>{shieldPerKill.Value} <style=cStack>(+{shieldPerKill.Value} per stack)</style> " +
-                $"shield</style>. " +
-                $"<style=cDeath>Lose {maxHealthLost.Value}% <style=cStack>(+{maxHealthLost.Value}% per stack)</style> max health</style>.";
-            LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("SPIRIT_STONE_LORE", lore);
         }
     }
 }

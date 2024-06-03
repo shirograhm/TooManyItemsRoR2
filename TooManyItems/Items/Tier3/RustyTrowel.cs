@@ -121,7 +121,6 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -248,21 +247,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("RUSTED_TROWEL", "Rusty Trowel");
-            LanguageAPI.Add("RUSTED_TROWEL_NAME", "Rusty Trowel");
-            LanguageAPI.Add("RUSTED_TROWEL_PICKUP", "Harvest Mulch on-hit. Heal periodically based on Mulch stacks.");
-
-            string desc = $"On-hit, gain <style=cIsUtility>1</style> <style=cStack>(+1 per stack)</style> Mulch. " +
-                $"Every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>, " +
-                $"heal <style=cIsHealing>{healingPerStack.Value} HP</style> for each stack of Mulch received.";
-            LanguageAPI.Add("RUSTED_TROWEL_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("RUSTED_TROWEL_LORE", lore);
         }
     }
 }

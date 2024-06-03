@@ -117,7 +117,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -205,20 +204,6 @@ namespace TooManyItems
 
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("SOUL_RING", "Soul Ring");
-            LanguageAPI.Add("SOUL_RING_NAME", "Soul Ring");
-            LanguageAPI.Add("SOUL_RING_PICKUP", "Gain permanent health regen on kill.");
-
-            string desc = $"On kill, permanently increase your health regeneration by <style=cIsHealing>{healthRegenOnKill.Value} HP/s</style>, " +
-                $"up to a maximum of <style=cIsHealing>{maxRegenOnFirstStack.Value} <style=cStack>(+{maxRegenForExtraStacks.Value} per stack)</style> HP/s</style>.";
-            LanguageAPI.Add("SOUL_RING_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("SOUL_RING_LORE", lore);
         }
     }
 }

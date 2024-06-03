@@ -51,7 +51,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -107,22 +106,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("PERMAFROST", "Permafrost");
-            LanguageAPI.Add("PERMAFROST_NAME", "Permafrost");
-            LanguageAPI.Add("PERMAFROST_PICKUP", "Dealing damage has a chance to freeze enemies. Deal bonus damage to frozen enemies.");
-
-            string desc = $"Dealing damage has a <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
-                $"chance to freeze enemies. " +
-                $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}%</style> <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style>" +
-                $" bonus damage to frozen enemies.";
-            LanguageAPI.Add("PERMAFROST_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("PERMAFROST_LORE", lore);
         }
     }
 }

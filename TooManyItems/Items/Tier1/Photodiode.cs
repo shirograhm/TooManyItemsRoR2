@@ -60,7 +60,6 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -141,20 +140,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("PHOTODIODE", "Photodiode");
-            LanguageAPI.Add("PHOTODIODE_NAME", "Photodiode");
-            LanguageAPI.Add("PHOTODIODE_PICKUP", "Gain temporary attack speed on-hit.");
-
-            string desc = $"On-hit, gain <style=cIsDamage>{attackSpeedOnHit.Value}% attack speed</style> for <style=cIsUtility>{attackSpeedDuration.Value} seconds</style>, " +
-                $"up to a maximum of <style=cIsDamage>{maxAttackSpeedAllowed}%</style> <style=cStack>(+{maxAttackSpeedAllowed}% per stack)</style>.";
-            LanguageAPI.Add("PHOTODIODE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("PHOTODIODE_LORE", lore);
         }
     }
 }

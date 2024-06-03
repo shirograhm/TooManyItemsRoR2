@@ -36,7 +36,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -84,19 +83,6 @@ namespace TooManyItems
                     }
                 }
             };
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("DEBIT_CARD", "Debit Card");
-            LanguageAPI.Add("DEBIT_CARD_NAME", "Debit Card");
-            LanguageAPI.Add("DEBIT_CARD_PICKUP", "Get a rebate on purchases.");
-
-            string desc = $"Get a <style=cIsUtility>{rebate.Value}% <style=cStack>(+{rebate.Value}% per stack)</style> rebate</style> on purchases.";
-            LanguageAPI.Add("DEBIT_CARD_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("DEBIT_CARD_LORE", lore);
         }
     }
 }

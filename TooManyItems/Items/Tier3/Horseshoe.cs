@@ -163,7 +163,6 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -355,20 +354,6 @@ namespace TooManyItems
             {
                 Log.Error("Unable to reroll Horseshoe statistics.");
             }
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("HORSESHOE", "Golden Horseshoe");
-            LanguageAPI.Add("HORSESHOE_NAME", "Golden Horseshoe");
-            LanguageAPI.Add("HORSESHOE_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> every stage.");
-
-            string desc = $"Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon entering a new stage. " +
-                $"These bonuses scale with <style=cIsUtility>level</style>, and each <style=cStack>additional stack</style> increases all bonuses by <style=cIsUtility>{extraStackMultiplier.Value}%</style>.";
-            LanguageAPI.Add("HORSESHOE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("HORSESHOE_LORE", lore);
         }
     }
 }
