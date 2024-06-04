@@ -5,31 +5,32 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class HereticSeal
+    internal class ShadowCrest
     {
         public static ItemDef itemDef;
 
-        // Gain bonus damage based on missing health.
+        // Gain health regen based on missing health.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Seal of the Heretic",
+            "Item: Shadow Crest",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_HERETICSEAL_DESC"
+                "ITEM_SHADOWCREST_DESC"
             }
         );
-        public static ConfigurableValue<float> damagePerMissing = new(
-            "Item: Seal of the Heretic",
-            "Damage Increase",
-            1f,
-            "Percent damage gained for each percentage of missing health.",
+        public static ConfigurableValue<float> regenPerSecond = new(
+            "Item: Shadow Crest",
+            "Regen Per Second",
+            3f,
+            "Percentage of missing health regenerated per second.",
             new List<string>()
             {
-                "ITEM_HERETICSEAL_DESC"
+                "ITEM_SHADOWCREST_DESC"
             }
         );
+        public static float regenPerSecondPercent = regenPerSecond.Value / 100f;
 
         internal static void Init()
         {
@@ -45,22 +46,22 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "HERETIC_SEAL";
-            itemDef.nameToken = "HERETIC_SEAL_NAME";
-            itemDef.pickupToken = "HERETIC_SEAL_PICKUP";
-            itemDef.descriptionToken = "HERETIC_SEAL_DESCRIPTION";
-            itemDef.loreToken = "HERETIC_SEAL_LORE";
+            itemDef.name = "SHADOW_CREST";
+            itemDef.nameToken = "SHADOW_CREST_NAME";
+            itemDef.pickupToken = "SHADOW_CREST_PICKUP";
+            itemDef.descriptionToken = "SHADOW_CREST_DESCRIPTION";
+            itemDef.loreToken = "SHADOW_CREST_LORE";
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utils.SetItemTier(itemDef, ItemTier.VoidTier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HereticSeal.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HereticSeal.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("ShadowCrest.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("ShadowCrest.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Healing
             };
         }
 
@@ -90,7 +91,7 @@ namespace TooManyItems
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1
                         if (sender.healthComponent.combinedHealthFraction < 1f)
                         {
-                            args.damageMultAdd += count * damagePerMissing.Value * (1f - sender.healthComponent.combinedHealthFraction);
+                            args.baseRegenAdd += Utils.GetHyperbolicStacking(regenPerSecondPercent, count) * sender.healthComponent.missingCombinedHealth;
                         }
                     }
                 }

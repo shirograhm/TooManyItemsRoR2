@@ -1,35 +1,49 @@
 ﻿using R2API;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class HereticSeal
+    internal class VoidHeart
     {
         public static ItemDef itemDef;
 
-        // Gain bonus damage based on missing health.
+        // Gain 150 HP. Gain 2% (+2% per stack) of your max health as bonus damage.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Seal of the Heretic",
+            "Item: Void Heart",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_HERETICSEAL_DESC"
+                "ITEM_VOIDHEART_DESC"
             }
         );
-        public static ConfigurableValue<float> damagePerMissing = new(
-            "Item: Seal of the Heretic",
-            "Damage Increase",
-            1f,
-            "Percent damage gained for each percentage of missing health.",
+        public static ConfigurableValue<float> healthIncrease = new(
+            "Item: Void Heart",
+            "Health Increase",
+            150f,
+            "Bonus health gained from this item. Does not increase with stacks.",
             new List<string>()
             {
-                "ITEM_HERETICSEAL_DESC"
+                "ITEM_VOIDHEART_DESC"
             }
         );
+        public static ConfigurableValue<float> percentDamagePerStack = new(
+            "Item: Void Heart",
+            "Bonus Damage Scaling",
+            2f,
+            "Percent of maximum health gained as bonus damage.",
+            new List<string>()
+            {
+                "ITEM_VOIDHEART_DESC"
+            }
+        );
+        public static float multiplierPerStack = percentDamagePerStack.Value / 100.0f;
 
         internal static void Init()
         {
@@ -45,41 +59,33 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "HERETIC_SEAL";
-            itemDef.nameToken = "HERETIC_SEAL_NAME";
-            itemDef.pickupToken = "HERETIC_SEAL_PICKUP";
-            itemDef.descriptionToken = "HERETIC_SEAL_DESCRIPTION";
-            itemDef.loreToken = "HERETIC_SEAL_LORE";
+            itemDef.name = "VOID_HEART";
+            itemDef.nameToken = "VOID_HEART_NAME";
+            itemDef.pickupToken = "VOID_HEART_PICKUP";
+            itemDef.descriptionToken = "VOID_HEART_DESCRIPTION";
+            itemDef.loreToken = "VOID_HEART_LORE";
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utils.SetItemTier(itemDef, ItemTier.VoidTier3);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HereticSeal.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HereticSeal.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("VoidHeart.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("VoidHeart.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+                ItemTag.Utility
             };
+        }
+
+        public static float CalculateDamageBonus(CharacterBody sender, float itemCount)
+        {
+            return sender.healthComponent.fullCombinedHealth * itemCount * multiplierPerStack;
         }
 
         public static void Hooks()
         {
-            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
-            {
-                orig(self);
-
-                if (self && self.inventory)
-                {
-                    int count = self.inventory.GetItemCount(itemDef);
-                    if (count > 0)
-                    {
-                        Utils.ForceRecalculate(self);
-                    }
-                }
-            };
-
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender && sender.inventory)
@@ -87,11 +93,8 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        // Make sure this calculation only runs when healthFraction is below 1, not above 1
-                        if (sender.healthComponent.combinedHealthFraction < 1f)
-                        {
-                            args.damageMultAdd += count * damagePerMissing.Value * (1f - sender.healthComponent.combinedHealthFraction);
-                        }
+                        args.baseHealthAdd += healthIncrease.Value;
+                        args.baseDamageAdd += CalculateDamageBonus(sender, count);
                     }
                 }
             };
