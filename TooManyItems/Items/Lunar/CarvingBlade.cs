@@ -155,38 +155,27 @@ namespace TooManyItems
 
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (attackerInfo.inventory == null) return;
-
-                if (attackerInfo.inventory.GetItemCount(itemDef) > 0)
+                if (attackerInfo.inventory && attackerInfo.inventory.GetItemCount(itemDef) > 0)
                 {
                     damageInfo.crit = false;
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                // Return if no attacker or no victim
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-                if (attackerBody != null && attackerBody.inventory != null)
+                if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
+                    int count = attackerInfo.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        float damageAmount = CalculateDamageOnHit(victimBody, count);
-                        // Cap damage based on config
-                        if (damageCapMultiplier > 0) damageAmount = Mathf.Min(damageAmount, attackerBody.damage * damageCapMultiplier);
+                        float amount = CalculateDamageOnHit(victimInfo.body, count);
+                        if (damageCapMultiplier > 0) amount = Mathf.Min(amount, attackerInfo.body.damage * damageCapMultiplier);
 
-                        DamageInfo damageProc = new()
+                        DamageInfo proc = new()
                         {
-                            damage = damageAmount,
-                            attacker = damageInfo.attacker.gameObject,
-                            inflictor = damageInfo.attacker.gameObject,
+                            damage = amount,
+                            attacker = attackerInfo.gameObject,
+                            inflictor = attackerInfo.gameObject,
                             procCoefficient = 0f,
                             position = damageInfo.position,
                             crit = false,
@@ -194,9 +183,9 @@ namespace TooManyItems
                             procChainMask = damageInfo.procChainMask,
                             damageType = DamageType.Silent
                         };
-                        damageProc.AddModdedDamageType(damageType);
+                        proc.AddModdedDamageType(damageType);
 
-                        victimBody.healthComponent.TakeDamage(damageProc);
+                        victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
                         CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
@@ -205,6 +194,55 @@ namespace TooManyItems
                     }
                 }
             };
+
+            //On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            //{
+            //    orig(self, damageInfo, victim);
+
+            //    if (!NetworkServer.active) return;
+            //    // Return if no attacker or no victim
+            //    if (damageInfo.attacker == null || victim == null) return;
+
+            //    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            //    CharacterBody victimBody = victim.GetComponent<CharacterBody>();
+            //    if (attackerBody != null && attackerBody.inventory != null)
+            //    {
+            //        int count = attackerBody.inventory.GetItemCount(itemDef);
+            //        if (count > 0)
+            //        {
+            //            float damageAmount = CalculateDamageOnHit(victimBody, count);
+            //            // Cap damage based on config
+            //            if (damageCapMultiplier > 0) damageAmount = Mathf.Min(damageAmount, attackerBody.damage * damageCapMultiplier);
+
+            //            DamageInfo damageProc = new()
+            //            {
+            //                damage = damageAmount,
+            //                attacker = damageInfo.attacker.gameObject,
+            //                inflictor = damageInfo.attacker.gameObject,
+            //                procCoefficient = 0f,
+            //                position = damageInfo.position,
+            //                crit = false,
+            //                damageColorIndex = damageColor,
+            //                procChainMask = damageInfo.procChainMask,
+            //                damageType = DamageType.Silent
+            //            };
+            //            damageProc.AddModdedDamageType(damageType);
+
+            //            victimBody.healthComponent.TakeDamage(damageProc);
+
+            //            // Damage calculation takes minions into account
+            //            if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
+            //            {
+            //                if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
+            //                {
+            //                    attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
+            //                }
+            //            }
+            //            var stats = attackerBody.inventory.GetComponent<Statistics>();
+            //            if (stats) stats.TotalDamageDealt += damageAmount;
+            //        }
+            //    }
+            //};
         }
     }
 }

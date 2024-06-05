@@ -106,28 +106,44 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-
-                if (attackerBody != null && attackerBody.inventory != null)
+                if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
-                        int currentStacks = attackerBody.GetBuffCount(attackSpeedBuff);
-                        if (currentStacks < maxAttackSpeedStacks.Value * count)
+                        int currentStacks = attackerInfo.body.GetBuffCount(attackSpeedBuff);
+                        if (currentStacks < maxAttackSpeedStacks.Value * itemCount)
                         {
-                            attackerBody.AddTimedBuff(attackSpeedBuff, attackSpeedDuration.Value);
+                            attackerInfo.body.AddTimedBuff(attackSpeedBuff, attackSpeedDuration.Value);
                         }
                     }
                 }
             };
+
+            //On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            //{
+            //    orig(self, damageInfo, victim);
+
+            //    if (!NetworkServer.active) return;
+            //    if (damageInfo.attacker == null || victim == null) return;
+
+            //    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+
+            //    if (attackerBody != null && attackerBody.inventory != null)
+            //    {
+            //        int count = attackerBody.inventory.GetItemCount(itemDef);
+            //        if (count > 0)
+            //        {
+            //            int currentStacks = attackerBody.GetBuffCount(attackSpeedBuff);
+            //            if (currentStacks < maxAttackSpeedStacks.Value * count)
+            //            {
+            //                attackerBody.AddTimedBuff(attackSpeedBuff, attackSpeedDuration.Value);
+            //            }
+            //        }
+            //    }
+            //};
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

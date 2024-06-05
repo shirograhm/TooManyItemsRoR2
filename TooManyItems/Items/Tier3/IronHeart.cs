@@ -169,39 +169,30 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-
-                if (attackerBody != null && attackerBody.inventory != null)
+                if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
-
+                    int count = attackerInfo.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        float damageAmount = CalculateDamageOnHit(attackerBody, count);
+                        float amount = CalculateDamageOnHit(attackerInfo.body, count);
 
-                        DamageInfo damageProc = new()
+                        DamageInfo proc = new()
                         {
-                            damage = damageAmount,
-                            attacker = damageInfo.attacker,
-                            inflictor = damageInfo.attacker,
+                            damage = amount,
+                            attacker = attackerInfo.gameObject,
+                            inflictor = attackerInfo.gameObject,
                             procCoefficient = 1f,
                             position = damageInfo.position,
-                            crit = false,
+                            crit = attackerInfo.body.RollCrit(),
                             damageColorIndex = damageColor,
                             procChainMask = damageInfo.procChainMask,
                             damageType = DamageType.Silent
                         };
-                        damageProc.AddModdedDamageType(damageType);
+                        proc.AddModdedDamageType(damageType);
 
-                        victimBody.healthComponent.TakeDamage(damageProc);
+                        victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
                         CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
@@ -210,6 +201,54 @@ namespace TooManyItems
                     }
                 }
             };
+
+            //On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            //{
+            //    orig(self, damageInfo, victim);
+
+            //    if (!NetworkServer.active) return;
+            //    if (damageInfo.attacker == null || victim == null) return;
+
+            //    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+            //    CharacterBody victimBody = victim.GetComponent<CharacterBody>();
+
+            //    if (attackerBody != null && attackerBody.inventory != null)
+            //    {
+            //        int count = attackerBody.inventory.GetItemCount(itemDef);
+
+            //        if (count > 0)
+            //        {
+            //            float damageAmount = CalculateDamageOnHit(attackerBody, count);
+
+            //            DamageInfo damageProc = new()
+            //            {
+            //                damage = damageAmount,
+            //                attacker = damageInfo.attacker,
+            //                inflictor = damageInfo.attacker,
+            //                procCoefficient = 1f,
+            //                position = damageInfo.position,
+            //                crit = attackerBody.RollCrit(),
+            //                damageColorIndex = damageColor,
+            //                procChainMask = damageInfo.procChainMask,
+            //                damageType = DamageType.Silent
+            //            };
+            //            damageProc.AddModdedDamageType(damageType);
+
+            //            victimBody.healthComponent.TakeDamage(damageProc);
+
+            //            // Damage calculation takes minions into account
+            //            if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
+            //            {
+            //                if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
+            //                {
+            //                    attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
+            //                }
+            //            }
+            //            var stats = attackerBody.inventory.GetComponent<Statistics>();
+            //            stats.TotalDamageDealt += damageAmount;
+            //        }
+            //    }
+            //};
         }
     }
 }

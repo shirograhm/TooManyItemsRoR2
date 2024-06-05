@@ -225,28 +225,43 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-
-                if (damageInfo.attacker)
+                if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                    if (attackerBody && attackerBody.inventory)
+                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
-                        int itemCount = attackerBody.inventory.GetItemCount(itemDef);
-                        if (itemCount > 0)
-                        {
-                            int newBuffCount = attackerBody.GetBuffCount(mulchBuff) + itemCount;
+                        int newBuffCount = attackerInfo.body.GetBuffCount(mulchBuff) + itemCount;
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                            attackerBody.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
+                        attackerInfo.body.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
-                        }
                     }
                 }
             };
+
+//            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+//            {
+//                orig(self, damageInfo, victim);
+
+//                if (!NetworkServer.active) return;
+
+//                if (damageInfo.attacker)
+//                {
+//                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
+//                    if (attackerBody && attackerBody.inventory)
+//                    {
+//                        int itemCount = attackerBody.inventory.GetItemCount(itemDef);
+//                        if (itemCount > 0)
+//                        {
+//                            int newBuffCount = attackerBody.GetBuffCount(mulchBuff) + itemCount;
+//#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+//                            attackerBody.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
+//#pragma warning restore Publicizer001 // Accessing a member that was not originally public
+//                        }
+//                    }
+//                }
+//            };
         }
     }
 }
