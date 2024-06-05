@@ -199,15 +199,9 @@ namespace TooManyItems
                         victimBody.healthComponent.TakeDamage(damageProc);
 
                         // Damage calculation takes minions into account
-                        if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
-                        {
-                            if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
-                            {
-                                attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
-                            }
-                        }
-                        var stats = attackerBody.inventory.GetComponent<Statistics>();
-                        if (stats) stats.TotalDamageDealt += damageAmount;
+                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
+                        var stats = trackerBody.inventory.GetComponent<Statistics>();
+                        stats.TotalDamageDealt += amount;
                     }
                 }
             };

@@ -28,6 +28,15 @@ namespace TooManyItems
             });
         }
 
+        public static CharacterBody GetMinionOwnershipParentBody(CharacterBody body)
+        {
+            if (body && body.master && body.master.minionOwnership && body.master.minionOwnership.ownerMaster && body.master.minionOwnership.ownerMaster.GetBody())
+            {
+                return body.master.minionOwnership.ownerMaster.GetBody();
+            }
+            return body;
+        }
+
         public static float GetChanceAfterLuck(float percent, float luckIn)
         {
             int luck = Mathf.CeilToInt(luckIn);
