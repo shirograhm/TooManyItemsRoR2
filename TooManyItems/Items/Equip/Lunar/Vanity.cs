@@ -1,76 +1,83 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class Arrogance
+    internal class Vanity
     {
         public static EquipmentDef equipmentDef;
         public static BuffDef hubrisDebuff;
 
+        public static GameObject targeterVisualizerPrefab;
+
         // 125 second cooldown
-        // While on cooldown, kills grant stacks of Hubris. Each stack causes you to take 0.2% bonus damage.
+        // While on cooldown, kills grant stacks of Hubris. Each stack causes you to take 0.4% bonus damage.
         // Activate this equipment to consume all Hubris stacks and deal 100% base damage per stack to a target enemy.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Equipment: Lunar Scepter",
+            "Equipment: Vanity Mirror",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "EQUIPMENT_ARROGANCE_DESC"
+                "EQUIPMENT_VANITY_DESC"
             }
         );
         public static ConfigurableValue<float> damageTakenPerStack = new(
-            "Equipment: Lunar Scepter",
-            "Damage Taken Per Stack",
-            0.2f,
+            "Equipment: Vanity Mirror",
+            "Damage Amp",
+            0.4f,
             "Percent bonus damage taken for each stack of Hubris.",
             new List<string>()
             {
-                "EQUIPMENT_ARROGANCE_DESC"
+                "EQUIPMENT_VANITY_DESC"
             }
         );
+        public static float damageTakenPercentPerStack = damageTakenPerStack.Value / 100f;
+
         public static ConfigurableValue<float> damageDealtPerStack = new(
-            "Equipment: Lunar Scepter",
-            "Damage Dealt Per Stack",
+            "Equipment: Vanity Mirror",
+            "Damage Dealt",
             100f,
             "Percent base damage dealt for each stack of Hubris accrued.",
             new List<string>()
             {
-                "EQUIPMENT_ARROGANCE_DESC"
+                "EQUIPMENT_VANITY_DESC"
             }
         );
+        public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
+
         public static ConfigurableValue<int> procCoefficient = new(
-            "Equipment: Lunar Scepter",
+            "Equipment: Vanity Mirror",
             "Proc Coefficient",
             3,
             "Proc coefficient for the single damage instance on equipment use.",
             new List<string>()
             {
-                "EQUIPMENT_ARROGANCE_DESC"
+                "EQUIPMENT_VANITY_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
-            "Equipment: Lunar Scepter",
+            "Equipment: Vanity Mirror",
             "Cooldown",
             125,
             "Equipment cooldown.",
             new List<string>()
             {
-                "EQUIPMENT_ARROGANCE_DESC"
+                "EQUIPMENT_VANITY_DESC"
             }
         );
-        public static float damageTakenPercentPerStack = damageTakenPerStack.Value / 100f;
-        public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
 
         internal static void Init()
         {
             GenerateEquipment();
             GenerateBuff();
+
+            targeterVisualizerPrefab = Assets.bundle.LoadAsset<GameObject>("VanityTargeter.prefab");
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
@@ -84,11 +91,11 @@ namespace TooManyItems
         {
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
-            equipmentDef.name = "ARROGANCE";
+            equipmentDef.name = "VANITY";
             equipmentDef.AutoPopulateTokens();
 
-            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Arrogance.png");
-            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Arrogance.prefab");
+            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Vanity.png");
+            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Vanity.prefab");
 
             equipmentDef.isLunar = true;
             equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
@@ -116,6 +123,52 @@ namespace TooManyItems
 
         public static void Hooks()
         {
+            On.RoR2.EquipmentSlot.Start += (orig, self) =>
+            {
+                orig(self);
+                self.gameObject.AddComponent<EquipmentTargeter>();
+            };
+
+            On.RoR2.EquipmentSlot.Update += (orig, self) =>
+            {
+                orig(self);
+
+                EquipmentTargeter targeter = self.gameObject.GetComponent<EquipmentTargeter>();
+                if (targeter)
+                {
+                    if (equipmentDef.equipmentIndex == self.equipmentIndex)
+                    {
+                        if (self.stock > 0)
+                        {
+                            targeter.ConfigureTargetFinderForEnemies(self);
+
+                            HurtBox hurtBox = targeter.search.GetResults().FirstOrDefault();
+                            if (hurtBox)
+                            {
+                                targeter.obj = hurtBox.healthComponent.gameObject;
+                                targeter.indicator.visualizerPrefab = targeterVisualizerPrefab;
+                                targeter.indicator.targetTransform = hurtBox.transform;
+                            }
+                            else
+                            {
+                                targeter.Invalidate();
+                            }
+                            targeter.indicator.active = hurtBox;
+                        }
+                        else
+                        {
+                            targeter.Invalidate();
+                            targeter.indicator.active = false;
+                        }
+                    }
+                    else
+                    {
+                        targeter.Invalidate();
+                        targeter.indicator.active = false;
+                    }
+                }
+            };
+
             On.RoR2.EquipmentSlot.PerformEquipmentAction += (orig, self, equipDef) =>
             {
                 if (NetworkServer.active && equipDef == equipmentDef)
@@ -137,6 +190,18 @@ namespace TooManyItems
                     }
                 }
             };
+
+            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            {
+                orig(eventManager, damageReport);
+                if (!NetworkServer.active) return;
+
+                CharacterBody atkBody = damageReport.attackerBody;
+                if (atkBody && atkBody.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
+                {
+                    atkBody.AddBuff(hubrisDebuff);
+                }
+            };
         }
 
         private static bool OnUse(EquipmentSlot slot)
@@ -144,9 +209,8 @@ namespace TooManyItems
             CharacterBody user = slot.characterBody;
             if (user)
             {
-                // TODO: Somehow get target enemy
-
-                CharacterBody targetEnemy = null;
+                EquipmentTargeter targeter = slot.GetComponent<EquipmentTargeter>();
+                CharacterBody targetEnemy = (targeter) ? targeter.obj.GetComponent<CharacterBody>() : null;
 
                 float damageAmount = user.damage * damageDealtPercentPerStack * user.GetBuffCount(hubrisDebuff);
                 DamageInfo scepterDamage = new()
