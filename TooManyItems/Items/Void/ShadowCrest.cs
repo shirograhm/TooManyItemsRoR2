@@ -23,7 +23,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> regenPerSecond = new(
             "Item: Shadow Crest",
             "Regen Per Second",
-            3f,
+            1f,
             "Percentage of missing health regenerated per second.",
             new List<string>()
             {

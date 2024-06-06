@@ -46,7 +46,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxRegenForExtraStacks = new(
             "Item: Soul Ring",
             "Maximum Regen On Extra Stacks",
-            2f,
+            3f,
             "Maximum amount of permanent health regeneration granted on additional stacks.",
             new List<string>()
             {

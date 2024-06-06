@@ -26,7 +26,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Defiled Heart",
             "Health Increase",
-            150f,
+            300f,
             "Bonus health gained from this item. Does not increase with stacks.",
             new List<string>()
             {
@@ -36,7 +36,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Defiled Heart",
             "Bonus Damage Scaling",
-            2f,
+            1f,
             "Percent of maximum health gained as bonus damage.",
             new List<string>()
             {
