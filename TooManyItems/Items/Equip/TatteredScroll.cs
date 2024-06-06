@@ -14,7 +14,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.TATTERED_SCROLL_COLOR);
 
-        // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 25 additional gold. (75 sec)
+        // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 20 additional gold. (100 sec)
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Tattered Scroll",
             "Enabled",
@@ -48,7 +48,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
-            25,
+            20,
             "Gold gained for each cursed enemy killed.",
             new List<string>()
             {
@@ -58,7 +58,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
-            75,
+            100,
             "Equipment cooldown.",
             new List<string>()
             {

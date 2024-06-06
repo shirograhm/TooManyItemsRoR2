@@ -23,8 +23,8 @@ namespace TooManyItems
         public static ConfigurableValue<float> damagePerMissing = new(
             "Item: Seal of the Heretic",
             "Damage Increase",
-            1f,
-            "Percent damage gained for each percentage of missing health.",
+            0.2f,
+            "Base damage gained for each percentage of missing health.",
             new List<string>()
             {
                 "ITEM_HERETICSEAL_DESC"
@@ -87,7 +87,7 @@ namespace TooManyItems
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1
                         if (sender.healthComponent.combinedHealthFraction < 1f)
                         {
-                            args.damageMultAdd += count * damagePerMissing.Value * (1f - sender.healthComponent.combinedHealthFraction);
+                            args.baseDamageAdd += count * damagePerMissing.Value * (1f - sender.healthComponent.combinedHealthFraction) * 100f;
                         }
                     }
                 }
