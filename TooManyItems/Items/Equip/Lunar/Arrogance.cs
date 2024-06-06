@@ -21,7 +21,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_ARROGANCE_DESC"
+                "EQUIPMENT_ARROGANCE_DESC"
             }
         );
         public static ConfigurableValue<float> damageTakenPerStack = new(
@@ -31,7 +31,7 @@ namespace TooManyItems
             "Percent bonus damage taken for each stack of Hubris.",
             new List<string>()
             {
-                "ITEM_ARROGANCE_DESC"
+                "EQUIPMENT_ARROGANCE_DESC"
             }
         );
         public static ConfigurableValue<float> damageDealtPerStack = new(
@@ -41,7 +41,7 @@ namespace TooManyItems
             "Percent base damage dealt for each stack of Hubris accrued.",
             new List<string>()
             {
-                "ITEM_ARROGANCE_DESC"
+                "EQUIPMENT_ARROGANCE_DESC"
             }
         );
         public static ConfigurableValue<int> procCoefficient = new(
@@ -51,7 +51,7 @@ namespace TooManyItems
             "Proc coefficient for the single damage instance on equipment use.",
             new List<string>()
             {
-                "ITEM_ARROGANCE_DESC"
+                "EQUIPMENT_ARROGANCE_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
@@ -61,7 +61,7 @@ namespace TooManyItems
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_ARROGANCE_DESC"
+                "EQUIPMENT_ARROGANCE_DESC"
             }
         );
         public static float damageTakenPercentPerStack = damageTakenPerStack.Value / 100f;
@@ -85,10 +85,7 @@ namespace TooManyItems
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
             equipmentDef.name = "ARROGANCE";
-            equipmentDef.nameToken = "ARROGANCE_NAME";
-            equipmentDef.pickupToken = "ARROGANCE_PICKUP";
-            equipmentDef.descriptionToken = "ARROGANCE_DESCRIPTION";
-            equipmentDef.loreToken = "ARROGANCE_LORE";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Arrogance.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Arrogance.prefab");
