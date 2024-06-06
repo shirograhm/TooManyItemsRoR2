@@ -22,7 +22,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<int> curseDistance = new(
@@ -32,7 +32,7 @@ namespace TooManyItems
             "Max distance that the curse can reach.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<float> curseDuration = new(
@@ -42,7 +42,7 @@ namespace TooManyItems
             "Duration of the curse.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<int> goldGranted = new(
@@ -52,7 +52,7 @@ namespace TooManyItems
             "Gold gained for each cursed enemy killed.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
@@ -62,7 +62,7 @@ namespace TooManyItems
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
 
@@ -70,6 +70,7 @@ namespace TooManyItems
         {
             GenerateEquipment();
             GenerateBuff();
+            AddTokens();
 
             var displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
@@ -83,11 +84,8 @@ namespace TooManyItems
         {
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
-            equipmentDef.name = "TATTERED_SCROLL";
-            equipmentDef.nameToken = "TATTERED_SCROLL_NAME";
-            equipmentDef.pickupToken = "TATTERED_SCROLL_PICKUP";
-            equipmentDef.descriptionToken = "TATTERED_SCROLL_DESCRIPTION";
-            equipmentDef.loreToken = "TATTERED_SCROLL_LORE";
+            equipmentDef.name = "TATTEREDSCROLL";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("TatteredScroll.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
@@ -173,6 +171,21 @@ namespace TooManyItems
             }
 
             return true;
+        }
+
+        private static void AddTokens()
+        {
+            LanguageAPI.Add("TATTERED_SCROLL", "Tattered Scroll");
+            LanguageAPI.Add("TATTERED_SCROLL_NAME", "Tattered Scroll");
+            LanguageAPI.Add("TATTERED_SCROLL_PICKUP", "Curse nearby enemies when activated. Killing cursed enemies grants extra gold.");
+
+            string desc = $"On activation, curse enemies within a <style=cIsUtility>{curseDistance.Value}m</style> radius " +
+                $"for <style=cIsUtility>{curseDuration.Value} seconds</style>. " +
+                $"Killing cursed enemies grants an additional <style=cHumanObjective>{goldGranted.Value} gold</style>.";
+            LanguageAPI.Add("TATTERED_SCROLL_DESCRIPTION", desc);
+
+            string lore = "";
+            LanguageAPI.Add("TATTERED_SCROLL_LORE", lore);
         }
     }
 }

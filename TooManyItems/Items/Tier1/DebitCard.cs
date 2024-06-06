@@ -23,7 +23,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
-            "Rebate Amount",
+            "Rebate",
             8f,
             "Percentage of spent gold refunded as rebate.",
             new List<string>()
@@ -47,11 +47,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "DEBIT_CARD";
-            itemDef.nameToken = "DEBIT_CARD_NAME";
-            itemDef.pickupToken = "DEBIT_CARD_PICKUP";
-            itemDef.descriptionToken = "DEBIT_CARD_DESCRIPTION";
-            itemDef.loreToken = "DEBIT_CARD_LORE";
+            itemDef.name = "DEBITCARD";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

@@ -19,7 +19,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> consecrateDuration = new(
@@ -29,7 +29,7 @@ namespace TooManyItems
             "Duration of the Consecrate buff given.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> consecrateDamageBonus = new(
@@ -39,7 +39,7 @@ namespace TooManyItems
             "Percent bonus damage dealt while Consecrated.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
@@ -49,7 +49,7 @@ namespace TooManyItems
             "Percent bonus attack speed gained while Consecrated.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> currentHealthCost = new(
@@ -59,7 +59,7 @@ namespace TooManyItems
             "Percent of current health lost as payment when Consecrated.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
@@ -69,7 +69,7 @@ namespace TooManyItems
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static float currentHealthCostPercent = currentHealthCost.Value / 100f;
@@ -92,10 +92,7 @@ namespace TooManyItems
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
             equipmentDef.name = "CHALICE";
-            equipmentDef.nameToken = "CHALICE_NAME";
-            equipmentDef.pickupToken = "CHALICE_PICKUP";
-            equipmentDef.descriptionToken = "CHALICE_DESCRIPTION";
-            equipmentDef.loreToken = "CHALICE_LORE";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Chalice.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Chalice.prefab");

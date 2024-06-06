@@ -23,7 +23,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_IRONHEART_DESC"
+                "ITEM_IRON_HEART_DESC"
             }
         );
         public static ConfigurableValue<float> healthIncrease = new(
@@ -33,7 +33,7 @@ namespace TooManyItems
             "Bonus health gained from this item. Does not increase with stacks.",
             new List<string>()
             {
-                "ITEM_IRONHEART_DESC"
+                "ITEM_IRON_HEART_DESC"
             }
         );
         public static ConfigurableValue<float> percentDamagePerStack = new(
@@ -43,7 +43,7 @@ namespace TooManyItems
             "Percent of maximum health dealt as bonus on-hit damage.",
             new List<string>()
             {
-                "ITEM_IRONHEART_DESC"
+                "ITEM_IRON_HEART_DESC"
             }
         );
         public static float multiplierPerStack = percentDamagePerStack.Value / 100.0f;
@@ -127,10 +127,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "IRON_HEART";
-            itemDef.nameToken = "IRON_HEART_NAME";
-            itemDef.pickupToken = "IRON_HEART_PICKUP";
-            itemDef.descriptionToken = "IRON_HEART_DESCRIPTION";
-            itemDef.loreToken = "IRON_HEART_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 

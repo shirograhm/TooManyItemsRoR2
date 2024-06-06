@@ -25,7 +25,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
-            "Health Regen On Kill",
+            "Regen On Kill",
             0.1f,
             "Amount of permanent health regeneration gained on kill.",
             new List<string>()
@@ -130,11 +130,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "SOUL_RING";
-            itemDef.nameToken = "SOUL_RING_NAME";
-            itemDef.pickupToken = "SOUL_RING_PICKUP";
-            itemDef.descriptionToken = "SOUL_RING_DESCRIPTION";
-            itemDef.loreToken = "SOUL_RING_LORE";
+            itemDef.name = "SOULRING";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 

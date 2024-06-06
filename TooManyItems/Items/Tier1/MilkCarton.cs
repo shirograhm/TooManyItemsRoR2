@@ -22,7 +22,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> eliteDamageReduction = new(
             "Item: Milk Carton",
-            "Percent Damage Reduction",
+            "Damage Reduction",
             8f,
             "Percent damage reduction agains elite enemies.",
             new List<string>()
@@ -46,11 +46,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "MILK_CARTON";
-            itemDef.nameToken = "MILK_CARTON_NAME";
-            itemDef.pickupToken = "MILK_CARTON_PICKUP";
-            itemDef.descriptionToken = "MILK_CARTON_DESCRIPTION";
-            itemDef.loreToken = "MILK_CARTON_LORE";
+            itemDef.name = "MILKCARTON";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

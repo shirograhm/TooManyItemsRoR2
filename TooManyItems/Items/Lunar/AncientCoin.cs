@@ -58,11 +58,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "ANCIENT_COIN";
-            itemDef.nameToken = "ANCIENT_COIN_NAME";
-            itemDef.pickupToken = "ANCIENT_COIN_PICKUP";
-            itemDef.descriptionToken = "ANCIENT_COIN_DESCRIPTION";
-            itemDef.loreToken = "ANCIENT_COIN_LORE";
+            itemDef.name = "ANCIENTCOIN";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 

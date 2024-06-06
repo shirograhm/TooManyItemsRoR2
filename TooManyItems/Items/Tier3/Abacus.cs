@@ -24,7 +24,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: Abacus",
-            "Crit Chance On Kill",
+            "Crit On Kill",
             1f,
             "Crit chance gained on kill per stack of item.",
             new List<string>()
@@ -51,10 +51,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "ABACUS";
-            itemDef.nameToken = "ABACUS_NAME";
-            itemDef.pickupToken = "ABACUS_PICKUP";
-            itemDef.descriptionToken = "ABACUS_DESCRIPTION";
-            itemDef.loreToken = "ABACUS_LORE";
+            itemDef.AutoPopulateTokens();
             
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 

@@ -165,11 +165,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BROKEN_MASK";
-            itemDef.nameToken = "BROKEN_MASK_NAME";
-            itemDef.pickupToken = "BROKEN_MASK_PICKUP";
-            itemDef.descriptionToken = "BROKEN_MASK_DESCRIPTION";
-            itemDef.loreToken = "BROKEN_MASK_LORE";
+            itemDef.name = "BROKENMASK";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 

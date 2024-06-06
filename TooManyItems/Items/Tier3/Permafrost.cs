@@ -37,7 +37,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
-            "Bonus Damage to Frozen Enemies",
+            "Bonus Frozen Damage",
             90f,
             "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
@@ -63,10 +63,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "PERMAFROST";
-            itemDef.nameToken = "PERMAFROST_NAME";
-            itemDef.pickupToken = "PERMAFROST_PICKUP";
-            itemDef.descriptionToken = "PERMAFROST_DESCRIPTION";
-            itemDef.loreToken = "PERMAFROST_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 

@@ -133,10 +133,10 @@ namespace TooManyItems
         //        "ITEM_HORSESHOE_DESC"
         //    }
         //);
-        public static ConfigurableValue<int> extraStackMultiplier = new(
+        public static ConfigurableValue<float> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
-            30,
+            30f,
             "Percent increase to all bonuses given for each additional stack.",
             new List<string>()
             {
@@ -177,10 +177,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "HORSESHOE";
-            itemDef.nameToken = "HORSESHOE_NAME";
-            itemDef.pickupToken = "HORSESHOE_PICKUP";
-            itemDef.descriptionToken = "HORSESHOE_DESCRIPTION";
-            itemDef.loreToken = "HORSESHOE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 

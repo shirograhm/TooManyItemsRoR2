@@ -137,11 +137,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "RUSTED_TROWEL";
-            itemDef.nameToken = "RUSTED_TROWEL_NAME";
-            itemDef.pickupToken = "RUSTED_TROWEL_PICKUP";
-            itemDef.descriptionToken = "RUSTED_TROWEL_DESCRIPTION";
-            itemDef.loreToken = "RUSTED_TROWEL_LORE";
+            itemDef.name = "RUSTEDTROWEL";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 

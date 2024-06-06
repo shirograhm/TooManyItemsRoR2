@@ -22,7 +22,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> movespeedIncrease = new(
             "Item: Paper Plane",
-            "Movement Speed Increase",
+            "Movement Speed",
             18f,
             "Percent movement speed gained per stack while airborne.",
             new List<string>()
@@ -46,11 +46,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "PAPER_PLANE";
-            itemDef.nameToken = "PAPER_PLANE_NAME";
-            itemDef.pickupToken = "PAPER_PLANE_PICKUP";
-            itemDef.descriptionToken = "PAPER_PLANE_DESCRIPTION";
-            itemDef.loreToken = "PAPER_PLANE_LORE";
+            itemDef.name = "PAPERPLANE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

@@ -22,7 +22,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: 3D Glasses",
-            "Crit Chance Increase",
+            "Crit Chance",
             6f,
             "Amount of crit chance gained per stack.",
             new List<string>()
@@ -32,7 +32,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> critDamagePerStack = new(
             "Item: 3D Glasses",
-            "Crit Damage Increase",
+            "Crit Damage",
             6f,
             "Amount of crit damage gained per stack.",
             new List<string>()
@@ -57,11 +57,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "REDBLUE_GLASSES";
-            itemDef.nameToken = "REDBLUE_GLASSES_NAME";
-            itemDef.pickupToken = "REDBLUE_GLASSES_PICKUP";
-            itemDef.descriptionToken = "REDBLUE_GLASSES_DESCRIPTION";
-            itemDef.loreToken = "REDBLUE_GLASSES_LORE";
+            itemDef.name = "REDBLUEGLASSES";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

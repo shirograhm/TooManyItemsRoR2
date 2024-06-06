@@ -33,6 +33,26 @@ namespace TooManyItems
                 "ITEM_BLOODDICE_DESC"
             }
         );
+        public static ConfigurableValue<int> minHealthGain = new(
+            "Item: Blood Dice",
+            "Min Gain",
+            2,
+            "Minimum health that can be gained every kill.",
+            new List<string>()
+            {
+                "ITEM_BLOODDICE_DESC"
+            }
+        );
+        public static ConfigurableValue<int> maxHealthGain = new(
+            "Item: Blood Dice",
+            "Max Gain",
+            12,
+            "Maximum health that can be gained every kill.",
+            new List<string>()
+            {
+                "ITEM_BLOODDICE_DESC"
+            }
+        );
         public static ConfigurableValue<float> maxHealthPerStack = new(
             "Item: Blood Dice",
             "Maximum Health Per Item",
@@ -43,8 +63,6 @@ namespace TooManyItems
                 "ITEM_BLOODDICE_DESC"
             }
         );
-        public static int minHealthGain = 2;
-        public static int maxHealthGain = 12;
 
         public class Statistics : MonoBehaviour
         {
@@ -122,12 +140,9 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BLOOD_DICE";
-            itemDef.nameToken = "BLOOD_DICE_NAME";
-            itemDef.pickupToken = "BLOOD_DICE_PICKUP";
-            itemDef.descriptionToken = "BLOOD_DICE_DESCRIPTION";
-            if (affectedByLuck.Value) itemDef.descriptionToken += "BLOOD_DICE_DESCRIPTION_LUCK";
-            itemDef.loreToken = "BLOOD_DICE_LORE";
+            itemDef.name = "BLOODDICE";
+            itemDef.AutoPopulateTokens();
+            if (affectedByLuck.Value) itemDef.descriptionToken += "_LUCK";
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -218,7 +233,7 @@ namespace TooManyItems
             float mean = 7f, deviation = 2f;
             if (affectedByLuck.Value) mean += master.luck * deviation;
             
-            return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain, maxHealthGain);
+            return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain.Value, maxHealthGain.Value);
         }
 
         private static int GenerateRollNormalDistribution(float mean, float deviation)
@@ -233,21 +248,3 @@ namespace TooManyItems
         }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

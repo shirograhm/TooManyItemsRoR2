@@ -24,7 +24,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> armorIncrease = new(
@@ -34,7 +34,7 @@ namespace TooManyItems
             "Armor increase if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> damageIncrease = new(
@@ -44,7 +44,7 @@ namespace TooManyItems
             "Percent damage increase if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> attackSpeedIncrease = new(
@@ -54,7 +54,7 @@ namespace TooManyItems
             "Percent attack speed increase if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> regenIncrease = new(
@@ -64,7 +64,7 @@ namespace TooManyItems
             "Health regeneration bonus (as max HP/s) if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> buffDuration = new(
@@ -74,7 +74,7 @@ namespace TooManyItems
             "Duration of the buff given.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
@@ -84,7 +84,7 @@ namespace TooManyItems
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static float damageIncreasePercent = damageIncrease.Value / 100f;
@@ -118,11 +118,8 @@ namespace TooManyItems
         {
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
-            equipmentDef.name = "BUFF_TOTEM";
-            equipmentDef.nameToken = "BUFF_TOTEM_NAME";
-            equipmentDef.pickupToken = "BUFF_TOTEM_PICKUP";
-            equipmentDef.descriptionToken = "BUFF_TOTEM_DESCRIPTION";
-            equipmentDef.loreToken = "BUFF_TOTEM_LORE";
+            equipmentDef.name = "BUFFTOTEM";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BuffTotem.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BuffTotem.prefab");

@@ -127,11 +127,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "CARVING_BLADE";
-            itemDef.nameToken = "CARVING_BLADE_NAME";
-            itemDef.pickupToken = "CARVING_BLADE_PICKUP";
-            itemDef.descriptionToken = "CARVING_BLADE_DESCRIPTION";
-            itemDef.loreToken = "CARVING_BLADE_LORE";
+            itemDef.name = "CARVINGBLADE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 

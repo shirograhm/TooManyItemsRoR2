@@ -17,17 +17,17 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_ARMORITEM_DESC"
+                "ITEM_RUBBERDUCKY_DESC"
             }
         );
         public static ConfigurableValue<int> armorPerStack = new(
             "Item: Rubber Ducky",
-            "Armor Increase",
+            "Armor",
             5,
             "Amount of flat armor gained per stack.",
             new List<string>()
             {
-                "ITEM_ARMORITEM_DESC"
+                "ITEM_RUBBERDUCKY_DESC"
             }
         );
 
@@ -45,11 +45,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "RUBBER_DUCKY";
-            itemDef.nameToken = "RUBBER_DUCKY_NAME";
-            itemDef.pickupToken = "RUBBER_DUCKY_PICKUP";
-            itemDef.descriptionToken = "RUBBER_DUCKY_DESCRIPTION";
-            itemDef.loreToken = "RUBBER_DUCKY_LORE";
+            itemDef.name = "RUBBERDUCKY";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

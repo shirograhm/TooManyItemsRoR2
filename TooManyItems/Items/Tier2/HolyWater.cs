@@ -24,7 +24,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> minExperienceMultiplierPerStack = new(
             "Item: Holy Water",
-            "Minimum XP Multiplier",
+            "Minimum XP",
             1f,
             "Minimum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
@@ -36,7 +36,7 @@ namespace TooManyItems
 
         public static ConfigurableValue<float> maxExperienceMultiplierPerStack = new(
             "Item: Holy Water",
-            "Maximum XP Multiplier",
+            "Maximum XP",
             100f,
             "Maximum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
@@ -72,11 +72,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "HOLY_WATER";
-            itemDef.nameToken = "HOLY_WATER_NAME";
-            itemDef.pickupToken = "HOLY_WATER_PICKUP";
-            itemDef.descriptionToken = "HOLY_WATER_DESCRIPTION";
-            itemDef.loreToken = "HOLY_WATER_LORE";
+            itemDef.name = "HOLYWATER";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 

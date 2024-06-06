@@ -47,11 +47,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BREAD_LOAF";
-            itemDef.nameToken = "BREAD_LOAF_NAME";
-            itemDef.pickupToken = "BREAD_LOAF_PICKUP";
-            itemDef.descriptionToken = "BREAD_LOAF_DESCRIPTION";
-            itemDef.loreToken = "BREAD_LOAF_LORE";
+            itemDef.name = "BREADLOAF";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

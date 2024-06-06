@@ -77,10 +77,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "HOODIE";
-            itemDef.nameToken = "HOODIE_NAME";
-            itemDef.pickupToken = "HOODIE_PICKUP";
-            itemDef.descriptionToken = "HOODIE_DESCRIPTION";
-            itemDef.loreToken = "HOODIE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 

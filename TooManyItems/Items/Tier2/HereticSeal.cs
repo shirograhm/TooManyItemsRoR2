@@ -45,11 +45,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "HERETIC_SEAL";
-            itemDef.nameToken = "HERETIC_SEAL_NAME";
-            itemDef.pickupToken = "HERETIC_SEAL_PICKUP";
-            itemDef.descriptionToken = "HERETIC_SEAL_DESCRIPTION";
-            itemDef.loreToken = "HERETIC_SEAL_LORE";
+            itemDef.name = "HERETICSEAL";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 

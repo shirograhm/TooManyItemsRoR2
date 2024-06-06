@@ -14,7 +14,7 @@ namespace TooManyItems
 
         // Gain 150 HP. Gain 2% (+2% per stack) of your max health as bonus damage.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Void Heart",
+            "Item: Defiled Heart",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
@@ -24,7 +24,7 @@ namespace TooManyItems
             }
         );
         public static ConfigurableValue<float> healthIncrease = new(
-            "Item: Void Heart",
+            "Item: Defiled Heart",
             "Health Increase",
             150f,
             "Bonus health gained from this item. Does not increase with stacks.",
@@ -34,7 +34,7 @@ namespace TooManyItems
             }
         );
         public static ConfigurableValue<float> percentDamagePerStack = new(
-            "Item: Void Heart",
+            "Item: Defiled Heart",
             "Bonus Damage Scaling",
             2f,
             "Percent of maximum health gained as bonus damage.",
@@ -59,11 +59,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "VOID_HEART";
-            itemDef.nameToken = "VOID_HEART_NAME";
-            itemDef.pickupToken = "VOID_HEART_PICKUP";
-            itemDef.descriptionToken = "VOID_HEART_DESCRIPTION";
-            itemDef.loreToken = "VOID_HEART_LORE";
+            itemDef.name = "VOIDHEART";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.VoidTier3);
 

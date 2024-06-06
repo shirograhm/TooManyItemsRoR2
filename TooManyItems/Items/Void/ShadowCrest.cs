@@ -46,11 +46,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "SHADOW_CREST";
-            itemDef.nameToken = "SHADOW_CREST_NAME";
-            itemDef.pickupToken = "SHADOW_CREST_PICKUP";
-            itemDef.descriptionToken = "SHADOW_CREST_DESCRIPTION";
-            itemDef.loreToken = "SHADOW_CREST_LORE";
+            itemDef.name = "SHADOWCREST";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.VoidTier2);
 

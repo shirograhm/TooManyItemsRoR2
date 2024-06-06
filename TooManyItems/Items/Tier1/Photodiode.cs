@@ -24,7 +24,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
-            "Attack Speed On-Hit",
+            "Attack Speed",
             2.5f,
             "Percent attack speed gained on-hit.",
             new List<string>()
@@ -34,7 +34,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<int> attackSpeedDuration = new(
             "Item: Photodiode",
-            "Attack Speed Duration",
+            "Buff Duration",
             10,
             "Duration of attack speed buff in seconds.",
             new List<string>()
@@ -74,10 +74,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "PHOTODIODE";
-            itemDef.nameToken = "PHOTODIODE_NAME";
-            itemDef.pickupToken = "PHOTODIODE_PICKUP";
-            itemDef.descriptionToken = "PHOTODIODE_DESCRIPTION";
-            itemDef.loreToken = "PHOTODIODE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

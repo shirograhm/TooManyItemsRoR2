@@ -23,7 +23,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> attackSpeedBonus = new(
             "Item: Epinephrine",
-            "Attack Speed Bonus",
+            "Attack Speed",
             60f,
             "Attack speed gained after taking damage.",
             new List<string>()
@@ -33,8 +33,8 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> buffDuration = new(
             "Item: Epinephrine",
-            "Duration",
-            3f,
+            "Buff Duration",
+            1f,
             "Duration of attack speed gained after taking damage.",
             new List<string>()
             {
@@ -61,10 +61,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "EPINEPHRINE";
-            itemDef.nameToken = "EPINEPHRINE_NAME";
-            itemDef.pickupToken = "EPINEPHRINE_PICKUP";
-            itemDef.descriptionToken = "EPINEPHRINE_DESCRIPTION";
-            itemDef.loreToken = "EPINEPHRINE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 

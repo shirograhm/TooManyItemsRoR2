@@ -33,12 +33,12 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> slowDuration = new(
             "Item: Edible Glue",
-            "Slow Duration",
+            "Glue Duration",
             4f,
             "Slow duration.",
             new List<string>()
             {
-                "ITE_EDIBLEGLUE_DESC",
+                "ITEM_EDIBLEGLUE_DESC",
             }
         );
 
@@ -56,11 +56,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "EDIBLE_GLUE";
-            itemDef.nameToken = "EDIBLE_GLUE_NAME";
-            itemDef.pickupToken = "EDIBLE_GLUE_PICKUP";
-            itemDef.descriptionToken = "EDIBLE_GLUE_DESCRIPTION";
-            itemDef.loreToken = "EDIBLE_GLUE_LORE";
+            itemDef.name = "EDIBLEGLUE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 

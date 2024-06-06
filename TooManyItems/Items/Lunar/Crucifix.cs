@@ -67,10 +67,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "CRUCIFIX";
-            itemDef.nameToken = "CRUCIFIX_NAME";
-            itemDef.pickupToken = "CRUCIFIX_PICKUP";
-            itemDef.descriptionToken = "CRUCIFIX_DESCRIPTION";
-            itemDef.loreToken = "CRUCIFIX_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 

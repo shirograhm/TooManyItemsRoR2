@@ -45,11 +45,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "GLASS_MARBLES";
-            itemDef.nameToken = "GLASS_MARBLES_NAME";
-            itemDef.pickupToken = "GLASS_MARBLES_PICKUP";
-            itemDef.descriptionToken = "GLASS_MARBLES_DESCRIPTION";
-            itemDef.loreToken = "GLASS_MARBLES_LORE";
+            itemDef.name = "GLASSMARBLES";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
