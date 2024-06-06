@@ -562,7 +562,7 @@ namespace TooManyItems
                 }
 
                 // Shadow Crest
-                if (ShadowCrest.isEnabled.Value)
+                if (LunarCrest.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Missing Health Regen: ");
@@ -571,10 +571,10 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(ShadowCrest.regenPerSecondPercent, itemCount)
+                            Utils.GetHyperbolicStacking(LunarCrest.regenPerSecondPercent, itemCount)
                         };
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)ShadowCrest.itemDef.itemIndex, stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)LunarCrest.itemDef.itemIndex, stats);
                 }
 
                 // Soul Ring
@@ -643,7 +643,7 @@ namespace TooManyItems
                 }
 
                 // Void Heart
-                if (VoidHeart.isEnabled.Value)
+                if (ShadowCore.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Damage Bonus: ");
@@ -654,7 +654,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         if (master && master.GetBody())
                         {
-                            values.Add(VoidHeart.CalculateDamageBonus(master.GetBody(), itemCount));
+                            values.Add(ShadowCore.CalculateDamageBonus(master.GetBody(), itemCount));
                         }
                         else
                         {
@@ -662,7 +662,7 @@ namespace TooManyItems
                         }
                         return values;
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)VoidHeart.itemDef.itemIndex, stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)ShadowCore.itemDef.itemIndex, stats);
                 }
             }
         }
