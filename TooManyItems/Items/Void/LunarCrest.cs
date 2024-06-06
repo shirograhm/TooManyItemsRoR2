@@ -11,23 +11,23 @@ namespace TooManyItems
 
         // Gain health regen based on missing health.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Shadow Crest",
+            "Item: Lunar Crest",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_SHADOWCREST_DESC"
+                "ITEM_LUNARCREST_DESC"
             }
         );
         public static ConfigurableValue<float> regenPerSecond = new(
-            "Item: Shadow Crest",
+            "Item: Lunar Crest",
             "Regen Per Second",
             2f,
             "Percentage of missing health regenerated per second.",
             new List<string>()
             {
-                "ITEM_SHADOWCREST_DESC"
+                "ITEM_LUNARCREST_DESC"
             }
         );
         public static float regenPerSecondPercent = regenPerSecond.Value / 100f;
@@ -46,13 +46,13 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "SHADOWCREST";
+            itemDef.name = "LUNARCREST";
             itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.VoidTier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("ShadowCrest.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("ShadowCrest.prefab");
+            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("LunarCrest.png");
+            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("LunarCrest.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

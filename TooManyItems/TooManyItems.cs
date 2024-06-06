@@ -111,12 +111,14 @@ namespace TooManyItems
                 SpiritStone.Init();
 
             // Void
-            if (ShadowCrest.isEnabled.Value)
-                ShadowCrest.Init();
-            if (VoidHeart.isEnabled.Value)
-                VoidHeart.Init();
+            if (LunarCrest.isEnabled.Value)
+                LunarCrest.Init();
+            if (ShadowCore.isEnabled.Value)
+                ShadowCore.Init();
 
             // Equipment
+            if (Vanity.isEnabled.Value)
+                Vanity.Init();
             if (BuffTotem.isEnabled.Value)
                 BuffTotem.Init();
             if (Chalice.isEnabled.Value)
@@ -143,13 +145,13 @@ namespace TooManyItems
                     new ItemDef.Pair()
                     {
                         itemDef1 = IronHeart.itemDef,
-                        itemDef2 = VoidHeart.itemDef
+                        itemDef2 = ShadowCore.itemDef
                     },
                     // Seal of the Heretic => Shadow Crest
                     new ItemDef.Pair()
                     {
                         itemDef1 = HereticSeal.itemDef,
-                        itemDef2 = ShadowCrest.itemDef
+                        itemDef2 = LunarCrest.itemDef
                     }
                 };
 
@@ -203,9 +205,10 @@ namespace TooManyItems
                 DropItem(Crucifix.itemDef);
                 DropItem(SpiritStone.itemDef);
 
-                DropItem(VoidHeart.itemDef);
-                DropItem(ShadowCrest.itemDef);
+                DropItem(ShadowCore.itemDef);
+                DropItem(LunarCrest.itemDef);
 
+                DropItem(Vanity.equipmentDef);
                 DropItem(BuffTotem.equipmentDef);
                 DropItem(Chalice.equipmentDef);
                 DropItem(TatteredScroll.equipmentDef);
