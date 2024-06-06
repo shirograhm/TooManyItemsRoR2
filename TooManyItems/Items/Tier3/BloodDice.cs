@@ -142,7 +142,6 @@ namespace TooManyItems
 
             itemDef.name = "BLOODDICE";
             itemDef.AutoPopulateTokens();
-            if (affectedByLuck.Value) itemDef.descriptionToken += "_LUCK";
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
