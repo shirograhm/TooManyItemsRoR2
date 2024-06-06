@@ -11,7 +11,7 @@ namespace TooManyItems
     internal class SpiritStone
     {
         public static ItemDef itemDef;
-        // Killing an enemy grants 1 (+1 per stack) permanent shield. Lose 50% (+50% per stack) max health.
+        // Killing an enemy grants 1 (+1 per stack) permanent shield. Lose 30% (+30% per stack) max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
             "Enabled",

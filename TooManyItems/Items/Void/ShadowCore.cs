@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain HP. Gain bonus base damage based on your max health.
+        // Gain HP. Gain bonus damage based on your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Shadow Core",
             "Enabled",

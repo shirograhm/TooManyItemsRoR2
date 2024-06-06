@@ -646,7 +646,7 @@ namespace TooManyItems
                 if (ShadowCore.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Damage Bonus: ");
+                    stats.descriptions.Add("Base Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
