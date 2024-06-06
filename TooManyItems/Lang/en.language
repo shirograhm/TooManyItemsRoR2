@@ -1,5 +1,10 @@
 ﻿{
   "en": {
+    "ARROGANCE": "Lunar Scepter",
+    "EQUIPMENT_ARROGANCE_NAME": "Lunar Scepter",
+    "EQUIPMENT_ARROGANCE_PICKUP": "<style=cDeath>Killing enemies grants a stacking debuff while on cooldown</style>. Activate to deal damage based on the number of stacks accrued.",
+    "EQUIPMENT_ARROGANCE_DESC": "While on cooldown, gain stacks of <style=cWorldEvent>Hubris</style> on kill. <style=cDeath>Each stack increases the damage you take by {Damage Amp}%</style>. Activate to cleanse all <style=cWorldEvent>Hubris</style> stacks and rend a target enemy for <style=cIsDamage>{Damage Dealt}% base damage</style> per stack.",
+    "EQUIPMENT_ARROGANCE_LORE": "",
     "CHALICE": "Chalice",
     "EQUIPMENT_CHALICE_NAME": "Chalice",
     "EQUIPMENT_CHALICE_PICKUP": "<style=cDeath>Pay a portion of your current health</style> to grant all allies bonus damage and attack speed.",
@@ -79,7 +84,7 @@
     "ITEM_RUBBERDUCKY_NAME": "Rubber Ducky",
     "ITEM_RUBBERDUCKY_PICKUP": "Gain armor.",
     "ITEM_RUBBERDUCKY_DESC": "Gain <style=cEvent>{Armor} <style=cStack>(+{Armor} per stack)</style> armor</style>.",
-    "ITEM_RUBBERDUCKY_LORE": "\"I don't know, John! All I'm saying is that when I hold this duck I feel safer. Why do you have to make everything such a big deal?\"\n\n\"Are you even listening to yourself? It's a ****** toy!\"",
+    "ITEM_RUBBERDUCKY_LORE": "",
     "BROKENMASK": "Broken Mask",
     "ITEM_BROKENMASK_NAME": "Broken Mask",
     "ITEM_BROKENMASK_PICKUP": "Dealing damage burns enemies for a percentage of their max health.",
