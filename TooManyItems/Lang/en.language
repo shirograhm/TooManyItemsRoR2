@@ -1,7 +1,7 @@
 ﻿{
   "en": {
-    "ARROGANCE": "Lunar Scepter",
-    "EQUIPMENT_ARROGANCE_NAME": "Lunar Scepter",
+    "ARROGANCE": "Vanity",
+    "EQUIPMENT_ARROGANCE_NAME": "Vanity",
     "EQUIPMENT_ARROGANCE_PICKUP": "<style=cDeath>Killing enemies grants a stacking debuff while on cooldown</style>. Activate to deal damage based on the number of stacks accrued.",
     "EQUIPMENT_ARROGANCE_DESC": "While on cooldown, gain stacks of <style=cWorldEvent>Hubris</style> on kill. <style=cDeath>Each stack increases the damage you take by {Damage Amp}%</style>. Activate to cleanse all <style=cWorldEvent>Hubris</style> stacks and rend a target enemy for <style=cIsDamage>{Damage Dealt}% base damage</style> per stack.",
     "EQUIPMENT_ARROGANCE_LORE": "",
