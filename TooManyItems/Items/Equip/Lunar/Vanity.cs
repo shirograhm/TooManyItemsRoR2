@@ -3,6 +3,7 @@ using RoR2;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace TooManyItems
@@ -13,10 +14,12 @@ namespace TooManyItems
         public static BuffDef hubrisDebuff;
 
         public static GameObject vanityTargetIndicatorPrefab;
+        public static GameObject implosionEffectObject;
+
+        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.VANITY_COLOR);
 
         // 30 second cooldown
-        // Gain stacks of Hubris when killing enemies. Each stack reduces your BASE damage by 3%.
-        // Activate this equipment to consume all Hubris stacks and deal 300% BASE damage per stack to a target enemy.
+        // Gain stacks of Hubris when killing enemies. Activate to cleanse all stacks and damage a target enemy. This damage scales with stacks cleansed.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Crown of Vanity",
             "Enabled",
@@ -30,7 +33,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            3f,
+            8f,
             "Percent base damage lost for each stack of Hubris.",
             new List<string>()
             {
@@ -42,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageDealtPerStack = new(
             "Equipment: Crown of Vanity",
             "Damage Dealt",
-            300f,
+            200f,
             "Percent damage dealt for each stack of Hubris accrued.",
             new List<string>()
             {
@@ -51,10 +54,10 @@ namespace TooManyItems
         );
         public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
 
-        public static ConfigurableValue<int> procCoefficient = new(
+        public static ConfigurableValue<float> procCoefficient = new(
             "Equipment: Crown of Vanity",
             "Proc Coefficient",
-            3,
+            2f,
             "Proc coefficient for the single damage instance on equipment use.",
             new List<string>()
             {
@@ -64,7 +67,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
-            30,
+            40,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -78,9 +81,12 @@ namespace TooManyItems
             GenerateBuff();
 
             vanityTargetIndicatorPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator"), "TooManyItems_vanityTargetIndicator", false);
-            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().sprite = Assets.bundle.LoadAsset<Sprite>("VanityTargeter.png");
             vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utils.VANITY_COLOR;
             vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utils.VANITY_COLOR;
+
+            implosionEffectObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteIce/AffixWhiteExplosion.prefab").WaitForCompletion();
+            // implosionEffectObject = Assets.bundle.LoadAsset<GameObject>("VanityImplosionEffect.prefab");
+            ContentAddition.AddEffect(implosionEffectObject);
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
@@ -178,12 +184,6 @@ namespace TooManyItems
                 {
                     return OnUse(self);
                 } 
-                else if (self.characterBody.GetBuffCount(hubrisDebuff) > 0)
-                {
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                    self.characterBody.SetBuffCount(hubrisDebuff.buffIndex, 0);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-                }
 
                 return orig(self, equipDef);
             };
@@ -193,19 +193,6 @@ namespace TooManyItems
                 if (sender && sender.inventory)
                 {
                     args.damageMultAdd -= Utils.GetExponentialStacking(damageLostPercentPerStack, sender.GetBuffCount(hubrisDebuff));
-                }
-            };
-
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attacker, victim) =>
-            {
-                if (victim.body && victim.body.inventory)
-                {
-                    int stackCount = victim.body.GetBuffCount(hubrisDebuff);
-                    if (stackCount > 0)
-                    {
-                        float multiplier = 1 + stackCount * damageLostPercentPerStack;
-                        damageInfo.damage *= multiplier;
-                    }
                 }
             };
 
@@ -224,11 +211,18 @@ namespace TooManyItems
 
         private static bool OnUse(EquipmentSlot slot)
         {
+            EquipmentTargeter targeter = slot.GetComponent<EquipmentTargeter>();
+            CharacterBody targetEnemy = (targeter) ? targeter.obj.GetComponent<CharacterBody>() : null;
+
             CharacterBody user = slot.characterBody;
-            if (user)
+            if (user && targetEnemy)
             {
-                EquipmentTargeter targeter = slot.GetComponent<EquipmentTargeter>();
-                CharacterBody targetEnemy = (targeter) ? targeter.obj.GetComponent<CharacterBody>() : null;
+                EffectManager.SpawnEffect(implosionEffectObject, new EffectData
+                {
+                    origin = targetEnemy.corePosition,
+                    scale = 3 + targetEnemy.radius
+                }, 
+                true);
 
                 float damageAmount = user.damage * damageDealtPercentPerStack * user.GetBuffCount(hubrisDebuff);
                 DamageInfo scepterDamage = new()
@@ -239,7 +233,7 @@ namespace TooManyItems
                     procCoefficient = procCoefficient.Value,
                     position = targetEnemy.corePosition,
                     crit = false,
-                    damageColorIndex = DamageColorIndex.Default,
+                    damageColorIndex = damageColor,
                     procChainMask = new ProcChainMask(),
                     damageType = DamageType.Silent
                 };
