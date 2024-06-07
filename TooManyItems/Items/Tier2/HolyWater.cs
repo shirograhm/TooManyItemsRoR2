@@ -100,18 +100,13 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
 
-                if (atkBody && atkMaster && vicBody && vicBody.isElite)
+                if (vicBody.isElite)
                 {
-                    // Check if attacker is minion and if we can switch to player
-                    if (atkMaster.minionOwnership && atkMaster.minionOwnership.ownerMaster && atkMaster.minionOwnership.ownerMaster.hasBody)
-                    {
-                        atkMaster = atkMaster.minionOwnership.ownerMaster;
-                        atkBody = atkMaster.GetBody();
-                    }
+                    atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
                     if (atkBody.inventory)
                     {
                         int count = atkBody.inventory.GetItemCount(itemDef);
-                        if (count > 0)
+                        if (atkMaster && vicBody && count > 0)
                         {
                             float bonusXP = vicBody.healthComponent.fullCombinedHealth * CalculateExperienceMultiplier(count);
 

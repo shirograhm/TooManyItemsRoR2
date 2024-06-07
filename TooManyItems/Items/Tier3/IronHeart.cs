@@ -198,54 +198,6 @@ namespace TooManyItems
                     }
                 }
             };
-
-            //On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-            //{
-            //    orig(self, damageInfo, victim);
-
-            //    if (!NetworkServer.active) return;
-            //    if (damageInfo.attacker == null || victim == null) return;
-
-            //    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-            //    CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-
-            //    if (attackerBody != null && attackerBody.inventory != null)
-            //    {
-            //        int count = attackerBody.inventory.GetItemCount(itemDef);
-
-            //        if (count > 0)
-            //        {
-            //            float damageAmount = CalculateDamageOnHit(attackerBody, count);
-
-            //            DamageInfo damageProc = new()
-            //            {
-            //                damage = damageAmount,
-            //                attacker = damageInfo.attacker,
-            //                inflictor = damageInfo.attacker,
-            //                procCoefficient = 1f,
-            //                position = damageInfo.position,
-            //                crit = attackerBody.RollCrit(),
-            //                damageColorIndex = damageColor,
-            //                procChainMask = damageInfo.procChainMask,
-            //                damageType = DamageType.Silent
-            //            };
-            //            damageProc.AddModdedDamageType(damageType);
-
-            //            victimBody.healthComponent.TakeDamage(damageProc);
-
-            //            // Damage calculation takes minions into account
-            //            if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
-            //            {
-            //                if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
-            //                {
-            //                    attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
-            //                }
-            //            }
-            //            var stats = attackerBody.inventory.GetComponent<Statistics>();
-            //            stats.TotalDamageDealt += damageAmount;
-            //        }
-            //    }
-            //};
         }
     }
 }
