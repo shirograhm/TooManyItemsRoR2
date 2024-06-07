@@ -8,7 +8,8 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            var pluginInfos = BepInEx.Bootstrap.Chainloader.PluginInfos;
+            System.Collections.Generic.Dictionary<string, BepInEx.PluginInfo> pluginInfos = BepInEx.Bootstrap.Chainloader.PluginInfos;
+
             if (pluginInfos.ContainsKey("droppod.lookingglass"))
             {
                 try
