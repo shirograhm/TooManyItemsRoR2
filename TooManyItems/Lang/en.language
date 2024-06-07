@@ -160,10 +160,10 @@
     "ITEM_DEFILEDHEART_PICKUP": "Gain base damage based on your max health.",
     "ITEM_DEFILEDHEART_DESC": "Gain <style=cIsHealth>{Health Increase} HP</style>. Also, gain <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% per stack)</style></style> of your max health as <style=cIsDamage>BASE damage</style>.",
     "ITEM_DEFILEDHEART_LORE": "",
-    "LUNARCREST": "Lunar Crest",
-    "ITEM_LUNARCREST_NAME": "Lunar Crest",
-    "ITEM_LUNARCREST_PICKUP": "Regenerate a portion of your missing health per second.",
-    "ITEM_LUNARCREST_DESC": "Regenerate <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second}% per stack)</style></style> of your missing health per second.",
-    "ITEM_LUNARCREST_LORE": ""
+    "SHADOWCREST": "Shadow Crest",
+    "ITEM_SHADOWCREST_NAME": "Shadow Crest",
+    "ITEM_SHADOWCREST_PICKUP": "Regenerate a portion of your missing health per second.",
+    "ITEM_SHADOWCREST_DESC": "Regenerate <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second}% per stack)</style></style> of your missing health per second.",
+    "ITEM_SHADOWCREST_LORE": ""
   }
 }

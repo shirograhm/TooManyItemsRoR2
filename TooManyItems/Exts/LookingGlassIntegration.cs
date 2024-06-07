@@ -562,7 +562,7 @@ namespace TooManyItems
                 }
 
                 // Shadow Crest
-                if (LunarCrest.isEnabled.Value)
+                if (ShadowCrest.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Missing Health Regen: ");
@@ -571,10 +571,10 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(LunarCrest.regenPerSecondPercent, itemCount)
+                            Utils.GetHyperbolicStacking(ShadowCrest.regenPerSecondPercent, itemCount)
                         };
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)LunarCrest.itemDef.itemIndex, stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)ShadowCrest.itemDef.itemIndex, stats);
                 }
 
                 // Soul Ring
