@@ -18,7 +18,7 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex maskDamageColor = DamageColorAPI.RegisterDamageColor(Utils.BROKEN_MASK_COLOR);
 
-        // Dealing damage burns enemies for 1.5% (+1.5% per stack) max health over 5 seconds.
+        // Dealing damage burns enemies for a portion of their max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Broken Mask",
             "Enabled",
@@ -32,7 +32,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
-            1.5f,
+            2f,
             "Burn damage dealt over the duration as a percentage of enemy max health.",
             new List<string>()
             {

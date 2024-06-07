@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 2.5 (+2.5) damage per level.
+        // Gain BASE damage per level.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Glass Marbles",
             "Enabled",

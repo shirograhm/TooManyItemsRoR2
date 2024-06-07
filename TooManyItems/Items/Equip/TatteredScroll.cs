@@ -38,7 +38,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> curseDuration = new(
             "Equipment: Tattered Scroll",
             "Curse Duration",
-            12f,
+            10f,
             "Duration of the curse.",
             new List<string>()
             {
