@@ -12,7 +12,7 @@ namespace TooManyItems
         public static BuffDef hoodieBuffActive;
         public static BuffDef hoodieBuffCooldown;
 
-        // The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 8 (-15% per stack) seconds.
+        // The next timed buff received has its duration increased. Recharges over time.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Fleece Hoodie",
             "Enabled",

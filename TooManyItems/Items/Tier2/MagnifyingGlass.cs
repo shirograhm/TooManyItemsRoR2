@@ -10,7 +10,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef analyzedDebuff;
 
-        // Gain 5% crit chance. Critical strikes have an 6% (+6% per stack) chance to Analyze the enemy, increasing their damage taken by 18% from all sources.
+        // Gain crit chance. Critical strikes have a chance to Analyze the enemy, increasing their damage taken from all sources.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Magnifying Glass",
             "Enabled",

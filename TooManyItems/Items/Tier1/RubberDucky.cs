@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 5 (+5) armor.
+        // Gain armor.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Rubber Ducky",
             "Enabled",

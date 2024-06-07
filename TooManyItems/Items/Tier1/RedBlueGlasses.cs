@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 6% (+6%) crit chance and 6% (+6%) crit damage.
+        // Crit more and crit harder.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: 3D Glasses",
             "Enabled",

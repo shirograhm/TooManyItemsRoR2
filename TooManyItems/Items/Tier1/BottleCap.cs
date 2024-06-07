@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce your ultimate skill cooldown by 8% (+8% per stack).
+        // Reduce your ultimate skill cooldown by a percentage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Bottle Cap",
             "Enabled",

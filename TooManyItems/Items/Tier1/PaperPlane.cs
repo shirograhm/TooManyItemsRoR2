@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Increase movement speed by 18% while airborne.
+        // Increase movement speed while airborne.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Paper Plane",
             "Enabled",

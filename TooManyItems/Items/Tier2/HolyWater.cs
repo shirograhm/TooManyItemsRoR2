@@ -11,7 +11,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Killing an elite enemy grants all allies 1% to 100% (+50% per stack) of its max health as bonus experience, scaling with difficulty.
+        // Killing an elite enemy grants all allies a portion of its max health as bonus experience, scaling with difficulty.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Holy Water",
             "Enabled",

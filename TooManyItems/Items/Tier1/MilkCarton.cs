@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce damage from elite enemies by 8% (+8% per stack).
+        // Reduce damage from elite enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Milk Carton",
             "Enabled",

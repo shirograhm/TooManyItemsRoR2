@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage.
+        // Gain more gold. Take more damage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Ancient Coin",
             "Enabled",

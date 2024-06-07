@@ -18,7 +18,6 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.VANITY_COLOR);
 
-        // 30 second cooldown
         // Gain stacks of Hubris when killing enemies. Activate to cleanse all stacks and damage a target enemy. This damage scales with stacks cleansed.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Crown of Vanity",

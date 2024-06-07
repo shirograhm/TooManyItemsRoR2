@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently gain 2 to 12 HP, up to a max of 550 (+550 per stack) HP.
+        // Gain permanent health on-kill.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Blood Dice",
             "Enabled",

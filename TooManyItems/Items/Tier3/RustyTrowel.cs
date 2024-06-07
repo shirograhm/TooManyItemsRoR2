@@ -14,7 +14,7 @@ namespace TooManyItems
         public static BuffDef mulchBuff;
         public static BuffDef healingTimer;
 
-        // On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, heal 3 HP for each stack of Mulch received.
+        // Gain stacks of Mulch on-hit. Periodically heal based on the stacks accrued.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Rusty Trowel",
             "Enabled",

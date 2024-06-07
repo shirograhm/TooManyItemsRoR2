@@ -11,7 +11,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef countedBuff;
 
-        // Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Excess crit chance grants bonus crit damage.
+        // Killing an enemy grants crit chance until the next stage. Excess crit chance grants bonus crit damage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Abacus",
             "Enabled",

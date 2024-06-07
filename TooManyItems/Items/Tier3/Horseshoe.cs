@@ -1,10 +1,8 @@
 ﻿using R2API;
 using R2API.Networking;
 using RoR2;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -12,6 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
+        // Gain an assortment of random stat bonuses that reroll every stage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Golden Horseshoe",
             "Enabled",

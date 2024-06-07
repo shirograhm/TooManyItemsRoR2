@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // While the teleporter is charging, killing enemies heals you for 3% (+3% per stack) of your missing health.
+        // While the teleporter is charging, killing enemies heals you for a portion of your missing health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Loaf of Bread",
             "Enabled",
