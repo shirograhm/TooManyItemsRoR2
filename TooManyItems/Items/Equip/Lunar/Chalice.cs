@@ -65,7 +65,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Chalice",
             "Cooldown",
-            60,
+            70,
             "Equipment cooldown.",
             new List<string>()
             {

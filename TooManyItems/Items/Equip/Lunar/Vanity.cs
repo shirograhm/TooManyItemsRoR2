@@ -14,9 +14,9 @@ namespace TooManyItems
 
         public static GameObject targeterVisualizerPrefab;
 
-        // 125 second cooldown
-        // Gain stacks of Hubris when killing enemies. Each stack reduces your BASE damage by 2%.
-        // Activate this equipment to consume all Hubris stacks and deal 100% BASE damage per stack to a target enemy.
+        // 30 second cooldown
+        // Gain stacks of Hubris when killing enemies. Each stack reduces your BASE damage by 3%.
+        // Activate this equipment to consume all Hubris stacks and deal 300% BASE damage per stack to a target enemy.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Crown of Vanity",
             "Enabled",
@@ -30,7 +30,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            2f,
+            3f,
             "Percent base damage lost for each stack of Hubris.",
             new List<string>()
             {
@@ -42,7 +42,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageDealtPerStack = new(
             "Equipment: Crown of Vanity",
             "Damage Dealt",
-            100f,
+            300f,
             "Percent damage dealt for each stack of Hubris accrued.",
             new List<string>()
             {
@@ -54,7 +54,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> procCoefficient = new(
             "Equipment: Crown of Vanity",
             "Proc Coefficient",
-            1,
+            3,
             "Proc coefficient for the single damage instance on equipment use.",
             new List<string>()
             {
@@ -64,7 +64,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
-            125,
+            30,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -114,7 +114,7 @@ namespace TooManyItems
             hubrisDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             hubrisDebuff.name = "Hubris";
-            hubrisDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("HubrisDebuff.png");
+            hubrisDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Hubris.png");
             hubrisDebuff.canStack = true;
             hubrisDebuff.isHidden = false;
             hubrisDebuff.isDebuff = true;
