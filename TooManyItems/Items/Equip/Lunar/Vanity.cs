@@ -18,7 +18,7 @@ namespace TooManyItems
         // Gain stacks of Hubris when killing enemies. Each stack reduces your BASE damage by 2%.
         // Activate this equipment to consume all Hubris stacks and deal 100% BASE damage per stack to a target enemy.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Equipment: Vanity Mirror",
+            "Equipment: Staff of Eminence",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
@@ -28,7 +28,7 @@ namespace TooManyItems
             }
         );
         public static ConfigurableValue<float> damageLostPerStack = new(
-            "Equipment: Vanity Mirror",
+            "Equipment: Staff of Eminence",
             "Base Damage Lost",
             2f,
             "Percent base damage lost for each stack of Hubris.",
@@ -40,7 +40,7 @@ namespace TooManyItems
         public static float damageLostPercentPerStack = damageLostPerStack.Value / 100f;
 
         public static ConfigurableValue<float> damageDealtPerStack = new(
-            "Equipment: Vanity Mirror",
+            "Equipment: Staff of Eminence",
             "Damage Dealt",
             100f,
             "Percent damage dealt for each stack of Hubris accrued.",
@@ -52,7 +52,7 @@ namespace TooManyItems
         public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
 
         public static ConfigurableValue<int> procCoefficient = new(
-            "Equipment: Vanity Mirror",
+            "Equipment: Staff of Eminence",
             "Proc Coefficient",
             1,
             "Proc coefficient for the single damage instance on equipment use.",
@@ -62,7 +62,7 @@ namespace TooManyItems
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
-            "Equipment: Vanity Mirror",
+            "Equipment: Staff of Eminence",
             "Cooldown",
             125,
             "Equipment cooldown.",

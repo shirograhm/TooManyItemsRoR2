@@ -1,7 +1,7 @@
 ﻿{
   "en": {
-    "VANITY": "Vanity Mirror",
-    "EQUIPMENT_VANITY_NAME": "Vanity Mirror",
+    "VANITY": "Staff of Eminence",
+    "EQUIPMENT_VANITY_NAME": "Staff of Eminence",
     "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>Killing enemies grants a stacking debuff</style>. Activate to deal damage based on the number of stacks accrued.",
     "EQUIPMENT_VANITY_DESC": "Gain stacks of <style=cWorldEvent>Hubris</style> when killing enemies. <style=cDeath>Each stack accrued reduces your <style=cIsDamage>BASE damage</style> by <style=cIsUtility>{Base Damage Lost}%</style></style>. Activate this equipment to cleanse all <style=cWorldEvent>Hubris</style> stacks and rend a target enemy for <style=cIsDamage>{Damage Dealt}% BASE damage</style> per stack.",
     "EQUIPMENT_VANITY_LORE": "",
