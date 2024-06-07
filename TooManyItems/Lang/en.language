@@ -1,4 +1,9 @@
-﻿{
+﻿// <style=cIsHealth> <style=cIsDamage> <style=cIsHealing>
+// <style=cIsUtility> <style=cIsVoid>  <style=cHumanObjective>
+// <style=cLunarObjective> <style=cStack> <style=cWorldEvent>
+// <style=cArtifact> <style=cUserSetting> <style=cDeath>
+// <style=cSub> <style=cMono> <style=cShrine> <style=cEvent>
+{
   "en": {
     "VANITY": "Crown of Vanity",
     "EQUIPMENT_VANITY_NAME": "Crown of Vanity",

@@ -236,47 +236,6 @@ namespace TooManyItems
                     }
                 }
             };
-
-//            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-//            {
-//                orig(self, damageInfo, victim);
-
-//                if (!NetworkServer.active) return;
-
-//                if (damageInfo.attacker)
-//                {
-//                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-//                    if (attackerBody && attackerBody.inventory)
-//                    {
-//                        int itemCount = attackerBody.inventory.GetItemCount(itemDef);
-//                        if (itemCount > 0)
-//                        {
-//                            int newBuffCount = attackerBody.GetBuffCount(mulchBuff) + itemCount;
-//#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-//                            attackerBody.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
-//#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-//                        }
-//                    }
-//                }
-//            };
         }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

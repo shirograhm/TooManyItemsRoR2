@@ -119,29 +119,6 @@ namespace TooManyItems
                 }
             };
 
-            //On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
-            //{
-            //    orig(self, damageInfo, victim);
-
-            //    if (!NetworkServer.active) return;
-            //    if (damageInfo.attacker == null || victim == null) return;
-
-            //    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-
-            //    if (attackerBody != null && attackerBody.inventory != null)
-            //    {
-            //        int count = attackerBody.inventory.GetItemCount(itemDef);
-            //        if (count > 0)
-            //        {
-            //            int currentStacks = attackerBody.GetBuffCount(attackSpeedBuff);
-            //            if (currentStacks < maxAttackSpeedStacks.Value * count)
-            //            {
-            //                attackerBody.AddTimedBuff(attackSpeedBuff, attackSpeedDuration.Value);
-            //            }
-            //        }
-            //    }
-            //};
-
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender && sender.inventory)
@@ -156,21 +133,3 @@ namespace TooManyItems
         }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>
