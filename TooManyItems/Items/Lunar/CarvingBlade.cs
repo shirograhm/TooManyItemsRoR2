@@ -113,7 +113,7 @@ namespace TooManyItems
         {
             GenerateItem();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -187,7 +187,7 @@ namespace TooManyItems
 
                         // Damage calculation takes minions into account
                         CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
-                        var stats = trackerBody.inventory.GetComponent<Statistics>();
+                        Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                         stats.TotalDamageDealt += amount;
                     }
                 }

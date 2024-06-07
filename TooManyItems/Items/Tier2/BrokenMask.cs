@@ -118,7 +118,7 @@ namespace TooManyItems
             GenerateBuff();
             GenerateDot();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(burnDebuff);

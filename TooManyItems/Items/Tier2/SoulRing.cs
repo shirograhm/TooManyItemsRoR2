@@ -118,7 +118,7 @@ namespace TooManyItems
         {
             GenerateItem();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -167,7 +167,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<Statistics>();
+                        Statistics component = sender.inventory.GetComponent<Statistics>();
 
                         args.baseRegenAdd += component.HealthRegen;
                     }
@@ -186,7 +186,7 @@ namespace TooManyItems
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
                         float maxRegenAllowed = CalculateMaxRegenCap(count);
 
                         if (component.HealthRegen + healthRegenOnKill.Value <= maxRegenAllowed)

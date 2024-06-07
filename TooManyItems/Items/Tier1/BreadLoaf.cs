@@ -37,7 +37,7 @@ namespace TooManyItems
         {
             GenerateItem();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -81,9 +81,9 @@ namespace TooManyItems
                     int itemCount = atkBody.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        foreach (var holdoutZoneController in InstanceTracker.GetInstancesList<HoldoutZoneController>())
+                        foreach (HoldoutZoneController hzc in InstanceTracker.GetInstancesList<HoldoutZoneController>())
                         {
-                            if (holdoutZoneController.isActiveAndEnabled && holdoutZoneController.IsBodyInChargingRadius(atkBody))
+                            if (hzc.isActiveAndEnabled && hzc.IsBodyInChargingRadius(atkBody))
                             {
                                 float healing = healthGainOnKillPercent * itemCount * atkBody.healthComponent.missingCombinedHealth;
                                 atkBody.healthComponent.Heal(healing, new ProcChainMask());

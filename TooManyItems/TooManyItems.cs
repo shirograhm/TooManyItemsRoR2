@@ -155,15 +155,15 @@ namespace TooManyItems
                     }
                 };
 
-                var key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
+                ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
+
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                var voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
+                ItemDef.Pair[] voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
                 ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = voidPairs.Union(newVoidPairs).ToArray();
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 Debug.Log("Injected void item transformations.");
-
                 orig();
             };
         }
@@ -219,7 +219,7 @@ namespace TooManyItems
         {
             foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
             {
-                var transform = controller.master.GetBodyObject().transform;
+                Transform transform = controller.master.GetBodyObject().transform;
 
                 Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
@@ -228,7 +228,7 @@ namespace TooManyItems
 
         private void DropItem(EquipmentDef def)
         {
-            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+            Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
             Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
@@ -236,7 +236,7 @@ namespace TooManyItems
 
         private void DropItem(MiscPickupDef def)
         {
-            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+            Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
             Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);

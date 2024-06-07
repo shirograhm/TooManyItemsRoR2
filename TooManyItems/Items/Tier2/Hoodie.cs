@@ -63,7 +63,7 @@ namespace TooManyItems
             GenerateItem();
             GenerateBuff();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(hoodieBuffActive);
@@ -128,9 +128,9 @@ namespace TooManyItems
 
                 // Ignore dot effects that use Buffs to keep track of them
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                foreach (var dotDebuff in DotController.dotDefs.Where(x => x.associatedBuff != null).Select(x => x.associatedBuff).Distinct())
+                foreach (BuffDef dotDebuff in DotController.dotDefs.Where(x => x.associatedBuff != null).Select(x => x.associatedBuff).Distinct())
                     ignoredBuffDefs.Add(dotDebuff);
-                foreach (var dotDebuff in DotController.dotDefs.Where(x => x.terminalTimedBuff != null).Select(x => x.terminalTimedBuff).Distinct())
+                foreach (BuffDef dotDebuff in DotController.dotDefs.Where(x => x.terminalTimedBuff != null).Select(x => x.terminalTimedBuff).Distinct())
                     ignoredBuffDefs.Add(dotDebuff);
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
             };

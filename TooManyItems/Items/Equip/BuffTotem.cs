@@ -103,7 +103,7 @@ namespace TooManyItems
             GenerateEquipment();
             GenerateBuff();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
 
             ContentAddition.AddBuffDef(armorBuff);

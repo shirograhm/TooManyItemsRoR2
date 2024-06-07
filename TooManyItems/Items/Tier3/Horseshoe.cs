@@ -164,7 +164,7 @@ namespace TooManyItems
         {
             GenerateItem();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<HorseshoeStatistics.Sync>();
@@ -242,7 +242,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<HorseshoeStatistics>();
+                        HorseshoeStatistics component = sender.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
                             args.baseHealthAdd += GetScaledValue(component.MaxHealthBonus, sender.level, count);
@@ -286,7 +286,7 @@ namespace TooManyItems
 
         public static void Reroll(Inventory inventory, CharacterBody body)
         {
-            var component = inventory.GetComponent<HorseshoeStatistics>();
+            HorseshoeStatistics component = inventory.GetComponent<HorseshoeStatistics>();
             if (component)
             {
                 component.MaxHealthBonus = 0;

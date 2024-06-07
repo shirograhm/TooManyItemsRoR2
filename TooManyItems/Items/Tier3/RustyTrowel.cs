@@ -122,7 +122,7 @@ namespace TooManyItems
             GenerateItem();
             GenerateBuff();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(mulchBuff);
@@ -212,7 +212,7 @@ namespace TooManyItems
                         float healing = buffCount * healingPerStack.Value;
                         self.healthComponent.Heal(healing, new ProcChainMask());
 
-                        var stats = self.inventory.GetComponent<Statistics>();
+                        Statistics stats = self.inventory.GetComponent<Statistics>();
                         stats.TotalHealingDone += healing;
 
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public

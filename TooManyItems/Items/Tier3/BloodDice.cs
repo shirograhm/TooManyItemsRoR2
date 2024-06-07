@@ -128,7 +128,7 @@ namespace TooManyItems
         {
             GenerateItem();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -185,7 +185,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<Statistics>();
+                        Statistics component = sender.inventory.GetComponent<Statistics>();
                         // Take Math.min incase item was dropped or removed from inventory
                         component.PermanentHealth = Mathf.Min(component.PermanentHealth, maxHealthPerStack.Value * count);
                         args.baseHealthAdd += component.PermanentHealth;
@@ -210,7 +210,7 @@ namespace TooManyItems
                         float maxHealthAllowed = maxHealthPerStack.Value * count;
                         int roll = GetDiceRoll(atkMaster);
 
-                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
 
                         if (component.PermanentHealth + roll < maxHealthAllowed)
                         {
