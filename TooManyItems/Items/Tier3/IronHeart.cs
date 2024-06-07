@@ -139,7 +139,7 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Utility
+                ItemTag.Healing
             };
         }
 
