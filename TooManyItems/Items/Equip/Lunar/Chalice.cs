@@ -156,7 +156,7 @@ namespace TooManyItems
 
                 DamageInfo useCost = new()
                 {
-                    damage = body.healthComponent.combinedHealth * currentHealthCostPercent,
+                    damage = damageToTake,
                     attacker = null,
                     inflictor = null,
                     procCoefficient = 0f,
