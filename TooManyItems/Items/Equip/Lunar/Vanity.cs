@@ -12,7 +12,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef hubrisDebuff;
 
-        public static GameObject targeterVisualizerPrefab;
+        public static GameObject vanityTargetIndicatorPrefab;
 
         // 30 second cooldown
         // Gain stacks of Hubris when killing enemies. Each stack reduces your BASE damage by 3%.
@@ -77,9 +77,12 @@ namespace TooManyItems
             GenerateEquipment();
             GenerateBuff();
 
-            targeterVisualizerPrefab = Assets.bundle.LoadAsset<GameObject>("VanityTargeter.prefab");
+            vanityTargetIndicatorPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator"), "TooManyItems_vanityTargetIndicator", false);
+            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().sprite = Assets.bundle.LoadAsset<Sprite>("VanityTargeter.png");
+            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utils.VANITY_COLOR;
+            vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utils.VANITY_COLOR;
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
 
             ContentAddition.AddBuffDef(hubrisDebuff);
@@ -146,7 +149,7 @@ namespace TooManyItems
                             if (hurtBox)
                             {
                                 targeter.obj = hurtBox.healthComponent.gameObject;
-                                targeter.indicator.visualizerPrefab = targeterVisualizerPrefab;
+                                targeter.indicator.visualizerPrefab = vanityTargetIndicatorPrefab;
                                 targeter.indicator.targetTransform = hurtBox.transform;
                             }
                             else
