@@ -216,15 +216,16 @@ namespace TooManyItems
             CharacterBody user = slot.characterBody;
             if (user && targetEnemy)
             {
+                int buffCount = user.GetBuffCount(hubrisDebuff);
                 EffectManager.SpawnEffect(implosionEffectObject, new EffectData
                 {
                     origin = targetEnemy.corePosition,
-                    scale = 3 + targetEnemy.radius
+                    scale = buffCount + targetEnemy.radius
                 }, 
                 true);
 
-                float damageAmount = user.damage * damageDealtPercentPerStack * user.GetBuffCount(hubrisDebuff);
-                DamageInfo scepterDamage = new()
+                float damageAmount = user.damage * damageDealtPercentPerStack * buffCount;
+                DamageInfo damageInfo = new()
                 {
                     damage = damageAmount,
                     attacker = user.gameObject,
@@ -236,7 +237,7 @@ namespace TooManyItems
                     procChainMask = new ProcChainMask(),
                     damageType = DamageType.Silent
                 };
-                targetEnemy.healthComponent.TakeDamage(scepterDamage);
+                targetEnemy.healthComponent.TakeDamage(damageInfo);
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
                 user.SetBuffCount(hubrisDebuff.buffIndex, 0);
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
