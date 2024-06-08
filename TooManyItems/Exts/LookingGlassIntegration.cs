@@ -316,6 +316,26 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ItemCatalog.FindItemIndex("IRON_HEART"), stats);
                 }
 
+                // Lunar Revive
+                if (LunarRevive.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Health on Revive: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Items Lost: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            Utils.GetExponentialStacking(LunarRevive.reviveHealthPercent, itemCount),
+                            LunarRevive.itemsLostPerStack.Value * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)LunarRevive.itemDef.itemIndex, stats);
+                }
+
                 // Milk Carton
                 if (MilkCarton.isEnabled.Value)
                 {

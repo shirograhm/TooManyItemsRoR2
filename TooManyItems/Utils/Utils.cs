@@ -40,6 +40,12 @@ namespace TooManyItems
             return percent;
         }
 
+        public static ItemDef GetRandomItemDef()
+        {
+            int index = TooManyItems.rand.Next(0, ItemCatalog.allItemDefs.Length);
+            return ItemCatalog.allItemDefs[index];
+        }
+
         public static float getDifficultyAsPercentage()
         {
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
