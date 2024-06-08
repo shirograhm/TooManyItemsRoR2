@@ -32,7 +32,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            8f,
+            6f,
             "Percent base damage lost for each stack of Hubris.",
             new List<string>()
             {
@@ -44,7 +44,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageDealtPerStack = new(
             "Equipment: Crown of Vanity",
             "Damage Dealt",
-            200f,
+            300f,
             "Percent damage dealt for each stack of Hubris accrued.",
             new List<string>()
             {
@@ -56,7 +56,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> procCoefficient = new(
             "Equipment: Crown of Vanity",
             "Proc Coefficient",
-            2f,
+            1.5f,
             "Proc coefficient for the single damage instance on equipment use.",
             new List<string>()
             {
@@ -66,7 +66,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
-            40,
+            30,
             "Equipment cooldown.",
             new List<string>()
             {
