@@ -86,8 +86,8 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Chalice**  
 > *70 second cooldown*  
 > On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds.  
-> **Crown of Vanity**
-> Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 4%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy.
+> **Crown of Vanity**  
+> Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 4%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy.  
 > **Tattered Scroll**  
 > *100 second cooldown*  
 > On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold.  
