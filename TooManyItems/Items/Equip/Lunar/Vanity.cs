@@ -225,10 +225,6 @@ namespace TooManyItems
                 }, 
                 true);
 
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                user.SetBuffCount(hubrisDebuff.buffIndex, 0);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-
                 float damageAmount = user.damage * damageDealtPercentPerStack * buffCount;
                 DamageInfo damageInfo = new()
                 {
@@ -243,6 +239,10 @@ namespace TooManyItems
                     damageType = DamageType.Silent
                 };
                 targetEnemy.healthComponent.TakeDamage(damageInfo);
+
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+                user.SetBuffCount(hubrisDebuff.buffIndex, 0);
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 return true;
             }
