@@ -97,6 +97,6 @@ The following values are configurable. To do so, run the game once with the mod 
 > On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds.  
 
 ### Credits
-- Programming: shirograhm
-- Translations: MushroomEl
+- Programming: shirograhm  
+- Translations: MushroomEl  
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
