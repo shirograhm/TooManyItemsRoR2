@@ -1,6 +1,5 @@
 # TooManyItems - RoR2
 Adds 33 new items to Risk of Rain 2!
-<img src="![drawing.jpg](https://i.imgur.com/nDgkbc8.png)" alt="picture of items" width="200"/>
 ![picture of items](https://i.imgur.com/nDgkbc8.png)
 
 Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/). See below for compatibility issues.
