@@ -32,7 +32,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            6f,
+            4f,
             "Percent base damage lost for each stack of Hubris.",
             new List<string>()
             {
@@ -44,7 +44,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageDealtPerStack = new(
             "Equipment: Crown of Vanity",
             "Damage Dealt",
-            300f,
+            200f,
             "Percent damage dealt for each stack of Hubris accrued.",
             new List<string>()
             {
@@ -53,10 +53,10 @@ namespace TooManyItems
         );
         public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
 
-        public static ConfigurableValue<float> procCoefficient = new(
+        public static ConfigurableValue<float> coefficient = new(
             "Equipment: Crown of Vanity",
             "Proc Coefficient",
-            1.5f,
+            2f,
             "Proc coefficient for the single damage instance on equipment use.",
             new List<string>()
             {
@@ -66,7 +66,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
-            30,
+            40,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -220,9 +220,14 @@ namespace TooManyItems
                 EffectManager.SpawnEffect(implosionEffectObject, new EffectData
                 {
                     origin = targetEnemy.corePosition,
-                    scale = buffCount + targetEnemy.radius
+                    scale = 0.3f * buffCount + targetEnemy.radius,
+                    color = Utils.VANITY_COLOR
                 }, 
                 true);
+
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+                user.SetBuffCount(hubrisDebuff.buffIndex, 0);
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 float damageAmount = user.damage * damageDealtPercentPerStack * buffCount;
                 DamageInfo damageInfo = new()
@@ -230,7 +235,7 @@ namespace TooManyItems
                     damage = damageAmount,
                     attacker = user.gameObject,
                     inflictor = user.gameObject,
-                    procCoefficient = procCoefficient.Value,
+                    procCoefficient = coefficient.Value,
                     position = targetEnemy.corePosition,
                     crit = false,
                     damageColorIndex = damageColor,
@@ -238,9 +243,6 @@ namespace TooManyItems
                     damageType = DamageType.Silent
                 };
                 targetEnemy.healthComponent.TakeDamage(damageInfo);
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                user.SetBuffCount(hubrisDebuff.buffIndex, 0);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 return true;
             }

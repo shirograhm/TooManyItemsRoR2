@@ -29,7 +29,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Iron Heart",
             "Health Increase",
-            300f,
+            200f,
             "Bonus health gained from this item. Does not increase with stacks.",
             new List<string>()
             {
