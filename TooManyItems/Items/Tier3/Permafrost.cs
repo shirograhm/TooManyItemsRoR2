@@ -14,7 +14,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.PERMAFROST_COLOR);
 
-        // Dealing damage has a 3% (+3% per stack) chance to freeze enemies. You deal 90% (+90% per stack) bonus damage to frozen enemies.
+        // Dealing damage has a chance to freeze enemies. You deal bonus damage to frozen enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Permafrost",
             "Enabled",
@@ -37,7 +37,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
-            "Bonus Damage to Frozen Enemies",
+            "Bonus Frozen Damage",
             90f,
             "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
@@ -51,9 +51,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -64,10 +63,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "PERMAFROST";
-            itemDef.nameToken = "PERMAFROST_NAME";
-            itemDef.pickupToken = "PERMAFROST_PICKUP";
-            itemDef.descriptionToken = "PERMAFROST_DESCRIPTION";
-            itemDef.loreToken = "PERMAFROST_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -108,39 +104,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("PERMAFROST", "Permafrost");
-            LanguageAPI.Add("PERMAFROST_NAME", "Permafrost");
-            LanguageAPI.Add("PERMAFROST_PICKUP", "Dealing damage has a chance to freeze enemies. Deal bonus damage to frozen enemies.");
-
-            string desc = $"Dealing damage has a <style=cIsUtility>{freezeChance.Value}%</style> <style=cStack>(+{freezeChance.Value}% per stack)</style> " +
-                $"chance to freeze enemies. " +
-                $"You deal <style=cIsDamage>{frozenDamageMultiplier.Value}%</style> <style=cStack>(+{frozenDamageMultiplier.Value}% per stack)</style>" +
-                $" bonus damage to frozen enemies.";
-            LanguageAPI.Add("PERMAFROST_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("PERMAFROST_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

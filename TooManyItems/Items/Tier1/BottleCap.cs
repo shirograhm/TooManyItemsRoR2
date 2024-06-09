@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce your ultimate skill cooldown by 8% (+8% per stack).
+        // Reduce your ultimate skill cooldown by a percentage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Bottle Cap",
             "Enabled",
@@ -35,9 +35,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -47,11 +46,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BOTTLE_CAP";
-            itemDef.nameToken = "BOTTLE_CAP_NAME";
-            itemDef.pickupToken = "BOTTLE_CAP_PICKUP";
-            itemDef.descriptionToken = "BOTTLE_CAP_DESCRIPTION";
-            itemDef.loreToken = "BOTTLE_CAP_LORE";
+            itemDef.name = "BOTTLECAP";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
@@ -81,37 +77,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BOTTLE_CAP", "Bottle Cap");
-            LanguageAPI.Add("BOTTLE_CAP_NAME", "Bottle Cap");
-            LanguageAPI.Add("BOTTLE_CAP_PICKUP", "Reduce the cooldown of your ultimate skill.");
-
-            string desc = $"Reduce your ultimate skill cooldown by <style=cIsUtility>{ultimateCDR.Value}%</style> " +
-                $"<style=cStack>(+{ultimateCDR.Value}% per stack)</style>.";
-            LanguageAPI.Add("BOTTLE_CAP_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BOTTLE_CAP_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

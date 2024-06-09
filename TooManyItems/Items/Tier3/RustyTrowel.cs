@@ -14,7 +14,7 @@ namespace TooManyItems
         public static BuffDef mulchBuff;
         public static BuffDef healingTimer;
 
-        // On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, heal 3 HP for each stack of Mulch received.
+        // Gain stacks of Mulch on-hit. Periodically heal based on the stacks accrued.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Rusty Trowel",
             "Enabled",
@@ -121,9 +121,8 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(mulchBuff);
@@ -138,11 +137,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "RUSTED_TROWEL";
-            itemDef.nameToken = "RUSTED_TROWEL_NAME";
-            itemDef.pickupToken = "RUSTED_TROWEL_PICKUP";
-            itemDef.descriptionToken = "RUSTED_TROWEL_DESCRIPTION";
-            itemDef.loreToken = "RUSTED_TROWEL_LORE";
+            itemDef.name = "RUSTEDTROWEL";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -216,7 +212,7 @@ namespace TooManyItems
                         float healing = buffCount * healingPerStack.Value;
                         self.healthComponent.Heal(healing, new ProcChainMask());
 
-                        var stats = self.inventory.GetComponent<Statistics>();
+                        Statistics stats = self.inventory.GetComponent<Statistics>();
                         stats.TotalHealingDone += healing;
 
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
@@ -226,61 +222,20 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-
-                if (damageInfo.attacker)
+                if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                    if (attackerBody && attackerBody.inventory)
+                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
-                        int itemCount = attackerBody.inventory.GetItemCount(itemDef);
-                        if (itemCount > 0)
-                        {
-                            int newBuffCount = attackerBody.GetBuffCount(mulchBuff) + itemCount;
+                        int newBuffCount = attackerInfo.body.GetBuffCount(mulchBuff) + itemCount;
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                            attackerBody.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
+                        attackerInfo.body.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
-                        }
                     }
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("RUSTED_TROWEL", "Rusty Trowel");
-            LanguageAPI.Add("RUSTED_TROWEL_NAME", "Rusty Trowel");
-            LanguageAPI.Add("RUSTED_TROWEL_PICKUP", "Harvest Mulch on-hit. Heal periodically based on Mulch stacks.");
-
-            string desc = $"On-hit, gain <style=cIsUtility>1</style> <style=cStack>(+1 per stack)</style> Mulch. " +
-                $"Every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>, " +
-                $"heal <style=cIsHealing>{healingPerStack.Value} HP</style> for each stack of Mulch received.";
-            LanguageAPI.Add("RUSTED_TROWEL_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("RUSTED_TROWEL_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

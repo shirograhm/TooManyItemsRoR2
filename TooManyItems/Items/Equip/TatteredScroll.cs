@@ -14,7 +14,7 @@ namespace TooManyItems
 
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.TATTERED_SCROLL_COLOR);
 
-        // On activation, curse all enemies in a 60m radius for 12 seconds. Killing cursed enemies grants 25 additional gold. (75 sec)
+        // On activation, curse all enemies around you for a short duration. Killing cursed enemies grants additional gold.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Tattered Scroll",
             "Enabled",
@@ -22,7 +22,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<int> curseDistance = new(
@@ -32,37 +32,37 @@ namespace TooManyItems
             "Max distance that the curse can reach.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<float> curseDuration = new(
             "Equipment: Tattered Scroll",
             "Curse Duration",
-            12f,
+            10f,
             "Duration of the curse.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
-            25,
+            20,
             "Gold gained for each cursed enemy killed.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
-            75,
+            100,
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_TATTEREDSCROLL_DESC"
+                "EQUIPMENT_TATTEREDSCROLL_DESC"
             }
         );
 
@@ -72,7 +72,7 @@ namespace TooManyItems
             GenerateBuff();
             AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
 
             ContentAddition.AddBuffDef(curseDebuff);
@@ -84,11 +84,8 @@ namespace TooManyItems
         {
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
-            equipmentDef.name = "TATTERED_SCROLL";
-            equipmentDef.nameToken = "TATTERED_SCROLL_NAME";
-            equipmentDef.pickupToken = "TATTERED_SCROLL_PICKUP";
-            equipmentDef.descriptionToken = "TATTERED_SCROLL_DESCRIPTION";
-            equipmentDef.loreToken = "TATTERED_SCROLL_LORE";
+            equipmentDef.name = "TATTEREDSCROLL";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("TatteredScroll.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
@@ -192,21 +189,3 @@ namespace TooManyItems
         }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

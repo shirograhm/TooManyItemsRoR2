@@ -18,7 +18,7 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex maskDamageColor = DamageColorAPI.RegisterDamageColor(Utils.BROKEN_MASK_COLOR);
 
-        // Dealing damage burns enemies for 1.5% (+1.5% per stack) max health over 5 seconds.
+        // Dealing damage burns enemies for a portion of their max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Broken Mask",
             "Enabled",
@@ -32,7 +32,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
-            1.5f,
+            2f,
             "Burn damage dealt over the duration as a percentage of enemy max health.",
             new List<string>()
             {
@@ -117,9 +117,8 @@ namespace TooManyItems
             GenerateItem();
             GenerateBuff();
             GenerateDot();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(burnDebuff);
@@ -148,16 +147,8 @@ namespace TooManyItems
                 dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * burnPercentPerTick * count;
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
-                // Damage calculation takes minions into account
-                if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
-                {
-                    if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
-                    {
-                        attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
-                    }
-                }
-
-                var stats = attackerBody.inventory.GetComponent<Statistics>();
+                CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerBody);
+                Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                 stats.TotalDamageDealt += dotStack.damage;
             }
         }
@@ -166,11 +157,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BROKEN_MASK";
-            itemDef.nameToken = "BROKEN_MASK_NAME";
-            itemDef.pickupToken = "BROKEN_MASK_PICKUP";
-            itemDef.descriptionToken = "BROKEN_MASK_DESCRIPTION";
-            itemDef.loreToken = "BROKEN_MASK_LORE";
+            itemDef.name = "BROKENMASK";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
@@ -244,37 +232,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BROKEN_MASK", "Broken Mask");
-            LanguageAPI.Add("BROKEN_MASK_NAME", "Broken Mask");
-            LanguageAPI.Add("BROKEN_MASK_PICKUP", "Dealing damage burns enemies for a portion of their max health.");
-
-            string desc = $"Dealing damage burns enemies for <style=cIsDamage>{burnDamage.Value}%</style> <style=cStack>(+{burnDamage.Value}% per stack)</style> " +
-                $"of their max health over <style=cIsUtility>{burnDuration.Value} seconds</style>.";
-            LanguageAPI.Add("BROKEN_MASK_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BROKEN_MASK_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

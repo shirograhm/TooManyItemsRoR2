@@ -1,10 +1,8 @@
 ﻿using R2API;
 using R2API.Networking;
 using RoR2;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -12,6 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
+        // Gain an assortment of random stat bonuses that reroll every stage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Golden Horseshoe",
             "Enabled",
@@ -133,10 +132,10 @@ namespace TooManyItems
         //        "ITEM_HORSESHOE_DESC"
         //    }
         //);
-        public static ConfigurableValue<int> extraStackMultiplier = new(
+        public static ConfigurableValue<float> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
-            30,
+            30f,
             "Percent increase to all bonuses given for each additional stack.",
             new List<string>()
             {
@@ -163,9 +162,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<HorseshoeStatistics.Sync>();
@@ -178,10 +176,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "HORSESHOE";
-            itemDef.nameToken = "HORSESHOE_NAME";
-            itemDef.pickupToken = "HORSESHOE_PICKUP";
-            itemDef.descriptionToken = "HORSESHOE_DESCRIPTION";
-            itemDef.loreToken = "HORSESHOE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -246,7 +241,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<HorseshoeStatistics>();
+                        HorseshoeStatistics component = sender.inventory.GetComponent<HorseshoeStatistics>();
                         if (component)
                         {
                             args.baseHealthAdd += GetScaledValue(component.MaxHealthBonus, sender.level, count);
@@ -290,7 +285,7 @@ namespace TooManyItems
 
         public static void Reroll(Inventory inventory, CharacterBody body)
         {
-            var component = inventory.GetComponent<HorseshoeStatistics>();
+            HorseshoeStatistics component = inventory.GetComponent<HorseshoeStatistics>();
             if (component)
             {
                 component.MaxHealthBonus = 0;
@@ -356,37 +351,5 @@ namespace TooManyItems
                 Log.Error("Unable to reroll Horseshoe statistics.");
             }
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("HORSESHOE", "Golden Horseshoe");
-            LanguageAPI.Add("HORSESHOE_NAME", "Golden Horseshoe");
-            LanguageAPI.Add("HORSESHOE_PICKUP", "Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> every stage.");
-
-            string desc = $"Gain a random assortment of stat bonuses that are <style=cWorldEvent>rerolled</style> upon entering a new stage. " +
-                $"These bonuses scale with <style=cIsUtility>level</style>, and each <style=cStack>additional stack</style> increases all bonuses by <style=cIsUtility>{extraStackMultiplier.Value}%</style>.";
-            LanguageAPI.Add("HORSESHOE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("HORSESHOE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

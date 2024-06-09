@@ -16,7 +16,7 @@ namespace TooManyItems
         public static BuffDef attackSpeedBuff;
         public static BuffDef healthRegenBuff;
 
-        // On activation, grants either 100 armor, 30% damage, 75% attack speed, or 12% max HP/s regeneration for 12 seconds. (55 sec)
+        // On activation, grants either armor, damage, attack speed, or regeneration for a short duration. (55 sec)
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Totem of Prayer",
             "Enabled",
@@ -24,7 +24,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> armorIncrease = new(
@@ -34,17 +34,17 @@ namespace TooManyItems
             "Armor increase if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> damageIncrease = new(
             "Equipment: Totem of Prayer",
             "Damage Increase",
-            30f,
+            25f,
             "Percent damage increase if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> attackSpeedIncrease = new(
@@ -54,17 +54,17 @@ namespace TooManyItems
             "Percent attack speed increase if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> regenIncrease = new(
             "Equipment: Totem of Prayer",
             "Health Regen Increase",
-            12f,
+            10f,
             "Health regeneration bonus (as max HP/s) if rolled.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<float> buffDuration = new(
@@ -74,7 +74,7 @@ namespace TooManyItems
             "Duration of the buff given.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
@@ -84,7 +84,7 @@ namespace TooManyItems
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_BUFFTOTEM_DESC"
+                "EQUIPMENT_BUFFTOTEM_DESC"
             }
         );
         public static float damageIncreasePercent = damageIncrease.Value / 100f;
@@ -102,9 +102,8 @@ namespace TooManyItems
         {
             GenerateEquipment();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
 
             ContentAddition.AddBuffDef(armorBuff);
@@ -119,11 +118,8 @@ namespace TooManyItems
         {
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
-            equipmentDef.name = "BUFF_TOTEM";
-            equipmentDef.nameToken = "BUFF_TOTEM_NAME";
-            equipmentDef.pickupToken = "BUFF_TOTEM_PICKUP";
-            equipmentDef.descriptionToken = "BUFF_TOTEM_DESCRIPTION";
-            equipmentDef.loreToken = "BUFF_TOTEM_LORE";
+            equipmentDef.name = "BUFFTOTEM";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BuffTotem.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BuffTotem.prefab");
@@ -239,41 +235,5 @@ namespace TooManyItems
             Utils.ForceRecalculate(body);
             return true;
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BUFF_TOTEM", "Totem of Prayer");
-            LanguageAPI.Add("BUFF_TOTEM_NAME", "Totem of Prayer");
-            LanguageAPI.Add("BUFF_TOTEM_PICKUP", "Pray to the totem to receive a random buff.");
-
-            string desc = $"On activation, gain " +
-                $"<style=cEvent>{armorIncrease.Value} armor</style>, " +
-                $"<style=cIsDamage>{damageIncrease.Value}% damage</style>, " +
-                $"<style=cIsUtility>{attackSpeedIncrease.Value}% attack speed</style>, " +
-                $"or <style=cIsHealing>{regenIncrease.Value}% max HP/s regeneration</style> " +
-                $"for <style=cIsUtility>{buffDuration.Value} seconds</style>.";
-            LanguageAPI.Add("BUFF_TOTEM_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BUFF_TOTEM_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

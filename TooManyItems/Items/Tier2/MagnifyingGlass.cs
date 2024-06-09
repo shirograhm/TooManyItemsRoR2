@@ -10,7 +10,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef analyzedDebuff;
 
-        // Gain 5% crit chance. Critical strikes have an 6% (+6% per stack) chance to Analyze the enemy, increasing their damage taken by 18% from all sources.
+        // Gain crit chance. Critical strikes have a chance to Analyze the enemy, increasing their damage taken from all sources.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Magnifying Glass",
             "Enabled",
@@ -58,9 +58,8 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(analyzedDebuff);
@@ -72,11 +71,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "MAGNIFYING_GLASS";
-            itemDef.nameToken = "MAGNIFYING_GLASS_NAME";
-            itemDef.pickupToken = "MAGNIFYING_GLASS_PICKUP";
-            itemDef.descriptionToken = "MAGNIFYING_GLASS_DESCRIPTION";
-            itemDef.loreToken = "MAGNIFYING_GLASS_LORE";
+            itemDef.name = "MAGNIFYINGGLASS";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
@@ -144,38 +140,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("MAGNIFYING_GLASS", "Magnifying Glass");
-            LanguageAPI.Add("MAGNIFYING_GLASS_NAME", "Magnifying Glass");
-            LanguageAPI.Add("MAGNIFYING_GLASS_PICKUP", "Critical strikes sometimes cause enemies to take more damage.");
-
-            string desc = $"Gain <style=cIsDamage>{critBonus.Value}% crit chance</style>. " +
-                $"<style=cIsDamage>Critical strikes</style> have a <style=cIsUtility>{analyzeChance.Value}%</style> <style=cStack>(+{analyzeChance.Value}% per stack)</style> chance to <style=cWorldEvent>Analyze</style> the enemy, " +
-                $"increasing their damage taken by <style=cIsDamage>{damageTakenBonus.Value}%</style> from all sources.";
-            LanguageAPI.Add("MAGNIFYING_GLASS_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("MAGNIFYING_GLASS_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

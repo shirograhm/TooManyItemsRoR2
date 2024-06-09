@@ -26,7 +26,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.3.6";
+        public const string PluginVersion = "0.4.0";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -67,6 +67,8 @@ namespace TooManyItems
             // Green Items
             if (BrokenMask.isEnabled.Value)
                 BrokenMask.Init();
+            if (Epinephrine.isEnabled.Value)
+                Epinephrine.Init();
             if (HereticSeal.isEnabled.Value)
                 HereticSeal.Init();
             if (HolyWater.isEnabled.Value)
@@ -108,7 +110,15 @@ namespace TooManyItems
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
 
+            // Void
+            if (ShadowCrest.isEnabled.Value)
+                ShadowCrest.Init();
+            if (IronHeartVoid.isEnabled.Value)
+                IronHeartVoid.Init();
+
             // Equipment
+            if (Vanity.isEnabled.Value)
+                Vanity.Init();
             if (BuffTotem.isEnabled.Value)
                 BuffTotem.Init();
             if (Chalice.isEnabled.Value)
@@ -130,18 +140,30 @@ namespace TooManyItems
                     {
                         itemDef1 = RedBlueGlasses.itemDef,
                         itemDef2 = DLC1Content.Items.CritGlassesVoid
+                    },
+                    // Iron Heart => Defiled Heart
+                    new ItemDef.Pair()
+                    {
+                        itemDef1 = IronHeart.itemDef,
+                        itemDef2 = IronHeartVoid.itemDef
+                    },
+                    // Seal of the Heretic => Shadow Crest
+                    new ItemDef.Pair()
+                    {
+                        itemDef1 = HereticSeal.itemDef,
+                        itemDef2 = ShadowCrest.itemDef
                     }
                 };
 
-                var key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
+                ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
+
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                var voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
+                ItemDef.Pair[] voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
                 ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = voidPairs.Union(newVoidPairs).ToArray();
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 Debug.Log("Injected void item transformations.");
-
                 orig();
             };
         }
@@ -159,12 +181,15 @@ namespace TooManyItems
         //        DropItem(IronHeart.itemDef);
         //        DropItem(Permafrost.itemDef);
         //        DropItem(RustyTrowel.itemDef);
+
         //        DropItem(BrokenMask.itemDef);
+        //        DropItem(Epinephrine.itemDef);
         //        DropItem(HereticSeal.itemDef);
         //        DropItem(HolyWater.itemDef);
         //        DropItem(Hoodie.itemDef);
         //        DropItem(MagnifyingGlass.itemDef);
         //        DropItem(SoulRing.itemDef);
+
         //        DropItem(BottleCap.itemDef);
         //        DropItem(BreadLoaf.itemDef);
         //        DropItem(DebitCard.itemDef);
@@ -174,11 +199,16 @@ namespace TooManyItems
         //        DropItem(Photodiode.itemDef);
         //        DropItem(RedBlueGlasses.itemDef);
         //        DropItem(RubberDucky.itemDef);
+
         //        DropItem(AncientCoin.itemDef);
         //        DropItem(CarvingBlade.itemDef);
         //        DropItem(Crucifix.itemDef);
         //        DropItem(SpiritStone.itemDef);
 
+        //        DropItem(IronHeartVoid.itemDef);
+        //        DropItem(ShadowCrest.itemDef);
+
+        //        DropItem(Vanity.equipmentDef);
         //        DropItem(BuffTotem.equipmentDef);
         //        DropItem(Chalice.equipmentDef);
         //        DropItem(TatteredScroll.equipmentDef);
@@ -189,7 +219,7 @@ namespace TooManyItems
         //{
         //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
         //    {
-        //        var transform = controller.master.GetBodyObject().transform;
+        //        Transform transform = controller.master.GetBodyObject().transform;
 
         //        Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
         //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
@@ -198,7 +228,7 @@ namespace TooManyItems
 
         //private void DropItem(EquipmentDef def)
         //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        //    Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
         //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
         //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
@@ -206,7 +236,7 @@ namespace TooManyItems
 
         //private void DropItem(MiscPickupDef def)
         //{
-        //    var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        //    Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
         //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
         //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);

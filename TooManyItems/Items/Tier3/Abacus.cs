@@ -11,7 +11,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef countedBuff;
 
-        // Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Excess crit chance grants bonus crit damage.
+        // Killing an enemy grants crit chance until the next stage. Excess crit chance grants bonus crit damage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Abacus",
             "Enabled",
@@ -24,7 +24,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: Abacus",
-            "Crit Chance On Kill",
+            "Crit On Kill",
             1f,
             "Crit chance gained on kill per stack of item.",
             new List<string>()
@@ -37,9 +37,8 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(countedBuff);
@@ -52,10 +51,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "ABACUS";
-            itemDef.nameToken = "ABACUS_NAME";
-            itemDef.pickupToken = "ABACUS_PICKUP";
-            itemDef.descriptionToken = "ABACUS_DESCRIPTION";
-            itemDef.loreToken = "ABACUS_LORE";
+            itemDef.AutoPopulateTokens();
             
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -119,39 +115,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("ABACUS", "Abacus");
-            LanguageAPI.Add("ABACUS_NAME", "Abacus");
-            LanguageAPI.Add("ABACUS_PICKUP", "Killing enemies grants stacking crit chance until the next stage. Excess crit chance grants bonus crit damage.");
-
-            string desc = $"Killing an enemy grants <style=cIsDamage>{critChancePerStack.Value}% " +
-                $"<style=cStack>(+{critChancePerStack.Value}% per stack)</style> crit chance</style> until the next stage. " +
-                $"Every <style=cIsDamage>1% crit chance</style> above <style=cIsUtility>100%</style> grants " +
-                $"<style=cIsDamage>1% crit damage</style>.";
-            LanguageAPI.Add("ABACUS_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("ABACUS_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

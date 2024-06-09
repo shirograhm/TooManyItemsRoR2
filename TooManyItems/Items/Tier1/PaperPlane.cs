@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Increase movement speed by 18% while airborne.
+        // Increase movement speed while airborne.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Paper Plane",
             "Enabled",
@@ -22,7 +22,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> movespeedIncrease = new(
             "Item: Paper Plane",
-            "Movement Speed Increase",
+            "Movement Speed",
             18f,
             "Percent movement speed gained per stack while airborne.",
             new List<string>()
@@ -35,9 +35,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -47,11 +46,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "PAPER_PLANE";
-            itemDef.nameToken = "PAPER_PLANE_NAME";
-            itemDef.pickupToken = "PAPER_PLANE_PICKUP";
-            itemDef.descriptionToken = "PAPER_PLANE_DESCRIPTION";
-            itemDef.loreToken = "PAPER_PLANE_LORE";
+            itemDef.name = "PAPERPLANE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
@@ -93,37 +89,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("PAPER_PLANE", "Paper Plane");
-            LanguageAPI.Add("PAPER_PLANE_NAME", "Paper Plane");
-            LanguageAPI.Add("PAPER_PLANE_PICKUP", "Gain movement speed while airborne.");
-
-            string desc = $"Gain <style=cIsUtility>{movespeedIncrease.Value}%</style> " +
-                $"<style=cStack>(+{movespeedIncrease.Value}% per stack)</style> movement speed while airborne.";
-            LanguageAPI.Add("PAPER_PLANE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("PAPER_PLANE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

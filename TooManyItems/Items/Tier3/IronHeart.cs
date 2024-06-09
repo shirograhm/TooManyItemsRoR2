@@ -15,7 +15,7 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.IRON_HEART_COLOR);
 
-        // Gain 150 HP. Deal 2% (+2% per stack) of your max health as on-hit damage.
+        // Gain HP. Deal bonus damage on-hit based on your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Iron Heart",
             "Enabled",
@@ -29,7 +29,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Iron Heart",
             "Health Increase",
-            150f,
+            200f,
             "Bonus health gained from this item. Does not increase with stacks.",
             new List<string>()
             {
@@ -111,9 +111,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -127,11 +126,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "IRON_HEART";
-            itemDef.nameToken = "IRON_HEART_NAME";
-            itemDef.pickupToken = "IRON_HEART_PICKUP";
-            itemDef.descriptionToken = "IRON_HEART_DESCRIPTION";
-            itemDef.loreToken = "IRON_HEART_LORE";
+            itemDef.name = "IRONHEART";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -143,7 +139,7 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Utility
+                ItemTag.Healing
             };
         }
 
@@ -170,85 +166,38 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-
-                if (attackerBody != null && attackerBody.inventory != null)
+                if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
-
+                    int count = attackerInfo.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        float damageAmount = CalculateDamageOnHit(attackerBody, count);
+                        float amount = CalculateDamageOnHit(attackerInfo.body, count);
 
-                        DamageInfo damageProc = new()
+                        DamageInfo proc = new()
                         {
-                            damage = damageAmount,
-                            attacker = damageInfo.attacker,
-                            inflictor = damageInfo.attacker,
+                            damage = amount,
+                            attacker = attackerInfo.gameObject,
+                            inflictor = attackerInfo.gameObject,
                             procCoefficient = 1f,
                             position = damageInfo.position,
-                            crit = false,
+                            crit = attackerInfo.body.RollCrit(),
                             damageColorIndex = damageColor,
                             procChainMask = damageInfo.procChainMask,
                             damageType = DamageType.Silent
                         };
-                        damageProc.AddModdedDamageType(damageType);
+                        proc.AddModdedDamageType(damageType);
 
-                        victimBody.healthComponent.TakeDamage(damageProc);
+                        victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
-                        if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
-                        {
-                            if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
-                            {
-                                attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
-                            }
-                        }
-                        var stats = attackerBody.inventory.GetComponent<Statistics>();
-                        stats.TotalDamageDealt += damageAmount;
+                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
+                        Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
+                        stats.TotalDamageDealt += amount;
                     }
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("IRON_HEART", "Iron Heart");
-            LanguageAPI.Add("IRON_HEART_NAME", "Iron Heart");
-            LanguageAPI.Add("IRON_HEART_PICKUP", "Deal bonus damage on-hit based on your max health.");
-
-            string desc = $"Gain <style=cIsHealth>{healthIncrease.Value} HP</style>. " +
-                $"Deal <style=cIsDamage>{percentDamagePerStack.Value}%</style> <style=cStack>(+{percentDamagePerStack.Value}% per stack)</style> of your max health as bonus on-hit damage.";
-            LanguageAPI.Add("IRON_HEART_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("IRON_HEART_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

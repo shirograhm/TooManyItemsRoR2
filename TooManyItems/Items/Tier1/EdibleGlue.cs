@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds.
+        // On kill, slow nearby enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Edible Glue",
             "Enabled",
@@ -31,14 +31,22 @@ namespace TooManyItems
                 "ITEM_EDIBLEGLUE_DESC"
             }
         );
-        public static float slowDuration = 4f;
+        public static ConfigurableValue<float> slowDuration = new(
+            "Item: Edible Glue",
+            "Glue Duration",
+            4f,
+            "Slow duration.",
+            new List<string>()
+            {
+                "ITEM_EDIBLEGLUE_DESC",
+            }
+        );
 
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -48,11 +56,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "EDIBLE_GLUE";
-            itemDef.nameToken = "EDIBLE_GLUE_NAME";
-            itemDef.pickupToken = "EDIBLE_GLUE_PICKUP";
-            itemDef.descriptionToken = "EDIBLE_GLUE_DESCRIPTION";
-            itemDef.loreToken = "EDIBLE_GLUE_LORE";
+            itemDef.name = "EDIBLEGLUE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
@@ -95,43 +100,12 @@ namespace TooManyItems
                             CharacterBody parent = hb.healthComponent.body;
                             if (parent && parent != atkBody)
                             {
-                                parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration);
+                                parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
                             }
                         }
                     }
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("EDIBLE_GLUE", "Edible Glue");
-            LanguageAPI.Add("EDIBLE_GLUE_NAME", "Edible Glue");
-            LanguageAPI.Add("EDIBLE_GLUE_PICKUP", "On kill, slow nearby enemies.");
-
-            string desc = $"On kill, slow enemies within <style=cIsUtility>{slowRadiusPerStack.Value}m</style> <style=cStack>(+{slowRadiusPerStack.Value}m per stack)</style> by <style=cIsUtility>80%</style> for <style=cIsUtility>2 seconds</style>.";
-            LanguageAPI.Add("EDIBLE_GLUE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("EDIBLE_GLUE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

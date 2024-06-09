@@ -11,7 +11,7 @@ namespace TooManyItems
         public static ItemDef itemDef;
         public static BuffDef attackSpeedBuff;
 
-        // On-hit, gain 2.5% attack speed for 10 seconds, up to a max of 20% (+20% per stack).
+        // Gain temporary attack speed on-hit.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Photodiode",
             "Enabled",
@@ -24,7 +24,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
-            "Attack Speed On-Hit",
+            "Attack Speed",
             2.5f,
             "Percent attack speed gained on-hit.",
             new List<string>()
@@ -34,7 +34,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<int> attackSpeedDuration = new(
             "Item: Photodiode",
-            "Attack Speed Duration",
+            "Buff Duration",
             10,
             "Duration of attack speed buff in seconds.",
             new List<string>()
@@ -60,9 +60,8 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(attackSpeedBuff);
@@ -75,10 +74,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "PHOTODIODE";
-            itemDef.nameToken = "PHOTODIODE_NAME";
-            itemDef.pickupToken = "PHOTODIODE_PICKUP";
-            itemDef.descriptionToken = "PHOTODIODE_DESCRIPTION";
-            itemDef.loreToken = "PHOTODIODE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
@@ -107,24 +103,17 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-
-                if (attackerBody != null && attackerBody.inventory != null)
+                if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
-                        int currentStacks = attackerBody.GetBuffCount(attackSpeedBuff);
-                        if (currentStacks < maxAttackSpeedStacks.Value * count)
+                        int currentStacks = attackerInfo.body.GetBuffCount(attackSpeedBuff);
+                        if (currentStacks < maxAttackSpeedStacks.Value * itemCount)
                         {
-                            attackerBody.AddTimedBuff(attackSpeedBuff, attackSpeedDuration.Value);
+                            attackerInfo.body.AddTimedBuff(attackSpeedBuff, attackSpeedDuration.Value);
                         }
                     }
                 }
@@ -142,37 +131,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("PHOTODIODE", "Photodiode");
-            LanguageAPI.Add("PHOTODIODE_NAME", "Photodiode");
-            LanguageAPI.Add("PHOTODIODE_PICKUP", "Gain temporary attack speed on-hit.");
-
-            string desc = $"On-hit, gain <style=cIsDamage>{attackSpeedOnHit.Value}% attack speed</style> for <style=cIsUtility>{attackSpeedDuration.Value} seconds</style>, " +
-                $"up to a maximum of <style=cIsDamage>{maxAttackSpeedAllowed}%</style> <style=cStack>(+{maxAttackSpeedAllowed}% per stack)</style>.";
-            LanguageAPI.Add("PHOTODIODE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("PHOTODIODE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

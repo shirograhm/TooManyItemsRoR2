@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce damage from elite enemies by 8% (+8% per stack).
+        // Reduce damage from elite enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Milk Carton",
             "Enabled",
@@ -22,7 +22,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> eliteDamageReduction = new(
             "Item: Milk Carton",
-            "Percent Damage Reduction",
+            "Damage Reduction",
             8f,
             "Percent damage reduction agains elite enemies.",
             new List<string>()
@@ -35,9 +35,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -47,11 +46,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "MILK_CARTON";
-            itemDef.nameToken = "MILK_CARTON_NAME";
-            itemDef.pickupToken = "MILK_CARTON_PICKUP";
-            itemDef.descriptionToken = "MILK_CARTON_DESCRIPTION";
-            itemDef.loreToken = "MILK_CARTON_LORE";
+            itemDef.name = "MILKCARTON";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
@@ -81,36 +77,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("MILK_CARTON", "Milk Carton");
-            LanguageAPI.Add("MILK_CARTON_NAME", "Milk Carton");
-            LanguageAPI.Add("MILK_CARTON_PICKUP", "Reduce damage taken from elites.");
-
-            string desc = $"Reduce damage taken from elite enemies by <style=cIsUtility>{eliteDamageReduction.Value}%</style> <style=cStack>(+{eliteDamageReduction.Value}% per stack)</style>.";
-            LanguageAPI.Add("MILK_CARTON_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("MILK_CARTON_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

@@ -9,7 +9,7 @@ Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod
 | v0.2.0 and after | v1.5.1 and after |
 
 ## Issues
-Please raise any issues you find in the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues).
+Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). If possible, provide the output log as it often makes debugging much easier.
 
 ## Items Added
 The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
@@ -87,6 +87,7 @@ The following values are configurable. To do so, run the game once with the mod 
 > *70 second cooldown*  
 > On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds.  
 > **Crown of Vanity**  
+> *40 second cooldown*  
 > Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 4%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy.  
 > **Tattered Scroll**  
 > *100 second cooldown*  
@@ -94,3 +95,8 @@ The following values are configurable. To do so, run the game once with the mod 
 > **Totem of Prayer**  
 > *55 second cooldown*  
 > On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds.  
+
+### Credits
+- Programming: shirograhm  
+- Translations: MushroomEl  
+This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
