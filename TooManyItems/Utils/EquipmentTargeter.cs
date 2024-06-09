@@ -35,6 +35,7 @@ namespace TooManyItems
 
             search.searchOrigin = ray.origin;
             search.searchDirection = ray.direction;
+            search.maxDistanceFilter = 240f;
             search.maxAngleFilter = 10f;
             search.viewer = slot.characterBody;
         }
