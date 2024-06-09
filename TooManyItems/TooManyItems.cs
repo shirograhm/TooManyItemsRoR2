@@ -181,7 +181,7 @@ namespace TooManyItems
         //        DropItem(IronHeart.itemDef);
         //        DropItem(Permafrost.itemDef);
         //        DropItem(RustyTrowel.itemDef);
-                
+
         //        DropItem(BrokenMask.itemDef);
         //        DropItem(Epinephrine.itemDef);
         //        DropItem(HereticSeal.itemDef);
@@ -189,7 +189,7 @@ namespace TooManyItems
         //        DropItem(Hoodie.itemDef);
         //        DropItem(MagnifyingGlass.itemDef);
         //        DropItem(SoulRing.itemDef);
-                
+
         //        DropItem(BottleCap.itemDef);
         //        DropItem(BreadLoaf.itemDef);
         //        DropItem(DebitCard.itemDef);
@@ -199,7 +199,7 @@ namespace TooManyItems
         //        DropItem(Photodiode.itemDef);
         //        DropItem(RedBlueGlasses.itemDef);
         //        DropItem(RubberDucky.itemDef);
-                
+
         //        DropItem(AncientCoin.itemDef);
         //        DropItem(CarvingBlade.itemDef);
         //        DropItem(Crucifix.itemDef);
