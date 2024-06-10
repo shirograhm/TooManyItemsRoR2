@@ -393,24 +393,24 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)IronHeart.itemDef.itemIndex, stats);
                 }
 
-                // Lunar Revive
-                if (LunarRevive.isEnabled.Value)
+                // Lunar Revive Consumed
+                if (LunarReviveConsumed.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Health on Revive: ");
+                    stats.descriptions.Add("Base Damage Lost: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Max Health Sacrificed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
-                    stats.descriptions.Add("Items Lost: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetExponentialStacking(LunarRevive.reviveHealthPercent, itemCount),
-                            LunarRevive.itemsLostPerStack.Value * itemCount
+                            Utils.GetExponentialStacking(LunarReviveConsumed.baseDamageLostPercent, itemCount),
+                            Utils.GetExponentialStacking(LunarReviveConsumed.maxHealthLostPercent, itemCount)
                         };
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)LunarRevive.itemDef.itemIndex, stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)LunarReviveConsumed.itemDef.itemIndex, stats);
                 }
 
                 // Milk Carton

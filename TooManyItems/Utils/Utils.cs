@@ -23,6 +23,18 @@ namespace TooManyItems
 
         public static void SetItemTier(ItemDef itemDef, ItemTier tier)
         {
+            if (tier == ItemTier.NoTier)
+            {
+                try
+                {
+                    itemDef.deprecatedTier = tier;
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(String.Format("Error setting deprecatedTier for {0}: {1}", itemDef.name, e));
+                }
+            }
+
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = tier;

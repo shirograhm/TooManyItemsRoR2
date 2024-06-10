@@ -109,6 +109,8 @@ namespace TooManyItems
                 Crucifix.Init();
             if (LunarRevive.isEnabled.Value)
                 LunarRevive.Init();
+            if (LunarReviveConsumed.isEnabled.Value)
+                LunarReviveConsumed.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
 

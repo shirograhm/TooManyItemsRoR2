@@ -11,34 +11,12 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Taking a fatal blow revives you at 20% (+20% per stack) HP. Lose 4 (+4 per stack) items each time you are revived. If you do not have 4 items to lose, die instead.
+        // Upon death, consume this blessing to revive with 3 seconds of invulnerability.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Sages Blessing",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_LUNARREVIVE_DESC"
-            }
-        );
-        public static ConfigurableValue<float> reviveHealthPerStack = new(
-            "Item: Sages Blessing",
-            "Revive Health Per Stack",
-            20f,
-            "Percentage of health you spawn with when you revive.",
-            new List<string>()
-            {
-                "ITEM_LUNARREVIVE_DESC"
-            }
-        );
-        public static float reviveHealthPercent = reviveHealthPerStack.Value / 100f;
-
-        public static ConfigurableValue<int> itemsLostPerStack = new(
-            "Item: Sages Blessing",
-            "Items Lost Per Stack",
-            4,
-            "Items lost when you revive.",
             new List<string>()
             {
                 "ITEM_LUNARREVIVE_DESC"
@@ -59,11 +37,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "LUNAR_REVIVE";
-            itemDef.nameToken = "LUNAR_REVIVE_NAME";
-            itemDef.pickupToken = "LUNAR_REVIVE_PICKUP";
-            itemDef.descriptionToken = "LUNAR_REVIVE_DESCRIPTION";
-            itemDef.loreToken = "LUNAR_REVIVE_LORE";
+            itemDef.name = "LUNARREVIVE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
@@ -86,54 +61,20 @@ namespace TooManyItems
                     int itemCount = master.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        ItemIndex[] itemList = new List<ItemIndex>(master.inventory.itemAcquisitionOrder).ToArray();
-                        // Make sure there are enough items to destroy
-                        if (itemList.Length > itemsLostPerStack * itemCount)
-                        {
-                            master.Respawn(master.GetBody().footPosition, Quaternion.identity);
-                            // Set health for revive
-                            master.GetBody().healthComponent.health = master.GetBody().healthComponent.fullCombinedHealth * Utils.GetExponentialStacking(reviveHealthPercent, itemCount);
-                            // Destroy items based on stack count
-                            int itemsDestroyed = 0;
-                            while (itemsDestroyed < itemsLostPerStack * itemCount)
-                            {
-                                ItemDef destroyDef = Utils.GetRandomItemDef();
-                                bool isValidToDestroy = destroyDef.itemIndex != itemDef.itemIndex && destroyDef.tier != ItemTier.NoTier;
-                                if (master.inventory.GetItemCount(destroyDef) > 0 && isValidToDestroy)
-                                {
-                                    master.inventory.RemoveItem(destroyDef);
-                                    master.inventory.GiveItem(DLC1Content.Items.FragileDamageBonusConsumed);
-                                    CharacterMasterNotificationQueue.SendTransformNotification(
-                                        master,
-                                        destroyDef.itemIndex,
-                                        DLC1Content.Items.FragileDamageBonusConsumed.itemIndex,
-                                        CharacterMasterNotificationQueue.TransformationType.Default
-                                    );
-                                    itemsDestroyed += 1;
-                                }
-                            }
-                        }
+                        master.inventory.RemoveItem(itemDef);
+                        master.inventory.GiveItem(LunarReviveConsumed.itemDef);
+
+                        CharacterMasterNotificationQueue.SendTransformNotification(
+                            master,
+                            itemDef.itemIndex,
+                            LunarReviveConsumed.itemDef.itemIndex,
+                            CharacterMasterNotificationQueue.TransformationType.Default
+                        );
+
+                        master.Respawn(master.GetBody().footPosition, Quaternion.identity);
                     }
                 }
             };
         }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>
