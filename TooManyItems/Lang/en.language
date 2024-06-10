@@ -48,7 +48,7 @@
     "LUNARREVIVE": "Sage's Blessing",
     "ITEM_LUNARREVIVE_NAME": "Sage's Blessing",
     "ITEM_LUNARREVIVE_PICKUP": "Cheat death... <style=cDeath>for a price</style>.",
-    "ITEM_LUNARREVIVE_DESC": "<style=cIsUtility>Upon death</style>, this item will be <style=cIsUtility>consumed</style> and you will <style=cIsHealing>return to life</style> with <style=cIsHealing>3 seconds of invulnerability</style>, <style=cDeath>but you will become permanently weaker</style>.",
+    "ITEM_LUNARREVIVE_DESC": "<style=cIsUtility>Upon death</style>, this item will be <style=cIsUtility>consumed</style> and you will <style=cIsHealing>return to life</style> with <style=cIsHealing>3 seconds of invulnerability</style>... <style=cDeath>for a price</style>.",
     "ITEM_LUNARREVIVE_LORE": "",
     "LUNARREVIVECONSUMED": "Sage's Curse",
     "ITEM_LUNARREVIVECONSUMED_NAME": "Sage's Curse",
