@@ -15,7 +15,7 @@ namespace TooManyItems
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
 
-        // Deal 1% (+1% per stack) enemy current health as bonus on-hit damage. You cannot crit.
+        // Deal a percentage of enemy current health as bonus on-hit damage. You cannot crit.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Carving Blade",
             "Enabled",
@@ -112,9 +112,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -128,11 +127,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "CARVING_BLADE";
-            itemDef.nameToken = "CARVING_BLADE_NAME";
-            itemDef.pickupToken = "CARVING_BLADE_PICKUP";
-            itemDef.descriptionToken = "CARVING_BLADE_DESCRIPTION";
-            itemDef.loreToken = "CARVING_BLADE_LORE";
+            itemDef.name = "CARVINGBLADE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
@@ -144,7 +140,7 @@ namespace TooManyItems
 
         public static float CalculateDamageOnHit(CharacterBody sender, int itemCount)
         {
-            return sender.healthComponent.combinedHealth * Utils.GetHyperbolicStacking(multiplierPerStack, itemCount);
+            return sender.healthComponent.health * Utils.GetHyperbolicStacking(multiplierPerStack, itemCount);
         }
 
         public static void Hooks()
@@ -156,38 +152,28 @@ namespace TooManyItems
 
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (attackerInfo.inventory == null) return;
-
-                if (attackerInfo.inventory.GetItemCount(itemDef) > 0)
+                if (attackerInfo.inventory && attackerInfo.inventory.GetItemCount(itemDef) > 0)
                 {
                     damageInfo.crit = false;
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnHitEnemy += (orig, self, damageInfo, victim) =>
+            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                orig(self, damageInfo, victim);
-
-                if (!NetworkServer.active) return;
-                // Return if no attacker or no victim
-                if (damageInfo.attacker == null || victim == null) return;
-
-                CharacterBody attackerBody = damageInfo.attacker.GetComponent<CharacterBody>();
-                CharacterBody victimBody = victim.GetComponent<CharacterBody>();
-                if (attackerBody != null && attackerBody.inventory != null)
+                if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
+                    int count = attackerInfo.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        float damageAmount = CalculateDamageOnHit(victimBody, count);
-                        // Cap damage based on config
-                        if (damageCapMultiplier > 0) damageAmount = Mathf.Min(damageAmount, attackerBody.damage * damageCapMultiplier);
+                        // Minimum of 0.1 damage.
+                        float amount = Mathf.Max(CalculateDamageOnHit(victimInfo.body, count), 0.1f);
+                        if (damageCapMultiplier > 0) amount = Mathf.Min(amount, attackerInfo.body.damage * damageCapMultiplier);
 
-                        DamageInfo damageProc = new()
+                        DamageInfo proc = new()
                         {
-                            damage = damageAmount,
-                            attacker = damageInfo.attacker.gameObject,
-                            inflictor = damageInfo.attacker.gameObject,
+                            damage = amount,
+                            attacker = attackerInfo.gameObject,
+                            inflictor = attackerInfo.gameObject,
                             procCoefficient = 0f,
                             position = damageInfo.position,
                             crit = false,
@@ -195,55 +181,17 @@ namespace TooManyItems
                             procChainMask = damageInfo.procChainMask,
                             damageType = DamageType.Silent
                         };
-                        damageProc.AddModdedDamageType(damageType);
+                        proc.AddModdedDamageType(damageType);
 
-                        victimBody.healthComponent.TakeDamage(damageProc);
+                        victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
-                        if (attackerBody && attackerBody.master && attackerBody.master.minionOwnership && attackerBody.master.minionOwnership.ownerMaster)
-                        {
-                            if (attackerBody.master.minionOwnership.ownerMaster.GetBody())
-                            {
-                                attackerBody = attackerBody.master.minionOwnership.ownerMaster.GetBody();
-                            }
-                        }
-                        var stats = attackerBody.inventory.GetComponent<Statistics>();
-                        if (stats) stats.TotalDamageDealt += damageAmount;
+                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
+                        Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
+                        stats.TotalDamageDealt += amount;
                     }
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("CARVING_BLADE", "Carving Blade");
-            LanguageAPI.Add("CARVING_BLADE_NAME", "Carving Blade");
-            LanguageAPI.Add("CARVING_BLADE_PICKUP", "Deal damage on-hit based on the enemy's current health. <style=cDeath>You cannot critically strike</style>.");
-
-            string desc = $"Deal <style=cIsDamage>{percentDamagePerStack.Value}%</style> <style=cStack>(+{percentDamagePerStack.Value}% per stack)</style> of the enemy's current health as bonus on-hit damage. " +
-                $"<style=cDeath>You cannot critically strike.</style>";
-            LanguageAPI.Add("CARVING_BLADE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("CARVING_BLADE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

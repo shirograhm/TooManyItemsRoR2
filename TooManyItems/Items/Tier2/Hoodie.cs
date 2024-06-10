@@ -12,7 +12,7 @@ namespace TooManyItems
         public static BuffDef hoodieBuffActive;
         public static BuffDef hoodieBuffCooldown;
 
-        // The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 8 (-15% per stack) seconds.
+        // The next timed buff received has its duration increased. Recharges over time.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Fleece Hoodie",
             "Enabled",
@@ -62,9 +62,8 @@ namespace TooManyItems
         {
             GenerateItem();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(hoodieBuffActive);
@@ -78,10 +77,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "HOODIE";
-            itemDef.nameToken = "HOODIE_NAME";
-            itemDef.pickupToken = "HOODIE_PICKUP";
-            itemDef.descriptionToken = "HOODIE_DESCRIPTION";
-            itemDef.loreToken = "HOODIE_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
@@ -132,9 +128,9 @@ namespace TooManyItems
 
                 // Ignore dot effects that use Buffs to keep track of them
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                foreach (var dotDebuff in DotController.dotDefs.Where(x => x.associatedBuff != null).Select(x => x.associatedBuff).Distinct())
+                foreach (BuffDef dotDebuff in DotController.dotDefs.Where(x => x.associatedBuff != null).Select(x => x.associatedBuff).Distinct())
                     ignoredBuffDefs.Add(dotDebuff);
-                foreach (var dotDebuff in DotController.dotDefs.Where(x => x.terminalTimedBuff != null).Select(x => x.terminalTimedBuff).Distinct())
+                foreach (BuffDef dotDebuff in DotController.dotDefs.Where(x => x.terminalTimedBuff != null).Select(x => x.terminalTimedBuff).Distinct())
                     ignoredBuffDefs.Add(dotDebuff);
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
             };
@@ -168,38 +164,5 @@ namespace TooManyItems
                 orig(self, buffDef, duration);
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("HOODIE", "Fleece Hoodie");
-            LanguageAPI.Add("HOODIE_NAME", "Fleece Hoodie");
-            LanguageAPI.Add("HOODIE_PICKUP", "The next timed buff received lasts longer. Recharges over time.");
-
-            string desc = $"The next timed buff received has its duration increased by " +
-                $"<style=cIsUtility>{durationIncrease.Value}%</style> <style=cStack>(+{durationIncrease.Value}% per stack)</style>. " +
-                $"Recharges every <style=cIsUtility>{rechargeTime.Value} <style=cStack>(-{rechargeTimeReductionPerStack.Value}% per stack)</style> seconds</style>.";
-            LanguageAPI.Add("HOODIE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("HOODIE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

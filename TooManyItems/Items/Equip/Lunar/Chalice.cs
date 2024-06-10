@@ -11,7 +11,7 @@ namespace TooManyItems
         public static EquipmentDef equipmentDef;
         public static BuffDef consecratedBuff;
 
-        // Pay 90% of your current health to consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. (60 sec)
+        // Pay a portion of your current health to consecrate yourself and all allies for a short duration. Consecrated allies gain damage and attack speed.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Chalice",
             "Enabled",
@@ -19,7 +19,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> consecrateDuration = new(
@@ -29,7 +29,7 @@ namespace TooManyItems
             "Duration of the Consecrate buff given.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> consecrateDamageBonus = new(
@@ -39,7 +39,7 @@ namespace TooManyItems
             "Percent bonus damage dealt while Consecrated.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
@@ -49,7 +49,7 @@ namespace TooManyItems
             "Percent bonus attack speed gained while Consecrated.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<float> currentHealthCost = new(
@@ -59,17 +59,17 @@ namespace TooManyItems
             "Percent of current health lost as payment when Consecrated.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Chalice",
             "Cooldown",
-            60,
+            70,
             "Equipment cooldown.",
             new List<string>()
             {
-                "ITEM_CHALICE_DESC"
+                "EQUIPMENT_CHALICE_DESC"
             }
         );
         public static float currentHealthCostPercent = currentHealthCost.Value / 100f;
@@ -78,9 +78,8 @@ namespace TooManyItems
         {
             GenerateEquipment();
             GenerateBuff();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
 
             ContentAddition.AddBuffDef(consecratedBuff);
@@ -93,10 +92,7 @@ namespace TooManyItems
             equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
 
             equipmentDef.name = "CHALICE";
-            equipmentDef.nameToken = "CHALICE_NAME";
-            equipmentDef.pickupToken = "CHALICE_PICKUP";
-            equipmentDef.descriptionToken = "CHALICE_DESCRIPTION";
-            equipmentDef.loreToken = "CHALICE_LORE";
+            equipmentDef.AutoPopulateTokens();
 
             equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Chalice.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Chalice.prefab");
@@ -160,7 +156,7 @@ namespace TooManyItems
 
                 DamageInfo useCost = new()
                 {
-                    damage = body.healthComponent.combinedHealth * currentHealthCostPercent,
+                    damage = damageToTake,
                     attacker = null,
                     inflictor = null,
                     procCoefficient = 0f,
@@ -176,45 +172,11 @@ namespace TooManyItems
                 {
                     component.body.AddTimedBuff(consecratedBuff, consecrateDuration.Value);
                 }
+
                 return true;
             }
+
             return false;
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("CHALICE", "Chalice");
-            LanguageAPI.Add("CHALICE_NAME", "Chalice");
-            LanguageAPI.Add("CHALICE_PICKUP", "<style=cDeath>Pay a portion of your current health</style> to grant all allies bonus damage and attack speed.");
-
-            string desc = $"<style=cDeath>Pay {currentHealthCost.Value}% of your current health</style> to " +
-                $"<style=cWorldEvent>Consecrate</style> yourself and all allies. " +
-                $"<style=cWorldEvent>Consecrated</style> units gain " +
-                $"<style=cIsDamage>{consecrateDamageBonus.Value}% damage</style> and " +
-                $"<style=cIsDamage>{consecrateAttackSpeedBonus.Value}% attack speed</style> for " +
-                $"<style=cIsUtility>{consecrateDuration.Value} seconds</style>.";
-            LanguageAPI.Add("CHALICE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("CHALICE_LORE", lore);
         }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

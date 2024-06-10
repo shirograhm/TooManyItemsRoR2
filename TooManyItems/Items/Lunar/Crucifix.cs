@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce damage taken by 40%. Taking damage set you on fire for 5% max health over 3 seconds.
+        // Reduce damage taken. Taking damage set you on fire.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Crucifix",
             "Enabled",
@@ -55,9 +55,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -68,10 +67,7 @@ namespace TooManyItems
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
             itemDef.name = "CRUCIFIX";
-            itemDef.nameToken = "CRUCIFIX_NAME";
-            itemDef.pickupToken = "CRUCIFIX_PICKUP";
-            itemDef.descriptionToken = "CRUCIFIX_DESCRIPTION";
-            itemDef.loreToken = "CRUCIFIX_LORE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
@@ -105,37 +101,5 @@ namespace TooManyItems
                 }
             };
         }
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("CRUCIFIX", "Crucifix");
-            LanguageAPI.Add("CRUCIFIX_NAME", "Crucifix");
-            LanguageAPI.Add("CRUCIFIX_PICKUP", "Reduce damage taken. <style=cDeath>Taking damage sets you on fire</style>.");
-
-            string desc = $"Reduce damage taken by <style=cIsUtility>{damageReduction.Value}%</style>. " +
-                $"<style=cDeath>Taking damage burns you for {maxHealthBurnAmount.Value}% max health over " +
-                $"<style=cIsUtility>{fireDuration.Value} <style=cStack>(+{fireDuration.Value} per stack)</style> seconds</style></style>.";
-            LanguageAPI.Add("CRUCIFIX_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("CRUCIFIX_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

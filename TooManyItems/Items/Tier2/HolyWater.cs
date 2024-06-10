@@ -11,7 +11,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Killing an elite enemy grants all allies 1% to 100% (+50% per stack) of its max health as bonus experience, scaling with difficulty.
+        // Killing an elite enemy grants all allies a portion of its max health as bonus experience, scaling with difficulty.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Holy Water",
             "Enabled",
@@ -24,7 +24,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> minExperienceMultiplierPerStack = new(
             "Item: Holy Water",
-            "Minimum XP Multiplier",
+            "Minimum XP",
             1f,
             "Minimum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
@@ -36,7 +36,7 @@ namespace TooManyItems
 
         public static ConfigurableValue<float> maxExperienceMultiplierPerStack = new(
             "Item: Holy Water",
-            "Maximum XP Multiplier",
+            "Maximum XP",
             100f,
             "Maximum enemy max health converted to bonus experience when killing an elite.",
             new List<string>()
@@ -61,9 +61,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -73,11 +72,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "HOLY_WATER";
-            itemDef.nameToken = "HOLY_WATER_NAME";
-            itemDef.pickupToken = "HOLY_WATER_PICKUP";
-            itemDef.descriptionToken = "HOLY_WATER_DESCRIPTION";
-            itemDef.loreToken = "HOLY_WATER_LORE";
+            itemDef.name = "HOLYWATER";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
@@ -104,18 +100,13 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
 
-                if (atkBody && atkMaster && vicBody && vicBody.isElite)
+                if (vicBody.isElite)
                 {
-                    // Check if attacker is minion and if we can switch to player
-                    if (atkMaster.minionOwnership && atkMaster.minionOwnership.ownerMaster && atkMaster.minionOwnership.ownerMaster.hasBody)
-                    {
-                        atkMaster = atkMaster.minionOwnership.ownerMaster;
-                        atkBody = atkMaster.GetBody();
-                    }
+                    atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
                     if (atkBody.inventory)
                     {
                         int count = atkBody.inventory.GetItemCount(itemDef);
-                        if (count > 0)
+                        if (atkMaster && vicBody && count > 0)
                         {
                             float bonusXP = vicBody.healthComponent.fullCombinedHealth * CalculateExperienceMultiplier(count);
 
@@ -133,38 +124,5 @@ namespace TooManyItems
 
             return multiplier * (1 + extraStacksMultiplierPercent * (itemCount - 1));
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("HOLY_WATER", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_NAME", "Holy Water");
-            LanguageAPI.Add("HOLY_WATER_PICKUP", "Killing elite enemies grants all allies a percentage of the enemy's max HP as bonus experience.");
-
-            string desc = $"Killing an elite enemy grants all allies <style=cIsHealth>{minExperienceMultiplierPerStack.Value}-{maxExperienceMultiplierPerStack.Value}%</style> " +
-                $"<style=cStack>(+{extraStacksMultiplier.Value}% per stack)</style> of its <style=cIsHealth>max HP</style> as bonus experience. " +
-                $"<style=cIsUtility>Scales over time.</style>.";
-            LanguageAPI.Add("HOLY_WATER_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("HOLY_WATER_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

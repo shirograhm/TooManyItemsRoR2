@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 5 (+2 per stack) HP/s.
+        // Gain permanent health regeneration on-kill.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Soul Ring",
             "Enabled",
@@ -25,7 +25,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
-            "Health Regen On Kill",
+            "Regen On Kill",
             0.1f,
             "Amount of permanent health regeneration gained on kill.",
             new List<string>()
@@ -46,7 +46,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxRegenForExtraStacks = new(
             "Item: Soul Ring",
             "Maximum Regen On Extra Stacks",
-            2f,
+            3f,
             "Maximum amount of permanent health regeneration granted on additional stacks.",
             new List<string>()
             {
@@ -117,9 +117,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -131,11 +130,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "SOUL_RING";
-            itemDef.nameToken = "SOUL_RING_NAME";
-            itemDef.pickupToken = "SOUL_RING_PICKUP";
-            itemDef.descriptionToken = "SOUL_RING_DESCRIPTION";
-            itemDef.loreToken = "SOUL_RING_LORE";
+            itemDef.name = "SOULRING";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
@@ -171,7 +167,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<Statistics>();
+                        Statistics component = sender.inventory.GetComponent<Statistics>();
 
                         args.baseRegenAdd += component.HealthRegen;
                     }
@@ -189,7 +185,7 @@ namespace TooManyItems
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
                         float maxRegenAllowed = CalculateMaxRegenCap(count);
 
                         if (component.HealthRegen + healthRegenOnKill.Value <= maxRegenAllowed)
@@ -205,37 +201,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("SOUL_RING", "Soul Ring");
-            LanguageAPI.Add("SOUL_RING_NAME", "Soul Ring");
-            LanguageAPI.Add("SOUL_RING_PICKUP", "Gain permanent health regen on kill.");
-
-            string desc = $"On kill, permanently increase your health regeneration by <style=cIsHealing>{healthRegenOnKill.Value} HP/s</style>, " +
-                $"up to a maximum of <style=cIsHealing>{maxRegenOnFirstStack.Value} <style=cStack>(+{maxRegenForExtraStacks.Value} per stack)</style> HP/s</style>.";
-            LanguageAPI.Add("SOUL_RING_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("SOUL_RING_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

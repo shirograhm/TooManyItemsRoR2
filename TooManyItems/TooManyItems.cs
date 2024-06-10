@@ -26,7 +26,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.3.6";
+        public const string PluginVersion = "0.4.1";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -67,6 +67,8 @@ namespace TooManyItems
             // Green Items
             if (BrokenMask.isEnabled.Value)
                 BrokenMask.Init();
+            if (Epinephrine.isEnabled.Value)
+                Epinephrine.Init();
             if (HereticSeal.isEnabled.Value)
                 HereticSeal.Init();
             if (HolyWater.isEnabled.Value)
@@ -110,7 +112,15 @@ namespace TooManyItems
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
 
+            // Void
+            if (ShadowCrest.isEnabled.Value)
+                ShadowCrest.Init();
+            if (IronHeartVoid.isEnabled.Value)
+                IronHeartVoid.Init();
+
             // Equipment
+            if (Vanity.isEnabled.Value)
+                Vanity.Init();
             if (BuffTotem.isEnabled.Value)
                 BuffTotem.Init();
             if (Chalice.isEnabled.Value)
@@ -132,18 +142,30 @@ namespace TooManyItems
                     {
                         itemDef1 = RedBlueGlasses.itemDef,
                         itemDef2 = DLC1Content.Items.CritGlassesVoid
+                    },
+                    // Iron Heart => Defiled Heart
+                    new ItemDef.Pair()
+                    {
+                        itemDef1 = IronHeart.itemDef,
+                        itemDef2 = IronHeartVoid.itemDef
+                    },
+                    // Seal of the Heretic => Shadow Crest
+                    new ItemDef.Pair()
+                    {
+                        itemDef1 = HereticSeal.itemDef,
+                        itemDef2 = ShadowCrest.itemDef
                     }
                 };
 
-                var key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
+                ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
+
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                var voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
+                ItemDef.Pair[] voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
                 ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = voidPairs.Union(newVoidPairs).ToArray();
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 Debug.Log("Injected void item transformations.");
-
                 orig();
             };
         }

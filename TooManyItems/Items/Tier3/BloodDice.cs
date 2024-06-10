@@ -12,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // On kill, permanently gain 2 to 12 HP, up to a max of 550 (+550 per stack) HP.
+        // Gain permanent health on-kill.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Blood Dice",
             "Enabled",
@@ -33,6 +33,26 @@ namespace TooManyItems
                 "ITEM_BLOODDICE_DESC"
             }
         );
+        public static ConfigurableValue<int> minHealthGain = new(
+            "Item: Blood Dice",
+            "Min Gain",
+            2,
+            "Minimum health that can be gained every kill.",
+            new List<string>()
+            {
+                "ITEM_BLOODDICE_DESC"
+            }
+        );
+        public static ConfigurableValue<int> maxHealthGain = new(
+            "Item: Blood Dice",
+            "Max Gain",
+            12,
+            "Maximum health that can be gained every kill.",
+            new List<string>()
+            {
+                "ITEM_BLOODDICE_DESC"
+            }
+        );
         public static ConfigurableValue<float> maxHealthPerStack = new(
             "Item: Blood Dice",
             "Maximum Health Per Item",
@@ -43,8 +63,6 @@ namespace TooManyItems
                 "ITEM_BLOODDICE_DESC"
             }
         );
-        public static int minHealthGain = 2;
-        public static int maxHealthGain = 12;
 
         public class Statistics : MonoBehaviour
         {
@@ -109,9 +127,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -123,11 +140,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "BLOOD_DICE";
-            itemDef.nameToken = "BLOOD_DICE_NAME";
-            itemDef.pickupToken = "BLOOD_DICE_PICKUP";
-            itemDef.descriptionToken = "BLOOD_DICE_DESCRIPTION";
-            itemDef.loreToken = "BLOOD_DICE_LORE";
+            itemDef.name = "BLOODDICE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -171,7 +185,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = sender.inventory.GetComponent<Statistics>();
+                        Statistics component = sender.inventory.GetComponent<Statistics>();
                         // Take Math.min incase item was dropped or removed from inventory
                         component.PermanentHealth = Mathf.Min(component.PermanentHealth, maxHealthPerStack.Value * count);
                         args.baseHealthAdd += component.PermanentHealth;
@@ -196,7 +210,7 @@ namespace TooManyItems
                         float maxHealthAllowed = maxHealthPerStack.Value * count;
                         int roll = GetDiceRoll(atkMaster);
 
-                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
 
                         if (component.PermanentHealth + roll < maxHealthAllowed)
                         {
@@ -218,7 +232,7 @@ namespace TooManyItems
             float mean = 7f, deviation = 2f;
             if (affectedByLuck.Value) mean += master.luck * deviation;
             
-            return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain, maxHealthGain);
+            return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain.Value, maxHealthGain.Value);
         }
 
         private static int GenerateRollNormalDistribution(float mean, float deviation)
@@ -231,38 +245,5 @@ namespace TooManyItems
             float scaledSample = mean + deviation * randomSample;
             return Mathf.RoundToInt(scaledSample);
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("BLOOD_DICE", "Blood Dice");
-            LanguageAPI.Add("BLOOD_DICE_NAME", "Blood Dice");
-            LanguageAPI.Add("BLOOD_DICE_PICKUP", "Gain permanent health on kill.");
-
-            string desc = $"On kill, permanently gain <style=cIsHealth>{minHealthGain}-{maxHealthGain} HP</style>, " +
-                $"up to a maximum of <style=cIsHealth>{maxHealthPerStack.Value} <style=cStack>(+{maxHealthPerStack.Value} per stack)</style> HP</style>. ";
-            if (affectedByLuck.Value) desc += "<style=cIsUtility>Affected by luck</style>.";
-            LanguageAPI.Add("BLOOD_DICE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("BLOOD_DICE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

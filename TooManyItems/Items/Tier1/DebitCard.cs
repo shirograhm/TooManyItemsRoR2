@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Get a 8% (+8% per stack) rebate on purchases.
+        // Get a rebate on purchases.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Debit Card",
             "Enabled",
@@ -23,7 +23,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
-            "Rebate Amount",
+            "Rebate",
             8f,
             "Percentage of spent gold refunded as rebate.",
             new List<string>()
@@ -36,9 +36,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -48,11 +47,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "DEBIT_CARD";
-            itemDef.nameToken = "DEBIT_CARD_NAME";
-            itemDef.pickupToken = "DEBIT_CARD_PICKUP";
-            itemDef.descriptionToken = "DEBIT_CARD_DESCRIPTION";
-            itemDef.loreToken = "DEBIT_CARD_LORE";
+            itemDef.name = "DEBITCARD";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
@@ -85,36 +81,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("DEBIT_CARD", "Debit Card");
-            LanguageAPI.Add("DEBIT_CARD_NAME", "Debit Card");
-            LanguageAPI.Add("DEBIT_CARD_PICKUP", "Get a rebate on purchases.");
-
-            string desc = $"Get a <style=cIsUtility>{rebate.Value}% <style=cStack>(+{rebate.Value}% per stack)</style> rebate</style> on purchases.";
-            LanguageAPI.Add("DEBIT_CARD_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("DEBIT_CARD_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

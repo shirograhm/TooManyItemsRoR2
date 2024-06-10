@@ -14,6 +14,7 @@ namespace TooManyItems
         public static Color PERMAFROST_COLOR         = new(0.76f, 0.80f, 0.98f, 1f);
         public static Color IRON_HEART_COLOR         = new(0.85f, 0.20f, 0.22f, 1f);
         public static Color TATTERED_SCROLL_COLOR    = new(0.80f, 0.78f, 0.57f, 1f);
+        public static Color VANITY_COLOR             = new(0.53f, 0.44f, 0.77f, 1f);
 
         internal static void Init()
         {
@@ -26,6 +27,15 @@ namespace TooManyItems
             {
                 if (itemDef) itemDef.tier = tier;
             });
+        }
+
+        public static CharacterBody GetMinionOwnershipParentBody(CharacterBody body)
+        {
+            if (body && body.master && body.master.minionOwnership && body.master.minionOwnership.ownerMaster && body.master.minionOwnership.ownerMaster.GetBody())
+            {
+                return body.master.minionOwnership.ownerMaster.GetBody();
+            }
+            return body;
         }
 
         public static float GetChanceAfterLuck(float percent, float luckIn)

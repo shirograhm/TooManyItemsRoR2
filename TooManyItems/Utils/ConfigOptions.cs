@@ -28,8 +28,8 @@ namespace TooManyItems
 
         private static string Language_GetLocalizedStringByToken(On.RoR2.Language.orig_GetLocalizedStringByToken orig, RoR2.Language self, string token)
         {
-            var result = orig(self, token);
-            foreach (var configurableValue in ConfigurableValue.instancesList.FindAll(x => x.stringsToAffect.Contains(token)))
+            string result = orig(self, token);
+            foreach (ConfigurableValue configurableValue in ConfigurableValue.instancesList.FindAll(x => x.stringsToAffect.Contains(token)))
             {
                 result = result.Replace("{" + configurableValue.key + "}", configurableValue.ToString());
             }
@@ -51,28 +51,28 @@ namespace TooManyItems
 
             public static ConfigurableValue<int> CreateInt(string modGUID, string modName, ConfigFile configFile, string section, string key, int defaultValue, int min = 0, int max = 1000, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<int> onChanged = null)
             {
-                var configurableValue = Create<int>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<int> configurableValue = Create<int>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
 
             public static ConfigurableValue<float> CreateFloat(string modGUID, string modName, ConfigFile configFile, string section, string key, float defaultValue, float min = 0, float max = 1000, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<float> onChanged = null)
             {
-                var configurableValue = Create<float>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<float> configurableValue = Create<float>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
 
             public static ConfigurableValue<bool> CreateBool(string modGUID, string modName, ConfigFile configFile, string section, string key, bool defaultValue, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<bool> onChanged = null)
             {
-                var configurableValue = Create<bool>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<bool> configurableValue = Create<bool>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
 
             public static ConfigurableValue<string> CreateString(string modGUID, string modName, ConfigFile configFile, string section, string key, string defaultValue, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<string> onChanged = null)
             {
-                var configurableValue = Create<string>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<string> configurableValue = Create<string>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
@@ -87,10 +87,10 @@ namespace TooManyItems
             public ConfigurableValue(ConfigFile configFile, string section, string key, T defaultValue, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<T> onChanged = null)
             {
                 id = System.IO.Path.GetFileNameWithoutExtension(configFile.ConfigFilePath) + "." + section + "." + key;
-                var existing = instancesList.FirstOrDefault(x => x.id == id);
+                ConfigurableValue existing = instancesList.FirstOrDefault(x => x.id == id);
                 if (existing != null)
                 {
-                    var existingCast = existing as ConfigurableValue<T>;
+                    ConfigurableValue<T> existingCast = existing as ConfigurableValue<T>;
                     bepinexConfigEntry = existingCast.bepinexConfigEntry;
                     this.useCustomValueConfigEntry = useCustomValueConfigEntry;
                 }

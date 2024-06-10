@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain 2.5 (+2.5) damage per level.
+        // Gain BASE damage per level.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Glass Marbles",
             "Enabled",
@@ -34,9 +34,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
@@ -46,11 +45,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "GLASS_MARBLES";
-            itemDef.nameToken = "GLASS_MARBLES_NAME";
-            itemDef.pickupToken = "GLASS_MARBLES_PICKUP";
-            itemDef.descriptionToken = "GLASS_MARBLES_DESCRIPTION";
-            itemDef.loreToken = "GLASS_MARBLES_LORE";
+            itemDef.name = "GLASSMARBLES";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
@@ -80,36 +76,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("GLASS_MARBLES", "Glass Marbles");
-            LanguageAPI.Add("GLASS_MARBLES_NAME", "Glass Marbles");
-            LanguageAPI.Add("GLASS_MARBLES_PICKUP", "Gain base damage per level.");
-
-            string desc = $"Gain <style=cIsDamage>{damagePerLevelPerStack.Value}</style> <style=cStack>(+{damagePerLevelPerStack.Value} per stack)</style> base damage per level.";
-            LanguageAPI.Add("GLASS_MARBLES_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("GLASS_MARBLES_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>

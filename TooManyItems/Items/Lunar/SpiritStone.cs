@@ -11,7 +11,7 @@ namespace TooManyItems
     internal class SpiritStone
     {
         public static ItemDef itemDef;
-        // Killing an enemy grants 1 (+1 per stack) permanent shield. Lose 50% (+50% per stack) max health.
+        // Killing an enemy grants permanent shield. Lose a percentage of your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
             "Enabled",
@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
-            50f,
+            30f,
             "Max health lost as a penalty for holding this item.",
             new List<string>()
             {
@@ -107,9 +107,8 @@ namespace TooManyItems
         internal static void Init()
         {
             GenerateItem();
-            AddTokens();
 
-            var displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
@@ -121,11 +120,8 @@ namespace TooManyItems
         {
             itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
-            itemDef.name = "SPIRIT_STONE";
-            itemDef.nameToken = "SPIRIT_STONE_NAME";
-            itemDef.pickupToken = "SPIRIT_STONE_PICKUP";
-            itemDef.descriptionToken = "SPIRIT_STONE_DESCRIPTION";
-            itemDef.loreToken = "SPIRIT_STONE_LORE";
+            itemDef.name = "SPIRITSTONE";
+            itemDef.AutoPopulateTokens();
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
@@ -154,7 +150,7 @@ namespace TooManyItems
                     int itemCount = sender.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        var component = sender.inventory.GetComponent<Statistics>();
+                        Statistics component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
 
                         args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
@@ -190,7 +186,7 @@ namespace TooManyItems
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0)
                     {
-                        var component = atkBody.inventory.GetComponent<Statistics>();
+                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
                         component.PermanentShield += shieldPerKill * count;
 
                         Utils.ForceRecalculate(atkBody);
@@ -199,39 +195,5 @@ namespace TooManyItems
                 }
             };
         }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("SPIRIT_STONE", "Spirit Stone");
-            LanguageAPI.Add("SPIRIT_STONE_NAME", "Spirit Stone");
-            LanguageAPI.Add("SPIRIT_STONE_PICKUP", "Gain a permanent stacking shield when killing enemies. <style=cDeath>Lose a portion of your max health</style>.");
-
-            string desc = $"Killing an enemy permanently grants " +
-                $"<style=cIsUtility>{shieldPerKill.Value} <style=cStack>(+{shieldPerKill.Value} per stack)</style> " +
-                $"shield</style>. " +
-                $"<style=cDeath>Lose {maxHealthLost.Value}% <style=cStack>(+{maxHealthLost.Value}% per stack)</style> max health</style>.";
-            LanguageAPI.Add("SPIRIT_STONE_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("SPIRIT_STONE_LORE", lore);
-        }
     }
 }
-
-// Styles
-// <style=cIsHealth>" + exampleValue + "</style>
-// <style=cIsDamage>" + exampleValue + "</style>
-// <style=cIsHealing>" + exampleValue + "</style>
-// <style=cIsUtility>" + exampleValue + "</style>
-// <style=cIsVoid>" + exampleValue + "</style>
-// <style=cHumanObjective>" + exampleValue + "</style>
-// <style=cLunarObjective>" + exampleValue + "</style>
-// <style=cStack>" + exampleValue + "</style>
-// <style=cWorldEvent>" + exampleValue + "</style>
-// <style=cArtifact>" + exampleValue + "</style>
-// <style=cUserSetting>" + exampleValue + "</style>
-// <style=cDeath>" + exampleValue + "</style>
-// <style=cSub>" + exampleValue + "</style>
-// <style=cMono>" + exampleValue + "</style>
-// <style=cShrine>" + exampleValue + "</style>
-// <style=cEvent>" + exampleValue + "</style>
