@@ -176,8 +176,8 @@ namespace TooManyItems
 
             if (Input.GetKeyDown(KeyCode.F2))
             {
-                //DropItem(Abacus.itemDef);
-                //DropItem(BloodDice.itemDef);
+                DropItem(Abacus.itemDef);
+                DropItem(BloodDice.itemDef);
                 DropItem(GlassMarbles.itemDef);
                 DropItem(Horseshoe.itemDef);
                 DropItem(IronHeart.itemDef);
@@ -195,13 +195,13 @@ namespace TooManyItems
                 DropItem(EdibleGlue.itemDef);
                 DropItem(MilkCarton.itemDef);
                 DropItem(PaperPlane.itemDef);
-                //DropItem(Photodiode.itemDef);
-                //DropItem(RedBlueGlasses.itemDef);
-                //DropItem(RubberDucky.itemDef);
-                //DropItem(AncientCoin.itemDef);
+                DropItem(Photodiode.itemDef);
+                DropItem(RedBlueGlasses.itemDef);
+                DropItem(RubberDucky.itemDef);
+                DropItem(AncientCoin.itemDef);
                 //DropItem(CarvingBlade.itemDef);
                 //DropItem(Crucifix.itemDef);
-                //DropItem(SpiritStone.itemDef);
+                DropItem(SpiritStone.itemDef);
                 DropItem(LunarRevive.itemDef);
 
                 DropItem(BuffTotem.equipmentDef);

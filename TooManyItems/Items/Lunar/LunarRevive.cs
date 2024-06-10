@@ -11,7 +11,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // If you would take a fatal blow, instead revive with 20% (+20% per stack) max HP. Each revive, lose 5 (+5 per stack) items.
+        // Taking a fatal blow revives you at 20% (+20% per stack) HP. Lose 4 (+4 per stack) items each time you are revived. If you do not have 4 items to lose, die instead.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Sages Blessing",
             "Enabled",
@@ -37,7 +37,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> itemsLostPerStack = new(
             "Item: Sages Blessing",
             "Items Lost Per Stack",
-            5,
+            4,
             "Items lost when you revive.",
             new List<string>()
             {
@@ -86,26 +86,31 @@ namespace TooManyItems
                     int itemCount = master.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        master.Respawn(master.GetBody().footPosition, Quaternion.identity);
-                        // Set health for revive
-                        master.GetBody().healthComponent.health = master.GetBody().healthComponent.fullCombinedHealth * Utils.GetExponentialStacking(reviveHealthPercent, itemCount);
-                        // Destroy items based on stack count
-                        int itemsDestroyed = 0;
-                        while(itemsDestroyed < itemsLostPerStack * itemCount)
+                        ItemIndex[] itemList = new List<ItemIndex>(master.inventory.itemAcquisitionOrder).ToArray();
+                        // Make sure there are enough items to destroy
+                        if (itemList.Length > itemsLostPerStack * itemCount)
                         {
-                            ItemDef destroyDef = Utils.GetRandomItemDef();
-                            bool isValidToDestroy = destroyDef.itemIndex != itemDef.itemIndex && destroyDef.tier != ItemTier.NoTier;
-                            if (master.inventory.GetItemCount(destroyDef) > 0 && isValidToDestroy)
+                            master.Respawn(master.GetBody().footPosition, Quaternion.identity);
+                            // Set health for revive
+                            master.GetBody().healthComponent.health = master.GetBody().healthComponent.fullCombinedHealth * Utils.GetExponentialStacking(reviveHealthPercent, itemCount);
+                            // Destroy items based on stack count
+                            int itemsDestroyed = 0;
+                            while (itemsDestroyed < itemsLostPerStack * itemCount)
                             {
-                                master.inventory.RemoveItem(destroyDef);
-                                master.inventory.GiveItem(DLC1Content.Items.FragileDamageBonusConsumed);
-                                CharacterMasterNotificationQueue.SendTransformNotification(
-                                    master, 
-                                    destroyDef.itemIndex, 
-                                    DLC1Content.Items.FragileDamageBonusConsumed.itemIndex, 
-                                    CharacterMasterNotificationQueue.TransformationType.Default
-                                );
-                                itemsDestroyed += 1;
+                                ItemDef destroyDef = Utils.GetRandomItemDef();
+                                bool isValidToDestroy = destroyDef.itemIndex != itemDef.itemIndex && destroyDef.tier != ItemTier.NoTier;
+                                if (master.inventory.GetItemCount(destroyDef) > 0 && isValidToDestroy)
+                                {
+                                    master.inventory.RemoveItem(destroyDef);
+                                    master.inventory.GiveItem(DLC1Content.Items.FragileDamageBonusConsumed);
+                                    CharacterMasterNotificationQueue.SendTransformNotification(
+                                        master,
+                                        destroyDef.itemIndex,
+                                        DLC1Content.Items.FragileDamageBonusConsumed.itemIndex,
+                                        CharacterMasterNotificationQueue.TransformationType.Default
+                                    );
+                                    itemsDestroyed += 1;
+                                }
                             }
                         }
                     }
