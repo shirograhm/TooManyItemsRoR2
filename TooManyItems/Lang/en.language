@@ -53,7 +53,7 @@
     "LUNARREVIVECONSUMED": "Sage's Curse",
     "ITEM_LUNARREVIVECONSUMED_NAME": "Sage's Curse",
     "ITEM_LUNARREVIVECONSUMED_PICKUP": "<style=cDeath>You are on borrowed time</style>.",
-    "ITEM_LUNARREVIVECONSUMED_DESC": "Lose <style=cIsDamage>{Damage Lost}% <style=cStack>(+{Damage Lost}% per stack)</style> BASE damage</style> and <style=cIsHealth>{Health Lost}% <style=cStack>(+{Health Lost}% per stack)</style> max HP</style>.",
+    "ITEM_LUNARREVIVECONSUMED_DESC": "Become <style=cDeath>unlucky</style> and lose <style=cIsHealth>{Health Lost}% <style=cStack>(+{Health Lost}% per stack)</style> max HP</style>.",
     "ITEM_LUNARREVIVECONSUMED_LORE": "",
     "BOTTLECAP": "Bottle Cap",
     "ITEM_BOTTLECAP_NAME": "Bottle Cap",

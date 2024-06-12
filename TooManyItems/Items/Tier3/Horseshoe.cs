@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using PartialLuckPlugin;
+using R2API;
 using R2API.Networking;
 using RoR2;
 using System.Collections.Generic;
@@ -122,16 +123,16 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
-        //public static ConfigurableValue<float> luckPerPoint = new(
-        //    "Item: Golden Horseshoe",
-        //    "Luck Per Point",
-        //    0.025f,
-        //    "Luck gained per stat point invested.",
-        //    new List<string>()
-        //    {
-        //        "ITEM_HORSESHOE_DESC"
-        //    }
-        //);
+        public static ConfigurableValue<float> luckPerPoint = new(
+            "Item: Golden Horseshoe",
+            "Luck Per Point",
+            0.025f,
+            "Luck gained per stat point invested.",
+            new List<string>()
+            {
+                "ITEM_HORSESHOE_DESC"
+            }
+        );
         public static ConfigurableValue<float> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
@@ -155,6 +156,7 @@ namespace TooManyItems
             HEALTH_REGEN,
             SHIELD,
             MOVEMENT_SPEED,
+            LUCK,
 
             NUM_STATS
         }
@@ -254,6 +256,9 @@ namespace TooManyItems
                             args.baseShieldAdd += GetScaledValue(component.ShieldBonus, sender.level, count);
                             args.moveSpeedMultAdd += GetScaledValue(component.MoveSpeedPercentBonus, sender.level, count);
                         }
+
+                        PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
+                        tracker.PartialLuck += GetScaledValue(component.LuckBonus, sender.level, count);
                     }
                 }
             };
@@ -279,6 +284,7 @@ namespace TooManyItems
             if (bonuses.RegenerationBonus != 0) return false;
             if (bonuses.ShieldBonus != 0) return false;
             if (bonuses.MoveSpeedPercentBonus != 0) return false;
+            if (bonuses.LuckBonus != 0) return false;
 
             return true;
         }
@@ -297,6 +303,7 @@ namespace TooManyItems
                 component.RegenerationBonus = 0;
                 component.ShieldBonus = 0;
                 component.MoveSpeedPercentBonus = 0;
+                component.LuckBonus = 0;
 
                 float pointsRemaining = Horseshoe.totalPointsCap.Value;
                 while (pointsRemaining > 0)
@@ -337,6 +344,9 @@ namespace TooManyItems
                             break;
                         case Bonuses.MOVEMENT_SPEED:
                             component.MoveSpeedPercentBonus += randomPoints * Horseshoe.moveSpeedPerPoint.Value / 100f;
+                            break;
+                        case Bonuses.LUCK:
+                            component.LuckBonus += randomPoints * Horseshoe.luckPerPoint.Value;
                             break;
                         default:
                             Log.Error("Attempted to boost an invalid stat.");

@@ -327,9 +327,12 @@ namespace TooManyItems
                     stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Luck: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
+                        var empty = new List<float> { 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f };
 
                         if (!master || !master.inventory || !master.GetBody()) return empty;
 
@@ -346,6 +349,7 @@ namespace TooManyItems
                             values.Add(Horseshoe.GetScaledValue(component.RegenerationBonus, master.GetBody().level, itemCount));
                             values.Add(Horseshoe.GetScaledValue(component.ShieldBonus, master.GetBody().level, itemCount));
                             values.Add(Horseshoe.GetScaledValue(component.MoveSpeedPercentBonus, master.GetBody().level, itemCount));
+                            values.Add(Horseshoe.GetScaledValue(component.LuckBonus, master.GetBody().level, itemCount));
                         }
                         else
                         {
@@ -397,16 +401,12 @@ namespace TooManyItems
                 if (LunarReviveConsumed.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Base Damage Lost: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.descriptions.Add("Max Health Sacrificed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetExponentialStacking(LunarReviveConsumed.baseDamageLostPercent, itemCount),
                             Utils.GetExponentialStacking(LunarReviveConsumed.maxHealthLostPercent, itemCount)
                         };
                     };

@@ -1,4 +1,5 @@
-﻿using R2API;
+﻿using PartialLuckPlugin;
+using R2API;
 using RoR2;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // This item is given after a Lunar Revive. Lose 50% max HP and 25% BASE damage, exponentially.
+        // This item is given after a Lunar Revive. Become unlucky and lose max HP.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Sages Curse",
             "Enabled",
@@ -22,22 +23,10 @@ namespace TooManyItems
                 "ITEM_LUNARREVIVECONSUMED_DESC"
             }
         );
-        public static ConfigurableValue<float> baseDamageLost = new(
-            "Item: Sages Curse",
-            "Damage Lost",
-            25f,
-            "Percent base damage reduced while holding this item (after reviving).",
-            new List<string>()
-            {
-                "ITEM_LUNARREVIVECONSUMED_DESC"
-            }
-        );
-        public static float baseDamageLostPercent = baseDamageLost.Value / 100f;
-        
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Sages Curse",
             "Health Lost",
-            50f,
+            35f,
             "Percent max health lost while holding this item (after reviving).",
             new List<string>()
             {
@@ -45,7 +34,6 @@ namespace TooManyItems
             }
         );
         public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
-
 
         internal static void Init()
         {
@@ -81,7 +69,9 @@ namespace TooManyItems
                     if (itemCount > 0)
                     {
                         args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
-                        args.damageMultAdd -= Utils.GetExponentialStacking(baseDamageLostPercent, itemCount);
+
+                        PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
+                        tracker.PartialLuck += -1;
                     }
                 }
             };

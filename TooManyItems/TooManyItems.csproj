@@ -40,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="PartialLuckPlugin">
+      <HintPath>libs\PartialLuckPlugin.dll</HintPath>
+    </Reference>
     <Reference Include="LookingGlass">
       <HintPath>libs\LookingGlass.dll</HintPath>
     </Reference>
