@@ -195,15 +195,13 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            On.RoR2.CharacterBody.HandleOnKillEffectsServer += (orig, self, damageReport) =>
             {
-                orig(eventManager, damageReport);
-                if (!NetworkServer.active) return;
+                orig(self, damageReport);
 
-                CharacterBody atkBody = damageReport.attackerBody;
-                if (atkBody && atkBody.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
+                if (self && self.equipmentSlot && self.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
                 {
-                    atkBody.AddBuff(hubrisDebuff);
+                    self.AddBuff(hubrisDebuff);
                 }
             };
         }
@@ -211,10 +209,10 @@ namespace TooManyItems
         private static bool OnUse(EquipmentSlot slot)
         {
             EquipmentTargeter targeter = slot.GetComponent<EquipmentTargeter>();
-            CharacterBody targetEnemy = (targeter) ? targeter.obj.GetComponent<CharacterBody>() : null;
+            CharacterBody targetEnemy = (targeter && targeter.obj) ? targeter.obj.GetComponent<CharacterBody>() : null;
 
             CharacterBody user = slot.characterBody;
-            if (user && targetEnemy)
+            if (user && targetEnemy && targetEnemy.healthComponent)
             {
                 int buffCount = user.GetBuffCount(hubrisDebuff);
                 EffectManager.SpawnEffect(implosionEffectObject, new EffectData
@@ -225,6 +223,10 @@ namespace TooManyItems
                 }, 
                 true);
 
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+                user.SetBuffCount(hubrisDebuff.buffIndex, 0);
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
+
                 float damageAmount = user.damage * damageDealtPercentPerStack * buffCount;
                 DamageInfo damageInfo = new()
                 {
@@ -233,16 +235,12 @@ namespace TooManyItems
                     inflictor = user.gameObject,
                     procCoefficient = coefficient.Value,
                     position = targetEnemy.corePosition,
-                    crit = false,
+                    crit = user.RollCrit(),
                     damageColorIndex = damageColor,
                     procChainMask = new ProcChainMask(),
-                    damageType = DamageType.Silent
+                    damageType = DamageType.BypassOneShotProtection | DamageType.BypassArmor | DamageType.BypassBlock | DamageType.AOE | DamageType.Silent
                 };
                 targetEnemy.healthComponent.TakeDamage(damageInfo);
-
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                user.SetBuffCount(hubrisDebuff.buffIndex, 0);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 return true;
             }

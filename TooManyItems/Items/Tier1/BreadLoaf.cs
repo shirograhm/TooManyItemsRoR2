@@ -68,14 +68,11 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(eventManager, damageReport);
-
                 if (!NetworkServer.active) return;
 
                 CharacterBody atkBody = damageReport.attackerBody;
-
                 if (atkBody && atkBody.inventory)
                 {
                     int itemCount = atkBody.inventory.GetItemCount(itemDef);

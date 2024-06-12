@@ -174,10 +174,8 @@ namespace TooManyItems
                 return values;
             };
 
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(eventManager, damageReport);
-
                 if (!NetworkServer.active) return;
 
                 CharacterBody atkBody = damageReport.attackerBody;
@@ -191,7 +189,6 @@ namespace TooManyItems
 
                         Utils.ForceRecalculate(atkBody);
                     }
-
                 }
             };
         }

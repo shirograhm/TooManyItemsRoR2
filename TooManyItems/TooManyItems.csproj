@@ -40,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="AncientScepter">
+      <HintPath>libs\AncientScepter.dll</HintPath>
+    </Reference>
     <Reference Include="LookingGlass">
       <HintPath>libs\LookingGlass.dll</HintPath>
     </Reference>
