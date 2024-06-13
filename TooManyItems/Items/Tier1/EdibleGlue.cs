@@ -76,9 +76,9 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.CharacterBody.HandleOnKillEffectsServer += (orig, self, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(self, damageReport);
+                if (!NetworkServer.active) return;
 
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
@@ -88,18 +88,18 @@ namespace TooManyItems
                     {
                         HurtBox[] hurtboxes = new SphereSearch
                         {
-                            mask = LayerIndex.enemyBody.mask,
-                            origin = atkBody.corePosition,
+                            mask = LayerIndex.entityPrecise.mask,
+                            origin = atkBody.footPosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
                             radius = slowRadiusPerStack.Value * count
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
 
-                        foreach (HurtBox hb in hurtboxes)
+                        foreach (HurtBox hurtbox in hurtboxes)
                         {
-                            CharacterBody parent = hb.healthComponent.body;
-                            if (parent && parent != atkBody)
+                            HealthComponent hc = hurtbox.healthComponent;
+                            if (hc && hc.body && hc.body.teamComponent && hc.body.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                             {
-                                parent.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
+                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
                             }
                         }
                     }
