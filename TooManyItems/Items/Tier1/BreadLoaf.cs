@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthGainOnKill = new(
             "Item: Loaf of Bread",
             "Healing On Kill",
-            3f,
+            5f,
             "Percent missing health gained after killing an enemy during the teleporter event.",
             new List<string>()
             {
@@ -68,14 +68,11 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(eventManager, damageReport);
-
                 if (!NetworkServer.active) return;
 
                 CharacterBody atkBody = damageReport.attackerBody;
-
                 if (atkBody && atkBody.inventory)
                 {
                     int itemCount = atkBody.inventory.GetItemCount(itemDef);

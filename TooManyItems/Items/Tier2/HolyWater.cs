@@ -90,16 +90,13 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, eventManager, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(eventManager, damageReport);
-
                 if (!NetworkServer.active) return;
 
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
-
                 if (vicBody.isElite)
                 {
                     atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
