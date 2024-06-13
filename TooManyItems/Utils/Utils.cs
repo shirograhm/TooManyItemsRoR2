@@ -27,7 +27,11 @@ namespace TooManyItems
             {
                 try
                 {
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+#pragma warning disable CS0618 // Type or member is obsolete
                     itemDef.deprecatedTier = tier;
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
                 }
                 catch (Exception e)
                 {
