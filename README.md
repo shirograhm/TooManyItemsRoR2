@@ -52,12 +52,12 @@ The following values are configurable. To do so, run the game once with the mod 
 | ![Rubber Ducky](https://i.imgur.com/xEhnTCSs.png) | **Rubber Ducky** | Gain 5 (+5 per stack) armor. |
 
 ### Equipment
-| | | | |
-|-|-|-|-|
-| ![Chalice](https://i.imgur.com/dCXZJL2s.png) | **Chalice** | On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. | *70 second cooldown* |
-| ![Crown of Vanity](https://i.imgur.com/3wi2hTjs.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 4%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy. | *40 second cooldown* |
-| ![Tattered Scroll](https://i.imgur.com/WdsP2xEs.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold. | *100 second cooldown* |
-| ![Totem of Prayer](https://i.imgur.com/raoYVUls.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. | *55 second cooldown* |
+| | | |
+|-|-|-|
+| ![Chalice](https://i.imgur.com/dCXZJL2s.png) | **Chalice** | On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. [*70 second cooldown*] |
+| ![Crown of Vanity](https://i.imgur.com/3wi2hTjs.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 4%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy. [*40 second cooldown*] |
+| ![Tattered Scroll](https://i.imgur.com/WdsP2xEs.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold. [*100 second cooldown*] |
+| ![Totem of Prayer](https://i.imgur.com/raoYVUls.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. [*55 second cooldown*] |
 
 ### Credits
 - **Programming:** shirograhm  
