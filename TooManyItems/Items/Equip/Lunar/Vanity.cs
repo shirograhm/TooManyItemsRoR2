@@ -32,7 +32,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            4f,
+            3f,
             "Percent base damage lost for each stack of Hubris.",
             new List<string>()
             {
@@ -66,7 +66,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
-            40,
+            30,
             "Equipment cooldown.",
             new List<string>()
             {
@@ -238,7 +238,7 @@ namespace TooManyItems
                     crit = user.RollCrit(),
                     damageColorIndex = damageColor,
                     procChainMask = new ProcChainMask(),
-                    damageType = DamageType.BypassOneShotProtection | DamageType.BypassArmor | DamageType.BypassBlock | DamageType.AOE | DamageType.Silent
+                    damageType = DamageType.BypassOneShotProtection | DamageType.BypassArmor | DamageType.BypassBlock | DamageType.Silent
                 };
                 targetEnemy.healthComponent.TakeDamage(damageInfo);
 
