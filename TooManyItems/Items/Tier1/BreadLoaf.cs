@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthGainOnKill = new(
             "Item: Loaf of Bread",
             "Healing On Kill",
-            3f,
+            5f,
             "Percent missing health gained after killing an enemy during the teleporter event.",
             new List<string>()
             {
