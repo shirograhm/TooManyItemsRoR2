@@ -261,8 +261,8 @@ namespace TooManyItems
 
         public static float GetScaledValue(float value, float level, int count)
         {
-            // Level 1 -> 100%, Level 11 -> 200%, Level 21 -> 300%, Level 31 -> 400%
-            float levelScaling = (level + 9) / 10f;
+            // Level 1 -> 100%, Level 16 -> 200%, Level 31 -> 300%, Level 46 -> 400%
+            float levelScaling = (level + 14) / 15f;
             float extraStackScaling = 1 + extraStackMultiplierPercent * count;
 
             return value * levelScaling * extraStackScaling;
