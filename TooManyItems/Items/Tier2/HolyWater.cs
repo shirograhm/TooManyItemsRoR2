@@ -100,7 +100,7 @@ namespace TooManyItems
                 if (vicBody.isElite)
                 {
                     atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
-                    if (atkBody.inventory)
+                    if (atkBody && atkBody.inventory)
                     {
                         int count = atkBody.inventory.GetItemCount(itemDef);
                         if (atkMaster && vicBody && count > 0)
