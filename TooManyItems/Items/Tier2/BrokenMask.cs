@@ -135,7 +135,6 @@ namespace TooManyItems
             if (dotStack.attackerObject)
             {
                 CharacterBody attackerBody = dotStack.attackerObject.GetComponent<CharacterBody>();
-
                 if (attackerBody && attackerBody.inventory)
                 {
                     int count = attackerBody.inventory.GetItemCount(itemDef);
