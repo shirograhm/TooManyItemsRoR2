@@ -50,16 +50,15 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            On.RoR2.GlobalEventManager.OnCharacterDeath += (orig, self, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(self, damageReport);
                 if (!NetworkServer.active) return; 
                 
                 CharacterMaster master = damageReport.victimMaster;
                 if (master && master.inventory)
                 {
                     int itemCount = master.inventory.GetItemCount(itemDef);
-                    if (itemCount > 0)
+                    if (itemCount > 0 && master.GetBody())
                     {
                         master.inventory.RemoveItem(itemDef);
                         master.inventory.GiveItem(LunarReviveConsumed.itemDef);

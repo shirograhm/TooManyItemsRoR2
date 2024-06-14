@@ -1,5 +1,4 @@
-﻿using PartialLuckPlugin;
-using R2API;
+﻿using R2API;
 using RoR2;
 using System;
 using System.Collections.Generic;
@@ -12,20 +11,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Sages Curse",
-            "Enabled",
-            true,
-            "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_LUNARREVIVECONSUMED_DESC"
-            }
-        );
+        // This item is given after a Lunar Revive. Reduces your max health by 20%. Each stage, lose 2 (+2 per stack) items at random. If you don't have 2 items to lose, die instead. Lose all stacks of this item upon death.
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Sages Curse",
             "Health Lost",
-            35f,
+            20f,
             "Percent max health lost while holding this item (after reviving).",
             new List<string>()
             {
@@ -33,6 +23,17 @@ namespace TooManyItems
             }
         );
         public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
+
+        public static ConfigurableValue<int> itemsLostPerStage = new(
+            "Item: Sages Curse",
+            "Items Lost",
+            2,
+            "Number of items lost on new stage (after reviving).",
+            new List<string>()
+            {
+                "ITEM_LUNARREVIVECONSUMED_DESC"
+            }
+        );
 
         internal static void Init()
         {
@@ -86,6 +87,76 @@ namespace TooManyItems
                     }
                 }
                 return values;
+            };
+
+            Stage.onStageStartGlobal += (stage) =>
+            {
+                foreach (NetworkUser user in NetworkUser.readOnlyInstancesList)
+                {
+                    CharacterMaster master = user.masterController.master ?? user.master;
+                    if (master && master.inventory)
+                    {
+                        int itemCount = master.inventory.GetItemCount(itemDef);
+                        if (itemCount > 0)
+                        {
+                            int itemsToLose = itemCount * itemsLostPerStage;
+                            
+                            List<ItemIndex> list = new(master.inventory.itemAcquisitionOrder);
+                            Util.ShuffleList(list);
+
+                            foreach (ItemIndex index in list)
+                            {
+                                if (itemsToLose == 0) break;
+
+                                ItemDef def = ItemCatalog.GetItemDef(index);
+                                if (def && def.tier != ItemTier.NoTier && def.itemIndex != LunarRevive.itemDef.itemIndex)
+                                {
+                                    master.inventory.RemoveItem(def);
+                                    master.inventory.GiveItem(Debris.itemDef);
+                                    CharacterMasterNotificationQueue.SendTransformNotification(
+                                        master, def.itemIndex, Debris.itemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+
+                                    itemsToLose -= 1;
+                                }
+                            }
+
+                            if (itemsToLose > 0 && user.GetCurrentBody() && user.GetCurrentBody().healthComponent)
+                            {
+                                user.GetCurrentBody().healthComponent.Suicide(user.gameObject, user.gameObject);
+                            }
+                        }
+                    }
+
+                    if (user.GetCurrentBody())
+                    {
+                        EffectData effectData = new EffectData
+                        {
+                            origin = user.GetCurrentBody().corePosition
+                        };
+                        effectData.SetNetworkedObjectReference(user.gameObject);
+                        EffectManager.SpawnEffect(HealthComponent.AssetReferences.fragileDamageBonusBreakEffectPrefab, effectData, transmit: true);
+                    }
+                }
+            };
+
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            {
+                if (!NetworkServer.active) return;
+
+                CharacterMaster master = damageReport.victimMaster;
+                if (master && master.inventory)
+                {
+                    while (master.inventory.GetItemCount(itemDef) > 0)
+                    {
+                        master.inventory.RemoveItem(itemDef);
+                        CharacterMasterNotificationQueue.SendTransformNotification(
+                            master,
+                            itemDef.itemIndex,
+                            ItemIndex.None,
+                            CharacterMasterNotificationQueue.TransformationType.Suppressed
+                        );
+                    }
+                }
             };
         }
     }

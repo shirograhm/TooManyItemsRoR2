@@ -107,12 +107,14 @@ namespace TooManyItems
                 CarvingBlade.Init();
             if (Crucifix.isEnabled.Value)
                 Crucifix.Init();
-            if (LunarRevive.isEnabled.Value)
-                LunarRevive.Init();
-            if (LunarReviveConsumed.isEnabled.Value)
-                LunarReviveConsumed.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
+            if (LunarRevive.isEnabled.Value)
+            {
+                LunarRevive.Init();
+                LunarReviveConsumed.Init();
+                Debris.Init();
+            }
 
             // Void
             if (ShadowCrest.isEnabled.Value)

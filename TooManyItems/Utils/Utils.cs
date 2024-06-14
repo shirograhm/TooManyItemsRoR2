@@ -2,6 +2,7 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -19,6 +20,45 @@ namespace TooManyItems
         internal static void Init()
         {
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
+        }
+
+        private class SyncForceRecalculate : INetMessage
+        {
+            NetworkInstanceId netID;
+
+            public SyncForceRecalculate() { }
+            public SyncForceRecalculate(NetworkInstanceId ID)
+            {
+                this.netID = ID;
+            }
+
+            public void Deserialize(NetworkReader reader)
+            {
+                netID = reader.ReadNetworkId();
+            }
+
+            public void OnReceived()
+            {
+                if (NetworkServer.active) return;
+
+                GameObject obj = RoR2.Util.FindNetworkObject(netID);
+                if (obj)
+                {
+                    CharacterBody body = obj.GetComponent<CharacterBody>();
+                    if (body) body.RecalculateStats();
+                }
+            }
+
+            public void Serialize(NetworkWriter writer)
+            {
+                writer.Write(netID);
+            }
+        }
+
+        public static void ForceRecalculate(CharacterBody body)
+        {
+            body.RecalculateStats();
+            if (NetworkServer.active) new SyncForceRecalculate(body.netId);
         }
 
         public static void SetItemTier(ItemDef itemDef, ItemTier tier)
@@ -66,12 +106,6 @@ namespace TooManyItems
             return percent;
         }
 
-        public static ItemDef GetRandomItemDef()
-        {
-            int index = TooManyItems.rand.Next(0, ItemCatalog.allItemDefs.Length);
-            return ItemCatalog.allItemDefs[index];
-        }
-
         public static float getDifficultyAsPercentage()
         {
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
@@ -87,43 +121,9 @@ namespace TooManyItems
             return 1f - 1f / (1f + percent * count);
         }
 
-        public static void ForceRecalculate(CharacterBody body)
+        public static ItemDef GetRandomItemDef()
         {
-            body.RecalculateStats();
-            if (NetworkServer.active) new SyncForceRecalculate(body.netId);
-        }
-
-        private class SyncForceRecalculate : INetMessage
-        {
-            NetworkInstanceId netID;
-
-            public SyncForceRecalculate() { }
-            public SyncForceRecalculate(NetworkInstanceId ID)
-            {
-                this.netID = ID;
-            }
-
-            public void Deserialize(NetworkReader reader)
-            {
-                netID = reader.ReadNetworkId();
-            }
-
-            public void OnReceived()
-            {
-                if (NetworkServer.active) return;
-
-                GameObject obj = RoR2.Util.FindNetworkObject(netID);
-                if (obj)
-                {
-                    CharacterBody body = obj.GetComponent<CharacterBody>();
-                    if (body) body.RecalculateStats();
-                }
-            }
-
-            public void Serialize(NetworkWriter writer)
-            {
-                writer.Write(netID);
-            }
+            return ItemCatalog.allItemDefs[TooManyItems.rand.Next(0, ItemCatalog.allItemDefs.Length)];
         }
     }
 }
