@@ -12,7 +12,6 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // This item is given after a Lunar Revive. Become unlucky and lose max HP.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Sages Curse",
             "Enabled",
@@ -69,9 +68,6 @@ namespace TooManyItems
                     if (itemCount > 0)
                     {
                         args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
-
-                        PartialLuckTracker tracker = sender.master.gameObject.GetComponent<PartialLuckTracker>();
-                        tracker.PartialLuck += -1;
                     }
                 }
             };

@@ -15,7 +15,6 @@ namespace TooManyItems
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
-    [BepInDependency(PartialLuckPlugin.PartialLuckPlugin.PluginGUID)]
     // Soft Dependencies
     [BepInDependency(LookingGlass.PluginInfo.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
     // Compatibility
