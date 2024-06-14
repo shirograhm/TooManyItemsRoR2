@@ -97,10 +97,10 @@ namespace TooManyItems
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
-                if (vicBody && vicBody.isElite)
+                if (atkMaster && vicBody && vicBody.isElite)
                 {
                     atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
-                    if (atkBody && atkMaster && atkBody.inventory)
+                    if (atkBody && atkBody.inventory)
                     {
                         int count = atkBody.inventory.GetItemCount(itemDef);
                         if (count > 0)
