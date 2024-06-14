@@ -115,12 +115,11 @@ namespace TooManyItems
 
             GenericGameEvents.OnTakeDamage += (damageReport) =>
             {
-                if (damageReport.attackerBody && damageReport.attackerBody.master && damageReport.victimBody)
+                CharacterBody atkBody = damageReport.attackerBody;
+                CharacterBody vicBody = damageReport.victimBody;
+                CharacterMaster atkMaster = damageReport.attackerMaster;
+                if (atkBody && vicBody && atkMaster)
                 {
-                    CharacterBody vicBody = damageReport.victimBody;
-                    CharacterBody atkBody = damageReport.attackerBody;
-                    CharacterMaster atkMaster = damageReport.attackerBody.master;
-
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0 && damageReport.damageInfo.crit)
                     {

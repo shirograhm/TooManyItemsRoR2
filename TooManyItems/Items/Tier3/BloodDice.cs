@@ -199,7 +199,6 @@ namespace TooManyItems
 
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
-
                 if (atkMaster && atkBody && atkBody.inventory)
                 {
                     int count = atkBody.inventory.GetItemCount(itemDef);
