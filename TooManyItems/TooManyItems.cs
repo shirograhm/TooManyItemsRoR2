@@ -181,38 +181,38 @@ namespace TooManyItems
 
             if (Input.GetKeyDown(KeyCode.F2))
             {
-                //DropItem(Abacus.itemDef);
+                DropItem(Abacus.itemDef);
                 DropItem(BloodDice.itemDef);
-                //DropItem(GlassMarbles.itemDef);
+                DropItem(GlassMarbles.itemDef);
                 DropItem(Horseshoe.itemDef);
                 DropItem(IronHeartVoid.itemDef);
-                //DropItem(Permafrost.itemDef);
-                //DropItem(RustyTrowel.itemDef);
-                //DropItem(BrokenMask.itemDef);
-                //DropItem(HereticSeal.itemDef);
+                DropItem(Permafrost.itemDef);
+                DropItem(RustyTrowel.itemDef);
+                DropItem(BrokenMask.itemDef);
+                DropItem(HereticSeal.itemDef);
                 DropItem(ShadowCrest.itemDef);
-                //DropItem(HolyWater.itemDef);
-                //DropItem(Hoodie.itemDef);
-                //DropItem(MagnifyingGlass.itemDef);
-                //DropItem(SoulRing.itemDef);
-                //DropItem(BottleCap.itemDef);
-                //DropItem(BreadLoaf.itemDef);
-                //DropItem(DebitCard.itemDef);
-                //DropItem(EdibleGlue.itemDef);
-                //DropItem(MilkCarton.itemDef);
-                //DropItem(PaperPlane.itemDef);
-                //DropItem(Photodiode.itemDef);
-                //DropItem(RedBlueGlasses.itemDef);
-                //DropItem(RubberDucky.itemDef);
-                //DropItem(AncientCoin.itemDef);
-                //DropItem(CarvingBlade.itemDef);
-                //DropItem(Crucifix.itemDef);
+                DropItem(HolyWater.itemDef);
+                DropItem(Hoodie.itemDef);
+                DropItem(MagnifyingGlass.itemDef);
+                DropItem(SoulRing.itemDef);
+                DropItem(BottleCap.itemDef);
+                DropItem(BreadLoaf.itemDef);
+                DropItem(DebitCard.itemDef);
+                DropItem(EdibleGlue.itemDef);
+                DropItem(MilkCarton.itemDef);
+                DropItem(PaperPlane.itemDef);
+                DropItem(Photodiode.itemDef);
+                DropItem(RedBlueGlasses.itemDef);
+                DropItem(RubberDucky.itemDef);
+                DropItem(AncientCoin.itemDef);
+                DropItem(CarvingBlade.itemDef);
+                DropItem(Crucifix.itemDef);
                 DropItem(SpiritStone.itemDef);
                 DropItem(LunarRevive.itemDef);
 
-                //DropItem(BuffTotem.equipmentDef);
-                //DropItem(Chalice.equipmentDef);
-                //DropItem(TatteredScroll.equipmentDef);
+                DropItem(BuffTotem.equipmentDef);
+                DropItem(Chalice.equipmentDef);
+                DropItem(TatteredScroll.equipmentDef);
             }
         }
 
