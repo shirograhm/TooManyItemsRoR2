@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> totalPointsCap = new(
             "Item: Golden Horseshoe",
             "Stat Points Cap",
-            20f,
+            18f,
             "Max value of stat points a reroll can have. See following configs for scalings.",
             new List<string>()
             {
@@ -261,8 +261,8 @@ namespace TooManyItems
 
         public static float GetScaledValue(float value, float level, int count)
         {
-            // Level 1 -> 100%, Level 16 -> 200%, Level 31 -> 300%, Level 46 -> 400%
-            float levelScaling = (level + 14) / 15f;
+            // Level 1 -> 100%, Level 13 -> 200%, Level 25 -> 300%, Level 37 -> 400%
+            float levelScaling = (level + 11) / 12f;
             float extraStackScaling = 1 + extraStackMultiplierPercent * count;
 
             return value * levelScaling * extraStackScaling;
