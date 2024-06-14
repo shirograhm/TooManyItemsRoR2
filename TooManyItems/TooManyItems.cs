@@ -111,9 +111,10 @@ namespace TooManyItems
                 SpiritStone.Init();
             if (LunarRevive.isEnabled.Value)
             {
-                LunarRevive.Init();
-                LunarReviveConsumed.Init();
+                // Must be in order Debris -> LunarReviveConsumed -> LunarRevive
                 Debris.Init();
+                LunarReviveConsumed.Init();
+                LunarRevive.Init();
             }
 
             // Void

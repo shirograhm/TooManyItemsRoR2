@@ -394,16 +394,20 @@ namespace TooManyItems
                 }
 
                 // Lunar Revive Consumed
-                if (LunarReviveConsumed.isEnabled.Value)
+                if (LunarRevive.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Max Health Sacrificed: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.descriptions.Add("Items Lost Per Stage: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Death);
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetExponentialStacking(LunarReviveConsumed.maxHealthLostPercent, itemCount)
+                            Utils.GetExponentialStacking(LunarReviveConsumed.maxHealthLostPercent, itemCount),
+                            LunarReviveConsumed.itemsLostPerStage * itemCount
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)LunarReviveConsumed.itemDef.itemIndex, stats);

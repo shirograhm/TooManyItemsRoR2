@@ -3,7 +3,7 @@
     "VANITY": "Корона Нарцисса",
     "EQUIPMENT_VANITY_NAME": "Корона Нарцисса",
     "EQUIPMENT_VANITY_PICKUP": "style=cDeath>После убийства врага даёт один заряд негативного эффекта</style>. Активируйте предмет, чтобы нанести урон, зависящий от количество набранных зарядов.",
-    "EQUIPMENT_VANITY_DESC": "За убийство врагов накапливает заряды <style=cWorldEvent>Высокомерия</style>. <style=cDeath>Каждый заряд Высокомерия уменьшает <style=cIsDamage>БАЗОВЫЙ урон</style> на <style=cIsUtility>{Base Damage Lost}%</style></style>. Активируйте данный предмет, чтобы убрать с себя всё <style=cWorldEvent>Высокомерие</style> и нанести выбранному противнику <style=cIsDamage>{Damage Dealt}% БАЗОВОГО урона</style> за каждый заряд негативного эффекта.",
+    "EQUIPMENT_VANITY_DESC": "За убийство врагов накапливает заряды <style=cWorldEvent>Высокомерия</style>. <style=cDeath>Каждый заряд Высокомерия уменьшает <style=cIsDamage>БАЗОВЫЙ урон</style> на <style=cIsDamage>{Base Damage Lost}%</style></style>. Активируйте данный предмет, чтобы убрать с себя всё <style=cWorldEvent>Высокомерие</style> и нанести выбранному противнику <style=cIsDamage>{Damage Dealt}% БАЗОВОГО урона</style> за каждый заряд негативного эффекта.",
     "EQUIPMENT_VANITY_LORE": "",
     "CHALICE": "Потир",
     "EQUIPMENT_CHALICE_NAME": "Потир",
