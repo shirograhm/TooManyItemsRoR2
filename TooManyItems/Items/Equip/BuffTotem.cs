@@ -121,7 +121,7 @@ namespace TooManyItems
             equipmentDef.name = "BUFFTOTEM";
             equipmentDef.AutoPopulateTokens();
 
-            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BuffTotem.png");
+            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HealTotem.png");
             equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BuffTotem.prefab");
 
             equipmentDef.appearsInMultiPlayer = true;
