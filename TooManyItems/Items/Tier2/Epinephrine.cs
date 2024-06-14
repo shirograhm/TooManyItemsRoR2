@@ -105,10 +105,8 @@ namespace TooManyItems
 
             GenericGameEvents.OnTakeDamage += (damageReport) =>
             {
-                if (damageReport.victimBody == null) return;
-
                 CharacterBody vicBody = damageReport.victimBody;
-                if (vicBody.inventory)
+                if (vicBody && vicBody.inventory)
                 {
                     int count = vicBody.inventory.GetItemCount(itemDef);
                     if (count > 0)

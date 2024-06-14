@@ -97,13 +97,13 @@ namespace TooManyItems
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
-                if (vicBody.isElite)
+                if (vicBody && vicBody.isElite)
                 {
                     atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
-                    if (atkBody && atkBody.inventory)
+                    if (atkBody && atkMaster && atkBody.inventory)
                     {
                         int count = atkBody.inventory.GetItemCount(itemDef);
-                        if (atkMaster && vicBody && count > 0)
+                        if (count > 0)
                         {
                             float bonusXP = vicBody.healthComponent.fullCombinedHealth * CalculateExperienceMultiplier(count);
 
