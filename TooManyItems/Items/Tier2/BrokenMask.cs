@@ -135,21 +135,19 @@ namespace TooManyItems
             if (dotStack.attackerObject)
             {
                 CharacterBody attackerBody = dotStack.attackerObject.GetComponent<CharacterBody>();
-
-                int count = 1;
                 if (attackerBody && attackerBody.inventory)
                 {
-                    count = attackerBody.inventory.GetItemCount(itemDef);
-                }
+                    int count = attackerBody.inventory.GetItemCount(itemDef);
 
-                float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
+                    float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * burnPercentPerTick * count;
+                    dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * burnPercentPerTick * count;
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
-                CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerBody);
-                Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
-                stats.TotalDamageDealt += dotStack.damage;
+                    CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerBody);
+                    Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
+                    stats.TotalDamageDealt += dotStack.damage;
+                }
             }
         }
 
@@ -207,12 +205,9 @@ namespace TooManyItems
 
             GenericGameEvents.OnTakeDamage += (damageReport) =>
             {
-                if (damageReport.attackerBody == null || damageReport.victimBody == null) return;
-
                 CharacterBody vicBody = damageReport.victimBody;
                 CharacterBody atkBody = damageReport.attackerBody;
-
-                if (atkBody.inventory)
+                if (vicBody && atkBody && atkBody.inventory)
                 {
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0 && damageReport.dotType != burnIndex && vicBody != atkBody)

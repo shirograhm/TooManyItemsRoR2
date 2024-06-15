@@ -9,9 +9,6 @@ Generally compatible with most mods. Supports integration with [LookingGlass](ht
 | v0.1.x           | v1.5.0 |
 | v0.2.0 and after | v1.5.1 and after |
 
-## Translations
-If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
-
 ## Issue Reports
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). If possible, provide the output log as it often makes debugging much easier.
 
@@ -58,6 +55,9 @@ The following values are configurable. To do so, run the game once with the mod 
 | ![Crown of Vanity](https://i.imgur.com/3wi2hTjs.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 4%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy. [*40 second cooldown*] |
 | ![Tattered Scroll](https://i.imgur.com/WdsP2xEs.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold. [*100 second cooldown*] |
 | ![Totem of Prayer](https://i.imgur.com/raoYVUls.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. [*55 second cooldown*] |
+
+## Translations
+If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
 
 ### Credits
 - **Programming:** shirograhm  
