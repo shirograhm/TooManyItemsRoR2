@@ -210,6 +210,7 @@ namespace TooManyItems
                 DropItem(SpiritStone.itemDef);
                 DropItem(LunarRevive.itemDef);
 
+                DropItem(Vanity.equipmentDef);
                 DropItem(BuffTotem.equipmentDef);
                 DropItem(Chalice.equipmentDef);
                 DropItem(TatteredScroll.equipmentDef);
