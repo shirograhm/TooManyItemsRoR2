@@ -11,7 +11,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // This item is given after a Lunar Revive. Reduces your max health by 20%. Each stage, lose 2 (+2 per stack) items at random. If you don't have 2 items to lose, die instead. Lose all stacks of this item upon death.
+        // This item is given after a Lunar Revive. Reduces your max health by 20%. Each stage, lose 2 (+2 per stack) items at random. If you don't have 2 items to lose, die instead.
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Sages Curse",
             "Health Lost",
@@ -135,26 +135,6 @@ namespace TooManyItems
                         };
                         effectData.SetNetworkedObjectReference(user.gameObject);
                         EffectManager.SpawnEffect(HealthComponent.AssetReferences.fragileDamageBonusBreakEffectPrefab, effectData, transmit: true);
-                    }
-                }
-            };
-
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
-            {
-                if (!NetworkServer.active) return;
-
-                CharacterMaster master = damageReport.victimMaster;
-                if (master && master.inventory)
-                {
-                    while (master.inventory.GetItemCount(itemDef) > 0)
-                    {
-                        master.inventory.RemoveItem(itemDef);
-                        CharacterMasterNotificationQueue.SendTransformNotification(
-                            master,
-                            itemDef.itemIndex,
-                            ItemIndex.None,
-                            CharacterMasterNotificationQueue.TransformationType.Suppressed
-                        );
                     }
                 }
             };
