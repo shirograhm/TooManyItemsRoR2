@@ -210,7 +210,7 @@ namespace TooManyItems
                 if (vicBody && atkBody && atkBody.inventory)
                 {
                     int count = atkBody.inventory.GetItemCount(itemDef);
-                    if (count > 0 && damageReport.dotType != burnIndex && vicBody != atkBody)
+                    if (count > 0 && damageReport.dotType != burnIndex && vicBody.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                     {
                         InflictDotInfo dotInfo = new()
                         {
