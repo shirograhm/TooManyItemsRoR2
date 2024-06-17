@@ -2,6 +2,7 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -21,8 +22,63 @@ namespace TooManyItems
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
         }
 
+        private class SyncForceRecalculate : INetMessage
+        {
+            NetworkInstanceId netID;
+
+            public SyncForceRecalculate() { }
+            public SyncForceRecalculate(NetworkInstanceId ID)
+            {
+                this.netID = ID;
+            }
+
+            public void Deserialize(NetworkReader reader)
+            {
+                netID = reader.ReadNetworkId();
+            }
+
+            public void OnReceived()
+            {
+                if (NetworkServer.active) return;
+
+                GameObject obj = RoR2.Util.FindNetworkObject(netID);
+                if (obj)
+                {
+                    CharacterBody body = obj.GetComponent<CharacterBody>();
+                    if (body) body.RecalculateStats();
+                }
+            }
+
+            public void Serialize(NetworkWriter writer)
+            {
+                writer.Write(netID);
+            }
+        }
+
+        public static void ForceRecalculate(CharacterBody body)
+        {
+            body.RecalculateStats();
+            if (NetworkServer.active) new SyncForceRecalculate(body.netId);
+        }
+
         public static void SetItemTier(ItemDef itemDef, ItemTier tier)
         {
+            if (tier == ItemTier.NoTier)
+            {
+                try
+                {
+#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+#pragma warning disable CS0618 // Type or member is obsolete
+                    itemDef.deprecatedTier = tier;
+#pragma warning restore CS0618 // Type or member is obsolete
+#pragma warning restore Publicizer001 // Accessing a member that was not originally public
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(String.Format("Error setting deprecatedTier for {0}: {1}", itemDef.name, e));
+                }
+            }
+
             ItemTierCatalog.availability.CallWhenAvailable(() =>
             {
                 if (itemDef) itemDef.tier = tier;
@@ -65,43 +121,9 @@ namespace TooManyItems
             return 1f - 1f / (1f + percent * count);
         }
 
-        public static void ForceRecalculate(CharacterBody body)
+        public static ItemDef GetRandomItemDef()
         {
-            body.RecalculateStats();
-            if (NetworkServer.active) new SyncForceRecalculate(body.netId);
-        }
-
-        private class SyncForceRecalculate : INetMessage
-        {
-            NetworkInstanceId netID;
-
-            public SyncForceRecalculate() { }
-            public SyncForceRecalculate(NetworkInstanceId ID)
-            {
-                this.netID = ID;
-            }
-
-            public void Deserialize(NetworkReader reader)
-            {
-                netID = reader.ReadNetworkId();
-            }
-
-            public void OnReceived()
-            {
-                if (NetworkServer.active) return;
-
-                GameObject obj = RoR2.Util.FindNetworkObject(netID);
-                if (obj)
-                {
-                    CharacterBody body = obj.GetComponent<CharacterBody>();
-                    if (body) body.RecalculateStats();
-                }
-            }
-
-            public void Serialize(NetworkWriter writer)
-            {
-                writer.Write(netID);
-            }
+            return ItemCatalog.allItemDefs[TooManyItems.rand.Next(0, ItemCatalog.allItemDefs.Length)];
         }
     }
 }

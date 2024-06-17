@@ -122,16 +122,6 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
-        //public static ConfigurableValue<float> luckPerPoint = new(
-        //    "Item: Golden Horseshoe",
-        //    "Luck Per Point",
-        //    0.025f,
-        //    "Luck gained per stat point invested.",
-        //    new List<string>()
-        //    {
-        //        "ITEM_HORSESHOE_DESC"
-        //    }
-        //);
         public static ConfigurableValue<float> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
@@ -206,13 +196,10 @@ namespace TooManyItems
             {
                 foreach (NetworkUser user in NetworkUser.readOnlyInstancesList)
                 {
-                    CharacterMaster master = user.masterController.master;
-                    if (master)
+                    CharacterMaster master = user.masterController.master ?? user.master;
+                    if (master && master.inventory && master.inventory.GetItemCount(itemDef) > 0)
                     {
-                        if (master.inventory && master.inventory.GetItemCount(itemDef) > 0)
-                        {
-                            Reroll(master.inventory, master.GetBody());
-                        }
+                        Reroll(master.inventory, master.GetBody());
                     }
                 }
             };
@@ -304,11 +291,11 @@ namespace TooManyItems
                     float randomPoints;
                     float step = 1.8f;
                     if (pointsRemaining > step * 2)
-                        randomPoints = UnityEngine.Random.Range(step, step * 2);
+                        randomPoints = (float)TooManyItems.rand.NextDouble() * step + step;
                     else
                         randomPoints = pointsRemaining;
 
-                    Bonuses chosenStat = (Bonuses)UnityEngine.Random.Range(0, (int)Bonuses.NUM_STATS);
+                    Bonuses chosenStat = (Bonuses) TooManyItems.rand.Next(0, (int)Bonuses.NUM_STATS);
                     switch (chosenStat)
                     {
                         case Bonuses.HEALTH:
