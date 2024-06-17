@@ -65,6 +65,8 @@ namespace TooManyItems
                 RustyTrowel.Init();
 
             // Green Items
+            if (BrassKnuckles.isEnabled.Value)
+                BrassKnuckles.Init();
             if (BrokenMask.isEnabled.Value)
                 BrokenMask.Init();
             if (Epinephrine.isEnabled.Value)
@@ -99,6 +101,8 @@ namespace TooManyItems
                 RedBlueGlasses.Init();
             if (RubberDucky.isEnabled.Value)
                 RubberDucky.Init();
+            if (Thumbtack.isEnabled)
+                Thumbtack.Init();
 
             // Lunar
             if (AncientCoin.isEnabled.Value)

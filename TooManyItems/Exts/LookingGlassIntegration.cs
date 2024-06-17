@@ -82,6 +82,22 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BottleCap.itemDef.itemIndex, stats);
                 }
+                
+                // Brass Knuckles
+                if (BrassKnuckles.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Heavy Hit Bonus: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            BrassKnuckles.heavyHitBonusPercent * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)BrassKnuckles.itemDef.itemIndex, stats);
+                }
 
                 // Bread
                 if (BreadLoaf.isEnabled.Value)
@@ -640,6 +656,22 @@ namespace TooManyItems
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)SpiritStone.itemDef.itemIndex, stats);
+                }
+
+                // Thumbtack
+                if (Thumbtack.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Bonus Damage Ticks: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            Thumbtack.dotTickBonus * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)Thumbtack.itemDef.itemIndex, stats);
                 }
 
                 // Void Heart
