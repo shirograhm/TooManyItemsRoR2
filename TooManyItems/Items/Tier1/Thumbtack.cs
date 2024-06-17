@@ -108,7 +108,7 @@ namespace TooManyItems
                     if (attackerInfo.master && itemCount > 0)
                     {
                         // If successful roll and the hit doesn't already apply bleed
-                        if (Util.CheckRoll(bleedChance.Value, attackerInfo.master.luck, attackerInfo.master) && damageInfo.damageType != DamageType.BleedOnHit)
+                        if (Util.CheckRoll(bleedChance.Value, attackerInfo.master.luck, attackerInfo.master) && damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
                         {
                             InflictDotInfo info = new()
                             {
