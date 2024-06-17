@@ -34,7 +34,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> buffDuration = new(
             "Item: Epinephrine",
             "Buff Duration",
-            1.5f,
+            1f,
             "Duration of attack speed gained after taking damage.",
             new List<string>()
             {
