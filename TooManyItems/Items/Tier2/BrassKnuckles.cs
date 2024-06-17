@@ -86,7 +86,7 @@ namespace TooManyItems
                 if (attackerBody && victimBody && attackerBody)
                 {
                     int itemCount = attackerBody.inventory.GetItemCount(itemDef);
-                    if (itemCount > 0 && (attackerBody.damage * heavyHitCapPercent) < damageInfo.damage)
+                    if (itemCount > 0 && (attackerBody.damage * heavyHitCapPercent) <= damageInfo.damage)
                     {
                         damageInfo.damage *= 1 + (heavyHitBonusPercent * itemCount);
                         damageInfo.damageType |= DamageType.Stun1s;

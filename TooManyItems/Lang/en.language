@@ -98,7 +98,7 @@
     "BRASSKNUCKLES": "Brass Knuckles",
     "ITEM_BRASSKNUCKLES_NAME": "Brass Knuckles",
     "ITEM_BRASSKNUCKLES_PICKUP": "Heavy hits deal more damage and stun enemies.",
-    "ITEM_BRASSKNUCKLES_DESC": "Hits that deal more than <style=cIsDamage>{Heavy Hit Threshold}% BASE damage</style> are <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus}% per stack)</style> stronger</style> and <style=cIsUtility>stun</style> enemies.",
+    "ITEM_BRASSKNUCKLES_DESC": "Hits that deal at least <style=cIsDamage>{Heavy Hit Threshold}% BASE damage</style> are <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus}% per stack)</style> stronger</style> and <style=cIsUtility>stun</style> enemies.",
     "ITEM_BRASSKNUCKLES_LORE": "",
     "BROKENMASK": "Broken Mask",
     "ITEM_BROKENMASK_NAME": "Broken Mask",
