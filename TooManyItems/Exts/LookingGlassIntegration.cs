@@ -409,6 +409,22 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)IronHeart.itemDef.itemIndex, stats);
                 }
 
+                // Lunar Revive
+                if (LunarRevive.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Revives: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)LunarRevive.itemDef.itemIndex, stats);
+                }
+
                 // Lunar Revive Consumed
                 if (LunarRevive.isEnabled.Value)
                 {
