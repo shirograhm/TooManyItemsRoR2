@@ -132,7 +132,7 @@
     "ITEM_HOLYWATER_LORE": "",
     "HOODIE": "Fleece Hoodie",
     "ITEM_HOODIE_NAME": "Fleece Hoodie",
-    "ITEM_HOODIE_PICKUP": "The next buff received lasts longer. Recharges over time.",
+    "ITEM_HOODIE_PICKUP": "The next buff received lasts longer. <style=cIsUtility>Recharges over time</style>.",
     "ITEM_HOODIE_DESC": "The next timed buff received has its duration increased by <style=cIsUtility>{Duration Increase}%</style> <style=cStack>(+{Duration Increase}% per stack)</style>. Recharges every <style=cIsUtility>{Recharge Time} <style=cStack>(-{Recharge Time Reduction}% per stack)</style> seconds</style>.",
     "ITEM_HOODIE_LORE": "",
     "MAGNIFYINGGLASS": "Magnifying Glass",
