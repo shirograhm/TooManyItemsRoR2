@@ -83,7 +83,7 @@ namespace TooManyItems
             {
                 CharacterBody attackerBody = attackerInfo.body;
                 CharacterBody victimBody = victimInfo.body;
-                if (attackerBody && victimBody && attackerBody)
+                if (attackerBody && victimBody && attackerBody.inventory)
                 {
                     int itemCount = attackerBody.inventory.GetItemCount(itemDef);
                     if (itemCount > 0 && (attackerBody.damage * heavyHitCapPercent) <= damageInfo.damage)
