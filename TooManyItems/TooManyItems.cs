@@ -232,7 +232,7 @@ namespace TooManyItems
 
         private void DropItem(EquipmentDef def)
         {
-            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+            Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
             Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
@@ -240,7 +240,7 @@ namespace TooManyItems
 
         private void DropItem(MiscPickupDef def)
         {
-            var transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+            Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
 
             Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
             PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);
