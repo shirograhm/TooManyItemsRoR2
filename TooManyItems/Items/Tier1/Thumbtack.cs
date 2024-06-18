@@ -36,7 +36,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> bleedDamage = new(
             "Item: Thumbtack",
             "Bleed Damage",
-            120f,
+            240f,
             "Bleed damage for this item.",
             new List<string>()
             {
@@ -107,18 +107,21 @@ namespace TooManyItems
                     int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
                     if (attackerInfo.master && itemCount > 0)
                     {
-                        // If successful roll and the hit doesn't already apply bleed
-                        if (Util.CheckRoll(bleedChance.Value, attackerInfo.master.luck, attackerInfo.master) && damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
+                        // If the hit has a proc coefficient, doesn't already apply bleed, and isn't applied to a member of the same team, roll for bleed
+                        if (damageInfo.procCoefficient > 0 && damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
                         {
-                            InflictDotInfo info = new()
+                            if (Util.CheckRoll(bleedChance.Value, attackerInfo.master.luck, attackerInfo.master))
                             {
-                                victimObject = victimInfo.gameObject,
-                                attackerObject = attackerInfo.gameObject,
-                                damageMultiplier = bleedDamagePercent,
-                                dotIndex = DotController.DotIndex.Bleed,
-                                duration = bleedDuration.Value * damageInfo.procCoefficient
-                            };
-                            DotController.InflictDot(ref info);
+                                InflictDotInfo info = new()
+                                {
+                                    victimObject = victimInfo.gameObject,
+                                    attackerObject = attackerInfo.gameObject,
+                                    damageMultiplier = bleedDamagePercent,
+                                    dotIndex = DotController.DotIndex.Bleed,
+                                    duration = bleedDuration.Value * damageInfo.procCoefficient
+                                };
+                                DotController.InflictDot(ref info);
+                            }
                         }
                     }
                 }
