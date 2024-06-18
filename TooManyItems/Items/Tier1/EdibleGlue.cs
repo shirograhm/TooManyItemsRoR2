@@ -89,7 +89,7 @@ namespace TooManyItems
                         HurtBox[] hurtboxes = new SphereSearch
                         {
                             mask = LayerIndex.entityPrecise.mask,
-                            origin = atkBody.footPosition,
+                            origin = atkBody.corePosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
                             radius = slowRadiusPerStack.Value * count
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
