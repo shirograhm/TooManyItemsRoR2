@@ -55,15 +55,15 @@ The following values are configurable. To do so, run the game once with the mod 
 ### Equipment
 | | | |
 |-|-|-|
-
-## Translations
-If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
 | ![Chalice](https://i.imgur.com/klcM2TFt.png) | **Chalice** | On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. [*70 second cooldown*] |
 | ![Crown of Vanity](https://i.imgur.com/YIl5v00t.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 3%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy. [*30 second cooldown*] |
 | ![Tattered Scroll](https://i.imgur.com/ZRQUBHmt.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold. [*100 second cooldown*] |
 | ![Totem of Prayer](https://i.imgur.com/Fii53bpt.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. [*55 second cooldown*] |
 
-### Credits
+## Translations
+If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
+
+## Credits
 - **Programming:** shirograhm  
 - **Translations:** MushroomEl (github), JustBro (discord)  
   
