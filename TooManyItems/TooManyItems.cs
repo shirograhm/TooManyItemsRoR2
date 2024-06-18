@@ -113,13 +113,11 @@ namespace TooManyItems
                 Crucifix.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
+            // Must be in order LunarReviveConsumed -> LunarRevive
             if (LunarRevive.isEnabled.Value)
-            {
-                // Must be in order Debris -> LunarReviveConsumed -> LunarRevive
-                Debris.Init();
                 LunarReviveConsumed.Init();
+            if (LunarRevive.isEnabled.Value)
                 LunarRevive.Init();
-            }
 
             // Void
             if (ShadowCrest.isEnabled.Value)
