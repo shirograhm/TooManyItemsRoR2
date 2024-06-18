@@ -38,7 +38,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> heavyHitBonus = new(
             "Item: Brass Knuckles",
             "Heavy Hit Bonus",
-            20f,
+            40f,
             "Bonus percent damage dealt by heavy hits for each stack of this item.",
             new List<string>()
             {

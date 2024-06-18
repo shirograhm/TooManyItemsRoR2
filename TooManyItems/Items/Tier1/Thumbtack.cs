@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Your damage over time effects last longer.
+        // Your bleed effects last longer.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Thumbtack",
             "Enabled",
