@@ -22,7 +22,7 @@ The following values are configurable. To do so, run the game once with the mod 
 | ![Carving Blade](https://i.imgur.com/z29LUT2t.png) | **Carving Blade** | Deal 1% (+1% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike. |
 | ![Crucifix](https://i.imgur.com/6JnhLFbt.png) | **Crucifix** | Reduce damage taken by 40%. Taking damage sets you on fire for 5% max health over 3 (+3 per stack) seconds. |
 | ![Sage's Blessing](https://i.imgur.com/cdoAzIat.png) | **Sage's Blessing** | Upon death, this item will be consumed and you will return to life with 3 seconds of invulnerability. After revive, receive Sage's Curse. |
-| ![Sage's Curse](https://i.imgur.com/BIIgok1t.png) | **Sage's Curse** | Lose 8% (+8% per stack) max health, exponentially. Your stacks are doubled upon entering a new stage. |
+| ![Sage's Curse](https://i.imgur.com/BIIgok1t.png) | **Sage's Curse** | Lose 8% (+8% per stack) max health, exponentially. This item's stacks are doubled upon entering a new stage. |
 | ![Spirit Stone](https://i.imgur.com/2PhhDygt.png) | **Spirit Stone** | On-kill, gain 1 (+1 per stack) permanent shield. Lose 30% (+30% per stack) max HP. |
 | ![Shadow Crest](https://i.imgur.com/RYlNwqAt.png) | **Shadow Crest** | Regenerate 1% (+1% per stack) of your missing health every second. |
 | ![Defiled Heart](https://i.imgur.com/H8JadY0t.png) | **Defiled Heart** | Gain 350 HP. Also, gain 1% (+1% per stack) of your max health as bonus BASE damage. |
