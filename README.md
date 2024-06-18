@@ -1,5 +1,5 @@
 # TooManyItems
-Adds 33 new items to Risk of Rain 2!  
+Adds 36 new items to Risk of Rain 2!  
 ![picture of items](https://i.imgur.com/nDgkbc8l.png)
 
 ## Mod Compatibility
