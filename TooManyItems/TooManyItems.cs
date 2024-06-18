@@ -223,7 +223,7 @@ namespace TooManyItems
         {
             foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
             {
-                var transform = controller.master.GetBodyObject().transform;
+                Transform transform = controller.master.GetBodyObject().transform;
 
                 Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
                 PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
