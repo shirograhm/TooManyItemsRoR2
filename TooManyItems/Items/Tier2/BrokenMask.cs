@@ -42,7 +42,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
-            5,
+            2,
             "Total duration of the burn in seconds.",
             new List<string>()
             {
@@ -187,10 +187,11 @@ namespace TooManyItems
         {
             burnDotDef = new DotController.DotDef
             {
+                damageCoefficient = 0f,
                 damageColorIndex = maskDamageColor,
                 associatedBuff = burnDebuff,
                 terminalTimedBuff = null,
-                terminalTimedBuffDuration = 0,
+                terminalTimedBuffDuration = 0f,
                 resetTimerOnAdd = true,
                 interval = burnTickInterval
             };
@@ -220,7 +221,7 @@ namespace TooManyItems
                             dotIndex = burnIndex,
                             duration = burnDuration.Value,
                             maxStacksFromAttacker = 1,
-                            damageMultiplier = 1f
+                            damageMultiplier = 0f
                         };
                         DotController.InflictDot(ref dotInfo);
                     }
