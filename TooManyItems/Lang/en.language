@@ -103,7 +103,7 @@
     "THUMBTACK": "Thumbtack",
     "ITEM_THUMBTACK_NAME": "Thumbtack",
     "ITEM_THUMBTACK_PICKUP": "Your <style=cIsDamage>bleed<style> effects last longer.",
-    "ITEM_THUMBTACK_DESC": "Gain <style=cIsDamage>{Bleed Chance}%</style> to <style=cIsDamage>bleed</style> enemies on-hit for <style=cIsDamage>{Bleed Damage}% BASE damage</style> over <style=cIsUtility>{Bleed Duration} seconds</style>. Your <style=cIsDamage>bleed</style> effects tick an additional <style=cIsUtility>{DOT Tick Bonus} <style=cStack>(+{DOT Tick Bonus} per stack)</style> times</style>.",
+    "ITEM_THUMBTACK_DESC": "Gain <style=cIsDamage>{Bleed Chance}%</style> to <style=cIsDamage>bleed</style> enemies on-hit for <style=cIsDamage>{Bleed Damage}% BASE damage</style> over <style=cIsUtility>{Bleed Duration} seconds</style>. Your <style=cIsDamage>bleed</style> effects last an additional <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration} per stack)</style> seconds</style>.",
     "ITEM_THUMBTACK_LORE": "",
     "BRASSKNUCKLES": "Brass Knuckles",
     "ITEM_BRASSKNUCKLES_NAME": "Brass Knuckles",
