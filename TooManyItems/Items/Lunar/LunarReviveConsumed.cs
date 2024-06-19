@@ -2,9 +2,7 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -12,11 +10,11 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // This item is given after a Lunar Revive. Lose 8% (+8% per stack) max health, exponentially. Double your stacks upon entering a new stage.
+        // This item is given after a Lunar Revive. Lose 10% (+10% per stack) max health. Gain a stack of this item upon entering a new stage.
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Sages Curse",
             "Health Lost",
-            8f,
+            10f,
             "Percent max health lost per stack.",
             new List<string>()
             {
@@ -58,7 +56,7 @@ namespace TooManyItems
                     int itemCount = sender.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
+                        args.healthMultAdd -= maxHealthLostPercent * itemCount;
                     }
                 }
             };
@@ -71,7 +69,7 @@ namespace TooManyItems
                     int itemCount = self.body.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
+                        values.curseFraction += (1f - values.curseFraction) * maxHealthLostPercent * itemCount;
                         values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
                         values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
                     }

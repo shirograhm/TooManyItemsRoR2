@@ -446,13 +446,13 @@ namespace TooManyItems
                 if (LunarRevive.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Max Health Lost: ");
+                    stats.descriptions.Add("Health Penalty: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetExponentialStacking(LunarReviveConsumed.maxHealthLostPercent, itemCount)
+                            LunarReviveConsumed.maxHealthLostPercent * itemCount
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)LunarReviveConsumed.itemDef.itemIndex, stats);
@@ -692,7 +692,7 @@ namespace TooManyItems
                     stats.descriptions.Add("Permanent Shield: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
-                    stats.descriptions.Add("Max Health Lost: ");
+                    stats.descriptions.Add("Health Penalty: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth); 
                     stats.calculateValues = (master, itemCount) =>
@@ -711,7 +711,7 @@ namespace TooManyItems
                         {
                             values.Add(0f);
                         }
-                        values.Add(Utils.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount));
+                        values.Add(SpiritStone.maxHealthLostPercent * itemCount);
 
                         return values;
                     };
