@@ -37,7 +37,7 @@ namespace TooManyItems
             "Item: Thumbtack",
             "Bleed Damage",
             240f,
-            "Bleed damage for this item.",
+            "Base damage dealt as bleed for this item.",
             new List<string>()
             {
                 "ITEM_THUMBTACK_DESC"
@@ -56,11 +56,11 @@ namespace TooManyItems
             }
         );
 
-        public static ConfigurableValue<float> dotTickBonus = new(
+        public static ConfigurableValue<float> bleedDurationBonus = new(
             "Item: Thumbtack",
-            "DOT Tick Bonus",
-            1f,
-            "Number of additional times your DOT effects tick for each stack of this item.",
+            "Bonus Bleed Duration",
+            0.25f,
+            "How much longer your bleed effects last for each stack of this item.",
             new List<string>()
             {
                 "ITEM_THUMBTACK_DESC"
@@ -140,10 +140,12 @@ namespace TooManyItems
                 int itemCount = atkBody.inventory.GetItemCount(itemDef);
                 if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
                 {
-                    float tickRate = 4.0f;
-                    float damageMultPerTick = info.damageMultiplier / (info.duration * tickRate);
-                    info.damageMultiplier += damageMultPerTick * itemCount * dotTickBonus.Value;
-                    info.duration += (itemCount * dotTickBonus.Value) / tickRate;
+                    float bleedTickRate = 4.0f;
+                    float extraTicks = bleedDurationBonus.Value * itemCount * bleedTickRate;
+
+                    float damageMultPerTick = info.damageMultiplier / (info.duration * bleedTickRate);
+                    info.damageMultiplier += damageMultPerTick * extraTicks;
+                    info.duration += bleedDurationBonus.Value * itemCount;
                 }
             }
 
