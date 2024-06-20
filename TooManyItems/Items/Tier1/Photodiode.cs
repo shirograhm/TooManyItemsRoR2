@@ -78,8 +78,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Photodiode.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Photodiode.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Photodiode.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Photodiode.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -94,7 +94,7 @@ namespace TooManyItems
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             attackSpeedBuff.name = "Voltage";
-            attackSpeedBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Voltage.png");
+            attackSpeedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Voltage.png");
             attackSpeedBuff.canStack = true;
             attackSpeedBuff.isHidden = false;
             attackSpeedBuff.isDebuff = false;

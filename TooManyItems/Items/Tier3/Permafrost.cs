@@ -67,8 +67,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Permafrost.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Permafrost.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Permafrost.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Permafrost.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

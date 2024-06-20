@@ -160,8 +160,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BrokenMask.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BrokenMask.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrokenMask.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("BrokenMask.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -176,7 +176,7 @@ namespace TooManyItems
             burnDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             burnDebuff.name = "Torment";
-            burnDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("MaskDebuff.png");
+            burnDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MaskDebuff.png");
             burnDebuff.canStack = false;
             burnDebuff.isHidden = false;
             burnDebuff.isDebuff = true;

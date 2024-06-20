@@ -55,8 +55,8 @@ namespace TooManyItems
             
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Abacus.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Abacus.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Abacus.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Abacus.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -73,7 +73,7 @@ namespace TooManyItems
             countedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             countedBuff.name = "Counted";
-            countedBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Counted.png");
+            countedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Counted.png");
             countedBuff.canStack = true;
             countedBuff.isHidden = false;
             countedBuff.isDebuff = false;

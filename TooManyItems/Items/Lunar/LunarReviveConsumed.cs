@@ -42,7 +42,7 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.NoTier);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("LunarReviveConsumed.png");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("LunarReviveConsumed.png");
             itemDef.canRemove = false;
             itemDef.hidden = false;
         }

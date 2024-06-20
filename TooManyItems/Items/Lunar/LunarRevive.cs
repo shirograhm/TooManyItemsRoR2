@@ -42,8 +42,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("LunarRevive.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("LunarRevive.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("LunarRevive.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("LunarRevive.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -64,11 +64,7 @@ namespace TooManyItems
                         master.inventory.GiveItem(LunarReviveConsumed.itemDef);
 
                         CharacterMasterNotificationQueue.SendTransformNotification(
-                            master,
-                            itemDef.itemIndex,
-                            LunarReviveConsumed.itemDef.itemIndex,
-                            CharacterMasterNotificationQueue.TransformationType.Default
-                        );
+                            master, itemDef.itemIndex, LunarReviveConsumed.itemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
 
                         master.Respawn(master.GetBody().footPosition, Quaternion.identity);
                     }

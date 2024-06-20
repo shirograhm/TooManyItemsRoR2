@@ -77,8 +77,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HolyWater.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("HolyWater.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HolyWater.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("HolyWater.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

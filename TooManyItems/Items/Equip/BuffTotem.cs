@@ -121,8 +121,8 @@ namespace TooManyItems
             equipmentDef.name = "BUFFTOTEM";
             equipmentDef.AutoPopulateTokens();
 
-            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("HealTotem.png");
-            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BuffTotem.prefab");
+            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HealTotem.png");
+            equipmentDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("BuffTotem.prefab");
 
             equipmentDef.appearsInMultiPlayer = true;
             equipmentDef.appearsInSinglePlayer = true;
@@ -137,7 +137,7 @@ namespace TooManyItems
         {
             armorBuff = ScriptableObject.CreateInstance<BuffDef>();
             armorBuff.name = "Prayer of Defense";
-            armorBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("DefensePrayer.png");
+            armorBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DefensePrayer.png");
             armorBuff.canStack = false;
             armorBuff.isHidden = false;
             armorBuff.isDebuff = false;
@@ -145,7 +145,7 @@ namespace TooManyItems
 
             damageBuff = ScriptableObject.CreateInstance<BuffDef>();
             damageBuff.name = "Prayer of Power";
-            damageBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("DamagePrayer.png");
+            damageBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DamagePrayer.png");
             damageBuff.canStack = false;
             damageBuff.isHidden = false;
             damageBuff.isDebuff = false;
@@ -153,7 +153,7 @@ namespace TooManyItems
 
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
             attackSpeedBuff.name = "Prayer of Cadence";
-            attackSpeedBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("CadencePrayer.png");
+            attackSpeedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("CadencePrayer.png");
             attackSpeedBuff.canStack = false;
             attackSpeedBuff.isHidden = false;
             attackSpeedBuff.isDebuff = false;
@@ -161,7 +161,7 @@ namespace TooManyItems
 
             healthRegenBuff = ScriptableObject.CreateInstance<BuffDef>();
             healthRegenBuff.name = "Prayer of Remedy";
-            healthRegenBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("RemedyPrayer.png");
+            healthRegenBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RemedyPrayer.png");
             healthRegenBuff.canStack = false;
             healthRegenBuff.isHidden = false;
             healthRegenBuff.isDebuff = false;

@@ -94,8 +94,8 @@ namespace TooManyItems
             equipmentDef.name = "CHALICE";
             equipmentDef.AutoPopulateTokens();
 
-            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Chalice.png");
-            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Chalice.prefab");
+            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Chalice.png");
+            equipmentDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Chalice.prefab");
 
             equipmentDef.isLunar = true;
             equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
@@ -114,7 +114,7 @@ namespace TooManyItems
             consecratedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             consecratedBuff.name = "Consecrated";
-            consecratedBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("ConsecratedBuff.png");
+            consecratedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("ConsecratedBuff.png");
             consecratedBuff.canStack = false;
             consecratedBuff.isHidden = false;
             consecratedBuff.isDebuff = false;
