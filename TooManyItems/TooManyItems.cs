@@ -40,7 +40,7 @@ namespace TooManyItems
             voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
 
             Log.Init(Logger);
-            Assets.Init();
+            AssetHandler.Init();
             GenericGameEvents.Init();
             ConfigOptions.Init();
             DamageColorAPI.Init();
