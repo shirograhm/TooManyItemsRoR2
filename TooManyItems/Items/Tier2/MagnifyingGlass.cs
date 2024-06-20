@@ -123,7 +123,7 @@ namespace TooManyItems
                     int count = atkBody.inventory.GetItemCount(itemDef);
                     if (count > 0 && damageReport.damageInfo.crit)
                     {
-                        if (Util.CheckRoll(analyzeChance.Value * count, atkMaster.luck, atkMaster))
+                        if (Util.CheckRoll(analyzeChance.Value * count * damageReport.damageInfo.procCoefficient, atkMaster.luck, atkMaster))
                         {
                             vicBody.AddBuff(analyzedDebuff);
                         }

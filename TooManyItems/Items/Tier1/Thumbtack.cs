@@ -25,7 +25,7 @@ namespace TooManyItems
             "Item: Thumbtack",
             "Bleed Chance",
             5f,
-            "Chance to bleed with this item.",
+            "Chance to bleed per stack of this item.",
             new List<string>()
             {
                 "ITEM_THUMBTACK_DESC"
@@ -107,10 +107,10 @@ namespace TooManyItems
                     int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
                     if (attackerInfo.master && itemCount > 0)
                     {
-                        // If the hit has a proc coefficient, doesn't already apply bleed, and isn't applied to a member of the same team, roll for bleed
-                        if (damageInfo.procCoefficient > 0 && damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
+                        // If the hit doesn't already apply bleed, and isn't applied to a member of the same team, roll for bleed
+                        if (damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
                         {
-                            if (Util.CheckRoll(bleedChance.Value, attackerInfo.master.luck, attackerInfo.master))
+                            if (Util.CheckRoll(bleedChance.Value * itemCount * damageInfo.procCoefficient, attackerInfo.master.luck, attackerInfo.master))
                             {
                                 InflictDotInfo info = new()
                                 {
@@ -118,7 +118,7 @@ namespace TooManyItems
                                     attackerObject = attackerInfo.gameObject,
                                     damageMultiplier = bleedDamagePercent,
                                     dotIndex = DotController.DotIndex.Bleed,
-                                    duration = bleedDuration.Value * damageInfo.procCoefficient
+                                    duration = bleedDuration.Value
                                 };
                                 DotController.InflictDot(ref info);
                             }

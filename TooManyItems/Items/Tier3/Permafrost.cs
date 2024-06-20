@@ -90,7 +90,7 @@ namespace TooManyItems
                     int count = attackerBody.inventory.GetItemCount(itemDef);
                     if (count > 0 && attackerBody.master)
                     {
-                        if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f, attackerBody.master.luck, attackerBody.master))
+                        if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
                         {
                             damageInfo.damageType |= DamageType.Freeze2s;
                         }
