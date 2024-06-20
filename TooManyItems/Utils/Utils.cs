@@ -3,6 +3,7 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -121,9 +122,53 @@ namespace TooManyItems
             return 1f - 1f / (1f + percent * count);
         }
 
-        public static ItemDef GetRandomItemDef()
+        public static ItemTier? GetLowestAvailableItemTier(Inventory inventory)
         {
-            return ItemCatalog.allItemDefs[TooManyItems.rand.Next(0, ItemCatalog.allItemDefs.Length)];
+            if (inventory.GetTotalItemCountOfTier(ItemTier.Tier1) > 0)
+            {
+                return ItemTier.Tier1;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidTier1) > 0)
+            {
+                return ItemTier.VoidTier1;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.Tier2) > 0)
+            {
+                return ItemTier.Tier2;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidTier2) > 0)
+            {
+                return ItemTier.VoidTier2;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.Tier3) > 0)
+            {
+                return ItemTier.Tier3;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidTier3) > 0)
+            {
+                return ItemTier.VoidTier3;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.Boss) > 0)
+            {
+                return ItemTier.Boss;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidBoss) > 0)
+            {
+                return ItemTier.VoidBoss;
+            }
+            else if (inventory.GetTotalItemCountOfTier(ItemTier.Lunar) > 0)
+            {
+                return ItemTier.Lunar;
+            }
+            
+            return null;
+        }
+
+        public static ItemDef GetRandomItemOfTier(ItemTier tier)
+        {
+            ItemDef[] tierItems = ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == tier).ToArray();
+
+            return tierItems[TooManyItems.rand.Next(0, tierItems.Length)];
         }
     }
 }

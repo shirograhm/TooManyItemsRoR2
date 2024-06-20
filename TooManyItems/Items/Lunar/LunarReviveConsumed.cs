@@ -2,7 +2,9 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -10,18 +12,17 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // This item is given after a Lunar Revive. Lose 10% (+10% per stack) max health. Gain a stack of this item upon entering a new stage.
-        public static ConfigurableValue<float> maxHealthLost = new(
+        // This item is given after a Lunar Revive. Randomly deletes 2 (+2 per stack) items upon entering a new stage, prioritizing lower tiered items. If you don't have items to lose, cleanse all stacks of this item and die instead.
+        public static ConfigurableValue<int> itemsLostPerStage = new(
             "Item: Sages Curse",
-            "Health Lost",
-            10f,
-            "Percent max health lost per stack.",
+            "Items Lost",
+            2,
+            "Items lost per stack of this item upon entering a new stage.",
             new List<string>()
             {
                 "ITEM_LUNARREVIVECONSUMED_DESC"
             }
         );
-        public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
 
         internal static void Init()
         {
@@ -47,42 +48,47 @@ namespace TooManyItems
             itemDef.hidden = false;
         }
 
+        private static async Task RunLunarReviveCurseAsync(CharacterMaster master, int itemCount)
+        {
+            await Task.Delay(1500);
+
+            int itemsToLose = itemsLostPerStage * itemCount;
+            while (itemsToLose > 0)
+            {
+                ItemTier? tierToLose = Utils.GetLowestAvailableItemTier(master.inventory);
+                if (tierToLose != null)
+                {
+                    ItemDef defToLose = Utils.GetRandomItemOfTier((ItemTier)tierToLose);
+                    if (master.inventory.GetItemCount(defToLose) > 0)
+                    {
+                        await Task.Delay(500);
+                        ScrapperController.CreateItemTakenOrb(master.GetBody().corePosition, master.GetBody().gameObject, defToLose.itemIndex);
+                        master.inventory.RemoveItem(defToLose);
+
+                        CharacterMasterNotificationQueue.SendTransformNotification(
+                            master, defToLose.itemIndex, itemDef.itemIndex, CharacterMasterNotificationQueue.TransformationType.Default);
+
+                        itemsToLose -= 1;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (itemsToLose > 0)
+            {
+                AkSoundEngine.PostEvent(AssetHandler.LUNAR_REVIVE_TICKING_ID, master.GetBody().gameObject);
+                await Task.Delay(2000);
+                master.GetBody().healthComponent.Suicide();
+            }
+        }
+
         public static void Hooks()
         {
-            RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
-            {
-                if (sender && sender.inventory)
-                {
-                    int itemCount = sender.inventory.GetItemCount(itemDef);
-                    if (itemCount > 0)
-                    {
-                        args.healthMultAdd -= maxHealthLostPercent * itemCount;
-                    }
-                }
-            };
-
-            On.RoR2.HealthComponent.GetHealthBarValues += (orig, self) =>
-            {
-                HealthComponent.HealthBarValues values = orig(self);
-                if (self.body && self.body.inventory)
-                {
-                    int itemCount = self.body.inventory.GetItemCount(itemDef);
-                    if (itemCount > 0)
-                    {
-                        values.curseFraction += (1f - values.curseFraction) * maxHealthLostPercent * itemCount;
-                        values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
-                        values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
-                    }
-                }
-                return values;
-            };
-
             Stage.onStageStartGlobal += (stage) =>
             {
-                // Exit if stage is bazaar
-                if (stage.sceneDef == SceneCatalog.GetSceneDefFromSceneName("bazaar"))
-                    return;
-               
                 foreach (NetworkUser user in NetworkUser.readOnlyInstancesList)
                 {
                     CharacterMaster master = user.masterController.master ?? user.master;
@@ -91,7 +97,8 @@ namespace TooManyItems
                         int itemCount = master.inventory.GetItemCount(itemDef);
                         if (itemCount > 0)
                         {
-                            master.inventory.GiveItem(itemDef, itemCount);
+                            // Run this method async for all players with the revive item.
+                            RunLunarReviveCurseAsync(master, itemCount);
                         }
                     }
                 }

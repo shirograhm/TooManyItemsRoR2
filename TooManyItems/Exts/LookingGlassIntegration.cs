@@ -446,13 +446,13 @@ namespace TooManyItems
                 if (LunarRevive.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Health Penalty: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
+                    stats.descriptions.Add("Items Lost: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            LunarReviveConsumed.maxHealthLostPercent * itemCount
+                            LunarReviveConsumed.itemsLostPerStage * itemCount
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)LunarReviveConsumed.itemDef.itemIndex, stats);

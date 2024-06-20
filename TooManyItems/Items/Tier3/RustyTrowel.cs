@@ -209,6 +209,7 @@ namespace TooManyItems
                     int buffCount = self.GetBuffCount(mulchBuff);
                     if (buffCount > 0)
                     {
+                        AkSoundEngine.PostEvent(AssetHandler.TROWEL_CONSUME_ID, self.gameObject);
                         float healing = buffCount * healingPerStack.Value;
                         self.healthComponent.Heal(healing, new ProcChainMask());
 
