@@ -425,40 +425,6 @@ namespace TooManyItems
                 }
 
 
-                // Lunar Revive
-                if (LunarRevive.isEnabled.Value)
-                {
-                    ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Revives: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.calculateValues = (master, itemCount) =>
-                    {
-                        return new List<float> {
-                            itemCount
-                        };
-                    };
-                    ItemDefinitions.allItemDefinitions.Add((int)LunarRevive.itemDef.itemIndex, stats);
-                }
-
-
-                // Lunar Revive Consumed
-                if (LunarRevive.isEnabled.Value)
-                {
-                    ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Items Lost: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
-                    stats.calculateValues = (master, itemCount) =>
-                    {
-                        return new List<float> {
-                            LunarReviveConsumed.itemsLostPerStage * itemCount
-                        };
-                    };
-                    ItemDefinitions.allItemDefinitions.Add((int)LunarReviveConsumed.itemDef.itemIndex, stats);
-                }
-
-
                 // Milk Carton
                 if (MilkCarton.isEnabled.Value)
                 {

@@ -113,12 +113,7 @@ namespace TooManyItems
                 Crucifix.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
-            // Must be in order LunarReviveConsumed -> LunarRevive
-            if (LunarRevive.isEnabled.Value)
-                LunarReviveConsumed.Init();
-            if (LunarRevive.isEnabled.Value)
-                LunarRevive.Init();
-
+            
             // Void
             if (ShadowCrest.isEnabled.Value)
                 ShadowCrest.Init();
@@ -217,12 +212,6 @@ namespace TooManyItems
                 //DropItem(CarvingBlade.itemDef);
                 //DropItem(Crucifix.itemDef);
                 //DropItem(SpiritStone.itemDef);
-                DropItem(LunarRevive.itemDef);
-                DropItem(LunarReviveConsumed.itemDef);
-                DropItem(LunarReviveConsumed.itemDef);
-                DropItem(LunarReviveConsumed.itemDef);
-                DropItem(LunarReviveConsumed.itemDef);
-                DropItem(LunarReviveConsumed.itemDef);
 
                 //DropItem(IronHeartVoid.itemDef);
                 //DropItem(ShadowCrest.itemDef);
