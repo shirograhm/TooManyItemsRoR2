@@ -64,6 +64,9 @@ If you would like to help translate this mod, please reach out to me through DM 
 ## Credits
 - **Programming:** shirograhm  
 - **Assets & Models:** shirograhm  
-- **Translations:** MushroomEl (chinese), JustBro (russian), Yguenko (spanish)  
+- **Translations:**  
+    - JustBro (russian)  
+    - Elchia_Mushroom (chinese)  
+    - Yguenko (spanish)  
   
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
