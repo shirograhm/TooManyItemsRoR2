@@ -206,34 +206,38 @@ namespace TooManyItems
         private static bool OnUse(EquipmentSlot slot)
         {
             CharacterBody body = slot.characterBody;
-
-            Array values = Enum.GetValues(typeof(Result));
-            Result r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
-
-            while (r == lastBuffGiven)
+            if (body)
             {
-                r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
-            }
-            lastBuffGiven = r;
+                Array values = Enum.GetValues(typeof(Result));
+                Result r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
 
-            switch (r)
-            {
-                case Result.ARMOR:
-                    body.AddTimedBuff(armorBuff, buffDuration.Value);
-                    break;
-                case Result.DAMAGE:
-                    body.AddTimedBuff(damageBuff, buffDuration.Value);
-                    break;
-                case Result.ATTACK_SPEED:
-                    body.AddTimedBuff(attackSpeedBuff, buffDuration.Value);
-                    break;
-                case Result.HEALTH_REGEN:
-                    body.AddTimedBuff(healthRegenBuff, buffDuration.Value);
-                    break;
-            }
+                while (r == lastBuffGiven)
+                {
+                    r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
+                }
+                lastBuffGiven = r;
 
-            Utils.ForceRecalculate(body);
-            return true;
+                switch (r)
+                {
+                    case Result.ARMOR:
+                        body.AddTimedBuff(armorBuff, buffDuration.Value);
+                        break;
+                    case Result.DAMAGE:
+                        body.AddTimedBuff(damageBuff, buffDuration.Value);
+                        break;
+                    case Result.ATTACK_SPEED:
+                        body.AddTimedBuff(attackSpeedBuff, buffDuration.Value);
+                        break;
+                    case Result.HEALTH_REGEN:
+                        body.AddTimedBuff(healthRegenBuff, buffDuration.Value);
+                        break;
+                }
+                Utils.ForceRecalculate(body);
+
+                return true;
+
+            }
+            return false;
         }
     }
 }
