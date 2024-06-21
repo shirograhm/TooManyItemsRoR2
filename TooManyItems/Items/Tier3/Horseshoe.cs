@@ -288,11 +288,10 @@ namespace TooManyItems
                 float pointsRemaining = Horseshoe.totalPointsCap.Value;
                 while (pointsRemaining > 0)
                 {
-                    float randomPoints;
                     float step = 1.8f;
-                    if (pointsRemaining > step * 2)
-                        randomPoints = (float)TooManyItems.RandGen.NextDouble() * step + step;
-                    else
+                    float randomPoints = (float)TooManyItems.RandGen.NextDouble() * step + step;
+                    // Fixed issue where this item would sometimes give very small buffs
+                    if (pointsRemaining - randomPoints < step)
                         randomPoints = pointsRemaining;
 
                     Bonuses chosenStat = (Bonuses) TooManyItems.RandGen.Next(0, (int)Bonuses.NUM_STATS);
