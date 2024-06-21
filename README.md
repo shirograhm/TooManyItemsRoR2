@@ -28,7 +28,7 @@ The following values are configurable. To do so, run the game once with the mod 
 | ![Blood Dice](https://i.imgur.com/7nB0tFPt.png) | **Blood Dice** | On-kill, gain 2 to 12 permanent HP, up to a max of 550 (+550 per stack) HP. |
 | ![Glass Marbles](https://i.imgur.com/NzRNge2t.png) | **Glass Marbles** | Gain 2.5 (+2.5 per stack) BASE damage per level. |
 | ![Golden Horseshoe](https://i.imgur.com/XwCuw2Pt.png) | **Golden Horseshoe** | Gain a random assortment of stat bonuses that are rerolled upon entering a new stage. These bonuses scale with level, and each additional stack increases all bonuses by 30%. |
-| ![Iron Heart](https://i.imgur.com/1sirkmit.png)  | **Iron Heart** | Gain 200 HP. Deal 2% (+2% per stack) of your max health as bonus on-hit damage. |
+| ![Iron Heart](https://i.imgur.com/1sirkmit.png)  | **Iron Heart** | Gain 200 HP. Deal 1.5% (+1.5% per stack) of your max health as bonus on-hit damage. |
 | ![Permafrost](https://i.imgur.com/ESn7Gn2t.png) | **Permafrost** | Dealing damage has a 3% (+3% per stack) chance to freeze enemies. You deal 90% (+90% per stack) bonus damage to frozen enemies. |
 | ![Rusty Trowel](https://i.imgur.com/Isa4tqxt.png) | **Rusty Trowel** | On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack. |
 | ![Brass Knuckles](https://i.imgur.com/8ebb6mat.png) | **Brass Knuckles** | Hits that deal at least 400% BASE damage are 40% (+40% per stack) stronger and stun enemies. |
@@ -64,6 +64,6 @@ If you would like to help translate this mod, please reach out to me through DM 
 ## Credits
 - **Programming:** shirograhm  
 - **Assets & Models:** shirograhm  
-- **Translations:** MushroomEl (chinese), JustBro (russian), Cocaso (spanish)  
+- **Translations:** MushroomEl (chinese), JustBro (russian), Yguenko (spanish)  
   
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
