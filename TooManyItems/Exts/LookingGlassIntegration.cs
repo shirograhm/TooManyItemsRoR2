@@ -689,12 +689,16 @@ namespace TooManyItems
                 if (Thumbtack.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Bonus Bleed Duration: ");
+                    stats.descriptions.Add("Bleed Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Bonus Duration: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
+                            Thumbtack.bleedChancePercent * itemCount,
                             Thumbtack.bleedDurationBonus.Value * itemCount
                         };
                     };
