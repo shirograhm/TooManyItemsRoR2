@@ -31,7 +31,7 @@ The following values are configurable. To do so, run the game once with the mod 
 | ![Iron Heart](https://i.imgur.com/1sirkmit.png)  | **Iron Heart** | Gain 200 HP. Deal 1.5% (+1.5% per stack) of your max health as bonus on-hit damage. |
 | ![Permafrost](https://i.imgur.com/ESn7Gn2t.png) | **Permafrost** | Dealing damage has a 3% (+3% per stack) chance to freeze enemies. You deal 90% (+90% per stack) bonus damage to frozen enemies. |
 | ![Rusty Trowel](https://i.imgur.com/Isa4tqxt.png) | **Rusty Trowel** | On-hit, gain 1 (+1 per stack) Mulch. Every 8 (-30% per stack) seconds, consume all stacks and heal for 3 HP per stack. |
-| ![Brass Knuckles](https://i.imgur.com/8ebb6mat.png) | **Brass Knuckles** | Hits that deal at least 400% BASE damage are 40% (+40% per stack) stronger and stun enemies. |
+| ![Brass Knuckles](https://i.imgur.com/8ebb6mat.png) | **Brass Knuckles** | Hits that deal at least 400% BASE damage are 25% (+25% per stack) stronger and stun enemies. |
 | ![Broken Mask](https://i.imgur.com/hRzczm5t.png) | **Broken Mask** | Dealing damage burns enemies for 2% (+2% per stack) max health over 4 seconds. Does not apply itself. |
 | ![Fleece Hoodie](https://i.imgur.com/0t8q5mqt.png) | **Fleece Hoodie** | The next timed buff received has its duration increased by 40% (+40% per stack). Recharges every 8 (-15% per stack) seconds. |
 | ![Epinephrine](https://i.imgur.com/oem7bxMt.png) | **Epinephrine** | After taking damage, gain 60% attack speed for 1 (+1 per stack) seconds. |
@@ -65,8 +65,8 @@ If you would like to help translate this mod, please reach out to me through DM 
 - **Programming:** shirograhm  
 - **Assets & Models:** shirograhm  
 - **Translations:**  
-    - JustBro (russian)  
-    - Elchia_Mushroom (chinese)  
-    - Yguenko (spanish)  
+    - JustBro (Russian)  
+    - Elchia_Mushroom (Chinese)  
+    - Yguenko (Spanish)  
   
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
