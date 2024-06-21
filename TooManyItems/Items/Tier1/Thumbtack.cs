@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> bleedChance = new(
             "Item: Thumbtack",
             "Bleed Chance",
-            5f,
+            4f,
             "Chance to bleed per stack of this item.",
             new List<string>()
             {

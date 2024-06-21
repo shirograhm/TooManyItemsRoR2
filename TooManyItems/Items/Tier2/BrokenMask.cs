@@ -42,7 +42,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
-            2,
+            4,
             "Total duration of the burn in seconds.",
             new List<string>()
             {
