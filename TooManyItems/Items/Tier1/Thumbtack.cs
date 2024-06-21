@@ -140,11 +140,6 @@ namespace TooManyItems
                 int itemCount = atkBody.inventory.GetItemCount(itemDef);
                 if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
                 {
-                    float bleedTickRate = 4.0f;
-                    float extraTicks = bleedDurationBonus.Value * itemCount * bleedTickRate;
-
-                    float damageMultPerTick = info.damageMultiplier / (info.duration * bleedTickRate);
-                    info.damageMultiplier += damageMultPerTick * extraTicks;
                     info.duration += bleedDurationBonus.Value * itemCount;
                 }
             }
