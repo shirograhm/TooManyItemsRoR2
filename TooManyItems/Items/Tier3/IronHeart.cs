@@ -39,7 +39,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Iron Heart",
             "On-Hit Damage Scaling",
-            2f,
+            1.5f,
             "Percent of maximum health dealt as bonus on-hit damage.",
             new List<string>()
             {
@@ -131,8 +131,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("IronHeart.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("IronHeart.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("IronHeart.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("IronHeart.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -145,7 +145,7 @@ namespace TooManyItems
 
         public static float CalculateDamageOnHit(CharacterBody sender, float itemCount)
         {
-            return sender.healthComponent.fullCombinedHealth * itemCount * multiplierPerStack;
+            return sender.healthComponent.fullHealth * itemCount * multiplierPerStack;
         }
 
         public static void Hooks()

@@ -51,8 +51,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("MilkCarton.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("MilkCarton.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MilkCarton.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("MilkCarton.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

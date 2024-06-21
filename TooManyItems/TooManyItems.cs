@@ -26,7 +26,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.4.3";
+        public const string PluginVersion = "0.4.4";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -40,7 +40,7 @@ namespace TooManyItems
             voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
 
             Log.Init(Logger);
-            Assets.Init();
+            AssetHandler.Init();
             GenericGameEvents.Init();
             ConfigOptions.Init();
             DamageColorAPI.Init();
@@ -65,6 +65,8 @@ namespace TooManyItems
                 RustyTrowel.Init();
 
             // Green Items
+            if (BrassKnuckles.isEnabled.Value)
+                BrassKnuckles.Init();
             if (BrokenMask.isEnabled.Value)
                 BrokenMask.Init();
             if (Epinephrine.isEnabled.Value)
@@ -99,6 +101,8 @@ namespace TooManyItems
                 RedBlueGlasses.Init();
             if (RubberDucky.isEnabled.Value)
                 RubberDucky.Init();
+            if (Thumbtack.isEnabled)
+                Thumbtack.Init();
 
             // Lunar
             if (AncientCoin.isEnabled.Value)
@@ -109,7 +113,7 @@ namespace TooManyItems
                 Crucifix.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
-
+            
             // Void
             if (ShadowCrest.isEnabled.Value)
                 ShadowCrest.Init();
@@ -117,14 +121,14 @@ namespace TooManyItems
                 IronHeartVoid.Init();
 
             // Equipment
-            if (Vanity.isEnabled.Value)
-                Vanity.Init();
             if (BuffTotem.isEnabled.Value)
                 BuffTotem.Init();
-            if (Chalice.isEnabled.Value)
-                Chalice.Init();
             if (TatteredScroll.isEnabled.Value)
                 TatteredScroll.Init();
+            if (Chalice.isEnabled.Value)
+                Chalice.Init();
+            if (Vanity.isEnabled.Value)
+                Vanity.Init();
 
             Log.Message("Finished initializations.");
         }
@@ -182,6 +186,7 @@ namespace TooManyItems
         //        DropItem(Permafrost.itemDef);
         //        DropItem(RustyTrowel.itemDef);
 
+        //        DropItem(BrassKnuckles.itemDef);
         //        DropItem(BrokenMask.itemDef);
         //        DropItem(Epinephrine.itemDef);
         //        DropItem(HereticSeal.itemDef);
@@ -199,6 +204,7 @@ namespace TooManyItems
         //        DropItem(Photodiode.itemDef);
         //        DropItem(RedBlueGlasses.itemDef);
         //        DropItem(RubberDucky.itemDef);
+        //        DropItem(Thumbtack.itemDef, 4);
 
         //        DropItem(AncientCoin.itemDef);
         //        DropItem(CarvingBlade.itemDef);
@@ -208,38 +214,116 @@ namespace TooManyItems
         //        DropItem(IronHeartVoid.itemDef);
         //        DropItem(ShadowCrest.itemDef);
 
-        //        DropItem(Vanity.equipmentDef);
         //        DropItem(BuffTotem.equipmentDef);
-        //        DropItem(Chalice.equipmentDef);
         //        DropItem(TatteredScroll.equipmentDef);
+        //        DropItem(Chalice.equipmentDef);
+        //        DropItem(Vanity.equipmentDef);
         //    }
         //}
 
         //private void DropItem(ItemDef def)
+        //{
+        //    DropItem(def, 1);
+        //}
+
+        //private void DropItem(ItemDef def, int itemCount)
+        //{
+        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //    {
+        //        CharacterBody body = controller.master.GetBody();
+        //        if (body)
+        //        {
+        //            body.inventory.GiveItem(def, itemCount);
+        //        }
+        //    }
+        //}
+
+        //private void DropItem(EquipmentDef def)
         //{
         //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
         //    {
         //        Transform transform = controller.master.GetBodyObject().transform;
 
         //        Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.itemIndex), transform.position, transform.forward * 20f);
+        //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
+        //    }
+        //}
+
+        //private void Update()
+        //{
+        //    if (!NetworkServer.active) return;
+
+        //    if (Input.GetKeyDown(KeyCode.F2))
+        //    {
+        //        DropItem(Abacus.itemDef);
+        //        DropItem(BloodDice.itemDef);
+        //        DropItem(GlassMarbles.itemDef);
+        //        DropItem(Horseshoe.itemDef);
+        //        DropItem(IronHeart.itemDef);
+        //        DropItem(Permafrost.itemDef);
+        //        DropItem(RustyTrowel.itemDef);
+
+        //        DropItem(BrassKnuckles.itemDef);
+        //        DropItem(BrokenMask.itemDef);
+        //        DropItem(Epinephrine.itemDef);
+        //        DropItem(HereticSeal.itemDef);
+        //        DropItem(HolyWater.itemDef);
+        //        DropItem(Hoodie.itemDef);
+        //        DropItem(MagnifyingGlass.itemDef);
+        //        DropItem(SoulRing.itemDef);
+
+        //        DropItem(BottleCap.itemDef);
+        //        DropItem(BreadLoaf.itemDef);
+        //        DropItem(DebitCard.itemDef);
+        //        DropItem(EdibleGlue.itemDef);
+        //        DropItem(MilkCarton.itemDef);
+        //        DropItem(PaperPlane.itemDef);
+        //        DropItem(Photodiode.itemDef);
+        //        DropItem(RedBlueGlasses.itemDef);
+        //        DropItem(RubberDucky.itemDef);
+        //        DropItem(Thumbtack.itemDef, 4);
+
+        //        DropItem(AncientCoin.itemDef);
+        //        DropItem(CarvingBlade.itemDef);
+        //        DropItem(Crucifix.itemDef);
+        //        DropItem(SpiritStone.itemDef);
+
+        //        DropItem(IronHeartVoid.itemDef);
+        //        DropItem(ShadowCrest.itemDef);
+
+        //        DropItem(BuffTotem.equipmentDef);
+        //        DropItem(TatteredScroll.equipmentDef);
+        //        DropItem(Chalice.equipmentDef);
+        //        DropItem(Vanity.equipmentDef);
+        //    }
+        //}
+
+        //private void DropItem(ItemDef def)
+        //{
+        //    DropItem(def, 1);
+        //}
+
+        //private void DropItem(ItemDef def, int itemCount)
+        //{
+        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //    {
+        //        CharacterBody body = controller.master.GetBody();
+        //        if (body)
+        //        {
+        //            body.inventory.GiveItem(def, itemCount);
+        //        }
         //    }
         //}
 
         //private void DropItem(EquipmentDef def)
         //{
-        //    Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
+        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //    {
+        //        Transform transform = controller.master.GetBodyObject().transform;
 
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
-        //}
-
-        //private void DropItem(MiscPickupDef def)
-        //{
-        //    Transform transform = PlayerCharacterMasterController.instances[0].master.GetBodyObject().transform;
-
-        //    Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //    PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.miscPickupIndex), transform.position, transform.forward * 20f);
+        //        Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+        //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
+        //    }
         //}
 
         public struct GenericCharacterInfo

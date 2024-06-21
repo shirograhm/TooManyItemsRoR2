@@ -71,8 +71,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Crucifix.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Crucifix.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Crucifix.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Crucifix.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }

@@ -61,8 +61,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("EdibleGlue.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("GlueBottle.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("EdibleGlue.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("GlueBottle.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -89,7 +89,7 @@ namespace TooManyItems
                         HurtBox[] hurtboxes = new SphereSearch
                         {
                             mask = LayerIndex.entityPrecise.mask,
-                            origin = atkBody.footPosition,
+                            origin = atkBody.corePosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
                             radius = slowRadiusPerStack.Value * count
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();

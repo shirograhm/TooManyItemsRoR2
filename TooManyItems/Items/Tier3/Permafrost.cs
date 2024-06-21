@@ -67,8 +67,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Permafrost.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Permafrost.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Permafrost.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Permafrost.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -90,7 +90,7 @@ namespace TooManyItems
                     int count = attackerBody.inventory.GetItemCount(itemDef);
                     if (count > 0 && attackerBody.master)
                     {
-                        if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f, attackerBody.master.luck, attackerBody.master))
+                        if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
                         {
                             damageInfo.damageType |= DamageType.Freeze2s;
                         }

@@ -42,7 +42,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
-            5,
+            4,
             "Total duration of the burn in seconds.",
             new List<string>()
             {
@@ -160,8 +160,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("BrokenMask.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("BrokenMask.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrokenMask.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("BrokenMask.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -176,7 +176,7 @@ namespace TooManyItems
             burnDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             burnDebuff.name = "Torment";
-            burnDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("MaskDebuff.png");
+            burnDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MaskDebuff.png");
             burnDebuff.canStack = false;
             burnDebuff.isHidden = false;
             burnDebuff.isDebuff = true;
@@ -187,10 +187,11 @@ namespace TooManyItems
         {
             burnDotDef = new DotController.DotDef
             {
+                damageCoefficient = 0f,
                 damageColorIndex = maskDamageColor,
                 associatedBuff = burnDebuff,
                 terminalTimedBuff = null,
-                terminalTimedBuffDuration = 0,
+                terminalTimedBuffDuration = 0f,
                 resetTimerOnAdd = true,
                 interval = burnTickInterval
             };
@@ -210,7 +211,7 @@ namespace TooManyItems
                 if (vicBody && atkBody && atkBody.inventory)
                 {
                     int count = atkBody.inventory.GetItemCount(itemDef);
-                    if (count > 0 && damageReport.dotType != burnIndex && vicBody != atkBody)
+                    if (count > 0 && damageReport.dotType != burnIndex && vicBody.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                     {
                         InflictDotInfo dotInfo = new()
                         {
@@ -220,7 +221,7 @@ namespace TooManyItems
                             dotIndex = burnIndex,
                             duration = burnDuration.Value,
                             maxStacksFromAttacker = 1,
-                            damageMultiplier = 1f
+                            damageMultiplier = 0f
                         };
                         DotController.InflictDot(ref dotInfo);
                     }

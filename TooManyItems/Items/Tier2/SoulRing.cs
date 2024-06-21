@@ -135,8 +135,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("SoulRing.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("SoulRing.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("SoulRing.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("SoulRing.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

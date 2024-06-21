@@ -10,7 +10,7 @@ namespace TooManyItems
         {
             System.Collections.Generic.Dictionary<string, BepInEx.PluginInfo> pluginInfos = BepInEx.Bootstrap.Chainloader.PluginInfos;
 
-            if (pluginInfos.ContainsKey("droppod.lookingglass"))
+            if (pluginInfos.ContainsKey(LookingGlass.PluginInfo.PLUGIN_GUID))
             {
                 try
                 {

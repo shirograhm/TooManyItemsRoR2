@@ -102,8 +102,8 @@ namespace TooManyItems
             equipmentDef.name = "VANITY";
             equipmentDef.AutoPopulateTokens();
 
-            equipmentDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Vanity.png");
-            equipmentDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Vanity.prefab");
+            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Vanity.png");
+            equipmentDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Vanity.prefab");
 
             equipmentDef.isLunar = true;
             equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
@@ -122,7 +122,7 @@ namespace TooManyItems
             hubrisDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             hubrisDebuff.name = "Hubris";
-            hubrisDebuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Hubris.png");
+            hubrisDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Hubris.png");
             hubrisDebuff.canStack = true;
             hubrisDebuff.isHidden = false;
             hubrisDebuff.isDebuff = true;

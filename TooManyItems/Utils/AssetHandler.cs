@@ -1,9 +1,10 @@
-﻿using System.IO;
+﻿using R2API;
+using System.IO;
 using UnityEngine;
 
 namespace TooManyItems
 {
-    public static class Assets
+    public static class AssetHandler
     {
         public static AssetBundle bundle;
         public const string bundleName = "tmiassets";

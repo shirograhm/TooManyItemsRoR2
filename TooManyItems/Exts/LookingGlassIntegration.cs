@@ -1,4 +1,5 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
+using R2API;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ namespace TooManyItems
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Gold Gain: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.HumanObjective);
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Gold);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.descriptions.Add("Damage Taken: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Death);
@@ -36,13 +37,14 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)AncientCoin.itemDef.itemIndex, stats);
                 }
 
+
                 // Blood Dice
                 if (BloodDice.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Permanent Health: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
@@ -67,6 +69,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)BloodDice.itemDef.itemIndex, stats);
                 }
 
+
                 // Bottle Cap
                 if (BottleCap.isEnabled.Value)
                 {
@@ -82,7 +85,24 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BottleCap.itemDef.itemIndex, stats);
                 }
+                
+                // Brass Knuckles
+                if (BrassKnuckles.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Bonus Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            BrassKnuckles.heavyHitBonusPercent * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)BrassKnuckles.itemDef.itemIndex, stats);
+                }
 
+                
                 // Bread
                 if (BreadLoaf.isEnabled.Value)
                 {
@@ -98,6 +118,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BreadLoaf.itemDef.itemIndex, stats);
                 }
+
 
                 // Broken Mask
                 if (BrokenMask.isEnabled.Value)
@@ -136,6 +157,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)BrokenMask.itemDef.itemIndex, stats);
                 }
 
+
                 // Carving Blade
                 if (CarvingBlade.isEnabled.Value)
                 {
@@ -173,6 +195,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)CarvingBlade.itemDef.itemIndex, stats);
                 }
 
+
                 // Crucifix
                 if (Crucifix.isEnabled.Value)
                 {
@@ -189,11 +212,12 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)Crucifix.itemDef.itemIndex, stats);
                 }
 
+
                 // Debit Card
                 if (DebitCard.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Rebate on Purchase: ");
+                    stats.descriptions.Add("Rebate: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
@@ -204,6 +228,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)DebitCard.itemDef.itemIndex, stats);
                 }
+
 
                 // Edible Glue
                 if (EdibleGlue.isEnabled.Value)
@@ -221,6 +246,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)EdibleGlue.itemDef.itemIndex, stats);
                 }
 
+
                 // Epinephrine
                 if (Epinephrine.isEnabled.Value)
                 {
@@ -236,6 +262,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Epinephrine.itemDef.itemIndex, stats);
                 }
+
 
                 // Fleece Hoodie
                 if (Hoodie.isEnabled.Value)
@@ -256,6 +283,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Hoodie.itemDef.itemIndex, stats);
                 }
+
 
                 // Glass Marbles
                 if (GlassMarbles.isEnabled.Value)
@@ -280,13 +308,14 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)GlassMarbles.itemDef.itemIndex, stats);
                 }
 
+
                 // Holy Water
                 if (HolyWater.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Experience Gained: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
@@ -296,13 +325,14 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)HolyWater.itemDef.itemIndex, stats);
                 }
 
+
                 // Horseshoe
                 if (Horseshoe.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Health: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
                     stats.descriptions.Add("Base Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
@@ -320,10 +350,10 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.descriptions.Add("Regeneration: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealing);
                     stats.descriptions.Add("Shield: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
                     stats.descriptions.Add("Movement Speed: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
@@ -356,13 +386,14 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)Horseshoe.itemDef.itemIndex, stats);
                 }
 
+
                 // Iron Heart
                 if (IronHeart.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("On-Hit Damage: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
                     stats.descriptions.Add("Damage Dealt: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
@@ -393,6 +424,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)IronHeart.itemDef.itemIndex, stats);
                 }
 
+
                 // Milk Carton
                 if (MilkCarton.isEnabled.Value)
                 {
@@ -408,6 +440,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)MilkCarton.itemDef.itemIndex, stats);
                 }
+
 
                 // Magnifying Glass
                 if (MagnifyingGlass.isEnabled.Value)
@@ -430,6 +463,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)MagnifyingGlass.itemDef.itemIndex, stats);
                 }
 
+
                 // Paper Plane
                 if (PaperPlane.isEnabled.Value)
                 {
@@ -445,6 +479,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)PaperPlane.itemDef.itemIndex, stats);
                 }
+
 
                 // Permafrost
                 if (Permafrost.isEnabled.Value)
@@ -471,6 +506,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)Permafrost.itemDef.itemIndex, stats);
                 }
 
+
                 // Photodiode
                 if (Photodiode.isEnabled.Value)
                 {
@@ -486,6 +522,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Photodiode.itemDef.itemIndex, stats);
                 }
+
 
                 // Red-Blue Glasses
                 if (RedBlueGlasses.isEnabled.Value)
@@ -507,12 +544,13 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)RedBlueGlasses.itemDef.itemIndex, stats);
                 }
 
+
                 // Rubber Ducky
                 if (RubberDucky.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Bonus Armor: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Event);
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Armor);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
@@ -523,6 +561,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)RubberDucky.itemDef.itemIndex, stats);
                 }
 
+
                 // Rusty Trowel
                 if (RustyTrowel.isEnabled.Value)
                 {
@@ -530,9 +569,9 @@ namespace TooManyItems
                     stats.descriptions.Add("Cooldown: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
-                    stats.descriptions.Add("Health Recovered: ");
+                    stats.descriptions.Add("Healing Done: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
@@ -561,6 +600,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)RustyTrowel.itemDef.itemIndex, stats);
                 }
 
+
                 // Shadow Crest
                 if (ShadowCrest.isEnabled.Value)
                 {
@@ -577,13 +617,14 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)ShadowCrest.itemDef.itemIndex, stats);
                 }
 
+
                 // Soul Ring
                 if (SoulRing.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Bonus Regeneration: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Healing);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealing);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
@@ -609,16 +650,17 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)SoulRing.itemDef.itemIndex, stats);
                 }
 
+
                 // Spirit Stone
                 if (SpiritStone.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Permanent Shield: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Health);
-                    stats.descriptions.Add("Max Health Sacrificed: ");
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
+                    stats.descriptions.Add("Health Penalty: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage); 
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth); 
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
@@ -635,12 +677,34 @@ namespace TooManyItems
                         {
                             values.Add(0f);
                         }
-                        values.Add(Utils.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount));
+                        values.Add(SpiritStone.maxHealthLostPercent * itemCount);
 
                         return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)SpiritStone.itemDef.itemIndex, stats);
                 }
+
+
+                // Thumbtack
+                if (Thumbtack.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Bleed Chance: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Bonus Duration: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            Thumbtack.bleedChancePercent * itemCount,
+                            Thumbtack.bleedDurationBonus.Value * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)Thumbtack.itemDef.itemIndex, stats);
+                }
+
 
                 // Void Heart
                 if (IronHeartVoid.isEnabled.Value)

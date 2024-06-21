@@ -34,7 +34,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> buffDuration = new(
             "Item: Epinephrine",
             "Buff Duration",
-            1.5f,
+            1f,
             "Duration of attack speed gained after taking damage.",
             new List<string>()
             {
@@ -65,8 +65,8 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier2);
 
-            itemDef.pickupIconSprite = Assets.bundle.LoadAsset<Sprite>("Epinephrine.png");
-            itemDef.pickupModelPrefab = Assets.bundle.LoadAsset<GameObject>("Epinephrine.prefab");
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Epinephrine.png");
+            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Epinephrine.prefab");
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -82,7 +82,7 @@ namespace TooManyItems
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             attackSpeedBuff.name = "Adrenaline";
-            attackSpeedBuff.iconSprite = Assets.bundle.LoadAsset<Sprite>("Adrenaline.png");
+            attackSpeedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Adrenaline.png");
             attackSpeedBuff.canStack = false;
             attackSpeedBuff.isHidden = false;
             attackSpeedBuff.isDebuff = false;
