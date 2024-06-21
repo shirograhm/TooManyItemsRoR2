@@ -145,6 +145,12 @@ namespace TooManyItems
                         itemDef1 = RedBlueGlasses.itemDef,
                         itemDef2 = DLC1Content.Items.CritGlassesVoid
                     },
+                    // Thumbtack => Needletick
+                    new ItemDef.Pair()
+                    {
+                        itemDef1 = Thumbtack.itemDef,
+                        itemDef2 = DLC1Content.Items.BleedOnHitVoid
+                    },
                     // Iron Heart => Defiled Heart
                     new ItemDef.Pair()
                     {
