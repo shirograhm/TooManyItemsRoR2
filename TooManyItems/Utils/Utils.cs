@@ -168,7 +168,7 @@ namespace TooManyItems
         {
             ItemDef[] tierItems = ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == tier).ToArray();
 
-            return tierItems[TooManyItems.rand.Next(0, tierItems.Length)];
+            return tierItems[TooManyItems.RandGen.Next(0, tierItems.Length)];
         }
     }
 }

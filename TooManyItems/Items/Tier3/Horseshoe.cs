@@ -291,11 +291,11 @@ namespace TooManyItems
                     float randomPoints;
                     float step = 1.8f;
                     if (pointsRemaining > step * 2)
-                        randomPoints = (float)TooManyItems.rand.NextDouble() * step + step;
+                        randomPoints = (float)TooManyItems.RandGen.NextDouble() * step + step;
                     else
                         randomPoints = pointsRemaining;
 
-                    Bonuses chosenStat = (Bonuses) TooManyItems.rand.Next(0, (int)Bonuses.NUM_STATS);
+                    Bonuses chosenStat = (Bonuses) TooManyItems.RandGen.Next(0, (int)Bonuses.NUM_STATS);
                     switch (chosenStat)
                     {
                         case Bonuses.HEALTH:

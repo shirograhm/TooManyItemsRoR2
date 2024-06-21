@@ -30,7 +30,7 @@ namespace TooManyItems
 
         public static PluginInfo PInfo { get; private set; }
 
-        public static System.Random rand = new();
+        public static System.Random RandGen = new();
 
         public static ExpansionDef voidDLC;
 

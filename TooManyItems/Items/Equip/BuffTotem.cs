@@ -209,11 +209,11 @@ namespace TooManyItems
             if (body)
             {
                 Array values = Enum.GetValues(typeof(Result));
-                Result r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
+                Result r = (Result)values.GetValue(TooManyItems.RandGen.Next(values.Length));
 
                 while (r == lastBuffGiven)
                 {
-                    r = (Result)values.GetValue(TooManyItems.rand.Next(values.Length));
+                    r = (Result)values.GetValue(TooManyItems.RandGen.Next(values.Length));
                 }
                 lastBuffGiven = r;
 

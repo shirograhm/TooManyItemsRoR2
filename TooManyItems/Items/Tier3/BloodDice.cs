@@ -235,8 +235,8 @@ namespace TooManyItems
         private static int GenerateRollNormalDistribution(float mean, float deviation)
         {
             // Box-Mueller transform for normal distribution
-            float x = (float) (1.0 - TooManyItems.rand.NextDouble());
-            float y = (float) (1.0 - TooManyItems.rand.NextDouble());
+            float x = (float) (1.0 - TooManyItems.RandGen.NextDouble());
+            float y = (float) (1.0 - TooManyItems.RandGen.NextDouble());
 
             float randomSample = Mathf.Sqrt(-2f * Mathf.Log(x)) * Mathf.Sin(2f * Mathf.PI * y);
             float scaledSample = mean + deviation * randomSample;
