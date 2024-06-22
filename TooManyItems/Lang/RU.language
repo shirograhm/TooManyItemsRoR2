@@ -87,7 +87,7 @@
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "Канцелярская кнопка",
     "ITEM_THUMBTACK_NAME": "Канцелярская кнопка",
-    "ITEM_THUMBTACK_PICKUP": "Ваши атаки имеют небольшой шанс наложить <style=cIsDamage>кровотечение<style> на врагов. Также ваши эффекты <style=cIsDamage>кровотечения<style> длятся дольше.",
+    "ITEM_THUMBTACK_PICKUP": "Ваши атаки имеют небольшой шанс наложить <style=cIsDamage>кровотечение</style> на врагов. Также ваши эффекты <style=cIsDamage>кровотечения</style> длятся дольше.",
     "ITEM_THUMBTACK_DESC": "Получите <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance}% за шт.)</style> шанс</style> наложить <style=cIsDamage>кровотечение</style> на врагов, наносящее <style=cIsDamage>{Bleed Damage}% БАЗОВОГО урона</style> в течение<style=cIsUtility>{Bleed Duration} секунд</style>. Ваши эффекты <style=cIsDamage>кровотечения</style> длятся дольше на <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration} за шт.)</style> секунд</style>.",
     "ITEM_THUMBTACK_LORE": "",
     "BRASSKNUCKLES": "Латунный кастет",
