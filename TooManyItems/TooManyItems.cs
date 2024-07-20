@@ -137,34 +137,48 @@ namespace TooManyItems
         {
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
-                List<ItemDef.Pair> newVoidPairs = new List<ItemDef.Pair>
+                List<ItemDef.Pair> newVoidPairs = new List<ItemDef.Pair>{ };
+
+                if (RedBlueGlasses.isEnabled)
                 {
                     // 3D Glasses => Instakill Glasses
-                    new ItemDef.Pair()
+                    newVoidPairs.Add(new ItemDef.Pair()
                     {
                         itemDef1 = RedBlueGlasses.itemDef,
                         itemDef2 = DLC1Content.Items.CritGlassesVoid
-                    },
+                    });
+                }
+
+                if (Thumbtack.isEnabled)
+                {
                     // Thumbtack => Needletick
-                    new ItemDef.Pair()
+                    newVoidPairs.Add(new ItemDef.Pair()
                     {
                         itemDef1 = Thumbtack.itemDef,
                         itemDef2 = DLC1Content.Items.BleedOnHitVoid
-                    },
+                    });
+                }
+
+                if (IronHeart.isEnabled && IronHeartVoid.isEnabled)
+                {
                     // Iron Heart => Defiled Heart
-                    new ItemDef.Pair()
+                    newVoidPairs.Add(new ItemDef.Pair()
                     {
                         itemDef1 = IronHeart.itemDef,
                         itemDef2 = IronHeartVoid.itemDef
-                    },
+                    });
+                }
+
+                if (HereticSeal.isEnabled && ShadowCrest.isEnabled)
+                {
                     // Seal of the Heretic => Shadow Crest
-                    new ItemDef.Pair()
+                    newVoidPairs.Add(new ItemDef.Pair()
                     {
                         itemDef1 = HereticSeal.itemDef,
                         itemDef2 = ShadowCrest.itemDef
-                    }
-                };
-
+                    });
+                }
+                
                 ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
 
