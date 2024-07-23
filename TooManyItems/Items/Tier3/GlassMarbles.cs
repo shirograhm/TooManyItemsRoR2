@@ -23,7 +23,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damagePerLevelPerStack = new(
             "Item: Glass Marbles",
             "Damage Increase",
-            2.5f,
+            2f,
             "Amount of base damage gained per level per stack.",
             new List<string>()
             {

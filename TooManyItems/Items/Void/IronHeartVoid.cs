@@ -36,7 +36,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Defiled Heart",
             "Bonus Damage Scaling",
-            1f,
+            1.5f,
             "Percent of maximum health gained as base damage.",
             new List<string>()
             {
