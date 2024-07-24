@@ -25,7 +25,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
             "Attack Speed",
-            2.5f,
+            2f,
             "Percent attack speed gained on-hit.",
             new List<string>()
             {
@@ -45,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> maxAttackSpeedStacks = new(
             "Item: Photodiode",
             "Max Stacks",
-            8,
+            10,
             "Max attack speed stacks allowed per stack of item.",
             new List<string>()
             {
