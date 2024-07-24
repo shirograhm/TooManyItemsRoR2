@@ -36,7 +36,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> rechargeTime = new(
             "Item: Fleece Hoodie",
             "Recharge Time",
-            8f,
+            10f,
             "Time this item takes to recharge.",
             new List<string>()
             {
