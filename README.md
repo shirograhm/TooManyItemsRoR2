@@ -13,7 +13,8 @@ Generally compatible with most mods. Supports integration with [LookingGlass](ht
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). If possible, provide the output log as it often makes debugging much easier.
 
 ## Content
-The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game. If configuration issues persist, don't hesitate to delete the config file and let the mod regenerate it for you. <b>Make sure to enable the flag at the top of the config file as well, that tells the mod to use the config file values instead of base values.</b> 
+The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game. <b>Make sure to enable the "Use Custom Configs" flag at the top of the file, that tells the mod to use the config file values instead of base values.</b>
+<i>If configuration issues persist, don't hesitate to delete the config file and let the mod regenerate it for you. <b>Make sure to enable the "Use Custom Configs" flag at the top of the file, that tells the mod to use the config file values instead of base values.</i> 
 
 ### Items
 | | | |
