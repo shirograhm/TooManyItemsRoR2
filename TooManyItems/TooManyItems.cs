@@ -26,7 +26,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.4.6";
+        public const string PluginVersion = "0.5.0";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -46,9 +46,9 @@ namespace TooManyItems
             DamageColorAPI.Init();
 
             ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
-            ItemCatalog.availability.CallWhenAvailable(InjectVoidItems);
+            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
 
-            //Red Items
+            // Red Items
             if (Abacus.isEnabled.Value)
                 Abacus.Init();
             if (BloodDice.isEnabled.Value)
@@ -113,7 +113,7 @@ namespace TooManyItems
                 Crucifix.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
-            
+
             // Void
             if (ShadowCrest.isEnabled.Value)
                 ShadowCrest.Init();
@@ -133,7 +133,7 @@ namespace TooManyItems
             Log.Message("Finished initializations.");
         }
 
-        private void InjectVoidItems()
+        private void InjectVoidItemTramsforms()
         {
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
