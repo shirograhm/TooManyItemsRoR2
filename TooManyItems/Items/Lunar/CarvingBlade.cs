@@ -163,7 +163,7 @@ namespace TooManyItems
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
                     int count = attackerInfo.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    if (count > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
                     {
                         // Minimum of 0.1 damage.
                         float amount = Mathf.Max(CalculateDamageOnHit(victimInfo.body, count), 0.1f);

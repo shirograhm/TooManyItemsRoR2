@@ -70,7 +70,6 @@ namespace TooManyItems
         {
             GenerateEquipment();
             GenerateBuff();
-            AddTokens();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
@@ -169,21 +168,6 @@ namespace TooManyItems
             }
 
             return true;
-        }
-
-        private static void AddTokens()
-        {
-            LanguageAPI.Add("TATTERED_SCROLL", "Tattered Scroll");
-            LanguageAPI.Add("TATTERED_SCROLL_NAME", "Tattered Scroll");
-            LanguageAPI.Add("TATTERED_SCROLL_PICKUP", "Curse nearby enemies when activated. Killing cursed enemies grants extra gold.");
-
-            string desc = $"On activation, curse enemies within a <style=cIsUtility>{curseDistance.Value}m</style> radius " +
-                $"for <style=cIsUtility>{curseDuration.Value} seconds</style>. " +
-                $"Killing cursed enemies grants an additional <style=cHumanObjective>{goldGranted.Value} gold</style>.";
-            LanguageAPI.Add("TATTERED_SCROLL_DESCRIPTION", desc);
-
-            string lore = "";
-            LanguageAPI.Add("TATTERED_SCROLL_LORE", lore);
         }
     }
 }

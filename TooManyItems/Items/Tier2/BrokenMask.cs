@@ -204,7 +204,7 @@ namespace TooManyItems
                 obj.inventory?.gameObject.AddComponent<Statistics>();
             };
 
-            GenericGameEvents.OnTakeDamage += (damageReport) =>
+            On.RoR2.CharacterBody.OnTakeDamageServer += (orig, self, damageReport) =>
             {
                 CharacterBody vicBody = damageReport.victimBody;
                 CharacterBody atkBody = damageReport.attackerBody;
@@ -227,6 +227,30 @@ namespace TooManyItems
                     }
                 }
             };
+
+            //GenericGameEvents.OnTakeDamage += (damageReport) =>
+            //{
+            //    CharacterBody vicBody = damageReport.victimBody;
+            //    CharacterBody atkBody = damageReport.attackerBody;
+            //    if (vicBody && atkBody && atkBody.inventory)
+            //    {
+            //        int count = atkBody.inventory.GetItemCount(itemDef);
+            //        if (count > 0 && damageReport.dotType != burnIndex && vicBody.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
+            //        {
+            //            InflictDotInfo dotInfo = new()
+            //            {
+            //                victimObject = vicBody.gameObject,
+            //                attackerObject = atkBody.gameObject,
+            //                totalDamage = null,
+            //                dotIndex = burnIndex,
+            //                duration = burnDuration.Value,
+            //                maxStacksFromAttacker = 1,
+            //                damageMultiplier = 0f
+            //            };
+            //            DotController.InflictDot(ref dotInfo);
+            //        }
+            //    }
+            //};
         }
     }
 }
