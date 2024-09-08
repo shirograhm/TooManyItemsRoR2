@@ -17,7 +17,9 @@ Seekers of the Storm DLC is supported for v0.5.0 and later.
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). If possible, provide the output log as it often makes debugging much easier.
 
 ## Content
-The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game. If configuration issues persist, don't hesitate to delete the config file and let the mod regenerate it for you.
+#### **Make sure to enable the "Use Custom Values" setting at the top of the config file, otherwise the mod will not respect your changes.**
+The following values are configurable. To do so, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game.
+If configuration issues persist, don't hesitate to delete the config file and let the mod regenerate it for you.
 
 ### Items
 | | | |
