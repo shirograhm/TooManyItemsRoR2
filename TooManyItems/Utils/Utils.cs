@@ -53,6 +53,7 @@ namespace TooManyItems
             public void Serialize(NetworkWriter writer)
             {
                 writer.Write(netID);
+                writer.FinishMessage();
             }
         }
 
