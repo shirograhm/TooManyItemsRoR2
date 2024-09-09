@@ -108,6 +108,8 @@ namespace TooManyItems
                 {
                     writer.Write(objId);
                     writer.Write(totalDamageDealt);
+
+                    writer.FinishMessage();
                 }
             }
         }

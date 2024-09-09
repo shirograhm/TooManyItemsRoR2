@@ -100,6 +100,8 @@ namespace TooManyItems
                 {
                     writer.Write(objId);
                     writer.Write(permanentShield);
+
+                    writer.FinishMessage();
                 }
             }
         }

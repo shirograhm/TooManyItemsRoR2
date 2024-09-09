@@ -110,6 +110,8 @@ namespace TooManyItems
                 {
                     writer.Write(objId);
                     writer.Write(healthRegen);
+
+                    writer.FinishMessage();
                 }
             }
         }
