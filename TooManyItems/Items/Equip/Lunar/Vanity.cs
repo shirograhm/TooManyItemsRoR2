@@ -218,7 +218,7 @@ namespace TooManyItems
                 EffectManager.SpawnEffect(implosionEffectObject, new EffectData
                 {
                     origin = targetEnemy.corePosition,
-                    scale = 0.3f * buffCount + targetEnemy.radius,
+                    scale = 0.2f * buffCount + targetEnemy.radius,
                     color = Utils.VANITY_COLOR
                 }, 
                 true);
