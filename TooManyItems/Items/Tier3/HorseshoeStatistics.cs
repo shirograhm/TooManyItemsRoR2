@@ -308,6 +308,8 @@ namespace TooManyItems
                 writer.Write(regenerationBonus);
                 writer.Write(shieldBonus);
                 writer.Write(moveSpeedPercentBonus);
+
+                writer.FinishMessage();
             }
         }
     }
