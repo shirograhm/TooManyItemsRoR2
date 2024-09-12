@@ -108,7 +108,7 @@ namespace TooManyItems
             return percent;
         }
 
-        public static float getDifficultyAsPercentage()
+        public static float GetDifficultyAsPercentage()
         {
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
         }

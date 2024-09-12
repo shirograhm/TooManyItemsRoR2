@@ -167,7 +167,7 @@ namespace TooManyItems
                     int count = attackerInfo.inventory.GetItemCount(itemDef);
                     if (count > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
                     {
-                        // Minimum of 0.1 damage.
+                        // Minimum of 0.1 damage to prevent negative values in LookingGlass
                         float amount = Mathf.Max(CalculateDamageOnHit(victimInfo.body, count), 0.1f);
                         if (damageCapMultiplier > 0) amount = Mathf.Min(amount, attackerInfo.body.damage * damageCapMultiplier);
 
