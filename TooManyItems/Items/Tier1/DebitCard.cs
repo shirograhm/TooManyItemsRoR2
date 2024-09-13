@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
             "Rebate",
-            8f,
+            10f,
             "Percentage of spent gold refunded as rebate.",
             new List<string>()
             {
