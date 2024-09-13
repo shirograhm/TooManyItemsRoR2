@@ -253,6 +253,7 @@ namespace TooManyItems
         //        CharacterBody body = controller.master.GetBody();
         //        if (body)
         //        {
+        //            ScrapperController.CreateItemTakenOrb(body.corePosition, body.gameObject, def.itemIndex);
         //            body.inventory.GiveItem(def, itemCount);
         //        }
         //    }
