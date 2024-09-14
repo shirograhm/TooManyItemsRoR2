@@ -26,7 +26,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.5.2";
+        public const string PluginVersion = "0.5.3";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -253,6 +253,7 @@ namespace TooManyItems
         //        CharacterBody body = controller.master.GetBody();
         //        if (body)
         //        {
+        //            ScrapperController.CreateItemTakenOrb(body.corePosition, body.gameObject, def.itemIndex);
         //            body.inventory.GiveItem(def, itemCount);
         //        }
         //    }

@@ -117,7 +117,7 @@ namespace TooManyItems
         public static float CalculateExperienceMultiplier(int itemCount)
         {
             float difference = maxExperienceMultiplierAsPercent - minExperienceMultiplierAsPercent;
-            float multiplier = minExperienceMultiplierAsPercent + difference * Utils.getDifficultyAsPercentage();
+            float multiplier = minExperienceMultiplierAsPercent + difference * Utils.GetDifficultyAsPercentage();
 
             return multiplier * (1 + extraStacksMultiplierPercent * (itemCount - 1));
         }

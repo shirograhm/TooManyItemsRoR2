@@ -80,7 +80,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(BottleCap.ultimateCDRPercent, itemCount)
+                            Utils.GetHyperbolicStacking(BottleCap.specialCDRPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BottleCap.itemDef.itemIndex, stats);

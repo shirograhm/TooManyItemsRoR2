@@ -23,7 +23,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> eliteDamageReduction = new(
             "Item: Milk Carton",
             "Damage Reduction",
-            8f,
+            10f,
             "Percent damage reduction agains elite enemies.",
             new List<string>()
             {

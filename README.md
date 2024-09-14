@@ -46,11 +46,11 @@ If configuration issues persist, don't hesitate to delete the config file and le
 | ![Seal of the Heretic](https://i.imgur.com/6okJd8vt.png) | **Seal of the Heretic** | Gain 0.3 (+0.3 per stack) BASE damage for every 1% missing health. |
 | ![Soul Ring](https://i.imgur.com/I3pEvR2t.png) | **Soul Ring** | On-kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 5 (+3 per stack) HP/s. |
 | ![3D Glasses](https://i.imgur.com/wys8KPct.png) | **3D Glasses** | Gain 6% (+6% per stack) critical strike chance and 6% (+6% per stack) critical strike damage. |
-| ![Bottle Cap](https://i.imgur.com/jq1lvS9t.png) | **Bottle Cap** | Reduce your ultimate skill cooldown by 8% (+8% per stack). |
-| ![Debit Card](https://i.imgur.com/BXUGjeft.png) | **Debit Card** | Get an 8% (+8% per stack) rebate on purchases. |
+| ![Bottle Cap](https://i.imgur.com/jq1lvS9t.png) | **Bottle Cap** | Reduce your ultimate skill cooldown by 10% (+10% per stack). |
+| ![Debit Card](https://i.imgur.com/BXUGjeft.png) | **Debit Card** | Get an 10% (+10% per stack) rebate on purchases. |
 | ![Edible Glue](https://i.imgur.com/3gpa6WWt.png) | **Edible Glue** | On-kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds. |
 | ![Loaf of Bread](https://i.imgur.com/mzlxTIrt.png) | **Loaf of Bread** | While the teleporter is charging, killing enemies heals you for 5% (+5% per stack) of your missing health. |
-| ![Milk Carton](https://i.imgur.com/R6U6Uget.png) | **Milk Carton** | Reduce damage taken from elite enemies by 8% (+8% per stack). |
+| ![Milk Carton](https://i.imgur.com/R6U6Uget.png) | **Milk Carton** | Reduce damage taken from elite enemies by 10% (+10% per stack). |
 | ![Paper Plane](https://i.imgur.com/pvG4mztt.png) | **Paper Plane** | Gain 18% (+18% per stack) movement speed while airborne. |
 | ![Photodiode](https://i.imgur.com/4ZjgqKIt.png) | **Photodiode** | On-hit, gain 2% attack speed for 10 seconds. Stacks up to a max of 10 (+10 per stack) times. |
 | ![Rubber Ducky](https://i.imgur.com/dEgzWQht.png) | **Rubber Ducky** | Gain 5 (+5 per stack) armor. |
@@ -61,7 +61,7 @@ If configuration issues persist, don't hesitate to delete the config file and le
 |-|-|-|
 | ![Chalice](https://i.imgur.com/klcM2TFt.png) | **Chalice** | On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. [*70 second cooldown*] |
 | ![Crown of Vanity](https://i.imgur.com/YIl5v00t.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 3%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy. [*30 second cooldown*] |
-| ![Tattered Scroll](https://i.imgur.com/ZRQUBHmt.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold. [*100 second cooldown*] |
+| ![Tattered Scroll](https://i.imgur.com/ZRQUBHmt.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold, scaling with difficulty. [*100 second cooldown*] |
 | ![Totem of Prayer](https://i.imgur.com/Fii53bpt.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. [*55 second cooldown*] |
 
 ## Translations
@@ -74,5 +74,6 @@ If you would like to help translate this mod, please reach out to me through DM 
     - JustBro (Russian)  
     - Elchia_Mushroom (Chinese)  
     - Yguenko (Spanish)  
+    - Poppy (Portugese)  
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).

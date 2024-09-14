@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Reduce your ultimate skill cooldown by a percentage.
+        // Reduce your special skill cooldown by a percentage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Bottle Cap",
             "Enabled",
@@ -20,17 +20,17 @@ namespace TooManyItems
                 "ITEM_BOTTLECAP_DESC"
             }
         );
-        public static ConfigurableValue<float> ultimateCDR = new(
+        public static ConfigurableValue<float> specialCDR = new(
             "Item: Bottle Cap",
             "Cooldown Reduction",
-            8f,
-            "Percent cooldown reduction on ultimate skill.",
+            10f,
+            "Percent cooldown reduction on special skill.",
             new List<string>()
             {
                 "ITEM_BOTTLECAP_DESC"
             }
         );
-        public static float ultimateCDRPercent = ultimateCDR.Value / 100f;
+        public static float specialCDRPercent = specialCDR.Value / 100f;
 
         internal static void Init()
         {
@@ -68,10 +68,10 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    int itemCount = sender.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
-                        float cdr = 1 - (1 / (1 + (ultimateCDRPercent * count)));
+                        float cdr = Utils.GetHyperbolicStacking(specialCDRPercent, itemCount);
                         args.specialCooldownMultAdd -= cdr;
                     }
                 }
