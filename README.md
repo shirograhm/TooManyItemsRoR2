@@ -25,7 +25,7 @@ If configuration issues persist, don't hesitate to delete the config file and le
 | | | |
 |-|-|-|
 | ![Ancient Coin](https://i.imgur.com/NWJgZGVt.png) | **Ancient Coin** | Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage. |
-| ![Carving Blade](https://i.imgur.com/z29LUT2t.png) | **Carving Blade** | Deal 1% (+1% per stack) of enemy current health as bonus on-hit damage. You cannot critically strike. |
+| ![Carving Blade](https://i.imgur.com/z29LUT2t.png) | **Carving Blade** | Deal 2% of enemy current health as bonus on-hit damage. Per-hit damage is capped at 4000% (+1000% per stack) of your BASE damage. You cannot critically strike. |
 | ![Crucifix](https://i.imgur.com/6JnhLFbt.png) | **Crucifix** | Reduce damage taken by 40%. Taking damage sets you on fire for 5% max health over 3 (+3 per stack) seconds. |
 | ![Spirit Stone](https://i.imgur.com/2PhhDygt.png) | **Spirit Stone** | On-kill, gain 1 (+1 per stack) permanent shield. Lose 30% (+30% per stack) max HP. |
 | ![Shadow Crest](https://i.imgur.com/RYlNwqAt.png) | **Shadow Crest** | Regenerate 1.2% (+1.2% per stack) of your missing health every second. |
@@ -74,6 +74,6 @@ If you would like to help translate this mod, please reach out to me through DM 
     - JustBro (Russian)  
     - Elchia_Mushroom (Chinese)  
     - Yguenko (Spanish)  
-    - Poppy (Portugese)  
+    - Poppy (Portuguese)  
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
