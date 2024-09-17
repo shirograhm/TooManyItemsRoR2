@@ -24,7 +24,7 @@
     "TATTEREDSCROLL": "Tattered Scroll",
     "EQUIPMENT_TATTEREDSCROLL_NAME": "Tattered Scroll",
     "EQUIPMENT_TATTEREDSCROLL_PICKUP": "Curse nearby enemies when activated. Killing cursed enemies grants extra gold.",
-    "EQUIPMENT_TATTEREDSCROLL_DESC": "On activation, curse enemies within a <style=cIsUtility>{Curse Distance}m</style> radius for <style=cIsUtility>{Curse Duration} seconds</style>. Killing cursed enemies grants an additional <style=cHumanObjective>{Gold Granted} gold</style>.",
+    "EQUIPMENT_TATTEREDSCROLL_DESC": "On activation, curse enemies within a <style=cIsUtility>{Curse Distance}m</style> radius for <style=cIsUtility>{Curse Duration} seconds</style>. Killing cursed enemies grants an additional <style=cHumanObjective>{Gold Granted} gold</style>, <style=cIsUtility>scaling with difficulty</style>.",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
 
     "ANCIENTCOIN": "Ancient Coin",
@@ -122,7 +122,7 @@
     "HOLYWATER": "Holy Water",
     "ITEM_HOLYWATER_NAME": "Holy Water",
     "ITEM_HOLYWATER_PICKUP": "Killing elite enemies grants all allies bonus experience.",
-    "ITEM_HOLYWATER_DESC": "Killing an elite enemy grants all allies <style=cIsHealth>{Minimum XP}%-{Maximum XP}%</style> <style=cStack>(+{Extra Stack Scaling}% per stack)</style> of its <style=cIsHealth>max HP</style> as bonus experience. <style=cIsUtility>Scales over time</style>.",
+    "ITEM_HOLYWATER_DESC": "Killing an elite enemy grants all allies <style=cIsHealth>{Minimum XP}%-{Maximum XP}%</style> <style=cStack>(+{Extra Stack Scaling}% per stack)</style> of its <style=cIsHealth>max HP</style> as bonus experience, <style=cIsUtility>scaling with difficulty</style>.",
     "ITEM_HOLYWATER_LORE": "",
     "HOODIE": "Fleece Hoodie",
     "ITEM_HOODIE_NAME": "Fleece Hoodie",

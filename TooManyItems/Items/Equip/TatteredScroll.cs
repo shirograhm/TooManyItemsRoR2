@@ -129,7 +129,8 @@ namespace TooManyItems
                 {
                     if (damageReport.attackerMaster)
                     {
-                        damageReport.attackerMaster.GiveMoney(Convert.ToUInt32(goldGranted.Value));
+                        uint goldToGive = Convert.ToUInt32(goldGranted.Value * (1 + Utils.GetDifficultyAsPercentage()));
+                        damageReport.attackerMaster.GiveMoney(goldToGive);
                     }
                 }
             };
