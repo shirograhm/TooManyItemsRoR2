@@ -35,7 +35,7 @@
     "CARVINGBLADE": "Lâmina de Entalhe",
     "ITEM_CARVINGBLADE_NAME": "Lâmina de Entalhe",
     "ITEM_CARVINGBLADE_PICKUP": "Cause dano ao golpear baseado na vida máxima do inimigo. <style=cDeath>Você não poderá mais causar acertos críticos</style>.",
-    "ITEM_CARVINGBLADE_DESC": "Dê <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% por stack)</style> da saúde atual do inimigo como dano bônus ao golpear. <style=cDeath>Você não poderá mais causar acertos críticos</style>.",
+    "ITEM_CARVINGBLADE_DESC": "Cause <style=cIsDamage>{On-Hit Damage Scaling}%</style> da <style=cIsHealth>saúde atual</style> do inimigo como dano bônus ao acerto. O dano por acerto é limitado a <style=cIsDamage>{Damage Cap}% <style=cStack>(+{Damage Cap Extra Stacks}% por acúmumlo)</style></style> do seu <style=cIsDamage>dano BASE</style>. <style=cDeath>Você não poderá mais causar acertos críticos</style>.",
     "ITEM_CARVINGBLADE_LORE": "",
     "CRUCIFIX": "Crucifixo",
     "ITEM_CRUCIFIX_NAME": "Crucifixo",

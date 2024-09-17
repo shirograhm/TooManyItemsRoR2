@@ -16,6 +16,7 @@ namespace TooManyItems
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
 
         // Deal a percentage of enemy current health as bonus on-hit damage. You cannot crit.
+        // On-hit, deal 2% of the enemy's current HP. Per-hit damage is capped at 4000% (+1000% per stack) of your BASE damage. You cannot crit.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Carving Blade",
             "Enabled",
@@ -26,28 +27,39 @@ namespace TooManyItems
                 "ITEM_CARVINGBLADE_DESC"
             }
         );
-        public static ConfigurableValue<float> percentDamagePerStack = new(
+        public static ConfigurableValue<float> currentHPDamage = new(
             "Item: Carving Blade",
             "On-Hit Damage Scaling",
-            1f,
+            2f,
             "Percent of enemy's current health dealt as bonus on-hit damage.",
             new List<string>()
             {
                 "ITEM_CARVINGBLADE_DESC"
             }
         );
-        // This damage is capped at 10000% of the player's base damage.
         public static ConfigurableValue<float> damageCapMultiplier = new(
             "Item: Carving Blade",
             "Damage Cap",
-            100f,
-            "Maximum damage on-hit. This value is multiplied by the user's base damage.\nSet this value to -1 to remove the cap.",
+            4000f,
+            "Maximum damage on-hit. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
             new List<string>()
             {
                 "ITEM_CARVINGBLADE_DESC"
             }
         );
-        public static float multiplierPerStack = percentDamagePerStack.Value / 100.0f;
+        public static ConfigurableValue<float> damageCapMultiplierExtraStacks = new(
+            "Item: Carving Blade",
+            "Damage Cap Extra Stacks",
+            1000f,
+            "Maximum damage on-hit with extra stacks. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
+            new List<string>()
+            {
+                "ITEM_CARVINGBLADE_DESC"
+            }
+        );
+        public static float currentHPDamageAsPercent = currentHPDamage.Value / 100.0f;
+        public static float damageCapMultAsPercent = damageCapMultiplier.Value / 100.0f;
+        public static float damageCapMultExtraStacksAsPercent = damageCapMultiplierExtraStacks.Value / 100.0f;
 
         public class Statistics : MonoBehaviour
         {
@@ -140,9 +152,9 @@ namespace TooManyItems
             itemDef.hidden = false;
         }
 
-        public static float CalculateDamageOnHit(CharacterBody sender, int itemCount)
+        public static float CalculateDamageCapPercent(int itemCount)
         {
-            return sender.healthComponent.health * Utils.GetHyperbolicStacking(multiplierPerStack, itemCount);
+            return damageCapMultAsPercent + damageCapMultExtraStacksAsPercent * (itemCount - 1);
         }
 
         public static void Hooks()
@@ -164,13 +176,15 @@ namespace TooManyItems
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerInfo.inventory.GetItemCount(itemDef);
-                    if (count > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
+                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
                     {
-                        // Minimum of 0.1 damage to prevent negative values in LookingGlass
-                        float amount = Mathf.Max(CalculateDamageOnHit(victimInfo.body, count), 0.1f);
-                        if (damageCapMultiplier > 0) amount = Mathf.Min(amount, attackerInfo.body.damage * damageCapMultiplier);
-
+                        // Minimum of 0.01 damage to prevent negative values in LookingGlass
+                        float amount = Mathf.Max(victimInfo.body.healthComponent.health * currentHPDamageAsPercent, 0.01f);
+                        // Cap the damage. If the damage cap was set to -1 to remove it, set it to default value instead.
+                        if (damageCapMultiplier.Value < 0) damageCapMultAsPercent = 40f;
+                        amount = Mathf.Min(amount, attackerInfo.body.damage * CalculateDamageCapPercent(itemCount));
+                        
                         DamageInfo proc = new()
                         {
                             damage = amount,

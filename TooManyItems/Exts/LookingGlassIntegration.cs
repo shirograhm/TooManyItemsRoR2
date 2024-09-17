@@ -162,7 +162,7 @@ namespace TooManyItems
                 if (CarvingBlade.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Damage On-Hit: ");
+                    stats.descriptions.Add("On-Hit Damage Cap: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.descriptions.Add("Damage Dealt: ");
@@ -173,7 +173,7 @@ namespace TooManyItems
                         var values = new List<float> {  };
                         if (master && master.inventory)
                         {
-                            values.Add(Utils.GetHyperbolicStacking(CarvingBlade.multiplierPerStack, itemCount));
+                            values.Add(CarvingBlade.CalculateDamageCapPercent(itemCount));
 
                             var component = master.inventory.GetComponent<CarvingBlade.Statistics>();
                             if (component)
@@ -187,7 +187,7 @@ namespace TooManyItems
                         }
                         else
                         {
-                            values.Add(Utils.GetHyperbolicStacking(CarvingBlade.multiplierPerStack, itemCount));
+                            values.Add(CarvingBlade.CalculateDamageCapPercent(itemCount));
                             values.Add(0f);
                         }
                         return values;
