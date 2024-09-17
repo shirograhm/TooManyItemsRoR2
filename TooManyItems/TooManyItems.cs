@@ -192,83 +192,83 @@ namespace TooManyItems
             };
         }
 
-        private void Update()
-        {
-            if (!NetworkServer.active) return;
+        //private void Update()
+        //{
+        //    if (!NetworkServer.active) return;
 
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
-                //DropItem(Abacus.itemDef);
-                DropItem(BloodDice.itemDef);
-                //DropItem(GlassMarbles.itemDef);
-                //DropItem(Horseshoe.itemDef);
-                //DropItem(IronHeart.itemDef);
-                //DropItem(Permafrost.itemDef);
-                //DropItem(RustyTrowel.itemDef);
+        //    if (Input.GetKeyDown(KeyCode.F2))
+        //    {
+        //        //DropItem(Abacus.itemDef);
+        //        DropItem(BloodDice.itemDef);
+        //        //DropItem(GlassMarbles.itemDef);
+        //        //DropItem(Horseshoe.itemDef);
+        //        //DropItem(IronHeart.itemDef);
+        //        //DropItem(Permafrost.itemDef);
+        //        //DropItem(RustyTrowel.itemDef);
 
-                //DropItem(BrassKnuckles.itemDef);
-                //DropItem(BrokenMask.itemDef);
-                //DropItem(Epinephrine.itemDef);
-                //DropItem(HereticSeal.itemDef);
-                //DropItem(HolyWater.itemDef);
-                //DropItem(Hoodie.itemDef);
-                //DropItem(MagnifyingGlass.itemDef);
-                //DropItem(SoulRing.itemDef);
+        //        //DropItem(BrassKnuckles.itemDef);
+        //        //DropItem(BrokenMask.itemDef);
+        //        //DropItem(Epinephrine.itemDef);
+        //        //DropItem(HereticSeal.itemDef);
+        //        //DropItem(HolyWater.itemDef);
+        //        //DropItem(Hoodie.itemDef);
+        //        //DropItem(MagnifyingGlass.itemDef);
+        //        //DropItem(SoulRing.itemDef);
 
-                //DropItem(BottleCap.itemDef);
-                //DropItem(BreadLoaf.itemDef);
-                //DropItem(DebitCard.itemDef);
-                //DropItem(EdibleGlue.itemDef);
-                //DropItem(MilkCarton.itemDef);
-                //DropItem(PaperPlane.itemDef);
-                //DropItem(Photodiode.itemDef);
-                //DropItem(RedBlueGlasses.itemDef);
-                //DropItem(RubberDucky.itemDef);
-                //DropItem(Thumbtack.itemDef, 4);
+        //        //DropItem(BottleCap.itemDef);
+        //        //DropItem(BreadLoaf.itemDef);
+        //        //DropItem(DebitCard.itemDef);
+        //        //DropItem(EdibleGlue.itemDef);
+        //        //DropItem(MilkCarton.itemDef);
+        //        //DropItem(PaperPlane.itemDef);
+        //        //DropItem(Photodiode.itemDef);
+        //        //DropItem(RedBlueGlasses.itemDef);
+        //        //DropItem(RubberDucky.itemDef);
+        //        //DropItem(Thumbtack.itemDef, 4);
 
-                //DropItem(AncientCoin.itemDef);
-                DropItem(CarvingBlade.itemDef);
-                //DropItem(Crucifix.itemDef);
-                //DropItem(SpiritStone.itemDef);
+        //        //DropItem(AncientCoin.itemDef);
+        //        DropItem(CarvingBlade.itemDef);
+        //        //DropItem(Crucifix.itemDef);
+        //        //DropItem(SpiritStone.itemDef);
 
-                //DropItem(IronHeartVoid.itemDef);
-                //DropItem(ShadowCrest.itemDef);
+        //        //DropItem(IronHeartVoid.itemDef);
+        //        //DropItem(ShadowCrest.itemDef);
 
-                //DropItem(BuffTotem.equipmentDef);
-                //DropItem(TatteredScroll.equipmentDef);
-                //DropItem(Chalice.equipmentDef);
-                //DropItem(Vanity.equipmentDef);
-            }
-        }
+        //        //DropItem(BuffTotem.equipmentDef);
+        //        //DropItem(TatteredScroll.equipmentDef);
+        //        //DropItem(Chalice.equipmentDef);
+        //        //DropItem(Vanity.equipmentDef);
+        //    }
+        //}
 
-        private void DropItem(ItemDef def)
-        {
-            DropItem(def, 1);
-        }
+        //private void DropItem(ItemDef def)
+        //{
+        //    DropItem(def, 1);
+        //}
 
-        private void DropItem(ItemDef def, int itemCount)
-        {
-            foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
-            {
-                CharacterBody body = controller.master.GetBody();
-                if (body)
-                {
-                    ScrapperController.CreateItemTakenOrb(body.corePosition, body.gameObject, def.itemIndex);
-                    body.inventory.GiveItem(def, itemCount);
-                }
-            }
-        }
+        //private void DropItem(ItemDef def, int itemCount)
+        //{
+        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //    {
+        //        CharacterBody body = controller.master.GetBody();
+        //        if (body)
+        //        {
+        //            ScrapperController.CreateItemTakenOrb(body.corePosition, body.gameObject, def.itemIndex);
+        //            body.inventory.GiveItem(def, itemCount);
+        //        }
+        //    }
+        //}
 
-        private void DropItem(EquipmentDef def)
-        {
-            foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
-            {
-                Transform transform = controller.master.GetBodyObject().transform;
+        //private void DropItem(EquipmentDef def)
+        //{
+        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //    {
+        //        Transform transform = controller.master.GetBodyObject().transform;
 
-                Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-                PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
-            }
-        }
+        //        Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
+        //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
+        //    }
+        //}
 
         public struct GenericCharacterInfo
         {
