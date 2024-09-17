@@ -28,7 +28,7 @@
     "CARVINGBLADE": "Резак",
     "ITEM_CARVINGBLADE_NAME": "Резак",
     "ITEM_CARVINGBLADE_PICKUP": "Вы наносите дополнительный урон при попадании, в зависимости от текущего здоровья врага. <style=cDeath>Вы больше не можете наносить критические удары.</style>.",
-    "ITEM_CARVINGBLADE_DESC": "При попадании, враг будет получать бонусный урон в размере <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% за шт.)</style> от его текущего здоровья. <style=cDeath>Вы больше не можете наносить критические удары</style>.",
+    "ITEM_CARVINGBLADE_DESC": "При попадании, враг будет получать бонусный урон в размере <style=cIsDamage>{On-Hit Damage Scaling}%</style> от его текущего здоровья. Данный урон не может превышать <style=cIsDamage>{Damage Cap}% <style=cStack>(+{Damage Cap Extra Stacks}% за шт.)</style></style> вашего <style=cIsDamage>БАЗОВОГО урона</style>. <style=cDeath>Вы больше не можете наносить критические удары</style>.",
     "ITEM_CARVINGBLADE_LORE": "",
     "CRUCIFIX": "Наперсный крест",
     "ITEM_CRUCIFIX_NAME": "Наперсный крест",

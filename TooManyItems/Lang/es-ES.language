@@ -33,7 +33,7 @@
     "CARVINGBLADE": "Hoja de Tallado",
     "ITEM_CARVINGBLADE_NAME": "Hoja de Tallado",
     "ITEM_CARVINGBLADE_PICKUP": "Inflige daño al golpear basado en la salud actual del enemigo. <style=cDeath>No podrás realizar golpes críticos</style>.",
-    "ITEM_CARVINGBLADE_DESC": "Haz <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% por stack)</style> de la salud actual del enemigo como daño adicional al golpear <style=cDeath>No podrás realizar golpes críticos</style>.",
+    "ITEM_CARVINGBLADE_DESC": "Haz <style=cIsDamage>{On-Hit Damage Scaling}%</style> de la salud actual del enemigo como daño adicional al golpear. El daño por golpe está limitado a <style=cIsDamage>{Damage Cap}% <style=cStack>(+{Damage Cap Extra Stacks}% por stack)</style></style> de tu <style=cIsDamage> daño BASE</style>. <style=cDeath>No podrás realizar golpes críticos</style>.",
     "ITEM_CARVINGBLADE_LORE": "",
     "CRUCIFIX": "Crucifijo",
     "ITEM_CRUCIFIX_NAME": "Crucifijo",

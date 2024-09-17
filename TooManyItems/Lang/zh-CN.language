@@ -28,7 +28,7 @@
     "CARVINGBLADE": "刻刀",
     "ITEM_CARVINGBLADE_NAME": "刻刀",
     "ITEM_CARVINGBLADE_PICKUP": "根据敌人当前的生命值在命中时造成额外伤害。<style=cDeath>你无法再暴击</style>。",
-    "ITEM_CARVINGBLADE_DESC": "造成 <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% 每层)</style> 敌人当前生命值的额外伤害。<style=cDeath>你无法再暴击</style>。",
+    "ITEM_CARVINGBLADE_DESC": "造成 <style=cIsDamage>{On-Hit Damage Scaling}%</style> 敌人当前生命值的额外伤害。每次命中伤害上限为基础伤害的 <style=cIsDamage>{Damage Cap}% <style=cStack>(+{Damage Cap Extra Stacks}% 每层)</style></style>。<style=cDeath>你无法再暴击</style>。",
     "ITEM_CARVINGBLADE_LORE": "",
     "CRUCIFIX": "十字架",
     "ITEM_CRUCIFIX_NAME": "十字架",
