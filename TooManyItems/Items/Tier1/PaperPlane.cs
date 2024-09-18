@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Increase movement speed while airborne.
+        // Increase damaage while airborne.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Paper Plane",
             "Enabled",
@@ -20,17 +20,17 @@ namespace TooManyItems
                 "ITEM_PAPERPLANE_DESC"
             }
         );
-        public static ConfigurableValue<float> movespeedIncrease = new(
+        public static ConfigurableValue<float> damageBonus = new(
             "Item: Paper Plane",
-            "Movement Speed",
-            18f,
-            "Percent movement speed gained per stack while airborne.",
+            "Damage Increase",
+            15f,
+            "Percent bonus damage dealt per stack while airborne.",
             new List<string>()
             {
                 "ITEM_PAPERPLANE_DESC"
             }
         );
-        public static float movespeedIncreasePercent = movespeedIncrease.Value / 100f;
+        public static float damageBonusPercent = damageBonus.Value / 100f;
 
         internal static void Init()
         {
@@ -58,7 +58,7 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Damage
             };
         }
 
@@ -77,14 +77,14 @@ namespace TooManyItems
                 }
             };
 
-            RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
+            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (sender && sender.inventory)
+                if (attackerInfo.inventory != null && attackerInfo.body != null)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
-                    if (count > 0 && sender.characterMotor && !sender.characterMotor.isGrounded)
+                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0 && attackerInfo.body.characterMotor && !attackerInfo.body.characterMotor.isGrounded)
                     {
-                        args.moveSpeedMultAdd += movespeedIncreasePercent * count;
+                        damageInfo.damage *= 1 + itemCount * damageBonusPercent;
                     }
                 }
             };
