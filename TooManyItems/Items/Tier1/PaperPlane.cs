@@ -9,7 +9,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Increase damaage while airborne.
+        // Increase damage while airborne.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Paper Plane",
             "Enabled",
