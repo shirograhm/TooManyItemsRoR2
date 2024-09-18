@@ -48,17 +48,10 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<BloodDice.Statistics>())
                         {
                             var component = master.inventory.GetComponent<BloodDice.Statistics>();
-                            if (component)
-                            {
-                                values.Add(component.PermanentHealth);
-                            }
-                            else
-                            {
-                                values.Add(0f);
-                            }
+                            values.Add(component.PermanentHealth);
                         }
                         else
                         {
@@ -107,14 +100,28 @@ namespace TooManyItems
                 if (BreadLoaf.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Healing On-Kill: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Healing);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Gold On-Kill: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Gold);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
+                    stats.descriptions.Add("Kills Remaining: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            BreadLoaf.healthGainOnKillPercent * itemCount
-                        };
+                        var values = new List<float> { };
+                        if (master && master.inventory && master.inventory.GetComponent<BreadLoaf.Statistics>())
+                        {
+                            var component = master.inventory.GetComponent<BreadLoaf.Statistics>();
+
+                            values.Add(BreadLoaf.goldGainOnKill.Value * itemCount);
+                            values.Add(BreadLoaf.killsNeededToScrap - component.KillsCounter);
+                        }
+                        else
+                        {
+                            values.Add(BreadLoaf.goldGainOnKill.Value * itemCount);
+                            values.Add(0f);
+                        }
+                        return values;
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BreadLoaf.itemDef.itemIndex, stats);
                 }
@@ -133,19 +140,12 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<BrokenMask.Statistics>())
                         {
-                            values.Add(BrokenMask.burnDamagePercent * itemCount);
-
                             var component = master.inventory.GetComponent<BrokenMask.Statistics>();
-                            if (component)
-                            {
-                                values.Add(component.TotalDamageDealt);
-                            }
-                            else
-                            {
-                                values.Add(0f);
-                            }
+
+                            values.Add(BrokenMask.burnDamagePercent * itemCount);
+                            values.Add(component.TotalDamageDealt);
                         }
                         else
                         {
@@ -171,19 +171,12 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> {  };
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<CarvingBlade.Statistics>())
                         {
-                            values.Add(CarvingBlade.CalculateDamageCapPercent(itemCount));
-
                             var component = master.inventory.GetComponent<CarvingBlade.Statistics>();
-                            if (component)
-                            {
-                                values.Add(Mathf.Max(component.TotalDamageDealt, 0));
-                            }
-                            else
-                            {
-                                values.Add(0f);
-                            }
+
+                            values.Add(CarvingBlade.CalculateDamageCapPercent(itemCount));
+                            values.Add(Mathf.Max(component.TotalDamageDealt, 0));
                         }
                         else
                         {
@@ -240,7 +233,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            EdibleGlue.slowRadiusPerStack * itemCount
+                            EdibleGlue.GetSlowRadius(itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)EdibleGlue.itemDef.itemIndex, stats);
@@ -400,19 +393,12 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<IronHeart.Statistics>())
                         {
-                            values.Add(IronHeart.multiplierPerStack * itemCount);
-
                             var component = master.inventory.GetComponent<IronHeart.Statistics>();
-                            if (component)
-                            {
-                                values.Add(component.TotalDamageDealt);
-                            }
-                            else
-                            {
-                                values.Add(0f);
-                            }
+                            
+                            values.Add(IronHeart.multiplierPerStack * itemCount);
+                            values.Add(component.TotalDamageDealt);
                         }
                         else
                         {
@@ -468,13 +454,13 @@ namespace TooManyItems
                 if (PaperPlane.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Movement Speed: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.descriptions.Add("Bonus Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            PaperPlane.movespeedIncreasePercent * itemCount
+                            PaperPlane.damageBonusPercent * itemCount
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)PaperPlane.itemDef.itemIndex, stats);
@@ -576,19 +562,12 @@ namespace TooManyItems
                     {
                         var values = new List<float> { };
 
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<RustyTrowel.Statistics>())
                         {
-                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
-
                             var component = master.inventory.GetComponent<RustyTrowel.Statistics>();
-                            if (component)
-                            {
-                                values.Add(component.TotalHealingDone);
-                            }
-                            else
-                            {
-                                values.Add(0f);
-                            }
+                            
+                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
+                            values.Add(component.TotalHealingDone);
                         }
                         else
                         {
@@ -629,17 +608,10 @@ namespace TooManyItems
                     {
                         var values = new List<float> { };
 
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<SoulRing.Statistics>())
                         {
                             var component = master.inventory.GetComponent<SoulRing.Statistics>();
-                            if (component)
-                            {
-                                values.Add(component.HealthRegen);
-                            }
-                            else
-                            {
-                                values.Add(0f);
-                            }
+                            values.Add(component.HealthRegen);
                         }
                         else
                         {
@@ -665,19 +637,16 @@ namespace TooManyItems
                     {
                         var values = new List<float> { };
 
-                        if (master && master.inventory)
+                        if (master && master.inventory && master.inventory.GetComponent<SpiritStone.Statistics>())
                         {
                             var component = master.inventory.GetComponent<SpiritStone.Statistics>();
-                            if (component)
-                                values.Add(component.PermanentShield);
-                            else
-                                values.Add(0f);
+                            values.Add(component.PermanentShield);
                         }
                         else
                         {
                             values.Add(0f);
                         }
-                        values.Add(SpiritStone.maxHealthLostPercent * itemCount);
+                        values.Add(Utils.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount));
 
                         return values;
                     };
