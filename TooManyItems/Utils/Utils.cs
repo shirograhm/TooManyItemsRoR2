@@ -96,6 +96,11 @@ namespace TooManyItems
             return body;
         }
 
+        public static uint ScaleGoldWithDifficulty(int goldGranted)
+        {
+            return Convert.ToUInt32(goldGranted * (1 + 50 * GetDifficultyAsPercentage()));
+        }
+
         public static float GetChanceAfterLuck(float percent, float luckIn)
         {
             int luck = Mathf.CeilToInt(luckIn);
