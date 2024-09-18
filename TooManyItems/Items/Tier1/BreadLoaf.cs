@@ -1,4 +1,6 @@
 ﻿using R2API;
+using R2API.Networking;
+using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // While the teleporter is charging, killing enemies heals you for a portion of your missing health.
+        // Gain gold on kill. After enough kills, gain bonus gold and convert a stack of this item to scrap.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Loaf of Bread",
             "Enabled",
@@ -21,17 +23,98 @@ namespace TooManyItems
                 "ITEM_BREADLOAF_DESC"
             }
         );
-        public static ConfigurableValue<float> healthGainOnKill = new(
+        public static ConfigurableValue<int> goldGainOnKill = new(
             "Item: Loaf of Bread",
-            "Healing On Kill",
-            5f,
-            "Percent missing health gained after killing an enemy during the teleporter event.",
+            "Gold On Kill",
+            1,
+            "Gold gained after killing an enemy, up to a set number of times (see next config).",
             new List<string>()
             {
                 "ITEM_BREADLOAF_DESC"
             }
         );
-        public static float healthGainOnKillPercent = healthGainOnKill.Value / 100f;
+        public static ConfigurableValue<int> killsNeededToScrap = new(
+            "Item: Loaf of Bread",
+            "Kills Needed",
+            1,
+            "How many kills are required per item stack to scrap the item and gain reward gold.",
+            new List<string>()
+            {
+                "ITEM_BREADLOAF_DESC"
+            }
+        );
+        public static ConfigurableValue<int> goldGainOnScrap = new(
+            "Item: Loaf of Bread",
+            "Gold On Scrap",
+            25,
+            "Gold gained after killing enough enemies. This item turns into scrap once this happens.",
+            new List<string>()
+            {
+                "ITEM_BREADLOAF_DESC"
+            }
+        );
+
+        public class Statistics : MonoBehaviour
+        {
+            private int _killsCounter;
+            public int KillsCounter
+            {
+                get { return _killsCounter; }
+                set
+                {
+                    _killsCounter = value;
+                    if (NetworkServer.active)
+                    {
+                        new Sync(gameObject.GetComponent<NetworkIdentity>().netId, value).Send(NetworkDestination.Clients);
+                    }
+                }
+            }
+
+            public class Sync : INetMessage
+            {
+                NetworkInstanceId objId;
+                int killsCounter;
+
+                public Sync()
+                {
+                }
+
+                public Sync(NetworkInstanceId objId, int kills)
+                {
+                    this.objId = objId;
+                    killsCounter = kills;
+                }
+
+                public void Deserialize(NetworkReader reader)
+                {
+                    objId = reader.ReadNetworkId();
+                    killsCounter = reader.ReadInt32();
+                }
+
+                public void OnReceived()
+                {
+                    if (NetworkServer.active) return;
+
+                    GameObject obj = Util.FindNetworkObject(objId);
+                    if (obj != null)
+                    {
+                        Statistics component = obj.GetComponent<Statistics>();
+                        if (component != null)
+                        {
+                            component.KillsCounter = killsCounter;
+                        }
+                    }
+                }
+
+                public void Serialize(NetworkWriter writer)
+                {
+                    writer.Write(objId);
+                    writer.Write(killsCounter);
+
+                    writer.FinishMessage();
+                }
+            }
+        }
 
         internal static void Init()
         {
@@ -39,6 +122,8 @@ namespace TooManyItems
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
+
+            NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
         }
@@ -59,15 +144,19 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Healing,
+                ItemTag.Utility,
 
-                ItemTag.HoldoutZoneRelated,
                 ItemTag.OnKillEffect
             };
         }
 
         public static void Hooks()
         {
+            CharacterMaster.onStartGlobal += (obj) =>
+            {
+                obj.inventory?.gameObject.AddComponent<Statistics>();
+            };
+
             GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
                 if (!NetworkServer.active) return;
@@ -78,12 +167,29 @@ namespace TooManyItems
                     int itemCount = atkBody.inventory.GetItemCount(itemDef);
                     if (itemCount > 0)
                     {
-                        foreach (HoldoutZoneController hzc in InstanceTracker.GetInstancesList<HoldoutZoneController>())
-                        {
-                            if (hzc.isActiveAndEnabled && hzc.IsBodyInChargingRadius(atkBody))
+                        Statistics stats = atkBody.inventory.GetComponent<Statistics>();
+                        if (stats) {
+                            // Increase kill counter
+                            stats.KillsCounter += 1;
+                            // If kill limit is reached, scrap 1 stack and grant reward gold
+                            if (stats.KillsCounter >= killsNeededToScrap.Value)
                             {
-                                float healing = healthGainOnKillPercent * itemCount * atkBody.healthComponent.missingCombinedHealth;
-                                atkBody.healthComponent.Heal(healing, new ProcChainMask());
+                                CharacterMasterNotificationQueue.PushItemTransformNotification(
+                                    atkBody.master,
+                                    itemDef.itemIndex,
+                                    RoR2Content.Items.ScrapWhite.itemIndex,
+                                    CharacterMasterNotificationQueue.TransformationType.Default
+                                ); 
+                                atkBody.inventory.RemoveItem(itemDef);
+                                atkBody.inventory.GiveItem(RoR2Content.Items.ScrapWhite);
+                                atkBody.master.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGainOnScrap.Value));
+                                // Reset the kills counter
+                                stats.KillsCounter = 0;
+                            }
+                            else
+                            {
+                                // Gain gold on kill
+                                atkBody.master.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGainOnKill.Value));
                             }
                         }
                     }
