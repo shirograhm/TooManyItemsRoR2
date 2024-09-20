@@ -2,6 +2,7 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -36,7 +37,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> killsNeededToScrap = new(
             "Item: Loaf of Bread",
             "Kills Needed",
-            25,
+            100,
             "How many kills are required per item stack to scrap the item and gain reward gold.",
             new List<string>()
             {
@@ -189,7 +190,7 @@ namespace TooManyItems
                             else
                             {
                                 // Gain gold on kill
-                                atkBody.master.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGainOnKill.Value));
+                                atkBody.master.GiveMoney(Convert.ToUInt32(goldGainOnKill.Value));
                             }
                         }
                     }
