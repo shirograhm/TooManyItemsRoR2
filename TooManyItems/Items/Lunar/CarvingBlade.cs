@@ -16,7 +16,7 @@ namespace TooManyItems
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
 
         // Deal a percentage of enemy current health as bonus on-hit damage. You cannot crit.
-        // On-hit, deal 2% of the enemy's current HP. Per-hit damage is capped at 4000% (+1000% per stack) of your BASE damage. You cannot crit.
+        // On-hit, deal 2% of the enemy's current HP. Per-hit damage is capped at 2000% (+1000% per stack) of your BASE damage. You cannot crit.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Carving Blade",
             "Enabled",
@@ -40,7 +40,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageCapMultiplier = new(
             "Item: Carving Blade",
             "Damage Cap",
-            4000f,
+            2000f,
             "Maximum damage on-hit. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
             new List<string>()
             {

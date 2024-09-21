@@ -1,5 +1,6 @@
 ﻿using R2API;
 using RoR2;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -21,11 +22,21 @@ namespace TooManyItems
                 "ITEM_EDIBLEGLUE_DESC"
             }
         );
-        public static ConfigurableValue<float> slowRadiusPerStack = new(
+        public static ConfigurableValue<float> slowRadiusInitialStack = new(
             "Item: Edible Glue",
-            "Slow Radius",
-            8f,
-            "Slow radius amount for each stack of item.",
+            "Slow Radius Initial Stack",
+            20f,
+            "Slow radius amount for the first stack of item.",
+            new List<string>()
+            {
+                "ITEM_EDIBLEGLUE_DESC"
+            }
+        );
+        public static ConfigurableValue<float> slowRadiusPerExtraStack = new(
+            "Item: Edible Glue",
+            "Slow Radius Extra Stacks",
+            10f,
+            "Slow radius amount for each additional stack of item.",
             new List<string>()
             {
                 "ITEM_EDIBLEGLUE_DESC"
@@ -74,6 +85,11 @@ namespace TooManyItems
             };
         }
 
+        public static float GetSlowRadius(int itemCount)
+        {
+            return slowRadiusInitialStack.Value + slowRadiusPerExtraStack.Value * (itemCount - 1);
+        }
+
         public static void Hooks()
         {
             GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
@@ -83,15 +99,15 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
-                    if (count > 0)
+                    int itemCount = atkBody.inventory.GetItemCount(itemDef);
+                    if (itemCount > 0)
                     {
                         HurtBox[] hurtboxes = new SphereSearch
                         {
                             mask = LayerIndex.entityPrecise.mask,
                             origin = atkBody.corePosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
-                            radius = slowRadiusPerStack.Value * count
+                            radius = GetSlowRadius(itemCount)
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
 
                         foreach (HurtBox hurtbox in hurtboxes)
