@@ -25,11 +25,11 @@ If configuration issues persist, don't hesitate to delete the config file and le
 | | | |
 |-|-|-|
 | ![Ancient Coin](https://i.imgur.com/NWJgZGVt.png) | **Ancient Coin** | Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage. |
-| ![Carving Blade](https://i.imgur.com/z29LUT2t.png) | **Carving Blade** | Deal 2% of enemy current health as bonus on-hit damage. Per-hit damage is capped at 4000% (+1000% per stack) of your BASE damage. You cannot critically strike. |
+| ![Carving Blade](https://i.imgur.com/z29LUT2t.png) | **Carving Blade** | Deal 2% of enemy current health as bonus on-hit damage. Per-hit damage is capped at 2000% (+1000% per stack) of your BASE damage. You cannot critically strike. |
 | ![Crucifix](https://i.imgur.com/6JnhLFbt.png) | **Crucifix** | Reduce damage taken by 40%. Taking damage sets you on fire for 5% max health over 3 (+3 per stack) seconds. |
 | ![Spirit Stone](https://i.imgur.com/2PhhDygt.png) | **Spirit Stone** | On-kill, gain 1 (+1 per stack) permanent shield. Lose 30% (+30% per stack) max HP. |
 | ![Shadow Crest](https://i.imgur.com/RYlNwqAt.png) | **Shadow Crest** | Regenerate 1.2% (+1.2% per stack) of your missing health every second. |
-| ![Defiled Heart](https://i.imgur.com/H8JadY0t.png) | **Defiled Heart** | Gain 350 HP. Also, gain 1.5% (+1.5% per stack) of your max health as bonus BASE damage. |
+| ![Defiled Heart](https://i.imgur.com/H8JadY0t.png) | **Defiled Heart** | Gain 300 HP. Also, gain 1.5% (+1.5% per stack) of your max health as bonus BASE damage. |
 | ![Abacus](https://i.imgur.com/yD368cAt.png) | **Abacus** | Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Every 1% crit chance above 100% grants 1% crit damage. |
 | ![Blood Dice](https://i.imgur.com/7nB0tFPt.png) | **Blood Dice** | On-kill, gain 2 to 12 permanent HP, up to a max of 550 (+550 per stack) HP. |
 | ![Glass Marbles](https://i.imgur.com/NzRNge2t.png) | **Glass Marbles** | Gain 2 (+2 per stack) BASE damage per level. |
@@ -48,10 +48,10 @@ If configuration issues persist, don't hesitate to delete the config file and le
 | ![3D Glasses](https://i.imgur.com/wys8KPct.png) | **3D Glasses** | Gain 6% (+6% per stack) critical strike chance and 6% (+6% per stack) critical strike damage. |
 | ![Bottle Cap](https://i.imgur.com/jq1lvS9t.png) | **Bottle Cap** | Reduce your ultimate skill cooldown by 10% (+10% per stack). |
 | ![Debit Card](https://i.imgur.com/BXUGjeft.png) | **Debit Card** | Get an 10% (+10% per stack) rebate on purchases. |
-| ![Edible Glue](https://i.imgur.com/3gpa6WWt.png) | **Edible Glue** | On-kill, slow enemies within 8m (+8m per stack) by 80% for 4 seconds. |
-| ![Loaf of Bread](https://i.imgur.com/mzlxTIrt.png) | **Loaf of Bread** | While the teleporter is charging, killing enemies heals you for 5% (+5% per stack) of your missing health. |
+| ![Edible Glue](https://i.imgur.com/3gpa6WWt.png) | **Edible Glue** | On-kill, slow enemies within 20m (+10m per stack) by 80% for 4 seconds. |
+| ![Loaf of Bread](https://i.imgur.com/mzlxTIrt.png) | **Loaf of Bread** | Gain 1 (+1 per stack) gold on-kill. After 100 kills, scrap a stack of this item and gain 25 bonus gold, scaling with difficulty. |
 | ![Milk Carton](https://i.imgur.com/R6U6Uget.png) | **Milk Carton** | Reduce damage taken from elite enemies by 10% (+10% per stack). |
-| ![Paper Plane](https://i.imgur.com/pvG4mztt.png) | **Paper Plane** | Gain 18% (+18% per stack) movement speed while airborne. |
+| ![Paper Plane](https://i.imgur.com/pvG4mztt.png) | **Paper Plane** | Deal 15% (+15% per stack) more damage while airborne. |
 | ![Photodiode](https://i.imgur.com/4ZjgqKIt.png) | **Photodiode** | On-hit, gain 2% attack speed for 10 seconds. Stacks up to a max of 10 (+10 per stack) times. |
 | ![Rubber Ducky](https://i.imgur.com/dEgzWQht.png) | **Rubber Ducky** | Gain 5 (+5 per stack) armor. |
 | ![Thumbtack](https://i.imgur.com/q89u8kWt.png) | **Thumbtack** | Gain 4% (+4% per stack) chance to bleed enemies on-hit for 240% BASE damage over 3 seconds. Your bleed effects last an additional 0.25 (+0.25 per stack) seconds. |
@@ -72,8 +72,9 @@ If you would like to help translate this mod, please reach out to me through DM 
 - **Assets & Models:** shirograhm  
 - **Translations:**  
     - JustBro (Russian)  
-    - Elchia_Mushroom (Chinese)  
+    - Elchia_Mushroom, My Mom (Chinese)  
     - Yguenko (Spanish)  
     - Poppy (Portuguese)  
+    - B. (Japanese)
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
