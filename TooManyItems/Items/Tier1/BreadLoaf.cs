@@ -37,7 +37,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> killsNeededToScrap = new(
             "Item: Loaf of Bread",
             "Kills Needed",
-            100,
+            50,
             "How many kills are required per item stack to scrap the item and gain reward gold.",
             new List<string>()
             {
