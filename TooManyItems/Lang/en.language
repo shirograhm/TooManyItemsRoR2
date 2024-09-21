@@ -75,7 +75,7 @@
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "Paper Plane",
     "ITEM_PAPERPLANE_NAME": "Paper Plane",
-    "ITEM_PAPERPLANE_PICKUP": "Deal more damge while airborne.",
+    "ITEM_PAPERPLANE_PICKUP": "Deal more damage while airborne.",
     "ITEM_PAPERPLANE_DESC": "Deal <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase}% per stack)</style> more damage while airborne.",
     "ITEM_PAPERPLANE_LORE": "",
     "PHOTODIODE": "Photodiode",
