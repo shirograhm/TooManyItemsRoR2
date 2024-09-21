@@ -190,7 +190,7 @@ namespace TooManyItems
                             else
                             {
                                 // Gain gold on kill
-                                atkBody.master.GiveMoney(Convert.ToUInt32(goldGainOnKill.Value));
+                                atkBody.master.GiveMoney(Convert.ToUInt32(goldGainOnKill.Value * itemCount));
                             }
                         }
                     }
