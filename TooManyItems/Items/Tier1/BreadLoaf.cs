@@ -37,7 +37,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> killsNeededToScrap = new(
             "Item: Loaf of Bread",
             "Kills Needed",
-            50,
+            100,
             "How many kills are required per item stack to scrap the item and gain reward gold.",
             new List<string>()
             {
@@ -48,7 +48,7 @@ namespace TooManyItems
             "Item: Loaf of Bread",
             "Gold On Scrap",
             25,
-            "Gold gained after killing enough enemies. This item turns into scrap once this happens.",
+            "Gold gained after killing enough enemies (scales with difficulty). This item turns into scrap once this happens.",
             new List<string>()
             {
                 "ITEM_BREADLOAF_DESC"
