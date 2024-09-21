@@ -56,7 +56,7 @@
     "BREADLOAF": "Loaf of Bread",
     "ITEM_BREADLOAF_NAME": "Loaf of Bread",
     "ITEM_BREADLOAF_PICKUP": "Gain gold on-kill. After enough kills, this item turns into scrap and grants bonus gold.",
-    "ITEM_BREADLOAF_DESC": "Gain <style=cHumanObjective>{Gold On Kill} <style=cStack>(+{Gold On Kill} per stack)</style> gold</style> on-kill. After <style=cIsUtility>{Kills Needed} kills</style>, gain an extra <style=cHumanObjective>{Gold On Scrap} gold</style> and convert one stack of this item into scrap.",
+    "ITEM_BREADLOAF_DESC": "Gain <style=cHumanObjective>{Gold On Kill} <style=cStack>(+{Gold On Kill} per stack)</style> gold</style> on-kill. After <style=cIsUtility>{Kills Needed} kills</style>, scrap a stack of this item and gain an extra <style=cHumanObjective>{Gold On Scrap} gold</style>, <style=cIsUtility>scaling with difficulty</style>.",
     "ITEM_BREADLOAF_LORE": "",
     "DEBITCARD": "Debit Card",
     "ITEM_DEBITCARD_NAME": "Debit Card",
