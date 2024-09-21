@@ -10,6 +10,7 @@
     "EQUIPMENT_CHALICE_PICKUP": "<style=cDeath>Пожертвуйте частью своего текущего здоровья,</style> чтобы дать всем союзникам усиление урона и усиление скорости атаки.",
     "EQUIPMENT_CHALICE_DESC": "<style=cDeath>Пожертвуйте {Current Health Loss}% вашего текущего здоровья,</style> чтобы <style=cWorldEvent>Освятить</style> вас и ваших союзников. <style=cWorldEvent>Освящённые</style> наносят на <style=cIsDamage>{Consecrate Damage Bonus}% больше урона</style> и атакуют на <style=cIsDamage>{Consecrate Attack Speed Bonus}% быстрее</style> в течение <style=cIsUtility>{Consecrate Duration} секунд</style>.",
     "EQUIPMENT_CHALICE_LORE": "",
+
     "BUFFTOTEM": "Тотем молитвы",
     "EQUIPMENT_BUFFTOTEM_NAME": "Тотем молитвы",
     "EQUIPMENT_BUFFTOTEM_PICKUP": "При активации получите случайное усиление.",
@@ -20,6 +21,7 @@
     "EQUIPMENT_TATTEREDSCROLL_PICKUP": "Проклинает ближайших врагов при использовании. Убийство проклятых врагов приносит дополнительное золото.",
     "EQUIPMENT_TATTEREDSCROLL_DESC": "При активации, проклинает врагов в радиусе <style=cIsUtility>{Curse Distance}m</style> на <style=cIsUtility>{Curse Duration} секунд</style>. Убийство проклятых врагов дополнительно приносит <style=cHumanObjective>{Gold Granted} золота</style>.",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
+
     "ANCIENTCOIN": "Древняя монета",
     "ITEM_ANCIENTCOIN_NAME": "Древняя монета",
     "ITEM_ANCIENTCOIN_PICKUP": "Зарабатывайте больше золота. <style=cDeath>Получайте больше урона.</style>.",
@@ -40,6 +42,7 @@
     "ITEM_SPIRITSTONE_PICKUP": "Убийство врага даёт вам щит навсегда. <style=cDeath>Блокирует часть полоски максимального здоровья</style>.",
     "ITEM_SPIRITSTONE_DESC": "Убийство врага даёт вам <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} за шт.)</style> единицу щита навсегда</style>. <style=cDeath>Блокирует {Max Health Reduction}% <style=cStack>(+{Max Health Reduction}% за шт.)</style> от полоски максимального здоровья</style>.",
     "ITEM_SPIRITSTONE_LORE": "",
+
     "BOTTLECAP": "Крышечка",
     "ITEM_BOTTLECAP_NAME": "Крышечка",
     "ITEM_BOTTLECAP_PICKUP": "Уменьшает перезарядку специального умения.",
@@ -47,8 +50,8 @@
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "Буханка хлеба",
     "ITEM_BREADLOAF_NAME": "Буханка хлеба",
-    "ITEM_BREADLOAF_PICKUP": "Пока телепорт заряжается, убийство врагов лечит вас.",
-    "ITEM_BREADLOAF_DESC": "Пока телепорт заряжается, убийство врагов лечит вас на <style=cIsHealing>{Healing On Kill}%</style> <style=cStack>(+{Healing On Kill}% за шт.)</style> от вашего недостающего здоровья.",
+    "ITEM_BREADLOAF_PICKUP": "Получайте дополнительное золото при убийстве. Убив определённое количество врагов, превращается в Мусор и выплачивает бонусное золото.",
+    "ITEM_BREADLOAF_DESC": "Получайте <style=cHumanObjective>{Gold On Kill} <style=cStack>(+{Gold On Kill} за шт.)</style> дополнительное золото</style> за убийство. После <style=cIsUtility>{Kills Needed} убийств</style>, дополнительно выплачивает <style=cHumanObjective>{Gold On Scrap} золота</style> и превращает одну копию этого предмета в Мусор.",
     "ITEM_BREADLOAF_LORE": "",
     "DEBITCARD": "Дебетовая карта",
     "ITEM_DEBITCARD_NAME": "Дебетовая карта",
@@ -67,8 +70,8 @@
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "Бумажный самолётик",
     "ITEM_PAPERPLANE_NAME": "Бумажный самолётик",
-    "ITEM_PAPERPLANE_PICKUP": "Получайте прибавку к скорости, пока вы не касаетесь земли.",
-    "ITEM_PAPERPLANE_DESC": "Получайте <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% за шт.)</style> скорости передвижения, пока вы не касаетесь земли.",
+    "ITEM_PAPERPLANE_PICKUP": "Наносите больше урона врагам, пока вы не касаетесь земли.",
+    "ITEM_PAPERPLANE_DESC": "Наносите на <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase}% за шт.)</style> больше урона врагам, пока вы не касаетесь земли.",
     "ITEM_PAPERPLANE_LORE": "",
     "PHOTODIODE": "Фотодиод",
     "ITEM_PHOTODIODE_NAME": "Фотодиод",
@@ -90,6 +93,7 @@
     "ITEM_THUMBTACK_PICKUP": "Ваши атаки имеют небольшой шанс наложить <style=cIsDamage>кровотечение</style> на врагов. Также ваши эффекты <style=cIsDamage>кровотечения</style> длятся дольше.",
     "ITEM_THUMBTACK_DESC": "Получите <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance}% за шт.)</style> шанс</style> наложить <style=cIsDamage>кровотечение</style> на врагов, наносящее <style=cIsDamage>{Bleed Damage}% БАЗОВОГО урона</style> в течение<style=cIsUtility>{Bleed Duration} секунд</style>. Ваши эффекты <style=cIsDamage>кровотечения</style> длятся дольше на <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration} за шт.)</style> секунд</style>.",
     "ITEM_THUMBTACK_LORE": "",
+
     "BRASSKNUCKLES": "Латунный кастет",
     "ITEM_BRASSKNUCKLES_NAME": "Латунный кастет",
     "ITEM_BRASSKNUCKLES_PICKUP": "Мощные удары наносят больше урона и оглушают врагов.",
@@ -130,6 +134,7 @@
     "ITEM_SOULRING_PICKUP": "Навсегда увеличивает регенерацию здоровья после убийства.",
     "ITEM_SOULRING_DESC": "После убийства навсегда увеличивает регенерацию здоровья на <style=cIsHealing>{Regen On Kill} HP/s</style>, вплоть до <style=cIsHealing>{Maximum Regen On First Stack} <style=cStack>(+{Maximum Regen On Extra Stacks} за шт.)</style> ОЗ/с</style>.",
     "ITEM_SOULRING_LORE": "",
+
     "ABACUS": "Счёты",
     "ITEM_ABACUS_NAME": "Счёты",
     "ITEM_ABACUS_PICKUP": "Убийство врагов накапливает бонус к шансу крита до следующего этапа. Излишний шанс крита превращается в бонусный критический урон.",
@@ -165,6 +170,7 @@
     "ITEM_RUSTEDTROWEL_PICKUP": "Попадания по врагам создают Мульчу. Периодически получайте лечение, в зависимости от количества собранной Мульчи.",
     "ITEM_RUSTEDTROWEL_DESC": "При попадании по врагу вы получаете <style=cIsUtility>1</style> <style=cStack>(+1 за шт.)</style> заряд Мульчи. Каждые <style=cIsUtility>{Recharge Time} <style=cStack>(-{Recharge Time Reduction}% за шт.)</style> секунд</style>, весь запас Мульчи превращается в лечение. <style=cIsHealing>{Heal Per Stack} ОЗ</style> за каждый заряд Мульчи.",
     "ITEM_RUSTEDTROWEL_LORE": "",
+
     "VOIDHEART": "Осквернённое сердце",
     "ITEM_VOIDHEART_NAME": "Осквернённое сердце",
     "ITEM_VOIDHEART_PICKUP": "Увеличивает базовый урон в зависимости от максимального здоровья.",
