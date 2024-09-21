@@ -16,6 +16,7 @@ namespace TooManyItems
         public static GameObject vanityTargetIndicatorPrefab;
         public static GameObject implosionEffectObject;
 
+        public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.VANITY_COLOR);
 
         // Gain stacks of Hubris when killing enemies. Activate to cleanse all stacks and damage a target enemy. This damage scales with stacks cleansed.
@@ -91,6 +92,8 @@ namespace TooManyItems
             ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
 
             ContentAddition.AddBuffDef(hubrisDebuff);
+            
+            damageType = DamageAPI.ReserveDamageType();
 
             Hooks();
         }
@@ -199,7 +202,7 @@ namespace TooManyItems
             {
                 orig(self, damageReport);
 
-                if (self && self.equipmentSlot && self.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
+                if (self && self.equipmentSlot && self.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex && !damageReport.damageInfo.HasModdedDamageType(damageType))
                 {
                     self.AddBuff(hubrisDebuff);
                 }
@@ -240,6 +243,7 @@ namespace TooManyItems
                     procChainMask = new ProcChainMask(),
                     damageType = DamageType.BypassOneShotProtection | DamageType.BypassArmor | DamageType.BypassBlock | DamageType.Silent
                 };
+                damageInfo.AddModdedDamageType(damageType);
                 targetEnemy.healthComponent.TakeDamage(damageInfo);
 
                 return true;
