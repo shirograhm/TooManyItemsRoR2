@@ -26,7 +26,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Defiled Heart",
             "Health Increase",
-            350f,
+            300f,
             "Bonus health gained from this item. Does not increase with stacks.",
             new List<string>()
             {
