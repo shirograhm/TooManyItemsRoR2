@@ -198,46 +198,46 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        //DropItem(Abacus.itemDef);
+        //        DropItem(Abacus.itemDef);
         //        DropItem(BloodDice.itemDef);
-        //        //DropItem(GlassMarbles.itemDef);
-        //        //DropItem(Horseshoe.itemDef);
-        //        //DropItem(IronHeart.itemDef);
-        //        //DropItem(Permafrost.itemDef);
-        //        //DropItem(RustyTrowel.itemDef);
+        //        DropItem(GlassMarbles.itemDef);
+        //        DropItem(Horseshoe.itemDef);
+        //        DropItem(IronHeart.itemDef);
+        //        DropItem(Permafrost.itemDef);
+        //        DropItem(RustyTrowel.itemDef);
 
-        //        //DropItem(BrassKnuckles.itemDef);
-        //        //DropItem(BrokenMask.itemDef);
-        //        //DropItem(Epinephrine.itemDef);
-        //        //DropItem(HereticSeal.itemDef);
-        //        //DropItem(HolyWater.itemDef);
-        //        //DropItem(Hoodie.itemDef);
-        //        //DropItem(MagnifyingGlass.itemDef);
-        //        //DropItem(SoulRing.itemDef);
+        //        DropItem(BrassKnuckles.itemDef);
+        //        DropItem(BrokenMask.itemDef);
+        //        DropItem(Epinephrine.itemDef);
+        //        DropItem(HereticSeal.itemDef);
+        //        DropItem(HolyWater.itemDef);
+        //        DropItem(Hoodie.itemDef);
+        //        DropItem(MagnifyingGlass.itemDef);
+        //        DropItem(SoulRing.itemDef);
 
-        //        //DropItem(BottleCap.itemDef);
-        //        //DropItem(BreadLoaf.itemDef);
-        //        //DropItem(DebitCard.itemDef);
-        //        //DropItem(EdibleGlue.itemDef);
-        //        //DropItem(MilkCarton.itemDef);
-        //        //DropItem(PaperPlane.itemDef);
-        //        //DropItem(Photodiode.itemDef);
-        //        //DropItem(RedBlueGlasses.itemDef);
-        //        //DropItem(RubberDucky.itemDef);
-        //        //DropItem(Thumbtack.itemDef, 4);
+        //        DropItem(BottleCap.itemDef);
+        //        DropItem(BreadLoaf.itemDef);
+        //        DropItem(DebitCard.itemDef);
+        //        DropItem(EdibleGlue.itemDef);
+        //        DropItem(MilkCarton.itemDef);
+        //        DropItem(PaperPlane.itemDef);
+        //        DropItem(Photodiode.itemDef);
+        //        DropItem(RedBlueGlasses.itemDef);
+        //        DropItem(RubberDucky.itemDef);
+        //        DropItem(Thumbtack.itemDef, 4);
 
-        //        //DropItem(AncientCoin.itemDef);
+        //        DropItem(AncientCoin.itemDef);
         //        DropItem(CarvingBlade.itemDef);
-        //        //DropItem(Crucifix.itemDef);
-        //        //DropItem(SpiritStone.itemDef);
+        //        DropItem(Crucifix.itemDef);
+        //        DropItem(SpiritStone.itemDef);
 
-        //        //DropItem(IronHeartVoid.itemDef);
-        //        //DropItem(ShadowCrest.itemDef);
+        //        DropItem(IronHeartVoid.itemDef);
+        //        DropItem(ShadowCrest.itemDef);
 
-        //        //DropItem(BuffTotem.equipmentDef);
-        //        //DropItem(TatteredScroll.equipmentDef);
-        //        //DropItem(Chalice.equipmentDef);
-        //        //DropItem(Vanity.equipmentDef);
+        //        DropItem(BuffTotem.equipmentDef);
+        //        DropItem(TatteredScroll.equipmentDef);
+        //        DropItem(Chalice.equipmentDef);
+        //        DropItem(Vanity.equipmentDef);
         //    }
         //}
 
