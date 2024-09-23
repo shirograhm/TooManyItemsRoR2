@@ -4,7 +4,7 @@
 // <style=cArtifact> <style=cUserSetting> <style=cDeath>
 // <style=cSub> <style=cMono> <style=cShrine> <style=cEvent>
 {
-  "jp": {
+  "ja": {
     "VANITY": "虚栄の王冠",
     "EQUIPMENT_VANITY_NAME": "虚栄の王冠",
     "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>敵を倒すとスタックするデバフが付与される</style>。使用すると蓄積したスタック数に応じたダメージを与える。",
