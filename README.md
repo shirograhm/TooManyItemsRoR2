@@ -12,6 +12,7 @@ Generally compatible with most mods. Supports integration with [LookingGlass](ht
 ## DLC Support
 Survivors of the Void DLC is supported on all versions.  
 Seekers of the Storm DLC is supported for v0.5.0 and later.  
+Alloyed Collective DLC is supported for v0.6.0 and later.
 
 ## Issue Reports
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). If possible, provide the output log as it often makes debugging much easier.
@@ -71,10 +72,10 @@ If you would like to help translate this mod, please reach out to me through DM 
 - **Programming:** shirograhm  
 - **Assets & Models:** shirograhm  
 - **Translations:**  
-    - JustBro (Russian)  
-    - Elchia_Mushroom, My Mom (Chinese)  
-    - Yguenko (Spanish)  
-    - Poppy (Portuguese)  
-    - B. (Japanese)
+    - Russian: JustBro (discord)  
+    - Chinese: Elchia_Mushroom (discord), my mom (irl)  
+    - Spanish: Yguenko (discord)  
+    - Portugese: Poppy (discord)  
+    - Japanese: B. (discord)  
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
