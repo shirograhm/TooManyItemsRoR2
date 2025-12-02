@@ -58,7 +58,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -70,7 +72,7 @@ namespace TooManyItems
 
                 if (self && self.inventory)
                 {
-                    if (self.inventory.GetItemCount(itemDef) > 0)
+                    if (self.inventory.GetItemCountEffective(itemDef) > 0)
                     {
                         Utils.ForceRecalculate(self);
                     }
@@ -81,7 +83,7 @@ namespace TooManyItems
             {
                 if (attackerInfo.inventory != null && attackerInfo.body != null)
                 {
-                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    int itemCount = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0 && attackerInfo.body.characterMotor && !attackerInfo.body.characterMotor.isGrounded)
                     {
                         damageInfo.damage *= 1 + itemCount * damageBonusPercent;

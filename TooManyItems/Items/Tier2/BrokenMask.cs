@@ -139,7 +139,7 @@ namespace TooManyItems
                 CharacterBody attackerBody = dotStack.attackerObject.GetComponent<CharacterBody>();
                 if (attackerBody && attackerBody.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
+                    int count = attackerBody.inventory.GetItemCountEffective(itemDef);
 
                     float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
@@ -169,7 +169,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -212,7 +214,7 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (vicBody && atkBody && atkBody.inventory)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && damageReport.dotType != burnIndex && vicBody.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                     {
                         InflictDotInfo dotInfo = new()

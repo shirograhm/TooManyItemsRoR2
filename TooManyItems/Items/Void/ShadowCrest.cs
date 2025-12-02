@@ -58,7 +58,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Healing
+                ItemTag.Healing,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -70,7 +72,7 @@ namespace TooManyItems
 
                 if (self && self.inventory)
                 {
-                    int count = self.inventory.GetItemCount(itemDef);
+                    int count = self.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         Utils.ForceRecalculate(self);
@@ -82,7 +84,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1

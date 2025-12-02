@@ -88,7 +88,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -141,7 +143,7 @@ namespace TooManyItems
 
                 if (self && self.inventory)
                 {
-                    if (!self.HasBuff(hoodieBuffActive) && !self.HasBuff(hoodieBuffCooldown) && self.inventory.GetItemCount(itemDef) > 0)
+                    if (!self.HasBuff(hoodieBuffActive) && !self.HasBuff(hoodieBuffCooldown) && self.inventory.GetItemCountEffective(itemDef) > 0)
                     {
                         self.AddBuff(hoodieBuffActive);
                     }
@@ -154,7 +156,7 @@ namespace TooManyItems
                 {
                     if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                     {
-                        int count = self.inventory.GetItemCount(itemDef);
+                        int count = self.inventory.GetItemCountEffective(itemDef);
                         duration *= 1 + durationIncreasePercent * count;
 
                         self.RemoveBuff(hoodieBuffActive);

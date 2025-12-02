@@ -148,6 +148,7 @@ namespace TooManyItems
                 ItemTag.Utility,
 
                 ItemTag.OnKillEffect
+                // CANNOT BE TEMPORARY
             };
         }
 
@@ -165,11 +166,12 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
-                    int itemCount = atkBody.inventory.GetItemCount(itemDef);
+                    int itemCount = atkBody.inventory.GetItemCountPermanent(itemDef);
                     if (itemCount > 0)
                     {
                         Statistics stats = atkBody.inventory.GetComponent<Statistics>();
-                        if (stats) {
+                        if (stats)
+                        {
                             // Increase kill counter
                             stats.KillsCounter += 1;
                             // If kill limit is reached, scrap 1 stack and grant reward gold
@@ -180,9 +182,9 @@ namespace TooManyItems
                                     itemDef.itemIndex,
                                     RoR2Content.Items.ScrapWhite.itemIndex,
                                     CharacterMasterNotificationQueue.TransformationType.Default
-                                ); 
-                                atkBody.inventory.RemoveItem(itemDef);
-                                atkBody.inventory.GiveItem(RoR2Content.Items.ScrapWhite);
+                                );
+                                atkBody.inventory.RemoveItemPermanent(itemDef);
+                                atkBody.inventory.GiveItemPermanent(RoR2Content.Items.ScrapWhite);
                                 atkBody.master.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGainOnScrap.Value));
                                 // Reset the kills counter
                                 stats.KillsCounter = 0;

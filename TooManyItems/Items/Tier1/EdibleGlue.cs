@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -81,7 +80,8 @@ namespace TooManyItems
             {
                 ItemTag.Utility,
 
-                ItemTag.OnKillEffect
+                ItemTag.OnKillEffect,
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -99,7 +99,7 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
-                    int itemCount = atkBody.inventory.GetItemCount(itemDef);
+                    int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0)
                     {
                         HurtBox[] hurtboxes = new SphereSearch

@@ -83,7 +83,7 @@ namespace TooManyItems
             {
                 if (victimInfo.inventory == null || victimInfo.body == null || attackerInfo.body == null) return;
 
-                int count = victimInfo.inventory.GetItemCount(itemDef);
+                int count = victimInfo.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0 && attackerInfo.body != victimInfo.body)
                 {
                     damageInfo.damage *= (1 - damageReductionPercent);

@@ -2,7 +2,6 @@
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -85,7 +84,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -107,7 +108,7 @@ namespace TooManyItems
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    int itemCount = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0)
                     {
                         int currentStacks = attackerInfo.body.GetBuffCount(attackSpeedBuff);
@@ -123,7 +124,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         args.attackSpeedMultAdd += sender.GetBuffCount(attackSpeedBuff) * attackSpeedOnHitPercent;

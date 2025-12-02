@@ -58,7 +58,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -68,7 +70,7 @@ namespace TooManyItems
             {
                 if (victimInfo.inventory)
                 {
-                    int count = victimInfo.inventory.GetItemCount(itemDef);
+                    int count = victimInfo.inventory.GetItemCountEffective(itemDef);
                     if (attackerInfo.body && attackerInfo.body.isElite && count > 0)
                     {
                         float damageReductionPercent = Utils.GetHyperbolicStacking(eliteDamageReductionPercent, count);

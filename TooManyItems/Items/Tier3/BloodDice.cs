@@ -156,7 +156,8 @@ namespace TooManyItems
             {
                 ItemTag.Utility,
 
-                ItemTag.OnKillEffect
+                ItemTag.OnKillEffect,
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -172,7 +173,7 @@ namespace TooManyItems
                 HealthComponent.HealthBarValues values = orig(self);
                 if (self.body && self.body.inventory)
                 {
-                    if (self.body.inventory.GetItemCount(itemDef) > 0)
+                    if (self.body.inventory.GetItemCountEffective(itemDef) > 0)
                     {
                         values.hasInfusion = true;
                     }
@@ -184,7 +185,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
@@ -203,7 +204,7 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkMaster && atkBody && atkBody.inventory)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         float maxHealthAllowed = maxHealthPerStack.Value * count;
@@ -230,15 +231,15 @@ namespace TooManyItems
         {
             float mean = 7f, deviation = 2f;
             if (affectedByLuck.Value) mean += master.luck * deviation;
-            
+
             return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain.Value, maxHealthGain.Value);
         }
 
         private static int GenerateRollNormalDistribution(float mean, float deviation)
         {
             // Box-Mueller transform for normal distribution
-            float x = (float) (1.0 - TooManyItems.RandGen.NextDouble());
-            float y = (float) (1.0 - TooManyItems.RandGen.NextDouble());
+            float x = (float)(1.0 - TooManyItems.RandGen.NextDouble());
+            float y = (float)(1.0 - TooManyItems.RandGen.NextDouble());
 
             float randomSample = Mathf.Sqrt(-2f * Mathf.Log(x)) * Mathf.Sin(2f * Mathf.PI * y);
             float scaledSample = mean + deviation * randomSample;

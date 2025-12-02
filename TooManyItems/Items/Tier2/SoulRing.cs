@@ -146,7 +146,8 @@ namespace TooManyItems
             {
                 ItemTag.Healing,
 
-                ItemTag.OnKillEffect
+                ItemTag.OnKillEffect,
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -166,7 +167,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
@@ -183,7 +184,7 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();

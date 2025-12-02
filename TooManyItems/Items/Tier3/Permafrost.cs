@@ -1,10 +1,7 @@
 ﻿using R2API;
-using R2API.Networking;
-using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -28,7 +25,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> freezeChance = new(
             "Item: Permafrost",
             "Freeze Chance",
-            3f,
+            1.5f,
             "Chance to apply freeze when dealing damage.",
             new List<string>()
             {
@@ -38,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
             "Bonus Frozen Damage",
-            90f,
+            45f,
             "Percent bonus damage dealt to frozen enemies.",
             new List<string>()
             {
@@ -75,7 +72,9 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -87,7 +86,7 @@ namespace TooManyItems
                 CharacterBody victimBody = victimInfo.body;
                 if (attackerBody && victimBody && attackerBody.inventory)
                 {
-                    int count = attackerBody.inventory.GetItemCount(itemDef);
+                    int count = attackerBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && attackerBody.master)
                     {
                         if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))

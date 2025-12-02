@@ -52,7 +52,7 @@ namespace TooManyItems
 
             itemDef.name = "ABACUS";
             itemDef.AutoPopulateTokens();
-            
+
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Abacus.png");
@@ -64,7 +64,8 @@ namespace TooManyItems
             {
                 ItemTag.Damage,
 
-                ItemTag.OnKillEffect
+                ItemTag.OnKillEffect,
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -89,8 +90,9 @@ namespace TooManyItems
                     // Process buffs regardless of item in inventory or not
                     int buffCount = sender.GetBuffCount(countedBuff);
                     args.critAdd += buffCount * critChancePerStack.Value;
-                    
-                    if (sender.inventory.GetItemCount(itemDef) > 0 && sender.crit > 100.0f)
+
+                    // Give bonus crit damage if item is in inventory
+                    if (sender.inventory.GetItemCountEffective(itemDef) > 0 && sender.crit > 100.0f)
                     {
                         args.critDamageMultAdd += sender.crit / 100f - 1f;
                     }
@@ -104,7 +106,7 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         for (int i = 0; i < count; i++) atkBody.AddBuff(countedBuff);

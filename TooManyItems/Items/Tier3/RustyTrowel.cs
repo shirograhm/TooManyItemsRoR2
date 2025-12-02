@@ -151,7 +151,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Healing
+                ItemTag.Healing,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -194,7 +196,7 @@ namespace TooManyItems
 
                 if (self && self.inventory)
                 {
-                    int itemCount = self.inventory.GetItemCount(itemDef);
+                    int itemCount = self.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0 && self.GetBuffCount(mulchBuff) > 0 && !self.HasBuff(healingTimer))
                     {
                         self.AddTimedBuff(healingTimer, CalculateCooldownInSec(itemCount));
@@ -228,7 +230,7 @@ namespace TooManyItems
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    int itemCount = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0)
                     {
                         int newBuffCount = attackerInfo.body.GetBuffCount(mulchBuff) + itemCount;

@@ -83,7 +83,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -105,7 +107,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         args.critAdd += critBonus.Value;
@@ -120,7 +122,7 @@ namespace TooManyItems
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 if (atkBody && vicBody && atkMaster)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && damageReport.damageInfo.crit)
                     {
                         if (Util.CheckRoll(analyzeChance.Value * count * damageReport.damageInfo.procCoefficient, atkMaster.luck, atkMaster))

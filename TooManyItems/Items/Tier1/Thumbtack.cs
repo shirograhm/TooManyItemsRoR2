@@ -94,7 +94,9 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -104,7 +106,7 @@ namespace TooManyItems
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
-                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    int itemCount = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (attackerInfo.master && itemCount > 0)
                     {
                         // If the hit doesn't already apply bleed, and isn't applied to a member of the same team, roll for bleed
@@ -137,7 +139,7 @@ namespace TooManyItems
             CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
             if (atkBody && atkBody.inventory)
             {
-                int itemCount = atkBody.inventory.GetItemCount(itemDef);
+                int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
                 if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
                 {
                     info.duration += bleedDurationBonus.Value * itemCount;

@@ -1,10 +1,7 @@
 ﻿using R2API;
-using R2API.Networking;
-using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -72,7 +69,9 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Healing
+                ItemTag.Healing,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -87,7 +86,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         args.baseHealthAdd += healthIncrease.Value;

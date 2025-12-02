@@ -91,7 +91,7 @@ namespace TooManyItems
                 "ITEM_HORSESHOE_DESC"
             }
         );
-        
+
         public static ConfigurableValue<float> regenPerPoint = new(
             "Item: Golden Horseshoe",
             "Regeneration Per Point",
@@ -181,7 +181,9 @@ namespace TooManyItems
 
                 ItemTag.Utility,
                 ItemTag.Damage,
-                ItemTag.Healing
+                ItemTag.Healing,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -197,7 +199,7 @@ namespace TooManyItems
                 foreach (NetworkUser user in NetworkUser.readOnlyInstancesList)
                 {
                     CharacterMaster master = user.masterController.master ?? user.master;
-                    if (master && master.inventory && master.inventory.GetItemCount(itemDef) > 0)
+                    if (master && master.inventory && master.inventory.GetItemCountEffective(itemDef) > 0)
                     {
                         Reroll(master.inventory, master.GetBody());
                     }
@@ -225,7 +227,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         HorseshoeStatistics component = sender.inventory.GetComponent<HorseshoeStatistics>();
@@ -294,7 +296,7 @@ namespace TooManyItems
                     if (pointsRemaining - randomPoints < step)
                         randomPoints = pointsRemaining;
 
-                    Bonuses chosenStat = (Bonuses) TooManyItems.RandGen.Next(0, (int)Bonuses.NUM_STATS);
+                    Bonuses chosenStat = (Bonuses)TooManyItems.RandGen.Next(0, (int)Bonuses.NUM_STATS);
                     switch (chosenStat)
                     {
                         case Bonuses.HEALTH:

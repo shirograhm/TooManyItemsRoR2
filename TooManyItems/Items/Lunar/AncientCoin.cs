@@ -75,7 +75,7 @@ namespace TooManyItems
             {
                 if (victimInfo.inventory == null || victimInfo.body == null) return;
 
-                int count = victimInfo.inventory.GetItemCount(itemDef);
+                int count = victimInfo.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0)
                 {
                     damageInfo.damage *= (1 + count * damageMultiplierAsPercent);
@@ -86,7 +86,7 @@ namespace TooManyItems
             {
                 if (self.inventory == null) return;
 
-                int count = self.inventory.GetItemCount(itemDef);
+                int count = self.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0)
                 {
                     float multiplier = 1 + count * goldMultiplierAsPercent;

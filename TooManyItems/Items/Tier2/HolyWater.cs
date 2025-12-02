@@ -84,7 +84,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -102,7 +104,7 @@ namespace TooManyItems
                     atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
                     if (atkBody && atkBody.inventory)
                     {
-                        int count = atkBody.inventory.GetItemCount(itemDef);
+                        int count = atkBody.inventory.GetItemCountEffective(itemDef);
                         if (count > 0)
                         {
                             float bonusXP = vicBody.healthComponent.fullCombinedHealth * CalculateExperienceMultiplier(count);

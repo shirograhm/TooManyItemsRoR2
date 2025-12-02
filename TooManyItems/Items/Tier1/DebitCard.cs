@@ -59,7 +59,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -72,7 +74,7 @@ namespace TooManyItems
                 CharacterMaster activator = context.activatorMaster;
                 if (activator && activator.hasBody && activator.inventory)
                 {
-                    int count = activator.inventory.GetItemCount(itemDef);
+                    int count = activator.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         float refundScaling = Utils.GetHyperbolicStacking(rebatePercent, count);

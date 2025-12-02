@@ -58,7 +58,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -68,7 +70,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int itemCount = sender.inventory.GetItemCount(itemDef);
+                    int itemCount = sender.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0)
                     {
                         float cdr = Utils.GetHyperbolicStacking(specialCDRPercent, itemCount);

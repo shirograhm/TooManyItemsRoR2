@@ -73,7 +73,9 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Utility
+                ItemTag.Utility,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -95,7 +97,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int count = sender.inventory.GetItemCount(itemDef);
+                    int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && sender.HasBuff(attackSpeedBuff))
                     {
                         args.attackSpeedMultAdd += attackSpeedBonusPercent;
@@ -108,7 +110,7 @@ namespace TooManyItems
                 CharacterBody vicBody = damageReport.victimBody;
                 if (vicBody && vicBody.inventory)
                 {
-                    int count = vicBody.inventory.GetItemCount(itemDef);
+                    int count = vicBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         vicBody.AddTimedBuff(attackSpeedBuff, buffDuration * count);

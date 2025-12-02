@@ -141,7 +141,9 @@ namespace TooManyItems
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
-                ItemTag.Healing
+                ItemTag.Healing,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -161,7 +163,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    if (sender.inventory.GetItemCount(itemDef) > 0)
+                    if (sender.inventory.GetItemCountEffective(itemDef) > 0)
                     {
                         args.baseHealthAdd += healthIncrease.Value;
                     }
@@ -172,7 +174,7 @@ namespace TooManyItems
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {
-                    int count = attackerInfo.inventory.GetItemCount(itemDef);
+                    int count = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         float amount = CalculateDamageOnHit(attackerInfo.body, count);

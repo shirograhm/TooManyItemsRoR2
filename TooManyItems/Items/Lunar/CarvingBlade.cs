@@ -166,7 +166,7 @@ namespace TooManyItems
 
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (attackerInfo.inventory && attackerInfo.inventory.GetItemCount(itemDef) > 0)
+                if (attackerInfo.inventory && attackerInfo.inventory.GetItemCountPermanent(itemDef) > 0)
                 {
                     damageInfo.crit = false;
                 }
@@ -176,7 +176,7 @@ namespace TooManyItems
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
-                    int itemCount = attackerInfo.inventory.GetItemCount(itemDef);
+                    int itemCount = attackerInfo.inventory.GetItemCountPermanent(itemDef);
                     if (itemCount > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
                     {
                         // Minimum of 0.01 damage to prevent negative values in LookingGlass
@@ -184,7 +184,7 @@ namespace TooManyItems
                         // Cap the damage. If the damage cap was set to -1 to remove it, set it to default value instead.
                         if (damageCapMultiplier.Value < 0) damageCapMultAsPercent = 40f;
                         amount = Mathf.Min(amount, attackerInfo.body.damage * CalculateDamageCapPercent(itemCount));
-                        
+
                         DamageInfo proc = new()
                         {
                             damage = amount,

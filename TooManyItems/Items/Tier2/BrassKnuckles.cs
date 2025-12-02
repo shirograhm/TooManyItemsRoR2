@@ -1,10 +1,7 @@
 ﻿using R2API;
-using R2API.Networking;
-using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems
 {
@@ -73,7 +70,9 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
-                ItemTag.Damage
+                ItemTag.Damage,
+
+                ItemTag.CanBeTemporary
             };
         }
 
@@ -85,7 +84,7 @@ namespace TooManyItems
                 CharacterBody victimBody = victimInfo.body;
                 if (attackerBody && victimBody && attackerBody.inventory)
                 {
-                    int itemCount = attackerBody.inventory.GetItemCount(itemDef);
+                    int itemCount = attackerBody.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0 && (attackerBody.damage * heavyHitCapPercent) <= damageInfo.damage)
                     {
                         damageInfo.damage *= 1 + (heavyHitBonusPercent * itemCount);

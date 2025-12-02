@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
-            30f,
+            25f,
             "Max health lost as a penalty for holding this item.",
             new List<string>()
             {
@@ -149,7 +149,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    int itemCount = sender.inventory.GetItemCount(itemDef);
+                    int itemCount = sender.inventory.GetItemCountPermanent(itemDef);
                     if (itemCount > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
@@ -165,7 +165,7 @@ namespace TooManyItems
                 HealthComponent.HealthBarValues values = orig(self);
                 if (self.body && self.body.inventory)
                 {
-                    int count = self.body.inventory.GetItemCount(itemDef);
+                    int count = self.body.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
                         values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, count);
@@ -183,7 +183,7 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
-                    int count = atkBody.inventory.GetItemCount(itemDef);
+                    int count = atkBody.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();
