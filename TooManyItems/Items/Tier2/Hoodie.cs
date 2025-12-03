@@ -148,6 +148,7 @@ namespace TooManyItems
                     if (buffIndex != BuffIndex.None)
                     {
                         ignoredBuffDefs.Add(BuffCatalog.GetBuffDef(buffIndex));
+                        Log.Message("Successfully added " + ignoredBuffName.Trim() + " to Fleece Hoodie ignored buffs list.");
                     }
                 }
 
