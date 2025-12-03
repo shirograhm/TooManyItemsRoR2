@@ -17,7 +17,7 @@ namespace TooManyItems
             "Whether or not the item is enabled.",
             new List<string>()
             {
-                "ITEM_PROPELLER_HAT_DESC"
+                "ITEM_PROPELLERHAT_DESC"
             }
         );
         public static ConfigurableValue<float> movespeedBonus = new(
@@ -27,7 +27,7 @@ namespace TooManyItems
             "Percent bonus movement speed per stack while airborne.",
             new List<string>()
             {
-                "ITEM_PROPELLER_HAT_DESC"
+                "ITEM_PROPELLERHAT_DESC"
             }
         );
         public static float movespeedBonusPercent = movespeedBonus.Value / 100f;
