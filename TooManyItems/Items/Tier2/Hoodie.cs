@@ -53,6 +53,16 @@ namespace TooManyItems
                 "ITEM_HOODIE_DESC"
             }
         );
+        public static ConfigurableValue<string> customIgnoredBuffNames = new(
+            "Item: Fleece Hoodie",
+            "Custom Ignored Buff Names",
+            "",
+            "Buffs/debuffs that this item should not affect. Use the internal name of the buff for this to work correctly (e.g. bdMedkitHeal), and separate them all with commas.",
+            new List<string>()
+            {
+                "ITEM_HOODIE_DESC"
+            }
+        );
         public static float durationIncreasePercent = durationIncrease.Value / 100f;
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
 
@@ -124,9 +134,22 @@ namespace TooManyItems
         {
             RoR2Application.onLoad += () =>
             {
-                // Buffs that this item shouldn't affect
+                // Buffs from the base game + DLCs that this item shouldn't affect
                 ignoredBuffDefs.Add(RoR2Content.Buffs.MedkitHeal);
                 ignoredBuffDefs.Add(RoR2Content.Buffs.HiddenInvincibility);
+                ignoredBuffDefs.Add(RoR2Content.Buffs.VoidFogMild);
+                ignoredBuffDefs.Add(RoR2Content.Buffs.VoidFogStrong);
+                ignoredBuffDefs.Add(DLC1Content.Buffs.VoidRaidCrabWardWipeFog);
+
+                // Append custom ignored buffs/debuffs from config
+                foreach (var ignoredBuffName in customIgnoredBuffNames.Value.Split(','))
+                {
+                    var buffIndex = BuffCatalog.FindBuffIndex(ignoredBuffName.Trim());
+                    if (buffIndex != BuffIndex.None)
+                    {
+                        ignoredBuffDefs.Add(BuffCatalog.GetBuffDef(buffIndex));
+                    }
+                }
 
                 // Ignore dot effects that use Buffs to keep track of them
 #pragma warning disable Publicizer001 // Accessing a member that was not originally public
