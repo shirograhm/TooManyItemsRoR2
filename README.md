@@ -1,5 +1,5 @@
 # TooManyItems
-Adds 35 new items to Risk of Rain 2!  
+Adds 36 new items to Risk of Rain 2!  
 ![picture of items](https://i.imgur.com/nDgkbc8l.png)
 
 ## Mod Compatibility
@@ -54,6 +54,7 @@ If configuration issues persist, don't hesitate to delete the config file and le
 | ![Milk Carton](https://i.imgur.com/R6U6Uget.png) | **Milk Carton** | Reduce damage taken from elite enemies by 10% (+10% per stack). |
 | ![Paper Plane](https://i.imgur.com/pvG4mztt.png) | **Paper Plane** | Deal 15% (+15% per stack) more damage while airborne. |
 | ![Photodiode](https://i.imgur.com/4ZjgqKIt.png) | **Photodiode** | On-hit, gain 2% attack speed for 10 seconds. Stacks up to a max of 10 (+10 per stack) times. |
+| ![Propeller Hat](https://imgur.com/llxVm4m.png) | **Propeller Hat** | Gain 20% (+20% per stack) movement speed while airborne. |
 | ![Rubber Ducky](https://i.imgur.com/dEgzWQht.png) | **Rubber Ducky** | Gain 5 (+5 per stack) armor. |
 | ![Thumbtack](https://i.imgur.com/q89u8kWt.png) | **Thumbtack** | Gain 4% (+4% per stack) chance to bleed enemies on-hit for 240% BASE damage over 3 seconds. Your bleed effects last an additional 0.25 (+0.25 per stack) seconds. |
 
