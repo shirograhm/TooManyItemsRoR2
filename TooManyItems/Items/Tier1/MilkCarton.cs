@@ -24,7 +24,7 @@ namespace TooManyItems
             "Item: Milk Carton",
             "Damage Reduction",
             10f,
-            "Percent damage reduction agains elite enemies.",
+            "Percent damage reduction against elite enemies.",
             new List<string>()
             {
                 "ITEM_MILKCARTON_DESC"
