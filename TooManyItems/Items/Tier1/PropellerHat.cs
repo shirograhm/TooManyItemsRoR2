@@ -22,7 +22,7 @@ namespace TooManyItems
         );
         public static ConfigurableValue<float> movespeedBonus = new(
             "Item: Propeller Hat",
-            "Movement Increase",
+            "Movement Speed",
             20f,
             "Percent bonus movement speed per stack while airborne.",
             new List<string>()
