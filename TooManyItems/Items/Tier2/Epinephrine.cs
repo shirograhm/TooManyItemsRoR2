@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> attackSpeedBonus = new(
             "Item: Epinephrine",
             "Attack Speed",
-            60f,
+            75f,
             "Attack speed gained after taking damage.",
             new List<string>()
             {
