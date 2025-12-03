@@ -96,6 +96,8 @@ namespace TooManyItems
                 PaperPlane.Init();
             if (Photodiode.isEnabled.Value)
                 Photodiode.Init();
+            if (PropellerHat.isEnabled.Value)
+                PropellerHat.Init();
             if (RedBlueGlasses.isEnabled.Value)
                 RedBlueGlasses.Init();
             if (RubberDucky.isEnabled.Value)

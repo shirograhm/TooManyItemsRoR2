@@ -1,5 +1,4 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
-using R2API;
 using RoR2;
 using System.Collections.Generic;
 using UnityEngine;
@@ -78,7 +77,7 @@ namespace TooManyItems
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BottleCap.itemDef.itemIndex, stats);
                 }
-                
+
                 // Brass Knuckles
                 if (BrassKnuckles.isEnabled.Value)
                 {
@@ -95,7 +94,7 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)BrassKnuckles.itemDef.itemIndex, stats);
                 }
 
-                
+
                 // Bread
                 if (BreadLoaf.isEnabled.Value)
                 {
@@ -170,7 +169,7 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Number);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        var values = new List<float> {  };
+                        var values = new List<float> { };
                         if (master && master.inventory && master.inventory.GetComponent<CarvingBlade.Statistics>())
                         {
                             var component = master.inventory.GetComponent<CarvingBlade.Statistics>();
@@ -396,7 +395,7 @@ namespace TooManyItems
                         if (master && master.inventory && master.inventory.GetComponent<IronHeart.Statistics>())
                         {
                             var component = master.inventory.GetComponent<IronHeart.Statistics>();
-                            
+
                             values.Add(IronHeart.multiplierPerStack * itemCount);
                             values.Add(component.TotalDamageDealt);
                         }
@@ -485,7 +484,7 @@ namespace TooManyItems
                             values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
                         else
                             values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
-                        
+
                         values.Add(Permafrost.frozenDamageMultiplierPercent * itemCount);
                         return values;
                     };
@@ -507,6 +506,22 @@ namespace TooManyItems
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Photodiode.itemDef.itemIndex, stats);
+                }
+
+
+                if (PropellerHat.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Movement Speed: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            PropellerHat.movespeedBonusPercent * itemCount
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)PropellerHat.itemDef.itemIndex, stats);
                 }
 
 
@@ -565,7 +580,7 @@ namespace TooManyItems
                         if (master && master.inventory && master.inventory.GetComponent<RustyTrowel.Statistics>())
                         {
                             var component = master.inventory.GetComponent<RustyTrowel.Statistics>();
-                            
+
                             values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
                             values.Add(component.TotalHealingDone);
                         }
@@ -575,7 +590,7 @@ namespace TooManyItems
                             values.Add(0f);
                         }
                         return values;
-                    }; 
+                    };
                     ItemDefinitions.allItemDefinitions.Add((int)RustyTrowel.itemDef.itemIndex, stats);
                 }
 
@@ -632,7 +647,7 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.FlatHealth);
                     stats.descriptions.Add("Health Penalty: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth); 
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
