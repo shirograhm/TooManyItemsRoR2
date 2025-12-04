@@ -30,7 +30,18 @@ namespace TooManyItems
                 "ITEM_PAPERPLANE_DESC"
             }
         );
+        public static ConfigurableValue<float> fallDamageTaken = new(
+            "Item: Paper Plane",
+            "Fall Damage Taken",
+            20f,
+            "Percent fall damage taken while holding this item.",
+            new List<string>()
+            {
+                "ITEM_PAPERPLANE_DESC"
+            }
+        );
         public static float damageBonusPercent = damageBonus.Value / 100f;
+        public static float fallDamageTakenPercent = fallDamageTaken.Value / 100f;
 
         internal static void Init()
         {
@@ -87,6 +98,11 @@ namespace TooManyItems
                     if (itemCount > 0 && attackerInfo.body.characterMotor && !attackerInfo.body.characterMotor.isGrounded)
                     {
                         damageInfo.damage *= 1 + itemCount * damageBonusPercent;
+                    }
+
+                    if (victimInfo.inventory && victimInfo.inventory.GetItemCountEffective(itemDef) > 0 && damageInfo.damageType == DamageType.FallDamage)
+                    {
+                        damageInfo.damage *= fallDamageTakenPercent;
                     }
                 }
             };

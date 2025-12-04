@@ -86,7 +86,7 @@
     "PROPELLERHAT": "Propeller Hat",
     "ITEM_PROPELLERHAT_NAME": "Propeller Hat",
     "ITEM_PROPELLERHAT_PICKUP": "Gain movement speed while airborne.",
-    "ITEM_PROPELLERHAT_DESC": "Gain <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% per stack)</style> movement speed while airborne.",
+    "ITEM_PROPELLERHAT_DESC": "Gain <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% per stack) movement speed</style> while airborne.",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3D Glasses",
     "ITEM_REDBLUEGLASSES_NAME": "3D Glasses",
