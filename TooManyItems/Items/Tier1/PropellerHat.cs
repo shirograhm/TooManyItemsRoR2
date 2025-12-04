@@ -30,7 +30,18 @@ namespace TooManyItems
                 "ITEM_PROPELLERHAT_DESC"
             }
         );
+        public static ConfigurableValue<float> fallDamageTaken = new(
+            "Item: Propeller Hat",
+            "Fall Damage Taken",
+            20f,
+            "Percent fall damage taken while holding this item.",
+            new List<string>()
+            {
+                "ITEM_PROPELLERHAT_DESC"
+            }
+        );
         public static float movespeedBonusPercent = movespeedBonus.Value / 100f;
+        public static float fallDamageTakenPercent = fallDamageTaken.Value / 100f;
 
         internal static void Init()
         {
@@ -88,6 +99,17 @@ namespace TooManyItems
                     {
                         args.moveSpeedMultAdd += movespeedBonusPercent * count;
                     }
+                }
+            };
+
+            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            {
+                if (victimInfo.inventory == null || victimInfo.body == null) return;
+
+                int count = victimInfo.inventory.GetItemCountEffective(itemDef);
+                if (count > 0 && damageInfo.damageType == DamageType.FallDamage)
+                {
+                    damageInfo.damage *= fallDamageTakenPercent;
                 }
             };
         }
