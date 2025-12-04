@@ -74,7 +74,8 @@ namespace TooManyItems
                     if (itemCount > 0)
                     {
                         float cdr = Utils.GetHyperbolicStacking(specialCDRPercent, itemCount);
-                        args.specialCooldownMultAdd -= cdr;
+
+                        args.specialSkill.cooldownReductionMultAdd -= cdr;
                     }
                 }
             };
