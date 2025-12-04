@@ -135,5 +135,18 @@ namespace TooManyItems
         {
             return 1f - 1f / (1f + percent * count);
         }
+
+        public static ItemDisplayRule GenerateItemDisplayRule(ItemDef def, string piece, Vector3 pos, Vector3 angles, Vector3 scale)
+        {
+            return new ItemDisplayRule
+            {
+                ruleType = ItemDisplayRuleType.ParentedPrefab,
+                followerPrefab = def.pickupModelPrefab,
+                childName = piece,
+                localPos = pos,
+                localAngles = angles,
+                localScale = scale
+            };
+        }
     }
 }
