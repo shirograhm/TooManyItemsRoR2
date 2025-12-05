@@ -35,7 +35,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
-            25f,
+            20f,
             "Max health lost as a penalty for holding the first stack of this item.",
             new List<string>()
             {
@@ -45,7 +45,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthLostExtraStack = new(
             "Item: Spirit Stone",
             "Max Health Reduction Extra Stacks",
-            15f,
+            10f,
             "Max health lost as a penalty for holding extra stacks of this item.",
             new List<string>()
             {
