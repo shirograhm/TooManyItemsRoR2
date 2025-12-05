@@ -45,7 +45,7 @@
     "SPIRITSTONE": "Pedra Espiritual",
     "ITEM_SPIRITSTONE_NAME": "Pedra Espiritual",
     "ITEM_SPIRITSTONE_PICKUP": "Ganhe escudo permanente ao abater inimigos. <style=cDeath>Perca vida máxima</style>.",
-    "ITEM_SPIRITSTONE_DESC": "Abater um inimigo garante permanentemente <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} por acúmulo)</style> de escudo</style>. Perde <style=cIsHealth>{Max Health Reduction}% <style=cStack>(+{Max Health Reduction}% por acúmulo)</style> de vida máxima</style>.",
+    "ITEM_SPIRITSTONE_DESC": "Abater um inimigo garante permanentemente <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} por acúmulo)</style> de escudo</style>. Perde <style=cIsHealth>{Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% por acúmulo)</style> de vida máxima</style>.",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "Tampinha de Garrafa",

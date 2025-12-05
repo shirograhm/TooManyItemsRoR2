@@ -23,7 +23,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> damageReduction = new(
             "Item: Crucifix",
             "Damage Reduction",
-            40f,
+            100f,
             "Percentage of damage reduced.",
             new List<string>()
             {
@@ -33,7 +33,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthBurnAmount = new(
             "Item: Crucifix",
             "Burn Amount",
-            5f,
+            4f,
             "Percentage of max health taken over the duration of the burn.",
             new List<string>()
             {
@@ -43,7 +43,7 @@ namespace TooManyItems
         public static ConfigurableValue<int> fireDuration = new(
             "Item: Crucifix",
             "Duration of Fire",
-            3,
+            2,
             "Duration of fire debuff after taking damage.",
             new List<string>()
             {
