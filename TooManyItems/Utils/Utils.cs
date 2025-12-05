@@ -119,7 +119,7 @@ namespace TooManyItems
 
         public static float GetExponentialStacking(float percent, int count)
         {
-            return 1f - Mathf.Pow(1f - percent, count);
+            return GetExponentialStacking(percent, percent, count);
         }
 
         public static float GetExponentialStacking(float percent, float stackPercent, int count)
