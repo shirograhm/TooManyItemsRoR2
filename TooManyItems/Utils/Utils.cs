@@ -2,7 +2,6 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,12 +10,12 @@ namespace TooManyItems
 {
     public static class Utils
     {
-        public static Color BROKEN_MASK_COLOR        = new(0.38f, 0.38f, 0.82f, 1f);
-        public static Color CARVING_BLADE_COLOR      = new(0.09f, 0.67f, 0.62f, 1f);
-        public static Color PERMAFROST_COLOR         = new(0.76f, 0.80f, 0.98f, 1f);
-        public static Color IRON_HEART_COLOR         = new(0.44f, 0.44f, 0.44f, 1f);
-        public static Color TATTERED_SCROLL_COLOR    = new(0.80f, 0.78f, 0.57f, 1f);
-        public static Color VANITY_COLOR             = new(0.53f, 0.44f, 0.77f, 1f);
+        public static Color BROKEN_MASK_COLOR = new(0.38f, 0.38f, 0.82f, 1f);
+        public static Color CARVING_BLADE_COLOR = new(0.09f, 0.67f, 0.62f, 1f);
+        public static Color PERMAFROST_COLOR = new(0.76f, 0.80f, 0.98f, 1f);
+        public static Color IRON_HEART_COLOR = new(0.44f, 0.44f, 0.44f, 1f);
+        public static Color TATTERED_SCROLL_COLOR = new(0.80f, 0.78f, 0.57f, 1f);
+        public static Color VANITY_COLOR = new(0.53f, 0.44f, 0.77f, 1f);
 
         internal static void Init()
         {
@@ -123,6 +122,11 @@ namespace TooManyItems
             return 1f - Mathf.Pow(1f - percent, count);
         }
 
+        public static float GetExponentialStacking(float percent, float stackPercent, int count)
+        {
+            return 1f - percent * Mathf.Pow(1f - stackPercent, count - 1);
+        }
+
         public static float GetHyperbolicStacking(float percent, int count)
         {
             return 1f - 1f / (1f + percent * count);
@@ -166,7 +170,7 @@ namespace TooManyItems
             {
                 return ItemTier.Lunar;
             }
-            
+
             return null;
         }
 

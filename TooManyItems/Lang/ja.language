@@ -45,7 +45,7 @@
     "SPIRITSTONE": "精霊の石",
     "ITEM_SPIRITSTONE_NAME": "精霊の石",
     "ITEM_SPIRITSTONE_PICKUP": "敵を倒すと永久的なシールドを得る。 <style=cDeath>最大体力が減少する。</style>.",
-    "ITEM_SPIRITSTONE_DESC": "敵を倒すと永久的に<style=cIsUtility>{Shield Amount}<style=cStack>(スタックごとに+{Shield Amount})</style>のシールドを得る。</style>. 最大体力が<style=cIsHealth>{Max Health Reduction}%<style=cStack>(スタックごとに+{Max Health Reduction}%)</style>減少する</style>。",
+    "ITEM_SPIRITSTONE_DESC": "敵を倒すと永久的に<style=cIsUtility>{Shield Amount}<style=cStack>(スタックごとに+{Shield Amount})</style>のシールドを得る。</style>. 最大体力が<style=cIsHealth>{Max Health Reduction}%<style=cStack>(スタックごとに+{Max Health Reduction Extra Stacks}%)</style>減少する</style>。",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "ボトルキャップ",

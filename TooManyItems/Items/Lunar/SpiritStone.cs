@@ -36,13 +36,24 @@ namespace TooManyItems
             "Item: Spirit Stone",
             "Max Health Reduction",
             25f,
-            "Max health lost as a penalty for holding this item.",
+            "Max health lost as a penalty for holding the first stack of this item.",
+            new List<string>()
+            {
+                "ITEM_SPIRITSTONE_DESC"
+            }
+        );
+        public static ConfigurableValue<float> maxHealthLostExtraStack = new(
+            "Item: Spirit Stone",
+            "Max Health Reduction Extra Stacks",
+            15f,
+            "Max health lost as a penalty for holding extra stacks of this item.",
             new List<string>()
             {
                 "ITEM_SPIRITSTONE_DESC"
             }
         );
         public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
+        public static float maxHealthLostExtraStackPercent = maxHealthLostExtraStack.Value / 100f;
 
         public class Statistics : MonoBehaviour
         {
@@ -168,7 +179,7 @@ namespace TooManyItems
                     int count = self.body.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
-                        values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, count);
+                        values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, count);
                         values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
                         values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
                     }

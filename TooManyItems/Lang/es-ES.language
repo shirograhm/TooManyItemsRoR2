@@ -45,7 +45,7 @@
     "SPIRITSTONE": "Espíritu de Piedra",
     "ITEM_SPIRITSTONE_NAME": "Espíritu de Piedra",
     "ITEM_SPIRITSTONE_PICKUP": "Gana escudo permanente al matar enemigos. <style=cDeath>Pierde vida máxima</style>.",
-    "ITEM_SPIRITSTONE_DESC": "Al matar un enemigo obtienes <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} por stack)</style> de escudo</style>. Pierdes <style=cIsHealth>{Max Health Reduction}% <style=cStack>(+{Max Health Reduction}% por stack)</style> de tu vida máxima</style>.",
+    "ITEM_SPIRITSTONE_DESC": "Al matar un enemigo obtienes <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} por stack)</style> de escudo</style>. Pierdes <style=cIsHealth>{Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% por stack)</style> de tu vida máxima</style>.",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "Tapa de Botella",
