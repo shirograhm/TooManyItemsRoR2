@@ -33,8 +33,18 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthBurnAmount = new(
             "Item: Crucifix",
             "Burn Amount",
-            4f,
+            25f,
             "Percentage of max health taken over the duration of the burn.",
+            new List<string>()
+            {
+                "ITEM_CRUCIFIX_DESC"
+            }
+        );
+        public static ConfigurableValue<float> maxHealthBurnAmountReduction = new(
+            "Item: Crucifix",
+            "Burn Amount Reduction",
+            5f,
+            "Percentage of burn damage reduced per stack of this item. This scales hyperbolically.",
             new List<string>()
             {
                 "ITEM_CRUCIFIX_DESC"
@@ -51,6 +61,8 @@ namespace TooManyItems
             }
         );
         public static float damageReductionPercent = damageReduction.Value / 100f;
+        public static float maxHealthBurnAmountPercent = maxHealthBurnAmount.Value / 100f;
+        public static float maxHealthBurnAmountReductionPercent = maxHealthBurnAmountReduction.Value / 100f;
 
         internal static void Init()
         {
@@ -87,14 +99,15 @@ namespace TooManyItems
                 if (count > 0 && attackerInfo.body != victimInfo.body)
                 {
                     damageInfo.damage *= (1 - damageReductionPercent);
+                    float stackedPercentage = Utils.GetReverseExponentialStacking(maxHealthBurnAmountPercent, maxHealthBurnAmountReductionPercent, count);
 
                     InflictDotInfo dotInfo = new()
                     {
                         victimObject = victimInfo.body.gameObject,
                         attackerObject = victimInfo.body.gameObject,
-                        totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * maxHealthBurnAmount.Value / 100f,
+                        totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * stackedPercentage,
                         dotIndex = DotController.DotIndex.Burn,
-                        duration = fireDuration.Value * count,
+                        duration = fireDuration.Value,
                         damageMultiplier = 1f
                     };
                     DotController.InflictDot(ref dotInfo);
