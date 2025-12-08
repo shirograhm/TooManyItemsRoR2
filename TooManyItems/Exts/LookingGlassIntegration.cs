@@ -215,7 +215,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            DebitCard.rebatePercent * itemCount
+                            Utils.GetHyperbolicStacking(DebitCard.rebatePercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)DebitCard.itemDef.itemIndex, stats);
