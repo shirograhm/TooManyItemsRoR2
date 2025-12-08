@@ -7,8 +7,8 @@
   "pt-BR": {
     "VANITY": "Coroa da Vaidade",
     "EQUIPMENT_VANITY_NAME": "Coroa da Vaidade",
-    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>Golpear inimigos garante um debuff acumulativo</style>. Ative para causar dano com base nos acúmulos adquiridos.",
-    "EQUIPMENT_VANITY_DESC": "Ganhe acúmulos de <style=cWorldEvent>Arrogância</style> ao golpear inimigos. <style=cDeath>Cada acúmulo obtido diminui o seu <style=cIsDamage>dano BASE</style> por <style=cIsDamage>{Base Damage Lost}%</style></style>. Ative este equipamento para remover todos os acúmulos de <style=cWorldEvent>Arrogância</style> e rasgar um inimigo, causando <style=cIsDamage>{Damage Dealt}% de dano</style> por acúmulo.",
+    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>Matar inimigos garante um debuff acumulativo</style>. Ative para causar dano com base nos acúmulos adquiridos.",
+    "EQUIPMENT_VANITY_DESC": "Ganhe acúmulos de <style=cWorldEvent>Arrogância</style> ao matar inimigos. <style=cDeath>Cada acúmulo obtido diminui o seu <style=cIsDamage>dano BASE</style> por <style=cIsDamage>{Base Damage Lost}%</style></style>. Ative este equipamento para remover todos os acúmulos de <style=cWorldEvent>Arrogância</style> e rasgar um inimigo, causando <style=cIsDamage>{Damage Dealt}% de dano</style> por acúmulo.",
     "EQUIPMENT_VANITY_LORE": "",
     "CHALICE": "Cálice",
     "EQUIPMENT_CHALICE_NAME": "Cálice",
