@@ -88,7 +88,7 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1
-                        if (sender.healthComponent.combinedHealthFraction < 1f)
+                        if (sender.healthComponent && sender.healthComponent.combinedHealthFraction < 1f)
                         {
                             args.baseRegenAdd += Utils.GetHyperbolicStacking(regenPerSecondPercent, count) * sender.healthComponent.missingCombinedHealth;
                         }
