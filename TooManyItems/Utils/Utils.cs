@@ -2,8 +2,6 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -11,12 +9,12 @@ namespace TooManyItems
 {
     public static class Utils
     {
-        public static Color BROKEN_MASK_COLOR        = new(0.38f, 0.38f, 0.82f, 1f);
-        public static Color CARVING_BLADE_COLOR      = new(0.09f, 0.67f, 0.62f, 1f);
-        public static Color PERMAFROST_COLOR         = new(0.76f, 0.80f, 0.98f, 1f);
-        public static Color IRON_HEART_COLOR         = new(0.44f, 0.44f, 0.44f, 1f);
-        public static Color TATTERED_SCROLL_COLOR    = new(0.80f, 0.78f, 0.57f, 1f);
-        public static Color VANITY_COLOR             = new(0.53f, 0.44f, 0.77f, 1f);
+        public static Color BROKEN_MASK_COLOR = new(0.38f, 0.38f, 0.82f, 1f);
+        public static Color CARVING_BLADE_COLOR = new(0.09f, 0.67f, 0.62f, 1f);
+        public static Color PERMAFROST_COLOR = new(0.76f, 0.80f, 0.98f, 1f);
+        public static Color IRON_HEART_COLOR = new(0.44f, 0.44f, 0.44f, 1f);
+        public static Color TATTERED_SCROLL_COLOR = new(0.80f, 0.78f, 0.57f, 1f);
+        public static Color VANITY_COLOR = new(0.53f, 0.44f, 0.77f, 1f);
 
         internal static void Init()
         {
@@ -120,61 +118,22 @@ namespace TooManyItems
 
         public static float GetExponentialStacking(float percent, int count)
         {
-            return 1f - Mathf.Pow(1f - percent, count);
+            return GetExponentialStacking(percent, percent, count);
+        }
+
+        public static float GetExponentialStacking(float percent, float stackPercent, int count)
+        {
+            return 1f - (1 - percent) * Mathf.Pow(1f - stackPercent, count - 1);
+        }
+
+        public static float GetReverseExponentialStacking(float percent, float reducePercent, int count)
+        {
+            return percent * Mathf.Pow(1 - reducePercent, count - 1);
         }
 
         public static float GetHyperbolicStacking(float percent, int count)
         {
             return 1f - 1f / (1f + percent * count);
-        }
-
-        public static ItemTier? GetLowestAvailableItemTier(Inventory inventory)
-        {
-            if (inventory.GetTotalItemCountOfTier(ItemTier.Tier1) > 0)
-            {
-                return ItemTier.Tier1;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidTier1) > 0)
-            {
-                return ItemTier.VoidTier1;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.Tier2) > 0)
-            {
-                return ItemTier.Tier2;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidTier2) > 0)
-            {
-                return ItemTier.VoidTier2;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.Tier3) > 0)
-            {
-                return ItemTier.Tier3;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidTier3) > 0)
-            {
-                return ItemTier.VoidTier3;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.Boss) > 0)
-            {
-                return ItemTier.Boss;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.VoidBoss) > 0)
-            {
-                return ItemTier.VoidBoss;
-            }
-            else if (inventory.GetTotalItemCountOfTier(ItemTier.Lunar) > 0)
-            {
-                return ItemTier.Lunar;
-            }
-            
-            return null;
-        }
-
-        public static ItemDef GetRandomItemOfTier(ItemTier tier)
-        {
-            ItemDef[] tierItems = ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == tier).ToArray();
-
-            return tierItems[TooManyItems.RandGen.Next(0, tierItems.Length)];
         }
     }
 }

@@ -192,13 +192,13 @@ namespace TooManyItems
                 if (Crucifix.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
-                    stats.descriptions.Add("Burn Duration: ");
-                    stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
-                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
+                    stats.descriptions.Add("Burn Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Health);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.PercentHealth);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Crucifix.fireDuration * itemCount
+                            Utils.GetReverseExponentialStacking(Crucifix.maxHealthBurnAmountPercent, Crucifix.maxHealthBurnAmountReductionPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Crucifix.itemDef.itemIndex, stats);
@@ -215,7 +215,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            DebitCard.rebatePercent * itemCount
+                            Utils.GetHyperbolicStacking(DebitCard.rebatePercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)DebitCard.itemDef.itemIndex, stats);
