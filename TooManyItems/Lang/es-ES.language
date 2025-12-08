@@ -7,8 +7,8 @@
   "es-ES": {
     "VANITY": "Corona de Vanidad",
     "EQUIPMENT_VANITY_NAME": "Corona de Vanidad",
-    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>Matar enemigos otorga un debuff acumulativo</style>. Actívalo para causar daño basado en la cantidad de acumulaciones obtenidas.",
-    "EQUIPMENT_VANITY_DESC": "Gana acumulaciones de <style=cWorldEvent>Arrogancia</style> al matar enemigos. <style=cDeath>Cada acumulación obtenida reduce tu <style=cIsDamage>daño BASE</style> por <style=cIsDamage>{Base Damage Lost}%</style></style>. Activa este equipo para limpiar todas las acumulaciones de <style=cWorldEvent>Arrogancia</style> y desgarrar a un enemigo objetivo por <style=cIsDamage>{Damage Dealt}% damage</style> por acumulación.",
+    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>Golpear enemigos otorga un debuff acumulativo</style>. Actívalo para causar daño basado en la cantidad de acumulaciones obtenidas.",
+    "EQUIPMENT_VANITY_DESC": "Gana acumulaciones de <style=cWorldEvent>Arrogancia</style> al golpear. <style=cDeath>Cada acumulación obtenida reduce tu <style=cIsDamage>daño BASE</style> por <style=cIsDamage>{Base Damage Lost}%</style></style>. Activa este equipo para limpiar todas las acumulaciones de <style=cWorldEvent>Arrogancia</style> y desgarrar a un enemigo objetivo por <style=cIsDamage>{Damage Dealt}% damage</style> por acumulación.",
     "EQUIPMENT_VANITY_LORE": "",
     "CHALICE": "Cáliz",
     "EQUIPMENT_CHALICE_NAME": "Cáliz",

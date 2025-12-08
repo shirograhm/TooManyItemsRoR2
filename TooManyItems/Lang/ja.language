@@ -7,8 +7,8 @@
   "ja": {
     "VANITY": "虚栄の王冠",
     "EQUIPMENT_VANITY_NAME": "虚栄の王冠",
-    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>敵を倒すとスタックするデバフが付与される</style>。使用すると蓄積したスタック数に応じたダメージを与える。",
-    "EQUIPMENT_VANITY_DESC": "敵を倒すと<style=cWorldEvent>ヒュブリス</style>を得る。この効果はスタックする。<style=cDeath>蓄積されたスタックごとに<style=cIsDamage>基礎ダメージが</style><style=cIsDamage>{Base Damage Lost}%</style></style>減少する。 この装備を使用すると、すべての<style=cWorldEvent>ヒュブリス</style>が解除され、対象の敵にスタックごとに<style=cIsDamage>{Damage Dealt}%のダメージ</style>を与える。",
+    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>敵を打つとスタックするデバフが付与される</style>。使用すると蓄積したスタック数に応じたダメージを与える。",
+    "EQUIPMENT_VANITY_DESC": "敵を打つと<style=cWorldEvent>ヒュブリス</style>を得る。この効果はスタックする。<style=cDeath>蓄積されたスタックごとに<style=cIsDamage>基礎ダメージが</style><style=cIsDamage>{Base Damage Lost}%</style></style>減少する。 この装備を使用すると、すべての<style=cWorldEvent>ヒュブリス</style>が解除され、対象の敵にスタックごとに<style=cIsDamage>{Damage Dealt}%のダメージ</style>を与える。",
     "EQUIPMENT_VANITY_LORE": "",
     "CHALICE": "聖杯",
     "EQUIPMENT_CHALICE_NAME": "聖杯",

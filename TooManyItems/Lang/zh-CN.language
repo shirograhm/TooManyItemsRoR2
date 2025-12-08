@@ -2,8 +2,8 @@
   "zh-CN": {
     "VANITY": "虚荣",
     "EQUIPMENT_VANITY_NAME": "虚荣",
-    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>装备冷却期间击杀敌人会获得叠加减益</style>。激活后根据叠加的减益数量造成伤害。",
-    "EQUIPMENT_VANITY_DESC": "在装备冷却期间，击杀敌人会获得一层 <style=cWorldEvent>傲慢</style>。<style=cDeath>每个等级都会使你的伤害降低 {Base Damage Lost}%</style>。激活后清除所有 <style=cWorldEvent>傲慢</style> 层数，并对目标敌人造成每层 <style=cIsDamage>{Damage Dealt}% 基础伤害</style>。",
+    "EQUIPMENT_VANITY_PICKUP": "<style=cDeath>装备冷却期间攻击敌人会获得叠加减益</style>。激活后根据叠加的减益数量造成伤害。",
+    "EQUIPMENT_VANITY_DESC": "在装备冷却期间，攻击敌人会获得一层 <style=cWorldEvent>傲慢</style>。<style=cDeath>每个等级都会使你的伤害降低 {Base Damage Lost}%</style>。激活后清除所有 <style=cWorldEvent>傲慢</style> 层数，并对目标敌人造成每层 <style=cIsDamage>{Damage Dealt}% 基础伤害</style>。",
     "EQUIPMENT_VANITY_LORE": "",
     "CHALICE": "圣杯",
     "EQUIPMENT_CHALICE_NAME": "圣杯",
