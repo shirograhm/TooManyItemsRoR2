@@ -33,7 +33,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthBurnAmount = new(
             "Item: Crucifix",
             "Burn Amount",
-            25f,
+            40f,
             "Percentage of max health taken over the duration of the burn.",
             new List<string>()
             {
@@ -43,18 +43,8 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthBurnAmountReduction = new(
             "Item: Crucifix",
             "Burn Amount Reduction",
-            5f,
+            8f,
             "Percentage of burn damage reduced per stack of this item. This scales hyperbolically.",
-            new List<string>()
-            {
-                "ITEM_CRUCIFIX_DESC"
-            }
-        );
-        public static ConfigurableValue<int> fireDuration = new(
-            "Item: Crucifix",
-            "Duration of Fire",
-            2,
-            "Duration of fire debuff after taking damage.",
             new List<string>()
             {
                 "ITEM_CRUCIFIX_DESC"
@@ -107,7 +97,7 @@ namespace TooManyItems
                         attackerObject = victimInfo.body.gameObject,
                         totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * stackedPercentage,
                         dotIndex = DotController.DotIndex.Burn,
-                        duration = fireDuration.Value,
+                        duration = 0f,
                         damageMultiplier = 1f
                     };
                     DotController.InflictDot(ref dotInfo);

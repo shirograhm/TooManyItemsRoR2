@@ -35,7 +35,7 @@
     "CRUCIFIX": "Наперсный крест",
     "ITEM_CRUCIFIX_NAME": "Наперсный крест",
     "ITEM_CRUCIFIX_PICKUP": "Уменьшает получаемый урон. <style=cDeath>Однако получение урона поджигает вас.</style>.",
-    "ITEM_CRUCIFIX_DESC": "Уменьшает получаемый урон на <style=cIsUtility>{Damage Reduction}%</style>. <style=cDeath>Получение урона поджигает вас</style> на <style=cIsUtility>{Duration of Fire}</style> <style=cStack>(+{Duration of Fire} за шт.)</style>, <style=cDeath>нанося {Burn Amount}% от вашего максимального здоровья в секунду</style>.",
+    "ITEM_CRUCIFIX_DESC": "Уменьшает получаемый урон на <style=cIsUtility>{Damage Reduction}%</style>. <style=cDeath>Получение урона поджигает вас</style>, нанося <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% per stack)</style> от вашего максимального здоровья</style>.",
     "ITEM_CRUCIFIX_LORE": "",
     "SPIRITSTONE": "Камень духов",
     "ITEM_SPIRITSTONE_NAME": "Камень духов",

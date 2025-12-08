@@ -40,7 +40,7 @@
     "CRUCIFIX": "十字架",
     "ITEM_CRUCIFIX_NAME": "十字架",
     "ITEM_CRUCIFIX_PICKUP": "受けるダメージを減少する。 <style=cDeath>ダメージを受けると炎上する。</style>.",
-    "ITEM_CRUCIFIX_DESC": "受けるダメージを<style=cIsUtility>{Damage Reduction}%</style>減少する。 ダメージを受けると<style=cIsHealth>最大体力の{Burn Amount}%分のダメージ</style>を<style=cIsUtility>{Duration of Fire}<style=cStack>(スタックごとに+{Duration of Fire})</style>秒間受ける</style>。",
+    "ITEM_CRUCIFIX_DESC": "受けるダメージを<style=cIsUtility>{Damage Reduction}%</style>減少する。 ダメージを受けると<style=cIsHealth>最大体力の{Burn Amount}%</style>を失います。",
     "ITEM_CRUCIFIX_LORE": "",
     "SPIRITSTONE": "精霊の石",
     "ITEM_SPIRITSTONE_NAME": "精霊の石",

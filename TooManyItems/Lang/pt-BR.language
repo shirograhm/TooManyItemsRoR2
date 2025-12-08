@@ -40,7 +40,7 @@
     "CRUCIFIX": "Crucifixo",
     "ITEM_CRUCIFIX_NAME": "Crucifixo",
     "ITEM_CRUCIFIX_PICKUP": "Reduz o dano recebido. <style=cDeath>Receber dano o incendeia</style>.",
-    "ITEM_CRUCIFIX_DESC": "Reduz o dano recebido em <style=cIsUtility>{Damage Reduction}%</style>. Receber dano o queima por <style=cIsHealth>{Burn Amount}% da sua vida máxima</style> durante <style=cIsUtility>{Duration of Fire} <style=cStack>(+{Duration of Fire} por acúmulo)</style> segundos</style>.",
+    "ITEM_CRUCIFIX_DESC": "Reduz o dano recebido em <style=cIsUtility>{Damage Reduction}%</style>. Receber dano o queima por <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% per stack)</style> da sua vida máxima</style>.",
     "ITEM_CRUCIFIX_LORE": "",
     "SPIRITSTONE": "Pedra Espiritual",
     "ITEM_SPIRITSTONE_NAME": "Pedra Espiritual",
