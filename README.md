@@ -27,11 +27,11 @@ If configuration issues persist, don't hesitate to delete the config file and le
 |-|-|-|
 | ![Ancient Coin](https://i.imgur.com/NWJgZGVt.png) | **Ancient Coin** | Gain 100% (+100% per stack) more gold. Take 25% (+25% per stack) more damage. |
 | ![Carving Blade](https://i.imgur.com/z29LUT2t.png) | **Carving Blade** | Deal 2% of enemy current health as bonus on-hit damage. Per-hit damage is capped at 2000% (+1000% per stack) of your BASE damage. You cannot critically strike. |
-| ![Crucifix](https://i.imgur.com/6JnhLFbt.png) | **Crucifix** | Reduce damage taken by 40%. Taking damage sets you on fire for 5% max health over 3 (+3 per stack) seconds. |
-| ![Spirit Stone](https://i.imgur.com/2PhhDygt.png) | **Spirit Stone** | On-kill, gain 1 (+1 per stack) permanent shield. Lose 25% (+25% per stack) max HP. |
+| ![Crucifix](https://i.imgur.com/6JnhLFbt.png) | **Crucifix** | Reduce damage taken by 100%. Taking damage sets you on fire for 40% (-8% per stack) of your max health. |
+| ![Spirit Stone](https://i.imgur.com/2PhhDygt.png) | **Spirit Stone** | On-kill, gain 1 (+1 per stack) permanent shield. Lose 25% (+15% per stack) max HP. |
 | ![Shadow Crest](https://i.imgur.com/RYlNwqAt.png) | **Shadow Crest** | Regenerate 1.2% (+1.2% per stack) of your missing health every second. |
 | ![Defiled Heart](https://i.imgur.com/H8JadY0t.png) | **Defiled Heart** | Gain 300 HP. Also, gain 1.5% (+1.5% per stack) of your max health as bonus BASE damage. |
-| ![Abacus](https://i.imgur.com/yD368cAt.png) | **Abacus** | Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Every 1% crit chance above 100% grants 1% crit damage. |
+| ![Abacus](https://i.imgur.com/ucBRpbnt.png) | **Abacus** | Killing an enemy grants 1% (+1% per stack) crit chance until the next stage. Every 1% crit chance above 100% grants 1% crit damage. |
 | ![Blood Dice](https://i.imgur.com/7nB0tFPt.png) | **Blood Dice** | On-kill, gain 2 to 12 permanent HP, up to a max of 550 (+550 per stack) HP. |
 | ![Glass Marbles](https://i.imgur.com/NzRNge2t.png) | **Glass Marbles** | Gain 2 (+2 per stack) BASE damage per level. |
 | ![Golden Horseshoe](https://i.imgur.com/XwCuw2Pt.png) | **Golden Horseshoe** | Gain a random assortment of stat bonuses that are rerolled upon entering a new stage. These bonuses scale with level, and each additional stack increases all bonuses by 30%. |
@@ -48,23 +48,23 @@ If configuration issues persist, don't hesitate to delete the config file and le
 | ![Soul Ring](https://i.imgur.com/I3pEvR2t.png) | **Soul Ring** | On-kill, permanently increase your health regeneration by 0.1 HP/s, up to a maximum of 5 (+3 per stack) HP/s. |
 | ![3D Glasses](https://i.imgur.com/wys8KPct.png) | **3D Glasses** | Gain 6% (+6% per stack) critical strike chance and 6% (+6% per stack) critical strike damage. |
 | ![Bottle Cap](https://i.imgur.com/jq1lvS9t.png) | **Bottle Cap** | Reduce your special skill cooldown by 10% (+10% per stack). |
-| ![Debit Card](https://i.imgur.com/BXUGjeft.png) | **Debit Card** | Get an 10% (+10% per stack) rebate on purchases. |
+| ![Debit Card](https://i.imgur.com/mhmaZoJt.png) | **Debit Card** | Get an 10% (+10% per stack) rebate on purchases. |
 | ![Edible Glue](https://i.imgur.com/3gpa6WWt.png) | **Edible Glue** | On-kill, slow enemies within 20m (+10m per stack) by 80% for 4 seconds. |
 | ![Loaf of Bread](https://i.imgur.com/mzlxTIrt.png) | **Loaf of Bread** | Gain 1 (+1 per stack) gold on-kill. After 25 kills, scrap a stack of this item and gain 25 gold, scaling with difficulty. |
 | ![Milk Carton](https://i.imgur.com/R6U6Uget.png) | **Milk Carton** | Reduce damage taken from elite enemies by 10% (+10% per stack). |
 | ![Paper Plane](https://i.imgur.com/pvG4mztt.png) | **Paper Plane** | Deal 15% (+15% per stack) more damage while airborne. |
 | ![Photodiode](https://i.imgur.com/4ZjgqKIt.png) | **Photodiode** | On-hit, gain 2% attack speed for 10 seconds. Stacks up to a max of 10 (+10 per stack) times. |
-| ![Propeller Hat](https://imgur.com/1FWpOyjt.png) | **Propeller Hat** | Gain 18% (+18% per stack) movement speed while airborne. |
+| ![Propeller Hat](https://imgur.com/1FWpOyjt.png) | **Propeller Hat** | Gain 16% (+16% per stack) movement speed while airborne. Take reduced fall damage. |
 | ![Rubber Ducky](https://i.imgur.com/dEgzWQht.png) | **Rubber Ducky** | Gain 5 (+5 per stack) armor. |
 | ![Thumbtack](https://i.imgur.com/q89u8kWt.png) | **Thumbtack** | Gain 4% (+4% per stack) chance to bleed enemies on-hit for 240% BASE damage over 3 seconds. Your bleed effects last an additional 0.25 (+0.25 per stack) seconds. |
 
 ### Equipment
 | | | |
 |-|-|-|
-| ![Chalice](https://i.imgur.com/klcM2TFt.png) | **Chalice** | On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. [*70 second cooldown*] |
-| ![Crown of Vanity](https://i.imgur.com/YIl5v00t.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 3%, exponentially. Activate this equipment to cleanse all stacks and deal 200% damage per stack to a target enemy. [*30 second cooldown*] |
+| ![Chalice](https://i.imgur.com/2edFOdNt.png) | **Chalice** | On activation, pay 90% of your current health to Consecrate yourself and all allies. Consecrated allies gain 30% damage and 90% attack speed for 10 seconds. [*70 second cooldown*] |
+| ![Crown of Vanity](https://i.imgur.com/NJnYRylt.png) | **Crown of Vanity** | Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by 3%, exponentially. Activate this equipment to cleanse all stacks and deal 150% damage per stack to a target enemy. [*40 second cooldown*] |
 | ![Tattered Scroll](https://i.imgur.com/ZRQUBHmt.png) | **Tattered Scroll** | On activation, curse enemies within 60m of you for 10 seconds. Killing cursed enemies grants 20 additional gold, scaling with difficulty. [*100 second cooldown*] |
-| ![Totem of Prayer](https://i.imgur.com/Fii53bpt.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. [*55 second cooldown*] |
+| ![Totem of Prayer](https://i.imgur.com/bKsmXi8t.png) | **Totem of Prayer** | On activation, grants either 100 armor, 25% damage, 75% attack speed, or 10% max HP/s regeneration for 12 seconds. [*55 second cooldown*] |
 
 ## Translations
 If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
