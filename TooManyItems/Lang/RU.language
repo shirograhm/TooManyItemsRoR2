@@ -81,7 +81,7 @@
     "PROPELLERHAT": "Пропеллер шляпа",
     "ITEM_PROPELLERHAT_NAME": "Пропеллер шляпа",
     "ITEM_PROPELLERHAT_PICKUP": "Получайте прибавку к скорости, пока вы не касаетесь земли.",
-    "ITEM_PROPELLERHAT_DESC": "Получайте <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% за шт.)</style> скорости передвижения, пока вы не касаетесь земли.",
+    "ITEM_PROPELLERHAT_DESC": "Получайте <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% за шт.)</style> скорости передвижения, пока вы не касаетесь земли. Уменьшите урон от падения.",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3D-очки",
     "ITEM_REDBLUEGLASSES_NAME": "3D-очки",
