@@ -128,7 +128,7 @@ namespace TooManyItems
 
         public static float GetReverseExponentialStacking(float percent, float reducePercent, int count)
         {
-            return percent * Mathf.Pow(1 - reducePercent, count);
+            return percent * Mathf.Pow(1 - reducePercent, count - 1);
         }
 
         public static float GetHyperbolicStacking(float percent, int count)
