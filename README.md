@@ -386,7 +386,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Chalice</b>
         </td>
         <td>
-            On activation, pay <b>90%</b> of your current health to Consecrate yourself and all allies. Consecrated allies gain <b>30%</b> damage and <b>90%</b> attack speed for <b>10</b> seconds. <u>[Cooldown: 70s]</u>
+            On activation, pay <b>90%</b> of your current health to Consecrate yourself and all allies. Consecrated allies gain <b>30%</b> damage and <b>90%</b> attack speed for <b>10</b> seconds. [<i>Cooldown: 70s</i>]
         </td>
     </tr>
     <tr>
@@ -397,7 +397,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Crown of Vanity</b>
         </td>
         <td>
-            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>3%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. <u>[Cooldown: 110s]</u>
+            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>3%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. [<i>Cooldown: 110s</i>]
         </td>
     </tr>
     <tr>
@@ -408,7 +408,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Tattered Scroll</b>
         </td>
         <td>
-            On activation, curse enemies within <b>60m</b> of you for <b>10</b> seconds. Killing cursed enemies grants <b>20</b> additional gold, scaling with difficulty. <u>[Cooldown: 100s]</u>
+            On activation, curse enemies within <b>60m</b> of you for <b>10</b> seconds. Killing cursed enemies grants <b>20</b> additional gold, scaling with difficulty. [<i>Cooldown: 100s</i>]
         </td>
     </tr>
     <tr>
@@ -419,7 +419,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Totem of Prayer</b>
         </td>
         <td>
-            On activation, grants either <b>100</b> armor, <b>25%</b> damage, <b>75%</b> attack speed, or <b>8%</b> max HP/s regeneration for <b>12</b> seconds. <u>[Cooldown: 80s]</u>
+            On activation, grants either <b>100</b> armor, <b>25%</b> damage, <b>75%</b> attack speed, or <b>8%</b> max HP/s regeneration for <b>12</b> seconds. [<i>Cooldown: 80s</i>]
         </td>
     </tr>
 </table>
