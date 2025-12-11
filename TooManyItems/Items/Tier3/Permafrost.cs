@@ -49,7 +49,10 @@ namespace TooManyItems
         {
             GenerateItem();
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
+            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict();
+
+            displayRules.Add("mdlEngiTurret", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, 50f, 10f), new Vector3(3f, 3f, 3f)));
+
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             Hooks();
