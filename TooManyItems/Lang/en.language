@@ -40,7 +40,7 @@
     "CRUCIFIX": "Crucifix",
     "ITEM_CRUCIFIX_NAME": "Crucifix",
     "ITEM_CRUCIFIX_PICKUP": "Reduce damage taken. <style=cDeath>Taking damage sets you on fire.</style>",
-    "ITEM_CRUCIFIX_DESC": "Reduce damage taken by <style=cIsUtility>{Damage Reduction}%</style>. Taking damage burns you for <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% per stack)</style> max health.</style>",
+    "ITEM_CRUCIFIX_DESC": "Reduce damage taken by <style=cIsUtility>{Damage Reduction}%</style>. Taking damage burns you for <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% per stack)</style> max health.</style> This burn does not stack.",
     "ITEM_CRUCIFIX_LORE": "",
     "SPIRITSTONE": "Spirit Stone",
     "ITEM_SPIRITSTONE_NAME": "Spirit Stone",

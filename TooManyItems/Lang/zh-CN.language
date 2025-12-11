@@ -35,7 +35,7 @@
     "CRUCIFIX": "十字架",
     "ITEM_CRUCIFIX_NAME": "十字架",
     "ITEM_CRUCIFIX_PICKUP": "减少所受伤害。<style=cDeath>受到伤害会让你燃烧起来</style>。",
-    "ITEM_CRUCIFIX_DESC": "减少 <style=cIsUtility>{Damage Reduction}%</style>受到的伤害。受到伤害会在内燃烧你<style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% 每层)</style>最大生命值</style>。",
+    "ITEM_CRUCIFIX_DESC": "减少 <style=cIsUtility>{Damage Reduction}%</style>受到的伤害。受到伤害会在内燃烧你<style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% 每层)</style>最大生命值</style>。这种灼伤效果不会叠加。",
     "ITEM_CRUCIFIX_LORE": "",
     "SPIRITSTONE": "灵魂之石",
     "ITEM_SPIRITSTONE_NAME": "灵魂之石",

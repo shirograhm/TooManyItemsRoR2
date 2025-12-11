@@ -50,6 +50,16 @@ namespace TooManyItems
                 "ITEM_CRUCIFIX_DESC"
             }
         );
+        public static ConfigurableValue<bool> isCrucifixBurnStackable = new(
+            "Item: Crucifix",
+            "Is Burn Stackable",
+            false,
+            "Whether or not the burn caused by Crucifix is stackable.",
+            new List<string>()
+            {
+                "ITEM_CRUCIFIX_DESC"
+            }
+        );
         public static float damageReductionPercent = damageReduction.Value / 100f;
         public static float maxHealthBurnAmountPercent = maxHealthBurnAmount.Value / 100f;
         public static float maxHealthBurnAmountReductionPercent = maxHealthBurnAmountReduction.Value / 100f;
@@ -84,6 +94,9 @@ namespace TooManyItems
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (victimInfo.inventory == null || victimInfo.body == null || attackerInfo.body == null) return;
+
+                // Not immune to void death
+                if (damageInfo.damageType == DamageType.VoidDeath) return;
 
                 int count = victimInfo.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0 && attackerInfo.body != victimInfo.body)

@@ -40,7 +40,7 @@
     "CRUCIFIX": "Crucifijo",
     "ITEM_CRUCIFIX_NAME": "Crucifijo",
     "ITEM_CRUCIFIX_PICKUP": "Reduce el daño recibido. <style=cDeath>Recibir daño te incendia</style>.",
-    "ITEM_CRUCIFIX_DESC": "Reduce el daño recibido por <style=cIsUtility>{Damage Reduction}%</style>. Tecibir daño te incendia por un <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% por stack)</style> de tu vida máxima</style>.",
+    "ITEM_CRUCIFIX_DESC": "Reduce el daño recibido por <style=cIsUtility>{Damage Reduction}%</style>. Tecibir daño te incendia por un <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% por stack)</style> de tu vida máxima</style>. Esta quemadura no es acumulativa.",
     "ITEM_CRUCIFIX_LORE": "",
     "SPIRITSTONE": "Espíritu de Piedra",
     "ITEM_SPIRITSTONE_NAME": "Espíritu de Piedra",
