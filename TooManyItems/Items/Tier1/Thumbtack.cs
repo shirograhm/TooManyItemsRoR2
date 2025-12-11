@@ -134,21 +134,24 @@ namespace TooManyItems
 
         private static void DotController_InflictDot_refInflictDotInfo(On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo info)
         {
-            if (!NetworkServer.active) return;
-
-            if (info.attackerObject)
+            if (NetworkServer.active)
             {
-                CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
-                if (atkBody && atkBody.inventory)
+                if (info.attackerObject)
                 {
-                    int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
-                    if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
+                    CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
+                    if (atkBody && atkBody.inventory)
                     {
-                        info.duration += bleedDurationBonus.Value * itemCount;
+                        int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
+                        if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
+                        {
+                            info.duration += bleedDurationBonus.Value * itemCount;
+                        }
                     }
                 }
             }
+
             orig(ref info);
         }
     }
+}
 }

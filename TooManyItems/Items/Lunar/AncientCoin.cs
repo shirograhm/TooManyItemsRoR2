@@ -84,15 +84,15 @@ namespace TooManyItems
 
             On.RoR2.CharacterMaster.GiveMoney += (orig, self, amount) =>
             {
-                if (self.inventory == null) return;
-
-                int count = self.inventory.GetItemCountPermanent(itemDef);
-                if (count > 0)
+                if (self.inventory)
                 {
-                    float multiplier = 1 + count * goldMultiplierAsPercent;
-                    amount = Convert.ToUInt32(amount * multiplier);
+                    int count = self.inventory.GetItemCountPermanent(itemDef);
+                    if (count > 0)
+                    {
+                        float multiplier = 1 + count * goldMultiplierAsPercent;
+                        amount = Convert.ToUInt32(amount * multiplier);
+                    }
                 }
-
                 orig(self, amount);
             };
         }
