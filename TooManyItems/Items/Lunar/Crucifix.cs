@@ -113,6 +113,8 @@ namespace TooManyItems
                         duration = 0f,
                         damageMultiplier = 1f
                     };
+                    if (!isCrucifixBurnStackable) dotInfo.maxStacksFromAttacker = 1;
+
                     DotController.InflictDot(ref dotInfo);
                 }
             };
