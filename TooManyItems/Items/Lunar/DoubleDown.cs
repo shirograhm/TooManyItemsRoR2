@@ -83,7 +83,7 @@ namespace TooManyItems
                 {
                     CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
                     CharacterBody vicBody = info.victimObject.GetComponent<CharacterBody>();
-                    if (vicBody && vicBody.healthComponent)
+                    if (vicBody && vicBody.inventory && vicBody.healthComponent)
                     {
                         int itemCount = vicBody.inventory.GetItemCountEffective(itemDef);
                         if (itemCount > 0)
