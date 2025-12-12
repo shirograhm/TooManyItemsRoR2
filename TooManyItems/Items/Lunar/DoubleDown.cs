@@ -10,7 +10,7 @@ namespace TooManyItems
     {
         public static ItemDef itemDef;
 
-        // Gain immunity to DoT effects. Instead, take 120% (-10% per stack) of the total DoT damage up front.
+        // Take all DoT damage up front.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Double Down",
             "Enabled",
@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> upFrontDamage = new(
             "Item: Double Down",
             "Total Up Front",
-            120f,
+            130f,
             "Percentage of the total DoT damage taken up front.",
             new List<string>()
             {
@@ -81,7 +81,6 @@ namespace TooManyItems
                 // Cannot affect Lunar Ruin DoT
                 if (info.victimObject && info.dotIndex != DotController.DotIndex.LunarRuin)
                 {
-                    CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
                     CharacterBody vicBody = info.victimObject.GetComponent<CharacterBody>();
                     if (vicBody && vicBody.inventory && vicBody.healthComponent)
                     {
