@@ -28,7 +28,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
 <table>
     <tr>
         <td>
-            <img src="https://i.imgur.com/NWJgZGV.png" alt="Ancient Coin" width="128"/>
+            <img src="https://i.imgur.com/NWJgZGV.png" alt="Ancient Coin" width="256"/>
         </td>
         <td>
             <b>Ancient Coin</b>
@@ -39,7 +39,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/z29LUT2.png" alt="Carving Blade" width="128"/>
+            <img src="https://i.imgur.com/z29LUT2.png" alt="Carving Blade" width="256"/>
         </td>
         <td>
             <b>Carving Blade</b>
@@ -50,7 +50,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/6JnhLFb.png" alt="Crucifix" width="128"/>
+            <img src="https://i.imgur.com/6JnhLFb.png" alt="Crucifix" width="256"/>
         </td>
         <td>
             <b>Crucifix</b>
@@ -61,7 +61,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/w256r2e.png" alt="Double Down" width="128"/>
+            <img src="https://i.imgur.com/w256r2e.png" alt="Double Down" width="256"/>
         </td>
         <td>
             <b>Double Down</b>
@@ -72,7 +72,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/2PhhDyg.png" alt="Spirit Stone" width="128"/>
+            <img src="https://i.imgur.com/2PhhDyg.png" alt="Spirit Stone" width="256"/>
         </td>
         <td>
             <b>Spirit Stone</b>
@@ -83,7 +83,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/RYlNwqA.png" alt="Shadow Crest" width="128"/>
+            <img src="https://i.imgur.com/RYlNwqA.png" alt="Shadow Crest" width="256"/>
         </td>
         <td>
             <b>Shadow Crest</b>
@@ -94,7 +94,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/H8JadY0.png" alt="Defiled Heart" width="128"/>
+            <img src="https://i.imgur.com/H8JadY0.png" alt="Defiled Heart" width="256"/>
         </td>
         <td>
             <b>Defiled Heart</b>
@@ -105,7 +105,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/ucBRpbn.png" alt="Abacus" width="128"/>
+            <img src="https://i.imgur.com/ucBRpbn.png" alt="Abacus" width="256"/>
         </td>
         <td>
             <b>Abacus</b>
@@ -116,7 +116,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/7nB0tFP.png" alt="Blood Dice" width="128"/>
+            <img src="https://i.imgur.com/7nB0tFP.png" alt="Blood Dice" width="256"/>
         </td>
         <td>
             <b>Blood Dice</b>
@@ -127,7 +127,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/NzRNge2.png" alt="Glass Marbles" width="128"/>
+            <img src="https://i.imgur.com/NzRNge2.png" alt="Glass Marbles" width="256"/>
         </td>
         <td>
             <b>Glass Marbles</b>
@@ -138,7 +138,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/XwCuw2P.png" alt="Golden Horseshoe" width="128"/>
+            <img src="https://i.imgur.com/XwCuw2P.png" alt="Golden Horseshoe" width="256"/>
         </td>
         <td>
             <b>Golden Horseshoe</b>
@@ -149,7 +149,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/1sirkmi.png" alt="Iron Heart" width="128"/>
+            <img src="https://i.imgur.com/1sirkmi.png" alt="Iron Heart" width="256"/>
         </td>
         <td>
             <b>Iron Heart</b>
@@ -160,7 +160,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/ESn7Gn2.png" alt="Permafrost" width="128"/>
+            <img src="https://i.imgur.com/ESn7Gn2.png" alt="Permafrost" width="256"/>
         </td>
         <td>
             <b>Permafrost</b>
@@ -171,7 +171,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/Isa4tqx.png" alt="Rusty Trowel" width="128"/>
+            <img src="https://i.imgur.com/Isa4tqx.png" alt="Rusty Trowel" width="256"/>
         </td>
         <td>
             <b>Rusty Trowel</b>
@@ -182,7 +182,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/8ebb6ma.png" alt="Brass Knuckles" width="128"/>
+            <img src="https://i.imgur.com/8ebb6ma.png" alt="Brass Knuckles" width="256"/>
         </td>
         <td>
             <b>Brass Knuckles</b>
@@ -193,7 +193,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/hRzczm5.png" alt="Broken Mask" width="128"/>
+            <img src="https://i.imgur.com/hRzczm5.png" alt="Broken Mask" width="256"/>
         </td>
         <td>
             <b>Broken Mask</b>
@@ -204,7 +204,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/0t8q5mq.png" alt="Fleece Hoodie" width="128"/>
+            <img src="https://i.imgur.com/0t8q5mq.png" alt="Fleece Hoodie" width="256"/>
         </td>
         <td>
             <b>Fleece Hoodie</b>
@@ -215,7 +215,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/oem7bxM.png" alt="Epinephrine" width="128"/>
+            <img src="https://i.imgur.com/UQGkqEA.png" alt="Epinephrine" width="256"/>
         </td>
         <td>
             <b>Epinephrine</b>
@@ -226,7 +226,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/ARyhF53.png" alt="Holy Water" width="128"/>
+            <img src="https://i.imgur.com/ARyhF53.png" alt="Holy Water" width="256"/>
         </td>
         <td>
             <b>Holy Water</b>
@@ -237,7 +237,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/8BsvCWQ.png" alt="Magnifying Glass" width="128"/>
+            <img src="https://i.imgur.com/8BsvCWQ.png" alt="Magnifying Glass" width="256"/>
         </td>
         <td>
             <b>Magnifying Glass</b>
@@ -248,7 +248,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/6okJd8v.png" alt="Seal of the Heretic" width="128"/>
+            <img src="https://i.imgur.com/6okJd8v.png" alt="Seal of the Heretic" width="256"/>
         </td>
         <td>
             <b>Seal of the Heretic</b>
@@ -259,7 +259,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/I3pEvR2.png" alt="Soul Ring" width="128"/>
+            <img src="https://i.imgur.com/I3pEvR2.png" alt="Soul Ring" width="256"/>
         </td>
         <td>
             <b>Soul Ring</b>
@@ -270,7 +270,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/wys8KPc.png" alt="3D Glasses" width="128"/>
+            <img src="https://i.imgur.com/wys8KPc.png" alt="3D Glasses" width="256"/>
         </td>
         <td>
             <b>3D Glasses</b>
@@ -281,7 +281,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/jq1lvS9.png" alt="Bottle Cap" width="128"/>
+            <img src="https://i.imgur.com/jq1lvS9.png" alt="Bottle Cap" width="256"/>
         </td>
         <td>
             <b>Bottle Cap</b>
@@ -292,7 +292,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/mhmaZoJ.png" alt="Debit Card" width="128"/>
+            <img src="https://i.imgur.com/mhmaZoJ.png" alt="Debit Card" width="256"/>
         </td>
         <td>
             <b>Debit Card</b>
@@ -303,7 +303,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/3gpa6WW.png" alt="Edible Glue" width="128"/>
+            <img src="https://i.imgur.com/3gpa6WW.png" alt="Edible Glue" width="256"/>
         </td>
         <td>
             <b>Edible Glue</b>
@@ -314,7 +314,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/mzlxTIr.png" alt="Loaf of Bread" width="128"/>
+            <img src="https://i.imgur.com/mzlxTIr.png" alt="Loaf of Bread" width="256"/>
         </td>
         <td>
             <b>Loaf of Bread</b>
@@ -325,7 +325,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/R6U6Uge.png" alt="Milk Carton" width="128"/>
+            <img src="https://i.imgur.com/R6U6Uge.png" alt="Milk Carton" width="256"/>
         </td>
         <td>
             <b>Milk Carton</b>
@@ -336,7 +336,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/pvG4mzt.png" alt="Paper Plane" width="128"/>
+            <img src="https://i.imgur.com/pvG4mzt.png" alt="Paper Plane" width="256"/>
         </td>
         <td>
             <b>Paper Plane</b>
@@ -347,7 +347,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/4ZjgqKI.png" alt="Photodiode" width="128"/>
+            <img src="https://i.imgur.com/4ZjgqKI.png" alt="Photodiode" width="256"/>
         </td>
         <td>
             <b>Photodiode</b>
@@ -358,7 +358,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://imgur.com/1FWpOyj.png" alt="Propeller Hat" width="128"/>
+            <img src="https://imgur.com/1FWpOyj.png" alt="Propeller Hat" width="256"/>
         </td>
         <td>
             <b>Propeller Hat</b>
@@ -369,7 +369,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/dEgzWQh.png" alt="Rubber Ducky" width="128"/>
+            <img src="https://i.imgur.com/dEgzWQh.png" alt="Rubber Ducky" width="256"/>
         </td>
         <td>
             <b>Rubber Ducky</b>
@@ -380,7 +380,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/q89u8kW.png" alt="Thumbtack" width="128"/>
+            <img src="https://i.imgur.com/q89u8kW.png" alt="Thumbtack" width="256"/>
         </td>
         <td>
             <b>Thumbtack</b>
@@ -391,7 +391,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/2edFOdN.png" alt="Chalice" width="128"/>
+            <img src="https://i.imgur.com/2edFOdN.png" alt="Chalice" width="256"/>
         </td>
         <td>
             <b>Chalice</b>
@@ -402,7 +402,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/NJnYRyl.png" alt="Crown of Vanity" width="128"/>
+            <img src="https://i.imgur.com/NJnYRyl.png" alt="Crown of Vanity" width="256"/>
         </td>
         <td>
             <b>Crown of Vanity</b>
@@ -413,7 +413,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/ZRQUBHm.png" alt="Tattered Scroll" width="128"/>
+            <img src="https://i.imgur.com/ZRQUBHm.png" alt="Tattered Scroll" width="256"/>
         </td>
         <td>
             <b>Tattered Scroll</b>
@@ -424,7 +424,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/bKsmXi8.png" alt="Totem of Prayer" width="128"/>
+            <img src="https://i.imgur.com/bKsmXi8.png" alt="Totem of Prayer" width="256"/>
         </td>
         <td>
             <b>Totem of Prayer</b>

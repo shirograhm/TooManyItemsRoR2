@@ -40,7 +40,7 @@
     "DOUBLEDOWN": "Удвоить ставку",
     "ITEM_DOUBLEDOWN_NAME": "Удвоить ставку",
     "ITEM_DOUBLEDOWN_PICKUP": "Получайте весь урон от периодических эффектов урона <style=cDeath>мгновенно</style>.",
-    "ITEM_DOUBLEDOWN_DESC": "Получите <style=cIsHealing>иммунитет</style> к эффектам периодического урона. Вместо этого, получайте <style=cIsDamage>100%</style> <style=cStack>(-10% за шт.)</style> от <style=cIsDamage>общего урона</style> сразу.",
+    "ITEM_DOUBLEDOWN_DESC": "Получите <style=cIsHealing>иммунитет</style> к эффектам периодического урона. Вместо этого, получайте <style=cIsDamage>{Total Up Front}%</style> <style=cStack>(-{Damage Reduced Per Stack}% за шт.)</style> от <style=cIsDamage>общего урона</style> сразу.",
     "ITEM_DOUBLEDOWN_LORE": "",
     "SPIRITSTONE": "Камень духов",
     "ITEM_SPIRITSTONE_NAME": "Камень духов",

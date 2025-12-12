@@ -221,6 +221,22 @@ namespace TooManyItems
                     ItemDefinitions.allItemDefinitions.Add((int)DebitCard.itemDef.itemIndex, stats);
                 }
 
+                // Double Down
+                if (DoubleDown.isEnabled.Value)
+                {
+                    ItemStatsDef stats = new ItemStatsDef();
+                    stats.descriptions.Add("Total DoT Damage: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Death);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.calculateValues = (master, itemCount) =>
+                    {
+                        return new List<float> {
+                            Utils.GetReverseExponentialStacking(DoubleDown.upFrontDamagePercent, DoubleDown.upFrontDamageReductionPercent, itemCount)
+                        };
+                    };
+                    ItemDefinitions.allItemDefinitions.Add((int)DoubleDown.itemDef.itemIndex, stats);
+                }
+
 
                 // Edible Glue
                 if (EdibleGlue.isEnabled.Value)
