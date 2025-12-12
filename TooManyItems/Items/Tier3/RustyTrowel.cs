@@ -48,7 +48,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
             "Item: Rusty Trowel",
             "Recharge Time Reduction",
-            30f,
+            20f,
             "Percent of recharge time removed for every additional stack of this item.",
             new List<string>()
             {
