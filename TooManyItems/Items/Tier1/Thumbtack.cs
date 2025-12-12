@@ -109,7 +109,7 @@ namespace TooManyItems
                     int itemCount = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (attackerInfo.master && itemCount > 0)
                     {
-                        // If the hit doesn't already apply bleed, and isn't applied to a member of the same team, roll for bleed
+                        // If the hit doesn't already apply bleed, and isn't applied by a member of the same team, roll for bleed
                         if (damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
                         {
                             if (Util.CheckRoll(bleedChance.Value * itemCount * damageInfo.procCoefficient, attackerInfo.master.luck, attackerInfo.master))
@@ -134,15 +134,19 @@ namespace TooManyItems
 
         private static void DotController_InflictDot_refInflictDotInfo(On.RoR2.DotController.orig_InflictDot_refInflictDotInfo orig, ref InflictDotInfo info)
         {
-            if (!NetworkServer.active) return;
-
-            CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
-            if (atkBody && atkBody.inventory)
+            if (NetworkServer.active)
             {
-                int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
-                if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
+                if (info.attackerObject)
                 {
-                    info.duration += bleedDurationBonus.Value * itemCount;
+                    CharacterBody atkBody = info.attackerObject.GetComponent<CharacterBody>();
+                    if (atkBody && atkBody.inventory)
+                    {
+                        int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
+                        if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
+                        {
+                            info.duration += bleedDurationBonus.Value * itemCount;
+                        }
+                    }
                 }
             }
 
