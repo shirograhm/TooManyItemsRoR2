@@ -25,7 +25,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.4";
+        public const string PluginVersion = "0.6.5";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -114,6 +114,8 @@ namespace TooManyItems
                 Crucifix.Init();
             if (SpiritStone.isEnabled.Value)
                 SpiritStone.Init();
+            if (DoubleDown.isEnabled.Value)
+                DoubleDown.Init();
 
             // Void
             if (ShadowCrest.isEnabled.Value)
@@ -199,47 +201,33 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        //DropItem(Abacus.itemDef);
-        //        //DropItem(BloodDice.itemDef);
-        //        //DropItem(GlassMarbles.itemDef);
-        //        //DropItem(Horseshoe.itemDef);
-        //        //DropItem(IronHeart.itemDef);
-        //        //DropItem(Permafrost.itemDef);
-        //        //DropItem(RustyTrowel.itemDef);
-
-        //        //DropItem(BrassKnuckles.itemDef);
-        //        //DropItem(BrokenMask.itemDef);
-        //        //DropItem(Epinephrine.itemDef);
-        //        //DropItem(HereticSeal.itemDef);
-        //        //DropItem(HolyWater.itemDef);
-        //        //DropItem(Hoodie.itemDef);
-        //        //DropItem(MagnifyingGlass.itemDef);
-        //        //DropItem(SoulRing.itemDef);
-
-        //        //DropItem(BottleCap.itemDef);
-        //        //DropItem(BreadLoaf.itemDef);
-        //        //DropItem(DebitCard.itemDef);
-        //        //DropItem(EdibleGlue.itemDef);
-        //        //DropItem(MilkCarton.itemDef);
-        //        //DropItem(PaperPlane.itemDef);
-        //        //DropItem(Photodiode.itemDef);
-        //        //DropItem(PropellerHat.itemDef);
-        //        //DropItem(RedBlueGlasses.itemDef);
-        //        //DropItem(RubberDucky.itemDef);
-        //        //DropItem(Thumbtack.itemDef, 4);
-
-        //        //DropItem(AncientCoin.itemDef);
-        //        //DropItem(CarvingBlade.itemDef);
-        //        //DropItem(Crucifix.itemDef);
-        //        //DropItem(SpiritStone.itemDef);
-
-        //        //DropItem(IronHeartVoid.itemDef);
-        //        //DropItem(ShadowCrest.itemDef);
-
-        //        //DropItem(BuffTotem.equipmentDef);
-        //        //DropItem(TatteredScroll.equipmentDef);
-        //        //DropItem(Chalice.equipmentDef);
-        //        //DropItem(Vanity.equipmentDef);
+        //        DropItem(Epinephrine.itemDef);
+        //        DropItem(DoubleDown.itemDef);
+        //        DropItem(Crucifix.itemDef);
+        //        DropItem(RustyTrowel.itemDef);
+        //        DropItem(SoulRing.itemDef);
+        //        DropItem(DLC2Content.Items.DelayedDamage);
+        //        DropItem(Vanity.equipmentDef);
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.F3))
+        //    {
+        //        foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
+        //        {
+        //            CharacterBody body = controller.master.GetBody();
+        //            if (body && body.healthComponent)
+        //            {
+        //                InflictDotInfo dotInfo = new()
+        //                {
+        //                    victimObject = body.gameObject,
+        //                    attackerObject = body.gameObject,
+        //                    totalDamage = body.healthComponent.fullCombinedHealth * 0.2f,
+        //                    dotIndex = DotController.DotIndex.Burn,
+        //                    duration = 0f,
+        //                    damageMultiplier = 1f
+        //                };
+        //                DotController.InflictDot(ref dotInfo);
+        //            }
+        //        }
         //    }
         //}
 
