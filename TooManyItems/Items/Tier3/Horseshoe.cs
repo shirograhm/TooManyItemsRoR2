@@ -196,9 +196,9 @@ namespace TooManyItems
 
             Stage.onStageStartGlobal += (stage) =>
             {
-                foreach (NetworkUser user in NetworkUser.readOnlyInstancesList)
+                foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
                 {
-                    CharacterMaster master = user.masterController.master ?? user.master;
+                    CharacterMaster master = controller.master;
                     if (master && master.inventory && master.inventory.GetItemCountEffective(itemDef) > 0)
                     {
                         Reroll(master.inventory, master.GetBody());
@@ -287,7 +287,7 @@ namespace TooManyItems
                 component.ShieldBonus = 0;
                 component.MoveSpeedPercentBonus = 0;
 
-                float pointsRemaining = Horseshoe.totalPointsCap.Value;
+                float pointsRemaining = totalPointsCap.Value;
                 while (pointsRemaining > 0)
                 {
                     float step = 1.8f;
@@ -300,31 +300,31 @@ namespace TooManyItems
                     switch (chosenStat)
                     {
                         case Bonuses.HEALTH:
-                            component.MaxHealthBonus += randomPoints * Horseshoe.healthPerPoint.Value;
+                            component.MaxHealthBonus += randomPoints * healthPerPoint.Value;
                             break;
                         case Bonuses.DAMAGE:
-                            component.BaseDamageBonus += randomPoints * Horseshoe.damagePerPoint.Value;
+                            component.BaseDamageBonus += randomPoints * damagePerPoint.Value;
                             break;
                         case Bonuses.ATTACK_SPEED:
-                            component.AttackSpeedPercentBonus += randomPoints * Horseshoe.attackSpeedPerPoint.Value / 100f;
+                            component.AttackSpeedPercentBonus += randomPoints * attackSpeedPerPoint.Value / 100f;
                             break;
                         case Bonuses.CRIT_CHANCE:
-                            component.CritChanceBonus += randomPoints * Horseshoe.critChancePerPoint.Value;
+                            component.CritChanceBonus += randomPoints * critChancePerPoint.Value;
                             break;
                         case Bonuses.CRIT_DAMAGE:
-                            component.CritDamageBonus += randomPoints * Horseshoe.critDamagePerPoint.Value / 100f;
+                            component.CritDamageBonus += randomPoints * critDamagePerPoint.Value / 100f;
                             break;
                         case Bonuses.ARMOR:
-                            component.ArmorBonus += randomPoints * Horseshoe.armorPerPoint.Value;
+                            component.ArmorBonus += randomPoints * armorPerPoint.Value;
                             break;
                         case Bonuses.HEALTH_REGEN:
-                            component.RegenerationBonus += randomPoints * Horseshoe.regenPerPoint.Value;
+                            component.RegenerationBonus += randomPoints * regenPerPoint.Value;
                             break;
                         case Bonuses.SHIELD:
-                            component.ShieldBonus += randomPoints * Horseshoe.shieldPerPoint.Value;
+                            component.ShieldBonus += randomPoints * shieldPerPoint.Value;
                             break;
                         case Bonuses.MOVEMENT_SPEED:
-                            component.MoveSpeedPercentBonus += randomPoints * Horseshoe.moveSpeedPerPoint.Value / 100f;
+                            component.MoveSpeedPercentBonus += randomPoints * moveSpeedPerPoint.Value / 100f;
                             break;
                         default:
                             Log.Error("Attempted to boost an invalid stat.");
