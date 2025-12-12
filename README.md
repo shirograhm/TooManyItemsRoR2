@@ -1,5 +1,5 @@
 # TooManyItems
-Adds 36 new items to Risk of Rain 2!  
+Adds 37 new items to Risk of Rain 2!  
 ![picture of items](https://i.imgur.com/nDgkbc8l.png)
 
 ## Mod Compatibility
@@ -56,7 +56,18 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Crucifix</b>
         </td>
         <td>
-            Reduce damage taken by <b>100%</b>. Taking damage sets you on fire for <b>40%</b> (-8% per stack) of your max health.
+            Reduce damage taken by <b>100%</b>. Taking damage sets you on fire for <b>40%</b> (-8% per stack) of your max health. This fire cannot stack.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <img src="https://i.imgur.com/w256r2e.png" alt="Double Down" width="128"/>
+        </td>
+        <td>
+            <b>Double Down</b>
+        </td>
+        <td>
+            Gain immunity to DoT effects. Instead, take <b>120%</b> (-10% per stack) of the total damage up front.
         </td>
     </tr>
     <tr>
@@ -397,7 +408,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Crown of Vanity</b>
         </td>
         <td>
-            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>3%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. [<i>Cooldown: 110s</i>]
+            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>3%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. [<i>Cooldown: 70s</i>]
         </td>
     </tr>
     <tr>
