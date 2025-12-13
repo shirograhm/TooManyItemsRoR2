@@ -91,6 +91,11 @@ namespace TooManyItems
                             float stackedDamage = Utils.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
                             float totalDamageCalc = dotDamage * stackedDamage;
 
+                            // Roll for crit if the attacker body exists
+                            bool isCrit = false;
+                            if (info.attackerObject && info.attackerObject.GetComponent<CharacterBody>())
+                                isCrit = info.attackerObject.GetComponent<CharacterBody>().RollCrit();
+
                             vicBody.healthComponent.TakeDamage(new DamageInfo
                             {
                                 damage = totalDamageCalc,
@@ -99,7 +104,7 @@ namespace TooManyItems
                                 inflictor = info.attackerObject,
                                 position = vicBody.corePosition,
                                 force = Vector3.zero,
-                                crit = false,
+                                crit = isCrit,
                                 // Cannot proc items/effects
                                 procCoefficient = 0f,
                                 procChainMask = new ProcChainMask()
