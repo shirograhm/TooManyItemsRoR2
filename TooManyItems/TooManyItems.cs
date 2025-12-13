@@ -25,7 +25,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.6";
+        public const string PluginVersion = "0.6.7";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -204,9 +204,10 @@ namespace TooManyItems
         //        DropItem(DoubleDown.itemDef);
         //        DropItem(BloodDice.itemDef);
         //        DropItem(GlassMarbles.itemDef);
-        //        DropItem(BrokenMask.itemDef);
         //        DropItem(Photodiode.itemDef);
         //        DropItem(HereticSeal.itemDef);
+
+        //        DropItem(Horseshoe.itemDef);
         //    }
         //    if (Input.GetKeyDown(KeyCode.F3))
         //    {

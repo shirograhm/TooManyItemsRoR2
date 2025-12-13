@@ -206,7 +206,24 @@ namespace TooManyItems
                 }
             };
 
-            On.RoR2.Inventory.GiveItem_ItemIndex_int += (orig, self, index, count) =>
+            On.RoR2.Inventory.GiveItemPermanent_ItemIndex_int += (orig, self, index, count) =>
+            {
+                HorseshoeStatistics component = self.GetComponent<HorseshoeStatistics>();
+                CharacterMaster master = self.GetComponent<CharacterMaster>();
+
+                if (component && master && index == itemDef.itemIndex)
+                {
+                    // Check if rolled yet
+                    if (HasNotRolledYet(component) && master.GetBody())
+                    {
+                        Reroll(self, master.GetBody());
+                    }
+
+                }
+                orig(self, index, count);
+            };
+
+            On.RoR2.Inventory.GiveItemTemp += (orig, self, index, count) =>
             {
                 HorseshoeStatistics component = self.GetComponent<HorseshoeStatistics>();
                 CharacterMaster master = self.GetComponent<CharacterMaster>();

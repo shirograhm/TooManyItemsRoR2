@@ -24,7 +24,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> upFrontDamage = new(
             "Item: Double Down",
             "Total Up Front",
-            130f,
+            200f,
             "Percentage of the total DoT damage taken up front.",
             new List<string>()
             {
@@ -34,7 +34,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> upFrontDamageReduction = new(
             "Item: Double Down",
             "Damage Reduced Per Stack",
-            10f,
+            12f,
             "Percentage of the up front damage reduced with stacks.",
             new List<string>()
             {
