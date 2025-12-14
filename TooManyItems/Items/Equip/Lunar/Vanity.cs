@@ -105,8 +105,15 @@ namespace TooManyItems
             equipmentDef.name = "VANITY";
             equipmentDef.AutoPopulateTokens();
 
+            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Vanity.prefab");
+            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
+            modelPanelParameters.focusPointTransform = prefab.transform;
+            modelPanelParameters.cameraPositionTransform = prefab.transform;
+            modelPanelParameters.maxDistance = 10f;
+            modelPanelParameters.minDistance = 5f;
+
             equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Vanity.png");
-            equipmentDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Vanity.prefab");
+            equipmentDef.pickupModelPrefab = prefab;
 
             equipmentDef.isLunar = true;
             equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;

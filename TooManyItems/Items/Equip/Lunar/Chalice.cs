@@ -94,8 +94,15 @@ namespace TooManyItems
             equipmentDef.name = "CHALICE";
             equipmentDef.AutoPopulateTokens();
 
+            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Chalice.prefab");
+            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
+            modelPanelParameters.focusPointTransform = prefab.transform;
+            modelPanelParameters.cameraPositionTransform = prefab.transform;
+            modelPanelParameters.maxDistance = 10f;
+            modelPanelParameters.minDistance = 5f;
+
             equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Chalice.png");
-            equipmentDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("Chalice.prefab");
+            equipmentDef.pickupModelPrefab = prefab;
 
             equipmentDef.isLunar = true;
             equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
@@ -167,7 +174,7 @@ namespace TooManyItems
                     damageType = DamageType.Silent
                 };
                 body.healthComponent.TakeDamage(useCost);
-                
+
                 foreach (TeamComponent component in TeamComponent.GetTeamMembers(slot.characterBody.teamComponent.teamIndex))
                 {
                     component.body.AddTimedBuff(consecratedBuff, consecrateDuration.Value);

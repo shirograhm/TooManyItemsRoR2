@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -86,8 +85,15 @@ namespace TooManyItems
             equipmentDef.name = "TATTEREDSCROLL";
             equipmentDef.AutoPopulateTokens();
 
+            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
+            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
+            modelPanelParameters.focusPointTransform = prefab.transform;
+            modelPanelParameters.cameraPositionTransform = prefab.transform;
+            modelPanelParameters.maxDistance = 10f;
+            modelPanelParameters.minDistance = 5f;
+
             equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("TatteredScroll.png");
-            equipmentDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
+            equipmentDef.pickupModelPrefab = prefab;
 
             equipmentDef.appearsInMultiPlayer = true;
             equipmentDef.appearsInSinglePlayer = true;
