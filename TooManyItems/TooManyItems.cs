@@ -44,9 +44,6 @@ namespace TooManyItems
             ConfigOptions.Init();
             DamageColorAPI.Init();
 
-            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
-            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
-
             // Red Items
             if (Abacus.isEnabled.Value)
                 Abacus.Init();
@@ -132,6 +129,9 @@ namespace TooManyItems
                 Chalice.Init();
             if (Vanity.isEnabled.Value)
                 Vanity.Init();
+
+            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
+            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
 
             Log.Message("Finished initializations.");
         }
