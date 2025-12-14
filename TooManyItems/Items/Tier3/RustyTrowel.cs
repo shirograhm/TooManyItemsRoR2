@@ -144,8 +144,15 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RustedTrowel.png");
-            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
+            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
+            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
+            modelPanelParameters.focusPointTransform = prefab.transform;
+            modelPanelParameters.cameraPositionTransform = prefab.transform;
+            modelPanelParameters.maxDistance = 10f;
+            modelPanelParameters.minDistance = 5f;
+
+            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RustyTrowel.png");
+            itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
 

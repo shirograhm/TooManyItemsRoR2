@@ -25,7 +25,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.7";
+        public const string PluginVersion = "0.6.8";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -43,9 +43,6 @@ namespace TooManyItems
             GenericGameEvents.Init();
             ConfigOptions.Init();
             DamageColorAPI.Init();
-
-            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
-            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
 
             // Red Items
             if (Abacus.isEnabled.Value)
@@ -132,6 +129,9 @@ namespace TooManyItems
                 Chalice.Init();
             if (Vanity.isEnabled.Value)
                 Vanity.Init();
+
+            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
+            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
 
             Log.Message("Finished initializations.");
         }
