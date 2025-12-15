@@ -63,8 +63,15 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Lunar);
 
+            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
+            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
+            modelPanelParameters.focusPointTransform = prefab.transform;
+            modelPanelParameters.cameraPositionTransform = prefab.transform;
+            modelPanelParameters.maxDistance = 10f;
+            modelPanelParameters.minDistance = 5f;
+
             itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DoubleDown.png");
-            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
+            itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
         }
@@ -91,6 +98,11 @@ namespace TooManyItems
                             float stackedDamage = Utils.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
                             float totalDamageCalc = dotDamage * stackedDamage;
 
+                            // Roll for crit if the attacker body exists
+                            bool isCrit = false;
+                            if (info.attackerObject && info.attackerObject.GetComponent<CharacterBody>())
+                                isCrit = info.attackerObject.GetComponent<CharacterBody>().RollCrit();
+
                             vicBody.healthComponent.TakeDamage(new DamageInfo
                             {
                                 damage = totalDamageCalc,
@@ -99,7 +111,7 @@ namespace TooManyItems
                                 inflictor = info.attackerObject,
                                 position = vicBody.corePosition,
                                 force = Vector3.zero,
-                                crit = false,
+                                crit = isCrit,
                                 // Cannot proc items/effects
                                 procCoefficient = 0f,
                                 procChainMask = new ProcChainMask()

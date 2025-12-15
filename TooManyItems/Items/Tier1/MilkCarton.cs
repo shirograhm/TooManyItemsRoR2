@@ -51,8 +51,15 @@ namespace TooManyItems
 
             Utils.SetItemTier(itemDef, ItemTier.Tier1);
 
+            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("MilkCarton.prefab");
+            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
+            modelPanelParameters.focusPointTransform = prefab.transform;
+            modelPanelParameters.cameraPositionTransform = prefab.transform;
+            modelPanelParameters.maxDistance = 10f;
+            modelPanelParameters.minDistance = 5f;
+
             itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MilkCarton.png");
-            itemDef.pickupModelPrefab = AssetHandler.bundle.LoadAsset<GameObject>("MilkCarton.prefab");
+            itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
@@ -71,7 +78,7 @@ namespace TooManyItems
                 if (victimInfo.inventory)
                 {
                     int count = victimInfo.inventory.GetItemCountEffective(itemDef);
-                    if (attackerInfo.body && attackerInfo.body.isElite && count > 0)
+                    if (attackerInfo.body && attackerInfo.body.isElite && count > 0 && damageInfo.damageColorIndex != DamageColorIndex.DelayedDamage)
                     {
                         float damageReductionPercent = Utils.GetHyperbolicStacking(eliteDamageReductionPercent, count);
                         damageInfo.damage *= 1 - damageReductionPercent;

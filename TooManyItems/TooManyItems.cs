@@ -25,7 +25,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.7";
+        public const string PluginVersion = "0.6.8";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -43,9 +43,6 @@ namespace TooManyItems
             GenericGameEvents.Init();
             ConfigOptions.Init();
             DamageColorAPI.Init();
-
-            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
-            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
 
             // Red Items
             if (Abacus.isEnabled.Value)
@@ -133,6 +130,9 @@ namespace TooManyItems
             if (Vanity.isEnabled.Value)
                 Vanity.Init();
 
+            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
+            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
+
             Log.Message("Finished initializations.");
         }
 
@@ -201,13 +201,54 @@ namespace TooManyItems
 
         //    if (Input.GetKeyDown(KeyCode.F2))
         //    {
-        //        DropItem(DoubleDown.itemDef);
+        //        DropItem(Abacus.itemDef);
         //        DropItem(BloodDice.itemDef);
         //        DropItem(GlassMarbles.itemDef);
-        //        DropItem(Photodiode.itemDef);
-        //        DropItem(HereticSeal.itemDef);
-
         //        DropItem(Horseshoe.itemDef);
+        //        DropItem(IronHeart.itemDef);
+        //        DropItem(Permafrost.itemDef);
+        //        DropItem(RustyTrowel.itemDef);
+
+        //        DropItem(BrassKnuckles.itemDef);
+        //        DropItem(BrokenMask.itemDef);
+        //        DropItem(Epinephrine.itemDef);
+        //        DropItem(HereticSeal.itemDef);
+        //        DropItem(HolyWater.itemDef);
+        //        DropItem(Hoodie.itemDef);
+        //        DropItem(MagnifyingGlass.itemDef);
+        //        DropItem(SoulRing.itemDef);
+
+        //        DropItem(BottleCap.itemDef);
+        //        DropItem(BreadLoaf.itemDef);
+        //        DropItem(DebitCard.itemDef);
+        //        DropItem(EdibleGlue.itemDef);
+        //        DropItem(MilkCarton.itemDef);
+        //        DropItem(PaperPlane.itemDef);
+        //        DropItem(Photodiode.itemDef);
+        //        DropItem(PropellerHat.itemDef);
+        //        DropItem(RedBlueGlasses.itemDef);
+        //        DropItem(RubberDucky.itemDef);
+        //        DropItem(Thumbtack.itemDef);
+
+        //        DropItem(AncientCoin.itemDef);
+        //        DropItem(CarvingBlade.itemDef);
+        //        DropItem(Crucifix.itemDef);
+        //        DropItem(DoubleDown.itemDef);
+        //        DropItem(SpiritStone.itemDef);
+
+        //        DropItem(IronHeartVoid.itemDef);
+        //        DropItem(ShadowCrest.itemDef);
+
+        //        DropItem(BuffTotem.equipmentDef);
+        //        DropItem(TatteredScroll.equipmentDef);
+        //        DropItem(Chalice.equipmentDef);
+        //        DropItem(Vanity.equipmentDef);
+
+        //        //DropItem(DoubleDown.itemDef);
+        //        //DropItem(BloodDice.itemDef);
+        //        //DropItem(GlassMarbles.itemDef);
+        //        //DropItem(Photodiode.itemDef);
+        //        //DropItem(HereticSeal.itemDef);
         //    }
         //    if (Input.GetKeyDown(KeyCode.F3))
         //    {
