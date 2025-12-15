@@ -218,10 +218,9 @@ namespace TooManyItems
                 Array values = Enum.GetValues(typeof(Result));
                 Result r = (Result)values.GetValue(TooManyItems.RandGen.Next(values.Length));
 
-                while (r == lastBuffGiven)
-                {
+                // Reroll once if the same buff was given last time
+                if (r == lastBuffGiven)
                     r = (Result)values.GetValue(TooManyItems.RandGen.Next(values.Length));
-                }
                 lastBuffGiven = r;
 
                 switch (r)
