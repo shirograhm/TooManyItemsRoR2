@@ -65,6 +65,8 @@ namespace TooManyItems
             Utils.SetItemTier(itemDef, ItemTier.Tier3);
 
             GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Permafrost.prefab");
+            prefab.AddComponent<PermafrostRotationHandler>();
+
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
