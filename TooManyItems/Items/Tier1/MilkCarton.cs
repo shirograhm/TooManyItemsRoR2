@@ -78,7 +78,7 @@ namespace TooManyItems
                 if (victimInfo.inventory)
                 {
                     int count = victimInfo.inventory.GetItemCountEffective(itemDef);
-                    if (attackerInfo.body && attackerInfo.body.isElite && count > 0)
+                    if (attackerInfo.body && attackerInfo.body.isElite && count > 0 && damageInfo.damageColorIndex != DamageColorIndex.DelayedDamage)
                     {
                         float damageReductionPercent = Utils.GetHyperbolicStacking(eliteDamageReductionPercent, count);
                         damageInfo.damage *= 1 - damageReductionPercent;
