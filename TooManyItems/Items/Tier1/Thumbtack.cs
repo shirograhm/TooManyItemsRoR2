@@ -1,15 +1,12 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class Thumbtack
+    internal class Thumbtack : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Your bleed effects last longer.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Thumbtack",
@@ -69,7 +66,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "THUMBTACK",
+                "Thumbtack.prefab",
+                "Thumbtack.png",
+                ItemTier.Tier1,
+                [
+                    ItemTag.Damage,
+                    ItemTag.Utility,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -77,37 +84,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "THUMBTACK";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Thumbtack.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Thumbtack.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {

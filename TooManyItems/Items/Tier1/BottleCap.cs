@@ -1,14 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class BottleCap
+    internal class BottleCap : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Reduce your special skill cooldown by a percentage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Bottle Cap",
@@ -34,7 +31,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "BOTTLECAP",
+                "BottleCap.prefab",
+                "BottleCap.png",
+                ItemTier.Tier1,
+                [
+                    ItemTag.Utility,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -42,36 +48,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BOTTLECAP";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BottleCap.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BottleCap.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

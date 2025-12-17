@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class Photodiode
+    internal class Photodiode : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef attackSpeedBuff;
 
         // Gain temporary attack speed on-hit.
@@ -57,7 +56,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "PHOTODIODE",
+                "Photodiode.prefab",
+                "Photodiode.png",
+                ItemTier.Tier1,
+                [
+                    ItemTag.Damage,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -66,35 +74,6 @@ namespace TooManyItems
             ContentAddition.AddBuffDef(attackSpeedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "PHOTODIODE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Photodiode.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Photodiode.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
@@ -109,7 +88,7 @@ namespace TooManyItems
             attackSpeedBuff.isCooldown = false;
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {

@@ -9,10 +9,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class BreadLoaf
+    internal class BreadLoaf : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain gold on kill. After enough kills, gain bonus gold and convert a stack of this item to scrap.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Loaf of Bread",
@@ -119,7 +117,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "BREADLOAF",
+                "BreadLoaf.prefab",
+                "BreadLoaf.png",
+                ItemTier.Tier1,
+                [
+                    ItemTag.Utility,
+                    ItemTag.OnKillEffect
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -129,37 +136,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BREADLOAF";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BreadLoaf.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BreadLoaf.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.OnKillEffect
-                // CANNOT BE TEMPORARY
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

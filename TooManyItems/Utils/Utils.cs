@@ -116,6 +116,16 @@ namespace TooManyItems
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
         }
 
+        public static float GetLinearStacking(float percent, int count)
+        {
+            return GetLinearStacking(percent, percent, count);
+        }
+
+        public static float GetLinearStacking(float percent, float stackPercent, int count)
+        {
+            return percent + stackPercent * (count - 1);
+        }
+
         public static float GetExponentialStacking(float percent, int count)
         {
             return GetExponentialStacking(percent, percent, count);

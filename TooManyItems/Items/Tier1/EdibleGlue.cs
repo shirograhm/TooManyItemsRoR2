@@ -6,10 +6,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class EdibleGlue
+    internal class EdibleGlue : BaseItem
     {
-        public static ItemDef itemDef;
-
         // On kill, slow nearby enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Edible Glue",
@@ -54,7 +52,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "EDIBLEGLUE",
+                "GlueBottle.prefab",
+                "EdibleGlue.png",
+                ItemTier.Tier1,
+                [
+                    ItemTag.Utility,
+                    ItemTag.OnKillEffect,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -62,42 +70,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "EDIBLEGLUE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("GlueBottle.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("EdibleGlue.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static float GetSlowRadius(int itemCount)
-        {
-            return slowRadiusInitialStack.Value + slowRadiusPerExtraStack.Value * (itemCount - 1);
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
@@ -114,7 +87,7 @@ namespace TooManyItems
                             mask = LayerIndex.entityPrecise.mask,
                             origin = atkBody.corePosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
-                            radius = GetSlowRadius(itemCount)
+                            radius = Utils.GetLinearStacking(slowRadiusInitialStack.Value, slowRadiusPerExtraStack.Value, itemCount)
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
 
                         foreach (HurtBox hurtbox in hurtboxes)
