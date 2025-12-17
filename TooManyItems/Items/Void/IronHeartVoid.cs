@@ -73,6 +73,8 @@ namespace TooManyItems
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
+            itemDef.requiredExpansion = TooManyItems.voidDLC;
+
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
