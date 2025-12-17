@@ -65,6 +65,8 @@ namespace TooManyItems
             //displayRules.Add("mdlSeeker", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, -20f, 10f), new Vector3(1f, 1f, 1f)));
             //displayRules.Add("mdlChef", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, -20f, 10f), new Vector3(1f, 1f, 1f)));
             //displayRules.Add("mdlFalseSon", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, -20f, 10f), new Vector3(1f, 1f, 1f)));
+            //displayRules.Add("mdlDroneTech", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, -20f, 10f), new Vector3(1f, 1f, 1f)));
+            //displayRules.Add("mdlDrifter", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, -20f, 10f), new Vector3(1f, 1f, 1f)));
             //displayRules.Add("mdlScav", Utils.GenerateItemDisplayRule(itemDef, "Head", new Vector3(0f, 0.5f, 0.023f), new Vector3(0f, -20f, 10f), new Vector3(1f, 1f, 1f)));
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
