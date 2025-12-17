@@ -697,10 +697,16 @@ namespace TooManyItems
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Seconds);
                     stats.calculateValues = (master, itemCount) =>
                     {
-                        return new List<float> {
-                            Thumbtack.bleedChancePercent * itemCount,
-                            Thumbtack.bleedDurationBonus.Value * itemCount
-                        };
+                        var values = new List<float> { };
+
+                        if (master)
+                            values.Add(Utils.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck);
+                        else
+                            values.Add(Thumbtack.bleedChancePercent * itemCount);
+
+                        values.Add(Thumbtack.bleedDurationBonus.Value * itemCount);
+                        return values;
+
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Thumbtack.itemDef.itemIndex, stats);
                 }
