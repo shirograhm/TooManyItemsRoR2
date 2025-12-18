@@ -1,14 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class IronHeartVoid
+    internal class IronHeartVoid : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain HP. Gain bonus damage based on your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Defiled Heart",
@@ -44,7 +41,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "VOIDHEART",
+                "IronHeartVoid.prefab",
+                "IronHeartVoid.png",
+                ItemTier.VoidTier3,
+                [
+                    ItemTag.Damage,
+                    ItemTag.Healing,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -52,44 +59,12 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "VOIDHEART";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.VoidTier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("IronHeartVoid.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("IronHeartVoid.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.requiredExpansion = TooManyItems.voidDLC;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
         public static float CalculateDamageBonus(CharacterBody sender, float itemCount)
         {
             return sender.healthComponent.fullCombinedHealth * itemCount * multiplierPerStack;
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

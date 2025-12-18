@@ -8,10 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class CarvingBlade
+    internal class CarvingBlade : BaseItem
     {
-        public static ItemDef itemDef;
-
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
 
@@ -125,7 +123,13 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "CARVINGBLADE",
+                "CarvingBlade.prefab",
+                "CarvingBlade.png",
+                ItemTier.Lunar,
+                null
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -137,34 +141,12 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "CARVINGBLADE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("CarvingBlade.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("CarvingBlade.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-        }
-
         public static float CalculateDamageCapPercent(int itemCount)
         {
             return damageCapMultAsPercent + damageCapMultExtraStacksAsPercent * (itemCount - 1);
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

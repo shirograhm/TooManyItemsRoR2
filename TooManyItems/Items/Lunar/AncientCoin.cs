@@ -2,14 +2,11 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class AncientCoin
+    internal class AncientCoin : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain more gold. Take more damage.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Ancient Coin",
@@ -46,7 +43,13 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "ANCIENTCOIN",
+                "AncientCoin.prefab",
+                "AncientCoin.png",
+                ItemTier.Lunar,
+                null
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -54,28 +57,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "ANCIENTCOIN";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("AncientCoin.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("AncientCoin.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {

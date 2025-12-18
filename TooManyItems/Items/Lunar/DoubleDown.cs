@@ -6,10 +6,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class DoubleDown
+    internal class DoubleDown : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Take all DoT damage up front.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Double Down",
@@ -46,7 +44,13 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "DOUBLEDOWN",
+                "DoubleDown.prefab",
+                "DoubleDown.png",
+                ItemTier.Lunar,
+                null
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -54,29 +58,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "DOUBLEDOWN";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DoubleDown.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             On.RoR2.DotController.InflictDot_refInflictDotInfo += DotController_InflictDot_refInflictDotInfo;
         }

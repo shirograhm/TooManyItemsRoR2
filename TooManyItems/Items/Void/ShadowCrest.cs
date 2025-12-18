@@ -1,14 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class ShadowCrest
+    internal class ShadowCrest : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain health regen based on missing health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Shadow Crest",
@@ -34,7 +31,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "SHADOWCREST",
+                "ShadowCrest.prefab",
+                "ShadowCrest.png",
+                ItemTier.VoidTier2,
+                [
+                    ItemTag.Healing,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -42,38 +48,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SHADOWCREST";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.VoidTier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("ShadowCrest.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("ShadowCrest.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.requiredExpansion = TooManyItems.voidDLC;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
             {

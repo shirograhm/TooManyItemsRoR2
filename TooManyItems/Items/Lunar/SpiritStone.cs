@@ -8,9 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class SpiritStone
+    internal class SpiritStone : BaseItem
     {
-        public static ItemDef itemDef;
         // Killing an enemy grants permanent shield. Lose a percentage of your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
@@ -119,7 +118,15 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "SPIRITSTONE",
+                "SpiritStone.prefab",
+                "SpiritStone.png",
+                ItemTier.Lunar,
+                [
+                    ItemTag.OnKillEffect
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -129,34 +136,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SPIRITSTONE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("SpiritStone.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.OnKillEffect
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {
