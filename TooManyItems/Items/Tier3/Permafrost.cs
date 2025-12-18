@@ -52,6 +52,7 @@ namespace TooManyItems
                 [
                     ItemTag.Damage,
                     ItemTag.Utility,
+                    ItemTag.AIBlacklist,
                     ItemTag.CanBeTemporary
                 ]
             );
