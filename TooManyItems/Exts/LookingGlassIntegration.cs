@@ -174,12 +174,12 @@ namespace TooManyItems
                         {
                             var component = master.inventory.GetComponent<CarvingBlade.Statistics>();
 
-                            values.Add(CarvingBlade.CalculateDamageCapPercent(itemCount));
+                            values.Add(Utils.GetLinearStacking(CarvingBlade.damageCapMultAsPercent, CarvingBlade.damageCapMultExtraStacksAsPercent, itemCount));
                             values.Add(Mathf.Max(component.TotalDamageDealt, 0));
                         }
                         else
                         {
-                            values.Add(CarvingBlade.CalculateDamageCapPercent(itemCount));
+                            values.Add(Utils.GetLinearStacking(CarvingBlade.damageCapMultAsPercent, CarvingBlade.damageCapMultExtraStacksAsPercent, itemCount));
                             values.Add(0f);
                         }
                         return values;
@@ -248,7 +248,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            EdibleGlue.GetSlowRadius(itemCount)
+                            Utils.GetLinearStacking(EdibleGlue.slowRadiusInitialStack.Value, EdibleGlue.slowRadiusPerExtraStack.Value, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)EdibleGlue.itemDef.itemIndex, stats);
@@ -286,7 +286,7 @@ namespace TooManyItems
                     {
                         return new List<float> {
                             Hoodie.durationIncreasePercent * itemCount,
-                            Hoodie.CalculateHoodieCooldown(itemCount)
+                            Utils.GetReverseExponentialStacking(Hoodie.rechargeTime.Value, Hoodie.rechargeTimeReductionPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Hoodie.itemDef.itemIndex, stats);
@@ -597,12 +597,12 @@ namespace TooManyItems
                         {
                             var component = master.inventory.GetComponent<RustyTrowel.Statistics>();
 
-                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
+                            values.Add(Utils.GetReverseExponentialStacking(RustyTrowel.rechargeTime.Value, RustyTrowel.rechargeTimeReductionPercent, itemCount));
                             values.Add(component.TotalHealingDone);
                         }
                         else
                         {
-                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
+                            values.Add(Utils.GetReverseExponentialStacking(RustyTrowel.rechargeTime.Value, RustyTrowel.rechargeTimeReductionPercent, itemCount));
                             values.Add(0f);
                         }
                         return values;
@@ -700,7 +700,7 @@ namespace TooManyItems
                         var values = new List<float> { };
 
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck);
+                            values.Add(Utils.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck));
                         else
                             values.Add(Thumbtack.bleedChancePercent * itemCount);
 

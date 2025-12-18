@@ -59,9 +59,9 @@ namespace TooManyItems
             Hooks();
         }
 
-        public static float CalculateDamageBonus(CharacterBody sender, float itemCount)
+        public static float CalculateDamageBonus(CharacterBody sender, int itemCount)
         {
-            return sender.healthComponent.fullCombinedHealth * itemCount * multiplierPerStack;
+            return sender.healthComponent.fullCombinedHealth * Utils.GetLinearStacking(multiplierPerStack, itemCount);
         }
 
         public static new void Hooks()

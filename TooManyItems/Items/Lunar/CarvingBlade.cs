@@ -141,11 +141,6 @@ namespace TooManyItems
             Hooks();
         }
 
-        public static float CalculateDamageCapPercent(int itemCount)
-        {
-            return damageCapMultAsPercent + damageCapMultExtraStacksAsPercent * (itemCount - 1);
-        }
-
         public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
@@ -163,16 +158,14 @@ namespace TooManyItems
 
             GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
+                if (attackerInfo.body && victimInfo.body && victimInfo.body.healthComponent && attackerInfo.inventory)
                 {
                     int itemCount = attackerInfo.inventory.GetItemCountPermanent(itemDef);
-                    if (itemCount > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
+                    if (itemCount > 0 && attackerInfo.teamComponent && victimInfo.teamComponent && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
                     {
                         // Minimum of 0.01 damage to prevent negative values in LookingGlass
-                        float amount = Mathf.Max(victimInfo.body.healthComponent.health * currentHPDamageAsPercent, 0.01f);
-                        // Cap the damage. If the damage cap was set to -1 to remove it, set it to default value instead.
-                        if (damageCapMultiplier.Value < 0) damageCapMultAsPercent = 40f;
-                        amount = Mathf.Min(amount, attackerInfo.body.damage * CalculateDamageCapPercent(itemCount));
+                        float rawDamage = Mathf.Max(victimInfo.body.healthComponent.health * currentHPDamageAsPercent, 0.01f);
+                        float amount = Mathf.Min(rawDamage, attackerInfo.body.damage * Utils.GetLinearStacking(damageCapMultAsPercent, damageCapMultExtraStacksAsPercent, itemCount));
 
                         DamageInfo proc = new()
                         {
@@ -188,7 +181,7 @@ namespace TooManyItems
                         };
                         proc.AddModdedDamageType(damageType);
 
-                        victimInfo.healthComponent.TakeDamage(proc);
+                        victimInfo.body.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
                         CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
