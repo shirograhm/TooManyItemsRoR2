@@ -164,11 +164,6 @@ namespace TooManyItems
             healingTimer.isCooldown = true;
         }
 
-        public static float CalculateCooldownInSec(int itemCount)
-        {
-            return rechargeTime.Value * Mathf.Pow(1 - rechargeTimeReductionPercent, itemCount - 1);
-        }
-
         public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
@@ -185,7 +180,7 @@ namespace TooManyItems
                     int itemCount = self.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0 && self.GetBuffCount(mulchBuff) > 0 && !self.HasBuff(healingTimer))
                     {
-                        self.AddTimedBuff(healingTimer, CalculateCooldownInSec(itemCount));
+                        self.AddTimedBuff(healingTimer, Utils.GetReverseExponentialStacking(rechargeTime.Value, rechargeTimeReductionPercent, itemCount));
                     }
                 }
             };

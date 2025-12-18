@@ -111,11 +111,6 @@ namespace TooManyItems
             hoodieBuffCooldown.isCooldown = true;
         }
 
-        public static float CalculateHoodieCooldown(int itemCount)
-        {
-            return rechargeTime.Value * Mathf.Pow(1 - rechargeTimeReductionPercent, itemCount - 1);
-        }
-
         public static new void Hooks()
         {
             RoR2Application.onLoad += () =>
@@ -170,7 +165,7 @@ namespace TooManyItems
                         duration *= 1 + durationIncreasePercent * count;
 
                         self.RemoveBuff(hoodieBuffActive);
-                        self.AddTimedBuff(hoodieBuffCooldown, CalculateHoodieCooldown(count));
+                        self.AddTimedBuff(hoodieBuffCooldown, Utils.GetReverseExponentialStacking(rechargeTime.Value, rechargeTimeReductionPercent, count));
                     }
                 }
                 orig(self, buffDef, duration);
