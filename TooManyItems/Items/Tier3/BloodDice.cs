@@ -8,10 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class BloodDice
+    internal class BloodDice : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain permanent health on-kill.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Blood Dice",
@@ -128,7 +126,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "BLOODDICE",
+                "BloodDice.prefab",
+                "BloodDice.png",
+                ItemTier.Tier3,
+                [
+                    ItemTag.Utility,
+                    ItemTag.OnKillEffect,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -138,37 +146,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BLOODDICE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BloodDice.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BloodDice.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

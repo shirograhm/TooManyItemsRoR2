@@ -8,9 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class RustyTrowel
+    internal class RustyTrowel : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef mulchBuff;
         public static BuffDef healingTimer;
 
@@ -121,7 +120,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "RUSTEDTROWEL",
+                "RustyTrowel.prefab",
+                "RustyTrowel.png",
+                ItemTier.Tier3,
+                [
+                    ItemTag.Healing,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -133,35 +141,6 @@ namespace TooManyItems
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "RUSTEDTROWEL";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RustyTrowel.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
@@ -190,7 +169,7 @@ namespace TooManyItems
             return rechargeTime.Value * Mathf.Pow(1 - rechargeTimeReductionPercent, itemCount - 1);
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

@@ -8,10 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class SoulRing
+    internal class SoulRing : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain permanent health regeneration on-kill.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Soul Ring",
@@ -118,7 +116,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "SOULRING",
+                "SoulRing.prefab",
+                "SoulRing.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Healing,
+                    ItemTag.OnKillEffect,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -128,42 +136,12 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SOULRING";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("SoulRing.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("SoulRing.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Healing,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
-        }
-
         public static float CalculateMaxRegenCap(int count)
         {
             return maxRegenOnFirstStack.Value + maxRegenForExtraStacks.Value * (count - 1);
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

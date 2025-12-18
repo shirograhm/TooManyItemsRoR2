@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class MagnifyingGlass
+    internal class MagnifyingGlass : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef analyzedDebuff;
 
         // Gain crit chance. Critical strikes have a chance to Analyze the enemy, increasing their damage taken from all sources.
@@ -56,7 +55,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "MAGNIFYINGGLASS",
+                "MagnifyingGlass.prefab",
+                "MagnifyingGlass.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Damage,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -65,35 +73,6 @@ namespace TooManyItems
             ContentAddition.AddBuffDef(analyzedDebuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "MAGNIFYINGGLASS";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("MagnifyingGlass.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MagnifyingGlass.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
@@ -108,7 +87,7 @@ namespace TooManyItems
             analyzedDebuff.isCooldown = false;
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

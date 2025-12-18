@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class Epinephrine
+    internal class Epinephrine : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef attackSpeedBuff;
 
         // Gain temporary attack speed after taking damage.
@@ -45,7 +44,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "EPINEPHRINE",
+                "Epinephrine.prefab",
+                "Epinephrine.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Damage,
+                    ItemTag.Utility,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -54,36 +63,6 @@ namespace TooManyItems
             ContentAddition.AddBuffDef(attackSpeedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "EPINEPHRINE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Epinephrine.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Epinephrine.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
@@ -98,7 +77,7 @@ namespace TooManyItems
             attackSpeedBuff.isCooldown = false;
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

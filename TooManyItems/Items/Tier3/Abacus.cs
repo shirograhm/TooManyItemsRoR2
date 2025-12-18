@@ -6,9 +6,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class Abacus
+    internal class Abacus : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef countedBuff;
 
         // Killing an enemy grants crit chance until the next stage. Excess crit chance grants bonus crit damage.
@@ -35,7 +34,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "ABACUS",
+                "Abacus.prefab",
+                "Abacus.png",
+                ItemTier.Tier3,
+                [
+                    ItemTag.Damage,
+                    ItemTag.OnKillEffect,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -44,36 +53,6 @@ namespace TooManyItems
             ContentAddition.AddBuffDef(countedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "ABACUS";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Abacus.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Abacus.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
@@ -88,7 +67,7 @@ namespace TooManyItems
             countedBuff.isCooldown = false;
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

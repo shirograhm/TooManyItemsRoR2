@@ -6,9 +6,8 @@ using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class Hoodie
+    internal class Hoodie : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef hoodieBuffActive;
         public static BuffDef hoodieBuffCooldown;
 
@@ -70,7 +69,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "HOODIE",
+                "Hoodie.prefab",
+                "Hoodie.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Utility,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -80,35 +88,6 @@ namespace TooManyItems
             ContentAddition.AddBuffDef(hoodieBuffCooldown);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "HOODIE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Hoodie.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Hoodie.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
@@ -137,7 +116,7 @@ namespace TooManyItems
             return rechargeTime.Value * Mathf.Pow(1 - rechargeTimeReductionPercent, itemCount - 1);
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             RoR2Application.onLoad += () =>
             {

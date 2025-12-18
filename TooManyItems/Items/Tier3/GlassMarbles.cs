@@ -1,14 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class GlassMarbles
+    internal class GlassMarbles : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain BASE damage per level.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Glass Marbles",
@@ -33,7 +30,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "GLASSMARBLES",
+                "GlassMarbles.prefab",
+                "GlassMarbles.png",
+                ItemTier.Tier3,
+                [
+                    ItemTag.Damage,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -41,36 +47,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "GLASSMARBLES";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("GlassMarbles.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("GlassMarbles.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {

@@ -1,14 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class BrassKnuckles
+    internal class BrassKnuckles : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Heavy hits deal more damage and stun enemies.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Brass Knuckles",
@@ -46,7 +43,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "BRASSKNUCKLES",
+                "BrassKnuckles.prefab",
+                "BrassKnuckles.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Damage,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -54,36 +60,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BRASSKNUCKLES";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BrassKnuckles.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrassKnuckles.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {

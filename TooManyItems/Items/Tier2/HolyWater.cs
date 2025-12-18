@@ -2,15 +2,12 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class HolyWater
+    internal class HolyWater : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Killing an elite enemy grants all allies a portion of its max health as bonus experience, scaling with difficulty.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Holy Water",
@@ -60,7 +57,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "HOLYWATER",
+                "HolyWater.prefab",
+                "HolyWater.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Utility,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -68,36 +74,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "HOLYWATER";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("HolyWater.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HolyWater.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {

@@ -8,9 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class BrokenMask
+    internal class BrokenMask : BaseItem
     {
-        public static ItemDef itemDef;
         public static BuffDef burnDebuff;
         private static DotController.DotDef burnDotDef;
         private static DotController.DotIndex burnIndex;
@@ -116,7 +115,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "BROKENMASK",
+                "BrokenMask.prefab",
+                "BrokenMask.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Damage,
+                    ItemTag.CanBeTemporary
+                ]
+            );
             GenerateBuff();
             GenerateDot();
 
@@ -153,35 +161,6 @@ namespace TooManyItems
             }
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BROKENMASK";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BrokenMask.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrokenMask.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
         private static void GenerateBuff()
         {
             burnDebuff = ScriptableObject.CreateInstance<BuffDef>();
@@ -208,7 +187,7 @@ namespace TooManyItems
             };
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

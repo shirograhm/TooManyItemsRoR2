@@ -1,14 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class HereticSeal
+    internal class HereticSeal : BaseItem
     {
-        public static ItemDef itemDef;
-
         // Gain bonus damage based on missing health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Seal of the Heretic",
@@ -33,7 +30,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "HERETICSEAL",
+                "HereticSeal.prefab",
+                "HereticSeal.png",
+                ItemTier.Tier2,
+                [
+                    ItemTag.Damage,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -41,36 +47,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "HERETICSEAL";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("HereticSeal.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HereticSeal.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
             {

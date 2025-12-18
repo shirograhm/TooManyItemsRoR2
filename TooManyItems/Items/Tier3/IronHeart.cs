@@ -8,10 +8,8 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    internal class IronHeart
+    internal class IronHeart : BaseItem
     {
-        public static ItemDef itemDef;
-
         public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.IRON_HEART_COLOR);
 
@@ -112,7 +110,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "IRONHEART",
+                "IronHeart.prefab",
+                "IronHeart.png",
+                ItemTier.Tier3,
+                [
+                    ItemTag.Damage,
+                    ItemTag.Healing,
+                    ItemTag.CanBeTemporary
+                ]
+            );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -124,42 +132,12 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "IRONHEART";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("IronHeart.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("IronHeart.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
         public static float CalculateDamageOnHit(CharacterBody sender, float itemCount)
         {
             return sender.healthComponent.fullHealth * itemCount * multiplierPerStack;
         }
 
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {

@@ -2,11 +2,10 @@
 using R2API.Networking;
 using RoR2;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace TooManyItems
 {
-    internal class Horseshoe
+    internal class Horseshoe : BaseItem
     {
         public static ItemDef itemDef;
 
@@ -151,7 +150,19 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            GenerateItem(
+                "HORSESHOE",
+                "Horseshoe.prefab",
+                "Horseshoe.png",
+                ItemTier.Tier3,
+                [
+                    ItemTag.Utility,
+                    ItemTag.Damage,
+                    ItemTag.Healing,
+                    ItemTag.OnStageBeginEffect,
+                    ItemTag.CanBeTemporary
+                ]
+                );
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
@@ -161,40 +172,7 @@ namespace TooManyItems
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "HORSESHOE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Horseshoe.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Horseshoe.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.AIBlacklist,
-
-                ItemTag.Utility,
-                ItemTag.Damage,
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static void Hooks()
+        public static new void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {
