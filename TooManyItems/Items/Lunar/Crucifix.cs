@@ -113,8 +113,8 @@ namespace TooManyItems
 
                     InflictDotInfo dotInfo = new()
                     {
-                        victimObject = victimInfo.body.gameObject,
-                        attackerObject = victimInfo.body.gameObject,
+                        victimObject = victimInfo.gameObject,
+                        attackerObject = victimInfo.gameObject,
                         totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * stackedPercentage,
                         dotIndex = DotController.DotIndex.Burn,
                         duration = 0f,
