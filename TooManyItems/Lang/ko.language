@@ -12,7 +12,7 @@
     "EQUIPMENT_VANITY_LORE": "",
     "CHALICE": "성배",
     "EQUIPMENT_CHALICE_NAME": "성배",
-    "EQUIPMENT_CHALICE_PICKUP": <style=cDeath>"현재 체력의 일부를 소모하여</style> <style=cIsUtility>모든 아군</style>에게<style=cIsDamage>추가 피해량과 공격 속도</style>를 부여합니다.",
+    "EQUIPMENT_CHALICE_PICKUP": "<style=cDeath>현재 체력의 일부를 소모하여</style> <style=cIsUtility>모든 아군</style>에게<style=cIsDamage>추가 피해량과 공격 속도</style>를 부여합니다.",
     "EQUIPMENT_CHALICE_DESC": "<style=cDeath>현재 체력의 {Current Health Loss}%를 소모하여</style> 자신과 모든 아군에게 <style=cWorldEvent>축성</style> 버프를 부여합니다. <style=cWorldEvent>축성</style> 버프를 받은 대상은 <style=cIsUtility>{Consecrate Duration}초</style>동안 <style=cIsDamage>{Consecrate Damage Bonus}% 피해량</style>과 <style=cIsDamage>{Consecrate Attack Speed Bonus}% 공격 속도</style> 증가 효과를 받습니다.",
     "EQUIPMENT_CHALICE_LORE": "",
 
@@ -91,7 +91,7 @@
     "PROPELLERHAT": "프로펠러 모자",
     "ITEM_PROPELLERHAT_NAME": "프로펠러 모자",
     "ITEM_PROPELLERHAT_PICKUP": "공중에 있는 동안 이동속도가 증가합니다.",
-    "ITEM_PROPELLERHAT_DESC": "공중에 있는 동안 <style=cIsUtility>{Movement Speed}%<style=cStack>(중첩당 +{Movement Speed}%)</style> 이동속도</style>가 증가합니다. 낙하 피해가 감소합니다.",
+    "ITEM_PROPELLERHAT_DESC": "공중에 있는 동안 <style=cIsUtility>{Movement Speed}%<style=cStack>(중첩당 +{Movement Speed}%)</style> 이동속도</style>가 증가합니다. <style=cWorldEvent>낙하 피해가 감소합니다.</style>",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3D 안경",
     "ITEM_REDBLUEGLASSES_NAME": "3D 안경",
