@@ -100,7 +100,7 @@ namespace TooManyItems
         {
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (victimInfo.inventory == null || victimInfo.body == null || attackerInfo.body == null) return;
+                if (victimInfo.inventory == null || victimInfo.body == null || victimInfo.body.healthComponent == null || attackerInfo.body == null) return;
 
                 // Not immune to void death
                 if (damageInfo.damageType == DamageType.VoidDeath) return;
