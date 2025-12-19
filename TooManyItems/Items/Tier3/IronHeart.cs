@@ -179,12 +179,13 @@ namespace TooManyItems
 
             GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (attackerInfo.body && attackerInfo.inventory)
+                CharacterBody attackerBody = attackerInfo.body;
+                if (attackerBody && attackerInfo.inventory && attackerBody.healthComponent)
                 {
                     int count = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        float amount = CalculateDamageOnHit(attackerInfo.body, count);
+                        float amount = CalculateDamageOnHit(attackerBody, count);
 
                         DamageInfo proc = new()
                         {
@@ -193,7 +194,7 @@ namespace TooManyItems
                             inflictor = attackerInfo.gameObject,
                             procCoefficient = 1f,
                             position = damageInfo.position,
-                            crit = attackerInfo.body.RollCrit(),
+                            crit = attackerBody.RollCrit(),
                             damageColorIndex = damageColor,
                             procChainMask = damageInfo.procChainMask,
                             damageType = DamageType.Silent
@@ -203,7 +204,7 @@ namespace TooManyItems
                         victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
-                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
+                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerBody);
                         Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                         stats.TotalDamageDealt += amount;
                     }

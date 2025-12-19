@@ -93,7 +93,7 @@ namespace TooManyItems
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender && sender.inventory)
+                if (sender && sender.inventory && sender.healthComponent)
                 {
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
