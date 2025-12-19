@@ -181,21 +181,58 @@ namespace TooManyItems
                 }
             };
 
+            On.RoR2.CharacterBody.AddTimedBuffAuthority += (orig, self, buffIndex, duration) =>
+            {
+                if (buffIndex != BuffIndex.None)
+                {
+                    duration = ApplyHoodieBuffToBuff(self, BuffCatalog.GetBuffDef(buffIndex), duration);
+                }
+                orig(self, buffIndex, duration);
+            };
+
             On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float += (orig, self, buffDef, duration) =>
             {
-                if (self && self.inventory)
-                {
-                    if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
-                    {
-                        int count = self.inventory.GetItemCountEffective(itemDef);
-                        duration *= 1 + durationIncreasePercent * count;
-
-                        self.RemoveBuff(hoodieBuffActive);
-                        self.AddTimedBuff(hoodieBuffCooldown, CalculateHoodieCooldown(count));
-                    }
-                }
+                duration = ApplyHoodieBuffToBuff(self, buffDef, duration);
                 orig(self, buffDef, duration);
             };
+
+            On.RoR2.CharacterBody.AddTimedBuff_BuffDef_float_int += (orig, self, buffDef, duration, stackCount) =>
+            {
+                duration = ApplyHoodieBuffToBuff(self, buffDef, duration);
+                orig(self, buffDef, duration, stackCount);
+            };
+
+            On.RoR2.CharacterBody.AddTimedBuff_BuffIndex_float += (orig, self, buffIndex, duration) =>
+            {
+                if (buffIndex != BuffIndex.None)
+                {
+                    duration = ApplyHoodieBuffToBuff(self, BuffCatalog.GetBuffDef(buffIndex), duration);
+                }
+                orig(self, buffIndex, duration);
+            };
+
+            On.RoR2.CharacterBody.AddTimedBuffDontRefreshDuration += (orig, self, buffDef, duration, maxStacks) =>
+            {
+                duration = ApplyHoodieBuffToBuff(self, buffDef, duration);
+                orig(self, buffDef, duration, maxStacks);
+            };
+        }
+
+        private static float ApplyHoodieBuffToBuff(CharacterBody self, BuffDef buffDef, float duration)
+        {
+            if (self && self.inventory)
+            {
+                if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
+                {
+                    int count = self.inventory.GetItemCountEffective(itemDef);
+                    duration *= 1 + durationIncreasePercent * count;
+
+                    self.RemoveBuff(hoodieBuffActive);
+                    self.AddTimedBuff(hoodieBuffCooldown, CalculateHoodieCooldown(count));
+                }
+            }
+
+            return duration;
         }
     }
 }
