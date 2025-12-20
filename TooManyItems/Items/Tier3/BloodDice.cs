@@ -161,6 +161,8 @@ namespace TooManyItems
 
             itemDef.tags = new ItemTag[]
             {
+                ItemTag.AIBlacklist,
+
                 ItemTag.Utility,
 
                 ItemTag.OnKillEffect,
