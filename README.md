@@ -6,11 +6,7 @@ Adds 37 new items to Risk of Rain 2!
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). That is where I check most often. If possible, provide the output log and/or modlist used as it helps me debug faster.
 
 ## Mod Compatibility
-Generally compatible with most mods. Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/). See below for compatibility issues.
-| TooManyItems | LookingGlass |
-|-|-|
-| v0.1.x           | v1.5.0 |
-| v0.2.0 and after | v1.5.1 and after |
+Generally compatible with most mods. Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) version 1.5.1 or later.
 
 ## DLC Support
 Survivors of the Void DLC is supported on all versions.  
@@ -56,7 +52,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Crucifix</b>
         </td>
         <td>
-            Reduce damage taken by <b>100%</b>. Taking damage sets you on fire for <b>40%</b> (-8% per stack) of your max health. This fire cannot stack.
+            Reduce damage taken by <b>100%</b>. Taking damage sets you on fire for <b>30%</b> (-8% per stack) of your max health. This fire cannot stack.
         </td>
     </tr>
     <tr>
@@ -447,5 +443,6 @@ If you would like to help translate this mod, please reach out to me through DM 
     - Spanish: Yguenko (discord)  
     - Portuguese: Poppy (discord)  
     - Japanese: B. (discord)  
+    - Korean: Ophiuchus (discord)
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
