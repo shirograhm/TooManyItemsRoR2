@@ -33,7 +33,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthBurnAmount = new(
             "Item: Crucifix",
             "Burn Amount",
-            40f,
+            30f,
             "Percentage of max health taken over the duration of the burn.",
             new List<string>()
             {
