@@ -91,7 +91,7 @@
     "PROPELLERHAT": "Sombrero de Hélice",
     "ITEM_PROPELLERHAT_NAME": "Sombrero de Hélice",
     "ITEM_PROPELLERHAT_PICKUP": "Ganas velocidad de movimiento mientras estás en el aire.",
-    "ITEM_PROPELLERHAT_DESC": "Ganas un <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% por stack)</style> de velocidad de movimiento cuando estás en el aire. Reducir el daño de caída.",
+    "ITEM_PROPELLERHAT_DESC": "Ganas un <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% por stack)</style> de velocidad de movimiento cuando estás en el aire. <style=cWorldEvent>Reducir el daño de caída.</style>",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3D Glasses",
     "ITEM_REDBLUEGLASSES_NAME": "3D Glasses",

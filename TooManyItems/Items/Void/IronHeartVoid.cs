@@ -73,6 +73,8 @@ namespace TooManyItems
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
+            itemDef.requiredExpansion = TooManyItems.voidDLC;
+
             itemDef.tags = new ItemTag[]
             {
                 ItemTag.Damage,
@@ -91,7 +93,7 @@ namespace TooManyItems
         {
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender && sender.inventory)
+                if (sender && sender.inventory && sender.healthComponent)
                 {
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)

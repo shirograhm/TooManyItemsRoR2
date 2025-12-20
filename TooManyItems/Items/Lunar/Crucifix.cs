@@ -33,7 +33,7 @@ namespace TooManyItems
         public static ConfigurableValue<float> maxHealthBurnAmount = new(
             "Item: Crucifix",
             "Burn Amount",
-            40f,
+            30f,
             "Percentage of max health taken over the duration of the burn.",
             new List<string>()
             {
@@ -100,7 +100,7 @@ namespace TooManyItems
         {
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (victimInfo.inventory == null || victimInfo.body == null || attackerInfo.body == null) return;
+                if (victimInfo.inventory == null || victimInfo.body == null || victimInfo.body.healthComponent == null || attackerInfo.body == null) return;
 
                 // Not immune to void death
                 if (damageInfo.damageType == DamageType.VoidDeath) return;
@@ -113,8 +113,8 @@ namespace TooManyItems
 
                     InflictDotInfo dotInfo = new()
                     {
-                        victimObject = victimInfo.body.gameObject,
-                        attackerObject = victimInfo.body.gameObject,
+                        victimObject = victimInfo.gameObject,
+                        attackerObject = victimInfo.gameObject,
                         totalDamage = victimInfo.body.healthComponent.fullCombinedHealth * stackedPercentage,
                         dotIndex = DotController.DotIndex.Burn,
                         duration = 0f,

@@ -91,7 +91,7 @@
     "PROPELLERHAT": "Chapéu de Hélice",
     "ITEM_PROPELLERHAT_NAME": "Chapéu de Hélice",
     "ITEM_PROPELLERHAT_PICKUP": "Ganhe velocidade de movimento enquanto no ar.",
-    "ITEM_PROPELLERHAT_DESC": "Ganhe <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% por acúmumlo)</style> de velocidade de movimento enquanto estiver no ar. Reduza os danos causados ​​pela queda.",
+    "ITEM_PROPELLERHAT_DESC": "Ganhe <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% por acúmumlo)</style> de velocidade de movimento enquanto estiver no ar. <style=cWorldEvent>Reduza os danos causados ​​pela queda.</style>",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "Óculos 3D",
     "ITEM_REDBLUEGLASSES_NAME": "Óculos 3D",
