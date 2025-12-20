@@ -127,12 +127,12 @@ namespace TooManyItems
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
                 CharacterMaster atkMaster = damageReport.attackerMaster;
-                if (atkBody && vicBody && atkMaster)
+                if (atkBody && vicBody && atkMaster && atkBody.inventory)
                 {
                     int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && damageReport.damageInfo.crit)
                     {
-                        if (Util.CheckRoll(analyzeChance.Value * count * damageReport.damageInfo.procCoefficient, atkMaster.luck, atkMaster))
+                        if (Util.CheckRoll(analyzeChance.Value * damageReport.damageInfo.procCoefficient, atkMaster.luck, atkMaster))
                         {
                             vicBody.AddBuff(analyzedDebuff);
                         }
@@ -142,9 +142,11 @@ namespace TooManyItems
 
             GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
-                if (victimInfo.body && victimInfo.body.HasBuff(analyzedDebuff))
+                CharacterBody atkBody = attackerInfo.body;
+                CharacterBody vicBody = victimInfo.body;
+                if (atkBody && atkBody.inventory && vicBody && vicBody.HasBuff(analyzedDebuff))
                 {
-                    damageInfo.damage *= 1 + damageTakenBonusPercent;
+                    damageInfo.damage *= 1f + damageTakenBonusPercent * atkBody.inventory.GetItemCountEffective(itemDef);
                 }
             };
         }

@@ -137,7 +137,7 @@
     "MAGNIFYINGGLASS": "Увеличительное стекло",
     "ITEM_MAGNIFYINGGLASS_NAME": "Увеличительное стекло",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "Критические удары иногда помечают врагов. Помеченные враги получают больше урона.",
-    "ITEM_MAGNIFYINGGLASS_DESC": "Получите <style=cIsDamage>{Crit Chance}% шанса критического удара</style>. <style=cIsDamage>Критические удары</style> имеют <style=cIsUtility>{Analyze Chance}%</style> <style=cStack>(+{Analyze Chance}% за шт.)</style> шанс <style=cWorldEvent>Проанализировать</style> врага, увеличивая любой наносимый любой наносимый ему урон на <style=cIsDamage>{Damage Taken Bonus}%</style>.",
+    "ITEM_MAGNIFYINGGLASS_DESC": "Получите <style=cIsDamage>{Crit Chance}% шанса критического удара</style>. <style=cIsDamage>Критические удары</style> имеют <style=cIsUtility>{Analyze Chance}%</style> шанс <style=cWorldEvent>Проанализировать</style> врага, увеличивая любой наносимый любой наносимый ему урон на <style=cIsDamage>{Damage Taken Bonus}%</style> <style=cStack>(+{Damage Taken Bonus}% за шт.)</style>.",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "Кольцо душ",
     "ITEM_SOULRING_NAME": "Кольцо душ",

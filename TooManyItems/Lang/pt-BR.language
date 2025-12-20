@@ -142,7 +142,7 @@
     "MAGNIFYINGGLASS": "Lupa",
     "ITEM_MAGNIFYINGGLASS_NAME": "Lupa",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "Acertos críticos as vezes fazem com que inimigos causem mais dano.",
-    "ITEM_MAGNIFYINGGLASS_DESC": "Ganhe <style=cIsDamage>{Crit Chance}% de chance de crítico</style>. <style=cIsDamage>Os acertos críticos</style> tem <style=cIsUtility>{Analyze Chance}%</style> <style=cStack>(+{Analyze Chance}% por acúmulo)</style> de chance de <style=cWorldEvent>Analizar</style> o inimigo, aumentando o dano recebido por ele em <style=cIsDamage>{Damage Taken Bonus}%</style> de todas as fontes.",
+    "ITEM_MAGNIFYINGGLASS_DESC": "Ganhe <style=cIsDamage>{Crit Chance}% de chance de crítico</style>. <style=cIsDamage>Os acertos críticos</style> tem <style=cIsUtility>{Analyze Chance}%</style> de chance de <style=cWorldEvent>Analizar</style> o inimigo, aumentando o dano recebido por ele em <style=cIsDamage>{Damage Taken Bonus}%</style> <style=cStack>(+{Damage Taken Bonus}% por acúmulo)</style> de todas as fontes.",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "Anel da Alma",
     "ITEM_SOULRING_NAME": "Anel da Alma",

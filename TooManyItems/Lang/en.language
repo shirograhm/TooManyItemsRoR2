@@ -142,7 +142,7 @@
     "MAGNIFYINGGLASS": "Magnifying Glass",
     "ITEM_MAGNIFYINGGLASS_NAME": "Magnifying Glass",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "Critical strikes sometimes cause enemies to take more damage.",
-    "ITEM_MAGNIFYINGGLASS_DESC": "Gain <style=cIsDamage>{Crit Chance}% crit chance</style>. <style=cIsDamage>Critical strikes</style> have a <style=cIsUtility>{Analyze Chance}%</style> <style=cStack>(+{Analyze Chance}% per stack)</style> chance to <style=cWorldEvent>Analyze</style> the enemy, increasing their damage taken by <style=cIsDamage>{Damage Taken Bonus}%</style> from all sources.",
+    "ITEM_MAGNIFYINGGLASS_DESC": "Gain <style=cIsDamage>{Crit Chance}% crit chance</style>. <style=cIsDamage>Critical strikes</style> have a <style=cIsUtility>{Analyze Chance}%</style> chance to <style=cWorldEvent>Analyze</style> the enemy, increasing their damage taken by <style=cIsDamage>{Damage Taken Bonus}%</style> <style=cStack>(+{Damage Taken Bonus}% per stack)</style> from all sources.",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "Soul Ring",
     "ITEM_SOULRING_NAME": "Soul Ring",

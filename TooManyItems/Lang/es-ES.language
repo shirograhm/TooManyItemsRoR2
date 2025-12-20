@@ -142,7 +142,7 @@
     "MAGNIFYINGGLASS": "Lupa",
     "ITEM_MAGNIFYINGGLASS_NAME": "Lupa",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "Los golpes críticos a veces causan más daño.",
-    "ITEM_MAGNIFYINGGLASS_DESC": "Obtienes un <style=cIsDamage>{Crit Chance}% de chance de golpe crítico</style>. <style=cIsDamage>Los Golpes Críticos</style> tienen un <style=cIsUtility>{Analyze Chance}%</style> <style=cStack>(+{Analyze Chance}% por stack)</style> de probabilidad de <style=cWorldEvent>Analizar</style> al enemigo, aumentando su daño recibido en un <style=cIsDamage>{Damage Taken Bonus}%</style> de todas las fuentes.",
+    "ITEM_MAGNIFYINGGLASS_DESC": "Obtienes un <style=cIsDamage>{Crit Chance}% de chance de golpe crítico</style>. <style=cIsDamage>Los Golpes Críticos</style> tienen un <style=cIsUtility>{Analyze Chance}%</style> de probabilidad de <style=cWorldEvent>Analizar</style> al enemigo, aumentando su daño recibido en un <style=cIsDamage>{Damage Taken Bonus}%</style> <style=cStack>(+{Damage Taken Bonus}% por stack)</style> de todas las fuentes.",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "Anillo de Alma",
     "ITEM_SOULRING_NAME": "Anillo de Alma",

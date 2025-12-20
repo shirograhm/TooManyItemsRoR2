@@ -142,7 +142,7 @@
     "MAGNIFYINGGLASS": "虫眼鏡",
     "ITEM_MAGNIFYINGGLASS_NAME": "虫眼鏡",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "クリティカル攻撃が確率で追加ダメージを与える。",
-    "ITEM_MAGNIFYINGGLASS_DESC": "<style=cIsDamage>クリティカル率が{Crit Chance}%</style>増加する。<style=cIsDamage>クリティカルストライク</style>は<style=cIsUtility>{Analyze Chance}%</style><style=cStack>（スタックごとに+{Analyze Chance}%）</style>の確率で敵を<style=cWorldEvent>分析</style>し、あらゆるソースからのダメージが<style=cIsDamage>{Damage Taken Bonus}%</style>増加する。",
+    "ITEM_MAGNIFYINGGLASS_DESC": "<style=cIsDamage>クリティカル率が{Crit Chance}%</style>増加する。<style=cIsDamage>クリティカルストライク</style>は<style=cIsUtility>{Analyze Chance}%</style>の確率で敵を<style=cWorldEvent>分析</style>し、あらゆるソースからのダメージが<style=cIsDamage>{Damage Taken Bonus}%</style><style=cStack>（スタックごとに+{Damage Taken Bonus}%）</style>増加する。",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "魂の指輪",
     "ITEM_SOULRING_NAME": "魂の指輪",
