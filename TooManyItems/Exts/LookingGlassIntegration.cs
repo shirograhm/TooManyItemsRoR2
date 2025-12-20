@@ -450,14 +450,18 @@ namespace TooManyItems
                     stats.descriptions.Add("Analyze Chance: ");
                     stats.valueTypes.Add(ItemStatsDef.ValueType.Utility);
                     stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
+                    stats.descriptions.Add("Damage Bonus: ");
+                    stats.valueTypes.Add(ItemStatsDef.ValueType.Damage);
+                    stats.measurementUnits.Add(ItemStatsDef.MeasurementUnits.Percentage);
                     stats.calculateValues = (master, itemCount) =>
                     {
                         var values = new List<float> { };
                         // Check if we can use luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent * itemCount, master.luck));
+                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent, master.luck));
                         else
-                            values.Add(MagnifyingGlass.analyzeChancePercent * itemCount);
+                            values.Add(MagnifyingGlass.analyzeChancePercent);
+                        values.Add(MagnifyingGlass.damageTakenBonusPercent * itemCount);
 
                         return values;
                     };
