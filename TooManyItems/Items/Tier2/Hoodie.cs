@@ -222,7 +222,7 @@ namespace TooManyItems
         {
             if (self && self.inventory)
             {
-                if (!buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
+                if (buffDef && !buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                 {
                     int count = self.inventory.GetItemCountEffective(itemDef);
                     duration *= 1 + durationIncreasePercent * count;
