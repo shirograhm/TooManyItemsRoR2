@@ -239,7 +239,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Magnifying Glass</b>
         </td>
         <td>
-            Gain <b>5%</b> crit chance. Critical strikes have a <b>6%</b> (+6% per stack) chance to Analyze the enemy, increasing their damage taken by <b>18%</b> from all sources.
+            Gain <b>5%</b> crit chance. Critical strikes have a <b>6%</b> chance to Analyze the enemy, increasing their damage taken by <b>18%</b> (+18% per stack) from all sources.
         </td>
     </tr>
     <tr>
@@ -443,6 +443,6 @@ If you would like to help translate this mod, please reach out to me through DM 
     - Spanish: Yguenko (discord)  
     - Portuguese: Poppy (discord)  
     - Japanese: B. (discord)  
-    - Korean: Ophiuchus (discord)
+    - Korean: Ophiuchus (discord)  
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
