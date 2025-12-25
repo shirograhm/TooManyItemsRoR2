@@ -45,7 +45,7 @@ namespace TooManyItems.Items.Tier1
 
         internal static void Init()
         {
-            itemDef = ItemManager.GenerateItem("3DGlasses", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier1);
+            itemDef = ItemManager.GenerateItem("RedBlueGlasses", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier1);
 
             Hooks();
         }

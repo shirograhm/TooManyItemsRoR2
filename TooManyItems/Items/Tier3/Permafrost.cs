@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Handlers;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier3
@@ -47,6 +48,8 @@ namespace TooManyItems.Items.Tier3
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("Permafrost", [ItemTag.Damage, ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier3);
+
+            itemDef.pickupModelPrefab.AddComponent<PermafrostRotationHandler>();
 
             Hooks();
         }

@@ -70,8 +70,8 @@ namespace TooManyItems
                 IronHeart.Init();
             if (Permafrost.isEnabled.Value)
                 Permafrost.Init();
-            if (RustyTrowel.isEnabled.Value)
-                RustyTrowel.Init();
+            if (RustedTrowel.isEnabled.Value)
+                RustedTrowel.Init();
 
             // Green Items
             if (BrassKnuckles.isEnabled.Value)
@@ -198,10 +198,8 @@ namespace TooManyItems
                 ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
 
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
                 ItemDef.Pair[] voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
                 ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = [.. voidPairs.Union(newVoidPairs)];
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                 Debug.Log("Injected void item transformations.");
                 orig();

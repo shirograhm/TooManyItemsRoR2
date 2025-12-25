@@ -589,8 +589,8 @@ namespace TooManyItems.Extensions
                 }
 
 
-                // Rusty Trowel
-                if (RustyTrowel.isEnabled.Value)
+                // Rusted Trowel
+                if (RustedTrowel.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Cooldown: ");
@@ -603,21 +603,21 @@ namespace TooManyItems.Extensions
                     {
                         var values = new List<float> { };
 
-                        if (master && master.inventory && master.inventory.GetComponent<RustyTrowel.Statistics>())
+                        if (master && master.inventory && master.inventory.GetComponent<RustedTrowel.Statistics>())
                         {
-                            var component = master.inventory.GetComponent<RustyTrowel.Statistics>();
+                            var component = master.inventory.GetComponent<RustedTrowel.Statistics>();
 
-                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
+                            values.Add(RustedTrowel.CalculateCooldownInSec(itemCount));
                             values.Add(component.TotalHealingDone);
                         }
                         else
                         {
-                            values.Add(RustyTrowel.CalculateCooldownInSec(itemCount));
+                            values.Add(RustedTrowel.CalculateCooldownInSec(itemCount));
                             values.Add(0f);
                         }
                         return values;
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)RustyTrowel.itemDef.itemIndex, stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)RustedTrowel.itemDef.itemIndex, stats);
                 }
 
 

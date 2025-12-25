@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 
 namespace TooManyItems.Items.Tier3
 {
-    internal class RustyTrowel
+    internal class RustedTrowel
     {
         public static ItemDef itemDef;
         public static BuffDef mulchBuff;
@@ -17,7 +17,7 @@ namespace TooManyItems.Items.Tier3
 
         // Gain stacks of Mulch on-hit. Periodically heal based on the stacks accrued.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
@@ -27,7 +27,7 @@ namespace TooManyItems.Items.Tier3
             }
         );
         public static ConfigurableValue<float> healingPerStack = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Heal Per Stack",
             3f,
             "Health recovered per stack of Mulch.",
@@ -37,7 +37,7 @@ namespace TooManyItems.Items.Tier3
             }
         );
         public static ConfigurableValue<float> rechargeTime = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Recharge Time",
             8f,
             "Time this item takes to recharge.",
@@ -47,7 +47,7 @@ namespace TooManyItems.Items.Tier3
             }
         );
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Recharge Time Reduction",
             20f,
             "Percent of recharge time removed for every additional stack of this item.",
@@ -122,7 +122,7 @@ namespace TooManyItems.Items.Tier3
 
         internal static void Init()
         {
-            itemDef = ItemManager.GenerateItem("RustyTrowel", [ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
+            itemDef = ItemManager.GenerateItem("RustedTrowel", [ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
             mulchBuff = ItemManager.GenerateBuff("Mulch", AssetManager.bundle.LoadAsset<Sprite>("Mulch.png"), canStack: true);
             ContentAddition.AddBuffDef(mulchBuff);

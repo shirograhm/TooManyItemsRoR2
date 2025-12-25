@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TooManyItems.Helpers
+namespace TooManyItems.Handlers
 {
     public class PermafrostRotationHandler : MonoBehaviour
     {
