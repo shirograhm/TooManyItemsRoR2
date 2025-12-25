@@ -36,47 +36,12 @@ namespace TooManyItems.Items.Tier3
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("Abacus", [ItemTag.AIBlacklist, ItemTag.Damage, ItemTag.OnKillEffect, ItemTag.CanBeTemporary], ItemTier.Tier3);
             GenerateBuff();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(countedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "ABACUS";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Abacus.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Abacus.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.AIBlacklist,
-
-                ItemTag.Damage,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()

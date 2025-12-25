@@ -122,11 +122,8 @@ namespace TooManyItems.Items.Tier3
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("RustyTrowel", [ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
             GenerateBuff();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(mulchBuff);
             ContentAddition.AddBuffDef(healingTimer);
@@ -134,35 +131,6 @@ namespace TooManyItems.Items.Tier3
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "RUSTEDTROWEL";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("RustyTrowel.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()

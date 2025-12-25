@@ -57,44 +57,12 @@ namespace TooManyItems.Items.Tier2
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("MagnifyingGlass", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
             GenerateBuff();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             ContentAddition.AddBuffDef(analyzedDebuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "MAGNIFYINGGLASS";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("MagnifyingGlass.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("MagnifyingGlass.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()

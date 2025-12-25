@@ -1,5 +1,4 @@
-﻿using R2API;
-using RoR2;
+﻿using RoR2;
 using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
@@ -47,38 +46,8 @@ namespace TooManyItems.Items.Lunar
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("DoubleDown", [ItemTag.Utility], ItemTier.Lunar);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
-            Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "DOUBLEDOWN";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("DoubleDown.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-        }
-
-        public static void Hooks()
-        {
             On.RoR2.DotController.InflictDot_refInflictDotInfo += DotController_InflictDot_refInflictDotInfo;
         }
 

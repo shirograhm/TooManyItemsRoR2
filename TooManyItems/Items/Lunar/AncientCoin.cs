@@ -1,9 +1,7 @@
-﻿using R2API;
-using RoR2;
+﻿using RoR2;
 using System;
 using System.Collections.Generic;
 using TooManyItems.Managers;
-using UnityEngine;
 
 namespace TooManyItems.Items.Lunar
 {
@@ -47,33 +45,9 @@ namespace TooManyItems.Items.Lunar
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("AncientCoin", [ItemTag.Damage, ItemTag.Utility], ItemTier.Lunar);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "ANCIENTCOIN";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("AncientCoin.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("AncientCoin.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
         }
 
         public static void Hooks()

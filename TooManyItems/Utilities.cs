@@ -78,30 +78,6 @@ namespace TooManyItems
             };
         }
 
-        public static void SetItemTier(ItemDef itemDef, ItemTier tier)
-        {
-            if (tier == ItemTier.NoTier)
-            {
-                try
-                {
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-#pragma warning disable CS0618 // Type or member is obsolete
-                    itemDef.deprecatedTier = tier;
-#pragma warning restore CS0618 // Type or member is obsolete
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-                }
-                catch (Exception e)
-                {
-                    Log.Warning(String.Format("Error setting deprecatedTier for {0}: {1}", itemDef.name, e));
-                }
-            }
-
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = tier;
-            });
-        }
-
         public static CharacterBody GetMinionOwnershipParentBody(CharacterBody body)
         {
             if (body && body.master && body.master.minionOwnership && body.master.minionOwnership.ownerMaster && body.master.minionOwnership.ownerMaster.GetBody())

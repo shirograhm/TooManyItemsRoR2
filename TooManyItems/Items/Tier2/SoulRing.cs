@@ -119,46 +119,11 @@ namespace TooManyItems.Items.Tier2
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("SoulRing", [ItemTag.AIBlacklist, ItemTag.Healing, ItemTag.OnKillEffect, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SOULRING";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("SoulRing.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("SoulRing.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.AIBlacklist,
-
-                ItemTag.Healing,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
         }
 
         public static float CalculateMaxRegenCap(int count)

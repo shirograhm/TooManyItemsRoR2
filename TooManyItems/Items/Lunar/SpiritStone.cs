@@ -120,41 +120,11 @@ namespace TooManyItems.Items.Lunar
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("SpiritStone", [ItemTag.Utility, ItemTag.OnKillEffect], ItemTier.Lunar);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SPIRITSTONE";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("SpiritStone.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.OnKillEffect
-            };
         }
 
         public static void Hooks()

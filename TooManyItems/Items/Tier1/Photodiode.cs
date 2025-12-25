@@ -58,7 +58,7 @@ namespace TooManyItems.Items.Tier1
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("Photodiode", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier1);
             GenerateBuff();
 
             ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
@@ -67,35 +67,6 @@ namespace TooManyItems.Items.Tier1
             ContentAddition.AddBuffDef(attackSpeedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "PHOTODIODE";
-            itemDef.AutoPopulateTokens();
-
-            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Photodiode.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Photodiode.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         private static void GenerateBuff()
