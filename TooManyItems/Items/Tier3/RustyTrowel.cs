@@ -172,6 +172,8 @@ namespace TooManyItems.Items.Tier3
                         float healing = buffCount * healingPerStack.Value;
                         self.healthComponent.Heal(healing, new ProcChainMask());
 
+                        Utilities.SpawnHealEffect(self);
+
                         Statistics stats = self.inventory.GetComponent<Statistics>();
                         stats.TotalHealingDone += healing;
 

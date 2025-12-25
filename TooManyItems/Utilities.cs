@@ -87,6 +87,13 @@ namespace TooManyItems
             return body;
         }
 
+        public static bool OnSameTeam(CharacterBody body1, CharacterBody body2)
+        {
+            if (body1 == null) throw new ArgumentNullException("body1");
+            if (body2 == null) throw new ArgumentNullException("body2");
+            return body1.teamComponent && body2.teamComponent && body1.teamComponent.teamIndex == body2.teamComponent.teamIndex;
+        }
+
         public static uint ScaleGoldWithDifficulty(int goldGranted)
         {
             return Convert.ToUInt32(goldGranted * (1 + 50 * GetDifficultyAsPercentage()));
@@ -107,6 +114,11 @@ namespace TooManyItems
         public static float GetDifficultyAsPercentage()
         {
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
+        }
+
+        public static float GetDifficultyAsMultiplier()
+        {
+            return Stage.instance.entryDifficultyCoefficient;
         }
 
         public static float GetLinearStacking(float baseValue, int count)
@@ -136,7 +148,23 @@ namespace TooManyItems
 
         public static float GetHyperbolicStacking(float percent, int count)
         {
-            return 1f - 1f / (1f + percent * count);
+            return GetHyperbolicStacking(percent, percent, count);
+        }
+
+        public static float GetHyperbolicStacking(float percent, float extraPercent, int count)
+        {
+            float denominator = (1f + percent) * (1 + extraPercent * (count - 1));
+            return 1f - 1f / denominator;
+        }
+
+        public static void SpawnHealEffect(CharacterBody self)
+        {
+            EffectData effectData = new()
+            {
+                origin = self.transform.position,
+                rootObject = self.gameObject
+            };
+            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect"), effectData, transmit: true);
         }
     }
 }

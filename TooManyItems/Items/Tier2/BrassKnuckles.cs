@@ -1,6 +1,7 @@
 ﻿using RoR2;
 using System.Collections.Generic;
 using TooManyItems.Managers;
+using UnityEngine;
 
 namespace TooManyItems.Items.Tier2
 {
@@ -61,8 +62,11 @@ namespace TooManyItems.Items.Tier2
                     int itemCount = attackerBody.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0 && attackerBody.damage * heavyHitCapPercent <= damageInfo.damage)
                     {
-                        damageInfo.damage *= 1 + heavyHitBonusPercent * itemCount;
+                        damageInfo.damage *= 1 + Utilities.GetLinearStacking(heavyHitBonusPercent, itemCount);
                         damageInfo.damageType |= DamageType.Stun1s;
+                        damageInfo.damageColorIndex = DamageColorIndex.Luminous;
+
+                        EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ImpactStunGrenade"), damageInfo.position, -damageInfo.force, transmit: true);
                     }
                 }
             };
