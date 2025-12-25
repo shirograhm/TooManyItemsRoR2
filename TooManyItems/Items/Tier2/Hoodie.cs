@@ -72,33 +72,13 @@ namespace TooManyItems.Items.Tier2
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("Hoodie", [ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier2);
-            GenerateBuff();
+            hoodieBuffActive = ItemManager.GenerateBuff("Hoodie Active", AssetManager.bundle.LoadAsset<Sprite>("HoodieActive.png"));
+            hoodieBuffCooldown = ItemManager.GenerateBuff("Hoodie Cooldown", AssetManager.bundle.LoadAsset<Sprite>("HoodieCooldown.png"), isCooldown: true);
 
             ContentAddition.AddBuffDef(hoodieBuffActive);
             ContentAddition.AddBuffDef(hoodieBuffCooldown);
 
             Hooks();
-        }
-
-        private static void GenerateBuff()
-        {
-            hoodieBuffActive = ScriptableObject.CreateInstance<BuffDef>();
-
-            hoodieBuffActive.name = "Hoodie Active";
-            hoodieBuffActive.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("HoodieActive.png");
-            hoodieBuffActive.canStack = false;
-            hoodieBuffActive.isHidden = false;
-            hoodieBuffActive.isDebuff = false;
-            hoodieBuffActive.isCooldown = false;
-
-            hoodieBuffCooldown = ScriptableObject.CreateInstance<BuffDef>();
-
-            hoodieBuffCooldown.name = "Hoodie Cooldown";
-            hoodieBuffCooldown.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("HoodieCooldown.png");
-            hoodieBuffCooldown.canStack = false;
-            hoodieBuffCooldown.isHidden = false;
-            hoodieBuffCooldown.isDebuff = false;
-            hoodieBuffCooldown.isCooldown = true;
         }
 
         public static float CalculateHoodieCooldown(int itemCount)

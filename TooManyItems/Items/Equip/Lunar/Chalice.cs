@@ -77,56 +77,12 @@ namespace TooManyItems.Items.Equip.Lunar
 
         internal static void Init()
         {
-            GenerateEquipment();
-            GenerateBuff();
+            equipmentDef = ItemManager.GenerateEquipment("Chalice", equipCooldown.Value, isLunar: true, canBeRandomlyTriggered: false);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
-
+            consecratedBuff = ItemManager.GenerateBuff("Consecrated", AssetManager.bundle.LoadAsset<Sprite>("ConsecratedBuff.png"));
             ContentAddition.AddBuffDef(consecratedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateEquipment()
-        {
-            equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
-
-            equipmentDef.name = "CHALICE";
-            equipmentDef.AutoPopulateTokens();
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Chalice.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            equipmentDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Chalice.png");
-            equipmentDef.pickupModelPrefab = prefab;
-
-            equipmentDef.isLunar = true;
-            equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
-
-            equipmentDef.appearsInMultiPlayer = true;
-            equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = false;
-            equipmentDef.enigmaCompatible = true;
-            equipmentDef.canDrop = true;
-
-            equipmentDef.cooldown = equipCooldown.Value;
-        }
-
-        private static void GenerateBuff()
-        {
-            consecratedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            consecratedBuff.name = "Consecrated";
-            consecratedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("ConsecratedBuff.png");
-            consecratedBuff.canStack = false;
-            consecratedBuff.isHidden = false;
-            consecratedBuff.isDebuff = false;
-            consecratedBuff.isCooldown = false;
         }
 
         public static void Hooks()

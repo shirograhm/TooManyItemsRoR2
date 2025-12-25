@@ -68,53 +68,12 @@ namespace TooManyItems.Items.Equip
 
         internal static void Init()
         {
-            GenerateEquipment();
-            GenerateBuff();
+            equipmentDef = ItemManager.GenerateEquipment("TatteredScroll", equipCooldown.Value);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
-
+            curseDebuff = ItemManager.GenerateBuff("Siphon", AssetManager.bundle.LoadAsset<Sprite>("TatteredCurse.png"), isDebuff: true);
             ContentAddition.AddBuffDef(curseDebuff);
 
             Hooks();
-        }
-
-        private static void GenerateEquipment()
-        {
-            equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
-
-            equipmentDef.name = "TATTEREDSCROLL";
-            equipmentDef.AutoPopulateTokens();
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            equipmentDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("TatteredScroll.png");
-            equipmentDef.pickupModelPrefab = prefab;
-
-            equipmentDef.appearsInMultiPlayer = true;
-            equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = true;
-            equipmentDef.enigmaCompatible = true;
-            equipmentDef.canDrop = true;
-
-            equipmentDef.cooldown = equipCooldown.Value;
-        }
-
-        private static void GenerateBuff()
-        {
-            curseDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            curseDebuff.name = "Siphon";
-            curseDebuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("TatteredCurse.png");
-            curseDebuff.canStack = false;
-            curseDebuff.isHidden = false;
-            curseDebuff.isDebuff = true;
-            curseDebuff.isCooldown = false;
         }
 
         public static void Hooks()

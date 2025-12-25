@@ -79,8 +79,10 @@ namespace TooManyItems.Items.Equip.Lunar
 
         internal static void Init()
         {
-            GenerateEquipment();
-            GenerateBuff();
+            equipmentDef = ItemManager.GenerateEquipment("Vanity", equipCooldown.Value, isLunar: true, canBeRandomlyTriggered: false, enigmaCompatible: false);
+
+            hubrisDebuff = ItemManager.GenerateBuff("Hubris", AssetManager.bundle.LoadAsset<Sprite>("Hubris.png"), canStack: true, isDebuff: true);
+            ContentAddition.AddBuffDef(hubrisDebuff);
 
             vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_vanityTargetIndicator", false);
             vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utilities.VANITY_COLOR;
@@ -90,55 +92,9 @@ namespace TooManyItems.Items.Equip.Lunar
             // implosionEffectObject = Assets.bundle.LoadAsset<GameObject>("VanityImplosionEffect.prefab");
             ContentAddition.AddEffect(implosionEffectObject);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
-
-            ContentAddition.AddBuffDef(hubrisDebuff);
-
             damageType = DamageAPI.ReserveDamageType();
 
             Hooks();
-        }
-
-        private static void GenerateEquipment()
-        {
-            equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
-
-            equipmentDef.name = "VANITY";
-            equipmentDef.AutoPopulateTokens();
-
-            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Vanity.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            equipmentDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Vanity.png");
-            equipmentDef.pickupModelPrefab = prefab;
-
-            equipmentDef.isLunar = true;
-            equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
-
-            equipmentDef.appearsInMultiPlayer = true;
-            equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = false;
-            equipmentDef.enigmaCompatible = false;
-            equipmentDef.canDrop = true;
-
-            equipmentDef.cooldown = equipCooldown.Value;
-        }
-
-        private static void GenerateBuff()
-        {
-            hubrisDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            hubrisDebuff.name = "Hubris";
-            hubrisDebuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Hubris.png");
-            hubrisDebuff.canStack = true;
-            hubrisDebuff.isHidden = false;
-            hubrisDebuff.isDebuff = true;
-            hubrisDebuff.isCooldown = false;
         }
 
         public static void Hooks()

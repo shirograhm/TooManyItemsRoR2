@@ -58,23 +58,11 @@ namespace TooManyItems.Items.Tier2
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("MagnifyingGlass", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
-            GenerateBuff();
 
+            analyzedDebuff = ItemManager.GenerateBuff("Analyzed", AssetManager.bundle.LoadAsset<Sprite>("Analyzed.png"), isDebuff: true);
             ContentAddition.AddBuffDef(analyzedDebuff);
 
             Hooks();
-        }
-
-        private static void GenerateBuff()
-        {
-            analyzedDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            analyzedDebuff.name = "Analyzed";
-            analyzedDebuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Analyzed.png");
-            analyzedDebuff.canStack = false;
-            analyzedDebuff.isHidden = false;
-            analyzedDebuff.isDebuff = true;
-            analyzedDebuff.isCooldown = false;
         }
 
         public static void Hooks()

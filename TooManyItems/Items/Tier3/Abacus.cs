@@ -37,23 +37,11 @@ namespace TooManyItems.Items.Tier3
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("Abacus", [ItemTag.AIBlacklist, ItemTag.Damage, ItemTag.OnKillEffect, ItemTag.CanBeTemporary], ItemTier.Tier3);
-            GenerateBuff();
 
+            countedBuff = ItemManager.GenerateBuff("Counted", AssetManager.bundle.LoadAsset<Sprite>("Counted.png"), canStack: true);
             ContentAddition.AddBuffDef(countedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateBuff()
-        {
-            countedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            countedBuff.name = "Counted";
-            countedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Counted.png");
-            countedBuff.canStack = true;
-            countedBuff.isHidden = false;
-            countedBuff.isDebuff = false;
-            countedBuff.isCooldown = false;
         }
 
         public static void Hooks()

@@ -59,26 +59,11 @@ namespace TooManyItems.Items.Tier1
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("Photodiode", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier1);
-            GenerateBuff();
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
+            attackSpeedBuff = ItemManager.GenerateBuff("Voltage", AssetManager.bundle.LoadAsset<Sprite>("Voltage.png"), canStack: true);
             ContentAddition.AddBuffDef(attackSpeedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateBuff()
-        {
-            attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            attackSpeedBuff.name = "Voltage";
-            attackSpeedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Voltage.png");
-            attackSpeedBuff.canStack = true;
-            attackSpeedBuff.isHidden = false;
-            attackSpeedBuff.isDebuff = false;
-            attackSpeedBuff.isCooldown = false;
         }
 
         public static void Hooks()

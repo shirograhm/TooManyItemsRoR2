@@ -47,23 +47,11 @@ namespace TooManyItems.Items.Tier2
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("Epinephrine", [ItemTag.Damage, ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier2);
-            GenerateBuff();
 
+            attackSpeedBuff = ItemManager.GenerateBuff("Adrenaline", AssetManager.bundle.LoadAsset<Sprite>("Adrenaline.png"));
             ContentAddition.AddBuffDef(attackSpeedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateBuff()
-        {
-            attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            attackSpeedBuff.name = "Adrenaline";
-            attackSpeedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Adrenaline.png");
-            attackSpeedBuff.canStack = false;
-            attackSpeedBuff.isHidden = false;
-            attackSpeedBuff.isDebuff = false;
-            attackSpeedBuff.isCooldown = false;
         }
 
         public static void Hooks()

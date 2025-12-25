@@ -123,35 +123,15 @@ namespace TooManyItems.Items.Tier3
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("RustyTrowel", [ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
-            GenerateBuff();
 
+            mulchBuff = ItemManager.GenerateBuff("Mulch", AssetManager.bundle.LoadAsset<Sprite>("Mulch.png"), canStack: true);
             ContentAddition.AddBuffDef(mulchBuff);
+            healingTimer = ItemManager.GenerateBuff("Mulch Cooldown", AssetManager.bundle.LoadAsset<Sprite>("MulchCooldown.png"), isCooldown: true);
             ContentAddition.AddBuffDef(healingTimer);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateBuff()
-        {
-            mulchBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            mulchBuff.name = "Mulch";
-            mulchBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Mulch.png");
-            mulchBuff.canStack = true;
-            mulchBuff.isHidden = false;
-            mulchBuff.isDebuff = false;
-            mulchBuff.isCooldown = false;
-
-            healingTimer = ScriptableObject.CreateInstance<BuffDef>();
-
-            healingTimer.name = "Mulch Cooldown";
-            healingTimer.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("MulchCooldown.png");
-            healingTimer.canStack = false;
-            healingTimer.isHidden = false;
-            healingTimer.isDebuff = false;
-            healingTimer.isCooldown = true;
         }
 
         public static float CalculateCooldownInSec(int itemCount)

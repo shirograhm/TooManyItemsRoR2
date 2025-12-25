@@ -118,12 +118,13 @@ namespace TooManyItems.Items.Tier2
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("BrokenMask", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
-            GenerateBuff();
-            GenerateDot();
 
+            burnDebuff = ItemManager.GenerateBuff("Torment", AssetManager.bundle.LoadAsset<Sprite>("MaskDebuff.png"), isDebuff: true);
             ContentAddition.AddBuffDef(burnDebuff);
+
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
+            GenerateDot();
             burnIndex = DotAPI.RegisterDotDef(burnDotDef, BurnBehavior);
             damageType = DamageAPI.ReserveDamageType();
 
@@ -149,18 +150,6 @@ namespace TooManyItems.Items.Tier2
                     stats.TotalDamageDealt += dotStack.damage;
                 }
             }
-        }
-
-        private static void GenerateBuff()
-        {
-            burnDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            burnDebuff.name = "Torment";
-            burnDebuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("MaskDebuff.png");
-            burnDebuff.canStack = false;
-            burnDebuff.isHidden = false;
-            burnDebuff.isDebuff = true;
-            burnDebuff.isCooldown = false;
         }
 
         private static void GenerateDot()
