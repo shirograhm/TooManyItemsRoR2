@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class Photodiode
     {
@@ -75,16 +76,16 @@ namespace TooManyItems
             itemDef.name = "PHOTODIODE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Photodiode.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Photodiode.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Photodiode.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Photodiode.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -102,7 +103,7 @@ namespace TooManyItems
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             attackSpeedBuff.name = "Voltage";
-            attackSpeedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Voltage.png");
+            attackSpeedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Voltage.png");
             attackSpeedBuff.canStack = true;
             attackSpeedBuff.isHidden = false;
             attackSpeedBuff.isDebuff = false;
@@ -111,7 +112,7 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {

@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class Crucifix
     {
@@ -81,16 +82,16 @@ namespace TooManyItems
             itemDef.name = "CRUCIFIX";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
+            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Crucifix.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Crucifix.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Crucifix.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Crucifix.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -98,7 +99,7 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (victimInfo.inventory == null || victimInfo.body == null || victimInfo.body.healthComponent == null || attackerInfo.body == null) return;
 
@@ -108,8 +109,8 @@ namespace TooManyItems
                 int count = victimInfo.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0 && attackerInfo.body != victimInfo.body)
                 {
-                    damageInfo.damage *= (1 - damageReductionPercent);
-                    float stackedPercentage = Utils.GetReverseExponentialStacking(maxHealthBurnAmountPercent, maxHealthBurnAmountReductionPercent, count);
+                    damageInfo.damage *= 1 - damageReductionPercent;
+                    float stackedPercentage = Utilities.GetReverseExponentialStacking(maxHealthBurnAmountPercent, maxHealthBurnAmountReductionPercent, count);
 
                     InflictDotInfo dotInfo = new()
                     {

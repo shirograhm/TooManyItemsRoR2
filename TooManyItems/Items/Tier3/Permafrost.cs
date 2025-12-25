@@ -1,15 +1,17 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Helpers;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class Permafrost
     {
         public static ItemDef itemDef;
 
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.PERMAFROST_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.PERMAFROST_COLOR);
 
         // Dealing damage has a chance to freeze enemies. You deal bonus damage to frozen enemies.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -62,9 +64,9 @@ namespace TooManyItems
             itemDef.name = "PERMAFROST";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Permafrost.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Permafrost.prefab");
             prefab.AddComponent<PermafrostRotationHandler>();
 
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
@@ -73,7 +75,7 @@ namespace TooManyItems
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Permafrost.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Permafrost.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -89,7 +91,7 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 CharacterBody attackerBody = attackerInfo.body;
                 CharacterBody victimBody = victimInfo.body;
@@ -98,7 +100,7 @@ namespace TooManyItems
                     int count = attackerBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && attackerBody.master)
                     {
-                        if (Util.CheckRoll(Utils.GetHyperbolicStacking(freezeChancePercent, count) * 100f * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
+                        if (Util.CheckRoll(Utilities.GetHyperbolicStacking(freezeChancePercent, count) * 100f * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
                         {
                             damageInfo.damageType |= DamageType.Freeze2s;
                         }

@@ -1,17 +1,18 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Equip
 {
     internal class TatteredScroll
     {
         public static EquipmentDef equipmentDef;
         public static BuffDef curseDebuff;
 
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.TATTERED_SCROLL_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.TATTERED_SCROLL_COLOR);
 
         // On activation, curse all enemies around you for a short duration. Killing cursed enemies grants additional gold.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -85,14 +86,14 @@ namespace TooManyItems
             equipmentDef.name = "TATTEREDSCROLL";
             equipmentDef.AutoPopulateTokens();
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("TatteredScroll.png");
+            equipmentDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("TatteredScroll.png");
             equipmentDef.pickupModelPrefab = prefab;
 
             equipmentDef.appearsInMultiPlayer = true;
@@ -109,7 +110,7 @@ namespace TooManyItems
             curseDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             curseDebuff.name = "Siphon";
-            curseDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("TatteredCurse.png");
+            curseDebuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("TatteredCurse.png");
             curseDebuff.canStack = false;
             curseDebuff.isHidden = false;
             curseDebuff.isDebuff = true;
@@ -135,7 +136,7 @@ namespace TooManyItems
                 {
                     if (damageReport.attackerMaster)
                     {
-                        damageReport.attackerMaster.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGranted.Value));
+                        damageReport.attackerMaster.GiveMoney(Utilities.ScaleGoldWithDifficulty(goldGranted.Value));
                     }
                 }
             };

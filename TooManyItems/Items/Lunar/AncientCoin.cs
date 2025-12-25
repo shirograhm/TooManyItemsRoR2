@@ -2,9 +2,10 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class AncientCoin
     {
@@ -61,15 +62,15 @@ namespace TooManyItems
             itemDef.name = "ANCIENTCOIN";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("AncientCoin.prefab");
+            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("AncientCoin.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("AncientCoin.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("AncientCoin.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -77,14 +78,14 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (victimInfo.inventory == null || victimInfo.body == null) return;
 
                 int count = victimInfo.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0)
                 {
-                    damageInfo.damage *= (1 + count * damageMultiplierAsPercent);
+                    damageInfo.damage *= 1 + count * damageMultiplierAsPercent;
                 }
             };
 

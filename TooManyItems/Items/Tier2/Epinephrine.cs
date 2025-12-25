@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class Epinephrine
     {
@@ -63,16 +64,16 @@ namespace TooManyItems
             itemDef.name = "EPINEPHRINE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Epinephrine.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Epinephrine.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Epinephrine.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Epinephrine.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -91,7 +92,7 @@ namespace TooManyItems
             attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             attackSpeedBuff.name = "Adrenaline";
-            attackSpeedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Adrenaline.png");
+            attackSpeedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Adrenaline.png");
             attackSpeedBuff.canStack = false;
             attackSpeedBuff.isHidden = false;
             attackSpeedBuff.isDebuff = false;
@@ -112,7 +113,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnTakeDamage += (damageReport) =>
+            GameEventManager.OnTakeDamage += (damageReport) =>
             {
                 CharacterBody vicBody = damageReport.victimBody;
                 if (vicBody && vicBody.inventory)

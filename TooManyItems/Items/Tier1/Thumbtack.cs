@@ -1,10 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class Thumbtack
     {
@@ -84,16 +85,16 @@ namespace TooManyItems
             itemDef.name = "THUMBTACK";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Thumbtack.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Thumbtack.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Thumbtack.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Thumbtack.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -109,7 +110,7 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {

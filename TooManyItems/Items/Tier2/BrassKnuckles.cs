@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class BrassKnuckles
     {
@@ -61,16 +62,16 @@ namespace TooManyItems
             itemDef.name = "BRASSKNUCKLES";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BrassKnuckles.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("BrassKnuckles.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrassKnuckles.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("BrassKnuckles.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -85,16 +86,16 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 CharacterBody attackerBody = attackerInfo.body;
                 CharacterBody victimBody = victimInfo.body;
                 if (attackerBody && victimBody && attackerBody.inventory)
                 {
                     int itemCount = attackerBody.inventory.GetItemCountEffective(itemDef);
-                    if (itemCount > 0 && (attackerBody.damage * heavyHitCapPercent) <= damageInfo.damage)
+                    if (itemCount > 0 && attackerBody.damage * heavyHitCapPercent <= damageInfo.damage)
                     {
-                        damageInfo.damage *= 1 + (heavyHitBonusPercent * itemCount);
+                        damageInfo.damage *= 1 + heavyHitBonusPercent * itemCount;
                         damageInfo.damageType |= DamageType.Stun1s;
                     }
                 }

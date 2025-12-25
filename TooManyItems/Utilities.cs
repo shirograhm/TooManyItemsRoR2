@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    public static class Utils
+    public static class Utilities
     {
         public static Color BROKEN_MASK_COLOR = new(0.38f, 0.38f, 0.82f, 1f);
         public static Color CARVING_BLADE_COLOR = new(0.09f, 0.67f, 0.62f, 1f);
@@ -116,6 +116,16 @@ namespace TooManyItems
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
         }
 
+        public static float GetLinearStacking(float baseValue, int count)
+        {
+            return GetLinearStacking(baseValue, baseValue, count);
+        }
+
+        public static float GetLinearStacking(float baseValue, float extraValue, int count)
+        {
+            return baseValue + extraValue * (count - 1);
+        }
+
         public static float GetExponentialStacking(float percent, int count)
         {
             return GetExponentialStacking(percent, percent, count);
@@ -126,9 +136,9 @@ namespace TooManyItems
             return 1f - (1 - percent) * Mathf.Pow(1f - stackPercent, count - 1);
         }
 
-        public static float GetReverseExponentialStacking(float percent, float reducePercent, int count)
+        public static float GetReverseExponentialStacking(float baseValue, float reducePercent, int count)
         {
-            return percent * Mathf.Pow(1 - reducePercent, count - 1);
+            return baseValue * Mathf.Pow(1 - reducePercent, count - 1);
         }
 
         public static float GetHyperbolicStacking(float percent, int count)

@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Void
 {
     internal class IronHeartVoid
     {
@@ -59,21 +60,21 @@ namespace TooManyItems
             itemDef.name = "VOIDHEART";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.VoidTier3);
+            Utilities.SetItemTier(itemDef, ItemTier.VoidTier3);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("IronHeartVoid.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("IronHeartVoid.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("IronHeartVoid.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("IronHeartVoid.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
 
-            itemDef.requiredExpansion = TooManyItems.voidDLC;
+            itemDef.requiredExpansion = TooManyItems.sotvDLC;
 
             itemDef.tags = new ItemTag[]
             {

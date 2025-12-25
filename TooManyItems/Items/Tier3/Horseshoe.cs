@@ -2,9 +2,10 @@
 using R2API.Networking;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class Horseshoe
     {
@@ -168,16 +169,16 @@ namespace TooManyItems
             itemDef.name = "HORSESHOE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Horseshoe.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Horseshoe.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Horseshoe.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Horseshoe.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -354,7 +355,7 @@ namespace TooManyItems
                     }
                     pointsRemaining -= randomPoints;
                 }
-                Utils.ForceRecalculate(body);
+                Utilities.ForceRecalculate(body);
             }
             else
             {

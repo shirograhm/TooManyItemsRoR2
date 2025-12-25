@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class HereticSeal
     {
@@ -48,16 +49,16 @@ namespace TooManyItems
             itemDef.name = "HERETICSEAL";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("HereticSeal.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("HereticSeal.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HereticSeal.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("HereticSeal.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -81,7 +82,7 @@ namespace TooManyItems
                     int count = self.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        Utils.ForceRecalculate(self);
+                        Utilities.ForceRecalculate(self);
                     }
                 }
             };

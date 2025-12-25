@@ -1,10 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Equip.Lunar
 {
     internal class Chalice
     {
@@ -94,14 +95,14 @@ namespace TooManyItems
             equipmentDef.name = "CHALICE";
             equipmentDef.AutoPopulateTokens();
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Chalice.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Chalice.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Chalice.png");
+            equipmentDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Chalice.png");
             equipmentDef.pickupModelPrefab = prefab;
 
             equipmentDef.isLunar = true;
@@ -121,7 +122,7 @@ namespace TooManyItems
             consecratedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             consecratedBuff.name = "Consecrated";
-            consecratedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("ConsecratedBuff.png");
+            consecratedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("ConsecratedBuff.png");
             consecratedBuff.canStack = false;
             consecratedBuff.isHidden = false;
             consecratedBuff.isDebuff = false;

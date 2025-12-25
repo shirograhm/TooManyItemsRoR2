@@ -3,10 +3,11 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class RustyTrowel
     {
@@ -142,16 +143,16 @@ namespace TooManyItems
             itemDef.name = "RUSTEDTROWEL";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RustyTrowel.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("RustyTrowel.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -169,7 +170,7 @@ namespace TooManyItems
             mulchBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             mulchBuff.name = "Mulch";
-            mulchBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Mulch.png");
+            mulchBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Mulch.png");
             mulchBuff.canStack = true;
             mulchBuff.isHidden = false;
             mulchBuff.isDebuff = false;
@@ -178,7 +179,7 @@ namespace TooManyItems
             healingTimer = ScriptableObject.CreateInstance<BuffDef>();
 
             healingTimer.name = "Mulch Cooldown";
-            healingTimer.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MulchCooldown.png");
+            healingTimer.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("MulchCooldown.png");
             healingTimer.canStack = false;
             healingTimer.isHidden = false;
             healingTimer.isDebuff = false;
@@ -233,7 +234,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {

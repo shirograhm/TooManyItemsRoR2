@@ -2,9 +2,10 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class DebitCard
     {
@@ -50,16 +51,16 @@ namespace TooManyItems
             itemDef.name = "DEBITCARD";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("DebitCard.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("DebitCard.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DebitCard.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("DebitCard.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -84,7 +85,7 @@ namespace TooManyItems
                     int count = activator.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        float refundScaling = Utils.GetHyperbolicStacking(rebatePercent, count);
+                        float refundScaling = Utilities.GetHyperbolicStacking(rebatePercent, count);
                         activator.GiveMoney(Convert.ToUInt32(moneyCost * refundScaling));
                     }
                 }

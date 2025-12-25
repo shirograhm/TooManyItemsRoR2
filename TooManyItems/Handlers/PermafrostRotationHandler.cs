@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Helpers
 {
     public class PermafrostRotationHandler : MonoBehaviour
     {
@@ -8,8 +8,8 @@ namespace TooManyItems
         // Start is called before the first frame update
         void Start()
         {
-            wispShells[0] = this.transform.Find("Wisp3");
-            wispShells[1] = this.transform.Find("Wisp4");
+            wispShells[0] = transform.Find("Wisp3");
+            wispShells[1] = transform.Find("Wisp4");
         }
 
         // Update is called once per frame

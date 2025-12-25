@@ -2,9 +2,10 @@ using R2API;
 using RoR2;
 using System.Collections.Generic;
 using System.Linq;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class Hoodie
     {
@@ -89,16 +90,16 @@ namespace TooManyItems
             itemDef.name = "HOODIE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Hoodie.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Hoodie.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Hoodie.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Hoodie.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -116,7 +117,7 @@ namespace TooManyItems
             hoodieBuffActive = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffActive.name = "Hoodie Active";
-            hoodieBuffActive.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HoodieActive.png");
+            hoodieBuffActive.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("HoodieActive.png");
             hoodieBuffActive.canStack = false;
             hoodieBuffActive.isHidden = false;
             hoodieBuffActive.isDebuff = false;
@@ -125,7 +126,7 @@ namespace TooManyItems
             hoodieBuffCooldown = ScriptableObject.CreateInstance<BuffDef>();
 
             hoodieBuffCooldown.name = "Hoodie Cooldown";
-            hoodieBuffCooldown.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HoodieCooldown.png");
+            hoodieBuffCooldown.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("HoodieCooldown.png");
             hoodieBuffCooldown.canStack = false;
             hoodieBuffCooldown.isHidden = false;
             hoodieBuffCooldown.isDebuff = false;

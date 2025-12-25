@@ -3,17 +3,18 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class CarvingBlade
     {
         public static ItemDef itemDef;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.CARVING_BLADE_COLOR);
 
         // Deal a percentage of enemy current health as bonus on-hit damage. You cannot crit.
         // On-hit, deal 2% of the enemy's current HP. Per-hit damage is capped at 2000% (+1000% per stack) of your BASE damage. You cannot crit.
@@ -144,16 +145,16 @@ namespace TooManyItems
             itemDef.name = "CARVINGBLADE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
+            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("CarvingBlade.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("CarvingBlade.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("CarvingBlade.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("CarvingBlade.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -171,7 +172,7 @@ namespace TooManyItems
                 obj.inventory?.gameObject.AddComponent<Statistics>();
             };
 
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.inventory && attackerInfo.inventory.GetItemCountPermanent(itemDef) > 0)
                 {
@@ -179,7 +180,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
@@ -209,7 +210,7 @@ namespace TooManyItems
                         victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
-                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
+                        CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerInfo.body);
                         Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                         stats.TotalDamageDealt += amount;
                     }

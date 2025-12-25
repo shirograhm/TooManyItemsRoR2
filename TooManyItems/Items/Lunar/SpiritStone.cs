@@ -3,10 +3,11 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class SpiritStone
     {
@@ -136,16 +137,16 @@ namespace TooManyItems
             itemDef.name = "SPIRITSTONE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
+            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("SpiritStone.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("SpiritStone.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -173,7 +174,7 @@ namespace TooManyItems
                         Statistics component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
 
-                        args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
+                        args.healthMultAdd -= Utilities.GetExponentialStacking(maxHealthLostPercent, itemCount);
                     }
                 }
             };
@@ -186,7 +187,7 @@ namespace TooManyItems
                     int count = self.body.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
-                        values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, count);
+                        values.curseFraction += (1f - values.curseFraction) * Utilities.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, count);
                         values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
                         values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
                     }
@@ -207,7 +208,7 @@ namespace TooManyItems
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();
                         component.PermanentShield += shieldPerKill * count;
 
-                        Utils.ForceRecalculate(atkBody);
+                        Utilities.ForceRecalculate(atkBody);
                     }
                 }
             };

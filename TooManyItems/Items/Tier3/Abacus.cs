@@ -1,10 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class Abacus
     {
@@ -53,16 +54,16 @@ namespace TooManyItems
             itemDef.name = "ABACUS";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Abacus.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Abacus.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Abacus.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Abacus.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -83,7 +84,7 @@ namespace TooManyItems
             countedBuff = ScriptableObject.CreateInstance<BuffDef>();
 
             countedBuff.name = "Counted";
-            countedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Counted.png");
+            countedBuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Counted.png");
             countedBuff.canStack = true;
             countedBuff.isHidden = false;
             countedBuff.isDebuff = false;
@@ -119,7 +120,7 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         for (int i = 0; i < count; i++) atkBody.AddBuff(countedBuff);
-                        Utils.ForceRecalculate(atkBody);
+                        Utilities.ForceRecalculate(atkBody);
                     }
                 }
             };

@@ -1,10 +1,11 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class DoubleDown
     {
@@ -61,16 +62,16 @@ namespace TooManyItems
             itemDef.name = "DOUBLEDOWN";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
+            Utilities.SetItemTier(itemDef, ItemTier.Lunar);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DoubleDown.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("DoubleDown.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -95,7 +96,7 @@ namespace TooManyItems
                         if (itemCount > 0)
                         {
                             float dotDamage = info.totalDamage ?? 0f;
-                            float stackedDamage = Utils.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
+                            float stackedDamage = Utilities.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
                             float totalDamageCalc = dotDamage * stackedDamage;
 
                             // Roll for crit if the attacker body exists

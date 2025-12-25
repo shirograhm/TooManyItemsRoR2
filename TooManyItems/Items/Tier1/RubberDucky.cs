@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class RubberDucky
     {
@@ -48,16 +49,16 @@ namespace TooManyItems
             itemDef.name = "RUBBERDUCKY";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("RubberDucky.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("RubberDucky.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RubberDucky.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("RubberDucky.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;

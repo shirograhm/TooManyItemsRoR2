@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class BottleCap
     {
@@ -49,16 +50,16 @@ namespace TooManyItems
             itemDef.name = "BOTTLECAP";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BottleCap.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("BottleCap.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BottleCap.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("BottleCap.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -80,7 +81,7 @@ namespace TooManyItems
                     int itemCount = sender.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0)
                     {
-                        float cdr = Utils.GetHyperbolicStacking(specialCDRPercent, itemCount);
+                        float cdr = Utilities.GetHyperbolicStacking(specialCDRPercent, itemCount);
                         // Calculate the actual number needed for the denominator to achieve the desired cooldown reduction
                         // because RecalculateStatsAPI no longer allows negative cooldownMultAdd values
                         float convertedCDR = cdr / (1f - cdr);

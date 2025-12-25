@@ -3,10 +3,11 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class BloodDice
     {
@@ -145,16 +146,16 @@ namespace TooManyItems
             itemDef.name = "BLOODDICE";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier3);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BloodDice.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("BloodDice.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BloodDice.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("BloodDice.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -230,7 +231,7 @@ namespace TooManyItems
                             component.PermanentHealth = maxHealthAllowed;
                         }
 
-                        Utils.ForceRecalculate(atkBody);
+                        Utilities.ForceRecalculate(atkBody);
                     }
                 }
             };

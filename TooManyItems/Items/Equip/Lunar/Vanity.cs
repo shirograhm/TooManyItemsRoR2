@@ -2,11 +2,13 @@
 using RoR2;
 using System.Collections.Generic;
 using System.Linq;
+using TooManyItems.Helpers;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Equip.Lunar
 {
     internal class Vanity
     {
@@ -17,7 +19,7 @@ namespace TooManyItems
         public static GameObject implosionEffectObject;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.VANITY_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.VANITY_COLOR);
 
         // Gain stacks of Hubris when killing enemies. Activate to cleanse all stacks and damage a target enemy. This damage scales with stacks cleansed.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -80,9 +82,9 @@ namespace TooManyItems
             GenerateEquipment();
             GenerateBuff();
 
-            vanityTargetIndicatorPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator"), "TooManyItems_vanityTargetIndicator", false);
-            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utils.VANITY_COLOR;
-            vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utils.VANITY_COLOR;
+            vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_vanityTargetIndicator", false);
+            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utilities.VANITY_COLOR;
+            vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utilities.VANITY_COLOR;
 
             implosionEffectObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteIce/AffixWhiteExplosion.prefab").WaitForCompletion();
             // implosionEffectObject = Assets.bundle.LoadAsset<GameObject>("VanityImplosionEffect.prefab");
@@ -105,14 +107,14 @@ namespace TooManyItems
             equipmentDef.name = "VANITY";
             equipmentDef.AutoPopulateTokens();
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Vanity.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("Vanity.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Vanity.png");
+            equipmentDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("Vanity.png");
             equipmentDef.pickupModelPrefab = prefab;
 
             equipmentDef.isLunar = true;
@@ -132,7 +134,7 @@ namespace TooManyItems
             hubrisDebuff = ScriptableObject.CreateInstance<BuffDef>();
 
             hubrisDebuff.name = "Hubris";
-            hubrisDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Hubris.png");
+            hubrisDebuff.iconSprite = AssetManager.bundle.LoadAsset<Sprite>("Hubris.png");
             hubrisDebuff.canStack = true;
             hubrisDebuff.isHidden = false;
             hubrisDebuff.isDebuff = true;
@@ -144,14 +146,14 @@ namespace TooManyItems
             On.RoR2.EquipmentSlot.Start += (orig, self) =>
             {
                 orig(self);
-                self.gameObject.AddComponent<EquipmentTargeter>();
+                self.gameObject.AddComponent<EquipmentTargetHandler>();
             };
 
             On.RoR2.EquipmentSlot.Update += (orig, self) =>
             {
                 orig(self);
 
-                EquipmentTargeter targeter = self.gameObject.GetComponent<EquipmentTargeter>();
+                EquipmentTargetHandler targeter = self.gameObject.GetComponent<EquipmentTargetHandler>();
                 if (targeter)
                 {
                     if (equipmentDef.equipmentIndex == self.equipmentIndex)
@@ -201,7 +203,7 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    args.damageMultAdd -= Utils.GetExponentialStacking(damageLostPercentPerStack, sender.GetBuffCount(hubrisDebuff));
+                    args.damageMultAdd -= Utilities.GetExponentialStacking(damageLostPercentPerStack, sender.GetBuffCount(hubrisDebuff));
                 }
             };
 
@@ -218,8 +220,8 @@ namespace TooManyItems
 
         private static bool OnUse(EquipmentSlot slot)
         {
-            EquipmentTargeter targeter = slot.GetComponent<EquipmentTargeter>();
-            CharacterBody targetEnemy = (targeter && targeter.obj) ? targeter.obj.GetComponent<CharacterBody>() : null;
+            EquipmentTargetHandler targeter = slot.GetComponent<EquipmentTargetHandler>();
+            CharacterBody targetEnemy = targeter && targeter.obj ? targeter.obj.GetComponent<CharacterBody>() : null;
 
             CharacterBody user = slot.characterBody;
             if (user && targetEnemy && targetEnemy.healthComponent)
@@ -234,7 +236,7 @@ namespace TooManyItems
                 {
                     origin = targetEnemy.corePosition,
                     scale = 0.2f * buffCount + targetEnemy.radius,
-                    color = Utils.VANITY_COLOR
+                    color = Utilities.VANITY_COLOR
                 },
                 true);
 

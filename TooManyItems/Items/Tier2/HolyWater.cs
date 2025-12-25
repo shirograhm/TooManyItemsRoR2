@@ -2,10 +2,11 @@
 using RoR2;
 using System;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class HolyWater
     {
@@ -75,16 +76,16 @@ namespace TooManyItems
             itemDef.name = "HOLYWATER";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier2);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("HolyWater.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("HolyWater.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HolyWater.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("HolyWater.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -108,7 +109,7 @@ namespace TooManyItems
                 CharacterBody vicBody = damageReport.victimBody;
                 if (atkMaster && vicBody && vicBody.isElite)
                 {
-                    atkBody = Utils.GetMinionOwnershipParentBody(atkBody);
+                    atkBody = Utilities.GetMinionOwnershipParentBody(atkBody);
                     if (atkBody && atkBody.inventory)
                     {
                         int count = atkBody.inventory.GetItemCountEffective(itemDef);
@@ -126,7 +127,7 @@ namespace TooManyItems
         public static float CalculateExperienceMultiplier(int itemCount)
         {
             float difference = maxExperienceMultiplierAsPercent - minExperienceMultiplierAsPercent;
-            float multiplier = minExperienceMultiplierAsPercent + difference * Utils.GetDifficultyAsPercentage();
+            float multiplier = minExperienceMultiplierAsPercent + difference * Utilities.GetDifficultyAsPercentage();
 
             return multiplier * (1 + extraStacksMultiplierPercent * (itemCount - 1));
         }

@@ -4,10 +4,11 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using System;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class BreadLoaf
     {
@@ -136,16 +137,16 @@ namespace TooManyItems
             itemDef.name = "BREADLOAF";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BreadLoaf.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("BreadLoaf.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BreadLoaf.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("BreadLoaf.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -194,7 +195,7 @@ namespace TooManyItems
                                 );
                                 atkBody.inventory.RemoveItemPermanent(itemDef);
                                 atkBody.inventory.GiveItemPermanent(RoR2Content.Items.ScrapWhite);
-                                atkBody.master.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGainOnScrap.Value));
+                                atkBody.master.GiveMoney(Utilities.ScaleGoldWithDifficulty(goldGainOnScrap.Value));
                                 // Reset the kills counter
                                 stats.KillsCounter = 0;
                             }

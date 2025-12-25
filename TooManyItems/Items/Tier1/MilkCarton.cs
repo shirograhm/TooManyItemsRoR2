@@ -1,9 +1,10 @@
 ﻿using R2API;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class MilkCarton
     {
@@ -49,16 +50,16 @@ namespace TooManyItems
             itemDef.name = "MILKCARTON";
             itemDef.AutoPopulateTokens();
 
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
+            Utilities.SetItemTier(itemDef, ItemTier.Tier1);
 
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("MilkCarton.prefab");
+            GameObject prefab = AssetManager.bundle.LoadAsset<GameObject>("MilkCarton.prefab");
             ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
             modelPanelParameters.focusPointTransform = prefab.transform;
             modelPanelParameters.cameraPositionTransform = prefab.transform;
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MilkCarton.png");
+            itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>("MilkCarton.png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
             itemDef.hidden = false;
@@ -73,14 +74,14 @@ namespace TooManyItems
 
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (victimInfo.inventory)
                 {
                     int count = victimInfo.inventory.GetItemCountEffective(itemDef);
                     if (attackerInfo.body && attackerInfo.body.isElite && count > 0 && damageInfo.damageColorIndex != DamageColorIndex.DelayedDamage)
                     {
-                        float damageReductionPercent = Utils.GetHyperbolicStacking(eliteDamageReductionPercent, count);
+                        float damageReductionPercent = Utilities.GetHyperbolicStacking(eliteDamageReductionPercent, count);
                         damageInfo.damage *= 1 - damageReductionPercent;
                     }
                 }
