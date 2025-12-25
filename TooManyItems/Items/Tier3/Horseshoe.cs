@@ -2,6 +2,7 @@
 using R2API.Networking;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Handlers;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier3
@@ -153,7 +154,7 @@ namespace TooManyItems.Items.Tier3
         {
             itemDef = ItemManager.GenerateItem("Horseshoe", [ItemTag.Utility, ItemTag.Damage, ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
-            NetworkingAPI.RegisterMessageType<HorseshoeStatistics.Sync>();
+            NetworkingAPI.RegisterMessageType<HorseshoeStatisticsHandler.Sync>();
 
             Hooks();
         }
@@ -162,7 +163,7 @@ namespace TooManyItems.Items.Tier3
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {
-                obj.inventory?.gameObject.AddComponent<HorseshoeStatistics>();
+                obj.inventory?.gameObject.AddComponent<HorseshoeStatisticsHandler>();
             };
 
             Stage.onStageStartGlobal += (stage) =>
@@ -179,7 +180,7 @@ namespace TooManyItems.Items.Tier3
 
             On.RoR2.Inventory.GiveItemPermanent_ItemIndex_int += (orig, self, index, count) =>
             {
-                HorseshoeStatistics component = self.GetComponent<HorseshoeStatistics>();
+                HorseshoeStatisticsHandler component = self.GetComponent<HorseshoeStatisticsHandler>();
                 CharacterMaster master = self.GetComponent<CharacterMaster>();
 
                 if (component && master && index == itemDef.itemIndex)
@@ -196,7 +197,7 @@ namespace TooManyItems.Items.Tier3
 
             On.RoR2.Inventory.GiveItemTemp += (orig, self, index, count) =>
             {
-                HorseshoeStatistics component = self.GetComponent<HorseshoeStatistics>();
+                HorseshoeStatisticsHandler component = self.GetComponent<HorseshoeStatisticsHandler>();
                 CharacterMaster master = self.GetComponent<CharacterMaster>();
 
                 if (component && master && index == itemDef.itemIndex)
@@ -218,7 +219,7 @@ namespace TooManyItems.Items.Tier3
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        HorseshoeStatistics component = sender.inventory.GetComponent<HorseshoeStatistics>();
+                        HorseshoeStatisticsHandler component = sender.inventory.GetComponent<HorseshoeStatisticsHandler>();
                         if (component)
                         {
                             args.baseHealthAdd += GetScaledValue(component.MaxHealthBonus, sender.level, count);
@@ -245,7 +246,7 @@ namespace TooManyItems.Items.Tier3
             return value * levelScaling * extraStackScaling;
         }
 
-        public static bool HasNotRolledYet(HorseshoeStatistics bonuses)
+        public static bool HasNotRolledYet(HorseshoeStatisticsHandler bonuses)
         {
             if (bonuses.MaxHealthBonus != 0) return false;
             if (bonuses.BaseDamageBonus != 0) return false;
@@ -262,7 +263,7 @@ namespace TooManyItems.Items.Tier3
 
         public static void Reroll(Inventory inventory, CharacterBody body)
         {
-            HorseshoeStatistics component = inventory.GetComponent<HorseshoeStatistics>();
+            HorseshoeStatisticsHandler component = inventory.GetComponent<HorseshoeStatisticsHandler>();
             if (component)
             {
                 component.MaxHealthBonus = 0;

@@ -1,6 +1,7 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Handlers;
 using TooManyItems.Items.Lunar;
 using TooManyItems.Items.Tier1;
 using TooManyItems.Items.Tier2;
@@ -377,7 +378,7 @@ namespace TooManyItems.Extensions
                         if (!master || !master.inventory || !master.GetBody()) return empty;
 
                         var values = new List<float> { };
-                        var component = master.inventory.GetComponent<HorseshoeStatistics>();
+                        var component = master.inventory.GetComponent<HorseshoeStatisticsHandler>();
                         if (component)
                         {
                             values.Add(Horseshoe.GetScaledValue(component.MaxHealthBonus, master.GetBody().level, itemCount));
