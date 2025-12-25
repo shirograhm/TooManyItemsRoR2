@@ -1,9 +1,14 @@
 ﻿using LookingGlass.ItemStatsNameSpace;
 using RoR2;
 using System.Collections.Generic;
+using TooManyItems.Items.Lunar;
+using TooManyItems.Items.Tier1;
+using TooManyItems.Items.Tier2;
+using TooManyItems.Items.Tier3;
+using TooManyItems.Items.Void;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Extensions
 {
     internal static class LookingGlassIntegration
     {
@@ -72,7 +77,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(BottleCap.specialCDRPercent, itemCount)
+                            Utilities.GetHyperbolicStacking(BottleCap.specialCDRPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)BottleCap.itemDef.itemIndex, stats);
@@ -198,7 +203,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetReverseExponentialStacking(Crucifix.maxHealthBurnAmountPercent, Crucifix.maxHealthBurnAmountReductionPercent, itemCount)
+                            Utilities.GetReverseExponentialStacking(Crucifix.maxHealthBurnAmountPercent, Crucifix.maxHealthBurnAmountReductionPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)Crucifix.itemDef.itemIndex, stats);
@@ -215,7 +220,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(DebitCard.rebatePercent, itemCount)
+                            Utilities.GetHyperbolicStacking(DebitCard.rebatePercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)DebitCard.itemDef.itemIndex, stats);
@@ -231,7 +236,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetReverseExponentialStacking(DoubleDown.upFrontDamagePercent, DoubleDown.upFrontDamageReductionPercent, itemCount)
+                            Utilities.GetReverseExponentialStacking(DoubleDown.upFrontDamagePercent, DoubleDown.upFrontDamageReductionPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)DoubleDown.itemDef.itemIndex, stats);
@@ -436,7 +441,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(MilkCarton.eliteDamageReductionPercent, itemCount)
+                            Utilities.GetHyperbolicStacking(MilkCarton.eliteDamageReductionPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)MilkCarton.itemDef.itemIndex, stats);
@@ -458,7 +463,7 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can use luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent, master.luck));
+                            values.Add(Utilities.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent, master.luck));
                         else
                             values.Add(MagnifyingGlass.analyzeChancePercent);
                         values.Add(MagnifyingGlass.damageTakenBonusPercent * itemCount);
@@ -501,9 +506,9 @@ namespace TooManyItems
                         var values = new List<float> { };
                         // Check if we can calculate using luck
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
+                            values.Add(Utilities.GetChanceAfterLuck(Utilities.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck));
                         else
-                            values.Add(Utils.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
+                            values.Add(Utilities.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount));
 
                         values.Add(Permafrost.frozenDamageMultiplierPercent * itemCount);
                         return values;
@@ -625,7 +630,7 @@ namespace TooManyItems
                     stats.calculateValues = (master, itemCount) =>
                     {
                         return new List<float> {
-                            Utils.GetHyperbolicStacking(ShadowCrest.regenPerSecondPercent, itemCount)
+                            Utilities.GetHyperbolicStacking(ShadowCrest.regenPerSecondPercent, itemCount)
                         };
                     };
                     ItemDefinitions.allItemDefinitions.Add((int)ShadowCrest.itemDef.itemIndex, stats);
@@ -681,7 +686,7 @@ namespace TooManyItems
                         {
                             values.Add(0f);
                         }
-                        values.Add(Utils.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount));
+                        values.Add(Utilities.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount));
 
                         return values;
                     };
@@ -704,7 +709,7 @@ namespace TooManyItems
                         var values = new List<float> { };
 
                         if (master)
-                            values.Add(Utils.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck));
+                            values.Add(Utilities.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck));
                         else
                             values.Add(Thumbtack.bleedChancePercent * itemCount);
                         values.Add(Thumbtack.bleedDurationBonus.Value * itemCount);

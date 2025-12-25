@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TooManyItems
+namespace TooManyItems.Extensions
 {
     internal class Integrations
     {
