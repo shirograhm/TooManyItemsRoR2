@@ -61,6 +61,23 @@ namespace TooManyItems
             if (NetworkServer.active) new SyncForceRecalculate(body.netId);
         }
 
+        public static void AddRecalculateOnFrameHook(ItemDef def)
+        {
+            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
+            {
+                orig(self);
+
+                if (self && self.inventory)
+                {
+                    int count = self.inventory.GetItemCountEffective(def);
+                    if (count > 0)
+                    {
+                        ForceRecalculate(self);
+                    }
+                }
+            };
+        }
+
         public static void SetItemTier(ItemDef itemDef, ItemTier tier)
         {
             if (tier == ItemTier.NoTier)

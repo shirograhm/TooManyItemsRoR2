@@ -85,18 +85,7 @@ namespace TooManyItems.Items.Tier1
 
         public static void Hooks()
         {
-            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
-            {
-                orig(self);
-
-                if (self && self.inventory)
-                {
-                    if (self.inventory.GetItemCountEffective(itemDef) > 0)
-                    {
-                        Utilities.ForceRecalculate(self);
-                    }
-                }
-            };
+            Utilities.AddRecalculateOnFrameHook(itemDef);
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
