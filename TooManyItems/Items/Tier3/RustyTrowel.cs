@@ -215,7 +215,7 @@ namespace TooManyItems
             {
                 orig(self, buffDef);
 
-                if (buffDef == healingTimer)
+                if (self && buffDef == healingTimer)
                 {
                     int buffCount = self.GetBuffCount(mulchBuff);
                     if (buffCount > 0)
