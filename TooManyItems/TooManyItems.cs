@@ -155,45 +155,18 @@ namespace TooManyItems
             {
                 List<ItemDef.Pair> newVoidPairs = [];
 
+                // 3D Glasses => Instakill Glasses
                 if (RedBlueGlasses.isEnabled)
-                {
-                    // 3D Glasses => Instakill Glasses
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = RedBlueGlasses.itemDef,
-                        itemDef2 = DLC1Content.Items.CritGlassesVoid
-                    });
-                }
-
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = RedBlueGlasses.itemDef, itemDef2 = DLC1Content.Items.CritGlassesVoid });
+                // Thumbtack => Needletick
                 if (Thumbtack.isEnabled)
-                {
-                    // Thumbtack => Needletick
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = Thumbtack.itemDef,
-                        itemDef2 = DLC1Content.Items.BleedOnHitVoid
-                    });
-                }
-
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = Thumbtack.itemDef, itemDef2 = DLC1Content.Items.BleedOnHitVoid });
+                // Iron Heart => Defiled Heart
                 if (IronHeart.isEnabled && VoidHeart.isEnabled)
-                {
-                    // Iron Heart => Defiled Heart
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = IronHeart.itemDef,
-                        itemDef2 = VoidHeart.itemDef
-                    });
-                }
-
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = IronHeart.itemDef, itemDef2 = VoidHeart.itemDef });
+                // Seal of the Heretic => Shadow Crest
                 if (HereticSeal.isEnabled && ShadowCrest.isEnabled)
-                {
-                    // Seal of the Heretic => Shadow Crest
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = HereticSeal.itemDef,
-                        itemDef2 = ShadowCrest.itemDef
-                    });
-                }
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = HereticSeal.itemDef, itemDef2 = ShadowCrest.itemDef });
 
                 ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
