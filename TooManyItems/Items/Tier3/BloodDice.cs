@@ -2,6 +2,7 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using RoR2.Orbs;
 using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
@@ -182,27 +183,13 @@ namespace TooManyItems.Items.Tier3
                     int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        float maxHealthAllowed = maxHealthPerStack.Value * count;
-                        int roll = GetDiceRoll(atkMaster);
-
-                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
-
-                        if (component.PermanentHealth + roll < maxHealthAllowed)
-                        {
-                            component.PermanentHealth += roll;
-                        }
-                        else
-                        {
-                            component.PermanentHealth = maxHealthAllowed;
-                        }
-
-                        Utilities.ForceRecalculate(atkBody);
+                        OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport));
                     }
                 }
             };
         }
 
-        private static int GetDiceRoll(CharacterMaster master)
+        public static int GetDiceRoll(CharacterMaster master)
         {
             float mean = 7f, deviation = 2f;
             if (affectedByLuck.Value) mean += master.luck * deviation;
@@ -219,6 +206,63 @@ namespace TooManyItems.Items.Tier3
             float randomSample = Mathf.Sqrt(-2f * Mathf.Log(x)) * Mathf.Sin(2f * Mathf.PI * y);
             float scaledSample = mean + deviation * randomSample;
             return Mathf.RoundToInt(scaledSample);
+        }
+    }
+
+    public class BloodDiceOrb : Orb
+    {
+        private const float speed = 30f;
+
+        public int maxHpValue;
+        private readonly CharacterBody targetBody;
+        private Inventory targetInventory;
+
+        public BloodDiceOrb(DamageReport report)
+        {
+            if (report.attackerMaster && report.victimBody && report.attackerBody)
+            {
+                this.maxHpValue = report.attackerMaster ? BloodDice.GetDiceRoll(report.attackerMaster) : 0;
+                this.targetBody = report.attackerBody ?? null;
+                this.origin = report.victimBody ? report.victimBody.corePosition : Vector3.zero;
+
+                if (targetBody) this.target = targetBody.mainHurtBox;
+            }
+        }
+
+        public override void Begin()
+        {
+            base.duration = base.distanceToTarget / speed;
+            EffectData effectData = new()
+            {
+                origin = origin,
+                genericFloat = base.duration
+            };
+            effectData.SetHurtBoxReference(target);
+            EffectManager.SpawnEffect(OrbStorageUtility.Get("Prefabs/Effects/OrbEffects/InfusionOrbEffect"), effectData, transmit: true);
+
+            targetInventory = targetBody.inventory;
+        }
+
+        public override void OnArrival()
+        {
+            if (targetInventory)
+            {
+                int count = targetInventory.GetItemCountEffective(BloodDice.itemDef);
+
+                float maxHealthAllowed = BloodDice.maxHealthPerStack.Value * count;
+                BloodDice.Statistics component = targetInventory.GetComponent<BloodDice.Statistics>();
+
+                if (component.PermanentHealth + maxHpValue < maxHealthAllowed)
+                {
+                    component.PermanentHealth += maxHpValue;
+                }
+                else
+                {
+                    component.PermanentHealth = maxHealthAllowed;
+                }
+
+                if (targetBody) Utilities.ForceRecalculate(targetBody);
+            }
         }
     }
 }
