@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BRASSKNUCKLES_DESC"
-            }
+            ["ITEM_BRASSKNUCKLES_DESC"]
         );
         public static ConfigurableValue<float> heavyHitCap = new(
             "Item: Brass Knuckles",
             "Heavy Hit Threshold",
             400f,
             "Minimum amount of damage dealt necessary to classify a hit as heavy.",
-            new List<string>()
-            {
-                "ITEM_BRASSKNUCKLES_DESC"
-            }
+            ["ITEM_BRASSKNUCKLES_DESC"]
         );
         public static float heavyHitCapPercent = heavyHitCap.Value / 100f;
 
@@ -37,10 +30,7 @@ namespace TooManyItems.Items.Tier2
             "Heavy Hit Bonus",
             25f,
             "Bonus percent damage dealt by heavy hits for each stack of this item.",
-            new List<string>()
-            {
-                "ITEM_BRASSKNUCKLES_DESC"
-            }
+            ["ITEM_BRASSKNUCKLES_DESC"]
         );
         public static float heavyHitBonusPercent = heavyHitBonus.Value / 100f;
 

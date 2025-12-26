@@ -2,7 +2,6 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -25,30 +24,21 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BROKENMASK_DESC"
-            }
+            ["ITEM_BROKENMASK_DESC"]
         );
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
             2f,
             "Burn damage dealt over the duration as a percentage of enemy max health.",
-            new List<string>()
-            {
-                "ITEM_BROKENMASK_DESC"
-            }
+            ["ITEM_BROKENMASK_DESC"]
         );
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
             4,
             "Total duration of the burn in seconds.",
-            new List<string>()
-            {
-                "ITEM_BROKENMASK_DESC"
-            }
+            ["ITEM_BROKENMASK_DESC"]
         );
         public static float burnDamagePercent = burnDamage.Value / 100f;
         public static float burnTickInterval = 0.5f;

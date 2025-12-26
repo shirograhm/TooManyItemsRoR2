@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -15,30 +14,21 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_REDBLUEGLASSES_DESC"
-            }
+            ["ITEM_REDBLUEGLASSES_DESC"]
         );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: 3D Glasses",
             "Crit Chance",
             6f,
             "Amount of crit chance gained per stack.",
-            new List<string>()
-            {
-                "ITEM_REDBLUEGLASSES_DESC"
-            }
+            ["ITEM_REDBLUEGLASSES_DESC"]
         );
         public static ConfigurableValue<float> critDamagePerStack = new(
             "Item: 3D Glasses",
             "Crit Damage",
             6f,
             "Amount of crit damage gained per stack.",
-            new List<string>()
-            {
-                "ITEM_REDBLUEGLASSES_DESC"
-            }
+            ["ITEM_REDBLUEGLASSES_DESC"]
         );
         public static float critChancePercent = critChancePerStack.Value / 100f;
         public static float critDamagePercent = critDamagePerStack.Value / 100f;

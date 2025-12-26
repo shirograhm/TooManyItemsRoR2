@@ -19,55 +19,40 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<float> durationIncrease = new(
             "Item: Fleece Hoodie",
             "Duration Increase",
             40f,
             "Buff duration percentage multiplier per stack.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<float> rechargeTime = new(
             "Item: Fleece Hoodie",
             "Recharge Time",
             10f,
             "Time this item takes to recharge.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
             "Item: Fleece Hoodie",
             "Recharge Time Reduction",
             15f,
             "Percent of recharge time removed for every additional stack of this item.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<string> customIgnoredBuffNames = new(
             "Item: Fleece Hoodie",
             "Custom Ignored Buff Names",
             "",
             "Buffs/debuffs that this item should not affect. Use the internal name of the buff for this to work correctly (e.g. bdMedkitHeal), and separate them all with commas.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static float durationIncreasePercent = durationIncrease.Value / 100f;
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
 
-        public static List<BuffDef> ignoredBuffDefs = new List<BuffDef>();
+        public static List<BuffDef> ignoredBuffDefs = [];
 
         internal static void Init()
         {

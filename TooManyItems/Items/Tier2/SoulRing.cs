@@ -3,7 +3,6 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -20,40 +19,28 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
             "Regen On Kill",
             0.1f,
             "Amount of permanent health regeneration gained on kill.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
         public static ConfigurableValue<float> maxRegenOnFirstStack = new(
             "Item: Soul Ring",
             "Maximum Regen On First Stack",
             4f,
             "Maximum amount of permanent health regeneration granted on first stack.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
         public static ConfigurableValue<float> maxRegenForExtraStacks = new(
             "Item: Soul Ring",
             "Maximum Regen On Extra Stacks",
             2.5f,
             "Maximum amount of permanent health regeneration granted on additional stacks.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
 
         public class Statistics : MonoBehaviour

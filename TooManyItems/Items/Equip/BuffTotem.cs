@@ -23,50 +23,35 @@ namespace TooManyItems.Items.Equip
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static ConfigurableValue<float> armorIncrease = new(
             "Equipment: Totem of Prayer",
             "Armor Increase",
             100f,
             "Armor increase if rolled.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static ConfigurableValue<float> damageIncrease = new(
             "Equipment: Totem of Prayer",
             "Damage Increase",
             25f,
             "Percent damage increase if rolled.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static ConfigurableValue<float> attackSpeedIncrease = new(
             "Equipment: Totem of Prayer",
             "Attack Speed Increase",
             75f,
             "Percent attack speed increase if rolled.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static ConfigurableValue<float> regenIncrease = new(
             "Equipment: Totem of Prayer",
             "Health Regen Increase",
             8f,
             "Health regeneration bonus (as max HP/s) if rolled.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static ConfigurableValue<float> buffDuration = new(
             "Equipment: Totem of Prayer",

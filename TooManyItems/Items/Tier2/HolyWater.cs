@@ -16,20 +16,14 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_HOLYWATER_DESC"
-            }
+            ["ITEM_HOLYWATER_DESC"]
         );
         public static ConfigurableValue<float> minExperienceMultiplierPerStack = new(
             "Item: Holy Water",
             "Minimum XP",
             1f,
             "Minimum enemy max health converted to bonus experience when killing an elite.",
-            new List<string>()
-            {
-                "ITEM_HOLYWATER_DESC"
-            }
+            ["ITEM_HOLYWATER_DESC"]
         );
         public static float minExperienceMultiplierAsPercent = minExperienceMultiplierPerStack.Value / 100f;
 
@@ -38,10 +32,7 @@ namespace TooManyItems.Items.Tier2
             "Maximum XP",
             100f,
             "Maximum enemy max health converted to bonus experience when killing an elite.",
-            new List<string>()
-            {
-                "ITEM_HOLYWATER_DESC"
-            }
+            ["ITEM_HOLYWATER_DESC"]
         );
         public static float maxExperienceMultiplierAsPercent = maxExperienceMultiplierPerStack.Value / 100f;
 

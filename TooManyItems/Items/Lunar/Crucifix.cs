@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Lunar
@@ -14,50 +13,35 @@ namespace TooManyItems.Items.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_CRUCIFIX_DESC"
-            }
+            ["ITEM_CRUCIFIX_DESC"]
         );
         public static ConfigurableValue<float> damageReduction = new(
             "Item: Crucifix",
             "Damage Reduction",
             100f,
             "Percentage of damage reduced.",
-            new List<string>()
-            {
-                "ITEM_CRUCIFIX_DESC"
-            }
+            ["ITEM_CRUCIFIX_DESC"]
         );
         public static ConfigurableValue<float> maxHealthBurnAmount = new(
             "Item: Crucifix",
             "Burn Amount",
             30f,
             "Percentage of max health taken over the duration of the burn.",
-            new List<string>()
-            {
-                "ITEM_CRUCIFIX_DESC"
-            }
+            ["ITEM_CRUCIFIX_DESC"]
         );
         public static ConfigurableValue<float> maxHealthBurnAmountReduction = new(
             "Item: Crucifix",
             "Burn Amount Reduction",
             8f,
             "Percentage of burn damage reduced per stack of this item. This scales hyperbolically.",
-            new List<string>()
-            {
-                "ITEM_CRUCIFIX_DESC"
-            }
+            ["ITEM_CRUCIFIX_DESC"]
         );
         public static ConfigurableValue<bool> isCrucifixBurnStackable = new(
             "Item: Crucifix",
             "Is Burn Stackable",
             false,
             "Whether or not the burn caused by Crucifix is stackable.",
-            new List<string>()
-            {
-                "ITEM_CRUCIFIX_DESC"
-            }
+            ["ITEM_CRUCIFIX_DESC"]
         );
         public static float damageReductionPercent = damageReduction.Value / 100f;
         public static float maxHealthBurnAmountPercent = maxHealthBurnAmount.Value / 100f;

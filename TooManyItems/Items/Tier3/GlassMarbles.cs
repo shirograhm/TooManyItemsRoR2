@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier3
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier3
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_GLASSMARBLES_DESC"
-            }
+            ["ITEM_GLASSMARBLES_DESC"]
         );
         public static ConfigurableValue<float> damagePerLevelPerStack = new(
             "Item: Glass Marbles",
             "Damage Increase",
             2f,
             "Amount of base damage gained per level per stack.",
-            new List<string>()
-            {
-                "ITEM_GLASSMARBLES_DESC"
-            }
+            ["ITEM_GLASSMARBLES_DESC"]
         );
 
         internal static void Init()

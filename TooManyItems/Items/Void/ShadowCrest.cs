@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Void
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Void
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_SHADOWCREST_DESC"
-            }
+            ["ITEM_SHADOWCREST_DESC"]
         );
         public static ConfigurableValue<float> regenPerSecond = new(
             "Item: Shadow Crest",
             "Regen Per Second",
             1.2f,
             "Percentage of missing health regenerated per second.",
-            new List<string>()
-            {
-                "ITEM_SHADOWCREST_DESC"
-            }
+            ["ITEM_SHADOWCREST_DESC"]
         );
         public static float regenPerSecondPercent = regenPerSecond.Value / 100f;
 

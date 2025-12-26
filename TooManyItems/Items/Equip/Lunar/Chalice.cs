@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -18,60 +17,42 @@ namespace TooManyItems.Items.Equip.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> consecrateDuration = new(
             "Equipment: Chalice",
             "Consecrate Duration",
             10f,
             "Duration of the Consecrate buff given.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> consecrateDamageBonus = new(
             "Equipment: Chalice",
             "Consecrate Damage Bonus",
             30f,
             "Percent bonus damage dealt while Consecrated.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
             "Equipment: Chalice",
             "Consecrate Attack Speed Bonus",
             90f,
             "Percent bonus attack speed gained while Consecrated.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> currentHealthCost = new(
             "Equipment: Chalice",
             "Current Health Loss",
             90f,
             "Percent of current health lost as payment when Consecrated.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Chalice",
             "Cooldown",
             70,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static float currentHealthCostPercent = currentHealthCost.Value / 100f;
 

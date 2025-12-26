@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 
@@ -17,30 +16,21 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_EPINEPHRINE_DESC"
-            }
+            ["ITEM_EPINEPHRINE_DESC"]
         );
         public static ConfigurableValue<float> attackSpeedBonus = new(
             "Item: Epinephrine",
             "Attack Speed",
             75f,
             "Attack speed gained after taking damage.",
-            new List<string>()
-            {
-                "ITEM_EPINEPHRINE_DESC"
-            }
+            ["ITEM_EPINEPHRINE_DESC"]
         );
         public static ConfigurableValue<float> buffDuration = new(
             "Item: Epinephrine",
             "Buff Duration",
             1f,
             "Duration of attack speed gained after taking damage.",
-            new List<string>()
-            {
-                "ITEM_EPINEPHRINE_DESC"
-            }
+            ["ITEM_EPINEPHRINE_DESC"]
         );
         public static float attackSpeedBonusPercent = attackSpeedBonus.Value / 100f;
 

@@ -2,7 +2,6 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -21,40 +20,28 @@ namespace TooManyItems.Items.Tier3
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_RUSTYTROWEL_DESC"
-            }
+            ["ITEM_RUSTYTROWEL_DESC"]
         );
         public static ConfigurableValue<float> healingPerStack = new(
             "Item: Rusted Trowel",
             "Heal Per Stack",
             3f,
             "Health recovered per stack of Mulch.",
-            new List<string>()
-            {
-                "ITEM_RUSTEDTROWEL_DESC"
-            }
+            ["ITEM_RUSTEDTROWEL_DESC"]
         );
         public static ConfigurableValue<float> rechargeTime = new(
             "Item: Rusted Trowel",
             "Recharge Time",
             8f,
             "Time this item takes to recharge.",
-            new List<string>()
-            {
-                "ITEM_RUSTEDTROWEL_DESC"
-            }
+            ["ITEM_RUSTEDTROWEL_DESC"]
         );
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
             "Item: Rusted Trowel",
             "Recharge Time Reduction",
             20f,
             "Percent of recharge time removed for every additional stack of this item.",
-            new List<string>()
-            {
-                "ITEM_RUSTEDTROWEL_DESC"
-            }
+            ["ITEM_RUSTEDTROWEL_DESC"]
         );
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
 

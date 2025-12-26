@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -14,20 +13,14 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_MILKCARTON_DESC"
-            }
+            ["ITEM_MILKCARTON_DESC"]
         );
         public static ConfigurableValue<float> eliteDamageReduction = new(
             "Item: Milk Carton",
             "Damage Reduction",
             10f,
             "Percent damage reduction against elite enemies.",
-            new List<string>()
-            {
-                "ITEM_MILKCARTON_DESC"
-            }
+            ["ITEM_MILKCARTON_DESC"]
         );
         public static float eliteDamageReductionPercent = eliteDamageReduction.Value / 100f;
 

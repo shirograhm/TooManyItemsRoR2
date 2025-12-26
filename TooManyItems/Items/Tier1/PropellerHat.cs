@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -15,30 +14,21 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_PROPELLERHAT_DESC"
-            }
+            ["ITEM_PROPELLERHAT_DESC"]
         );
         public static ConfigurableValue<float> movespeedBonus = new(
             "Item: Propeller Hat",
             "Movement Speed",
             16f,
             "Percent bonus movement speed per stack while airborne.",
-            new List<string>()
-            {
-                "ITEM_PROPELLERHAT_DESC"
-            }
+            ["ITEM_PROPELLERHAT_DESC"]
         );
         public static ConfigurableValue<float> fallDamageTaken = new(
             "Item: Propeller Hat",
             "Fall Damage Taken",
             20f,
             "Percent fall damage taken while holding this item.",
-            new List<string>()
-            {
-                "ITEM_PROPELLERHAT_DESC"
-            }
+            ["ITEM_PROPELLERHAT_DESC"]
         );
         public static float movespeedBonusPercent = movespeedBonus.Value / 100f;
         public static float fallDamageTakenPercent = fallDamageTaken.Value / 100f;

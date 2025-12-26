@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -14,20 +13,14 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_PAPERPLANE_DESC"
-            }
+            ["ITEM_PAPERPLANE_DESC"]
         );
         public static ConfigurableValue<float> damageBonus = new(
             "Item: Paper Plane",
             "Damage Increase",
             15f,
             "Percent bonus damage dealt per stack while airborne.",
-            new List<string>()
-            {
-                "ITEM_PAPERPLANE_DESC"
-            }
+            ["ITEM_PAPERPLANE_DESC"]
         );
         public static float damageBonusPercent = damageBonus.Value / 100f;
 

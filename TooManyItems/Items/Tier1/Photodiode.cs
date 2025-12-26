@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 
@@ -17,40 +16,28 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
             "Attack Speed",
             2f,
             "Percent attack speed gained on-hit.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static ConfigurableValue<int> attackSpeedDuration = new(
             "Item: Photodiode",
             "Buff Duration",
             10,
             "Duration of attack speed buff in seconds.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static ConfigurableValue<int> maxAttackSpeedStacks = new(
             "Item: Photodiode",
             "Max Stacks",
             10,
             "Max attack speed stacks allowed per stack of item.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static float attackSpeedOnHitPercent = attackSpeedOnHit.Value / 100f;
         public static float maxAttackSpeedAllowed = attackSpeedOnHit.Value * maxAttackSpeedStacks.Value;

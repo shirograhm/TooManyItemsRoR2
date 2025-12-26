@@ -2,7 +2,6 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -23,40 +22,28 @@ namespace TooManyItems.Items.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static ConfigurableValue<float> currentHPDamage = new(
             "Item: Carving Blade",
             "On-Hit Damage Scaling",
             2f,
             "Percent of enemy's current health dealt as bonus on-hit damage.",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static ConfigurableValue<float> damageCapMultiplier = new(
             "Item: Carving Blade",
             "Damage Cap",
             2000f,
             "Maximum damage on-hit. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static ConfigurableValue<float> damageCapMultiplierExtraStacks = new(
             "Item: Carving Blade",
             "Damage Cap Extra Stacks",
             1000f,
             "Maximum damage on-hit with extra stacks. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static float currentHPDamageAsPercent = currentHPDamage.Value / 100.0f;
         public static float damageCapMultAsPercent = damageCapMultiplier.Value / 100.0f;

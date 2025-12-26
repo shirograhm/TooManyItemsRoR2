@@ -4,7 +4,6 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
 using System;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -21,50 +20,35 @@ namespace TooManyItems.Items.Tier3
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BLOODDICE_DESC"
-            }
+            ["ITEM_BLOODDICE_DESC"]
         );
         public static ConfigurableValue<bool> affectedByLuck = new(
             "Item: Blood Dice",
             "Affected By Luck",
             true,
             "Whether or not the likelihood of a high roll is affected by luck.",
-            new List<string>()
-            {
-                "ITEM_BLOODDICE_DESC"
-            }
+            ["ITEM_BLOODDICE_DESC"]
         );
         public static ConfigurableValue<int> minHealthGain = new(
             "Item: Blood Dice",
             "Min Gain",
             2,
             "Minimum health that can be gained every kill.",
-            new List<string>()
-            {
-                "ITEM_BLOODDICE_DESC"
-            }
+            ["ITEM_BLOODDICE_DESC"]
         );
         public static ConfigurableValue<int> maxHealthGain = new(
             "Item: Blood Dice",
             "Max Gain",
             12,
             "Maximum health that can be gained every kill.",
-            new List<string>()
-            {
-                "ITEM_BLOODDICE_DESC"
-            }
+            ["ITEM_BLOODDICE_DESC"]
         );
         public static ConfigurableValue<float> maxHealthPerStack = new(
             "Item: Blood Dice",
             "Maximum Health Per Item",
             550f,
             "Maximum amount of permanent health allowed per stack.",
-            new List<string>()
-            {
-                "ITEM_BLOODDICE_DESC"
-            }
+            ["ITEM_BLOODDICE_DESC"]
         );
 
         public class Statistics : MonoBehaviour

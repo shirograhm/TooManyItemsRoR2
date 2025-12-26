@@ -2,7 +2,6 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -18,40 +17,28 @@ namespace TooManyItems.Items.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> shieldPerKill = new(
             "Item: Spirit Stone",
             "Shield Amount",
             1f,
             "Health given as shield for every kill.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
             25f,
             "Max health lost as a penalty for holding the first stack of this item.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> maxHealthLostExtraStack = new(
             "Item: Spirit Stone",
             "Max Health Reduction Extra Stacks",
             15f,
             "Max health lost as a penalty for holding extra stacks of this item.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
         public static float maxHealthLostExtraStackPercent = maxHealthLostExtraStack.Value / 100f;

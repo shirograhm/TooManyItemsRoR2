@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -16,30 +15,21 @@ namespace TooManyItems.Items.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_DOUBLEDOWN_DESC"
-            }
+            ["ITEM_DOUBLEDOWN_DESC"]
         );
         public static ConfigurableValue<float> upFrontDamage = new(
             "Item: Double Down",
             "Total Up Front",
             200f,
             "Percentage of the total DoT damage taken up front.",
-            new List<string>()
-            {
-                "ITEM_DOUBLEDOWN_DESC"
-            }
+            ["ITEM_DOUBLEDOWN_DESC"]
         );
         public static ConfigurableValue<float> upFrontDamageReduction = new(
             "Item: Double Down",
             "Damage Reduced Per Stack",
             12f,
             "Percentage of the up front damage reduced with stacks.",
-            new List<string>()
-            {
-                "ITEM_DOUBLEDOWN_DESC"
-            }
+            ["ITEM_DOUBLEDOWN_DESC"]
         );
         public static float upFrontDamagePercent = upFrontDamage.Value / 100f;
         public static float upFrontDamageReductionPercent = upFrontDamageReduction.Value / 100f;

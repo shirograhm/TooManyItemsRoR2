@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Handlers;
 using TooManyItems.Managers;
 
@@ -17,30 +16,21 @@ namespace TooManyItems.Items.Tier3
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_PERMAFROST_DESC"
-            }
+            ["ITEM_PERMAFROST_DESC"]
         );
         public static ConfigurableValue<float> freezeChance = new(
             "Item: Permafrost",
             "Freeze Chance",
             1.5f,
             "Chance to apply freeze when dealing damage.",
-            new List<string>()
-            {
-                "ITEM_PERMAFROST_DESC"
-            }
+            ["ITEM_PERMAFROST_DESC"]
         );
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
             "Bonus Frozen Damage",
             45f,
             "Percent bonus damage dealt to frozen enemies.",
-            new List<string>()
-            {
-                "ITEM_PERMAFROST_DESC"
-            }
+            ["ITEM_PERMAFROST_DESC"]
         );
         public static float freezeChancePercent = freezeChance.Value / 100.0f;
         public static float frozenDamageMultiplierPercent = frozenDamageMultiplier.Value / 100.0f;

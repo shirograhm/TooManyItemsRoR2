@@ -1,6 +1,5 @@
 ﻿using RoR2;
 using System;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_DEBITCARD_DESC"
-            }
+            ["ITEM_DEBITCARD_DESC"]
         );
         public static ConfigurableValue<float> rebate = new(
             "Item: Debit Card",
             "Rebate",
             10f,
             "Percentage of spent gold refunded as rebate.",
-            new List<string>()
-            {
-                "ITEM_DEBITCARD_DESC"
-            }
+            ["ITEM_DEBITCARD_DESC"]
         );
         public static float rebatePercent = rebate.Value / 100f;
 

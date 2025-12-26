@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -20,50 +19,35 @@ namespace TooManyItems.Items.Equip
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
             30,
             "Max distance that the curse can reach.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<float> curseDuration = new(
             "Equipment: Tattered Scroll",
             "Curse Duration",
             10f,
             "Duration of the curse.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
             30,
             "Gold gained for each cursed enemy killed.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
             100,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
 
         internal static void Init()

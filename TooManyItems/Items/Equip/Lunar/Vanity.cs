@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using System.Linq;
 using TooManyItems.Helpers;
 using TooManyItems.Managers;
@@ -27,20 +26,14 @@ namespace TooManyItems.Items.Equip.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
             3f,
             "Percent base damage lost for each stack of Hubris.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
         public static float damageLostPercentPerStack = damageLostPerStack.Value / 100f;
 
@@ -49,33 +42,23 @@ namespace TooManyItems.Items.Equip.Lunar
             "Damage Dealt",
             150f,
             "Percent damage dealt for each stack of Hubris accrued.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
-        public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
-
         public static ConfigurableValue<float> coefficient = new(
             "Equipment: Crown of Vanity",
             "Proc Coefficient",
             1.5f,
             "Proc coefficient for the single damage instance on equipment use.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
             70,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
+        public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
 
         internal static void Init()
         {
@@ -163,13 +146,17 @@ namespace TooManyItems.Items.Equip.Lunar
                 }
             };
 
-            On.RoR2.CharacterBody.HandleOnKillEffectsServer += (orig, self, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(self, damageReport);
+                if (!NetworkServer.active) return;
 
-                if (self && self.equipmentSlot && self.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex && !damageReport.damageInfo.HasModdedDamageType(damageType))
+                CharacterBody atkBody = damageReport.attackerBody;
+                if (atkBody && atkBody.equipmentSlot && atkBody.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
                 {
-                    self.AddBuff(hubrisDebuff);
+                    if (!damageReport.damageInfo.HasModdedDamageType(damageType))
+                    {
+                        atkBody.AddBuff(hubrisDebuff);
+                    }
                 }
             };
         }

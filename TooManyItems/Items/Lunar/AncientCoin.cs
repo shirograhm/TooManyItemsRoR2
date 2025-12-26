@@ -1,6 +1,5 @@
 ﻿using RoR2;
 using System;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Lunar
@@ -15,30 +14,21 @@ namespace TooManyItems.Items.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_ANCIENTCOIN_DESC"
-            }
+            ["ITEM_ANCIENTCOIN_DESC"]
         );
         public static ConfigurableValue<float> goldMultiplierPerStack = new(
             "Item: Ancient Coin",
             "Gold Multiplier",
             100f,
             "Gold generation increase as a percentage.",
-            new List<string>()
-            {
-                "ITEM_ANCIENTCOIN_DESC"
-            }
+            ["ITEM_ANCIENTCOIN_DESC"]
         );
         public static ConfigurableValue<float> damageMultiplierPerStack = new(
             "Item: Ancient Coin",
             "Damage Multiplier",
             25f,
             "Damage taken increase as a percentage.",
-            new List<string>()
-            {
-                "ITEM_ANCIENTCOIN_DESC"
-            }
+            ["ITEM_ANCIENTCOIN_DESC"]
         );
         public static float goldMultiplierAsPercent = goldMultiplierPerStack.Value / 100f;
         public static float damageMultiplierAsPercent = damageMultiplierPerStack.Value / 100f;

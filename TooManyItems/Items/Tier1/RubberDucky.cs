@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_RUBBERDUCKY_DESC"
-            }
+            ["ITEM_RUBBERDUCKY_DESC"]
         );
         public static ConfigurableValue<int> armorPerStack = new(
             "Item: Rubber Ducky",
             "Armor",
             5,
             "Amount of flat armor gained per stack.",
-            new List<string>()
-            {
-                "ITEM_RUBBERDUCKY_DESC"
-            }
+            ["ITEM_RUBBERDUCKY_DESC"]
         );
 
         internal static void Init()

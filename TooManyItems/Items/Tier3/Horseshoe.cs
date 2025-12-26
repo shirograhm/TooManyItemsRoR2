@@ -1,7 +1,6 @@
 ﻿using R2API;
 using R2API.Networking;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Handlers;
 using TooManyItems.Managers;
 
@@ -17,80 +16,56 @@ namespace TooManyItems.Items.Tier3
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> totalPointsCap = new(
             "Item: Golden Horseshoe",
             "Stat Points Cap",
             18f,
             "Max value of stat points a reroll can have. See following configs for scalings.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> healthPerPoint = new(
             "Item: Golden Horseshoe",
             "Health Per Point",
             12f,
             "Max health gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> damagePerPoint = new(
             "Item: Golden Horseshoe",
             "Damage Per Point",
             0.75f,
             "Base damage gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Attack Speed Per Point",
             4f,
             "Percent attack speed gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> critChancePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Chance Per Point",
             2f,
             "Percent crit chance gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Damage Per Point",
             2f,
             "Percent crit damage gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> armorPerPoint = new(
             "Item: Golden Horseshoe",
             "Armor Per Point",
             2f,
             "Armor gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
 
         public static ConfigurableValue<float> regenPerPoint = new(
@@ -98,40 +73,28 @@ namespace TooManyItems.Items.Tier3
             "Regeneration Per Point",
             0.75f,
             "Regeneration gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> shieldPerPoint = new(
             "Item: Golden Horseshoe",
             "Shield Per Point",
             15f,
             "Shield gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> moveSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Move Speed Per Point",
             4f,
             "Percent movement speed gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
             30f,
             "Percent increase to all bonuses given for each additional stack.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static float extraStackMultiplierPercent = extraStackMultiplier.Value / 100f;
 

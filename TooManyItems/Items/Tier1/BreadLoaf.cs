@@ -2,7 +2,6 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -19,40 +18,28 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
         public static ConfigurableValue<int> goldGainOnKill = new(
             "Item: Loaf of Bread",
             "Gold On Kill",
             1,
             "Gold gained after killing an enemy, up to a set number of times (see next config).",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
         public static ConfigurableValue<int> killsNeededToScrap = new(
             "Item: Loaf of Bread",
             "Kills Needed",
             25,
             "How many kills are required per item stack to scrap the item and gain reward gold.",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
         public static ConfigurableValue<int> goldGainOnScrap = new(
             "Item: Loaf of Bread",
             "Gold On Scrap",
             25,
             "Gold gained after killing enough enemies (scales with difficulty). This item turns into scrap once this happens.",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
 
         public class Statistics : MonoBehaviour

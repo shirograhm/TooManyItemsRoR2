@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier2
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier2
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_HERETICSEAL_DESC"
-            }
+            ["ITEM_HERETICSEAL_DESC"]
         );
         public static ConfigurableValue<float> damagePerMissing = new(
             "Item: Seal of the Heretic",
             "Damage Increase",
             0.3f,
             "Base damage gained for each percentage of missing health.",
-            new List<string>()
-            {
-                "ITEM_HERETICSEAL_DESC"
-            }
+            ["ITEM_HERETICSEAL_DESC"]
         );
 
         internal static void Init()

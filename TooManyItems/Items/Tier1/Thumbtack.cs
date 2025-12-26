@@ -1,5 +1,4 @@
 ﻿using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine.Networking;
 
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
         public static ConfigurableValue<float> bleedChance = new(
             "Item: Thumbtack",
             "Bleed Chance",
             4f,
             "Chance to bleed per stack of this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
         public static float bleedChancePercent = bleedChance.Value / 100f;
 
@@ -37,10 +30,7 @@ namespace TooManyItems.Items.Tier1
             "Bleed Damage",
             240f,
             "Base damage dealt as bleed for this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
         public static float bleedDamagePercent = bleedDamage.Value / 100f;
 
@@ -49,10 +39,7 @@ namespace TooManyItems.Items.Tier1
             "Bleed Duration",
             3f,
             "Bleed duration for this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
 
         public static ConfigurableValue<float> bleedDurationBonus = new(
@@ -60,10 +47,7 @@ namespace TooManyItems.Items.Tier1
             "Bonus Bleed Duration",
             0.25f,
             "How much longer your bleed effects last for each stack of this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
 
         internal static void Init()

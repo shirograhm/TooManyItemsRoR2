@@ -1,6 +1,5 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
@@ -15,20 +14,14 @@ namespace TooManyItems.Items.Tier1
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BOTTLECAP_DESC"
-            }
+            ["ITEM_BOTTLECAP_DESC"]
         );
         public static ConfigurableValue<float> specialCDR = new(
             "Item: Bottle Cap",
             "Cooldown Reduction",
             10f,
             "Percent cooldown reduction on special skill.",
-            new List<string>()
-            {
-                "ITEM_BOTTLECAP_DESC"
-            }
+            ["ITEM_BOTTLECAP_DESC"]
         );
         public static float specialCDRPercent = specialCDR.Value / 100f;
 
