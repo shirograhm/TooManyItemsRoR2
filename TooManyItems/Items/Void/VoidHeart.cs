@@ -5,7 +5,7 @@ using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Void
 {
-    internal class IronHeartVoid
+    internal class VoidHeart
     {
         public static ItemDef itemDef;
 

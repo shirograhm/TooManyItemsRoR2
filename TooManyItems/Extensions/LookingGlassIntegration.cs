@@ -722,7 +722,7 @@ namespace TooManyItems.Extensions
 
 
                 // Void Heart
-                if (IronHeartVoid.isEnabled.Value)
+                if (VoidHeart.isEnabled.Value)
                 {
                     ItemStatsDef stats = new ItemStatsDef();
                     stats.descriptions.Add("Base Damage: ");
@@ -733,7 +733,7 @@ namespace TooManyItems.Extensions
                         var values = new List<float> { };
                         if (master && master.GetBody())
                         {
-                            values.Add(IronHeartVoid.CalculateDamageBonus(master.GetBody(), itemCount));
+                            values.Add(VoidHeart.CalculateDamageBonus(master.GetBody(), itemCount));
                         }
                         else
                         {
@@ -741,7 +741,7 @@ namespace TooManyItems.Extensions
                         }
                         return values;
                     };
-                    ItemDefinitions.allItemDefinitions.Add((int)IronHeartVoid.itemDef.itemIndex, stats);
+                    ItemDefinitions.allItemDefinitions.Add((int)VoidHeart.itemDef.itemIndex, stats);
                 }
             }
         }

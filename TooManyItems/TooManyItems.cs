@@ -130,8 +130,8 @@ namespace TooManyItems
             // Void
             if (ShadowCrest.isEnabled.Value)
                 ShadowCrest.Init();
-            if (IronHeartVoid.isEnabled.Value)
-                IronHeartVoid.Init();
+            if (VoidHeart.isEnabled.Value)
+                VoidHeart.Init();
 
             // Equipment
             if (BuffTotem.isEnabled.Value)
@@ -175,13 +175,13 @@ namespace TooManyItems
                     });
                 }
 
-                if (IronHeart.isEnabled && IronHeartVoid.isEnabled)
+                if (IronHeart.isEnabled && VoidHeart.isEnabled)
                 {
                     // Iron Heart => Defiled Heart
                     newVoidPairs.Add(new ItemDef.Pair()
                     {
                         itemDef1 = IronHeart.itemDef,
-                        itemDef2 = IronHeartVoid.itemDef
+                        itemDef2 = VoidHeart.itemDef
                     });
                 }
 
