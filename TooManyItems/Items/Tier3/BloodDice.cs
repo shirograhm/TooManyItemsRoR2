@@ -3,6 +3,7 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
+using System;
 using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
@@ -183,7 +184,14 @@ namespace TooManyItems.Items.Tier3
                     int count = atkBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport));
+                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
+
+                        float maxHealthAllowed = Utilities.GetLinearStacking(maxHealthPerStack.Value, count);
+                        // Use math.min for health cap
+                        int healthToGain = Math.Min(GetDiceRoll(atkMaster), Mathf.RoundToInt(maxHealthAllowed - component.PermanentHealth));
+                        // Only send orb if item is not fully stacked
+                        if (healthToGain > 0)
+                            OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport, healthToGain));
                     }
                 }
             };
@@ -213,20 +221,21 @@ namespace TooManyItems.Items.Tier3
     {
         private const float speed = 30f;
 
-        public int maxHpValue;
+        public readonly int maxHpValue;
+
         private readonly CharacterBody targetBody;
         private Inventory targetInventory;
 
-        public BloodDiceOrb(DamageReport report)
+        public BloodDiceOrb(DamageReport report, int rolledValue)
         {
-            if (report.attackerMaster && report.victimBody && report.attackerBody)
+            if (report.victimBody && report.attackerBody)
             {
-                this.maxHpValue = report.attackerMaster ? BloodDice.GetDiceRoll(report.attackerMaster) : 0;
                 this.targetBody = report.attackerBody ?? null;
                 this.origin = report.victimBody ? report.victimBody.corePosition : Vector3.zero;
 
                 if (targetBody) this.target = targetBody.mainHurtBox;
             }
+            this.maxHpValue = rolledValue;
         }
 
         public override void Begin()
@@ -252,13 +261,10 @@ namespace TooManyItems.Items.Tier3
                 float maxHealthAllowed = BloodDice.maxHealthPerStack.Value * count;
                 BloodDice.Statistics component = targetInventory.GetComponent<BloodDice.Statistics>();
 
-                if (component.PermanentHealth + maxHpValue < maxHealthAllowed)
+                if (component)
                 {
                     component.PermanentHealth += maxHpValue;
-                }
-                else
-                {
-                    component.PermanentHealth = maxHealthAllowed;
+                    if (component.PermanentHealth > maxHealthAllowed) component.PermanentHealth = maxHealthAllowed;
                 }
 
                 if (targetBody) Utilities.ForceRecalculate(targetBody);
