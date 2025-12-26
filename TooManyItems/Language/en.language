@@ -23,8 +23,8 @@
     "EQUIPMENT_BUFFTOTEM_LORE": "",
     "TATTEREDSCROLL": "Tattered Scroll",
     "EQUIPMENT_TATTEREDSCROLL_NAME": "Tattered Scroll",
-    "EQUIPMENT_TATTEREDSCROLL_PICKUP": "Curse nearby enemies when activated. Killing cursed enemies grants extra gold.",
-    "EQUIPMENT_TATTEREDSCROLL_DESC": "On activation, curse enemies within a <style=cIsUtility>{Curse Distance}m</style> radius for <style=cIsUtility>{Curse Duration} seconds</style>. Killing cursed enemies grants an additional <style=cHumanObjective>{Gold Granted} gold</style>, <style=cIsUtility>scaling with difficulty</style>.",
+    "EQUIPMENT_TATTEREDSCROLL_PICKUP": "Curse nearby enemies when activated. Killing cursed enemies drops treasure.",
+    "EQUIPMENT_TATTEREDSCROLL_DESC": "On activation, curse enemies within a <style=cIsUtility>{Curse Distance}m</style> radius for <style=cIsUtility>{Curse Duration} seconds</style>. Killing cursed enemies drops treasure, each granting <style=cHumanObjective>{Gold Granted} gold</style>, <style=cIsUtility>scaling with difficulty</style>.",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
 
     "ANCIENTCOIN": "Ancient Coin",

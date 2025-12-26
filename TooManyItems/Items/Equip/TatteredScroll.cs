@@ -14,7 +14,7 @@ namespace TooManyItems.Items.Equip
 
         public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.TATTERED_SCROLL_COLOR);
 
-        // On activation, curse all enemies around you for a short duration. Killing cursed enemies grants additional gold.
+        // On activation, curse all enemies around you for a short duration. Killing cursed enemies drops treasure that grants additional gold.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Tattered Scroll",
             "Enabled",
@@ -28,7 +28,7 @@ namespace TooManyItems.Items.Equip
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
-            60,
+            30,
             "Max distance that the curse can reach.",
             new List<string>()
             {
@@ -48,7 +48,7 @@ namespace TooManyItems.Items.Equip
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
-            20,
+            30,
             "Gold gained for each cursed enemy killed.",
             new List<string>()
             {
@@ -91,12 +91,9 @@ namespace TooManyItems.Items.Equip
             {
                 if (!NetworkServer.active) return;
 
-                if (damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
+                if (damageReport.attackerBody && damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
                 {
-                    if (damageReport.attackerMaster)
-                    {
-                        damageReport.attackerMaster.GiveMoney(Utilities.ScaleGoldWithDifficulty(goldGranted.Value));
-                    }
+                    SpawnGoldPack(damageReport.attackerBody, damageReport.victimBody);
                 }
             };
         }
@@ -134,6 +131,36 @@ namespace TooManyItems.Items.Equip
             }
 
             return true;
+        }
+
+        private static void SpawnGoldPack(CharacterBody attacker, CharacterBody victim)
+        {
+            GameObject goldPackObject = Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BonusMoneyPack"), victim.transform.position, Random.rotation);
+            if (goldPackObject)
+            {
+                Collider component = goldPackObject.GetComponent<Collider>();
+                if (component)
+                {
+                    TeamFilter teamComponent = goldPackObject.GetComponent<TeamFilter>();
+                    if (teamComponent && attacker.teamComponent)
+                    {
+                        teamComponent.teamIndex = attacker.teamComponent.teamIndex;
+                    }
+                    MoneyPickup moneyPickup = goldPackObject.GetComponentInChildren<MoneyPickup>();
+                    if (moneyPickup)
+                    {
+                        moneyPickup.baseGoldReward = Mathf.RoundToInt(goldGranted.Value * Utilities.GetDifficultyAsMultiplier());
+                        Physics.IgnoreCollision(component, moneyPickup.GetComponent<Collider>());
+                    }
+                    GravitatePickup gravitatePickup = goldPackObject.GetComponentInChildren<GravitatePickup>();
+                    if (gravitatePickup)
+                    {
+                        Physics.IgnoreCollision(component, gravitatePickup.GetComponent<Collider>());
+                    }
+
+                    NetworkServer.Spawn(goldPackObject);
+                }
+            }
         }
     }
 }
