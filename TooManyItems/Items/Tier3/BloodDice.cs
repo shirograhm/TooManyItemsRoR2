@@ -189,9 +189,14 @@ namespace TooManyItems.Items.Tier3
                         float maxHealthAllowed = Utilities.GetLinearStacking(maxHealthPerStack.Value, count);
                         // Use math.min for health cap
                         int healthToGain = Math.Min(GetDiceRoll(atkMaster), Mathf.RoundToInt(maxHealthAllowed - component.PermanentHealth));
-                        // Only send orb if item is not fully stacked
+                        // Only send orbs if item is not fully stacked
                         if (healthToGain > 0)
-                            OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport, healthToGain));
+                        {
+                            for (int i = 0; i < healthToGain; i++)
+                            {
+                                OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport, i));
+                            }
+                        }
                     }
                 }
             };
@@ -219,14 +224,12 @@ namespace TooManyItems.Items.Tier3
 
     public class BloodDiceOrb : Orb
     {
-        private const float speed = 30f;
-
-        public readonly int maxHpValue;
+        private readonly float speed = 25f;
 
         private readonly CharacterBody targetBody;
         private Inventory targetInventory;
 
-        public BloodDiceOrb(DamageReport report, int rolledValue)
+        public BloodDiceOrb(DamageReport report, int sequence)
         {
             if (report.victimBody && report.attackerBody)
             {
@@ -235,7 +238,7 @@ namespace TooManyItems.Items.Tier3
 
                 if (targetBody) this.target = targetBody.mainHurtBox;
             }
-            this.maxHpValue = rolledValue;
+            this.speed += sequence;
         }
 
         public override void Begin()
@@ -263,7 +266,8 @@ namespace TooManyItems.Items.Tier3
 
                 if (component)
                 {
-                    component.PermanentHealth += maxHpValue;
+                    // Each orb grants 1 HP
+                    component.PermanentHealth += 1;
                     if (component.PermanentHealth > maxHealthAllowed) component.PermanentHealth = maxHealthAllowed;
                 }
 
