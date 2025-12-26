@@ -38,7 +38,7 @@ namespace TooManyItems.Items.Tier2
         public static ConfigurableValue<float> maxRegenOnFirstStack = new(
             "Item: Soul Ring",
             "Maximum Regen On First Stack",
-            3f,
+            4f,
             "Maximum amount of permanent health regeneration granted on first stack.",
             new List<string>()
             {
@@ -48,7 +48,7 @@ namespace TooManyItems.Items.Tier2
         public static ConfigurableValue<float> maxRegenForExtraStacks = new(
             "Item: Soul Ring",
             "Maximum Regen On Extra Stacks",
-            2f,
+            2.5f,
             "Maximum amount of permanent health regeneration granted on additional stacks.",
             new List<string>()
             {
@@ -174,7 +174,7 @@ namespace TooManyItems.Items.Tier2
 
         public class SoulRingOrb : Orb
         {
-            private const float speed = 20f;
+            private const float speed = 30f;
 
             private readonly float healthRegenOnKilled;
 
