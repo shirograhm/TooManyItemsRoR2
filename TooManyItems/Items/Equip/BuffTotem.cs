@@ -17,7 +17,7 @@ namespace TooManyItems.Items.Equip
         public static BuffDef attackSpeedBuff;
         public static BuffDef healthRegenBuff;
 
-        // On activation, grants either armor, damage, attack speed, or regeneration for a short duration. (55 sec)
+        // On activation, grants either armor, damage, attack speed, or regeneration for a short duration.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Totem of Prayer",
             "Enabled",

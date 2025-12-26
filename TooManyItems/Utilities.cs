@@ -1,6 +1,7 @@
 ﻿using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using RoR2.Orbs;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -165,6 +166,18 @@ namespace TooManyItems
                 rootObject = self.gameObject
             };
             EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect"), effectData, transmit: true);
+        }
+
+        internal static void SendGoldOrbAndEffect(uint goldGain, Vector3 origin, HurtBox target)
+        {
+            OrbManager.instance.AddOrb(new GoldOrb()
+            {
+                goldAmount = goldGain,
+                origin = origin,
+                target = target,
+            });
+            EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
+
         }
     }
 }

@@ -159,14 +159,16 @@ namespace TooManyItems.Items.Tier1
                                 );
                                 atkBody.inventory.RemoveItemPermanent(itemDef);
                                 atkBody.inventory.GiveItemPermanent(RoR2Content.Items.ScrapWhite);
-                                atkBody.master.GiveMoney(Utilities.ScaleGoldWithDifficulty(goldGainOnScrap.Value));
+
+                                Utilities.SendGoldOrbAndEffect(Utilities.ScaleGoldWithDifficulty(goldGainOnScrap.Value), atkBody.corePosition, atkBody.mainHurtBox);
+
                                 // Reset the kills counter
                                 stats.KillsCounter = 0;
                             }
                             else
                             {
                                 // Gain gold on kill
-                                atkBody.master.GiveMoney(Convert.ToUInt32(goldGainOnKill.Value * itemCount));
+                                Utilities.SendGoldOrbAndEffect(Convert.ToUInt32(goldGainOnKill.Value * itemCount), damageReport.damageInfo.position, atkBody.mainHurtBox);
                             }
                         }
                     }
