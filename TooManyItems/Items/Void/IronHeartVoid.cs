@@ -44,7 +44,7 @@ namespace TooManyItems.Items.Void
 
         internal static void Init()
         {
-            itemDef = ItemManager.GenerateItem("IronHeartVoid", [ItemTag.Damage, ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.VoidTier3);
+            itemDef = ItemManager.GenerateItem("VoidHeart", [ItemTag.Damage, ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.VoidTier3);
 
             Hooks();
         }
