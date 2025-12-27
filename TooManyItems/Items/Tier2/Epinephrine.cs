@@ -66,7 +66,7 @@ namespace TooManyItems.Items.Tier2
                     int count = vicBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        vicBody.AddTimedBuff(attackSpeedBuff, buffDuration * count);
+                        vicBody.AddTimedBuff(attackSpeedBuff, Utilities.GetLinearStacking(buffDuration.Value, count));
                     }
                 }
             };

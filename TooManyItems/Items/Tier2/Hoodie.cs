@@ -159,7 +159,7 @@ namespace TooManyItems.Items.Tier2
                 if (buffDef && !buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                 {
                     int count = self.inventory.GetItemCountEffective(itemDef);
-                    duration *= 1 + durationIncreasePercent * count;
+                    duration *= 1 + Utilities.GetLinearStacking(durationIncreasePercent, count);
 
                     self.RemoveBuff(hoodieBuffActive);
                     self.AddTimedBuff(hoodieBuffCooldown, CalculateHoodieCooldown(count));
