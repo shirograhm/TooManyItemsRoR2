@@ -74,7 +74,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Spirit Stone</b>
         </td>
         <td>
-            On-kill, gain <b>1</b> (+1 per stack) permanent shield. Lose <b>25%</b> (+15% per stack) max HP.
+            On-kill, gain <b>1</b> (+1 per stack) permanent shield. Lose <b>20%</b> (+10% per stack) max HP.
         </td>
     </tr>
     <tr>
