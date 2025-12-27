@@ -1,7 +1,7 @@
 ﻿using R2API;
 using RoR2;
 using System.Linq;
-using TooManyItems.Helpers;
+using TooManyItems.Handlers;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

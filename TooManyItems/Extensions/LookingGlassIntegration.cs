@@ -320,12 +320,13 @@ namespace TooManyItems.Extensions
                         new("Permanent Shield: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.FlatHealth)
                         ], (master, itemCount) =>
                         {
-                            List<float> values = [Utilities.GetExponentialStacking(SpiritStone.maxHealthLostPercent, itemCount)];
+                            List<float> values = [Utilities.GetExponentialStacking(SpiritStone.maxHealthLostPercent, SpiritStone.maxHealthLostExtraStackPercent, itemCount)];
 
                             if (master && master.inventory && master.inventory.GetComponent<SpiritStone.Statistics>())
                                 values.Add(master.inventory.GetComponent<SpiritStone.Statistics>().PermanentShield);
                             else
-                                values.Add(0f);
+                                // Show current stack value if we can't get the actual value
+                                values.Add(Utilities.GetLinearStacking(SpiritStone.shieldPerKill.Value, itemCount));
 
                             return values;
                         });

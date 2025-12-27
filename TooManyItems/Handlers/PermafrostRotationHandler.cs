@@ -5,6 +5,7 @@ namespace TooManyItems.Handlers
     public class PermafrostRotationHandler : MonoBehaviour
     {
         Transform[] wispShells = new Transform[4];
+
         // Start is called before the first frame update
         void Start()
         {

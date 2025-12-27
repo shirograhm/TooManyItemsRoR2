@@ -50,7 +50,7 @@
     "SPIRITSTONE": "Spirit Stone",
     "ITEM_SPIRITSTONE_NAME": "Spirit Stone",
     "ITEM_SPIRITSTONE_PICKUP": "Gain permanent shield when killing enemies. <style=cDeath>Lose max health.</style>",
-    "ITEM_SPIRITSTONE_DESC": "Killing an enemy permanently grants <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} per stack)</style> shield</style>. <style=cDeath>Lose {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% per stack)</style> max health.</style>",
+    "ITEM_SPIRITSTONE_DESC": "On-kill, harvest a <style=cLunarObjective>soul capsule</style> that <u>permanently</u> increases your <style=cIsUtility>shields by {Shield Amount} <style=cStack>(+{Shield Amount} per stack)</style></style>. <style=cDeath>Lose {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% per stack)</style> max health.</style>",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "Bottle Cap",
@@ -147,7 +147,7 @@
     "SOULRING": "Soul Ring",
     "ITEM_SOULRING_NAME": "Soul Ring",
     "ITEM_SOULRING_PICKUP": "Gain permanent health regen on-kill.",
-    "ITEM_SOULRING_DESC": "On-kill, permanently increase your <style=cIsHealing>health regeneration</style> by <style=cIsHealing>{Regen On Kill} HP/s</style>, up to a maximum of <style=cIsHealing>{Maximum Regen On First Stack} <style=cStack>(+{Maximum Regen On Extra Stacks} per stack)</style> HP/s</style>.",
+    "ITEM_SOULRING_DESC": "On-kill, <u>permanently</u> increase your <style=cIsHealing>health regeneration</style> by <style=cIsHealing>{Regen On Kill} HP/s</style>, up to a maximum of <style=cIsHealing>{Maximum Regen On First Stack} <style=cStack>(+{Maximum Regen On Extra Stacks} per stack)</style> HP/s</style>.",
     "ITEM_SOULRING_LORE": "",
 
     "ABACUS": "Abacus",
@@ -158,7 +158,7 @@
     "BLOODDICE": "Blood Dice",
     "ITEM_BLOODDICE_NAME": "Blood Dice",
     "ITEM_BLOODDICE_PICKUP": "Gain permanent health on-kill.",
-    "ITEM_BLOODDICE_DESC": "On-kill, permanently gain <style=cIsHealth>{Min Gain}-{Max Gain} HP</style>, up to a maximum of <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} per stack)</style> HP</style>.",
+    "ITEM_BLOODDICE_DESC": "On-kill, <u>permanently</u> gain <style=cIsHealth>{Min Gain}-{Max Gain} max health</style>, up to a maximum of <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} per stack)</style></style>.",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "Glass Marbles",
     "ITEM_GLASSMARBLES_NAME": "Glass Marbles",
