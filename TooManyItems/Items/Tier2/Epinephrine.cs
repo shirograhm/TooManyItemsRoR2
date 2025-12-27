@@ -28,7 +28,7 @@ namespace TooManyItems.Items.Tier2
         public static ConfigurableValue<float> buffDuration = new(
             "Item: Epinephrine",
             "Buff Duration",
-            1f,
+            1.5f,
             "Duration of attack speed gained after taking damage.",
             ["ITEM_EPINEPHRINE_DESC"]
         );
