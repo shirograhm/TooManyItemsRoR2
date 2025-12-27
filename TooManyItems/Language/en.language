@@ -50,7 +50,7 @@
     "SPIRITSTONE": "Spirit Stone",
     "ITEM_SPIRITSTONE_NAME": "Spirit Stone",
     "ITEM_SPIRITSTONE_PICKUP": "Gain permanent shield when killing enemies. <style=cDeath>Lose max health.</style>",
-    "ITEM_SPIRITSTONE_DESC": "Killing an enemy permanently grants <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} per stack)</style> shield</style>. <style=cDeath>Lose {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% per stack)</style> max health.</style>",
+    "ITEM_SPIRITSTONE_DESC": "On-kill, harvest a <style=cLunarObjective>soul capsule</style> that <i>permanently</i> increases your <style=cIsUtility>shields by {Shield Amount} <style=cStack>(+{Shield Amount} per stack)</style></style>. <style=cDeath>Lose {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% per stack)</style> max health.</style>",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "Bottle Cap",

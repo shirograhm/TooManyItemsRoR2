@@ -5,6 +5,7 @@ using RoR2;
 using RoR2.Orbs;
 using TooManyItems.Managers;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
 namespace TooManyItems.Items.Lunar
@@ -31,14 +32,14 @@ namespace TooManyItems.Items.Lunar
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
-            25f,
+            15f,
             "Max health lost as a penalty for holding the first stack of this item.",
             ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> maxHealthLostExtraStack = new(
             "Item: Spirit Stone",
             "Max Health Reduction Extra Stacks",
-            15f,
+            5f,
             "Max health lost as a penalty for holding extra stacks of this item.",
             ["ITEM_SPIRITSTONE_DESC"]
         );
@@ -133,7 +134,7 @@ namespace TooManyItems.Items.Lunar
                         Statistics component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
 
-                        args.healthMultAdd -= Utilities.GetExponentialStacking(maxHealthLostPercent, itemCount);
+                        args.healthMultAdd -= Utilities.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, itemCount);
                     }
                 }
             };
@@ -172,7 +173,7 @@ namespace TooManyItems.Items.Lunar
 
         public class SpiritStoneOrb : Orb
         {
-            private readonly float speed = 30f;
+            private readonly float speed = 25f;
             private readonly int stacks;
 
             private readonly CharacterBody targetBody;
@@ -187,7 +188,7 @@ namespace TooManyItems.Items.Lunar
 
                     if (targetBody) this.target = targetBody.mainHurtBox;
                 }
-                this.stacks = count;
+                this.stacks += count;
             }
 
             public override void Begin()
@@ -195,16 +196,16 @@ namespace TooManyItems.Items.Lunar
                 base.duration = base.distanceToTarget / speed;
                 targetInventory = targetBody.inventory;
 
-                GameObject spiritOrbPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/ExpOrb");
-                if (spiritOrbPrefab) spiritOrbPrefab.transform.localScale = Vector3.one * this.stacks;
-
+                GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VendingMachine/VendingMachineOrbEffect.prefab").WaitForCompletion();
+                var orbEffect = effectPrefab.GetComponent<OrbEffect>();
+                if (orbEffect) orbEffect.endEffect = null;
                 EffectData effectData = new()
                 {
                     origin = origin,
                     genericFloat = base.duration
                 };
                 effectData.SetHurtBoxReference(target);
-                EffectManager.SpawnEffect(spiritOrbPrefab, effectData, transmit: true);
+                EffectManager.SpawnEffect(effectPrefab, effectData, transmit: true);
             }
 
             public override void OnArrival()
@@ -214,8 +215,8 @@ namespace TooManyItems.Items.Lunar
                     SpiritStone.Statistics component = targetInventory.GetComponent<SpiritStone.Statistics>();
                     if (component)
                     {
-                        // Orb grants shield based on current stack count
-                        component.PermanentShield += Utilities.GetLinearStacking(shieldPerKill.Value, this.stacks);
+                        // Each canister grants shield = # of item stacks * shieldPerKill
+                        component.PermanentShield += Utilities.GetLinearStacking(shieldPerKill.Value, stacks);
                     }
                     if (targetBody) Utilities.ForceRecalculate(targetBody);
                 }
