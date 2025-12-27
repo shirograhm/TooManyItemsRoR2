@@ -69,6 +69,13 @@ namespace TooManyItems.Managers
             modelPanelParameters.maxDistance = 10f;
             modelPanelParameters.minDistance = 5f;
 
+            if (itemDef.tier == ItemTier.VoidBoss || itemDef.tier == ItemTier.VoidTier1 ||
+                itemDef.tier == ItemTier.VoidTier2 || itemDef.tier == ItemTier.VoidTier3)
+            {
+                itemDef.requiredExpansion = TooManyItems.sotvDLC;
+            }
+
+
             itemDef.pickupIconSprite = AssetManager.bundle.LoadAsset<Sprite>(name + ".png");
             itemDef.pickupModelPrefab = prefab;
             itemDef.canRemove = true;
