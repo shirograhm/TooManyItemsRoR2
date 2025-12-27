@@ -261,7 +261,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Soul Ring</b>
         </td>
         <td>
-            On-kill, permanently increase your health regeneration by <b>0.1 HP/s</b>, up to a maximum of <b>5</b> (+3 per stack) HP/s.
+            On-kill, permanently increase your health regeneration by <b>0.1 HP/s</b>, up to a maximum of <b>4</b> (+2.5 per stack) HP/s.
         </td>
     </tr>
     <tr>
@@ -415,7 +415,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Tattered Scroll</b>
         </td>
         <td>
-            On activation, curse enemies within <b>60m</b> of you for <b>10</b> seconds. Killing cursed enemies grants <b>20</b> additional gold, scaling with difficulty. [<i>Cooldown: 100s</i>]
+            On activation, curse enemies within <b>60m</b> of you for <b>10</b> seconds. Killing cursed enemies drops a treasure pickup that grants <b>20</b> additional gold, scaling with difficulty. [<i>Cooldown: 100s</i>]
         </td>
     </tr>
     <tr>
