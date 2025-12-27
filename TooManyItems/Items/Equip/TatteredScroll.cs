@@ -24,7 +24,7 @@ namespace TooManyItems.Items.Equip
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
-            30,
+            60,
             "Max distance that the curse can reach.",
             ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
@@ -38,7 +38,7 @@ namespace TooManyItems.Items.Equip
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
-            30,
+            20,
             "Gold gained for each cursed enemy killed.",
             ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );

@@ -189,7 +189,7 @@
     "VOIDHEART": "Defiled Heart",
     "ITEM_VOIDHEART_NAME": "Defiled Heart",
     "ITEM_VOIDHEART_PICKUP": "Gain base damage based on your max health.",
-    "ITEM_VOIDHEART_DESC": "Gain <style=cIsHealth>{Health Increase} HP</style>. Also, gain <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% per stack)</style></style> of your max health as <style=cIsDamage>BASE damage</style>.",
+    "ITEM_VOIDHEART_DESC": "Gain <style=cIsHealth>{Health Increase} HP</style>. Also, gain <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% per stack)</style></style> of your <style=cIsHealth>max health</style> as <style=cIsDamage>BASE damage</style>.",
     "ITEM_VOIDHEART_LORE": "",
     "SHADOWCREST": "Shadow Crest",
     "ITEM_SHADOWCREST_NAME": "Shadow Crest",
