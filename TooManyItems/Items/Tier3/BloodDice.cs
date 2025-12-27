@@ -188,7 +188,7 @@ namespace TooManyItems.Items.Tier3
 
         public static int GetDiceRoll(CharacterMaster master)
         {
-            float mean = 7f, deviation = 4f;
+            float mean = 7f, deviation = 3.5f;
             if (affectedByLuck.Value) mean += master.luck * deviation;
 
             return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain.Value, maxHealthGain.Value);
