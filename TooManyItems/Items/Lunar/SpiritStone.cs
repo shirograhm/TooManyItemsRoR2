@@ -188,7 +188,7 @@ namespace TooManyItems.Items.Lunar
 
                     if (targetBody) this.target = targetBody.mainHurtBox;
                 }
-                this.stacks += count;
+                this.stacks = count;
             }
 
             public override void Begin()
