@@ -2,6 +2,7 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using RoR2.Orbs;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,6 +12,7 @@ namespace TooManyItems.Items.Lunar
     internal class SpiritStone
     {
         public static ItemDef itemDef;
+
         // Killing an enemy grants permanent shield. Lose a percentage of your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
@@ -162,13 +164,61 @@ namespace TooManyItems.Items.Lunar
                     int count = atkBody.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
-                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
-                        component.PermanentShield += shieldPerKill * count;
-
-                        Utilities.ForceRecalculate(atkBody);
+                        OrbManager.instance.AddOrb(new SpiritStoneOrb(damageReport, count));
                     }
                 }
             };
+        }
+
+        public class SpiritStoneOrb : Orb
+        {
+            private readonly float speed = 30f;
+            private readonly int stacks;
+
+            private readonly CharacterBody targetBody;
+            private Inventory targetInventory;
+
+            public SpiritStoneOrb(DamageReport report, int count)
+            {
+                if (report.victimBody && report.attackerBody)
+                {
+                    this.targetBody = report.attackerBody ?? null;
+                    this.origin = report.victimBody ? report.victimBody.corePosition : Vector3.zero;
+
+                    if (targetBody) this.target = targetBody.mainHurtBox;
+                }
+                this.stacks = count;
+            }
+
+            public override void Begin()
+            {
+                base.duration = base.distanceToTarget / speed;
+                EffectData effectData = new()
+                {
+                    origin = origin,
+                    genericFloat = base.duration
+                };
+                effectData.SetHurtBoxReference(target);
+                GameObject spiritOrbPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/ExpOrb");
+                spiritOrbPrefab.transform.localScale = Vector3.one * this.stacks;
+                EffectManager.SpawnEffect(spiritOrbPrefab, effectData, transmit: true);
+
+                targetInventory = targetBody.inventory;
+            }
+
+            public override void OnArrival()
+            {
+                if (targetInventory)
+                {
+                    SpiritStone.Statistics component = targetInventory.GetComponent<SpiritStone.Statistics>();
+                    if (component)
+                    {
+                        // Orb grants shield based on current stack count
+                        component.PermanentShield += Utilities.GetLinearStacking(shieldPerKill.Value, this.stacks);
+                    }
+                    if (targetBody) Utilities.ForceRecalculate(targetBody);
+                }
+            }
         }
     }
 }

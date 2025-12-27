@@ -188,7 +188,7 @@ namespace TooManyItems.Items.Tier3
 
         public static int GetDiceRoll(CharacterMaster master)
         {
-            float mean = 7f, deviation = 2f;
+            float mean = 7f, deviation = 4f;
             if (affectedByLuck.Value) mean += master.luck * deviation;
 
             return Mathf.Clamp(GenerateRollNormalDistribution(mean, deviation), minHealthGain.Value, maxHealthGain.Value);
@@ -245,7 +245,7 @@ namespace TooManyItems.Items.Tier3
             {
                 int count = targetInventory.GetItemCountEffective(BloodDice.itemDef);
 
-                float maxHealthAllowed = BloodDice.maxHealthPerStack.Value * count;
+                float maxHealthAllowed = Utilities.GetLinearStacking(BloodDice.maxHealthPerStack.Value, count);
                 BloodDice.Statistics component = targetInventory.GetComponent<BloodDice.Statistics>();
 
                 if (component)
