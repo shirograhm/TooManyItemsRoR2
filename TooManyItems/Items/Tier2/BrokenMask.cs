@@ -2,11 +2,11 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class BrokenMask
     {
@@ -16,7 +16,7 @@ namespace TooManyItems
         private static DotController.DotIndex burnIndex;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex maskDamageColor = DamageColorAPI.RegisterDamageColor(Utils.BROKEN_MASK_COLOR);
+        public static DamageColorIndex maskDamageColor = DamageColorManager.RegisterDamageColor(Utilities.BROKEN_MASK_COLOR);
 
         // Dealing damage burns enemies for a portion of their max health.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -24,30 +24,21 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BROKENMASK_DESC"
-            }
+            ["ITEM_BROKENMASK_DESC"]
         );
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
             2f,
             "Burn damage dealt over the duration as a percentage of enemy max health.",
-            new List<string>()
-            {
-                "ITEM_BROKENMASK_DESC"
-            }
+            ["ITEM_BROKENMASK_DESC"]
         );
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
             4,
             "Total duration of the burn in seconds.",
-            new List<string>()
-            {
-                "ITEM_BROKENMASK_DESC"
-            }
+            ["ITEM_BROKENMASK_DESC"]
         );
         public static float burnDamagePercent = burnDamage.Value / 100f;
         public static float burnTickInterval = 0.5f;
@@ -116,16 +107,14 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-            GenerateBuff();
-            GenerateDot();
+            itemDef = ItemManager.GenerateItem("BrokenMask", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
+            burnDebuff = ItemManager.GenerateBuff("Torment", AssetManager.bundle.LoadAsset<Sprite>("MaskDebuff.png"), isDebuff: true);
             ContentAddition.AddBuffDef(burnDebuff);
+
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
+            GenerateDot();
             burnIndex = DotAPI.RegisterDotDef(burnDotDef, BurnBehavior);
             damageType = DamageAPI.ReserveDamageType();
 
@@ -146,52 +135,11 @@ namespace TooManyItems
                     dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * burnPercentPerTick * count;
 #pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
-                    CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerBody);
+                    CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                     Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                     stats.TotalDamageDealt += dotStack.damage;
                 }
             }
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BROKENMASK";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BrokenMask.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrokenMask.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        private static void GenerateBuff()
-        {
-            burnDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            burnDebuff.name = "Torment";
-            burnDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MaskDebuff.png");
-            burnDebuff.canStack = false;
-            burnDebuff.isHidden = false;
-            burnDebuff.isDebuff = true;
-            burnDebuff.isCooldown = false;
         }
 
         private static void GenerateDot()
@@ -215,7 +163,7 @@ namespace TooManyItems
                 obj.inventory?.gameObject.AddComponent<Statistics>();
             };
 
-            GenericGameEvents.OnTakeDamage += (damageReport) =>
+            GameEventManager.OnTakeDamage += (damageReport) =>
             {
                 CharacterBody vicBody = damageReport.victimBody;
                 CharacterBody atkBody = damageReport.attackerBody;

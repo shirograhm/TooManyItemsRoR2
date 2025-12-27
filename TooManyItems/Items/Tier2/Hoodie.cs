@@ -2,9 +2,10 @@ using R2API;
 using RoR2;
 using System.Collections.Generic;
 using System.Linq;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class Hoodie
     {
@@ -18,118 +19,51 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<float> durationIncrease = new(
             "Item: Fleece Hoodie",
             "Duration Increase",
             40f,
             "Buff duration percentage multiplier per stack.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<float> rechargeTime = new(
             "Item: Fleece Hoodie",
             "Recharge Time",
             10f,
             "Time this item takes to recharge.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
             "Item: Fleece Hoodie",
             "Recharge Time Reduction",
             15f,
             "Percent of recharge time removed for every additional stack of this item.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static ConfigurableValue<string> customIgnoredBuffNames = new(
             "Item: Fleece Hoodie",
             "Custom Ignored Buff Names",
             "",
             "Buffs/debuffs that this item should not affect. Use the internal name of the buff for this to work correctly (e.g. bdMedkitHeal), and separate them all with commas.",
-            new List<string>()
-            {
-                "ITEM_HOODIE_DESC"
-            }
+            ["ITEM_HOODIE_DESC"]
         );
         public static float durationIncreasePercent = durationIncrease.Value / 100f;
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
 
-        public static List<BuffDef> ignoredBuffDefs = new List<BuffDef>();
+        public static List<BuffDef> ignoredBuffDefs = [];
 
         internal static void Init()
         {
-            GenerateItem();
-            GenerateBuff();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("Hoodie", [ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier2);
+            hoodieBuffActive = ItemManager.GenerateBuff("Hoodie Active", AssetManager.bundle.LoadAsset<Sprite>("HoodieActive.png"));
+            hoodieBuffCooldown = ItemManager.GenerateBuff("Hoodie Cooldown", AssetManager.bundle.LoadAsset<Sprite>("HoodieCooldown.png"), isCooldown: true);
 
             ContentAddition.AddBuffDef(hoodieBuffActive);
             ContentAddition.AddBuffDef(hoodieBuffCooldown);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "HOODIE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Hoodie.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Hoodie.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        private static void GenerateBuff()
-        {
-            hoodieBuffActive = ScriptableObject.CreateInstance<BuffDef>();
-
-            hoodieBuffActive.name = "Hoodie Active";
-            hoodieBuffActive.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HoodieActive.png");
-            hoodieBuffActive.canStack = false;
-            hoodieBuffActive.isHidden = false;
-            hoodieBuffActive.isDebuff = false;
-            hoodieBuffActive.isCooldown = false;
-
-            hoodieBuffCooldown = ScriptableObject.CreateInstance<BuffDef>();
-
-            hoodieBuffCooldown.name = "Hoodie Cooldown";
-            hoodieBuffCooldown.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("HoodieCooldown.png");
-            hoodieBuffCooldown.canStack = false;
-            hoodieBuffCooldown.isHidden = false;
-            hoodieBuffCooldown.isDebuff = false;
-            hoodieBuffCooldown.isCooldown = true;
         }
 
         public static float CalculateHoodieCooldown(int itemCount)
@@ -225,7 +159,7 @@ namespace TooManyItems
                 if (buffDef && !buffDef.isDebuff && !buffDef.isCooldown && self.HasBuff(hoodieBuffActive) && !ignoredBuffDefs.Contains(buffDef))
                 {
                     int count = self.inventory.GetItemCountEffective(itemDef);
-                    duration *= 1 + durationIncreasePercent * count;
+                    duration *= 1 + Utilities.GetLinearStacking(durationIncreasePercent, count);
 
                     self.RemoveBuff(hoodieBuffActive);
                     self.AddTimedBuff(hoodieBuffCooldown, CalculateHoodieCooldown(count));

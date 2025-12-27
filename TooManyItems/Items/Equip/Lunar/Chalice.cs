@@ -1,10 +1,10 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Equip.Lunar
 {
     internal class Chalice
     {
@@ -17,115 +17,53 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> consecrateDuration = new(
             "Equipment: Chalice",
             "Consecrate Duration",
             10f,
             "Duration of the Consecrate buff given.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> consecrateDamageBonus = new(
             "Equipment: Chalice",
             "Consecrate Damage Bonus",
             30f,
             "Percent bonus damage dealt while Consecrated.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> consecrateAttackSpeedBonus = new(
             "Equipment: Chalice",
             "Consecrate Attack Speed Bonus",
             90f,
             "Percent bonus attack speed gained while Consecrated.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<float> currentHealthCost = new(
             "Equipment: Chalice",
             "Current Health Loss",
             90f,
             "Percent of current health lost as payment when Consecrated.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Chalice",
             "Cooldown",
             70,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_CHALICE_DESC"
-            }
+            ["EQUIPMENT_CHALICE_DESC"]
         );
         public static float currentHealthCostPercent = currentHealthCost.Value / 100f;
 
         internal static void Init()
         {
-            GenerateEquipment();
-            GenerateBuff();
+            equipmentDef = ItemManager.GenerateEquipment("Chalice", equipCooldown.Value, isLunar: true, canBeRandomlyTriggered: false);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
-
+            consecratedBuff = ItemManager.GenerateBuff("Consecrated", AssetManager.bundle.LoadAsset<Sprite>("ConsecratedBuff.png"));
             ContentAddition.AddBuffDef(consecratedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateEquipment()
-        {
-            equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
-
-            equipmentDef.name = "CHALICE";
-            equipmentDef.AutoPopulateTokens();
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Chalice.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Chalice.png");
-            equipmentDef.pickupModelPrefab = prefab;
-
-            equipmentDef.isLunar = true;
-            equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
-
-            equipmentDef.appearsInMultiPlayer = true;
-            equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = false;
-            equipmentDef.enigmaCompatible = true;
-            equipmentDef.canDrop = true;
-
-            equipmentDef.cooldown = equipCooldown.Value;
-        }
-
-        private static void GenerateBuff()
-        {
-            consecratedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            consecratedBuff.name = "Consecrated";
-            consecratedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("ConsecratedBuff.png");
-            consecratedBuff.canStack = false;
-            consecratedBuff.isHidden = false;
-            consecratedBuff.isDebuff = false;
-            consecratedBuff.isCooldown = false;
         }
 
         public static void Hooks()

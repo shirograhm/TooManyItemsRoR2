@@ -2,11 +2,12 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
+using RoR2.Orbs;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class SoulRing
     {
@@ -18,40 +19,28 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
         public static ConfigurableValue<float> healthRegenOnKill = new(
             "Item: Soul Ring",
             "Regen On Kill",
             0.1f,
             "Amount of permanent health regeneration gained on kill.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
         public static ConfigurableValue<float> maxRegenOnFirstStack = new(
             "Item: Soul Ring",
             "Maximum Regen On First Stack",
-            5f,
+            4f,
             "Maximum amount of permanent health regeneration granted on first stack.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
         public static ConfigurableValue<float> maxRegenForExtraStacks = new(
             "Item: Soul Ring",
             "Maximum Regen On Extra Stacks",
-            3f,
+            2.5f,
             "Maximum amount of permanent health regeneration granted on additional stacks.",
-            new List<string>()
-            {
-                "ITEM_SOULRING_DESC"
-            }
+            ["ITEM_SOULRING_DESC"]
         );
 
         public class Statistics : MonoBehaviour
@@ -118,51 +107,11 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("SoulRing", [ItemTag.AIBlacklist, ItemTag.Healing, ItemTag.OnKillEffect, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SOULRING";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("SoulRing.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("SoulRing.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.AIBlacklist,
-
-                ItemTag.Healing,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        public static float CalculateMaxRegenCap(int count)
-        {
-            return maxRegenOnFirstStack.Value + maxRegenForExtraStacks.Value * (count - 1);
         }
 
         public static void Hooks()
@@ -197,19 +146,72 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();
-                        float maxRegenAllowed = CalculateMaxRegenCap(count);
 
-                        if (component.HealthRegen + healthRegenOnKill.Value <= maxRegenAllowed)
+                        float maxRegenAllowed = Utilities.GetLinearStacking(maxRegenOnFirstStack.Value, maxRegenForExtraStacks.Value, count);
+                        float healthRegenToGain = Mathf.Min(healthRegenOnKill.Value, maxRegenAllowed - component.HealthRegen);
+                        // Only send orb if item is not fully stacked
+                        if (healthRegenToGain > 0)
                         {
-                            component.HealthRegen += healthRegenOnKill.Value;
-                        }
-                        else
-                        {
-                            component.HealthRegen = maxRegenAllowed;
+                            OrbManager.instance.AddOrb(new SoulRingOrb(damageReport, healthRegenToGain));
                         }
                     }
                 }
             };
+        }
+
+        public class SoulRingOrb : Orb
+        {
+            private const float speed = 30f;
+
+            private readonly float healthRegenOnKilled;
+
+            private readonly CharacterBody targetBody;
+            private Inventory targetInventory;
+
+            public SoulRingOrb(DamageReport report, float regenOnKill)
+            {
+                if (report.attackerMaster && report.victimBody && report.attackerBody)
+                {
+                    this.targetBody = report.attackerBody ?? null;
+                    this.origin = report.victimBody ? report.victimBody.corePosition : Vector3.zero;
+
+                    if (targetBody) this.target = targetBody.mainHurtBox;
+                }
+
+                this.healthRegenOnKilled = regenOnKill;
+            }
+
+            public override void Begin()
+            {
+                base.duration = base.distanceToTarget / speed;
+                EffectData effectData = new()
+                {
+                    origin = origin,
+                    genericFloat = base.duration
+                };
+                effectData.SetHurtBoxReference(target);
+                EffectManager.SpawnEffect(OrbStorageUtility.Get("Prefabs/Effects/OrbEffects/HealthOrbEffect"), effectData, transmit: true);
+
+                targetInventory = targetBody.inventory;
+            }
+
+            public override void OnArrival()
+            {
+                if (targetInventory)
+                {
+                    float maxRegenAllowed =
+                        Utilities.GetLinearStacking(maxRegenOnFirstStack.Value, maxRegenForExtraStacks.Value, targetInventory.GetItemCountEffective(SoulRing.itemDef));
+
+                    Statistics component = targetInventory.GetComponent<Statistics>();
+                    if (component)
+                    {
+                        component.HealthRegen += healthRegenOnKilled;
+                        if (component.HealthRegen > maxRegenAllowed) component.HealthRegen = maxRegenAllowed;
+                    }
+
+                    if (targetBody) Utilities.ForceRecalculate(targetBody);
+                }
+            }
         }
     }
 }

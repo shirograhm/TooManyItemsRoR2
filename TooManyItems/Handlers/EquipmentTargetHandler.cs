@@ -1,9 +1,9 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Helpers
 {
-    class EquipmentTargeter : MonoBehaviour 
+    class EquipmentTargetHandler : MonoBehaviour
     {
         public GameObject obj;
         public Indicator indicator;

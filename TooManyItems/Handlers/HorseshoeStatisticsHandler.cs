@@ -4,9 +4,9 @@ using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Handlers
 {
-    public class HorseshoeStatistics : MonoBehaviour
+    public class HorseshoeStatisticsHandler : MonoBehaviour
     {
         private float _maxHealthBonus;
         private float _baseDamageBonus;
@@ -280,7 +280,7 @@ namespace TooManyItems
                 GameObject obj = Util.FindNetworkObject(objId);
                 if (obj != null)
                 {
-                    HorseshoeStatistics component = obj.GetComponent<HorseshoeStatistics>();
+                    HorseshoeStatisticsHandler component = obj.GetComponent<HorseshoeStatisticsHandler>();
                     if (component != null)
                     {
                         component.MaxHealthBonus = maxHealthBonus;

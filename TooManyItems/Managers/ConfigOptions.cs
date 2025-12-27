@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TooManyItems
+namespace TooManyItems.Managers
 {
     public static class ConfigOptions
     {
@@ -51,28 +51,28 @@ namespace TooManyItems
 
             public static ConfigurableValue<int> CreateInt(string modGUID, string modName, ConfigFile configFile, string section, string key, int defaultValue, int min = 0, int max = 1000, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<int> onChanged = null)
             {
-                ConfigurableValue<int> configurableValue = Create<int>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<int> configurableValue = Create(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
 
             public static ConfigurableValue<float> CreateFloat(string modGUID, string modName, ConfigFile configFile, string section, string key, float defaultValue, float min = 0, float max = 1000, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<float> onChanged = null)
             {
-                ConfigurableValue<float> configurableValue = Create<float>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<float> configurableValue = Create(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
 
             public static ConfigurableValue<bool> CreateBool(string modGUID, string modName, ConfigFile configFile, string section, string key, bool defaultValue, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<bool> onChanged = null)
             {
-                ConfigurableValue<bool> configurableValue = Create<bool>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<bool> configurableValue = Create(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
 
             public static ConfigurableValue<string> CreateString(string modGUID, string modName, ConfigFile configFile, string section, string key, string defaultValue, string description = "", List<string> stringsToAffect = null, ConfigEntry<bool> useCustomValueConfigEntry = null, bool restartRequired = false, Action<string> onChanged = null)
             {
-                ConfigurableValue<string> configurableValue = Create<string>(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
+                ConfigurableValue<string> configurableValue = Create(configFile, section, key, defaultValue, description, stringsToAffect, useCustomValueConfigEntry, restartRequired, onChanged);
 
                 return configurableValue;
             }
@@ -96,7 +96,7 @@ namespace TooManyItems
                 }
                 else
                 {
-                    bepinexConfigEntry = configFile.Bind<T>(section, key, defaultValue, description);
+                    bepinexConfigEntry = configFile.Bind(section, key, defaultValue, description);
                     instancesList.Add(this);
                 }
 
@@ -129,7 +129,7 @@ namespace TooManyItems
 
             public override string ToString()
             {
-                return System.Convert.ToString(Value, System.Globalization.CultureInfo.InvariantCulture);
+                return Convert.ToString(Value, System.Globalization.CultureInfo.InvariantCulture);
             }
 
             public static implicit operator T(ConfigurableValue<T> configurableValue)

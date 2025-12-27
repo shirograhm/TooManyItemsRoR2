@@ -1,13 +1,14 @@
 ﻿using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using RoR2.Orbs;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
 
 namespace TooManyItems
 {
-    public static class Utils
+    public static class Utilities
     {
         public static Color BROKEN_MASK_COLOR = new(0.38f, 0.38f, 0.82f, 1f);
         public static Color CARVING_BLADE_COLOR = new(0.09f, 0.67f, 0.62f, 1f);
@@ -61,28 +62,21 @@ namespace TooManyItems
             if (NetworkServer.active) new SyncForceRecalculate(body.netId);
         }
 
-        public static void SetItemTier(ItemDef itemDef, ItemTier tier)
+        public static void AddRecalculateOnFrameHook(ItemDef def)
         {
-            if (tier == ItemTier.NoTier)
+            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
             {
-                try
-                {
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-#pragma warning disable CS0618 // Type or member is obsolete
-                    itemDef.deprecatedTier = tier;
-#pragma warning restore CS0618 // Type or member is obsolete
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-                }
-                catch (Exception e)
-                {
-                    Log.Warning(String.Format("Error setting deprecatedTier for {0}: {1}", itemDef.name, e));
-                }
-            }
+                orig(self);
 
-            ItemTierCatalog.availability.CallWhenAvailable(() =>
-            {
-                if (itemDef) itemDef.tier = tier;
-            });
+                if (self && self.inventory)
+                {
+                    int count = self.inventory.GetItemCountEffective(def);
+                    if (count > 0)
+                    {
+                        ForceRecalculate(self);
+                    }
+                }
+            };
         }
 
         public static CharacterBody GetMinionOwnershipParentBody(CharacterBody body)
@@ -92,6 +86,13 @@ namespace TooManyItems
                 return body.master.minionOwnership.ownerMaster.GetBody();
             }
             return body;
+        }
+
+        public static bool OnSameTeam(CharacterBody body1, CharacterBody body2)
+        {
+            if (body1 == null) throw new ArgumentNullException("body1");
+            if (body2 == null) throw new ArgumentNullException("body2");
+            return body1.teamComponent && body2.teamComponent && body1.teamComponent.teamIndex == body2.teamComponent.teamIndex;
         }
 
         public static uint ScaleGoldWithDifficulty(int goldGranted)
@@ -116,6 +117,21 @@ namespace TooManyItems
             return (Stage.instance.entryDifficultyCoefficient - 1f) / 98f;
         }
 
+        public static float GetDifficultyAsMultiplier()
+        {
+            return Stage.instance.entryDifficultyCoefficient;
+        }
+
+        public static float GetLinearStacking(float baseValue, int count)
+        {
+            return GetLinearStacking(baseValue, baseValue, count);
+        }
+
+        public static float GetLinearStacking(float baseValue, float extraValue, int count)
+        {
+            return baseValue + extraValue * (count - 1);
+        }
+
         public static float GetExponentialStacking(float percent, int count)
         {
             return GetExponentialStacking(percent, percent, count);
@@ -126,14 +142,42 @@ namespace TooManyItems
             return 1f - (1 - percent) * Mathf.Pow(1f - stackPercent, count - 1);
         }
 
-        public static float GetReverseExponentialStacking(float percent, float reducePercent, int count)
+        public static float GetReverseExponentialStacking(float baseValue, float reducePercent, int count)
         {
-            return percent * Mathf.Pow(1 - reducePercent, count - 1);
+            return baseValue * Mathf.Pow(1 - reducePercent, count - 1);
         }
 
         public static float GetHyperbolicStacking(float percent, int count)
         {
-            return 1f - 1f / (1f + percent * count);
+            return GetHyperbolicStacking(percent, percent, count);
+        }
+
+        public static float GetHyperbolicStacking(float percent, float extraPercent, int count)
+        {
+            float denominator = (1f + percent) * (1 + extraPercent * (count - 1));
+            return 1f - 1f / denominator;
+        }
+
+        public static void SpawnHealEffect(CharacterBody self)
+        {
+            EffectData effectData = new()
+            {
+                origin = self.transform.position,
+                rootObject = self.gameObject
+            };
+            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect"), effectData, transmit: true);
+        }
+
+        internal static void SendGoldOrbAndEffect(uint goldGain, Vector3 origin, HurtBox target)
+        {
+            OrbManager.instance.AddOrb(new GoldOrb()
+            {
+                goldAmount = goldGain,
+                origin = origin,
+                target = target,
+            });
+            EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
+
         }
     }
 }

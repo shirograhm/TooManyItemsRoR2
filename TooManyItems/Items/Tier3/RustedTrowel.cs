@@ -2,13 +2,13 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
-    internal class RustyTrowel
+    internal class RustedTrowel
     {
         public static ItemDef itemDef;
         public static BuffDef mulchBuff;
@@ -16,44 +16,32 @@ namespace TooManyItems
 
         // Gain stacks of Mulch on-hit. Periodically heal based on the stacks accrued.
         public static ConfigurableValue<bool> isEnabled = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_RUSTYTROWEL_DESC"
-            }
+            ["ITEM_RUSTYTROWEL_DESC"]
         );
         public static ConfigurableValue<float> healingPerStack = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Heal Per Stack",
             3f,
             "Health recovered per stack of Mulch.",
-            new List<string>()
-            {
-                "ITEM_RUSTEDTROWEL_DESC"
-            }
+            ["ITEM_RUSTEDTROWEL_DESC"]
         );
         public static ConfigurableValue<float> rechargeTime = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Recharge Time",
             8f,
             "Time this item takes to recharge.",
-            new List<string>()
-            {
-                "ITEM_RUSTEDTROWEL_DESC"
-            }
+            ["ITEM_RUSTEDTROWEL_DESC"]
         );
         public static ConfigurableValue<float> rechargeTimeReductionPerStack = new(
-            "Item: Rusty Trowel",
+            "Item: Rusted Trowel",
             "Recharge Time Reduction",
             20f,
             "Percent of recharge time removed for every additional stack of this item.",
-            new List<string>()
-            {
-                "ITEM_RUSTEDTROWEL_DESC"
-            }
+            ["ITEM_RUSTEDTROWEL_DESC"]
         );
         public static float rechargeTimeReductionPercent = rechargeTimeReductionPerStack.Value / 100f;
 
@@ -121,68 +109,16 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-            GenerateBuff();
+            itemDef = ItemManager.GenerateItem("RustedTrowel", [ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
+            mulchBuff = ItemManager.GenerateBuff("Mulch", AssetManager.bundle.LoadAsset<Sprite>("Mulch.png"), canStack: true);
             ContentAddition.AddBuffDef(mulchBuff);
+            healingTimer = ItemManager.GenerateBuff("Mulch Cooldown", AssetManager.bundle.LoadAsset<Sprite>("MulchCooldown.png"), isCooldown: true);
             ContentAddition.AddBuffDef(healingTimer);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "RUSTEDTROWEL";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("RustyTrowel.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("RustyTrowel.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        private static void GenerateBuff()
-        {
-            mulchBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            mulchBuff.name = "Mulch";
-            mulchBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Mulch.png");
-            mulchBuff.canStack = true;
-            mulchBuff.isHidden = false;
-            mulchBuff.isDebuff = false;
-            mulchBuff.isCooldown = false;
-
-            healingTimer = ScriptableObject.CreateInstance<BuffDef>();
-
-            healingTimer.name = "Mulch Cooldown";
-            healingTimer.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MulchCooldown.png");
-            healingTimer.canStack = false;
-            healingTimer.isHidden = false;
-            healingTimer.isDebuff = false;
-            healingTimer.isCooldown = true;
         }
 
         public static float CalculateCooldownInSec(int itemCount)
@@ -215,13 +151,15 @@ namespace TooManyItems
             {
                 orig(self, buffDef);
 
-                if (buffDef == healingTimer)
+                if (self && buffDef == healingTimer)
                 {
                     int buffCount = self.GetBuffCount(mulchBuff);
                     if (buffCount > 0)
                     {
                         float healing = buffCount * healingPerStack.Value;
                         self.healthComponent.Heal(healing, new ProcChainMask());
+
+                        Utilities.SpawnHealEffect(self);
 
                         Statistics stats = self.inventory.GetComponent<Statistics>();
                         stats.TotalHealingDone += healing;
@@ -233,7 +171,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {

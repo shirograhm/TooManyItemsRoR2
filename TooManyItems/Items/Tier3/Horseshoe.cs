@@ -1,10 +1,10 @@
 ﻿using R2API;
 using R2API.Networking;
 using RoR2;
-using System.Collections.Generic;
-using UnityEngine;
+using TooManyItems.Handlers;
+using TooManyItems.Managers;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class Horseshoe
     {
@@ -16,80 +16,56 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> totalPointsCap = new(
             "Item: Golden Horseshoe",
             "Stat Points Cap",
             18f,
             "Max value of stat points a reroll can have. See following configs for scalings.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> healthPerPoint = new(
             "Item: Golden Horseshoe",
             "Health Per Point",
             12f,
             "Max health gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> damagePerPoint = new(
             "Item: Golden Horseshoe",
             "Damage Per Point",
             0.75f,
             "Base damage gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> attackSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Attack Speed Per Point",
             4f,
             "Percent attack speed gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> critChancePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Chance Per Point",
             2f,
             "Percent crit chance gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> critDamagePerPoint = new(
             "Item: Golden Horseshoe",
             "Crit Damage Per Point",
             2f,
             "Percent crit damage gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> armorPerPoint = new(
             "Item: Golden Horseshoe",
             "Armor Per Point",
             2f,
             "Armor gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
 
         public static ConfigurableValue<float> regenPerPoint = new(
@@ -97,40 +73,28 @@ namespace TooManyItems
             "Regeneration Per Point",
             0.75f,
             "Regeneration gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> shieldPerPoint = new(
             "Item: Golden Horseshoe",
             "Shield Per Point",
             15f,
             "Shield gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> moveSpeedPerPoint = new(
             "Item: Golden Horseshoe",
             "Move Speed Per Point",
             4f,
             "Percent movement speed gained per stat point invested.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> extraStackMultiplier = new(
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
             30f,
             "Percent increase to all bonuses given for each additional stack.",
-            new List<string>()
-            {
-                "ITEM_HORSESHOE_DESC"
-            }
+            ["ITEM_HORSESHOE_DESC"]
         );
         public static float extraStackMultiplierPercent = extraStackMultiplier.Value / 100f;
 
@@ -151,52 +115,18 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("Horseshoe", [ItemTag.Utility, ItemTag.Damage, ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
-            NetworkingAPI.RegisterMessageType<HorseshoeStatistics.Sync>();
+            NetworkingAPI.RegisterMessageType<HorseshoeStatisticsHandler.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "HORSESHOE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Horseshoe.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Horseshoe.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-                ItemTag.Damage,
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         public static void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
             {
-                obj.inventory?.gameObject.AddComponent<HorseshoeStatistics>();
+                obj.inventory?.gameObject.AddComponent<HorseshoeStatisticsHandler>();
             };
 
             Stage.onStageStartGlobal += (stage) =>
@@ -213,7 +143,7 @@ namespace TooManyItems
 
             On.RoR2.Inventory.GiveItemPermanent_ItemIndex_int += (orig, self, index, count) =>
             {
-                HorseshoeStatistics component = self.GetComponent<HorseshoeStatistics>();
+                HorseshoeStatisticsHandler component = self.GetComponent<HorseshoeStatisticsHandler>();
                 CharacterMaster master = self.GetComponent<CharacterMaster>();
 
                 if (component && master && index == itemDef.itemIndex)
@@ -230,7 +160,7 @@ namespace TooManyItems
 
             On.RoR2.Inventory.GiveItemTemp += (orig, self, index, count) =>
             {
-                HorseshoeStatistics component = self.GetComponent<HorseshoeStatistics>();
+                HorseshoeStatisticsHandler component = self.GetComponent<HorseshoeStatisticsHandler>();
                 CharacterMaster master = self.GetComponent<CharacterMaster>();
 
                 if (component && master && index == itemDef.itemIndex)
@@ -252,7 +182,7 @@ namespace TooManyItems
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        HorseshoeStatistics component = sender.inventory.GetComponent<HorseshoeStatistics>();
+                        HorseshoeStatisticsHandler component = sender.inventory.GetComponent<HorseshoeStatisticsHandler>();
                         if (component)
                         {
                             args.baseHealthAdd += GetScaledValue(component.MaxHealthBonus, sender.level, count);
@@ -279,7 +209,7 @@ namespace TooManyItems
             return value * levelScaling * extraStackScaling;
         }
 
-        public static bool HasNotRolledYet(HorseshoeStatistics bonuses)
+        public static bool HasNotRolledYet(HorseshoeStatisticsHandler bonuses)
         {
             if (bonuses.MaxHealthBonus != 0) return false;
             if (bonuses.BaseDamageBonus != 0) return false;
@@ -296,7 +226,7 @@ namespace TooManyItems
 
         public static void Reroll(Inventory inventory, CharacterBody body)
         {
-            HorseshoeStatistics component = inventory.GetComponent<HorseshoeStatistics>();
+            HorseshoeStatisticsHandler component = inventory.GetComponent<HorseshoeStatisticsHandler>();
             if (component)
             {
                 component.MaxHealthBonus = 0;
@@ -354,7 +284,7 @@ namespace TooManyItems
                     }
                     pointsRemaining -= randomPoints;
                 }
-                Utils.ForceRecalculate(body);
+                Utilities.ForceRecalculate(body);
             }
             else
             {

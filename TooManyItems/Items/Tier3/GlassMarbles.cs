@@ -1,9 +1,8 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
-using UnityEngine;
+using TooManyItems.Managers;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class GlassMarbles
     {
@@ -15,59 +14,21 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_GLASSMARBLES_DESC"
-            }
+            ["ITEM_GLASSMARBLES_DESC"]
         );
         public static ConfigurableValue<float> damagePerLevelPerStack = new(
             "Item: Glass Marbles",
             "Damage Increase",
             2f,
             "Amount of base damage gained per level per stack.",
-            new List<string>()
-            {
-                "ITEM_GLASSMARBLES_DESC"
-            }
+            ["ITEM_GLASSMARBLES_DESC"]
         );
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("GlassMarbles", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "GLASSMARBLES";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("GlassMarbles.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("GlassMarbles.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         public static void Hooks()

@@ -1,9 +1,9 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class Photodiode
     {
@@ -16,40 +16,28 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static ConfigurableValue<float> attackSpeedOnHit = new(
             "Item: Photodiode",
             "Attack Speed",
             2f,
             "Percent attack speed gained on-hit.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static ConfigurableValue<int> attackSpeedDuration = new(
             "Item: Photodiode",
             "Buff Duration",
             10,
             "Duration of attack speed buff in seconds.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static ConfigurableValue<int> maxAttackSpeedStacks = new(
             "Item: Photodiode",
             "Max Stacks",
             10,
             "Max attack speed stacks allowed per stack of item.",
-            new List<string>()
-            {
-                "ITEM_PHOTODIODE_DESC"
-            }
+            ["ITEM_PHOTODIODE_DESC"]
         );
         public static float attackSpeedOnHitPercent = attackSpeedOnHit.Value / 100f;
         public static float maxAttackSpeedAllowed = attackSpeedOnHit.Value * maxAttackSpeedStacks.Value;
@@ -57,61 +45,17 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-            GenerateBuff();
+            itemDef = ItemManager.GenerateItem("Photodiode", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier1);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
+            attackSpeedBuff = ItemManager.GenerateBuff("Voltage", AssetManager.bundle.LoadAsset<Sprite>("Voltage.png"), canStack: true);
             ContentAddition.AddBuffDef(attackSpeedBuff);
 
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "PHOTODIODE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Photodiode.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Photodiode.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        private static void GenerateBuff()
-        {
-            attackSpeedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            attackSpeedBuff.name = "Voltage";
-            attackSpeedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Voltage.png");
-            attackSpeedBuff.canStack = true;
-            attackSpeedBuff.isHidden = false;
-            attackSpeedBuff.isDebuff = false;
-            attackSpeedBuff.isCooldown = false;
-        }
-
         public static void Hooks()
         {
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && attackerInfo.inventory)
                 {

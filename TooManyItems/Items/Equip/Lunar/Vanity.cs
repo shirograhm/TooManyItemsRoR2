@@ -1,12 +1,13 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
 using System.Linq;
+using TooManyItems.Helpers;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Equip.Lunar
 {
     internal class Vanity
     {
@@ -17,7 +18,7 @@ namespace TooManyItems
         public static GameObject implosionEffectObject;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.VANITY_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.VANITY_COLOR);
 
         // Gain stacks of Hubris when killing enemies. Activate to cleanse all stacks and damage a target enemy. This damage scales with stacks cleansed.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -25,20 +26,14 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
             3f,
             "Percent base damage lost for each stack of Hubris.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
         public static float damageLostPercentPerStack = damageLostPerStack.Value / 100f;
 
@@ -47,96 +42,42 @@ namespace TooManyItems
             "Damage Dealt",
             150f,
             "Percent damage dealt for each stack of Hubris accrued.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
-        public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
-
         public static ConfigurableValue<float> coefficient = new(
             "Equipment: Crown of Vanity",
             "Proc Coefficient",
             1.5f,
             "Proc coefficient for the single damage instance on equipment use.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Crown of Vanity",
             "Cooldown",
             70,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_VANITY_DESC"
-            }
+            ["EQUIPMENT_VANITY_DESC"]
         );
+        public static float damageDealtPercentPerStack = damageDealtPerStack.Value / 100f;
 
         internal static void Init()
         {
-            GenerateEquipment();
-            GenerateBuff();
+            equipmentDef = ItemManager.GenerateEquipment("Vanity", equipCooldown.Value, isLunar: true, canBeRandomlyTriggered: false, enigmaCompatible: false);
 
-            vanityTargetIndicatorPrefab = PrefabAPI.InstantiateClone(LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator"), "TooManyItems_vanityTargetIndicator", false);
-            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utils.VANITY_COLOR;
-            vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utils.VANITY_COLOR;
+            hubrisDebuff = ItemManager.GenerateBuff("Hubris", AssetManager.bundle.LoadAsset<Sprite>("Hubris.png"), canStack: true, isDebuff: true);
+            ContentAddition.AddBuffDef(hubrisDebuff);
+
+            vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_vanityTargetIndicator", false);
+            vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utilities.VANITY_COLOR;
+            vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utilities.VANITY_COLOR;
 
             implosionEffectObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteIce/AffixWhiteExplosion.prefab").WaitForCompletion();
             // implosionEffectObject = Assets.bundle.LoadAsset<GameObject>("VanityImplosionEffect.prefab");
             ContentAddition.AddEffect(implosionEffectObject);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
-
-            ContentAddition.AddBuffDef(hubrisDebuff);
-
             damageType = DamageAPI.ReserveDamageType();
 
             Hooks();
-        }
-
-        private static void GenerateEquipment()
-        {
-            equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
-
-            equipmentDef.name = "VANITY";
-            equipmentDef.AutoPopulateTokens();
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Vanity.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Vanity.png");
-            equipmentDef.pickupModelPrefab = prefab;
-
-            equipmentDef.isLunar = true;
-            equipmentDef.colorIndex = ColorCatalog.ColorIndex.LunarItem;
-
-            equipmentDef.appearsInMultiPlayer = true;
-            equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = false;
-            equipmentDef.enigmaCompatible = false;
-            equipmentDef.canDrop = true;
-
-            equipmentDef.cooldown = equipCooldown.Value;
-        }
-
-        private static void GenerateBuff()
-        {
-            hubrisDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            hubrisDebuff.name = "Hubris";
-            hubrisDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Hubris.png");
-            hubrisDebuff.canStack = true;
-            hubrisDebuff.isHidden = false;
-            hubrisDebuff.isDebuff = true;
-            hubrisDebuff.isCooldown = false;
         }
 
         public static void Hooks()
@@ -144,14 +85,14 @@ namespace TooManyItems
             On.RoR2.EquipmentSlot.Start += (orig, self) =>
             {
                 orig(self);
-                self.gameObject.AddComponent<EquipmentTargeter>();
+                self.gameObject.AddComponent<EquipmentTargetHandler>();
             };
 
             On.RoR2.EquipmentSlot.Update += (orig, self) =>
             {
                 orig(self);
 
-                EquipmentTargeter targeter = self.gameObject.GetComponent<EquipmentTargeter>();
+                EquipmentTargetHandler targeter = self.gameObject.GetComponent<EquipmentTargetHandler>();
                 if (targeter)
                 {
                     if (equipmentDef.equipmentIndex == self.equipmentIndex)
@@ -201,25 +142,29 @@ namespace TooManyItems
             {
                 if (sender && sender.inventory)
                 {
-                    args.damageMultAdd -= Utils.GetExponentialStacking(damageLostPercentPerStack, sender.GetBuffCount(hubrisDebuff));
+                    args.damageMultAdd -= Utilities.GetExponentialStacking(damageLostPercentPerStack, sender.GetBuffCount(hubrisDebuff));
                 }
             };
 
-            On.RoR2.CharacterBody.HandleOnKillEffectsServer += (orig, self, damageReport) =>
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
             {
-                orig(self, damageReport);
+                if (!NetworkServer.active) return;
 
-                if (self && self.equipmentSlot && self.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex && !damageReport.damageInfo.HasModdedDamageType(damageType))
+                CharacterBody atkBody = damageReport.attackerBody;
+                if (atkBody && atkBody.equipmentSlot && atkBody.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
                 {
-                    self.AddBuff(hubrisDebuff);
+                    if (!damageReport.damageInfo.HasModdedDamageType(damageType))
+                    {
+                        atkBody.AddBuff(hubrisDebuff);
+                    }
                 }
             };
         }
 
         private static bool OnUse(EquipmentSlot slot)
         {
-            EquipmentTargeter targeter = slot.GetComponent<EquipmentTargeter>();
-            CharacterBody targetEnemy = (targeter && targeter.obj) ? targeter.obj.GetComponent<CharacterBody>() : null;
+            EquipmentTargetHandler targeter = slot.GetComponent<EquipmentTargetHandler>();
+            CharacterBody targetEnemy = targeter && targeter.obj ? targeter.obj.GetComponent<CharacterBody>() : null;
 
             CharacterBody user = slot.characterBody;
             if (user && targetEnemy && targetEnemy.healthComponent)
@@ -234,7 +179,7 @@ namespace TooManyItems
                 {
                     origin = targetEnemy.corePosition,
                     scale = 0.2f * buffCount + targetEnemy.radius,
-                    color = Utils.VANITY_COLOR
+                    color = Utilities.VANITY_COLOR
                 },
                 true);
 

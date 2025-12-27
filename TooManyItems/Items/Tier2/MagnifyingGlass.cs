@@ -1,9 +1,9 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class MagnifyingGlass
     {
@@ -16,96 +16,40 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_MAGNIFYINGGLASS_DESC"
-            }
+            ["ITEM_MAGNIFYINGGLASS_DESC"]
         );
         public static ConfigurableValue<float> critBonus = new(
             "Item: Magnifying Glass",
             "Crit Chance",
             5f,
             "Crit chance increase so that the item isn't worthless without other crit items.",
-            new List<string>()
-            {
-                "ITEM_MAGNIFYINGGLASS_DESC"
-            }
+            ["ITEM_MAGNIFYINGGLASS_DESC"]
         );
         public static ConfigurableValue<float> analyzeChance = new(
             "Item: Magnifying Glass",
             "Analyze Chance",
             6f,
             "Percent chance to Analyze an enemy on crit.",
-            new List<string>()
-            {
-                "ITEM_MAGNIFYINGGLASS_DESC"
-            }
+            ["ITEM_MAGNIFYINGGLASS_DESC"]
         );
         public static ConfigurableValue<float> damageTakenBonus = new(
             "Item: Magnifying Glass",
             "Damage Taken Bonus",
             18f,
             "Percent damage taken bonus once Analyzed.",
-            new List<string>()
-            {
-                "ITEM_MAGNIFYINGGLASS_DESC"
-            }
+            ["ITEM_MAGNIFYINGGLASS_DESC"]
         );
         public static float analyzeChancePercent = analyzeChance.Value / 100f;
         public static float damageTakenBonusPercent = damageTakenBonus.Value / 100f;
 
         internal static void Init()
         {
-            GenerateItem();
-            GenerateBuff();
+            itemDef = ItemManager.GenerateItem("MagnifyingGlass", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
+            analyzedDebuff = ItemManager.GenerateBuff("Analyzed", AssetManager.bundle.LoadAsset<Sprite>("Analyzed.png"), isDebuff: true);
             ContentAddition.AddBuffDef(analyzedDebuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "MAGNIFYINGGLASS";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("MagnifyingGlass.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("MagnifyingGlass.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        private static void GenerateBuff()
-        {
-            analyzedDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            analyzedDebuff.name = "Analyzed";
-            analyzedDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Analyzed.png");
-            analyzedDebuff.canStack = false;
-            analyzedDebuff.isHidden = false;
-            analyzedDebuff.isDebuff = true;
-            analyzedDebuff.isCooldown = false;
         }
 
         public static void Hooks()
@@ -122,7 +66,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnTakeDamage += (damageReport) =>
+            GameEventManager.OnTakeDamage += (damageReport) =>
             {
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
@@ -140,7 +84,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 CharacterBody atkBody = attackerInfo.body;
                 CharacterBody vicBody = victimInfo.body;

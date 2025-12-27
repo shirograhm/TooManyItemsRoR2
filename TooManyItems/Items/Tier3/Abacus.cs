@@ -1,10 +1,10 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class Abacus
     {
@@ -17,77 +17,24 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_ABACUS_DESC"
-            }
+            ["ITEM_ABACUS_DESC"]
         );
         public static ConfigurableValue<float> critChancePerStack = new(
             "Item: Abacus",
             "Crit On Kill",
             1f,
             "Crit chance gained on kill per stack of item.",
-            new List<string>()
-            {
-                "ITEM_ABACUS_DESC"
-            }
+            ["ITEM_ABACUS_DESC"]
         );
 
         internal static void Init()
         {
-            GenerateItem();
-            GenerateBuff();
+            itemDef = ItemManager.GenerateItem("Abacus", [ItemTag.AIBlacklist, ItemTag.Damage, ItemTag.OnKillEffect, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
+            countedBuff = ItemManager.GenerateBuff("Counted", AssetManager.bundle.LoadAsset<Sprite>("Counted.png"), canStack: true);
             ContentAddition.AddBuffDef(countedBuff);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "ABACUS";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Abacus.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Abacus.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.AIBlacklist,
-
-                ItemTag.Damage,
-
-                ItemTag.OnKillEffect,
-                ItemTag.CanBeTemporary
-            };
-        }
-
-        private static void GenerateBuff()
-        {
-            countedBuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            countedBuff.name = "Counted";
-            countedBuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Counted.png");
-            countedBuff.canStack = true;
-            countedBuff.isHidden = false;
-            countedBuff.isDebuff = false;
-            countedBuff.isCooldown = false;
         }
 
         public static void Hooks()
@@ -119,7 +66,7 @@ namespace TooManyItems
                     if (count > 0)
                     {
                         for (int i = 0; i < count; i++) atkBody.AddBuff(countedBuff);
-                        Utils.ForceRecalculate(atkBody);
+                        Utilities.ForceRecalculate(atkBody);
                     }
                 }
             };

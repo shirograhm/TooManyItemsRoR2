@@ -2,18 +2,18 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class CarvingBlade
     {
         public static ItemDef itemDef;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.CARVING_BLADE_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.CARVING_BLADE_COLOR);
 
         // Deal a percentage of enemy current health as bonus on-hit damage. You cannot crit.
         // On-hit, deal 2% of the enemy's current HP. Per-hit damage is capped at 2000% (+1000% per stack) of your BASE damage. You cannot crit.
@@ -22,40 +22,28 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static ConfigurableValue<float> currentHPDamage = new(
             "Item: Carving Blade",
             "On-Hit Damage Scaling",
             2f,
             "Percent of enemy's current health dealt as bonus on-hit damage.",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static ConfigurableValue<float> damageCapMultiplier = new(
             "Item: Carving Blade",
             "Damage Cap",
             2000f,
             "Maximum damage on-hit. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static ConfigurableValue<float> damageCapMultiplierExtraStacks = new(
             "Item: Carving Blade",
             "Damage Cap Extra Stacks",
             1000f,
             "Maximum damage on-hit with extra stacks. This value is displayed as a percentage of the user's base damage (100 = 1x your base damage).",
-            new List<string>()
-            {
-                "ITEM_CARVINGBLADE_DESC"
-            }
+            ["ITEM_CARVINGBLADE_DESC"]
         );
         public static float currentHPDamageAsPercent = currentHPDamage.Value / 100.0f;
         public static float damageCapMultAsPercent = damageCapMultiplier.Value / 100.0f;
@@ -125,38 +113,13 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("CarvingBlade", [ItemTag.Damage], ItemTier.Lunar);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             damageType = DamageAPI.ReserveDamageType();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "CARVINGBLADE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("CarvingBlade.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("CarvingBlade.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
         }
 
         public static float CalculateDamageCapPercent(int itemCount)
@@ -171,7 +134,7 @@ namespace TooManyItems
                 obj.inventory?.gameObject.AddComponent<Statistics>();
             };
 
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.inventory && attackerInfo.inventory.GetItemCountPermanent(itemDef) > 0)
                 {
@@ -179,7 +142,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
@@ -209,7 +172,7 @@ namespace TooManyItems
                         victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
-                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerInfo.body);
+                        CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerInfo.body);
                         Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                         stats.TotalDamageDealt += amount;
                     }

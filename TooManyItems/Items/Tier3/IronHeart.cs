@@ -2,18 +2,18 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier3
 {
     internal class IronHeart
     {
         public static ItemDef itemDef;
 
         public static DamageAPI.ModdedDamageType damageType;
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.IRON_HEART_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.IRON_HEART_COLOR);
 
         // Gain HP. Deal bonus damage on-hit based on your max health.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -21,30 +21,21 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_IRONHEART_DESC"
-            }
+            ["ITEM_IRONHEART_DESC"]
         );
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Iron Heart",
             "Health Increase",
             200f,
             "Bonus health gained from this item. Does not increase with stacks.",
-            new List<string>()
-            {
-                "ITEM_IRONHEART_DESC"
-            }
+            ["ITEM_IRONHEART_DESC"]
         );
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Iron Heart",
             "On-Hit Damage Scaling",
             1.5f,
             "Percent of maximum health dealt as bonus on-hit damage.",
-            new List<string>()
-            {
-                "ITEM_IRONHEART_DESC"
-            }
+            ["ITEM_IRONHEART_DESC"]
         );
         public static float multiplierPerStack = percentDamagePerStack.Value / 100.0f;
 
@@ -112,46 +103,13 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("IronHeart", [ItemTag.Damage, ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.Tier3);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             damageType = DamageAPI.ReserveDamageType();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "IRONHEART";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("IronHeart.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("IronHeart.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         public static float CalculateDamageOnHit(CharacterBody sender, float itemCount)
@@ -177,7 +135,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 CharacterBody attackerBody = attackerInfo.body;
                 if (attackerBody && attackerInfo.inventory && attackerBody.healthComponent)
@@ -204,7 +162,7 @@ namespace TooManyItems
                         victimInfo.healthComponent.TakeDamage(proc);
 
                         // Damage calculation takes minions into account
-                        CharacterBody trackerBody = Utils.GetMinionOwnershipParentBody(attackerBody);
+                        CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                         Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
                         stats.TotalDamageDealt += amount;
                     }

@@ -5,6 +5,15 @@ using RoR2;
 using RoR2.ExpansionManagement;
 using System.Collections.Generic;
 using System.Linq;
+using TooManyItems.Extensions;
+using TooManyItems.Items.Equip;
+using TooManyItems.Items.Equip.Lunar;
+using TooManyItems.Items.Lunar;
+using TooManyItems.Items.Tier1;
+using TooManyItems.Items.Tier2;
+using TooManyItems.Items.Tier3;
+using TooManyItems.Items.Void;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -25,24 +34,28 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.10";
+        public const string PluginVersion = "0.7.0";
 
         public static PluginInfo PInfo { get; private set; }
 
         public static System.Random RandGen = new();
 
-        public static ExpansionDef voidDLC;
+        public static ExpansionDef sotvDLC;
+        public static ExpansionDef sotsDLC;
 
         public void Awake()
         {
             PInfo = Info;
-            voidDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
+
+            sotvDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC1/Common/DLC1.asset").WaitForCompletion();
+            sotsDLC = Addressables.LoadAssetAsync<ExpansionDef>("RoR2/DLC2/Common/DLC2.asset").WaitForCompletion();
 
             Log.Init(Logger);
-            AssetHandler.Init();
-            GenericGameEvents.Init();
+            AssetManager.Init();
+            GameEventManager.Init();
             ConfigOptions.Init();
-            DamageColorAPI.Init();
+            DamageColorManager.Init();
+            Utilities.Init();
 
             // Red Items
             if (Abacus.isEnabled.Value)
@@ -57,8 +70,8 @@ namespace TooManyItems
                 IronHeart.Init();
             if (Permafrost.isEnabled.Value)
                 Permafrost.Init();
-            if (RustyTrowel.isEnabled.Value)
-                RustyTrowel.Init();
+            if (RustedTrowel.isEnabled.Value)
+                RustedTrowel.Init();
 
             // Green Items
             if (BrassKnuckles.isEnabled.Value)
@@ -117,8 +130,8 @@ namespace TooManyItems
             // Void
             if (ShadowCrest.isEnabled.Value)
                 ShadowCrest.Init();
-            if (IronHeartVoid.isEnabled.Value)
-                IronHeartVoid.Init();
+            if (VoidHeart.isEnabled.Value)
+                VoidHeart.Init();
 
             // Equipment
             if (BuffTotem.isEnabled.Value)
@@ -140,189 +153,30 @@ namespace TooManyItems
         {
             On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
             {
-                List<ItemDef.Pair> newVoidPairs = new List<ItemDef.Pair> { };
+                List<ItemDef.Pair> newVoidPairs = [];
 
+                // 3D Glasses => Instakill Glasses
                 if (RedBlueGlasses.isEnabled)
-                {
-                    // 3D Glasses => Instakill Glasses
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = RedBlueGlasses.itemDef,
-                        itemDef2 = DLC1Content.Items.CritGlassesVoid
-                    });
-                }
-
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = RedBlueGlasses.itemDef, itemDef2 = DLC1Content.Items.CritGlassesVoid });
+                // Thumbtack => Needletick
                 if (Thumbtack.isEnabled)
-                {
-                    // Thumbtack => Needletick
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = Thumbtack.itemDef,
-                        itemDef2 = DLC1Content.Items.BleedOnHitVoid
-                    });
-                }
-
-                if (IronHeart.isEnabled && IronHeartVoid.isEnabled)
-                {
-                    // Iron Heart => Defiled Heart
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = IronHeart.itemDef,
-                        itemDef2 = IronHeartVoid.itemDef
-                    });
-                }
-
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = Thumbtack.itemDef, itemDef2 = DLC1Content.Items.BleedOnHitVoid });
+                // Iron Heart => Defiled Heart
+                if (IronHeart.isEnabled && VoidHeart.isEnabled)
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = IronHeart.itemDef, itemDef2 = VoidHeart.itemDef });
+                // Seal of the Heretic => Shadow Crest
                 if (HereticSeal.isEnabled && ShadowCrest.isEnabled)
-                {
-                    // Seal of the Heretic => Shadow Crest
-                    newVoidPairs.Add(new ItemDef.Pair()
-                    {
-                        itemDef1 = HereticSeal.itemDef,
-                        itemDef2 = ShadowCrest.itemDef
-                    });
-                }
+                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = HereticSeal.itemDef, itemDef2 = ShadowCrest.itemDef });
 
                 ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
                 Debug.Log(key);
 
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
                 ItemDef.Pair[] voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
-                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = voidPairs.Union(newVoidPairs).ToArray();
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
+                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = [.. voidPairs.Union(newVoidPairs)];
 
                 Debug.Log("Injected void item transformations.");
                 orig();
             };
-        }
-
-        //private void Update()
-        //{
-        //    if (!NetworkServer.active) return;
-
-        //    if (Input.GetKeyDown(KeyCode.F2))
-        //    {
-        //        DropItem(Abacus.itemDef);
-        //        DropItem(BloodDice.itemDef);
-        //        DropItem(GlassMarbles.itemDef);
-        //        DropItem(Horseshoe.itemDef);
-        //        DropItem(IronHeart.itemDef);
-        //        DropItem(Permafrost.itemDef);
-        //        DropItem(RustyTrowel.itemDef);
-
-        //        DropItem(BrassKnuckles.itemDef);
-        //        DropItem(BrokenMask.itemDef);
-        //        DropItem(Epinephrine.itemDef);
-        //        DropItem(HereticSeal.itemDef);
-        //        DropItem(HolyWater.itemDef);
-        //        DropItem(Hoodie.itemDef);
-        //        DropItem(MagnifyingGlass.itemDef);
-        //        DropItem(SoulRing.itemDef);
-
-        //        DropItem(BottleCap.itemDef);
-        //        DropItem(BreadLoaf.itemDef);
-        //        DropItem(DebitCard.itemDef);
-        //        DropItem(EdibleGlue.itemDef);
-        //        DropItem(MilkCarton.itemDef);
-        //        DropItem(PaperPlane.itemDef);
-        //        DropItem(Photodiode.itemDef);
-        //        DropItem(PropellerHat.itemDef);
-        //        DropItem(RedBlueGlasses.itemDef);
-        //        DropItem(RubberDucky.itemDef);
-        //        DropItem(Thumbtack.itemDef);
-
-        //        DropItem(AncientCoin.itemDef);
-        //        DropItem(CarvingBlade.itemDef);
-        //        DropItem(Crucifix.itemDef);
-        //        DropItem(DoubleDown.itemDef);
-        //        DropItem(SpiritStone.itemDef);
-
-        //        DropItem(IronHeartVoid.itemDef);
-        //        DropItem(ShadowCrest.itemDef);
-
-        //        DropItem(BuffTotem.equipmentDef);
-        //        DropItem(TatteredScroll.equipmentDef);
-        //        DropItem(Chalice.equipmentDef);
-        //        DropItem(Vanity.equipmentDef);
-
-        //        //DropItem(DoubleDown.itemDef);
-        //        //DropItem(BloodDice.itemDef);
-        //        //DropItem(GlassMarbles.itemDef);
-        //        //DropItem(Photodiode.itemDef);
-        //        //DropItem(HereticSeal.itemDef);
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.F3))
-        //    {
-        //        foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
-        //        {
-        //            CharacterBody body = controller.master.GetBody();
-        //            if (body && body.healthComponent)
-        //            {
-        //                InflictDotInfo dotInfo = new()
-        //                {
-        //                    victimObject = body.gameObject,
-        //                    attackerObject = body.gameObject,
-        //                    totalDamage = 10f,
-        //                    dotIndex = DotController.DotIndex.Burn,
-        //                    duration = 0f,
-        //                    damageMultiplier = 1f
-        //                };
-        //                DotController.InflictDot(ref dotInfo);
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void DropItem(ItemDef def)
-        //{
-        //    DropItem(def, 1);
-        //}
-
-        //private void DropItem(ItemDef def, int itemCount)
-        //{
-        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
-        //    {
-        //        CharacterBody body = controller.master.GetBody();
-        //        if (body)
-        //        {
-        //            ScrapperController.CreateItemTakenOrb(body.corePosition, body.gameObject, def.itemIndex);
-        //            body.inventory.GiveItemPermanent(def, itemCount);
-        //        }
-        //    }
-        //}
-
-        //private void DropItem(EquipmentDef def)
-        //{
-        //    foreach (PlayerCharacterMasterController controller in PlayerCharacterMasterController.instances)
-        //    {
-        //        Transform transform = controller.master.GetBodyObject().transform;
-
-        //        Log.Info($"Dropping {def.nameToken} at coordinates {transform.position}");
-        //        PickupDropletController.CreatePickupDroplet(PickupCatalog.FindPickupIndex(def.equipmentIndex), transform.position, transform.forward * 20f);
-        //    }
-        //}
-
-        public struct GenericCharacterInfo
-        {
-            public GameObject gameObject;
-            public CharacterBody body;
-            public CharacterMaster master;
-            public TeamComponent teamComponent;
-            public HealthComponent healthComponent;
-            public Inventory inventory;
-            public TeamIndex teamIndex;
-            public Vector3 aimOrigin;
-
-            public GenericCharacterInfo(CharacterBody body)
-            {
-                this.body = body;
-                gameObject = body ? body.gameObject : null;
-                master = body ? body.master : null;
-                teamComponent = body ? body.teamComponent : null;
-                healthComponent = body ? body.healthComponent : null;
-                inventory = master ? master.inventory : null;
-                teamIndex = teamComponent ? teamComponent.teamIndex : TeamIndex.Neutral;
-                aimOrigin = body ? body.aimOrigin : UnityEngine.Random.insideUnitSphere.normalized;
-            }
         }
     }
 }

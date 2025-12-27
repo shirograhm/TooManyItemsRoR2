@@ -1,11 +1,10 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
-using UnityEngine;
+using TooManyItems.Managers;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Void
 {
-    internal class IronHeartVoid
+    internal class VoidHeart
     {
         public static ItemDef itemDef;
 
@@ -15,73 +14,29 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_VOIDHEART_DESC"
-            }
+            ["ITEM_VOIDHEART_DESC"]
         );
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Defiled Heart",
             "Health Increase",
             300f,
             "Bonus health gained from this item. Does not increase with stacks.",
-            new List<string>()
-            {
-                "ITEM_VOIDHEART_DESC"
-            }
+            ["ITEM_VOIDHEART_DESC"]
         );
         public static ConfigurableValue<float> percentDamagePerStack = new(
             "Item: Defiled Heart",
             "Bonus Damage Scaling",
             1.5f,
             "Percent of maximum health gained as base damage.",
-            new List<string>()
-            {
-                "ITEM_VOIDHEART_DESC"
-            }
+            ["ITEM_VOIDHEART_DESC"]
         );
         public static float multiplierPerStack = percentDamagePerStack.Value / 100.0f;
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("VoidHeart", [ItemTag.Damage, ItemTag.Healing, ItemTag.CanBeTemporary], ItemTier.VoidTier3);
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "VOIDHEART";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.VoidTier3);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("IronHeartVoid.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("IronHeartVoid.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.requiredExpansion = TooManyItems.voidDLC;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Healing,
-
-                ItemTag.CanBeTemporary
-            };
         }
 
         public static float CalculateDamageBonus(CharacterBody sender, float itemCount)

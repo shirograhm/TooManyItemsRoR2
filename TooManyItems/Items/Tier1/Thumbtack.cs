@@ -1,10 +1,8 @@
-﻿using R2API;
-using RoR2;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using RoR2;
+using TooManyItems.Managers;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class Thumbtack
     {
@@ -16,20 +14,14 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
         public static ConfigurableValue<float> bleedChance = new(
             "Item: Thumbtack",
             "Bleed Chance",
             4f,
             "Chance to bleed per stack of this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
         public static float bleedChancePercent = bleedChance.Value / 100f;
 
@@ -38,10 +30,7 @@ namespace TooManyItems
             "Bleed Damage",
             240f,
             "Base damage dealt as bleed for this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
         public static float bleedDamagePercent = bleedDamage.Value / 100f;
 
@@ -50,10 +39,7 @@ namespace TooManyItems
             "Bleed Duration",
             3f,
             "Bleed duration for this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
 
         public static ConfigurableValue<float> bleedDurationBonus = new(
@@ -61,55 +47,19 @@ namespace TooManyItems
             "Bonus Bleed Duration",
             0.25f,
             "How much longer your bleed effects last for each stack of this item.",
-            new List<string>()
-            {
-                "ITEM_THUMBTACK_DESC"
-            }
+            ["ITEM_THUMBTACK_DESC"]
         );
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("Thumbtack", [ItemTag.Damage, ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier1);
 
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "THUMBTACK";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("Thumbtack.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("Thumbtack.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
         public static void Hooks()
         {
-            GenericGameEvents.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.OnHitEnemy += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {

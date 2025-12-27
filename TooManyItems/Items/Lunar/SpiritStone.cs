@@ -2,55 +2,45 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
-using System.Collections.Generic;
+using RoR2.Orbs;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class SpiritStone
     {
         public static ItemDef itemDef;
+
         // Killing an enemy grants permanent shield. Lose a percentage of your max health.
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Spirit Stone",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> shieldPerKill = new(
             "Item: Spirit Stone",
             "Shield Amount",
             1f,
             "Health given as shield for every kill.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
             25f,
             "Max health lost as a penalty for holding the first stack of this item.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static ConfigurableValue<float> maxHealthLostExtraStack = new(
             "Item: Spirit Stone",
             "Max Health Reduction Extra Stacks",
             15f,
             "Max health lost as a penalty for holding extra stacks of this item.",
-            new List<string>()
-            {
-                "ITEM_SPIRITSTONE_DESC"
-            }
+            ["ITEM_SPIRITSTONE_DESC"]
         );
         public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
         public static float maxHealthLostExtraStackPercent = maxHealthLostExtraStack.Value / 100f;
@@ -119,41 +109,11 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("SpiritStone", [ItemTag.Utility, ItemTag.OnKillEffect], ItemTier.Lunar);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "SPIRITSTONE";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("SpiritStone.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("SpiritStone.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.OnKillEffect
-            };
         }
 
         public static void Hooks()
@@ -173,7 +133,7 @@ namespace TooManyItems
                         Statistics component = sender.inventory.GetComponent<Statistics>();
                         args.baseShieldAdd += component.PermanentShield;
 
-                        args.healthMultAdd -= Utils.GetExponentialStacking(maxHealthLostPercent, itemCount);
+                        args.healthMultAdd -= Utilities.GetExponentialStacking(maxHealthLostPercent, itemCount);
                     }
                 }
             };
@@ -186,7 +146,7 @@ namespace TooManyItems
                     int count = self.body.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
-                        values.curseFraction += (1f - values.curseFraction) * Utils.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, count);
+                        values.curseFraction += (1f - values.curseFraction) * Utilities.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, count);
                         values.healthFraction = self.health * (1f - values.curseFraction) / self.fullCombinedHealth;
                         values.shieldFraction = self.shield * (1f - values.curseFraction) / self.fullCombinedHealth;
                     }
@@ -204,13 +164,62 @@ namespace TooManyItems
                     int count = atkBody.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
-                        Statistics component = atkBody.inventory.GetComponent<Statistics>();
-                        component.PermanentShield += shieldPerKill * count;
-
-                        Utils.ForceRecalculate(atkBody);
+                        OrbManager.instance.AddOrb(new SpiritStoneOrb(damageReport, count));
                     }
                 }
             };
+        }
+
+        public class SpiritStoneOrb : Orb
+        {
+            private readonly float speed = 30f;
+            private readonly int stacks;
+
+            private readonly CharacterBody targetBody;
+            private Inventory targetInventory;
+
+            public SpiritStoneOrb(DamageReport report, int count)
+            {
+                if (report.victimBody && report.attackerBody)
+                {
+                    this.targetBody = report.attackerBody ?? null;
+                    this.origin = report.victimBody ? report.victimBody.corePosition : Vector3.zero;
+
+                    if (targetBody) this.target = targetBody.mainHurtBox;
+                }
+                this.stacks = count;
+            }
+
+            public override void Begin()
+            {
+                base.duration = base.distanceToTarget / speed;
+                targetInventory = targetBody.inventory;
+
+                GameObject spiritOrbPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/ExpOrb");
+                if (spiritOrbPrefab) spiritOrbPrefab.transform.localScale = Vector3.one * this.stacks;
+
+                EffectData effectData = new()
+                {
+                    origin = origin,
+                    genericFloat = base.duration
+                };
+                effectData.SetHurtBoxReference(target);
+                EffectManager.SpawnEffect(spiritOrbPrefab, effectData, transmit: true);
+            }
+
+            public override void OnArrival()
+            {
+                if (targetInventory)
+                {
+                    SpiritStone.Statistics component = targetInventory.GetComponent<SpiritStone.Statistics>();
+                    if (component)
+                    {
+                        // Orb grants shield based on current stack count
+                        component.PermanentShield += Utilities.GetLinearStacking(shieldPerKill.Value, this.stacks);
+                    }
+                    if (targetBody) Utilities.ForceRecalculate(targetBody);
+                }
+            }
         }
     }
 }

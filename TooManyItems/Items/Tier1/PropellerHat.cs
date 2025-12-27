@@ -1,9 +1,8 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
-using UnityEngine;
+using TooManyItems.Managers;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class PropellerHat
     {
@@ -15,87 +14,35 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_PROPELLERHAT_DESC"
-            }
+            ["ITEM_PROPELLERHAT_DESC"]
         );
         public static ConfigurableValue<float> movespeedBonus = new(
             "Item: Propeller Hat",
             "Movement Speed",
             16f,
             "Percent bonus movement speed per stack while airborne.",
-            new List<string>()
-            {
-                "ITEM_PROPELLERHAT_DESC"
-            }
+            ["ITEM_PROPELLERHAT_DESC"]
         );
         public static ConfigurableValue<float> fallDamageTaken = new(
             "Item: Propeller Hat",
             "Fall Damage Taken",
             20f,
             "Percent fall damage taken while holding this item.",
-            new List<string>()
-            {
-                "ITEM_PROPELLERHAT_DESC"
-            }
+            ["ITEM_PROPELLERHAT_DESC"]
         );
         public static float movespeedBonusPercent = movespeedBonus.Value / 100f;
         public static float fallDamageTakenPercent = fallDamageTaken.Value / 100f;
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("PropellerHat", [ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier1);
 
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "PROPELLERHAT";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("PropellerHat.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("PropellerHat.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Utility,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
         public static void Hooks()
         {
-            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
-            {
-                orig(self);
-
-                if (self && self.inventory)
-                {
-                    if (self.inventory.GetItemCountEffective(itemDef) > 0)
-                    {
-                        Utils.ForceRecalculate(self);
-                    }
-                }
-            };
+            Utilities.AddRecalculateOnFrameHook(itemDef);
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
@@ -109,7 +56,7 @@ namespace TooManyItems
                 }
             };
 
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (victimInfo.inventory == null || victimInfo.body == null) return;
 

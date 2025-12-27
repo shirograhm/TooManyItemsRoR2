@@ -1,119 +1,63 @@
 ﻿using R2API;
 using RoR2;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Equip
 {
     internal class TatteredScroll
     {
         public static EquipmentDef equipmentDef;
         public static BuffDef curseDebuff;
 
-        public static DamageColorIndex damageColor = DamageColorAPI.RegisterDamageColor(Utils.TATTERED_SCROLL_COLOR);
+        public static DamageColorIndex damageColor = DamageColorManager.RegisterDamageColor(Utilities.TATTERED_SCROLL_COLOR);
 
-        // On activation, curse all enemies around you for a short duration. Killing cursed enemies grants additional gold.
+        // On activation, curse all enemies around you for a short duration. Killing cursed enemies drops treasure that grants additional gold.
         public static ConfigurableValue<bool> isEnabled = new(
             "Equipment: Tattered Scroll",
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<int> curseDistance = new(
             "Equipment: Tattered Scroll",
             "Curse Distance",
             60,
             "Max distance that the curse can reach.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<float> curseDuration = new(
             "Equipment: Tattered Scroll",
             "Curse Duration",
             10f,
             "Duration of the curse.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<int> goldGranted = new(
             "Equipment: Tattered Scroll",
             "Gold Granted",
             20,
             "Gold gained for each cursed enemy killed.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Tattered Scroll",
             "Cooldown",
             100,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_TATTEREDSCROLL_DESC"
-            }
+            ["EQUIPMENT_TATTEREDSCROLL_DESC"]
         );
 
         internal static void Init()
         {
-            GenerateEquipment();
-            GenerateBuff();
+            equipmentDef = ItemManager.GenerateEquipment("TatteredScroll", equipCooldown.Value);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomEquipment(equipmentDef, displayRules));
-
+            curseDebuff = ItemManager.GenerateBuff("Siphon", AssetManager.bundle.LoadAsset<Sprite>("TatteredCurse.png"), isDebuff: true);
             ContentAddition.AddBuffDef(curseDebuff);
 
             Hooks();
-        }
-
-        private static void GenerateEquipment()
-        {
-            equipmentDef = ScriptableObject.CreateInstance<EquipmentDef>();
-
-            equipmentDef.name = "TATTEREDSCROLL";
-            equipmentDef.AutoPopulateTokens();
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("TatteredScroll.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            equipmentDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("TatteredScroll.png");
-            equipmentDef.pickupModelPrefab = prefab;
-
-            equipmentDef.appearsInMultiPlayer = true;
-            equipmentDef.appearsInSinglePlayer = true;
-            equipmentDef.canBeRandomlyTriggered = true;
-            equipmentDef.enigmaCompatible = true;
-            equipmentDef.canDrop = true;
-
-            equipmentDef.cooldown = equipCooldown.Value;
-        }
-
-        private static void GenerateBuff()
-        {
-            curseDebuff = ScriptableObject.CreateInstance<BuffDef>();
-
-            curseDebuff.name = "Siphon";
-            curseDebuff.iconSprite = AssetHandler.bundle.LoadAsset<Sprite>("TatteredCurse.png");
-            curseDebuff.canStack = false;
-            curseDebuff.isHidden = false;
-            curseDebuff.isDebuff = true;
-            curseDebuff.isCooldown = false;
         }
 
         public static void Hooks()
@@ -131,12 +75,9 @@ namespace TooManyItems
             {
                 if (!NetworkServer.active) return;
 
-                if (damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
+                if (damageReport.attackerBody && damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
                 {
-                    if (damageReport.attackerMaster)
-                    {
-                        damageReport.attackerMaster.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGranted.Value));
-                    }
+                    SpawnGoldPack(damageReport.attackerBody, damageReport.victimBody);
                 }
             };
         }
@@ -174,6 +115,36 @@ namespace TooManyItems
             }
 
             return true;
+        }
+
+        private static void SpawnGoldPack(CharacterBody attacker, CharacterBody victim)
+        {
+            GameObject goldPackObject = Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BonusMoneyPack"), victim.transform.position, Random.rotation);
+            if (goldPackObject)
+            {
+                Collider component = goldPackObject.GetComponent<Collider>();
+                if (component)
+                {
+                    TeamFilter teamComponent = goldPackObject.GetComponent<TeamFilter>();
+                    if (teamComponent && attacker.teamComponent)
+                    {
+                        teamComponent.teamIndex = attacker.teamComponent.teamIndex;
+                    }
+                    MoneyPickup moneyPickup = goldPackObject.GetComponentInChildren<MoneyPickup>();
+                    if (moneyPickup)
+                    {
+                        moneyPickup.baseGoldReward = Mathf.RoundToInt(goldGranted.Value * Utilities.GetDifficultyAsMultiplier());
+                        Physics.IgnoreCollision(component, moneyPickup.GetComponent<Collider>());
+                    }
+                    GravitatePickup gravitatePickup = goldPackObject.GetComponentInChildren<GravitatePickup>();
+                    if (gravitatePickup)
+                    {
+                        Physics.IgnoreCollision(component, gravitatePickup.GetComponent<Collider>());
+                    }
+
+                    NetworkServer.Spawn(goldPackObject);
+                }
+            }
         }
     }
 }

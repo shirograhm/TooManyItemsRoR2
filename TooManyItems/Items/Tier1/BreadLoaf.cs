@@ -1,13 +1,12 @@
-﻿using R2API;
-using R2API.Networking;
+﻿using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
-using System.Collections.Generic;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier1
 {
     internal class BreadLoaf
     {
@@ -19,40 +18,28 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
         public static ConfigurableValue<int> goldGainOnKill = new(
             "Item: Loaf of Bread",
             "Gold On Kill",
             1,
             "Gold gained after killing an enemy, up to a set number of times (see next config).",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
         public static ConfigurableValue<int> killsNeededToScrap = new(
             "Item: Loaf of Bread",
             "Kills Needed",
             25,
             "How many kills are required per item stack to scrap the item and gain reward gold.",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
         public static ConfigurableValue<int> goldGainOnScrap = new(
             "Item: Loaf of Bread",
             "Gold On Scrap",
             25,
             "Gold gained after killing enough enemies (scales with difficulty). This item turns into scrap once this happens.",
-            new List<string>()
-            {
-                "ITEM_BREADLOAF_DESC"
-            }
+            ["ITEM_BREADLOAF_DESC"]
         );
 
         public class Statistics : MonoBehaviour
@@ -119,46 +106,11 @@ namespace TooManyItems
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("BreadLoaf", [ItemTag.AIBlacklist, ItemTag.Utility, ItemTag.OnKillEffect], ItemTier.Tier1);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
             Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BREADLOAF";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier1);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BreadLoaf.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BreadLoaf.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.AIBlacklist,
-
-                ItemTag.Utility,
-
-                ItemTag.OnKillEffect
-                // CANNOT BE TEMPORARY
-            };
         }
 
         public static void Hooks()
@@ -194,14 +146,16 @@ namespace TooManyItems
                                 );
                                 atkBody.inventory.RemoveItemPermanent(itemDef);
                                 atkBody.inventory.GiveItemPermanent(RoR2Content.Items.ScrapWhite);
-                                atkBody.master.GiveMoney(Utils.ScaleGoldWithDifficulty(goldGainOnScrap.Value));
+
+                                Utilities.SendGoldOrbAndEffect(Utilities.ScaleGoldWithDifficulty(goldGainOnScrap.Value), atkBody.corePosition, atkBody.mainHurtBox);
+
                                 // Reset the kills counter
                                 stats.KillsCounter = 0;
                             }
                             else
                             {
                                 // Gain gold on kill
-                                atkBody.master.GiveMoney(Convert.ToUInt32(goldGainOnKill.Value * itemCount));
+                                Utilities.SendGoldOrbAndEffect(Convert.ToUInt32(goldGainOnKill.Value * itemCount), damageReport.damageInfo.position, atkBody.mainHurtBox);
                             }
                         }
                     }

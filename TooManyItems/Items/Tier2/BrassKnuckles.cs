@@ -1,9 +1,8 @@
-﻿using R2API;
-using RoR2;
-using System.Collections.Generic;
+﻿using RoR2;
+using TooManyItems.Managers;
 using UnityEngine;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Tier2
 {
     internal class BrassKnuckles
     {
@@ -15,20 +14,14 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_BRASSKNUCKLES_DESC"
-            }
+            ["ITEM_BRASSKNUCKLES_DESC"]
         );
         public static ConfigurableValue<float> heavyHitCap = new(
             "Item: Brass Knuckles",
             "Heavy Hit Threshold",
             400f,
             "Minimum amount of damage dealt necessary to classify a hit as heavy.",
-            new List<string>()
-            {
-                "ITEM_BRASSKNUCKLES_DESC"
-            }
+            ["ITEM_BRASSKNUCKLES_DESC"]
         );
         public static float heavyHitCapPercent = heavyHitCap.Value / 100f;
 
@@ -37,65 +30,33 @@ namespace TooManyItems
             "Heavy Hit Bonus",
             25f,
             "Bonus percent damage dealt by heavy hits for each stack of this item.",
-            new List<string>()
-            {
-                "ITEM_BRASSKNUCKLES_DESC"
-            }
+            ["ITEM_BRASSKNUCKLES_DESC"]
         );
         public static float heavyHitBonusPercent = heavyHitBonus.Value / 100f;
 
         internal static void Init()
         {
-            GenerateItem();
-
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
+            itemDef = ItemManager.GenerateItem("BrassKnuckles", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
             Hooks();
         }
 
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "BRASSKNUCKLES";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Tier2);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("BrassKnuckles.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("BrassKnuckles.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-
-            itemDef.tags = new ItemTag[]
-            {
-                ItemTag.Damage,
-
-                ItemTag.CanBeTemporary
-            };
-        }
-
         public static void Hooks()
         {
-            GenericGameEvents.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
+            GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 CharacterBody attackerBody = attackerInfo.body;
                 CharacterBody victimBody = victimInfo.body;
                 if (attackerBody && victimBody && attackerBody.inventory)
                 {
                     int itemCount = attackerBody.inventory.GetItemCountEffective(itemDef);
-                    if (itemCount > 0 && (attackerBody.damage * heavyHitCapPercent) <= damageInfo.damage)
+                    if (itemCount > 0 && attackerBody.damage * heavyHitCapPercent <= damageInfo.damage)
                     {
-                        damageInfo.damage *= 1 + (heavyHitBonusPercent * itemCount);
+                        damageInfo.damage *= 1 + Utilities.GetLinearStacking(heavyHitBonusPercent, itemCount);
                         damageInfo.damageType |= DamageType.Stun1s;
+                        damageInfo.damageColorIndex = DamageColorIndex.Luminous;
+
+                        EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ImpactStunGrenade"), damageInfo.position, -damageInfo.force, transmit: true);
                     }
                 }
             };

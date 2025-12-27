@@ -1,10 +1,9 @@
-﻿using R2API;
-using RoR2;
-using System.Collections.Generic;
+﻿using RoR2;
+using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace TooManyItems
+namespace TooManyItems.Items.Lunar
 {
     internal class DoubleDown
     {
@@ -16,68 +15,29 @@ namespace TooManyItems
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            new List<string>()
-            {
-                "ITEM_DOUBLEDOWN_DESC"
-            }
+            ["ITEM_DOUBLEDOWN_DESC"]
         );
         public static ConfigurableValue<float> upFrontDamage = new(
             "Item: Double Down",
             "Total Up Front",
             200f,
             "Percentage of the total DoT damage taken up front.",
-            new List<string>()
-            {
-                "ITEM_DOUBLEDOWN_DESC"
-            }
+            ["ITEM_DOUBLEDOWN_DESC"]
         );
         public static ConfigurableValue<float> upFrontDamageReduction = new(
             "Item: Double Down",
             "Damage Reduced Per Stack",
             12f,
             "Percentage of the up front damage reduced with stacks.",
-            new List<string>()
-            {
-                "ITEM_DOUBLEDOWN_DESC"
-            }
+            ["ITEM_DOUBLEDOWN_DESC"]
         );
         public static float upFrontDamagePercent = upFrontDamage.Value / 100f;
         public static float upFrontDamageReductionPercent = upFrontDamageReduction.Value / 100f;
 
         internal static void Init()
         {
-            GenerateItem();
+            itemDef = ItemManager.GenerateItem("DoubleDown", [ItemTag.Utility], ItemTier.Lunar);
 
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
-            ItemAPI.Add(new CustomItem(itemDef, displayRules));
-
-            Hooks();
-        }
-
-        private static void GenerateItem()
-        {
-            itemDef = ScriptableObject.CreateInstance<ItemDef>();
-
-            itemDef.name = "DOUBLEDOWN";
-            itemDef.AutoPopulateTokens();
-
-            Utils.SetItemTier(itemDef, ItemTier.Lunar);
-
-            GameObject prefab = AssetHandler.bundle.LoadAsset<GameObject>("DoubleDown.prefab");
-            ModelPanelParameters modelPanelParameters = prefab.AddComponent<ModelPanelParameters>();
-            modelPanelParameters.focusPointTransform = prefab.transform;
-            modelPanelParameters.cameraPositionTransform = prefab.transform;
-            modelPanelParameters.maxDistance = 10f;
-            modelPanelParameters.minDistance = 5f;
-
-            itemDef.pickupIconSprite = AssetHandler.bundle.LoadAsset<Sprite>("DoubleDown.png");
-            itemDef.pickupModelPrefab = prefab;
-            itemDef.canRemove = true;
-            itemDef.hidden = false;
-        }
-
-        public static void Hooks()
-        {
             On.RoR2.DotController.InflictDot_refInflictDotInfo += DotController_InflictDot_refInflictDotInfo;
         }
 
@@ -95,7 +55,7 @@ namespace TooManyItems
                         if (itemCount > 0)
                         {
                             float dotDamage = info.totalDamage ?? 0f;
-                            float stackedDamage = Utils.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
+                            float stackedDamage = Utilities.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
                             float totalDamageCalc = dotDamage * stackedDamage;
 
                             // Roll for crit if the attacker body exists
