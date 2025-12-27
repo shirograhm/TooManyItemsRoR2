@@ -193,17 +193,18 @@ namespace TooManyItems.Items.Lunar
             public override void Begin()
             {
                 base.duration = base.distanceToTarget / speed;
+                targetInventory = targetBody.inventory;
+
+                GameObject spiritOrbPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/ExpOrb");
+                if (spiritOrbPrefab) spiritOrbPrefab.transform.localScale = Vector3.one * this.stacks;
+
                 EffectData effectData = new()
                 {
                     origin = origin,
                     genericFloat = base.duration
                 };
                 effectData.SetHurtBoxReference(target);
-                GameObject spiritOrbPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/ExpOrb");
-                spiritOrbPrefab.transform.localScale = Vector3.one * this.stacks;
                 EffectManager.SpawnEffect(spiritOrbPrefab, effectData, transmit: true);
-
-                targetInventory = targetBody.inventory;
             }
 
             public override void OnArrival()
