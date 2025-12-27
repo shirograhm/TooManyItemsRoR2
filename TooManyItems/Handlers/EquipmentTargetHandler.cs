@@ -1,7 +1,7 @@
 ﻿using RoR2;
 using UnityEngine;
 
-namespace TooManyItems.Helpers
+namespace TooManyItems.Handlers
 {
     class EquipmentTargetHandler : MonoBehaviour
     {
@@ -22,17 +22,14 @@ namespace TooManyItems.Helpers
 
         public void ConfigureTargetFinder(EquipmentSlot slot)
         {
-            if (search == null) search = new BullseyeSearch();
+            search ??= new BullseyeSearch();
 
             search.teamMaskFilter = TeamMask.allButNeutral;
             search.teamMaskFilter.RemoveTeam(slot.characterBody.teamComponent.teamIndex);
             search.sortMode = BullseyeSearch.SortMode.Angle;
             search.filterByLoS = true;
 
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-            Ray ray = CameraRigController.ModifyAimRayIfApplicable(slot.GetAimRay(), slot.gameObject, out float num);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-
+            Ray ray = CameraRigController.ModifyAimRayIfApplicable(slot.GetAimRay(), slot.gameObject, out _);
             search.searchOrigin = ray.origin;
             search.searchDirection = ray.direction;
             search.maxDistanceFilter = 240f;
