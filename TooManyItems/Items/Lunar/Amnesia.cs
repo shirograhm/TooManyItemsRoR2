@@ -41,10 +41,7 @@ namespace TooManyItems.Items.Lunar
                     {
                         Vector3 vector = vicBody.footPosition;
                         if (vicBody.master.killedByUnsafeArea)
-                        {
                             vector = TeleportHelper.FindSafeTeleportDestination(vicBody.footPosition, vicBody, RoR2Application.rng) ?? vicBody.footPosition;
-                        }
-                        RandomizePlayerItems(vicBody.master);
 
                         // Consume stack of Amnesia
                         vicBody.master.inventory.RemoveItemPermanent(itemDef, 1);
@@ -55,6 +52,7 @@ namespace TooManyItems.Items.Lunar
                             depletedDef.itemIndex,
                             CharacterMasterNotificationQueue.TransformationType.Default
                         );
+                        RandomizePlayerItems(vicBody.master);
 
                         vicBody.master.Respawn(vector, Quaternion.Euler(0f, UnityEngine.Random.Range(0f, 360f), 0f), wasRevivedMidStage: true);
                         vicBody.AddTimedBuff(RoR2Content.Buffs.Immune, 3f);
