@@ -162,7 +162,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Permafrost</b>
         </td>
         <td>
-            Dealing damage has a <b>1.5%</b> (+1.5% per stack) chance to freeze enemies. You deal <b>45%</b> (+45% per stack) <b>bonus damage</b> to frozen enemies.
+            Dealing skill damage has a <b>5%</b> chance to freeze enemies. You deal <b>50%</b> (+100% per stack) <b>bonus damage</b> to frozen enemies.
         </td>
     </tr>
     <tr>
@@ -398,13 +398,13 @@ The items in this mod are configurable. To edit, run the game once with the mod 
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/NJnYRyl.png" alt="Crown of Vanity" width="192"/>
+            <img src="https://i.imgur.com/0dX1lZ7.png" alt="Crown of Vanity" width="192"/>
         </td>
         <td>
             <b>Crown of Vanity</b>
         </td>
         <td>
-            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>3%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. [<i>Cooldown: 70s</i>]
+            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>2.5%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. [<i>Cooldown: 70s</i>]
         </td>
     </tr>
     <tr>
