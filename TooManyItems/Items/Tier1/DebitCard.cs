@@ -27,7 +27,7 @@ namespace TooManyItems.Items.Tier1
 
         internal static void Init()
         {
-            itemDef = ItemManager.GenerateItem("DebitCard", [ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier1);
+            itemDef = ItemManager.GenerateItem("DebitCard", [ItemTag.AIBlacklist, ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier1);
 
             Hooks();
         }

@@ -35,7 +35,7 @@ namespace TooManyItems.Items.Lunar
 
         internal static void Init()
         {
-            itemDef = ItemManager.GenerateItem("AncientCoin", [ItemTag.Damage, ItemTag.Utility], ItemTier.Lunar);
+            itemDef = ItemManager.GenerateItem("AncientCoin", [ItemTag.AIBlacklist, ItemTag.Damage, ItemTag.Utility], ItemTier.Lunar);
 
             Hooks();
         }
