@@ -173,7 +173,7 @@
     "PERMAFROST": "Вечная Мерзлота",
     "ITEM_PERMAFROST_NAME": "Вечная Мерзлота",
     "ITEM_PERMAFROST_PICKUP": "Нанесение урона имеет шанс заморозить врагов. Вы наносите дополнительный урон замороженным врагам.",
-    "ITEM_PERMAFROST_DESC": "Нанесение урона имеет <style=cIsUtility>{Freeze Chance}%</style> <style=cStack>(+{Freeze Chance}% за шт.)</style> шанс заморозить врагов. Вы наносите <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage}% за шт.)</style> дополнительного урона замороженным врагам.",
+    "ITEM_PERMAFROST_DESC": "Нанесение урона имеет <style=cIsUtility>{Freeze Chance}%</style> шанс заморозить врагов. Вы наносите <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage Extra Stacks}% за шт.)</style> дополнительного урона замороженным врагам.",
     "ITEM_PERMAFROST_LORE": "",
     "RUSTEDTROWEL": "Ржавая лопатка",
     "ITEM_RUSTEDTROWEL_NAME": "Ржавая лопатка",

@@ -95,6 +95,11 @@ namespace TooManyItems
             return body1.teamComponent && body2.teamComponent && body1.teamComponent.teamIndex == body2.teamComponent.teamIndex;
         }
 
+        public static bool IsSkillDamage(DamageInfo damageInfo)
+        {
+            return damageInfo.damageType == DamageTypeCombo.GenericPrimary || damageInfo.damageType == DamageTypeCombo.GenericSecondary || damageInfo.damageType == DamageTypeCombo.GenericUtility || damageInfo.damageType == DamageTypeCombo.GenericSpecial;
+        }
+
         public static uint ScaleGoldWithDifficulty(int goldGranted)
         {
             return Convert.ToUInt32(goldGranted * (1 + 50 * GetDifficultyAsPercentage()));
@@ -168,7 +173,7 @@ namespace TooManyItems
             EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect"), effectData, transmit: true);
         }
 
-        internal static void SendGoldOrbAndEffect(uint goldGain, Vector3 origin, HurtBox target)
+        public static void SendGoldOrbAndEffect(uint goldGain, Vector3 origin, HurtBox target)
         {
             OrbManager.instance.AddOrb(new GoldOrb()
             {

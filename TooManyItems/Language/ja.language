@@ -178,7 +178,7 @@
     "PERMAFROST": "永久凍土",
     "ITEM_PERMAFROST_NAME": "永久凍土",
     "ITEM_PERMAFROST_PICKUP": "ダメージを与えると、一定確率で敵を凍らせる。凍った敵はボーナスのダメージを受ける。",
-    "ITEM_PERMAFROST_DESC": "ダメージを与えると、<style=cIsUtility>{Freeze Chance}%</style><style=cStack>（スタックごとに+{Freeze Chance}%）</style>の確率で敵を凍らせる。凍った敵には<style=cIsDamage>{Bonus Frozen Damage}%</style><style=cStack>（スタックごとに+{Bonus Frozen Damage}%）</style>の追加ダメージを与える。",
+    "ITEM_PERMAFROST_DESC": "ダメージを与えると、<style=cIsUtility>{Freeze Chance}%</style>の確率で敵を凍らせる。凍った敵には<style=cIsDamage>{Bonus Frozen Damage}%</style><style=cStack>（スタックごとに+{Bonus Frozen Damage Extra Stacks}%）</style>の追加ダメージを与える。",
     "ITEM_PERMAFROST_LORE": "",
     "RUSTEDTROWEL": "錆びたこて",
     "ITEM_RUSTEDTROWEL_NAME": "錆びたこて",
