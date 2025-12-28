@@ -31,7 +31,7 @@ namespace TooManyItems.Items.Equip.Lunar
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            3f,
+            2.5f,
             "Percent base damage lost for each stack of Hubris.",
             ["EQUIPMENT_VANITY_DESC"]
         );
@@ -41,7 +41,7 @@ namespace TooManyItems.Items.Equip.Lunar
             "Equipment: Crown of Vanity",
             "Damage Dealt",
             150f,
-            "Percent damage dealt for each stack of Hubris accrued.",
+            "Percent BASE damage dealt for each stack of Hubris accrued.",
             ["EQUIPMENT_VANITY_DESC"]
         );
         public static ConfigurableValue<float> coefficient = new(
@@ -72,8 +72,6 @@ namespace TooManyItems.Items.Equip.Lunar
             vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utilities.VANITY_COLOR;
 
             implosionEffectObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteIce/AffixWhiteExplosion.prefab").WaitForCompletion();
-            // implosionEffectObject = Assets.bundle.LoadAsset<GameObject>("VanityImplosionEffect.prefab");
-            ContentAddition.AddEffect(implosionEffectObject);
 
             damageType = DamageAPI.ReserveDamageType();
 
@@ -170,20 +168,20 @@ namespace TooManyItems.Items.Equip.Lunar
             if (user && targetEnemy && targetEnemy.healthComponent)
             {
                 int buffCount = user.GetBuffCount(hubrisDebuff);
-
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
+                // Remove Hubris stacks and spawn the implosion effect
                 user.SetBuffCount(hubrisDebuff.buffIndex, 0);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
-
                 EffectManager.SpawnEffect(implosionEffectObject, new EffectData
                 {
                     origin = targetEnemy.corePosition,
-                    scale = 0.2f * buffCount + targetEnemy.radius,
+                    scale = Utilities.GetLinearStacking(0.15f, buffCount) + targetEnemy.radius,
+                    rootObject = targetEnemy.gameObject,
                     color = Utilities.VANITY_COLOR
                 },
                 true);
-
-                float damageAmount = user.damage * damageDealtPercentPerStack * buffCount;
+                // Ensure next section uses updated stats after buff removal
+                Utilities.ForceRecalculate(user);
+                // Deal damage based on stacks removed
+                float damageAmount = user.damage * Utilities.GetLinearStacking(damageDealtPercentPerStack, buffCount);
                 DamageInfo damageInfo = new()
                 {
                     damage = damageAmount,
@@ -196,6 +194,7 @@ namespace TooManyItems.Items.Equip.Lunar
                     procChainMask = new ProcChainMask(),
                     damageType = DamageType.BypassOneShotProtection | DamageType.BypassArmor | DamageType.BypassBlock | DamageType.Silent
                 };
+                // Mark the damage as coming from Vanity to avoid reapplying Hubris
                 damageInfo.AddModdedDamageType(damageType);
                 targetEnemy.healthComponent.TakeDamage(damageInfo);
 

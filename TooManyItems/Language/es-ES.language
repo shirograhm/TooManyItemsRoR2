@@ -178,7 +178,7 @@
     "PERMAFROST": "Permafrost",
     "ITEM_PERMAFROST_NAME": "Permafrost",
     "ITEM_PERMAFROST_PICKUP": "Causar daño tiene una chance de congelar enemigos. Inflige daño adicional a enemigos congelados..",
-    "ITEM_PERMAFROST_DESC": "Infligir daño tiene un <style=cIsUtility>{Freeze Chance}%</style> <style=cStack>(+{Freeze Chance}% por stack)</style> de chance de congelar enemigos. Infliges <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage}% por stack)</style> más de daño a enemigos congelados.",
+    "ITEM_PERMAFROST_DESC": "Infligir daño tiene un <style=cIsUtility>{Freeze Chance}%</style> de chance de congelar enemigos. Infliges <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage Extra Stacks}% por stack)</style> más de daño a enemigos congelados.",
     "ITEM_PERMAFROST_LORE": "",
     "RUSTEDTROWEL": "Paleta oxidada",
     "ITEM_RUSTEDTROWEL_NAME": "Paleta oxidada",

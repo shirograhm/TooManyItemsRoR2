@@ -178,7 +178,7 @@
     "PERMAFROST": "Geloeterno",
     "ITEM_PERMAFROST_NAME": "Geloeterno",
     "ITEM_PERMAFROST_PICKUP": "Causar dano tem uma chance de congelar inimigos. Cause dano adicional a inimigos congelados.",
-    "ITEM_PERMAFROST_DESC": "Causar dano tem <style=cIsUtility>{Freeze Chance}%</style> <style=cStack>(+{Freeze Chance}% por acúmulo)</style> de chance de congelar inimigos. Você causa <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage}% por acúmulo)</style> de dano adicional a inimigos congelados.",
+    "ITEM_PERMAFROST_DESC": "Causar dano tem <style=cIsUtility>{Freeze Chance}%</style> de chance de congelar inimigos. Você causa <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage Extra Stacks}% por acúmulo)</style> de dano adicional a inimigos congelados.",
     "ITEM_PERMAFROST_LORE": "",
     "RUSTEDTROWEL": "Espátula Enferrujada",
     "ITEM_RUSTEDTROWEL_NAME": "Espátula Enferrujada",

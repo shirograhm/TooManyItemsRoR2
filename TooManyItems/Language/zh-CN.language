@@ -173,7 +173,7 @@
     "PERMAFROST": "永霜冻土",
     "ITEM_PERMAFROST_NAME": "永霜冻土",
     "ITEM_PERMAFROST_PICKUP": "造成伤害有几率冻结敌人。对被冰冻的敌人造成额外伤害。",
-    "ITEM_PERMAFROST_DESC": "造成伤害有 <style=cIsUtility>{Freeze Chance}%</style> <style=cStack>(+{Freeze Chance}% 每层)</style> 几率冻结敌人。对被冰冻的敌人造成额外 <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage}% 每层)</style> 伤害。",
+    "ITEM_PERMAFROST_DESC": "造成伤害有 <style=cIsUtility>{Freeze Chance}%</style> 几率冻结敌人。对被冰冻的敌人造成额外 <style=cIsDamage>{Bonus Frozen Damage}%</style> <style=cStack>(+{Bonus Frozen Damage Extra Stacks}% 每层)</style> 伤害。",
     "ITEM_PERMAFROST_LORE": "",
     "RUSTEDTROWEL": "生锈的泥铲",
     "ITEM_RUSTEDTROWEL_NAME": "生锈的泥铲",

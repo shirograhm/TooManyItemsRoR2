@@ -21,19 +21,27 @@ namespace TooManyItems.Items.Tier3
         public static ConfigurableValue<float> freezeChance = new(
             "Item: Permafrost",
             "Freeze Chance",
-            1.5f,
+            5f,
             "Chance to apply freeze when dealing damage.",
             ["ITEM_PERMAFROST_DESC"]
         );
         public static ConfigurableValue<float> frozenDamageMultiplier = new(
             "Item: Permafrost",
             "Bonus Frozen Damage",
-            45f,
+            50f,
             "Percent bonus damage dealt to frozen enemies.",
+            ["ITEM_PERMAFROST_DESC"]
+        );
+        public static ConfigurableValue<float> frozenDamageMultiplierExtraStacks = new(
+            "Item: Permafrost",
+            "Bonus Frozen Damage Extra Stacks",
+            100f,
+            "Percent bonus damage dealt to frozen enemies with extra stacks.",
             ["ITEM_PERMAFROST_DESC"]
         );
         public static float freezeChancePercent = freezeChance.Value / 100.0f;
         public static float frozenDamageMultiplierPercent = frozenDamageMultiplier.Value / 100.0f;
+        public static float frozenDamageMultiplierExtraStacksPercent = frozenDamageMultiplierExtraStacks.Value / 100.0f;
 
         internal static void Init()
         {
@@ -55,14 +63,18 @@ namespace TooManyItems.Items.Tier3
                     int count = attackerBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && attackerBody.master)
                     {
-                        if (Util.CheckRoll(Utilities.GetHyperbolicStacking(freezeChancePercent, count) * 100f * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
+                        // If damage is from skills and not on the same team, apply freeze
+                        if (!Utilities.OnSameTeam(attackerBody, victimBody) && Utilities.IsSkillDamage(damageInfo))
                         {
-                            damageInfo.damageType |= DamageType.Freeze2s;
+                            if (Util.CheckRoll0To1(freezeChancePercent * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
+                            {
+                                damageInfo.damageType |= DamageType.Freeze2s;
+                            }
                         }
 
                         if (victimBody.healthComponent.isInFrozenState)
                         {
-                            damageInfo.damage *= 1 + frozenDamageMultiplierPercent * count;
+                            damageInfo.damage *= 1 + Utilities.GetLinearStacking(frozenDamageMultiplierPercent, frozenDamageMultiplierExtraStacksPercent, count);
                             damageInfo.damageColorIndex = damageColor;
                         }
                     }

@@ -178,7 +178,7 @@
     "PERMAFROST": "영구동토층",
     "ITEM_PERMAFROST_NAME": "영구동토층",
     "ITEM_PERMAFROST_PICKUP": "피해를 입힐 때 적을 얼릴 수가 있습니다. 얼어붙은 적에게 추가 피해를 입힙니다.",
-    "ITEM_PERMAFROST_DESC": "적에게 피해를 입힐 때 <style=cIsUtility>{Freeze Chance}%</style><style=cStack>(중첩당 +{Freeze Chance}%)</style>확률로 적을 얼립니다. 얼어붙은 적에게 <style=cIsDamage>{Bonus Frozen Damage}%</style><style=cStack>(중첩당 +{Bonus Frozen Damage}%)</style> 추가 피해를 입힙니다.",
+    "ITEM_PERMAFROST_DESC": "적에게 피해를 입힐 때 <style=cIsUtility>{Freeze Chance}%</style>확률로 적을 얼립니다. 얼어붙은 적에게 <style=cIsDamage>{Bonus Frozen Damage}%</style><style=cStack>(중첩당 +{Bonus Frozen Damage Extra Stacks}%)</style> 추가 피해를 입힙니다.",
     "ITEM_PERMAFROST_LORE": "",
     "RUSTEDTROWEL": "녹슨 모종삽",
     "ITEM_RUSTEDTROWEL_NAME": "녹슨 모종삽",

@@ -50,7 +50,7 @@ namespace TooManyItems.Items.Tier2
 
         internal static void Init()
         {
-            itemDef = ItemManager.GenerateItem("HolyWater", [ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier2);
+            itemDef = ItemManager.GenerateItem("HolyWater", [ItemTag.AIBlacklist, ItemTag.Utility, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
             Hooks();
         }
