@@ -63,7 +63,7 @@ namespace TooManyItems.Items.Tier3
                     int count = attackerBody.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && attackerBody.master)
                     {
-                        // If damage is from skills, not on the same team, roll to freeze
+                        // If damage is from skills and not on the same team, apply freeze
                         if (!Utilities.OnSameTeam(attackerBody, victimBody) && Utilities.IsSkillDamage(damageInfo))
                         {
                             if (Util.CheckRoll0To1(freezeChancePercent * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
