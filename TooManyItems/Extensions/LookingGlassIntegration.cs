@@ -241,8 +241,8 @@ namespace TooManyItems.Extensions
                             return
                             [
                                 // Check if we can calculate using luck
-                                master ? Utilities.GetChanceAfterLuck(Utilities.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount), master.luck) : Utilities.GetHyperbolicStacking(Permafrost.freezeChancePercent, itemCount),
-                                Utilities.GetLinearStacking(Permafrost.frozenDamageMultiplierPercent, itemCount),
+                                master ? Utilities.GetChanceAfterLuck(Permafrost.freezeChancePercent, master.luck) : Permafrost.freezeChancePercent,
+                                Utilities.GetLinearStacking(Permafrost.frozenDamageMultiplierPercent, Permafrost.frozenDamageMultiplierExtraStacksPercent, itemCount),
                             ];
                         });
                 if (Photodiode.isEnabled.Value)

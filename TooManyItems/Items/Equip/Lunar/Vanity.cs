@@ -31,7 +31,7 @@ namespace TooManyItems.Items.Equip.Lunar
         public static ConfigurableValue<float> damageLostPerStack = new(
             "Equipment: Crown of Vanity",
             "Base Damage Lost",
-            2f,
+            2.5f,
             "Percent base damage lost for each stack of Hubris.",
             ["EQUIPMENT_VANITY_DESC"]
         );
@@ -173,7 +173,7 @@ namespace TooManyItems.Items.Equip.Lunar
                 EffectManager.SpawnEffect(implosionEffectObject, new EffectData
                 {
                     origin = targetEnemy.corePosition,
-                    scale = 0.2f * buffCount + targetEnemy.radius,
+                    scale = Utilities.GetLinearStacking(0.15f, buffCount) + targetEnemy.radius,
                     rootObject = targetEnemy.gameObject,
                     color = Utilities.VANITY_COLOR
                 },
