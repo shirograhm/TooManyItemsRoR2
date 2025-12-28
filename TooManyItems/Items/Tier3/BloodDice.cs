@@ -150,9 +150,8 @@ namespace TooManyItems.Items.Tier3
                     if (count > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
-                        // Take Math.min incase item was dropped or removed from inventory
-                        component.PermanentHealth = Mathf.Min(component.PermanentHealth, maxHealthPerStack.Value * count);
-                        args.baseHealthAdd += component.PermanentHealth;
+                        // Take Math.min incase item was momentarily dropped or removed from inventory
+                        args.baseHealthAdd += Mathf.Min(component.PermanentHealth, Utilities.GetLinearStacking(maxHealthPerStack.Value, count));
                     }
                 }
             };
