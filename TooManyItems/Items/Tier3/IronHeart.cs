@@ -164,7 +164,7 @@ namespace TooManyItems.Items.Tier3
                         // Damage calculation takes minions into account
                         CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                         Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
-                        stats.TotalDamageDealt += amount;
+                        stats.TotalDamageDealt += amount *= proc.crit ? attackerBody.critMultiplier : 1f;
                     }
                 }
             };
