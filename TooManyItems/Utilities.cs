@@ -3,6 +3,7 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
 using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -182,7 +183,38 @@ namespace TooManyItems
                 target = target,
             });
             EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
+        }
 
+        public static bool IsItemTierRandomizable(ItemTier tier)
+        {
+            return tier == ItemTier.Tier1 || tier == ItemTier.Tier2 || tier == ItemTier.Tier3 || tier == ItemTier.Lunar;
+        }
+
+        public static ItemIndex GetRandomItemOfTier(ItemTier tier)
+        {
+            if (!IsItemTierRandomizable(tier)) throw new Exception("Invalid tier called for random item.");
+
+            switch (tier)
+            {
+                case ItemTier.Tier1:
+                    var arrayNoScrap = ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex).ToArray();
+                    int randomIndex = UnityEngine.Random.Range(0, arrayNoScrap.Count());
+                    return arrayNoScrap[randomIndex];
+                case ItemTier.Tier2:
+                    var arrayNoScrap2 = ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex).ToArray();
+                    int randomIndex2 = UnityEngine.Random.Range(0, arrayNoScrap2.Count());
+                    return arrayNoScrap2[randomIndex2];
+                case ItemTier.Tier3:
+                    var arrayNoScrap3 = ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex).ToArray();
+                    int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Count());
+                    return arrayNoScrap3[randomIndex3];
+                case ItemTier.Lunar:
+                    int randomIndexLunar = UnityEngine.Random.Range(0, ItemCatalog.lunarItemList.Count);
+                    return ItemCatalog.lunarItemList[randomIndexLunar];
+                default:
+                    Log.Error("Invalid tier called for random item.");
+                    return ItemIndex.None;
+            }
         }
     }
 }
