@@ -40,7 +40,7 @@
     "CRUCIFIX": "Crucifix",
     "ITEM_CRUCIFIX_NAME": "Crucifix",
     "ITEM_CRUCIFIX_PICKUP": "Reduce damage taken. <style=cDeath>Taking damage sets you on fire.</style>",
-    "ITEM_CRUCIFIX_DESC": "Reduce damage taken by <style=cIsUtility>{Damage Reduction}%</style>. <style=cDeath>Taking damage burns you for <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% per stack)</style></style> of your max health.</style>",
+    "ITEM_CRUCIFIX_DESC": "Reduce damage taken by <style=cIsUtility>{Damage Reduction}%</style>. <style=cDeath>Taking damage <style=cDeath>burns you</style> for <style=cIsHealth>{Burn Amount}% <style=cStack>(-{Burn Amount Reduction}% per stack)</style> max health.</style>",
     "ITEM_CRUCIFIX_LORE": "",
     "DOUBLEDOWN": "Double Down",
     "ITEM_DOUBLEDOWN_NAME": "Double Down",
