@@ -27,6 +27,11 @@
     "EQUIPMENT_TATTEREDSCROLL_DESC": "使用すると、<style=cIsUtility>{Curse Distance}m</style>以内の敵を<style=cIsUtility>{Curse Duration}秒間</style>呪う。呪われた敵を倒すと、<style=cHumanObjective>{Gold Granted}ゴールド</style>を獲得する。",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
 
+    "AMNESIA": "健忘症",
+    "ITEM_AMNESIA_NAME": "健忘症",
+    "ITEM_AMNESIA_PICKUP": "<style=cDeath>ある価格で</style>死から免れる。使用すると消費される。",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>死んだ時</style>、このアイテムが<style=cIsUtility>消費され</style> 、<style=cIsHealing>息を吹き返す</style>。<style=cIsHealing>復活直後の 3 秒は無敵になる</style>。復活時に、<style=cDeath>所持アイテムをランダム化する</style>。",
+    "ITEM_AMNESIA_LORE": "",
     "ANCIENTCOIN": "古代の硬貨",
     "ITEM_ANCIENTCOIN_NAME": "古代の硬貨",
     "ITEM_ANCIENTCOIN_PICKUP": "ゴールドが増え、<style=cDeath>受けるダメージも増える</style>。",

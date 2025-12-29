@@ -22,6 +22,11 @@
     "EQUIPMENT_TATTEREDSCROLL_DESC": "激活时，诅咒 <style=cIsUtility>{Curse Distance}m</style> 内的敌人 <style=cIsUtility>{Curse Duration} 秒</style>。杀死被诅咒的敌人会获得额外 <style=cHumanObjective>{Gold Granted} 金币</style>。",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
 
+    "AMNESIA": "健忘症",
+    "ITEM_AMNESIA_NAME": "健忘症",
+    "ITEM_AMNESIA_PICKUP": "<style=cDeath>付出代价才能</style>逃脱轮回。使用即消耗。",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>倒下后</style>，该物品将被<style=cIsUtility>消耗</style>，你将<style=cIsHealing>绝处逢生</style>并获得<style=cIsHealing>3秒的无敌时间</style>。复活后，<style=cDeath>重新随机生成你的物品</style>。",
+    "ITEM_AMNESIA_LORE": "",
     "ANCIENTCOIN": "古代硬币",
     "ITEM_ANCIENTCOIN_NAME": "古代硬币",
     "ITEM_ANCIENTCOIN_PICKUP": "获得更多金币。<style=cDeath>受到更多伤害</style>。",

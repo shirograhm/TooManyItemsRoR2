@@ -27,6 +27,11 @@
     "EQUIPMENT_TATTEREDSCROLL_DESC": "장비를 사용하면 <style=cIsUtility>반경 {Curse Distance}m</style>내의 있는 적에게 <style=cIsUtility>{Curse Duration}초</style>동안 저주를 부여합니다. 저주를 받은 적을 처치 할 시, <style=cHumanObjective>{Gold Granted}골드</style>를 추가로 얻습니다. 난이도에 따라 추가로 얻는 <style=cHumanObjective>골드</style>가 증가합니다.",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
 
+    "AMNESIA": "기억력 상실",
+    "ITEM_AMNESIA_NAME": "기억력 상실",
+    "ITEM_AMNESIA_PICKUP": "<style=cDeath>어떤 대가를</style>죽음을 피합니다. 사용 시 소비됩니다.",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>사망 시</style>에 이 아이템이 <style=cIsUtility>소모되어</style> <style=cIsHealing>다시 살아나고</style> <style=cIsHealing>3초 동안 무적 상태</style>가 됩니다. <style=cDeath>부활 시 아이템을 다시 뽑습니다</style>.",
+    "ITEM_AMNESIA_LORE": "",
     "ANCIENTCOIN": "고대 주화",
     "ITEM_ANCIENTCOIN_NAME": "고대 주화",
     "ITEM_ANCIENTCOIN_PICKUP": "더 많은 골드를 얻습니다. <style=cDeath>더 많은 피해를 입습니다.</style>",

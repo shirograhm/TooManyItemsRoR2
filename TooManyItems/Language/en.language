@@ -29,9 +29,9 @@
 
     "AMNESIA": "Amnesia",
     "ITEM_AMNESIA_NAME": "Amnesia",
-    "ITEM_AMNESIA_PICKUP": "Cheat death... <style=cDeath>for a price.</style> Consumed on use.",
+    "ITEM_AMNESIA_PICKUP": "Cheat death... <style=cDeath>for a price</style>. Consumed on use.",
     "ITEM_AMNESIA_DESC": "<style=cIsUtility>Upon death</style>, this item will be <style=cIsUtility>consumed</style> and you will <style=cIsHealing>return to life</style> with <style=cIsHealing>3 seconds of invulnerability</style>. On revive, <style=cDeath>randomize your items</style>.",
-    "ITEM_AMNESIA_LORE": "",
+    "ITEM_AMNESIA_LORE": "<style=cMono>$ DataScraper (v3.1.67 LTS)\n$ Scraping Research Log #29... done.\n$ Resolving... done.\n$ Error! Corrupted data detected.\n$ Show anyway? (y/N) y\n$ Attempting to display...</style>\n\n<style=cLunarObjective>UES Contact Light - Research Log #29</style>\n\n<style=cSub>Subject revived approximately 3 seconds after fatal trauma. Physiological recovery remains inconclusive; however, subject's motor function was returned immediately.\n\nInventory scan produced a full re-assortment of carried items. Tier distribution was preserved; object identities entirely replaced. Cross‑checks show statistically significant amounts of mismatch with pre‑death inventory.\n\nSubject insists they \"remember\" the replacements. Subject insists they always had them.\n\nVideo evidence disagrees.\nVideo █vidence is beginning to de-syn█.\n\nMemory cont█mination is now considered a primary side effect.\nContamination spread beyond subject is ██confirmed.\nUnconfirme█.\nUncon—█████—\nRecommend immediat█ suspen███n of ████ar██ █ ████ ██████ duck█ █████s! Th██ is—\n[FILE ERROR: ENTRY REWRITTEN DURING ACCESS]</style>\n",
     "DEPLETEDAMNESIA": "Amnesia (Consumed)",
     "ITEM_DEPLETEDAMNESIA_NAME": "Amnesia (Consumed)",
     "ITEM_DEPLETEDAMNESIA_PICKUP": "A spent item with no remaining power.",

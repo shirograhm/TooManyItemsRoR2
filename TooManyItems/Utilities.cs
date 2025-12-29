@@ -207,6 +207,11 @@ namespace TooManyItems
                 tier == ItemTier.VoidTier1 || tier == ItemTier.VoidTier2 || tier == ItemTier.VoidTier3;
         }
 
+        public static bool IsItemIndexScrap(ItemIndex itemIndex)
+        {
+            return itemIndex == RoR2Content.Items.ScrapWhite.itemIndex || itemIndex == RoR2Content.Items.ScrapGreen.itemIndex || itemIndex == RoR2Content.Items.ScrapRed.itemIndex;
+        }
+
         public static ItemIndex GetRandomItemOfTier(ItemTier tier)
         {
             if (!IsItemTierRandomizable(tier)) throw new Exception("Invalid tier " + tier.ToString() + " called for random item.");

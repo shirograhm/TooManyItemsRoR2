@@ -27,6 +27,11 @@
     "EQUIPMENT_TATTEREDSCROLL_DESC": "Ao ativar, amaldiçoe inimigos em um raio de <style=cIsUtility>{Curse Distance}m</style> por <style=cIsUtility>{Curse Duration} segundos</style>. Matar inimigos amaldiçoados garante <style=cHumanObjective>{Gold Granted} de ouro extra</style>.",
     "EQUIPMENT_TATTEREDSCROLL_LORE": "",
 
+    "AMNESIA": "Amnésia",
+    "ITEM_AMNESIA_NAME": "Amnésia",
+    "ITEM_AMNESIA_PICKUP": "Engane a morte <style=cDeath>por um preço</style>. O item será consumido após o uso.",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>Ao morrer</style>, esse item será <style=cIsUtility>consumido</style> e você <style=cIsHealing>retornará à vida</style> com <style=cIsHealing>3 segundos de invulnerabilidade</style>. Ao reviver, <style=cDeath>seu inventário será randomizado</style>.",
+    "ITEM_AMNESIA_LORE": "",
     "ANCIENTCOIN": "Moeda Antiga",
     "ITEM_ANCIENTCOIN_NAME": "Moeda Antiga",
     "ITEM_ANCIENTCOIN_PICKUP": "Ganhe mais ouro. <style=cDeath>Receba mais dano</style>.",
