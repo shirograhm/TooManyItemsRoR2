@@ -38,13 +38,14 @@ namespace TooManyItems.Items.Lunar
                 if (damageReport.victimBody && damageReport.victimBody.master)
                 {
                     CharacterMaster master = damageReport.victimBody.master;
+                    Vector3 deathPosition = damageReport.damageInfo.position;
 
                     int count = master.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        Vector3 vector = master.deathFootPosition;
+                        Vector3 vector = deathPosition;
                         if (master.killedByUnsafeArea)
-                            vector = TeleportHelper.FindSafeTeleportDestination(master.deathFootPosition, master.bodyPrefab.GetComponent<CharacterBody>(), RoR2Application.rng) ?? master.deathFootPosition;
+                            vector = TeleportHelper.FindSafeTeleportDestination(deathPosition, master.bodyPrefab.GetComponent<CharacterBody>(), RoR2Application.rng) ?? deathPosition;
 
                         // Revive the player with invulnerability
                         master.Respawn(vector, Quaternion.Euler(0f, TooManyItems.RandGen.Next(0, 360), 0f), wasRevivedMidStage: true);
