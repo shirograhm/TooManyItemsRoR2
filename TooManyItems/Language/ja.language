@@ -81,7 +81,7 @@
     "EDIBLEGLUE": "食用のり",
     "ITEM_EDIBLEGLUE_NAME": "食用のり",
     "ITEM_EDIBLEGLUE_PICKUP": "敵を倒すと周囲の敵の移動速度が下がる。",
-    "ITEM_EDIBLEGLUE_DESC": "敵のキル時に、<style=cIsUtility>{Slow Radius Initial Stack}m</style><style=cStack>（スタックごとに+{Slow Radius Extra Stacks}m）</style>以内の敵の速度を<style=cIsUtility>80%</style>低下させる。これは<style=cIsUtility>{Glue Duration}秒間</style>続く。",
+    "ITEM_EDIBLEGLUE_DESC": "敵のキル時に、<style=cIsUtility>{Slow Radius Initial Stack}m</style><style=cStack>（スタックごとに+{Slow Radius Extra Stacks}m）</style>以内の敵の速度を<style=cIsUtility>60%</style>低下させる。これは<style=cIsUtility>{Glue Duration}秒間</style>続く。",
     "ITEM_EDIBLEGLUE_LORE": "",
     "MILKCARTON": "牛乳パック",
     "ITEM_MILKCARTON_NAME": "牛乳パック",

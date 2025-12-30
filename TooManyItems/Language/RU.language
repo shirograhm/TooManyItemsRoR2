@@ -76,7 +76,7 @@
     "EDIBLEGLUE": "Съедобный клей",
     "ITEM_EDIBLEGLUE_NAME": "Съедобный клей",
     "ITEM_EDIBLEGLUE_PICKUP": "После убийства замедлите врагов вокруг себя.",
-    "ITEM_EDIBLEGLUE_DESC": "После убийства замедлите врагов вокруг себя в радиусе <style=cIsUtility>{Slow Radius Initial Stack}м</style> <style=cStack>(+{Slow Radius Extra Stacks}м за шт.)</style> на <style=cIsUtility>80%</style>, на <style=cIsUtility>{Glue Duration} секунды</style>.",
+    "ITEM_EDIBLEGLUE_DESC": "После убийства замедлите врагов вокруг себя в радиусе <style=cIsUtility>{Slow Radius Initial Stack}м</style> <style=cStack>(+{Slow Radius Extra Stacks}м за шт.)</style> на <style=cIsUtility>60%</style>, на <style=cIsUtility>{Glue Duration} секунды</style>.",
     "ITEM_EDIBLEGLUE_LORE": "",
     "MILKCARTON": "Упаковка из-под молока",
     "ITEM_MILKCARTON_NAME": "Упаковка из-под молока",

@@ -81,7 +81,7 @@
     "EDIBLEGLUE": "Pegamento Comestible",
     "ITEM_EDIBLEGLUE_NAME": "Pegamento Comestible",
     "ITEM_EDIBLEGLUE_PICKUP": "Reduce la velocidad de los enemigos cercanos al matarlos.",
-    "ITEM_EDIBLEGLUE_DESC": "Reduce la velocidad de los enemigos en un radio de <style=cIsUtility>{Slow Radius Initial Stack}m</style> <style=cStack>(+{Slow Radius Extra Stack}m por stack)</style> <style=cIsUtility>80%</style> por <style=cIsUtility>{Glue Duration} segundos</style>.",
+    "ITEM_EDIBLEGLUE_DESC": "Reduce la velocidad de los enemigos en un radio de <style=cIsUtility>{Slow Radius Initial Stack}m</style> <style=cStack>(+{Slow Radius Extra Stack}m por stack)</style> <style=cIsUtility>60%</style> por <style=cIsUtility>{Glue Duration} segundos</style>.",
     "ITEM_EDIBLEGLUE_LORE": "",
     "MILKCARTON": "Caja de Leche",
     "ITEM_MILKCARTON_NAME": "Caja de Leche",

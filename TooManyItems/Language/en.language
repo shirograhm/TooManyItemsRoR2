@@ -81,7 +81,7 @@
     "EDIBLEGLUE": "Edible Glue",
     "ITEM_EDIBLEGLUE_NAME": "Edible Glue",
     "ITEM_EDIBLEGLUE_PICKUP": "Slow enemies near you on-kill.",
-    "ITEM_EDIBLEGLUE_DESC": "On-kill, slow enemies within <style=cIsUtility>{Slow Radius Initial Stack}m</style> <style=cStack>(+{Slow Radius Extra Stacks}m per stack)</style> by <style=cIsUtility>80%</style> for <style=cIsUtility>{Glue Duration} seconds</style>.",
+    "ITEM_EDIBLEGLUE_DESC": "On-kill, slow enemies within <style=cIsUtility>{Slow Radius Initial Stack}m</style> <style=cStack>(+{Slow Radius Extra Stacks}m per stack)</style> by <style=cIsUtility>60%</style> for <style=cIsUtility>{Glue Duration} seconds</style>.",
     "ITEM_EDIBLEGLUE_LORE": "<style=cUserSetting><b>DETENTION NOTICE — STUDENT DEVIN G.</b></style>\n\nReason: Consumed glue in class. \nSecondary Reason: Encouraged other students to partake in its \"practical uses.\"\nNotes: Student claimed the glue was for emergencies. However, when asked, he did not define class as an emergency.\nAction: Bottle was confiscated. Bottle was later found empty.\n\n<style=cLunarObjective>Filed by Instructor V.</style>",
     "MILKCARTON": "Milk Carton",
     "ITEM_MILKCARTON_NAME": "Milk Carton",
