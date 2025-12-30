@@ -129,11 +129,8 @@ namespace TooManyItems.Items.Tier2
                 if (attackerBody && attackerBody.inventory)
                 {
                     int count = attackerBody.inventory.GetItemCountEffective(itemDef);
-
                     float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
                     dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * Utilities.GetLinearStacking(burnPercentPerTick, count);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
 
                     CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                     Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
