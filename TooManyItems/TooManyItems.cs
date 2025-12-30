@@ -116,10 +116,10 @@ namespace TooManyItems
                 Thumbtack.Init();
 
             // Lunar
-            if (AncientCoin.isEnabled.Value)
-                AncientCoin.Init();
             if (Amnesia.isEnabled.Value)
                 Amnesia.Init();
+            if (AncientCoin.isEnabled.Value)
+                AncientCoin.Init();
             if (CarvingBlade.isEnabled.Value)
                 CarvingBlade.Init();
             if (Crucifix.isEnabled.Value)
