@@ -19,7 +19,7 @@ namespace TooManyItems.Items.Void
         public static ConfigurableValue<float> regenPerSecond = new(
             "Item: Shadow Crest",
             "Regen Per Second",
-            1.2f,
+            1f,
             "Percentage of missing health regenerated per second.",
             ["ITEM_SHADOWCREST_DESC"]
         );
