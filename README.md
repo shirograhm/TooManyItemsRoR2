@@ -1,5 +1,5 @@
 # TooManyItems
-Adds 37 new items to Risk of Rain 2!  
+Adds 38 new items to Risk of Rain 2!  
 ![picture of items](https://i.imgur.com/nDgkbc8l.png)
 
 ## Issue Reports
@@ -85,7 +85,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Spirit Stone</b>
         </td>
         <td>
-            On-kill, gain <b>1</b> (+1 per stack) permanent shield. Lose <b>20%</b> (+10% per stack) max HP.
+            On-kill, harvest a <b>spirit capsule</b> that <i>permanently</i> increases your shields by <b>1</b> (+1 per stack). Lose <b>20%</b> (+10% per stack) max HP.
         </td>
     </tr>
     <tr>
@@ -96,7 +96,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Shadow Crest</b>
         </td>
         <td>
-            Regenerate <b>1.2%</b> (+1.2% per stack) of your missing health every second.
+            Regenerate <b>1%</b> (+1% per stack) of your missing health every second.
         </td>
     </tr>
     <tr>
@@ -107,7 +107,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Defiled Heart</b>
         </td>
         <td>
-            Gain <b>300</b> HP. Also, gain <b>1.5%</b> (+1.5% per stack) of your max health as bonus BASE damage.
+            Gain <b>200</b> max health. Also, gain <b>1.5%</b> (+1.5% per stack) of your max health as bonus BASE damage.
         </td>
     </tr>
     <tr>
@@ -206,7 +206,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Broken Mask</b>
         </td>
         <td>
-            Dealing damage burns enemies for <b>2%</b> (+2% per stack) max health over <b>4</b> seconds. Does not apply itself.
+            Dealing damage burns enemies for <b>1.5%</b> (+1.5% per stack) max health over <b>5</b> seconds. Does not apply itself.
         </td>
     </tr>
     <tr>
@@ -272,7 +272,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Soul Ring</b>
         </td>
         <td>
-            On-kill, permanently increase your health regeneration by <b>0.1 HP/s</b>, up to a maximum of <b>4</b> (+2.5 per stack) HP/s.
+            On-kill, permanently increase your health regeneration by <b>0.1 HP/s</b>, up to a maximum of <b>4</b> (+1 per stack) HP/s.
         </td>
     </tr>
     <tr>
@@ -316,7 +316,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Edible Glue</b>
         </td>
         <td>
-            On-kill, slow enemies within <b>20</b>m (+10m per stack) by <b>80</b>% for <b>4</b> seconds.
+            On-kill, slow enemies within <b>20m</b> (+10m per stack) by <b>60%</b> for <b>4</b> seconds.
         </td>
     </tr>
     <tr>
@@ -404,7 +404,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Chalice</b>
         </td>
         <td>
-            On activation, pay <b>90%</b> of your current health to Consecrate yourself and all allies. Consecrated allies gain <b>30%</b> damage and <b>90%</b> attack speed for <b>10</b> seconds. [<i>Cooldown: 70s</i>]
+            On activation, pay <b>90%</b> of your current health to Consecrate yourself and all allies. Consecrated allies gain <b>30%</b> BASE damage and <b>90%</b> attack speed for <b>10</b> seconds. [<i>Cooldown: 70s</i>]
         </td>
     </tr>
     <tr>
@@ -415,7 +415,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Crown of Vanity</b>
         </td>
         <td>
-            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>2.5%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> damage per stack to a target enemy. [<i>Cooldown: 70s</i>]
+            Gain stacks of Hubris on-kill. Each stack reduces your BASE damage by <b>2.5%</b>, exponentially. Activate this equipment to cleanse all stacks and deal <b>150%</b> BASE damage per stack to a target enemy. [<i>Cooldown: 70s</i>]
         </td>
     </tr>
     <tr>
@@ -437,7 +437,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Totem of Prayer</b>
         </td>
         <td>
-            On activation, grants either <b>100</b> armor, <b>25%</b> damage, <b>75%</b> attack speed, or <b>8%</b> max HP/s regeneration for <b>12</b> seconds. [<i>Cooldown: 80s</i>]
+            On activation, grants either <b>100</b> armor, <b>25%</b> BASE damage, <b>75%</b> attack speed, or <b>8%</b> max HP/s regeneration for <b>12</b> seconds. [<i>Cooldown: 80s</i>]
         </td>
     </tr>
 </table>
