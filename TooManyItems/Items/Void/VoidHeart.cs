@@ -19,7 +19,7 @@ namespace TooManyItems.Items.Void
         public static ConfigurableValue<float> healthIncrease = new(
             "Item: Defiled Heart",
             "Health Increase",
-            300f,
+            200f,
             "Bonus health gained from this item. Does not increase with stacks.",
             ["ITEM_VOIDHEART_DESC"]
         );
