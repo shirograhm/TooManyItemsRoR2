@@ -29,14 +29,14 @@ namespace TooManyItems.Items.Tier2
         public static ConfigurableValue<float> burnDamage = new(
             "Item: Broken Mask",
             "Percent Burn",
-            2f,
+            1.5f,
             "Burn damage dealt over the duration as a percentage of enemy max health.",
             ["ITEM_BROKENMASK_DESC"]
         );
         public static ConfigurableValue<int> burnDuration = new(
             "Item: Broken Mask",
             "Burn Duration",
-            4,
+            5,
             "Total duration of the burn in seconds.",
             ["ITEM_BROKENMASK_DESC"]
         );
@@ -129,11 +129,8 @@ namespace TooManyItems.Items.Tier2
                 if (attackerBody && attackerBody.inventory)
                 {
                     int count = attackerBody.inventory.GetItemCountEffective(itemDef);
-
                     float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
-                    dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * burnPercentPerTick * count;
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
+                    dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * Utilities.GetLinearStacking(burnPercentPerTick, count);
 
                     CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                     Statistics stats = trackerBody.inventory.GetComponent<Statistics>();

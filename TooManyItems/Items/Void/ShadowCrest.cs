@@ -19,7 +19,7 @@ namespace TooManyItems.Items.Void
         public static ConfigurableValue<float> regenPerSecond = new(
             "Item: Shadow Crest",
             "Regen Per Second",
-            1.2f,
+            1f,
             "Percentage of missing health regenerated per second.",
             ["ITEM_SHADOWCREST_DESC"]
         );
@@ -38,7 +38,7 @@ namespace TooManyItems.Items.Void
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender && sender.inventory)
+                if (sender && sender.inventory && sender.healthComponent)
                 {
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)

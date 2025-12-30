@@ -3,6 +3,8 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -17,9 +19,24 @@ namespace TooManyItems
         public static Color TATTERED_SCROLL_COLOR = new(0.80f, 0.78f, 0.57f, 1f);
         public static Color VANITY_COLOR = new(0.53f, 0.44f, 0.77f, 1f);
 
+        public static List<ItemIndex> allVoidTier1Items;
+        public static List<ItemIndex> allVoidTier2Items;
+        public static List<ItemIndex> allVoidTier3Items;
+        public static List<ItemIndex> allVoidBossItems;
+
         internal static void Init()
         {
             NetworkingAPI.RegisterMessageType<SyncForceRecalculate>();
+
+            ItemCatalog.availability.CallWhenAvailable(InitVoidTierItemLists);
+        }
+
+        private static void InitVoidTierItemLists()
+        {
+            allVoidTier1Items = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidTier1).Select(itemDef => itemDef.itemIndex)];
+            allVoidTier2Items = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidTier2).Select(itemDef => itemDef.itemIndex)];
+            allVoidTier3Items = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidTier3).Select(itemDef => itemDef.itemIndex)];
+            allVoidBossItems = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidBoss).Select(itemDef => itemDef.itemIndex)];
         }
 
         private class SyncForceRecalculate : INetMessage
@@ -182,7 +199,53 @@ namespace TooManyItems
                 target = target,
             });
             EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
+        }
 
+        public static bool IsItemTierRandomizable(ItemTier tier)
+        {
+            return tier == ItemTier.Tier1 || tier == ItemTier.Tier2 || tier == ItemTier.Tier3 || tier == ItemTier.Lunar ||
+                tier == ItemTier.VoidTier1 || tier == ItemTier.VoidTier2 || tier == ItemTier.VoidTier3;
+        }
+
+        public static bool IsItemIndexScrap(ItemIndex itemIndex)
+        {
+            return itemIndex == RoR2Content.Items.ScrapWhite.itemIndex || itemIndex == RoR2Content.Items.ScrapGreen.itemIndex || itemIndex == RoR2Content.Items.ScrapRed.itemIndex;
+        }
+
+        public static ItemIndex GetRandomItemOfTier(ItemTier tier)
+        {
+            if (!IsItemTierRandomizable(tier)) throw new Exception("Invalid tier " + tier.ToString() + " called for random item.");
+
+            switch (tier)
+            {
+                case ItemTier.Tier1:
+                    var arrayNoScrap = ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex).ToArray();
+                    int randomIndex = UnityEngine.Random.Range(0, arrayNoScrap.Count());
+                    return arrayNoScrap[randomIndex];
+                case ItemTier.Tier2:
+                    var arrayNoScrap2 = ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex).ToArray();
+                    int randomIndex2 = UnityEngine.Random.Range(0, arrayNoScrap2.Count());
+                    return arrayNoScrap2[randomIndex2];
+                case ItemTier.Tier3:
+                    var arrayNoScrap3 = ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex).ToArray();
+                    int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Count());
+                    return arrayNoScrap3[randomIndex3];
+                case ItemTier.Lunar:
+                    int randomIndexLunar = UnityEngine.Random.Range(0, ItemCatalog.lunarItemList.Count);
+                    return ItemCatalog.lunarItemList[randomIndexLunar];
+                case ItemTier.VoidTier1:
+                    int randomIndexV1 = UnityEngine.Random.Range(0, allVoidTier1Items.Count());
+                    return allVoidTier1Items[randomIndexV1];
+                case ItemTier.VoidTier2:
+                    int randomIndexV2 = UnityEngine.Random.Range(0, allVoidTier2Items.Count());
+                    return allVoidTier2Items[randomIndexV2];
+                case ItemTier.VoidTier3:
+                    int randomIndexV3 = UnityEngine.Random.Range(0, allVoidTier3Items.Count());
+                    return allVoidTier3Items[randomIndexV3];
+                default:
+                    Log.Error("Invalid tier called for random item.");
+                    return ItemIndex.None;
+            }
         }
     }
 }

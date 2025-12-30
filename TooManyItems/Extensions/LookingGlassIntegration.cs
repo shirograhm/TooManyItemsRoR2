@@ -24,6 +24,22 @@ namespace TooManyItems.Extensions
         {
             public static void RegisterStats()
             {
+                if (Amnesia.isEnabled.Value)
+                {
+                    RegisterStatsForItem(Amnesia.itemDef, [
+                        new("Lives Left: ", ItemStatsDef.ValueType.Healing, ItemStatsDef.MeasurementUnits.Number)
+                        ], (master, count) =>
+                        {
+                            return [count];
+                        });
+                    RegisterStatsForItem(Amnesia.depletedDef, [
+                        new("Lives Lived: ", ItemStatsDef.ValueType.Death, ItemStatsDef.MeasurementUnits.Number)
+                        ], (master, count) =>
+                        {
+                            return [count];
+                        });
+                }
+
                 if (AncientCoin.isEnabled.Value)
                     RegisterStatsForItem(AncientCoin.itemDef, [
                         new("Gold Gain: ", ItemStatsDef.ValueType.Gold, ItemStatsDef.MeasurementUnits.Percentage),

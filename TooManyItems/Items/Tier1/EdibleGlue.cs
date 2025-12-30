@@ -76,7 +76,7 @@ namespace TooManyItems.Items.Tier1
                             HealthComponent hc = hurtbox.healthComponent;
                             if (hc && hc.body && hc.body.teamComponent && hc.body.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                             {
-                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
+                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow60, slowDuration.Value);
                             }
                         }
                     }

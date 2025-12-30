@@ -24,6 +24,17 @@ The items in this mod are configurable. To edit, run the game once with the mod 
 <table>
     <tr>
         <td>
+            <img src="https://i.imgur.com/HhnbBdX.png" alt="Amnesia" width="192"/>
+        </td>
+        <td>
+            <b>Amnesia</b>
+        </td>
+        <td>
+            Upon death, this item will be consumed and you will return to life with <b>3</b> seconds of invulnerability. On revive, <b>randomize your items</b>.
+        </td>
+    </tr>
+    <tr>
+        <td>
             <img src="https://i.imgur.com/NWJgZGV.png" alt="Ancient Coin" width="192"/>
         </td>
         <td>

@@ -107,7 +107,7 @@ namespace TooManyItems.Items.Equip.Lunar
                     procCoefficient = 0f,
                     position = body.corePosition,
                     crit = false,
-                    damageColorIndex = DamageColorIndex.Default,
+                    damageColorIndex = DamageColorIndex.Fragile,
                     procChainMask = new ProcChainMask(),
                     damageType = DamageType.Silent
                 };

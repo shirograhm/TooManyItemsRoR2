@@ -34,7 +34,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.13";
+        public const string PluginVersion = "0.6.14";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -116,6 +116,8 @@ namespace TooManyItems
                 Thumbtack.Init();
 
             // Lunar
+            if (Amnesia.isEnabled.Value)
+                Amnesia.Init();
             if (AncientCoin.isEnabled.Value)
                 AncientCoin.Init();
             if (CarvingBlade.isEnabled.Value)
