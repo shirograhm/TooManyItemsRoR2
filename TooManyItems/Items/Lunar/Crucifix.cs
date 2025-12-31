@@ -32,7 +32,7 @@ namespace TooManyItems.Items.Lunar
         public static ConfigurableValue<float> maxHealthBurnAmountReduction = new(
             "Item: Crucifix",
             "Burn Amount Reduction",
-            25f,
+            15f,
             "Percentage of burn damage reduced per stack of this item. This scales hyperbolically.",
             ["ITEM_CRUCIFIX_DESC"]
         );
