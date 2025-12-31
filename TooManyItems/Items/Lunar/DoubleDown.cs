@@ -63,6 +63,14 @@ namespace TooManyItems.Items.Lunar
                             if (info.attackerObject && info.attackerObject.GetComponent<CharacterBody>())
                                 isCrit = info.attackerObject.GetComponent<CharacterBody>().RollCrit();
 
+                            // Spawn a cleanse effect to indicate DoT removal
+                            EffectManager.SpawnEffect(
+                                LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect"), new EffectData
+                                {
+                                    origin = vicBody.corePosition,
+                                    rootObject = vicBody.gameObject
+                                }, transmit: true);
+
                             vicBody.healthComponent.TakeDamage(new DamageInfo
                             {
                                 damage = totalDamageCalc,
@@ -77,7 +85,7 @@ namespace TooManyItems.Items.Lunar
                                 procChainMask = new ProcChainMask()
                             });
 
-                            return; // Skip applying the DoT
+                            return; // Skip applying the DoT (return before orig call)
                         }
                     }
                 }
