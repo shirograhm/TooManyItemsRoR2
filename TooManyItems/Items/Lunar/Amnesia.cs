@@ -18,14 +18,14 @@ namespace TooManyItems.Items.Lunar
             "Enabled",
             true,
             "Whether or not the item is enabled.",
-            ["ITEM_LUNARREVIVE_DESC"]
+            ["ITEM_AMNESIA_DESC"]
         );
         public static ConfigurableValue<float> invulnerabilityDuration = new(
             "Item: Amnesia",
             "Invulnerability Duration",
             3f,
             "Duration of invulnerability after revival in seconds.",
-            ["ITEM_LUNARREVIVE_DESC"]
+            ["ITEM_AMNESIA_DESC"]
         );
 
         internal static void Init()
