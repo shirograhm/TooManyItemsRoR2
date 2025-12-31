@@ -111,7 +111,7 @@
     "THUMBTACK": "图钉",
     "ITEM_THUMBTACK_NAME": "图钉",
     "ITEM_THUMBTACK_PICKUP": "延长流血时间。",
-    "ITEM_THUMBTACK_DESC": "获得 <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance}% 每层)</style> 流血几率</style>。使你的流血延长至 <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration} 每层)</style> 秒</style>.",
+    "ITEM_THUMBTACK_DESC": "获得 <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance Extra Stacks}% 每层)</style> 流血几率</style>。使你的流血延长至 <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration Extra Stacks} 每层)</style> 秒</style>.",
     "ITEM_THUMBTACK_LORE": "",
 
     "BRASSKNUCKLES": "指节铜环",

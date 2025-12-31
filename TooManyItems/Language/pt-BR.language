@@ -116,7 +116,7 @@
     "THUMBTACK": "Alfinete",
     "ITEM_THUMBTACK_NAME": "Alfinete",
     "ITEM_THUMBTACK_PICKUP": "Seus efeitos de <style=cIsDamage>sangramento</style> duram mais.",
-    "ITEM_THUMBTACK_DESC": "Ganhe <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance}% por acúmulo)</style> de chance</style> de causar <style=cIsDamage>sangramento</style> ao golpear inimigos por <style=cIsDamage>{Bleed Damage}% de dano BASE</style> durante <style=cIsUtility>{Bleed Duration} segundos</style>. Seus efeitos de <style=cIsDamage>sangramento</style> duram <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration} por acúmulo)</style> segundos adicionais</style>.",
+    "ITEM_THUMBTACK_DESC": "Ganhe <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance Extra Stacks}% por acúmulo)</style> de chance</style> de causar <style=cIsDamage>sangramento</style> ao golpear inimigos por <style=cIsDamage>{Bleed Damage}% de dano BASE</style> durante <style=cIsUtility>{Bleed Duration} segundos</style>. Seus efeitos de <style=cIsDamage>sangramento</style> duram <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration Extra Stacks} por acúmulo)</style> segundos adicionais</style>.",
     "ITEM_THUMBTACK_LORE": "",
 
     "BRASSKNUCKLES": "Soqueiras",

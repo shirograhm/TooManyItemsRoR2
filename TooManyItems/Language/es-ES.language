@@ -116,7 +116,7 @@
     "THUMBTACK": "Pin",
     "ITEM_THUMBTACK_NAME": "Pin",
     "ITEM_THUMBTACK_PICKUP": "Tus efectos de <style=cIsDamage>sangrado</style> duran más tiempo.",
-    "ITEM_THUMBTACK_DESC": "Obtienes <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance}% por stack)</style> de chance</style> de <style=cIsDamage>sangrado</style> cuando golpeas a enemigos por <style=cIsDamage>{Bleed Damage}% de daño BASE</style> por <style=cIsUtility>{Bleed Duration} segundos</style>. Tus efectos de <style=cIsDamage>sangrados</style> duran <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration} por stack)</style> segundos adicionales</style>.",
+    "ITEM_THUMBTACK_DESC": "Obtienes <style=cIsDamage>{Bleed Chance}% <style=cStack>(+{Bleed Chance Extra Stacks}% por stack)</style> de chance</style> de <style=cIsDamage>sangrado</style> cuando golpeas a enemigos por <style=cIsDamage>{Bleed Damage}% de daño BASE</style> por <style=cIsUtility>{Bleed Duration} segundos</style>. Tus efectos de <style=cIsDamage>sangrados</style> duran <style=cIsUtility>{Bonus Bleed Duration} <style=cStack>(+{Bonus Bleed Duration Extra Stacks} por stack)</style> segundos adicionales</style>.",
     "ITEM_THUMBTACK_LORE": "",
 
     "BRASSKNUCKLES": "Nudillos de Bronce",

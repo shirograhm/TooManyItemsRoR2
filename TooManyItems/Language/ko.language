@@ -116,7 +116,7 @@
     "THUMBTACK": "압정",
     "ITEM_THUMBTACK_NAME": "압정",
     "ITEM_THUMBTACK_PICKUP": "<style=cIsDamage>출혈</style>효과가 더 오래 지속됩니다.",
-    "ITEM_THUMBTACK_DESC": "적 명중시 <style=cIsDamage>{Bleed Chance}%<style=cStack>(중첩당 +{Bleed Chance}%)</style>확률</style>로 <style=cIsUtility>{Bleed Duration}초 </style>동안 <style=cIsDamage>출혈</style>을 일으켜 기본 피해량의 <style=cIsDamage>{Bleed Damage}%</style> 피해를 입힙니다. <style=cIsDamage>출혈</style> 효과 지속 시간이 <style=cIsUtility>{Bonus Bleed Duration}초<style=cStack>(중첩당 +{Bonus Bleed Duration}초)</style></style> 증가합니다.",
+    "ITEM_THUMBTACK_DESC": "적 명중시 <style=cIsDamage>{Bleed Chance}%<style=cStack>(중첩당 +{Bleed Chance Extra Stacks}%)</style>확률</style>로 <style=cIsUtility>{Bleed Duration}초 </style>동안 <style=cIsDamage>출혈</style>을 일으켜 기본 피해량의 <style=cIsDamage>{Bleed Damage}%</style> 피해를 입힙니다. <style=cIsDamage>출혈</style> 효과 지속 시간이 <style=cIsUtility>{Bonus Bleed Duration}초<style=cStack>(중첩당 +{Bonus Bleed Duration Extra Stacks}초)</style></style> 증가합니다.",
     "ITEM_THUMBTACK_LORE": "",
 
     "BRASSKNUCKLES": "황동 너클",

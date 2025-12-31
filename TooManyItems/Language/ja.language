@@ -116,7 +116,7 @@
     "THUMBTACK": "画鋲",
     "ITEM_THUMBTACK_NAME": "画鋲",
     "ITEM_THUMBTACK_PICKUP": "<style=cIsDamage>出血</style>を与え、効果時間が延長。",
-    "ITEM_THUMBTACK_DESC": "攻撃時<style=cIsDamage>{Bleed Chance}%<style=cStack>（スタックごとに+{Bleed Chance}%）</style>の確率</style>で<style=cIsDamage>出血</style>し<style=cIsDamage>基礎ダメージの{Bleed Damage}%</style>を<style=cIsUtility>{Bleed Duration}秒間</style>与える。また、<style=cIsDamage>出血</style>は<style=cIsUtility>{Bonus Bleed Duration}<style=cStack>（スタックごとに+{Bonus Bleed Duration}）</style>秒間</style>延長する。針刺（Needletick）を所持するとこのアイテムは破損される。",
+    "ITEM_THUMBTACK_DESC": "攻撃時<style=cIsDamage>{Bleed Chance}%<style=cStack>（スタックごとに+{Bleed Chance Extra Stacks}%）</style>の確率</style>で<style=cIsDamage>出血</style>し<style=cIsDamage>基礎ダメージの{Bleed Damage}%</style>を<style=cIsUtility>{Bleed Duration}秒間</style>与える。また、<style=cIsDamage>出血</style>は<style=cIsUtility>{Bonus Bleed Duration}<style=cStack>（スタックごとに+{Bonus Bleed Duration Extra Stacks}）</style>秒間</style>延長する。針刺（Needletick）を所持するとこのアイテムは破損される。",
     "ITEM_THUMBTACK_LORE": "",
 
     "BRASSKNUCKLES": "メリケンサック",
