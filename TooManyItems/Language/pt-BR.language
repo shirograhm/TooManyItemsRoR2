@@ -91,7 +91,7 @@
     "PAPERPLANE": "Avião de Papel",
     "ITEM_PAPERPLANE_NAME": "Avião de Papel",
     "ITEM_PAPERPLANE_PICKUP": "Cause mais dano enquanto estiver no ar.",
-    "ITEM_PAPERPLANE_DESC": "Cause um adicional de <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase}% por acúmulo)</style> a mais de dano enquanto você estiver no ar.",
+    "ITEM_PAPERPLANE_DESC": "Cause um adicional de <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase Extra Stacks}% por acúmulo)</style> a mais de dano enquanto você estiver no ar.",
     "ITEM_PAPERPLANE_LORE": "",
     "PHOTODIODE": "Foto-diodo",
     "ITEM_PHOTODIODE_NAME": "Foto-diodo",

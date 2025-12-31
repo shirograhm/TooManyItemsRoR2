@@ -91,7 +91,7 @@
     "PAPERPLANE": "Paper Plane",
     "ITEM_PAPERPLANE_NAME": "Paper Plane",
     "ITEM_PAPERPLANE_PICKUP": "Deal more damage while airborne.",
-    "ITEM_PAPERPLANE_DESC": "Deal <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase}% per stack)</style> more damage while airborne.",
+    "ITEM_PAPERPLANE_DESC": "Deal <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase Extra Stacks}% per stack)</style> more damage while airborne.",
     "ITEM_PAPERPLANE_LORE": "<style=cUserSetting><b>DETENTION NOTICE — MIRA K.</b></style>\n\nReason: Threw a paper plane during emergency drill.\nSecondary Reason: Claimed it was \"part of the strategy.\"\nNotes: Plane recovered. Fold quality was notably above average.\nAction: Student assigned to cleanup duty.\n\n<style=cLunarObjective>Filed by Instructor Hale</style>",
     "PHOTODIODE": "Photodiode",
     "ITEM_PHOTODIODE_NAME": "Photodiode",

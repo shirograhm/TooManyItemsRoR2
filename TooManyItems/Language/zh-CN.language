@@ -86,7 +86,7 @@
     "PAPERPLANE": "纸飞机",
     "ITEM_PAPERPLANE_NAME": "纸飞机",
     "ITEM_PAPERPLANE_PICKUP": "在空中造成更多伤害。",
-    "ITEM_PAPERPLANE_DESC": "空中时造成 <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase}% 每层)</style> 的额外伤害。",
+    "ITEM_PAPERPLANE_DESC": "空中时造成 <style=cIsDamage>{Damage Increase}%</style> <style=cStack>(+{Damage Increase Extra Stacks}% 每层)</style> 的额外伤害。",
     "ITEM_PAPERPLANE_LORE": "",
     "PHOTODIODE": "二极管",
     "ITEM_PHOTODIODE_NAME": "二极管",

@@ -91,7 +91,7 @@
     "PAPERPLANE": "紙飛行機",
     "ITEM_PAPERPLANE_NAME": "紙飛行機",
     "ITEM_PAPERPLANE_PICKUP": "空中にいるときに与えるダメージが上昇する。",
-    "ITEM_PAPERPLANE_DESC": "空中にいるときに与えるダメージが<style=cIsDamage>{Damage Increase}%</style><style=cStack>（スタックごとに+{Damage Increase}%）</style>上昇する。",
+    "ITEM_PAPERPLANE_DESC": "空中にいるときに与えるダメージが<style=cIsDamage>{Damage Increase}%</style><style=cStack>（スタックごとに+{Damage Increase Extra Stacks}%）</style>上昇する。",
     "ITEM_PAPERPLANE_LORE": "",
     "PHOTODIODE": "フォトダイオード",
     "ITEM_PHOTODIODE_NAME": "フォトダイオード",

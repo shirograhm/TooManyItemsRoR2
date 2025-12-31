@@ -91,7 +91,7 @@
     "PAPERPLANE": "종이비행기",
     "ITEM_PAPERPLANE_NAME": "종이비행기",
     "ITEM_PAPERPLANE_PICKUP": "공중에 있는 동안 더 많은 피해를 입힙니다.",
-    "ITEM_PAPERPLANE_DESC": "공중에 있는 동안 <style=cIsDamage>{Damage Increase}%</style><style=cStack>(중첩당 +{Damage Increase}%)</style> 더 많은 피해를 입힙니다.",
+    "ITEM_PAPERPLANE_DESC": "공중에 있는 동안 <style=cIsDamage>{Damage Increase}%</style><style=cStack>(중첩당 +{Damage Increase Extra Stacks}%)</style> 더 많은 피해를 입힙니다.",
     "ITEM_PAPERPLANE_LORE": "",
     "PHOTODIODE": "광 다이오드",
     "ITEM_PHOTODIODE_NAME": "광 다이오드",
