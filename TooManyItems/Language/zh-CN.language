@@ -61,7 +61,7 @@
     "BOTTLECAP": "瓶盖",
     "ITEM_BOTTLECAP_NAME": "瓶盖",
     "ITEM_BOTTLECAP_PICKUP": "减少终极技能的冷却时间。",
-    "ITEM_BOTTLECAP_DESC": "减少 <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction}% 每层)</style>终极技能冷却时间。",
+    "ITEM_BOTTLECAP_DESC": "减少 <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction Extra Stacks}% 每层)</style>终极技能冷却时间。",
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "一条面包",
     "ITEM_BREADLOAF_NAME": "一条面包",

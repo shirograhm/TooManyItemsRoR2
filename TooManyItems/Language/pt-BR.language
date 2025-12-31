@@ -66,7 +66,7 @@
     "BOTTLECAP": "Tampinha de Garrafa",
     "ITEM_BOTTLECAP_NAME": "Tampinha de Garrafa",
     "ITEM_BOTTLECAP_PICKUP": "Reduza o tempo de recarga de sua ultimate.",
-    "ITEM_BOTTLECAP_DESC": "Reduza o tempo de recarga de sua ultimate em <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction}% por acúmulo)</style>.",
+    "ITEM_BOTTLECAP_DESC": "Reduza o tempo de recarga de sua ultimate em <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction Extra Stacks}% por acúmulo)</style>.",
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "Pão",
     "ITEM_BREADLOAF_NAME": "Pão",

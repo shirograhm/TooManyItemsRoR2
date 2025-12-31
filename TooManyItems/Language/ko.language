@@ -66,7 +66,7 @@
     "BOTTLECAP": "병뚜껑",
     "ITEM_BOTTLECAP_NAME": "병뚜껑",
     "ITEM_BOTTLECAP_PICKUP": "특수 스킬의 재사용 대기시간이 감소됩니다.",
-    "ITEM_BOTTLECAP_DESC": "특수 스킬의 대기시간이 <style=cIsUtility>{Cooldown Reduction}%<style=cStack>(중첩당 +{Cooldown Reduction}%)</style> 감소합니다.</style> ",
+    "ITEM_BOTTLECAP_DESC": "특수 스킬의 대기시간이 <style=cIsUtility>{Cooldown Reduction}%<style=cStack>(중첩당 +{Cooldown Reduction Extra Stacks}%)</style> 감소합니다.</style> ",
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "빵 한 덩이",
     "ITEM_BREADLOAF_NAME": "빵 한 덩이",

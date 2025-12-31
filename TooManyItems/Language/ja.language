@@ -66,7 +66,7 @@
     "BOTTLECAP": "ボトルキャップ",
     "ITEM_BOTTLECAP_NAME": "ボトルキャップ",
     "ITEM_BOTTLECAP_PICKUP": "スペシャルスキルのクールダウンを減少する。",
-    "ITEM_BOTTLECAP_DESC": "スペシャルスキルのクールダウンを<style=cIsUtility>{Cooldown Reduction}%</style><style=cStack>（スタックごとに+{Cooldown Reduction}%）</style>減少する。",
+    "ITEM_BOTTLECAP_DESC": "スペシャルスキルのクールダウンを<style=cIsUtility>{Cooldown Reduction}%</style><style=cStack>（スタックごとに+{Cooldown Reduction Extra Stacks}%）</style>減少する。",
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "一斤のパン",
     "ITEM_BREADLOAF_NAME": "一斤のパン",

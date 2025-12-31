@@ -61,7 +61,7 @@
     "BOTTLECAP": "Крышечка",
     "ITEM_BOTTLECAP_NAME": "Крышечка",
     "ITEM_BOTTLECAP_PICKUP": "Уменьшает перезарядку специального умения.",
-    "ITEM_BOTTLECAP_DESC": "Уменьшает перезарядку специального умения на <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction}% за шт.)</style>.",
+    "ITEM_BOTTLECAP_DESC": "Уменьшает перезарядку специального умения на <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction Extra Stacks}% за шт.)</style>.",
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "Буханка хлеба",
     "ITEM_BREADLOAF_NAME": "Буханка хлеба",

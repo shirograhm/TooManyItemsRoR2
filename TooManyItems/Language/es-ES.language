@@ -66,7 +66,7 @@
     "BOTTLECAP": "Tapa de Botella",
     "ITEM_BOTTLECAP_NAME": "Tapa de Botella",
     "ITEM_BOTTLECAP_PICKUP": "Reduce el enfriamiento de tu habilidad especial.",
-    "ITEM_BOTTLECAP_DESC": "Reduce el enfriamiento de tu habilidad especial un <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction}% por stack)</style>.",
+    "ITEM_BOTTLECAP_DESC": "Reduce el enfriamiento de tu habilidad especial un <style=cIsUtility>{Cooldown Reduction}%</style> <style=cStack>(+{Cooldown Reduction Extra Stacks}% por stack)</style>.",
     "ITEM_BOTTLECAP_LORE": "",
     "BREADLOAF": "Barra de Pan",
     "ITEM_BREADLOAF_NAME": "Barra de Pan",
