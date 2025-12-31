@@ -133,7 +133,7 @@
     "ITEM_EPINEPHRINE_NAME": "Epinephrine",
     "ITEM_EPINEPHRINE_PICKUP": "Gain attack speed for a short duration after taking damage.",
     "ITEM_EPINEPHRINE_DESC": "Taking damage grants <style=cIsDamage>{Attack Speed}% attack speed</style> for <style=cIsUtility>{Buff Duration} <style=cStack>(+{Buff Duration} per stack)</style> seconds</style>.",
-    "ITEM_EPINEPHRINE_LORE": "\"A cut, a bruise, a bad angle... for a few seconds everything feels sharp and automatic. The boost fades quick, but it’s enough to keep me moving. Honestly, I've started taking hits on purpose just to feel it kick in again.\"\n\n\"...That sounds like an addiction, doesn't it?\"\n\n\"What? I don't <i>rely</i> on it. I just keep it close.\"\n\n-Signal echoes, UES Contact Light",
+    "ITEM_EPINEPHRINE_LORE": "\"For a few seconds everything feels.. sharper. It fades quick, but it’s enough to keep me moving. Honestly, I've started taking hits on purpose just to feel it kick in again.\"\n\n\"...That sounds like an addiction, doesn't it?\"\n\n\"What? I don't <i>rely</i> on it. I just keep it close.\"\n\n-Signal echoes, UES Contact Light",
     "HERETICSEAL": "Seal of the Heretic",
     "ITEM_HERETICSEAL_NAME": "Seal of the Heretic",
     "ITEM_HERETICSEAL_PICKUP": "Gain damage based on your missing health.",
