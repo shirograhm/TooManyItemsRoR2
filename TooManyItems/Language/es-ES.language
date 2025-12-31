@@ -86,7 +86,7 @@
     "MILKCARTON": "Caja de Leche",
     "ITEM_MILKCARTON_NAME": "Caja de Leche",
     "ITEM_MILKCARTON_PICKUP": "Reduce el daño causado por élites.",
-    "ITEM_MILKCARTON_DESC": "Reduce el daño causado por élites en un <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction}% por stack)</style>.",
+    "ITEM_MILKCARTON_DESC": "Reduce el daño causado por élites en un <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction Extra Stacks}% por stack)</style>.",
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "Avión de Papel",
     "ITEM_PAPERPLANE_NAME": "Avión de Papel",

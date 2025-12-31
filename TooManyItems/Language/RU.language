@@ -81,7 +81,7 @@
     "MILKCARTON": "Упаковка из-под молока",
     "ITEM_MILKCARTON_NAME": "Упаковка из-под молока",
     "ITEM_MILKCARTON_PICKUP": "Урон от элитных врагов уменьшен.",
-    "ITEM_MILKCARTON_DESC": "Урон от элитных врагов уменьшен на <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction}% за шт.)</style>.",
+    "ITEM_MILKCARTON_DESC": "Урон от элитных врагов уменьшен на <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction Extra Stacks}% за шт.)</style>.",
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "Бумажный самолётик",
     "ITEM_PAPERPLANE_NAME": "Бумажный самолётик",

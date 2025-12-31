@@ -81,7 +81,7 @@
     "MILKCARTON": "牛奶盒",
     "ITEM_MILKCARTON_NAME": "牛奶盒",
     "ITEM_MILKCARTON_PICKUP": "减少精英敌人对你造成的伤害。",
-    "ITEM_MILKCARTON_DESC": "减少 <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction}% 每层)</style> 精英敌人对你造成的伤害。",
+    "ITEM_MILKCARTON_DESC": "减少 <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction Extra Stacks}% 每层)</style> 精英敌人对你造成的伤害。",
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "纸飞机",
     "ITEM_PAPERPLANE_NAME": "纸飞机",

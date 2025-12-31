@@ -86,7 +86,7 @@
     "MILKCARTON": "우유팩",
     "ITEM_MILKCARTON_NAME": "우유팩",
     "ITEM_MILKCARTON_PICKUP": "엘리트 적에게서 받는 피해가 감소합니다.",
-    "ITEM_MILKCARTON_DESC": "엘리트 적에게서 받는 피해가 <style=cIsUtility>{Damage Reduction}%</style><style=cStack>(중첩당 +{Damage Reduction}%)</style> 감소합니다.",
+    "ITEM_MILKCARTON_DESC": "엘리트 적에게서 받는 피해가 <style=cIsUtility>{Damage Reduction}%</style><style=cStack>(중첩당 +{Damage Reduction Extra Stacks}%)</style> 감소합니다.",
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "종이비행기",
     "ITEM_PAPERPLANE_NAME": "종이비행기",

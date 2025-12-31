@@ -86,7 +86,7 @@
     "MILKCARTON": "牛乳パック",
     "ITEM_MILKCARTON_NAME": "牛乳パック",
     "ITEM_MILKCARTON_PICKUP": "エリートの敵から受けるダメージを減少する。",
-    "ITEM_MILKCARTON_DESC": "エリートの敵から受けるダメージを<style=cIsUtility>{Damage Reduction}%</style><style=cStack>（スタックごとに+{Damage Reduction}%）</style>減少する。",
+    "ITEM_MILKCARTON_DESC": "エリートの敵から受けるダメージを<style=cIsUtility>{Damage Reduction}%</style><style=cStack>（スタックごとに+{Damage Reduction Extra Stacks}%）</style>減少する。",
     "ITEM_MILKCARTON_LORE": "",
     "PAPERPLANE": "紙飛行機",
     "ITEM_PAPERPLANE_NAME": "紙飛行機",

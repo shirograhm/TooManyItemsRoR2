@@ -86,7 +86,7 @@
     "MILKCARTON": "Milk Carton",
     "ITEM_MILKCARTON_NAME": "Milk Carton",
     "ITEM_MILKCARTON_PICKUP": "Reduce damage taken from elites.",
-    "ITEM_MILKCARTON_DESC": "Reduce damage taken from elite enemies by <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction}% per stack)</style>.",
+    "ITEM_MILKCARTON_DESC": "Reduce damage taken from elite enemies by <style=cIsUtility>{Damage Reduction}%</style> <style=cStack>(+{Damage Reduction Extra Stacks}% per stack)</style>.",
     "ITEM_MILKCARTON_LORE": "Order: Pasteurized Nutrient Milk Carton [1L, 12cm × 7cm × 7cm]\nTracking Number: 47***********\nEstimated Delivery: 08/14/2056\nShipping Method: Standard\nShipping Address: Dockside Habitat 3, Lowward District, Titan\nShipping Details:\n\nI know it’s “just milk,” but the stuff they sell locally tastes like it was filtered through engine coolant. This brand’s the only one that doesn’t curdle the moment you open it. If the carton feels warm when it arrives, don’t drink it! Last time that happened, the whole batch started <i>moving</i> on its own.\n\nLet me know if customs slaps a biohazard sticker on it again.",
     "PAPERPLANE": "Paper Plane",
     "ITEM_PAPERPLANE_NAME": "Paper Plane",
