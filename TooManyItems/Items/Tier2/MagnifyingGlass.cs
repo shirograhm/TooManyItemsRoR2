@@ -86,7 +86,10 @@ namespace TooManyItems.Items.Tier2
                     {
                         if (Util.CheckRoll(analyzeChance.Value * damageReport.damageInfo.procCoefficient, atkMaster.luck, atkMaster))
                         {
-                            vicBody.SetBuffCount(analyzedDebuff.buffIndex, count);
+                            int existingStacks = vicBody.GetBuffCount(analyzedDebuff.buffIndex);
+                            // Only add stacks if the user has more item stacks to prevent accidentally reducing stacks
+                            if (existingStacks < count)
+                                vicBody.SetBuffCount(analyzedDebuff.buffIndex, count);
                         }
                     }
                 }
