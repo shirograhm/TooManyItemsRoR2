@@ -80,7 +80,7 @@ namespace TooManyItems.Items.Tier1
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && sender.characterMotor && !sender.characterMotor.isGrounded)
                     {
-                        args.moveSpeedMultAdd += Utilities.GetLinearStacking(percentMovespeedBonus, movespeedBonusExtraStacks, count);
+                        args.moveSpeedMultAdd += Utilities.GetLinearStacking(percentMovespeedBonus, percentMovespeedBonusExtraStacks, count);
                     }
                 }
             };
