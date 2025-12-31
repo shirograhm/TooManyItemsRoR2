@@ -76,7 +76,7 @@
     "DEBITCARD": "Tarjeta de Débito",
     "ITEM_DEBITCARD_NAME": "Tarjeta de Débito",
     "ITEM_DEBITCARD_PICKUP": "Recibes un reembolso por tus compras.",
-    "ITEM_DEBITCARD_DESC": "Obtienes un reintegro del <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate}% por stack)</style> en concepto de reembolso </style> por tus compras.",
+    "ITEM_DEBITCARD_DESC": "Obtienes un reintegro del <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate Extra Stacks}% por stack)</style> en concepto de reembolso </style> por tus compras.",
     "ITEM_DEBITCARD_LORE": "",
     "EDIBLEGLUE": "Pegamento Comestible",
     "ITEM_EDIBLEGLUE_NAME": "Pegamento Comestible",

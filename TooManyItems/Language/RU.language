@@ -71,7 +71,7 @@
     "DEBITCARD": "Дебетовая карта",
     "ITEM_DEBITCARD_NAME": "Дебетовая карта",
     "ITEM_DEBITCARD_PICKUP": "Получайте кэшбэк при покупках.",
-    "ITEM_DEBITCARD_DESC": "Получайте кэшбэк <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate}% за шт.)</style> </style> при покупках.",
+    "ITEM_DEBITCARD_DESC": "Получайте кэшбэк <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate Extra Stacks}% за шт.)</style> </style> при покупках.",
     "ITEM_DEBITCARD_LORE": "",
     "EDIBLEGLUE": "Съедобный клей",
     "ITEM_EDIBLEGLUE_NAME": "Съедобный клей",

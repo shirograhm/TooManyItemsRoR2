@@ -23,6 +23,13 @@ namespace TooManyItems.Items.Tier1
             "Percentage of spent gold refunded as rebate.",
             ["ITEM_DEBITCARD_DESC"]
         );
+        public static ConfigurableValue<float> rebateExtraStacks = new(
+            "Item: Debit Card",
+            "Rebate Extra Stacks",
+            10f,
+            "Percentage of spent gold refunded as rebate for extra stacks.",
+            ["ITEM_DEBITCARD_DESC"]
+        );
         public static float rebatePercent = rebate.Value / 100f;
 
         internal static void Init()
@@ -44,7 +51,7 @@ namespace TooManyItems.Items.Tier1
                     int count = activator.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        float refundScaling = Utilities.GetHyperbolicStacking(rebatePercent, count);
+                        float refundScaling = Utilities.GetHyperbolicStacking(rebatePercent, rebateExtraStacks, count);
                         activator.GiveMoney(Convert.ToUInt32(moneyCost * refundScaling));
                     }
                 }

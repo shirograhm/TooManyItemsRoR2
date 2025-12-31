@@ -76,7 +76,7 @@
     "DEBITCARD": "직불 카드",
     "ITEM_DEBITCARD_NAME": "직불 카드",
     "ITEM_DEBITCARD_PICKUP": "구매 시 환급금을 돌려받습니다.",
-    "ITEM_DEBITCARD_DESC": "구매 금액의 <style=cIsUtility>{Rebate}%<style=cStack>(중첩당 +{Rebate}%)</style>만큼</style> 돌려받습니다.",
+    "ITEM_DEBITCARD_DESC": "구매 금액의 <style=cIsUtility>{Rebate}%<style=cStack>(중첩당 +{Rebate Extra Stacks}%)</style>만큼</style> 돌려받습니다.",
     "ITEM_DEBITCARD_LORE": "",
     "EDIBLEGLUE": "식용 접착제",
     "ITEM_EDIBLEGLUE_NAME": "식용 접착제",

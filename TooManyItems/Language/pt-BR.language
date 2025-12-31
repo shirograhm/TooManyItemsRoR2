@@ -76,7 +76,7 @@
     "DEBITCARD": "Cartão de Débito",
     "ITEM_DEBITCARD_NAME": "Cartão de Débito",
     "ITEM_DEBITCARD_PICKUP": "Receba um cashback em compras.",
-    "ITEM_DEBITCARD_DESC": "Receba <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate}% por acúmulo)</style> em cashback</style> em compras.",
+    "ITEM_DEBITCARD_DESC": "Receba <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate Extra Stacks}% por acúmulo)</style> em cashback</style> em compras.",
     "ITEM_DEBITCARD_LORE": "",
     "EDIBLEGLUE": "Cola Comestível",
     "ITEM_EDIBLEGLUE_NAME": "Cola Comestível",

@@ -71,7 +71,7 @@
     "DEBITCARD": "银行卡",
     "ITEM_DEBITCARD_NAME": "银行卡",
     "ITEM_DEBITCARD_PICKUP": "买东西有折扣。",
-    "ITEM_DEBITCARD_DESC": "购买时获得 <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate}% 每层)</style> 折扣</style>。",
+    "ITEM_DEBITCARD_DESC": "购买时获得 <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate Extra Stacks}% 每层)</style> 折扣</style>。",
     "ITEM_DEBITCARD_LORE": "",
     "EDIBLEGLUE": "可食用胶水",
     "ITEM_EDIBLEGLUE_NAME": "可食用胶水",

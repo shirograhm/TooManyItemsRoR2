@@ -76,7 +76,7 @@
     "DEBITCARD": "Debit Card",
     "ITEM_DEBITCARD_NAME": "Debit Card",
     "ITEM_DEBITCARD_PICKUP": "Get cashback on purchases.",
-    "ITEM_DEBITCARD_DESC": "Get a <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate}% per stack)</style> rebate</style> on purchases.",
+    "ITEM_DEBITCARD_DESC": "Get a <style=cIsUtility>{Rebate}% <style=cStack>(+{Rebate Extra Stacks}% per stack)</style> rebate</style> on purchases.",
     "ITEM_DEBITCARD_LORE": "Order: Debit Card, Standard Issue [12g, 8.5cm × 5.4cm]\nTracking Number: 77***********\nEstimated Delivery: 10/19/2057\nShipping Method: Priority\nShipping Address: Finance Kiosk 12C, Upper Dock, UES Contact Light\nShipping Details:\n\nTicket Number: #44129\nWe've reviewed your request for a replacement debit card. According to the report, the previous card \"over-performed during routine purchases\" and was declined by three separate terminals for unusual activity.\n\nPer protocol, we are issuing a new card and flagging the old one for destruction. Repeated swipes on the old card appeared to trigger additional reviews from Accounting.",
     "EDIBLEGLUE": "Edible Glue",
     "ITEM_EDIBLEGLUE_NAME": "Edible Glue",

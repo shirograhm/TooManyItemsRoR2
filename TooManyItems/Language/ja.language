@@ -76,7 +76,7 @@
     "DEBITCARD": "デビットカード",
     "ITEM_DEBITCARD_NAME": "デビットカード",
     "ITEM_DEBITCARD_PICKUP": "キャッシュバックキャンペーン中",
-    "ITEM_DEBITCARD_DESC": "購入時に<style=cIsUtility>{Rebate}%<style=cStack>（スタックごとに+{Rebate}%）</style>の割引</style>を受ける。",
+    "ITEM_DEBITCARD_DESC": "購入時に<style=cIsUtility>{Rebate}%<style=cStack>（スタックごとに+{Rebate Extra Stacks}%）</style>の割引</style>を受ける。",
     "ITEM_DEBITCARD_LORE": "",
     "EDIBLEGLUE": "食用のり",
     "ITEM_EDIBLEGLUE_NAME": "食用のり",
