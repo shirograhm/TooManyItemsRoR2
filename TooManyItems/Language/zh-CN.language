@@ -101,7 +101,7 @@
     "REDBLUEGLASSES": "3D眼镜",
     "ITEM_REDBLUEGLASSES_NAME": "3D眼镜",
     "ITEM_REDBLUEGLASSES_PICKUP": "获得少量暴击几率和暴击伤害。",
-    "ITEM_REDBLUEGLASSES_DESC": "获得 <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance}% 每层)</style> 暴击几率</style> 和 <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage}% 每层)</style> 暴击伤害</style>。",
+    "ITEM_REDBLUEGLASSES_DESC": "获得 <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance Extra Stacks}% 每层)</style> 暴击几率</style> 和 <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage Extra Stacks}% 每层)</style> 暴击伤害</style>。",
     "ITEM_REDBLUEGLASSES_LORE": "",
     "RUBBERDUCKY": "橡皮鸭",
     "ITEM_RUBBERDUCKY_NAME": "橡皮鸭",

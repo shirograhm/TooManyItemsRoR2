@@ -101,7 +101,7 @@
     "REDBLUEGLASSES": "3D-очки",
     "ITEM_REDBLUEGLASSES_NAME": "3D-очки",
     "ITEM_REDBLUEGLASSES_PICKUP": "Увеличивает шанс критического удара и критический урон.",
-    "ITEM_REDBLUEGLASSES_DESC": "Увеличивает шанс критического удара на <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance}% за шт.)</style></style> и критический урон на <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage}% за шт.)</style></style>.",
+    "ITEM_REDBLUEGLASSES_DESC": "Увеличивает шанс критического удара на <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance Extra Stacks}% за шт.)</style></style> и критический урон на <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage Extra Stacks}% за шт.)</style></style>.",
     "ITEM_REDBLUEGLASSES_LORE": "",
     "RUBBERDUCKY": "Резиновая уточка",
     "ITEM_RUBBERDUCKY_NAME": "Резиновая уточка",

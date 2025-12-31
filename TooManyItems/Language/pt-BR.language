@@ -106,7 +106,7 @@
     "REDBLUEGLASSES": "Óculos 3D",
     "ITEM_REDBLUEGLASSES_NAME": "Óculos 3D",
     "ITEM_REDBLUEGLASSES_PICKUP": "Cause mais críticos, mais fortes.",
-    "ITEM_REDBLUEGLASSES_DESC": "Ganhe <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance}% por acúmulo) de </style> chance de crítico</style> e <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage}% por acúmulo)</style> de dano crítico</style>.",
+    "ITEM_REDBLUEGLASSES_DESC": "Ganhe <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance Extra Stacks}% por acúmulo) de </style> chance de crítico</style> e <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage Extra Stacks}% por acúmulo)</style> de dano crítico</style>.",
     "ITEM_REDBLUEGLASSES_LORE": "",
     "RUBBERDUCKY": "Patinho de Borracha",
     "ITEM_RUBBERDUCKY_NAME": "Patinho de Borracha",

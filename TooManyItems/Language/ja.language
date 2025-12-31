@@ -106,7 +106,7 @@
     "REDBLUEGLASSES": "3Dメガネ",
     "ITEM_REDBLUEGLASSES_NAME": "3Dメガネ",
     "ITEM_REDBLUEGLASSES_PICKUP": "クリティカル率が上がってクリティカルダメージも上がる。",
-    "ITEM_REDBLUEGLASSES_DESC": "クリティカル率が<style=cIsDamage>{Crit Chance}%<style=cStack>（スタックごとに+{Crit Chance}%）</style>増加し</style>、クリティカルダメージが<style=cIsDamage>{Crit Damage}%<style=cStack>（スタックごとに+{Crit Damage}%）</style>増加する</style>。失われた預言者のレンズ（Lost Seer's Lenses）を所持するとこのアイテムは破損される。",
+    "ITEM_REDBLUEGLASSES_DESC": "クリティカル率が<style=cIsDamage>{Crit Chance}%<style=cStack>（スタックごとに+{Crit Chance Extra Stacks}%）</style>増加し</style>、クリティカルダメージが<style=cIsDamage>{Crit Damage Extra Stacks}%<style=cStack>（スタックごとに+{Crit Damage}%）</style>増加する</style>。失われた預言者のレンズ（Lost Seer's Lenses）を所持するとこのアイテムは破損される。",
     "ITEM_REDBLUEGLASSES_LORE": "",
     "RUBBERDUCKY": "ラバーダッキー",
     "ITEM_RUBBERDUCKY_NAME": "ラバーダッキー",

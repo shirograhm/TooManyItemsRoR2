@@ -106,7 +106,7 @@
     "REDBLUEGLASSES": "3D 안경",
     "ITEM_REDBLUEGLASSES_NAME": "3D 안경",
     "ITEM_REDBLUEGLASSES_PICKUP": "치명타확률과 치명타피해를 증가시킵니다.",
-    "ITEM_REDBLUEGLASSES_DESC": "<style=cIsDamage>치명타 확률</style>과 <style=cIsDamage>치명타 피해</style>가 <style=cIsDamage>{Crit Chance}%<style=cStack>(중첩당 +{Crit Chance}%)</style></style> 증가합니다.",
+    "ITEM_REDBLUEGLASSES_DESC": "<style=cIsDamage>치명타 확률</style>과 <style=cIsDamage>치명타 피해</style>가 <style=cIsDamage>{Crit Chance}%<style=cStack>(중첩당 +{Crit Chance Extra Stacks}%)</style></style> 증가합니다.",
     "ITEM_REDBLUEGLASSES_LORE": "",
     "RUBBERDUCKY": "고무 오리",
     "ITEM_RUBBERDUCKY_NAME": "고무 오리",

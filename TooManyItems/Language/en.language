@@ -106,7 +106,7 @@
     "REDBLUEGLASSES": "3D Glasses",
     "ITEM_REDBLUEGLASSES_NAME": "3D Glasses",
     "ITEM_REDBLUEGLASSES_PICKUP": "Crit more and crit harder.",
-    "ITEM_REDBLUEGLASSES_DESC": "Gain <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance}% per stack)</style> crit chance</style> and <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage}% per stack)</style> crit damage</style>.",
+    "ITEM_REDBLUEGLASSES_DESC": "Gain <style=cIsDamage>{Crit Chance}% <style=cStack>(+{Crit Chance Extra Stacks}% per stack)</style> crit chance</style> and <style=cIsDamage>{Crit Damage}% <style=cStack>(+{Crit Damage Extra Stacks}% per stack)</style> crit damage</style>.",
     "ITEM_REDBLUEGLASSES_LORE": "",
     "RUBBERDUCKY": "Rubber Ducky",
     "ITEM_RUBBERDUCKY_NAME": "Rubber Ducky",
