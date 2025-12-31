@@ -106,7 +106,7 @@
     "RUBBERDUCKY": "Резиновая уточка",
     "ITEM_RUBBERDUCKY_NAME": "Резиновая уточка",
     "ITEM_RUBBERDUCKY_PICKUP": "Немного увеличивает броню.",
-    "ITEM_RUBBERDUCKY_DESC": "Увеличивает броню на <style=cEvent>{Armor} <style=cStack>(+{Armor} за шт.)</style></style>.",
+    "ITEM_RUBBERDUCKY_DESC": "Увеличивает броню на <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} за шт.)</style></style>.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "Канцелярская кнопка",
     "ITEM_THUMBTACK_NAME": "Канцелярская кнопка",

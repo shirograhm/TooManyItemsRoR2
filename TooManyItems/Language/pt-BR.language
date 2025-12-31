@@ -111,7 +111,7 @@
     "RUBBERDUCKY": "Patinho de Borracha",
     "ITEM_RUBBERDUCKY_NAME": "Patinho de Borracha",
     "ITEM_RUBBERDUCKY_PICKUP": "Ganhe armadura.",
-    "ITEM_RUBBERDUCKY_DESC": "Ganhe <style=cEvent>{Armor} <style=cStack>(+{Armor} por acúmulo)</style> de armadura</style>.",
+    "ITEM_RUBBERDUCKY_DESC": "Ganhe <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} por acúmulo)</style> de armadura</style>.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "Alfinete",
     "ITEM_THUMBTACK_NAME": "Alfinete",

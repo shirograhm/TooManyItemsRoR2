@@ -111,7 +111,7 @@
     "RUBBERDUCKY": "고무 오리",
     "ITEM_RUBBERDUCKY_NAME": "고무 오리",
     "ITEM_RUBBERDUCKY_PICKUP": "방어력이 증가합니다.",
-    "ITEM_RUBBERDUCKY_DESC": "<style=cIsHealing>방어력</style>이 <style=cIsHealing>{Armor}<style=cStack>(중첩당 +{Armor})</style></style> 증가합니다.",
+    "ITEM_RUBBERDUCKY_DESC": "<style=cIsHealing>방어력</style>이 <style=cIsHealing>{Armor}<style=cStack>(중첩당 +{Armor Extra Stacks})</style></style> 증가합니다.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "압정",
     "ITEM_THUMBTACK_NAME": "압정",

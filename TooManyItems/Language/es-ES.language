@@ -111,7 +111,7 @@
     "RUBBERDUCKY": "Patito de Goma",
     "ITEM_RUBBERDUCKY_NAME": "Patito de Goma",
     "ITEM_RUBBERDUCKY_PICKUP": "Obtienes armadura.",
-    "ITEM_RUBBERDUCKY_DESC": "Obtienes <style=cEvent>{Armor} <style=cStack>(+{Armor} por stack)</style> de armadura</style>.",
+    "ITEM_RUBBERDUCKY_DESC": "Obtienes <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} por stack)</style> de armadura</style>.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "Pin",
     "ITEM_THUMBTACK_NAME": "Pin",

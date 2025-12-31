@@ -23,6 +23,13 @@ namespace TooManyItems.Items.Tier1
             "Amount of flat armor gained per stack.",
             ["ITEM_RUBBERDUCKY_DESC"]
         );
+        public static ConfigurableValue<int> armorPerExtraStack = new(
+            "Item: Rubber Ducky",
+            "Armor Extra Stacks",
+            5,
+            "Amount of flat armor gained per extra stack.",
+            ["ITEM_RUBBERDUCKY_DESC"]
+        );
 
         internal static void Init()
         {
@@ -40,7 +47,7 @@ namespace TooManyItems.Items.Tier1
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        args.armorAdd += count * armorPerStack.Value;
+                        args.armorAdd += Utilities.GetLinearStacking(armorPerStack.Value, armorPerExtraStack.Value, count);
                     }
                 }
             };

@@ -111,7 +111,7 @@
     "RUBBERDUCKY": "Rubber Ducky",
     "ITEM_RUBBERDUCKY_NAME": "Rubber Ducky",
     "ITEM_RUBBERDUCKY_PICKUP": "Gain armor.",
-    "ITEM_RUBBERDUCKY_DESC": "Gain <style=cEvent>{Armor} <style=cStack>(+{Armor} per stack)</style> armor</style>.",
+    "ITEM_RUBBERDUCKY_DESC": "Gain <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} per stack)</style> armor</style>.",
     "ITEM_RUBBERDUCKY_LORE": "<style=cUserSetting><b>LOST & FOUND — SHOWER UNIT 6</b></style>\n\nThe janitor found a rubber duck during nightly cleaning in the corner stall. The item has been placed in the \"Urgent Claims\" bin. Please refrain from bringing personal objects into the communal showers. Thank you.",
     "THUMBTACK": "Thumbtack",
     "ITEM_THUMBTACK_NAME": "Thumbtack",

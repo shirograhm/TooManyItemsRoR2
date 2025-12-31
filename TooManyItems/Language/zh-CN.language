@@ -106,7 +106,7 @@
     "RUBBERDUCKY": "橡皮鸭",
     "ITEM_RUBBERDUCKY_NAME": "橡皮鸭",
     "ITEM_RUBBERDUCKY_PICKUP": "获得少量护甲。",
-    "ITEM_RUBBERDUCKY_DESC": "获得 <style=cEvent>{Armor} <style=cStack>(+{Armor} 每层)</style> 护甲</style>。",
+    "ITEM_RUBBERDUCKY_DESC": "获得 <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} 每层)</style> 护甲</style>。",
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "图钉",
     "ITEM_THUMBTACK_NAME": "图钉",

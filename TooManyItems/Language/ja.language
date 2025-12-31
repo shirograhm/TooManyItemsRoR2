@@ -111,7 +111,7 @@
     "RUBBERDUCKY": "ラバーダッキー",
     "ITEM_RUBBERDUCKY_NAME": "ラバーダッキー",
     "ITEM_RUBBERDUCKY_PICKUP": "アーマーが増加する。",
-    "ITEM_RUBBERDUCKY_DESC": "アーマーが<style=cEvent>{Armor}<style=cStack>（スタックごとに+{Armor}）</style>増加する</style>。",
+    "ITEM_RUBBERDUCKY_DESC": "アーマーが<style=cEvent>{Armor}<style=cStack>（スタックごとに+{Armor Extra Stacks}）</style>増加する</style>。",
     "ITEM_RUBBERDUCKY_LORE": "",
     "THUMBTACK": "画鋲",
     "ITEM_THUMBTACK_NAME": "画鋲",
