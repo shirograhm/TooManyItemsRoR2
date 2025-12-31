@@ -78,7 +78,7 @@ namespace TooManyItems.Items.Tier1
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        args.attackSpeedMultAdd += sender.GetBuffCount(attackSpeedBuff) * attackSpeedOnHitPercent;
+                        args.attackSpeedMultAdd += Utilities.GetLinearStacking(attackSpeedOnHitPercent, sender.GetBuffCount(attackSpeedBuff));
                     }
                 }
             };
