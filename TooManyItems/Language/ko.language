@@ -127,7 +127,7 @@
     "BROKENMASK": "깨진 가면",
     "ITEM_BROKENMASK_NAME": "깨진 가면",
     "ITEM_BROKENMASK_PICKUP": "적에게 피해를 입히면 대상 최대 체력의 일정 비율만큼 화상 피해를 줍니다.",
-    "ITEM_BROKENMASK_DESC": "적에게 피해를 입히면 대상의 <style=cIsHealing>최대 체력</style>의 <style=cIsDamage>{Percent Burn}%</style><style=cStack>(중첩당 +{Percent Burn}%)</style>에 해당하는 <color=#CB8DF7>지속피해</color>를 <style=cIsUtility>{Burn Duration}초</style>동안 입힙니다.",
+    "ITEM_BROKENMASK_DESC": "적에게 피해를 입히면 대상의 <style=cIsHealing>최대 체력</style>의 <style=cIsDamage>{Percent Burn}%</style><style=cStack>(중첩당 +{Percent Burn Extra Stacks}%)</style>에 해당하는 <color=#CB8DF7>지속피해</color>를 <style=cIsUtility>{Burn Duration}초</style>동안 입힙니다.",
     "ITEM_BROKENMASK_LORE": "",
     "EPINEPHRINE": "에피네프린",
     "ITEM_EPINEPHRINE_NAME": "에피네프린",

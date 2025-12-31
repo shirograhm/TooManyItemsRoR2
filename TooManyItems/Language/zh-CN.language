@@ -122,7 +122,7 @@
     "BROKENMASK": "痛苦面具",
     "ITEM_BROKENMASK_NAME": "痛苦面具",
     "ITEM_BROKENMASK_PICKUP": "造成伤害会燃烧敌人最大生命值的一部分。",
-    "ITEM_BROKENMASK_DESC": "造成伤害燃烧敌人 <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn}% 每层)</style> 最大生命值，持续 <style=cIsUtility>{Burn Duration} 秒</style>。",
+    "ITEM_BROKENMASK_DESC": "造成伤害燃烧敌人 <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn Extra Stacks}% 每层)</style> 最大生命值，持续 <style=cIsUtility>{Burn Duration} 秒</style>。",
     "ITEM_BROKENMASK_LORE": "",
     "EPINEPHRINE": "肾上腺素",
     "ITEM_EPINEPHRINE_NAME": "肾上腺素",

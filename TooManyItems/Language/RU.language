@@ -122,7 +122,7 @@
     "BROKENMASK": "Поломанная маска",
     "ITEM_BROKENMASK_NAME": "Поломанная маска",
     "ITEM_BROKENMASK_PICKUP": "Нанесение урона поджигает врагов. Урон поджога зависит от максимального здоровья цели.",
-    "ITEM_BROKENMASK_DESC": "Нанесение урона поджигает врагов на <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn}% за шт.)</style> от их максимального здоровья в течение <style=cIsUtility>{Burn Duration} секунд</style>.",
+    "ITEM_BROKENMASK_DESC": "Нанесение урона поджигает врагов на <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn Extra Stacks}% за шт.)</style> от их максимального здоровья в течение <style=cIsUtility>{Burn Duration} секунд</style>.",
     "ITEM_BROKENMASK_LORE": "",
     "EPINEPHRINE": "Эпинефрин",
     "ITEM_EPINEPHRINE_NAME": "Эпинефрин",

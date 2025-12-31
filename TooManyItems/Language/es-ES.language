@@ -127,7 +127,7 @@
     "BROKENMASK": "Máscara Rota",
     "ITEM_BROKENMASK_NAME": "Máscara Rota",
     "ITEM_BROKENMASK_PICKUP": "Infligir daño y quema a los enemigos por un porcentaje de su salud máxima..",
-    "ITEM_BROKENMASK_DESC": "Hacer daño a los enemigos los quema por <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn}% por stack)</style> de su salud máxima por <style=cIsUtility>{Burn Duration} segundos</style>.",
+    "ITEM_BROKENMASK_DESC": "Hacer daño a los enemigos los quema por <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn Extra Stacks}% por stack)</style> de su salud máxima por <style=cIsUtility>{Burn Duration} segundos</style>.",
     "ITEM_BROKENMASK_LORE": "",
     "EPINEPHRINE": "Epinefrina",
     "ITEM_EPINEPHRINE_NAME": "Epinefrina",

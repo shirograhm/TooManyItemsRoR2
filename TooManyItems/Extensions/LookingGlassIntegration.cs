@@ -93,7 +93,7 @@ namespace TooManyItems.Extensions
                         new("Damage Dealt: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            List<float> values = [Utilities.GetLinearStacking(BrokenMask.burnDamagePercent, itemCount)];
+                            List<float> values = [Utilities.GetLinearStacking(BrokenMask.percentBurnDamage, BrokenMask.percentBurnDamageExtraStacks, itemCount)];
 
                             if (master && master.inventory && master.inventory.GetComponent<BrokenMask.Statistics>())
                                 values.Add(master.inventory.GetComponent<BrokenMask.Statistics>().TotalDamageDealt);

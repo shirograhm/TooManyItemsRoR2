@@ -127,7 +127,7 @@
     "BROKENMASK": "壊れた仮面",
     "ITEM_BROKENMASK_NAME": "壊れた仮面",
     "ITEM_BROKENMASK_PICKUP": "ダメージを与えると、最大体力の一定割合を燃やす。",
-    "ITEM_BROKENMASK_DESC": "ダメージを与えると、最大体力の<style=cIsDamage>{Percent Burn}%</style><style=cStack>（スタックごとに+{Percent Burn}%）</style>のダメージを<style=cIsUtility>{Burn Duration}秒間</style>与える。",
+    "ITEM_BROKENMASK_DESC": "ダメージを与えると、最大体力の<style=cIsDamage>{Percent Burn}%</style><style=cStack>（スタックごとに+{Percent Burn Extra Stacks}%）</style>のダメージを<style=cIsUtility>{Burn Duration}秒間</style>与える。",
     "ITEM_BROKENMASK_LORE": "",
     "EPINEPHRINE": "アドレナリン",
     "ITEM_EPINEPHRINE_NAME": "アドレナリン",

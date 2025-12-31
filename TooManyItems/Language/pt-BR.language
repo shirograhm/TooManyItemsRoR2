@@ -127,7 +127,7 @@
     "BROKENMASK": "Máscara Partida",
     "ITEM_BROKENMASK_NAME": "Máscara Partida",
     "ITEM_BROKENMASK_PICKUP": "Causar dano queima inimigos em um percentual da vida máxima deles.",
-    "ITEM_BROKENMASK_DESC": "Causar dano queima inimigos em <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn}% por acúmulo)</style> da vida máxima deles <style=cIsUtility>durante {Burn Duration} segundos</style>.",
+    "ITEM_BROKENMASK_DESC": "Causar dano queima inimigos em <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn Extra Stacks}% por acúmulo)</style> da vida máxima deles <style=cIsUtility>durante {Burn Duration} segundos</style>.",
     "ITEM_BROKENMASK_LORE": "",
     "EPINEPHRINE": "Epinefrina",
     "ITEM_EPINEPHRINE_NAME": "Epinefrina",

@@ -127,7 +127,7 @@
     "BROKENMASK": "Broken Mask",
     "ITEM_BROKENMASK_NAME": "Broken Mask",
     "ITEM_BROKENMASK_PICKUP": "Dealing damage burns enemies for a percentage of their max health.",
-    "ITEM_BROKENMASK_DESC": "Dealing damage burns enemies for <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn}% per stack)</style> of their max health over <style=cIsUtility>{Burn Duration} seconds</style>.",
+    "ITEM_BROKENMASK_DESC": "Dealing damage burns enemies for <style=cIsDamage>{Percent Burn}%</style> <style=cStack>(+{Percent Burn Extra Stacks}% per stack)</style> of their max health over <style=cIsUtility>{Burn Duration} seconds</style>.",
     "ITEM_BROKENMASK_LORE": "\"So… the mask's broken. Cracked clean through. Still works, though. Every time I hit something, it starts burning like I insulted its entire family.\"\n\n\"Actual fire?\"\n\n\"No idea. Doesn't look like fire. Doesn't act like fire. But things definitely regret being near me.\"\n\n\"And you're comfortable wearing that?\"\n\n\"Comfortable? No. But is it effective? Absolutely.\"\n\n-Signal echoes, UES Contact Light",
     "EPINEPHRINE": "Epinephrine",
     "ITEM_EPINEPHRINE_NAME": "Epinephrine",
