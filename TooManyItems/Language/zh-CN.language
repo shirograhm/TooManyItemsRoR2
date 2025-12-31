@@ -147,7 +147,7 @@
     "MAGNIFYINGGLASS": "放大镜",
     "ITEM_MAGNIFYINGGLASS_NAME": "放大镜",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "暴击有时会使敌人受到更多伤害。",
-    "ITEM_MAGNIFYINGGLASS_DESC": "获得 <style=cIsDamage>{Crit Chance}% 暴击几率</style>。<style=cIsDamage>暴击</style> 有 <style=cIsUtility>{Analyze Chance}%</style> 几率 <style=cWorldEvent>分解</style> 敌人，使其受到额外 <style=cIsDamage>{Damage Taken Bonus}%</style> <style=cStack>(+{Damage Taken Bonus}% 每层)</style> 伤害。",
+    "ITEM_MAGNIFYINGGLASS_DESC": "获得 <style=cIsDamage>{Crit Chance}% 暴击几率</style>。<style=cIsDamage>暴击</style> 有 <style=cIsUtility>{Analyze Chance}%</style> 几率 <style=cWorldEvent>分解</style> 敌人，使其受到额外 <style=cIsDamage>{Damage Taken Bonus}%</style> <style=cStack>(+{Damage Taken Bonus Extra Stacks}% 每层)</style> 伤害。",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "灵魂之戒",
     "ITEM_SOULRING_NAME": "灵魂之戒",

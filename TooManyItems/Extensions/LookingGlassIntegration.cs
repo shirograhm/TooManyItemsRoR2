@@ -237,8 +237,8 @@ namespace TooManyItems.Extensions
                             return
                             [
                                 // Use luck from master if possible
-                                master ? Utilities.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent, master.luck) : MagnifyingGlass.analyzeChancePercent,
-                                Utilities.GetLinearStacking(MagnifyingGlass.damageTakenBonusPercent, itemCount)
+                                master ? Utilities.GetChanceAfterLuck(MagnifyingGlass.percentAnalyzeChance, master.luck) : MagnifyingGlass.percentAnalyzeChance,
+                                Utilities.GetLinearStacking(MagnifyingGlass.percentDamageTakenBonus, itemCount)
                             ];
                         });
                 if (PaperPlane.isEnabled.Value)

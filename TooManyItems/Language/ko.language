@@ -152,7 +152,7 @@
     "MAGNIFYINGGLASS": "돋보기",
     "ITEM_MAGNIFYINGGLASS_NAME": "돋보기",
     "ITEM_MAGNIFYINGGLASS_PICKUP": "치명타는 때때로 적에게 더 많은 피해를 입힙니다.",
-    "ITEM_MAGNIFYINGGLASS_DESC": "<style=cIsDamage>치명타 확률</style>이 <style=cIsDamage>{Crit Chance}%</style> 증가합니다. <style=cIsDamage>치명타</style> 적중 시 <style=cIsUtility>{Analyze Chance}%</style>확률로 적을 분석하며, <style=cWorldEvent>분석된 모든 적</style>은, 받는 모든 피해량이 <style=cIsDamage>{Damage Taken Bonus}%</style><style=cStack>(중첩당 +{Damage Taken Bonus}%)</style> 증가합니다.",
+    "ITEM_MAGNIFYINGGLASS_DESC": "<style=cIsDamage>치명타 확률</style>이 <style=cIsDamage>{Crit Chance}%</style> 증가합니다. <style=cIsDamage>치명타</style> 적중 시 <style=cIsUtility>{Analyze Chance}%</style>확률로 적을 분석하며, <style=cWorldEvent>분석된 모든 적</style>은, 받는 모든 피해량이 <style=cIsDamage>{Damage Taken Bonus}%</style><style=cStack>(중첩당 +{Damage Taken Bonus Extra Stacks}%)</style> 증가합니다.",
     "ITEM_MAGNIFYINGGLASS_LORE": "",
     "SOULRING": "영혼 반지",
     "ITEM_SOULRING_NAME": "영혼 반지",
