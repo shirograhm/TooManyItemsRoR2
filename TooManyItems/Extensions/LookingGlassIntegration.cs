@@ -122,7 +122,7 @@ namespace TooManyItems.Extensions
                         new("Burn Damage: ", ItemStatsDef.ValueType.Health, ItemStatsDef.MeasurementUnits.PercentHealth)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetReverseExponentialStacking(Crucifix.maxHealthBurnAmountPercent, Crucifix.maxHealthBurnAmountReductionPercent, itemCount)];
+                            return [Utilities.GetReverseExponentialStacking(Crucifix.percentMaxHealthBurnAmount, Crucifix.percentMaxHealthBurnAmountReduction, itemCount)];
                         });
                 if (DebitCard.isEnabled.Value)
                     RegisterStatsForItem(DebitCard.itemDef, [
