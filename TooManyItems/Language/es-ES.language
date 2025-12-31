@@ -30,7 +30,7 @@
     "AMNESIA": "Amnesia",
     "ITEM_AMNESIA_NAME": "Amnesia",
     "ITEM_AMNESIA_PICKUP": "Librate de la muerte <style=cDeath>por un precio</style>. Se consume tras el uso.",
-    "ITEM_AMNESIA_DESC": "<style=cIsUtility>Al morir</style>, este objeto se <style=cIsUtility>consumirá</style> y <style=cIsHealing>regresarás a la vida</style> con <style=cIsHealing>3 segundos de invulnerabilidad</style>. Al revivir, <style=cDeath>tu inventario se generará aleatoriamente</style>.",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>Al morir</style>, este objeto se <style=cIsUtility>consumirá</style> y <style=cIsHealing>regresarás a la vida</style> con <style=cIsHealing>{Invulnerability Duration} segundos de invulnerabilidad</style>. Al revivir, <style=cDeath>tu inventario se generará aleatoriamente</style>.",
     "ITEM_AMNESIA_LORE": "",
     "DEPLETEDAMNESIA": "Amnesia (consumido)",
     "ITEM_DEPLETEDAMNESIA_NAME": "Amnesia (consumido)",

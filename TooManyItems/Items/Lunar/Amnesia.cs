@@ -20,6 +20,13 @@ namespace TooManyItems.Items.Lunar
             "Whether or not the item is enabled.",
             ["ITEM_LUNARREVIVE_DESC"]
         );
+        public static ConfigurableValue<float> invulnerabilityDuration = new(
+            "Item: Amnesia",
+            "Invulnerability Duration",
+            3f,
+            "Duration of invulnerability after revival in seconds.",
+            ["ITEM_LUNARREVIVE_DESC"]
+        );
 
         internal static void Init()
         {
@@ -49,7 +56,7 @@ namespace TooManyItems.Items.Lunar
 
                         // Revive the player with invulnerability
                         master.Respawn(vector, Quaternion.Euler(0f, TooManyItems.RandGen.Next(0, 360), 0f), wasRevivedMidStage: true);
-                        if (master.GetBody()) master.GetBody().AddTimedBuff(RoR2Content.Buffs.Immune, 3f);
+                        if (master.GetBody()) master.GetBody().AddTimedBuff(RoR2Content.Buffs.Immune, invulnerabilityDuration.Value);
 
                         // Reset state machines
                         GameObject rezEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HippoRezEffect");
@@ -87,7 +94,8 @@ namespace TooManyItems.Items.Lunar
             Dictionary<ItemTier, int> tierCounts = [];
 
             var itemStacks = master.inventory.permanentItemStacks;
-            int durationPerItem = 3000 / 2 / itemStacks.GetTotalItemStacks();
+            int immuneDurationMillis = Mathf.RoundToInt(invulnerabilityDuration.Value * 1000f);
+            int durationPerItem = immuneDurationMillis / 2 / itemStacks.GetTotalItemStacks();
 
             for (int i = 0; i < ItemCatalog.itemCount; i++)
             {

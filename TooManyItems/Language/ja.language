@@ -30,7 +30,7 @@
     "AMNESIA": "健忘症",
     "ITEM_AMNESIA_NAME": "健忘症",
     "ITEM_AMNESIA_PICKUP": "<style=cDeath>ある価格で</style>死から免れる。使用すると消費される。",
-    "ITEM_AMNESIA_DESC": "<style=cIsUtility>死んだ時</style>、このアイテムが<style=cIsUtility>消費され</style> 、<style=cIsHealing>息を吹き返す</style>。<style=cIsHealing>復活直後の 3 秒は無敵になる</style>。復活時に、<style=cDeath>所持アイテムをランダム化する</style>。",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>死んだ時</style>、このアイテムが<style=cIsUtility>消費され</style> 、<style=cIsHealing>息を吹き返す</style>。<style=cIsHealing>復活直後の {Invulnerability Duration} 秒は無敵になる</style>。復活時に、<style=cDeath>所持アイテムをランダム化する</style>。",
     "ITEM_AMNESIA_LORE": "",
     "DEPLETEDAMNESIA": "健忘症 (消費済)",
     "ITEM_DEPLETEDAMNESIA_NAME": "健忘症 (消費済)",

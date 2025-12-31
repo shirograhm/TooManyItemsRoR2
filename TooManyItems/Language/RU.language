@@ -25,7 +25,7 @@
     "AMNESIA": "Амнезия",
     "ITEM_AMNESIA_NAME": "Амнезия",
     "ITEM_AMNESIA_PICKUP": "Обман смерти <style=cDeath>за определенную цену</style>. Исчезает после использования.",
-    "ITEM_AMNESIA_DESC": "<style=cIsUtility>При смерти</style> этот предмет будет <style=cIsUtility>израсходован</style>, вы <style=cIsHealing>оживете</style> и станете <style=cIsHealing>неуязвимы на 3 секунды</style>. После возрождения, <style=cDeath>содержимое вашего инвентаря будет перемешано случайным образом</style>.",
+    "ITEM_AMNESIA_DESC": "<style=cIsUtility>При смерти</style> этот предмет будет <style=cIsUtility>израсходован</style>, вы <style=cIsHealing>оживете</style> и станете <style=cIsHealing>неуязвимы на {Invulnerability Duration} секунды</style>. После возрождения, <style=cDeath>содержимое вашего инвентаря будет перемешано случайным образом</style>.",
     "ITEM_AMNESIA_LORE": "",
     "DEPLETEDAMNESIA": "Амнезия (использовано)",
     "ITEM_DEPLETEDAMNESIA_NAME": "Амнезия (использовано)",
