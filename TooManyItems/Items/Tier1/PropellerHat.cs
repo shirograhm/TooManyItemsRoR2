@@ -23,6 +23,13 @@ namespace TooManyItems.Items.Tier1
             "Percent bonus movement speed per stack while airborne.",
             ["ITEM_PROPELLERHAT_DESC"]
         );
+        public static ConfigurableValue<float> movespeedBonusExtraStacks = new(
+            "Item: Propeller Hat",
+            "Movement Speed Extra Stacks",
+            16f,
+            "Percent bonus movement speed with extra stacks while airborne.",
+            ["ITEM_PROPELLERHAT_DESC"]
+        );
         public static ConfigurableValue<float> fallDamageTaken = new(
             "Item: Propeller Hat",
             "Fall Damage Taken",
@@ -31,6 +38,7 @@ namespace TooManyItems.Items.Tier1
             ["ITEM_PROPELLERHAT_DESC"]
         );
         public static float movespeedBonusPercent = movespeedBonus.Value / 100f;
+        public static float movespeedBonusExtraStacksPercent = movespeedBonusExtraStacks.Value / 100f;
         public static float fallDamageTakenPercent = fallDamageTaken.Value / 100f;
 
         internal static void Init()
@@ -51,7 +59,7 @@ namespace TooManyItems.Items.Tier1
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0 && sender.characterMotor && !sender.characterMotor.isGrounded)
                     {
-                        args.moveSpeedMultAdd += movespeedBonusPercent * count;
+                        args.moveSpeedMultAdd += Utilities.GetLinearStacking(movespeedBonusPercent, movespeedBonusExtraStacks, count);
                     }
                 }
             };

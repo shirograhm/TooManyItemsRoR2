@@ -101,7 +101,7 @@
     "PROPELLERHAT": "プロペラ帽子",
     "ITEM_PROPELLERHAT_NAME": "プロペラ帽子",
     "ITEM_PROPELLERHAT_PICKUP": "空中にいるときに与える移動速度が上昇する。",
-    "ITEM_PROPELLERHAT_DESC": "空中にいるときに与える移動速度が<style=cIsUtility>{Movement Speed}%</style><style=cStack>（スタックごとに+{Movement Speed}%）</style>上昇する。<style=cWorldEvent>落下ダメージを軽減します。</style>",
+    "ITEM_PROPELLERHAT_DESC": "空中にいるときに与える移動速度が<style=cIsUtility>{Movement Speed}%</style><style=cStack>（スタックごとに+{Movement Speed Extra Stacks}%）</style>上昇する。<style=cWorldEvent>落下ダメージを軽減します。</style>",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3Dメガネ",
     "ITEM_REDBLUEGLASSES_NAME": "3Dメガネ",

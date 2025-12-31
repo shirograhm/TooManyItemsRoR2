@@ -101,7 +101,7 @@
     "PROPELLERHAT": "프로펠러 모자",
     "ITEM_PROPELLERHAT_NAME": "프로펠러 모자",
     "ITEM_PROPELLERHAT_PICKUP": "공중에 있는 동안 이동속도가 증가합니다.",
-    "ITEM_PROPELLERHAT_DESC": "공중에 있는 동안 <style=cIsUtility>{Movement Speed}%<style=cStack>(중첩당 +{Movement Speed}%)</style> 이동속도</style>가 증가합니다. <style=cWorldEvent>낙하 피해가 감소합니다.</style>",
+    "ITEM_PROPELLERHAT_DESC": "공중에 있는 동안 <style=cIsUtility>{Movement Speed}%<style=cStack>(중첩당 +{Movement Speed Extra Stacks}%)</style> 이동속도</style>가 증가합니다. <style=cWorldEvent>낙하 피해가 감소합니다.</style>",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3D 안경",
     "ITEM_REDBLUEGLASSES_NAME": "3D 안경",

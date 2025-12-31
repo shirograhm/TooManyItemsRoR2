@@ -96,7 +96,7 @@
     "PROPELLERHAT": "螺旋桨帽",
     "ITEM_PROPELLERHAT_NAME": "螺旋桨帽",
     "ITEM_PROPELLERHAT_PICKUP": "在空中时获得移动速度。",
-    "ITEM_PROPELLERHAT_DESC": "在空中时获得 <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed}% 每层)</style> 移动速度。<style=cWorldEvent>减少坠落伤害。</style>",
+    "ITEM_PROPELLERHAT_DESC": "在空中时获得 <style=cIsUtility>{Movement Speed}%</style> <style=cStack>(+{Movement Speed Extra Stacks}% 每层)</style> 移动速度。<style=cWorldEvent>减少坠落伤害。</style>",
     "ITEM_PROPELLERHAT_LORE": "",
     "REDBLUEGLASSES": "3D眼镜",
     "ITEM_REDBLUEGLASSES_NAME": "3D眼镜",
