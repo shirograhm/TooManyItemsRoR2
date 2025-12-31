@@ -122,7 +122,7 @@
     "BRASSKNUCKLES": "황동 너클",
     "ITEM_BRASSKNUCKLES_NAME": "황동 너클",
     "ITEM_BRASSKNUCKLES_PICKUP": "강타는 더 많은 피해를 주고 적을 기절시킵니다.",
-    "ITEM_BRASSKNUCKLES_DESC": "기본 피해량의 <style=cIsDamage>{Heavy Hit Threshold}%</style>이상의 공격을 가하면 <style=cIsDamage>{Heavy Hit Bonus}%<style=cStack>(중첩당 +{Heavy Hit Bonus}%)</style></style> 더 강한 공격을 가하며, 적을 <style=cIsUtility>기절</style> 시킵니다.",
+    "ITEM_BRASSKNUCKLES_DESC": "기본 피해량의 <style=cIsDamage>{Heavy Hit Threshold}%</style>이상의 공격을 가하면 <style=cIsDamage>{Heavy Hit Bonus}%<style=cStack>(중첩당 +{Heavy Hit Bonus Extra Stacks}%)</style></style> 더 강한 공격을 가하며, 적을 <style=cIsUtility>기절</style> 시킵니다.",
     "ITEM_BRASSKNUCKLES_LORE": "",
     "BROKENMASK": "깨진 가면",
     "ITEM_BROKENMASK_NAME": "깨진 가면",

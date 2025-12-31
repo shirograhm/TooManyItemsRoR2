@@ -70,7 +70,7 @@ namespace TooManyItems.Extensions
                         new("Bonus Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetLinearStacking(BrassKnuckles.heavyHitBonusPercent, itemCount)];
+                            return [Utilities.GetLinearStacking(BrassKnuckles.percentHeavyHitBonus, BrassKnuckles.percentHeavyHitBonusExtraStacks, itemCount)];
                         });
                 if (BreadLoaf.isEnabled.Value)
                     RegisterStatsForItem(BreadLoaf.itemDef, [

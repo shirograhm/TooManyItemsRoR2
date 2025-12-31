@@ -117,7 +117,7 @@
     "BRASSKNUCKLES": "Латунный кастет",
     "ITEM_BRASSKNUCKLES_NAME": "Латунный кастет",
     "ITEM_BRASSKNUCKLES_PICKUP": "Мощные удары наносят больше урона и оглушают врагов.",
-    "ITEM_BRASSKNUCKLES_DESC": "Удары, наносящие более <style=cIsDamage>{Heavy Hit Threshold}% БАЗОВОГО урона,</style> наносят на <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus}% за шт.)</style> больше урона</style> и <style=cIsUtility>оглушают</style> врагов.",
+    "ITEM_BRASSKNUCKLES_DESC": "Удары, наносящие более <style=cIsDamage>{Heavy Hit Threshold}% БАЗОВОГО урона,</style> наносят на <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus Extra Stacks}% за шт.)</style> больше урона</style> и <style=cIsUtility>оглушают</style> врагов.",
     "ITEM_BRASSKNUCKLES_LORE": "",
     "BROKENMASK": "Поломанная маска",
     "ITEM_BROKENMASK_NAME": "Поломанная маска",

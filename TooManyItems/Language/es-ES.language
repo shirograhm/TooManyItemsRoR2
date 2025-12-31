@@ -122,7 +122,7 @@
     "BRASSKNUCKLES": "Nudillos de Bronce",
     "ITEM_BRASSKNUCKLES_NAME": "Nudillos de Bronce",
     "ITEM_BRASSKNUCKLES_PICKUP": "Los golpes que requieren carga infligen más daño y aturden a los enemigos.",
-    "ITEM_BRASSKNUCKLES_DESC": "Los golpes que realicen un <style=cIsDamage>{Heavy Hit Threshold}% de daño BASE</style> son un <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus}% por stack)</style> más fuertes</style> y <style=cIsUtility>aturden</style> a los enemigos.",
+    "ITEM_BRASSKNUCKLES_DESC": "Los golpes que realicen un <style=cIsDamage>{Heavy Hit Threshold}% de daño BASE</style> son un <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus Extra Stacks}% por stack)</style> más fuertes</style> y <style=cIsUtility>aturden</style> a los enemigos.",
     "ITEM_BRASSKNUCKLES_LORE": "",
     "BROKENMASK": "Máscara Rota",
     "ITEM_BROKENMASK_NAME": "Máscara Rota",

@@ -117,7 +117,7 @@
     "BRASSKNUCKLES": "指节铜环",
     "ITEM_BRASSKNUCKLES_NAME": "指节铜环",
     "ITEM_BRASSKNUCKLES_PICKUP": "暴击更多伤害敌人。",
-    "ITEM_BRASSKNUCKLES_DESC": "造成至少 <style=cIsDamage>{Heavy Hit Threshold}% 基础伤害</style> 更强 <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus}% 每层)</style></style> 并击<style=cIsUtility>晕</style>敌人。",
+    "ITEM_BRASSKNUCKLES_DESC": "造成至少 <style=cIsDamage>{Heavy Hit Threshold}% 基础伤害</style> 更强 <style=cIsDamage>{Heavy Hit Bonus}% <style=cStack>(+{Heavy Hit Bonus Extra Stacks}% 每层)</style></style> 并击<style=cIsUtility>晕</style>敌人。",
     "ITEM_BRASSKNUCKLES_LORE": "",
     "BROKENMASK": "痛苦面具",
     "ITEM_BROKENMASK_NAME": "痛苦面具",

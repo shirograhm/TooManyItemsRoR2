@@ -122,7 +122,7 @@
     "BRASSKNUCKLES": "メリケンサック",
     "ITEM_BRASSKNUCKLES_NAME": "メリケンサック",
     "ITEM_BRASSKNUCKLES_PICKUP": "重い攻撃は見た目通りのダメージを与え、スタンさせる。",
-    "ITEM_BRASSKNUCKLES_DESC": "攻撃時、<style=cIsDamage>基礎ダメージの{Heavy Hit Threshold}%</style>を超えるダメージを与えると<style=cIsDamage>{Heavy Hit Bonus}%<style=cStack>（スタックごとに+{Heavy Hit Bonus}%）</style>の追加ダメージを与え</style>、敵を<style=cIsUtility>スタン</style>させる。",
+    "ITEM_BRASSKNUCKLES_DESC": "攻撃時、<style=cIsDamage>基礎ダメージの{Heavy Hit Threshold}%</style>を超えるダメージを与えると<style=cIsDamage>{Heavy Hit Bonus}%<style=cStack>（スタックごとに+{Heavy Hit Bonus Extra Stacks}%）</style>の追加ダメージを与え</style>、敵を<style=cIsUtility>スタン</style>させる。",
     "ITEM_BRASSKNUCKLES_LORE": "",
     "BROKENMASK": "壊れた仮面",
     "ITEM_BROKENMASK_NAME": "壊れた仮面",
