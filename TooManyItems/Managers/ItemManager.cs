@@ -1,6 +1,7 @@
 ﻿using R2API;
 using RoR2;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -48,7 +49,7 @@ namespace TooManyItems.Managers
             return equipmentDef;
         }
 
-        public static ItemDef GenerateItem(string name, ItemTag[] tags, ItemTier tier)
+        public static ItemDef GenerateItem(string name, ItemTag[] tags, ItemTier tier, List<DisplayRuleData> rules = null)
         {
             ItemDef itemDef = ScriptableObject.CreateInstance<ItemDef>();
 
@@ -83,11 +84,37 @@ namespace TooManyItems.Managers
 
             itemDef.tags = tags;
 
-            // Add item to item dict
-            ItemDisplayRuleDict displayRules = new ItemDisplayRuleDict(null);
+            // Add item to item dict, with display rules
+            ItemDisplayRuleDict displayRules = new(null);
+            if (rules != null)
+                foreach (var rule in rules)
+                    displayRules.Add(rule.survivorName, GenerateItemDisplayRule(prefab, rule));
+
             ItemAPI.Add(new CustomItem(itemDef, displayRules));
 
             return itemDef;
+        }
+
+        public static ItemDisplayRule GenerateItemDisplayRule(GameObject prefab, DisplayRuleData data)
+        {
+            return new ItemDisplayRule
+            {
+                ruleType = ItemDisplayRuleType.ParentedPrefab,
+                followerPrefab = prefab,
+                childName = data.partName,
+                localPos = data.localPos,
+                localAngles = data.localAngles,
+                localScale = data.localScale
+            };
+        }
+
+        public class DisplayRuleData(string survivorModelName, string partName, Vector3 localPos, Vector3 localAngles, Vector3 localScale)
+        {
+            public string survivorName = survivorModelName;
+            public string partName = partName;
+            public Vector3 localPos = localPos;
+            public Vector3 localAngles = localAngles;
+            public Vector3 localScale = localScale;
         }
 
         public static BuffDef GenerateBuff(string name, Sprite sprite, bool canStack = false, bool isHidden = false, bool isDebuff = false, bool isCooldown = false)
