@@ -59,9 +59,9 @@ namespace TooManyItems.Items.Tier1
             "How much longer your bleed effects last for each extra stack of this item.",
             ["ITEM_THUMBTACK_DESC"]
         );
-        public static float bleedChancePercent = bleedChance.Value / 100f;
-        public static float bleedChanceExtraStackPercent = bleedChanceExtraStacks.Value / 100f;
-        public static float bleedDamagePercent = bleedDamage.Value / 100f;
+        public static float percentBleedChance = bleedChance.Value / 100f;
+        public static float percentBleedChanceExtraStacks = bleedChanceExtraStacks.Value / 100f;
+        public static float percentBleedDamage = bleedDamage.Value / 100f;
 
         internal static void Init()
         {
@@ -88,7 +88,7 @@ namespace TooManyItems.Items.Tier1
                                 {
                                     victimObject = victimInfo.gameObject,
                                     attackerObject = attackerInfo.gameObject,
-                                    damageMultiplier = bleedDamagePercent,
+                                    damageMultiplier = percentBleedDamage,
                                     dotIndex = DotController.DotIndex.Bleed,
                                     duration = bleedDuration.Value
                                 };

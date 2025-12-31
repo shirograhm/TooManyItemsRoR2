@@ -29,8 +29,8 @@ namespace TooManyItems.Items.Tier1
             "Percent damage reduction against elite enemies with extra stacks.",
             ["ITEM_MILKCARTON_DESC"]
         );
-        public static float eliteDamageReductionPercent = eliteDamageReduction.Value / 100f;
-        public static float eliteDamageReductionExtraStacksPercent = eliteDamageReductionExtraStacks.Value / 100f;
+        public static float percentEliteDamageReduction = eliteDamageReduction.Value / 100f;
+        public static float percentEliteDamageReductionExtraStacks = eliteDamageReductionExtraStacks.Value / 100f;
 
         internal static void Init()
         {
@@ -48,7 +48,7 @@ namespace TooManyItems.Items.Tier1
                     int count = victimInfo.inventory.GetItemCountEffective(itemDef);
                     if (attackerInfo.body && attackerInfo.body.isElite && count > 0 && damageInfo.damageColorIndex != DamageColorIndex.DelayedDamage)
                     {
-                        float damageReductionPercent = Utilities.GetHyperbolicStacking(eliteDamageReductionPercent, eliteDamageReductionExtraStacksPercent, count);
+                        float damageReductionPercent = Utilities.GetHyperbolicStacking(percentEliteDamageReduction, percentEliteDamageReductionExtraStacks, count);
                         damageInfo.damage *= 1 - damageReductionPercent;
                     }
                 }

@@ -30,7 +30,8 @@ namespace TooManyItems.Items.Tier1
             "Percent cooldown reduction on special skill for extra stacks.",
             ["ITEM_BOTTLECAP_DESC"]
         );
-        public static float specialCDRPercent = specialCDR.Value / 100f;
+        public static float percentSpecialCDR = specialCDR.Value / 100f;
+        public static float percentSpecialCDRExtraStacks = specialCDRExtraStacks.Value / 100f;
 
         internal static void Init()
         {
@@ -48,7 +49,7 @@ namespace TooManyItems.Items.Tier1
                     int itemCount = sender.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0)
                     {
-                        float cdr = Utilities.GetHyperbolicStacking(specialCDRPercent, specialCDRExtraStacks, itemCount);
+                        float cdr = Utilities.GetHyperbolicStacking(percentSpecialCDR, percentSpecialCDRExtraStacks, itemCount);
                         // Calculate the actual number needed for the denominator to achieve the desired cooldown reduction
                         // because RecalculateStatsAPI no longer allows negative cooldownMultAdd values
                         float convertedCDR = cdr / (1f - cdr);

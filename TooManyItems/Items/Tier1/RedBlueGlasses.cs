@@ -44,10 +44,10 @@ namespace TooManyItems.Items.Tier1
             "Amount of crit damage gained for extra stacks.",
             ["ITEM_REDBLUEGLASSES_DESC"]
         );
-        public static float critChancePercent = critChancePerStack.Value / 100f;
-        public static float critChanceExtraStackPercent = critChancePerExtraStack.Value / 100f;
-        public static float critDamagePercent = critDamagePerStack.Value / 100f;
-        public static float critDamageExtraStackPercent = critDamagePerExtraStack.Value / 100f;
+        public static float percentCritChance = critChancePerStack.Value / 100f;
+        public static float percentCritChanceExtraStacks = critChancePerExtraStack.Value / 100f;
+        public static float percentCritDamage = critDamagePerStack.Value / 100f;
+        public static float percentCritDamageExtraStacks = critDamagePerExtraStack.Value / 100f;
 
         internal static void Init()
         {
@@ -66,7 +66,7 @@ namespace TooManyItems.Items.Tier1
                     if (count > 0)
                     {
                         args.critAdd += Utilities.GetLinearStacking(critChancePerStack.Value, critChancePerExtraStack.Value, count);
-                        args.critDamageMultAdd += Utilities.GetLinearStacking(critDamagePercent, critDamageExtraStackPercent, count);
+                        args.critDamageMultAdd += Utilities.GetLinearStacking(percentCritDamage, percentCritDamageExtraStacks, count);
                     }
                 }
             };

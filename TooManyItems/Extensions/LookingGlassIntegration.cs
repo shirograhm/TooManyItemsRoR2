@@ -63,7 +63,7 @@ namespace TooManyItems.Extensions
                         new("Cooldown Reduction: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(BottleCap.specialCDRPercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(BottleCap.percentSpecialCDR, BottleCap.percentSpecialCDRExtraStacks, itemCount)];
                         });
                 if (BrassKnuckles.isEnabled.Value)
                     RegisterStatsForItem(BrassKnuckles.itemDef, [
@@ -129,7 +129,7 @@ namespace TooManyItems.Extensions
                         new("Rebate: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(DebitCard.rebatePercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(DebitCard.percentRebate, DebitCard.percentRebateExtraStacks, itemCount)];
                         });
                 if (DoubleDown.isEnabled.Value)
                     RegisterStatsForItem(DoubleDown.itemDef, [
@@ -226,7 +226,7 @@ namespace TooManyItems.Extensions
                         new("Damage Reduction: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(MilkCarton.eliteDamageReductionPercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(MilkCarton.percentEliteDamageReduction, MilkCarton.percentEliteDamageReductionExtraStacks, itemCount)];
                         });
                 if (MagnifyingGlass.isEnabled.Value)
                     RegisterStatsForItem(MagnifyingGlass.itemDef, [
@@ -246,7 +246,7 @@ namespace TooManyItems.Extensions
                         new("Bonus Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [PaperPlane.damageBonusPercent * itemCount];
+                            return [Utilities.GetLinearStacking(PaperPlane.percentDamageBonus, PaperPlane.percentDamageBonusExtraStacks, itemCount)];
                         });
                 if (Permafrost.isEnabled.Value)
                     RegisterStatsForItem(Permafrost.itemDef, [
@@ -273,7 +273,7 @@ namespace TooManyItems.Extensions
                         new("Movement Speed: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetLinearStacking(PropellerHat.movespeedBonusPercent, itemCount)];
+                            return [Utilities.GetLinearStacking(PropellerHat.percentMovespeedBonus, PropellerHat.percentMovespeedBonusExtraStacks, itemCount)];
                         });
                 if (RedBlueGlasses.isEnabled.Value)
                     RegisterStatsForItem(RedBlueGlasses.itemDef, [
@@ -283,8 +283,8 @@ namespace TooManyItems.Extensions
                         {
                             return
                             [
-                                Utilities.GetLinearStacking(RedBlueGlasses.critChancePercent, itemCount),
-                                Utilities.GetLinearStacking(RedBlueGlasses.critDamagePercent, itemCount)
+                                Utilities.GetLinearStacking(RedBlueGlasses.percentCritChance, RedBlueGlasses.percentCritChanceExtraStacks, itemCount),
+                                Utilities.GetLinearStacking(RedBlueGlasses.percentCritDamage, RedBlueGlasses.percentCritDamageExtraStacks, itemCount)
                             ];
                         });
                 if (RubberDucky.isEnabled.Value)
@@ -292,7 +292,7 @@ namespace TooManyItems.Extensions
                         new("Bonus Armor: ", ItemStatsDef.ValueType.Armor, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetLinearStacking(RubberDucky.armorPerStack, itemCount)];
+                            return [Utilities.GetLinearStacking(RubberDucky.armorPerStack.Value, RubberDucky.armorPerExtraStack.Value, itemCount)];
                         });
                 if (RustedTrowel.isEnabled.Value)
                     RegisterStatsForItem(RustedTrowel.itemDef, [
@@ -326,7 +326,7 @@ namespace TooManyItems.Extensions
                             if (master && master.inventory && master.inventory.GetComponent<SoulRing.Statistics>())
                                 values.Add(master.inventory.GetComponent<SoulRing.Statistics>().HealthRegen);
                             else
-                                values.Add(Utilities.GetLinearStacking(SoulRing.maxRegenOnFirstStack, SoulRing.maxRegenForExtraStacks, itemCount));
+                                values.Add(Utilities.GetLinearStacking(SoulRing.maxRegenOnFirstStack.Value, SoulRing.maxRegenForExtraStacks.Value, itemCount));
 
                             return values;
                         });
@@ -352,10 +352,11 @@ namespace TooManyItems.Extensions
                         new("Bonus Duration: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Seconds)
                         ], (master, itemCount) =>
                         {
+                            float baseChance = Utilities.GetLinearStacking(Thumbtack.percentBleedChance, Thumbtack.percentBleedChanceExtraStacks, itemCount);
                             return
                             [
-                                master ? Utilities.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck) : Thumbtack.bleedChancePercent * itemCount,
-                                Utilities.GetLinearStacking(Thumbtack.bleedDurationBonus.Value, itemCount),
+                                master ? Utilities.GetChanceAfterLuck(baseChance, master.luck) : baseChance,
+                                Utilities.GetLinearStacking(Thumbtack.bleedDurationBonus.Value, Thumbtack.bleedDurationBonusExtraStacks.Value, itemCount),
                             ];
                         });
                 if (VoidHeart.isEnabled.Value)
