@@ -137,7 +137,7 @@
     "HERETICSEAL": "Selo do Herege",
     "ITEM_HERETICSEAL_NAME": "Selo do Herege",
     "ITEM_HERETICSEAL_PICKUP": "Cause dano aumentado baseado em sua vida perdida.",
-    "ITEM_HERETICSEAL_DESC": "Ganhe <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase} por acúmulo)</style> de dano BASE</style> a cada 1% de vida perdida.",
+    "ITEM_HERETICSEAL_DESC": "Ganhe <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase Extra Stacks} por acúmulo)</style> de dano BASE</style> a cada 1% de vida perdida.",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "Água Benta",
     "ITEM_HOLYWATER_NAME": "Água Benta",

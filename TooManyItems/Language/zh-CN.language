@@ -132,7 +132,7 @@
     "HERETICSEAL": "异端印记",
     "ITEM_HERETICSEAL_NAME": "异端印记",
     "ITEM_HERETICSEAL_PICKUP": "生命值减少时获得伤害加成。",
-    "ITEM_HERETICSEAL_DESC": "每失去 1% 最大生命值，获得 <style=cIsDamage>{Damage Increase}% <style=cStack>(+{Damage Increase}% 每层)</style> 基础伤害</style>。",
+    "ITEM_HERETICSEAL_DESC": "每失去 1% 最大生命值，获得 <style=cIsDamage>{Damage Increase}% <style=cStack>(+{Damage Increase Extra Stacks}% 每层)</style> 基础伤害</style>。",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "圣水",
     "ITEM_HOLYWATER_NAME": "圣水",

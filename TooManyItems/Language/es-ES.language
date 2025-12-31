@@ -137,7 +137,7 @@
     "HERETICSEAL": "Sello del Hereje",
     "ITEM_HERETICSEAL_NAME": "Sello del Hereje",
     "ITEM_HERETICSEAL_PICKUP": "Obtienes daño base teniendo en cuenta tu vida restante.",
-    "ITEM_HERETICSEAL_DESC": "Obtienes <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase} por stack)</style> de daño BASE</style> por cada 1% de vida faltante.",
+    "ITEM_HERETICSEAL_DESC": "Obtienes <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase Extra Stacks} por stack)</style> de daño BASE</style> por cada 1% de vida faltante.",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "Agua Bendita",
     "ITEM_HOLYWATER_NAME": "Agua Bendita",

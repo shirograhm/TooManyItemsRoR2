@@ -20,7 +20,14 @@ namespace TooManyItems.Items.Tier2
             "Item: Seal of the Heretic",
             "Damage Increase",
             0.3f,
-            "Base damage gained for each percentage of missing health.",
+            "Base damage gained for every 1% missing health.",
+            ["ITEM_HERETICSEAL_DESC"]
+        );
+        public static ConfigurableValue<float> damagePerMissingExtraStacks = new(
+            "Item: Seal of the Heretic",
+            "Damage Increase Extra Stacks",
+            0.3f,
+            "Base damage gained for every 1% missing health with extra stacks.",
             ["ITEM_HERETICSEAL_DESC"]
         );
 
@@ -37,7 +44,7 @@ namespace TooManyItems.Items.Tier2
 
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
-                if (sender && sender.inventory)
+                if (sender && sender.inventory && sender.healthComponent)
                 {
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
@@ -45,7 +52,8 @@ namespace TooManyItems.Items.Tier2
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1
                         if (sender.healthComponent.combinedHealthFraction < 1f)
                         {
-                            args.baseDamageAdd += count * damagePerMissing.Value * (1f - sender.healthComponent.combinedHealthFraction) * 100f;
+                            float missingHealth = (1f - sender.healthComponent.combinedHealthFraction) * 100f;
+                            args.baseDamageAdd += Utilities.GetLinearStacking(damagePerMissing.Value, damagePerMissingExtraStacks.Value, count) * missingHealth;
                         }
                     }
                 }

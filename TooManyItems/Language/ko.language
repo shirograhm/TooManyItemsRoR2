@@ -137,7 +137,7 @@
     "HERETICSEAL": "이단자의 인장",
     "ITEM_HERETICSEAL_NAME": "이단자의 인장",
     "ITEM_HERETICSEAL_PICKUP": "잃은 체력에 비례하여 피해량이 증가합니다.",
-    "ITEM_HERETICSEAL_DESC": "잃은 체력 1%당 <style=cIsDamage>기본 공격력</style>이 <style=cIsDamage>{Damage Increase}<style=cStack>(중첩당 +{Damage Increase})</style></style>씩 증가합니다.",
+    "ITEM_HERETICSEAL_DESC": "잃은 체력 1%당 <style=cIsDamage>기본 공격력</style>이 <style=cIsDamage>{Damage Increase Extra Stacks}<style=cStack>(중첩당 +{Damage Increase})</style></style>씩 증가합니다.",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "성수",
     "ITEM_HOLYWATER_NAME": "성수",

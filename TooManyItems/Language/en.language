@@ -137,7 +137,7 @@
     "HERETICSEAL": "Seal of the Heretic",
     "ITEM_HERETICSEAL_NAME": "Seal of the Heretic",
     "ITEM_HERETICSEAL_PICKUP": "Gain damage based on your missing health.",
-    "ITEM_HERETICSEAL_DESC": "Gain <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase} per stack)</style> BASE damage</style> for every <style=cIsHealing>1% missing health</style>.",
+    "ITEM_HERETICSEAL_DESC": "Gain <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase Extra Stacks} per stack)</style> BASE damage</style> for every <style=cIsHealing>1% missing health</style>.",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "Holy Water",
     "ITEM_HOLYWATER_NAME": "Holy Water",

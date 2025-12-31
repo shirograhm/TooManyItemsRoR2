@@ -132,7 +132,7 @@
     "HERETICSEAL": "Печать Еретика",
     "ITEM_HERETICSEAL_NAME": "Печать Еретика",
     "ITEM_HERETICSEAL_PICKUP": "Наносите дополнительный урон, в зависимости от недостающего здоровья.",
-    "ITEM_HERETICSEAL_DESC": "Наносите на <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase} за шт.)</style> больше урона,</style> за каждый 1% недостающего здоровья.",
+    "ITEM_HERETICSEAL_DESC": "Наносите на <style=cIsDamage>{Damage Increase} <style=cStack>(+{Damage Increase Extra Stacks} за шт.)</style> больше урона,</style> за каждый 1% недостающего здоровья.",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "Святая вода",
     "ITEM_HOLYWATER_NAME": "Святая вода",

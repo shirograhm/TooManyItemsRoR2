@@ -137,7 +137,7 @@
     "HERETICSEAL": "異端者の印章",
     "ITEM_HERETICSEAL_NAME": "異端者の印章",
     "ITEM_HERETICSEAL_PICKUP": "体力が低下すると基礎ダメージが増加する。",
-    "ITEM_HERETICSEAL_DESC": "最大体力の1%を失うたびに<style=cIsDamage>{Damage Increase}<style=cStack>（スタックごとに+{Damage Increase}）</style>の基礎ダメージ</style>が増加する。",
+    "ITEM_HERETICSEAL_DESC": "最大体力の1%を失うたびに<style=cIsDamage>{Damage Increase}<style=cStack>（スタックごとに+{Damage Increase Extra Stacks}）</style>の基礎ダメージ</style>が増加する。",
     "ITEM_HERETICSEAL_LORE": "",
     "HOLYWATER": "聖水",
     "ITEM_HOLYWATER_NAME": "聖水",
