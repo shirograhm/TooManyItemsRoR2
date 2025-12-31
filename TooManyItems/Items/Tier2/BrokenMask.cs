@@ -48,9 +48,9 @@ namespace TooManyItems.Items.Tier2
         );
         public static ConfigurableValue<float> burnTickInterval = new(
             "Item: Broken Mask",
-            "Burn Duration",
+            "Tick Interval",
             0.5f,
-            "Total duration of the burn in seconds.",
+            "Keep this a clean divisor of Burn Duration to prevent unpredictable behaviour... or go wild with it, honestly, up to you ¯\\_(ツ)_/¯",
             ["ITEM_BROKENMASK_DESC"]
         );
         public static float percentBurnDamage = burnDamage.Value / 100f;
