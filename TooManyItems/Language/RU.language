@@ -178,7 +178,7 @@
     "IRONHEART": "Стальное сердце",
     "ITEM_IRONHEART_NAME": "Стальное сердце",
     "ITEM_IRONHEART_PICKUP": "Наносит бонусный урон в зависимости от вашего максимального количества здоровья.",
-    "ITEM_IRONHEART_DESC": "Увеличивает максимальное здоровье на <style=cIsHealth>{Health Increase} единиц ОЗ</style>. Также при попадании наносит урон, составляющий <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% за шт.)</style> от вашего максимального здоровья.",
+    "ITEM_IRONHEART_DESC": "Увеличивает максимальное здоровье на <style=cIsHealth>{Health Increase} единиц ОЗ</style>. Также при попадании наносит урон, составляющий <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling Extra Stacks}% за шт.)</style> от вашего максимального здоровья.",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "Вечная Мерзлота",
     "ITEM_PERMAFROST_NAME": "Вечная Мерзлота",

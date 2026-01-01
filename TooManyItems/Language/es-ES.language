@@ -183,7 +183,7 @@
     "IRONHEART": "Corazón de Hierro",
     "ITEM_IRONHEART_NAME": "Corazón de Hierro",
     "ITEM_IRONHEART_PICKUP": "Inflige daño adicional basado en tu salud máxima.",
-    "ITEM_IRONHEART_DESC": "Obtienes <style=cIsHealth>{Health Increase} de HP</style>. Inflige un <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% por stack)</style> de tu vida máxima como bonus de golpe.",
+    "ITEM_IRONHEART_DESC": "Obtienes <style=cIsHealth>{Health Increase} de HP</style>. Inflige un <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling Extra Stacks}% por stack)</style> de tu vida máxima como bonus de golpe.",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "Permafrost",
     "ITEM_PERMAFROST_NAME": "Permafrost",

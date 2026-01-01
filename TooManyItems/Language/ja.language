@@ -183,7 +183,7 @@
     "IRONHEART": "鋼の心",
     "ITEM_IRONHEART_NAME": "鋼の心",
     "ITEM_IRONHEART_PICKUP": "最大HPが増加し、最大HPに応じて攻撃時に追加でボーナスダメージを与える。",
-    "ITEM_IRONHEART_DESC": "<style=cIsHealth>HPが{Health Increase}</style>増加する。攻撃時、最大HPの<style=cIsDamage>{On-Hit Damage Scaling}%</style><style=cStack>（スタックごとに+{On-Hit Damage Scaling}%）</style>に当たるボーナスダメージを与える。",
+    "ITEM_IRONHEART_DESC": "<style=cIsHealth>HPが{Health Increase}</style>増加する。攻撃時、最大HPの<style=cIsDamage>{On-Hit Damage Scaling}%</style><style=cStack>（スタックごとに+{On-Hit Damage Scaling Extra Stacks}%）</style>に当たるボーナスダメージを与える。",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "永久凍土",
     "ITEM_PERMAFROST_NAME": "永久凍土",

@@ -178,7 +178,7 @@
     "IRONHEART": "钢铁之心",
     "ITEM_IRONHEART_NAME": "钢铁之心",
     "ITEM_IRONHEART_PICKUP": "根据你的最大生命值造成额外伤害。",
-    "ITEM_IRONHEART_DESC": "获得 <style=cIsHealth>{Health Increase} 最大生命值</style>。攻击时造成额外 <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% 每层)</style> 最大生命值的伤害。",
+    "ITEM_IRONHEART_DESC": "获得 <style=cIsHealth>{Health Increase} 最大生命值</style>。攻击时造成额外 <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling Extra Stacks}% 每层)</style> 最大生命值的伤害。",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "永霜冻土",
     "ITEM_PERMAFROST_NAME": "永霜冻土",

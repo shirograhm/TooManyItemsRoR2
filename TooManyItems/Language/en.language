@@ -183,7 +183,7 @@
     "IRONHEART": "Iron Heart",
     "ITEM_IRONHEART_NAME": "Iron Heart",
     "ITEM_IRONHEART_PICKUP": "Deal damage on-hit based on your max health.",
-    "ITEM_IRONHEART_DESC": "Gain <style=cIsHealth>{Health Increase} max health</style>. Deal <style=cIsHealth>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% per stack)</style> of your <style=cIsHealth>max health</style> as bonus <style=cIsDamage>on-hit damage</style>.",
+    "ITEM_IRONHEART_DESC": "Gain <style=cIsHealth>{Health Increase} max health</style>. Deal <style=cIsHealth>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling Extra Stacks}% per stack)</style> of your <style=cIsHealth>max health</style> as bonus <style=cIsDamage>on-hit damage</style>.",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "Permafrost",
     "ITEM_PERMAFROST_NAME": "Permafrost",

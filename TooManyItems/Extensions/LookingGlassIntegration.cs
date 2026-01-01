@@ -219,7 +219,7 @@ namespace TooManyItems.Extensions
                         new("Damage Dealt: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            List<float> values = [Utilities.GetLinearStacking(IronHeart.multiplierPerStack, itemCount)];
+                            List<float> values = [Utilities.GetLinearStacking(IronHeart.multiplierPerStack, IronHeart.multiplierPerExtraStack, itemCount)];
                             if (master && master.inventory && master.inventory.GetComponent<IronHeart.Statistics>())
                                 values.Add(master.inventory.GetComponent<IronHeart.Statistics>().TotalDamageDealt);
                             else

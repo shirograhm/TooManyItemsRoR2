@@ -183,7 +183,7 @@
     "IRONHEART": "강철 심장",
     "ITEM_IRONHEART_NAME": "강철 심장",
     "ITEM_IRONHEART_PICKUP": "최대 체력에 비례하여 적중 시 추가 피해를 입힙니다.",
-    "ITEM_IRONHEART_DESC": "<style=cIsHealth>{Health Increase} HP</style>가 증가합니다. <style=cIsHealing>최대 체력</style>의 <style=cIsDamage>{On-Hit Damage Scaling}%</style><style=cStack>(중첩당 +{On-Hit Damage Scaling}%)</style>만큼 추가 피해를 입힙니다.",
+    "ITEM_IRONHEART_DESC": "<style=cIsHealth>{Health Increase} HP</style>가 증가합니다. <style=cIsHealing>최대 체력</style>의 <style=cIsDamage>{On-Hit Damage Scaling}%</style><style=cStack>(중첩당 +{On-Hit Damage Scaling Extra Stacks}%)</style>만큼 추가 피해를 입힙니다.",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "영구동토층",
     "ITEM_PERMAFROST_NAME": "영구동토층",

@@ -183,7 +183,7 @@
     "IRONHEART": "Coração de Ferro",
     "ITEM_IRONHEART_NAME": "Coração de Ferro",
     "ITEM_IRONHEART_PICKUP": "Cause dano bônus ao contato com base na sua vida máxima.",
-    "ITEM_IRONHEART_DESC": "Ganhe <style=cIsHealth>{Health Increase} de HP</style> na primeira vez que pegar este item. Cause <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling}% por acúmulo)</style> de sua vida máxima como dano bônus ao contato.",
+    "ITEM_IRONHEART_DESC": "Ganhe <style=cIsHealth>{Health Increase} de HP</style> na primeira vez que pegar este item. Cause <style=cIsDamage>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling Extra Stacks}% por acúmulo)</style> de sua vida máxima como dano bônus ao contato.",
     "ITEM_IRONHEART_LORE": "",
     "PERMAFROST": "Geloeterno",
     "ITEM_PERMAFROST_NAME": "Geloeterno",
