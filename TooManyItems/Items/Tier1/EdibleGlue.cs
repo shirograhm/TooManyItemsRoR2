@@ -46,11 +46,6 @@ namespace TooManyItems.Items.Tier1
             Hooks();
         }
 
-        public static float GetSlowRadius(int itemCount)
-        {
-            return slowRadiusInitialStack.Value + slowRadiusPerExtraStack.Value * (itemCount - 1);
-        }
-
         public static void Hooks()
         {
             GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
@@ -68,7 +63,7 @@ namespace TooManyItems.Items.Tier1
                             mask = LayerIndex.entityPrecise.mask,
                             origin = atkBody.corePosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
-                            radius = GetSlowRadius(itemCount)
+                            radius = Utilities.GetLinearStacking(slowRadiusInitialStack.Value, slowRadiusPerExtraStack.Value, itemCount)
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
 
                         foreach (HurtBox hurtbox in hurtboxes)

@@ -31,8 +31,8 @@ namespace TooManyItems.Items.Lunar
             "Percentage of the up front damage reduced with stacks.",
             ["ITEM_DOUBLEDOWN_DESC"]
         );
-        public static float upFrontDamagePercent = upFrontDamage.Value / 100f;
-        public static float upFrontDamageReductionPercent = upFrontDamageReduction.Value / 100f;
+        public static float percentUpFrontDamage = upFrontDamage.Value / 100f;
+        public static float percentUpFrontDamageReductionPerStack = upFrontDamageReduction.Value / 100f;
 
         internal static void Init()
         {
@@ -55,7 +55,7 @@ namespace TooManyItems.Items.Lunar
                         if (itemCount > 0)
                         {
                             float dotDamage = info.totalDamage ?? 0f;
-                            float stackedDamage = Utilities.GetReverseExponentialStacking(upFrontDamagePercent, upFrontDamageReductionPercent, itemCount);
+                            float stackedDamage = Utilities.GetReverseExponentialStacking(percentUpFrontDamage, percentUpFrontDamageReductionPerStack, itemCount);
                             float totalDamageCalc = dotDamage * stackedDamage;
 
                             // Roll for crit if the attacker body exists

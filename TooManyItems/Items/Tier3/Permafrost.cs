@@ -39,9 +39,9 @@ namespace TooManyItems.Items.Tier3
             "Percent bonus damage dealt to frozen enemies with extra stacks.",
             ["ITEM_PERMAFROST_DESC"]
         );
-        public static float freezeChancePercent = freezeChance.Value / 100.0f;
-        public static float frozenDamageMultiplierPercent = frozenDamageMultiplier.Value / 100.0f;
-        public static float frozenDamageMultiplierExtraStacksPercent = frozenDamageMultiplierExtraStacks.Value / 100.0f;
+        public static float percentFreezeChance = freezeChance.Value / 100.0f;
+        public static float percentFrozenDamageMultiplier = frozenDamageMultiplier.Value / 100.0f;
+        public static float percentFrozenDamageMultiplierExtraStacks = frozenDamageMultiplierExtraStacks.Value / 100.0f;
 
         internal static void Init()
         {
@@ -86,7 +86,7 @@ namespace TooManyItems.Items.Tier3
                         // If damage is from skills and not on the same team, apply freeze
                         if (!Utilities.OnSameTeam(attackerBody, victimBody) && Utilities.IsSkillDamage(damageInfo))
                         {
-                            if (Util.CheckRoll0To1(freezeChancePercent * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
+                            if (Util.CheckRoll0To1(percentFreezeChance * damageInfo.procCoefficient, attackerBody.master.luck, attackerBody.master))
                             {
                                 damageInfo.damageType |= DamageType.Freeze2s;
                             }
@@ -94,7 +94,7 @@ namespace TooManyItems.Items.Tier3
 
                         if (victimBody.healthComponent.isInFrozenState)
                         {
-                            damageInfo.damage *= 1 + Utilities.GetLinearStacking(frozenDamageMultiplierPercent, frozenDamageMultiplierExtraStacksPercent, count);
+                            damageInfo.damage *= 1 + Utilities.GetLinearStacking(percentFrozenDamageMultiplier, percentFrozenDamageMultiplierExtraStacks, count);
                             damageInfo.damageColorIndex = damageColor;
                         }
                     }

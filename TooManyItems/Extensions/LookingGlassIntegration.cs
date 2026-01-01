@@ -28,16 +28,10 @@ namespace TooManyItems.Extensions
                 {
                     RegisterStatsForItem(Amnesia.itemDef, [
                         new("Lives Left: ", ItemStatsDef.ValueType.Healing, ItemStatsDef.MeasurementUnits.Number)
-                        ], (master, count) =>
-                        {
-                            return [count];
-                        });
+                        ], (master, count) => { return [count]; });
                     RegisterStatsForItem(Amnesia.depletedDef, [
                         new("Lives Lived: ", ItemStatsDef.ValueType.Death, ItemStatsDef.MeasurementUnits.Number)
-                        ], (master, count) =>
-                        {
-                            return [count];
-                        });
+                        ], (master, count) => { return [count]; });
                 }
 
                 if (AncientCoin.isEnabled.Value)
@@ -54,6 +48,7 @@ namespace TooManyItems.Extensions
                         ], (master, itemCount) =>
                         {
                             if (!master || !master.inventory || !master.inventory.GetComponent<BloodDice.Statistics>())
+                                // Return the current cap if we can't get the actual permanent health
                                 return [BloodDice.CalculateMaxHealthCap(itemCount)];
 
                             return [master.inventory.GetComponent<BloodDice.Statistics>().PermanentHealth];
@@ -136,14 +131,14 @@ namespace TooManyItems.Extensions
                         new("Total DoT Damage: ", ItemStatsDef.ValueType.Death, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetReverseExponentialStacking(DoubleDown.upFrontDamagePercent, DoubleDown.upFrontDamageReductionPercent, itemCount)];
+                            return [Utilities.GetReverseExponentialStacking(DoubleDown.percentUpFrontDamage, DoubleDown.percentUpFrontDamageReductionPerStack, itemCount)];
                         });
                 if (EdibleGlue.isEnabled.Value)
                     RegisterStatsForItem(EdibleGlue.itemDef, [
                         new("Slow Range: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Meters)
                         ], (master, itemCount) =>
                         {
-                            return [EdibleGlue.GetSlowRadius(itemCount)];
+                            return [Utilities.GetLinearStacking(EdibleGlue.slowRadiusInitialStack.Value, EdibleGlue.slowRadiusPerExtraStack.Value, itemCount)];
                         });
                 if (Epinephrine.isEnabled.Value)
                     RegisterStatsForItem(Epinephrine.itemDef, [
@@ -166,11 +161,12 @@ namespace TooManyItems.Extensions
                         ], (master, itemCount) =>
                         {
                             List<float> values = [];
+                            float baseAmount = Utilities.GetLinearStacking(GlassMarbles.damagePerLevelPerStack.Value, GlassMarbles.damagePerLevelPerExtraStack.Value, itemCount);
 
                             if (master && master.GetBody())
-                                values.Add(Utilities.GetLinearStacking(GlassMarbles.damagePerLevelPerStack.Value, GlassMarbles.damagePerLevelPerExtraStack.Value, itemCount) * master.GetBody().level);
+                                values.Add(baseAmount * master.GetBody().level);
                             else
-                                values.Add(Utilities.GetLinearStacking(GlassMarbles.damagePerLevelPerStack.Value, GlassMarbles.damagePerLevelPerExtraStack.Value, itemCount));
+                                values.Add(baseAmount);
 
                             return values;
                         });
@@ -244,7 +240,7 @@ namespace TooManyItems.Extensions
                             [
                                 // Use luck from master if possible
                                 master ? Utilities.GetChanceAfterLuck(MagnifyingGlass.percentAnalyzeChance, master.luck) : MagnifyingGlass.percentAnalyzeChance,
-                                Utilities.GetLinearStacking(MagnifyingGlass.percentDamageTakenBonus, itemCount)
+                                Utilities.GetLinearStacking(MagnifyingGlass.percentDamageTakenBonus, MagnifyingGlass.percentDamageTakenBonusExtraStacks, itemCount)
                             ];
                         });
                 if (PaperPlane.isEnabled.Value)
@@ -263,8 +259,8 @@ namespace TooManyItems.Extensions
                             return
                             [
                                 // Check if we can calculate using luck
-                                master ? Utilities.GetChanceAfterLuck(Permafrost.freezeChancePercent, master.luck) : Permafrost.freezeChancePercent,
-                                Utilities.GetLinearStacking(Permafrost.frozenDamageMultiplierPercent, Permafrost.frozenDamageMultiplierExtraStacksPercent, itemCount),
+                                master ? Utilities.GetChanceAfterLuck(Permafrost.percentFreezeChance, master.luck) : Permafrost.percentFreezeChance,
+                                Utilities.GetLinearStacking(Permafrost.percentFrozenDamageMultiplier, Permafrost.percentFrozenDamageMultiplierExtraStacks, itemCount),
                             ];
                         });
                 if (Photodiode.isEnabled.Value)
@@ -309,6 +305,7 @@ namespace TooManyItems.Extensions
                             List<float> values = [RustedTrowel.CalculateCooldownInSec(itemCount)];
 
                             if (master && master.inventory && master.inventory.GetComponent<RustedTrowel.Statistics>())
+                                // Display actual healing done if possible
                                 values.Add(master.inventory.GetComponent<RustedTrowel.Statistics>().TotalHealingDone);
                             else
                                 values.Add(RustedTrowel.healingPerStack.Value);
