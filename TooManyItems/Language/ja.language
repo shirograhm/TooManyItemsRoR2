@@ -204,7 +204,7 @@
     "SHADOWCREST": "シャドウクレスト",
     "ITEM_SHADOWCREST_NAME": "シャドウクレスト",
     "ITEM_SHADOWCREST_PICKUP": "毎秒、失った体力の一定割合を回復する。",
-    "ITEM_SHADOWCREST_DESC": "毎秒、失った体力の<style=cIsHealing>{Regen Per Second}%<style=cStack>（スタックごとに+{Regen Per Second}%）</style></style>を回復する。すべての異端者の印章を破損する。",
+    "ITEM_SHADOWCREST_DESC": "毎秒、失った体力の<style=cIsHealing>{Regen Per Second}%<style=cStack>（スタックごとに+{Regen Per Second Extra Stacks}%）</style></style>を回復する。すべての異端者の印章を破損する。",
     "ITEM_SHADOWCREST_LORE": ""
   }
 }

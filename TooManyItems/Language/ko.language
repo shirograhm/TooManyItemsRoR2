@@ -204,7 +204,7 @@
     "SHADOWCREST": "그림자 문장",
     "ITEM_SHADOWCREST_NAME": "그림자 문장",
     "ITEM_SHADOWCREST_PICKUP": "매초마다 잃은 체력의 일부를 회복합니다.",
-    "ITEM_SHADOWCREST_DESC": "매초 잃은 체력의 <style=cIsHealing>{Regen Per Second}%<style=cStack>(중첩당 +{Regen Per Second}%)</style></style>를 <style=cIsHealing>회복</style>합니다.",
+    "ITEM_SHADOWCREST_DESC": "매초 잃은 체력의 <style=cIsHealing>{Regen Per Second}%<style=cStack>(중첩당 +{Regen Per Second Extra Stacks}%)</style></style>를 <style=cIsHealing>회복</style>합니다.",
     "ITEM_SHADOWCREST_LORE": ""
   }
 }

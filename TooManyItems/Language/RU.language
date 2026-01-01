@@ -199,7 +199,7 @@
     "SHADOWCREST": "Теневой Герб",
     "ITEM_SHADOWCREST_NAME": "Теневой Герб",
     "ITEM_SHADOWCREST_PICKUP": "Каждую секунду восстанавливает часть недостающего здоровья.",
-    "ITEM_SHADOWCREST_DESC": "Каждую секунду восстанавливает <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second}% за шт.)</style></style> от вашего максимального здоровья.",
+    "ITEM_SHADOWCREST_DESC": "Каждую секунду восстанавливает <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second Extra Stacks}% за шт.)</style></style> от вашего максимального здоровья.",
     "ITEM_SHADOWCREST_LORE": ""
   }
 }

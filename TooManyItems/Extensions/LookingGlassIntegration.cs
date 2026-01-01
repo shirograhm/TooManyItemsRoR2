@@ -320,7 +320,7 @@ namespace TooManyItems.Extensions
                         new("Missing Health Regen: ", ItemStatsDef.ValueType.Healing, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(ShadowCrest.regenPerSecondPercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(ShadowCrest.percentRegenPerSecond, ShadowCrest.percentRegenPerSecondExtraStacks, itemCount)];
                         });
                 if (SoulRing.isEnabled.Value)
                     RegisterStatsForItem(SoulRing.itemDef, [

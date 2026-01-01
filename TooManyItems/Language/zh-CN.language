@@ -199,7 +199,7 @@
     "SHADOWCREST": "暗影波纹",
     "ITEM_SHADOWCREST_NAME": "暗影波纹",
     "ITEM_SHADOWCREST_PICKUP": "每秒回复一部分已损失的生命值。",
-    "ITEM_SHADOWCREST_DESC": "每秒恢复 <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second}% 每层)</style></style> 已损失的生命值。",
+    "ITEM_SHADOWCREST_DESC": "每秒恢复 <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second Extra Stacks}% 每层)</style></style> 已损失的生命值。",
     "ITEM_SHADOWCREST_LORE": ""
   }
 }

@@ -204,7 +204,7 @@
     "SHADOWCREST": "Shadow Crest",
     "ITEM_SHADOWCREST_NAME": "Shadow Crest",
     "ITEM_SHADOWCREST_PICKUP": "Regenerate a portion of your missing health per second.",
-    "ITEM_SHADOWCREST_DESC": "Regenerate <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second}% per stack)</style></style> of your <style=cIsHealing>missing health</style> every second.",
+    "ITEM_SHADOWCREST_DESC": "Regenerate <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second Extra Stacks}% per stack)</style></style> of your <style=cIsHealing>missing health</style> every second.",
     "ITEM_SHADOWCREST_LORE": ""
   }
 }

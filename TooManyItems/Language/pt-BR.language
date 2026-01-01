@@ -203,7 +203,7 @@
     "SHADOWCREST": "Escudo da Sombras",
     "ITEM_SHADOWCREST_NAME": "Escudo da Sombras",
     "ITEM_SHADOWCREST_PICKUP": "Regenera uma porção da sua vida perdida a cada segundo.",
-    "ITEM_SHADOWCREST_DESC": "Regenera <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second}% por acúmulo)</style></style> da sua vida perdida a cada segundo.",
+    "ITEM_SHADOWCREST_DESC": "Regenera <style=cIsHealing>{Regen Per Second}% <style=cStack>(+{Regen Per Second Extra Stacks}% por acúmulo)</style></style> da sua vida perdida a cada segundo.",
     "ITEM_SHADOWCREST_LORE": ""
   }
 }

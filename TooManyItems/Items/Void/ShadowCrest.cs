@@ -23,7 +23,15 @@ namespace TooManyItems.Items.Void
             "Percentage of missing health regenerated per second.",
             ["ITEM_SHADOWCREST_DESC"]
         );
-        public static float regenPerSecondPercent = regenPerSecond.Value / 100f;
+        public static ConfigurableValue<float> regenPerSecondExtraStacks = new(
+            "Item: Shadow Crest",
+            "Regen Per Second Extra Stacks",
+            1f,
+            "Percentage of missing health regenerated per second for extra stacks.",
+            ["ITEM_SHADOWCREST_DESC"]
+        );
+        public static float percentRegenPerSecond = regenPerSecond.Value / 100f;
+        public static float percentRegenPerSecondExtraStacks = regenPerSecondExtraStacks.Value / 100f;
 
         internal static void Init()
         {
@@ -46,7 +54,7 @@ namespace TooManyItems.Items.Void
                         // Make sure this calculation only runs when healthFraction is below 1, not above 1
                         if (sender.healthComponent.combinedHealthFraction < 1f)
                         {
-                            args.baseRegenAdd += Utilities.GetHyperbolicStacking(regenPerSecondPercent, count) * sender.healthComponent.missingCombinedHealth;
+                            args.baseRegenAdd += Utilities.GetHyperbolicStacking(percentRegenPerSecond, percentRegenPerSecondExtraStacks, count) * sender.healthComponent.missingCombinedHealth;
                         }
                     }
                 }
