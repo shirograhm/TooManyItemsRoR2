@@ -55,7 +55,7 @@
     "SPIRITSTONE": "Камень духов",
     "ITEM_SPIRITSTONE_NAME": "Камень духов",
     "ITEM_SPIRITSTONE_PICKUP": "Убийство врага даёт вам щит навсегда. <style=cDeath>Блокирует часть полоски максимального здоровья</style>.",
-    "ITEM_SPIRITSTONE_DESC": "Убийство врага даёт вам <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} за шт.)</style> единицу щита навсегда</style>. <style=cDeath>Блокирует {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% за шт.)</style> от полоски максимального здоровья</style>.",
+    "ITEM_SPIRITSTONE_DESC": "Убийство врага даёт вам <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount Extra Stacks} за шт.)</style> единицу щита навсегда</style>. <style=cDeath>Блокирует {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% за шт.)</style> от полоски максимального здоровья</style>.",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "Крышечка",

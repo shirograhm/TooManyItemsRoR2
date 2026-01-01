@@ -60,7 +60,7 @@
     "SPIRITSTONE": "영혼석",
     "ITEM_SPIRITSTONE_NAME": "영혼석",
     "ITEM_SPIRITSTONE_PICKUP": "적을 처치할 때마다 영구적인 방어막을 획득합니다. 최대 체력이 감소합니다.",
-    "ITEM_SPIRITSTONE_DESC": "적 처치 시 영구적으로 <style=cIsHealing>{Shield Amount} <style=cStack>(중첩당 +{Shield Amount})</style>방어막</style>을 얻습니다. <style=cIsHealing>최대 체력</style>의 <style=cDeath>{Max Health Reduction}%<style=cStack> (중첩당 +{Max Health Reduction Extra Stacks}%)</style></style>감소합니다.",
+    "ITEM_SPIRITSTONE_DESC": "적 처치 시 영구적으로 <style=cIsHealing>{Shield Amount} <style=cStack>(중첩당 +{Shield Amount Extra Stacks})</style>방어막</style>을 얻습니다. <style=cIsHealing>최대 체력</style>의 <style=cDeath>{Max Health Reduction}%<style=cStack> (중첩당 +{Max Health Reduction Extra Stacks}%)</style></style>감소합니다.",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "병뚜껑",

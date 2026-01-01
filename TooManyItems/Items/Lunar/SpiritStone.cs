@@ -29,6 +29,13 @@ namespace TooManyItems.Items.Lunar
             "Health given as shield for every kill.",
             ["ITEM_SPIRITSTONE_DESC"]
         );
+        public static ConfigurableValue<float> shieldPerKillExtraStacks = new(
+            "Item: Spirit Stone",
+            "Shield Amount Extra Stacks",
+            1f,
+            "Health given as shield for every kill with extra stacks.",
+            ["ITEM_SPIRITSTONE_DESC"]
+        );
         public static ConfigurableValue<float> maxHealthLost = new(
             "Item: Spirit Stone",
             "Max Health Reduction",
@@ -36,7 +43,7 @@ namespace TooManyItems.Items.Lunar
             "Max health lost as a penalty for holding the first stack of this item.",
             ["ITEM_SPIRITSTONE_DESC"]
         );
-        public static ConfigurableValue<float> maxHealthLostExtraStack = new(
+        public static ConfigurableValue<float> maxHealthLostExtraStacks = new(
             "Item: Spirit Stone",
             "Max Health Reduction Extra Stacks",
             10f,
@@ -44,7 +51,7 @@ namespace TooManyItems.Items.Lunar
             ["ITEM_SPIRITSTONE_DESC"]
         );
         public static float maxHealthLostPercent = maxHealthLost.Value / 100f;
-        public static float maxHealthLostExtraStackPercent = maxHealthLostExtraStack.Value / 100f;
+        public static float maxHealthLostExtraStackPercent = maxHealthLostExtraStacks.Value / 100f;
 
         public class Statistics : MonoBehaviour
         {
@@ -215,8 +222,8 @@ namespace TooManyItems.Items.Lunar
                     SpiritStone.Statistics component = targetInventory.GetComponent<SpiritStone.Statistics>();
                     if (component)
                     {
-                        // Each canister grants shield = # of item stacks * shieldPerKill
-                        component.PermanentShield += Utilities.GetLinearStacking(shieldPerKill.Value, stacks);
+                        // Each canister grants shield based on # of item stacks
+                        component.PermanentShield += Utilities.GetLinearStacking(shieldPerKill.Value, shieldPerKillExtraStacks.Value, stacks);
                     }
                     if (targetBody) Utilities.ForceRecalculate(targetBody);
                 }

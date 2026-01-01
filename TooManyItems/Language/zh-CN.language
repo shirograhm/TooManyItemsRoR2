@@ -55,7 +55,7 @@
     "SPIRITSTONE": "灵魂之石",
     "ITEM_SPIRITSTONE_NAME": "灵魂之石",
     "ITEM_SPIRITSTONE_PICKUP": "击杀敌人时获得永久叠加护盾。<style=cDeath>失去一部分最大生命值</style>。",
-    "ITEM_SPIRITSTONE_DESC": "杀死一个敌人永久获得 <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount} 每层)</style> 护盾</style>。<style=cDeath>失去 {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% 每层)</style> 最大生命值</style>。",
+    "ITEM_SPIRITSTONE_DESC": "杀死一个敌人永久获得 <style=cIsUtility>{Shield Amount} <style=cStack>(+{Shield Amount Extra Stacks} 每层)</style> 护盾</style>。<style=cDeath>失去 {Max Health Reduction}% <style=cStack>(+{Max Health Reduction Extra Stacks}% 每层)</style> 最大生命值</style>。",
     "ITEM_SPIRITSTONE_LORE": "",
 
     "BOTTLECAP": "瓶盖",

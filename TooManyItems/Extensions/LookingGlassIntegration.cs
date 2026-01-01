@@ -345,7 +345,7 @@ namespace TooManyItems.Extensions
                                 values.Add(master.inventory.GetComponent<SpiritStone.Statistics>().PermanentShield);
                             else
                                 // Show current stack value if we can't get the actual value
-                                values.Add(Utilities.GetLinearStacking(SpiritStone.shieldPerKill.Value, itemCount));
+                                values.Add(Utilities.GetLinearStacking(SpiritStone.shieldPerKill.Value, SpiritStone.shieldPerKillExtraStacks, itemCount));
 
                             return values;
                         });
