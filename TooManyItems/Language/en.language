@@ -163,7 +163,7 @@
     "ABACUS": "Abacus",
     "ITEM_ABACUS_NAME": "Abacus",
     "ITEM_ABACUS_PICKUP": "Killing enemies grants stacking crit chance until the next stage. Excess crit chance grants bonus crit damage.",
-    "ITEM_ABACUS_DESC": "Killing an enemy grants <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill}% per stack)</style> crit chance</style> until the next stage. Every <style=cIsDamage>1% crit chance</style> above <style=cIsUtility>100%</style> grants <style=cIsDamage>1% crit damage</style>.",
+    "ITEM_ABACUS_DESC": "Killing an enemy grants <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill Extra Stacks}% per stack)</style> crit chance</style> until the next stage. Every <style=cIsDamage>1% crit chance</style> above <style=cIsUtility>100%</style> grants <style=cIsDamage>1% crit damage</style>.",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "Blood Dice",
     "ITEM_BLOODDICE_NAME": "Blood Dice",

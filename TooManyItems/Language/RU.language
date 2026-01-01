@@ -158,7 +158,7 @@
     "ABACUS": "Счёты",
     "ITEM_ABACUS_NAME": "Счёты",
     "ITEM_ABACUS_PICKUP": "Убийство врагов накапливает бонус к шансу крита до следующего этапа. Излишний шанс крита превращается в бонусный критический урон.",
-    "ITEM_ABACUS_DESC": "Убийство врагов даёт вам <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill}% за шт.)</style> к шансу крита</style> до следующего этапа. Каждый <style=cIsDamage>1% шанса крита</style> сверх <style=cIsUtility>100%</style> превращается в <style=cIsDamage>1% доп.критического урона</style>.",
+    "ITEM_ABACUS_DESC": "Убийство врагов даёт вам <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill Extra Stacks}% за шт.)</style> к шансу крита</style> до следующего этапа. Каждый <style=cIsDamage>1% шанса крита</style> сверх <style=cIsUtility>100%</style> превращается в <style=cIsDamage>1% доп.критического урона</style>.",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "Кровавые кости",
     "ITEM_BLOODDICE_NAME": "Кровавые кости",

@@ -158,7 +158,7 @@
     "ABACUS": "算盘",
     "ITEM_ABACUS_NAME": "算盘",
     "ITEM_ABACUS_PICKUP": "杀死敌人会增加暴击几率，直到下一阶段。额外的暴击几率给予额外的暴击伤害。",
-    "ITEM_ABACUS_DESC": "杀死一个敌人会获得 <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill}% 每层)</style> 暴击几率</style>，持续到下一阶段。超过 <style=cIsUtility>100%</style> 的暴击几率转化为 <style=cIsDamage>暴击伤害</style>。",
+    "ITEM_ABACUS_DESC": "杀死一个敌人会获得 <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill Extra Stacks}% 每层)</style> 暴击几率</style>，持续到下一阶段。超过 <style=cIsUtility>100%</style> 的暴击几率转化为 <style=cIsDamage>暴击伤害</style>。",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "血骰子",
     "ITEM_BLOODDICE_NAME": "血骰子",

@@ -163,7 +163,7 @@
     "ABACUS": "Ábaco",
     "ITEM_ABACUS_NAME": "Ábaco",
     "ITEM_ABACUS_PICKUP": "Matar enemigos otorga probabilidad de golpe crítico acumulativa hasta el próximo mapa. El exceso de probabilidad de crítico otorga daño crítico adicional.",
-    "ITEM_ABACUS_DESC": "Matar un enemigo otorga <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill}% por stack)</style> de probabilidad de golpe crítico</style> hasta el siguiente mapa. Cada <style=cIsDamage>1% de probabilidad</style> que pase el <style=cIsUtility>100%</style> otorga <style=cIsDamage>1% daño adicional</style>.",
+    "ITEM_ABACUS_DESC": "Matar un enemigo otorga <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill Extra Stacks}% por stack)</style> de probabilidad de golpe crítico</style> hasta el siguiente mapa. Cada <style=cIsDamage>1% de probabilidad</style> que pase el <style=cIsUtility>100%</style> otorga <style=cIsDamage>1% daño adicional</style>.",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "Dados de Sangre",
     "ITEM_BLOODDICE_NAME": "Dados de Sangre",

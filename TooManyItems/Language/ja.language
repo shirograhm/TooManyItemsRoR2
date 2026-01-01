@@ -163,7 +163,7 @@
     "ABACUS": "そろばん",
     "ITEM_ABACUS_NAME": "そろばん",
     "ITEM_ABACUS_PICKUP": "敵を倒すと、次のステージまでクリティカル率が蓄積される。クリティカル率が100％を超えると、追加のクリティカルダメージを与えるようになる。",
-    "ITEM_ABACUS_DESC": "敵を倒すと、<style=cIsDamage>{Crit On Kill}%<style=cStack>（スタックごとに+{Crit On Kill}%）</style>のクリティカル率</style>を次のステージまで得る。クリティカル率が<style=cIsUtility>100%</style>を超えると、<style=cIsDamage>超過クリティカル率1%</style>につき<style=cIsDamage>クリティカルダメージが1%</style>増加する",
+    "ITEM_ABACUS_DESC": "敵を倒すと、<style=cIsDamage>{Crit On Kill}%<style=cStack>（スタックごとに+{Crit On Kill Extra Stacks}%）</style>のクリティカル率</style>を次のステージまで得る。クリティカル率が<style=cIsUtility>100%</style>を超えると、<style=cIsDamage>超過クリティカル率1%</style>につき<style=cIsDamage>クリティカルダメージが1%</style>増加する",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "血のサイコロ",
     "ITEM_BLOODDICE_NAME": "血のサイコロ",

@@ -163,7 +163,7 @@
     "ABACUS": "주판",
     "ITEM_ABACUS_NAME": "주판",
     "ITEM_ABACUS_PICKUP": "적을 처치하면 다음 단계까지 중첩되는 치명타 확률을 부여합니다. 초과 치명타 확률은 추가 치명타 피해를 부여합니다.",
-    "ITEM_ABACUS_DESC": "적 처치 시, 다음 스테이지까지 <style=cIsDamage>치명타 확률</style>이 <style=cIsDamage>{Crit On Kill}%<style=cStack>(중첩당 +{Crit On Kill}%)</style></style> 증가합니다. <style=cIsDamage>치명타 확률</style>이 <style=cIsUtility>100%</style>를 초과할 경우 <style=cIsDamage>1%</style>당 <style=cIsDamage>치명타 피해가 1%</style> 증가합니다.",
+    "ITEM_ABACUS_DESC": "적 처치 시, 다음 스테이지까지 <style=cIsDamage>치명타 확률</style>이 <style=cIsDamage>{Crit On Kill}%<style=cStack>(중첩당 +{Crit On Kill Extra Stacks}%)</style></style> 증가합니다. <style=cIsDamage>치명타 확률</style>이 <style=cIsUtility>100%</style>를 초과할 경우 <style=cIsDamage>1%</style>당 <style=cIsDamage>치명타 피해가 1%</style> 증가합니다.",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "피의 주사위",
     "ITEM_BLOODDICE_NAME": "피의 주사위",

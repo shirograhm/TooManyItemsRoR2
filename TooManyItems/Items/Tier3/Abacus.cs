@@ -23,7 +23,14 @@ namespace TooManyItems.Items.Tier3
             "Item: Abacus",
             "Crit On Kill",
             1f,
-            "Crit chance gained on kill per stack of item.",
+            "Crit chance gained on kill per first stack of item.",
+            ["ITEM_ABACUS_DESC"]
+        );
+        public static ConfigurableValue<float> critChancePerExtraStack = new(
+            "Item: Abacus",
+            "Crit On Kill Extra Stacks",
+            1f,
+            "Crit chance gained on kill per extra stack of item.",
             ["ITEM_ABACUS_DESC"]
         );
 
@@ -45,7 +52,7 @@ namespace TooManyItems.Items.Tier3
                 {
                     // Process buffs regardless of item in inventory or not
                     int buffCount = sender.GetBuffCount(countedBuff);
-                    args.critAdd += buffCount * critChancePerStack.Value;
+                    args.critAdd += Utilities.GetLinearStacking(critChancePerStack.Value, critChancePerExtraStack.Value, buffCount);
 
                     // Give bonus crit damage if item is in inventory
                     if (sender.inventory.GetItemCountEffective(itemDef) > 0 && sender.crit > 100.0f)

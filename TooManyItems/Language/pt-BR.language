@@ -163,7 +163,7 @@
     "ABACUS": "Ábaco",
     "ITEM_ABACUS_NAME": "Ábaco",
     "ITEM_ABACUS_PICKUP": "Abater inimigos concede chance de acerto crítico acumulativa até o próximo estágio. Chance de crítico excedente garante dano de crítico adicional.",
-    "ITEM_ABACUS_DESC": "Abater um inimigo garante <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill}% por acúmulo)</style> de chance de acerto crítico</style> até o próximo estágio. Cada <style=cIsDamage>1% de chance de crítico</style> acima de <style=cIsUtility>100%</style> garante <style=cIsDamage>1% de dano crítico adicional</style>.",
+    "ITEM_ABACUS_DESC": "Abater um inimigo garante <style=cIsDamage>{Crit On Kill}% <style=cStack>(+{Crit On Kill Extra Stacks}% por acúmulo)</style> de chance de acerto crítico</style> até o próximo estágio. Cada <style=cIsDamage>1% de chance de crítico</style> acima de <style=cIsUtility>100%</style> garante <style=cIsDamage>1% de dano crítico adicional</style>.",
     "ITEM_ABACUS_LORE": "",
     "BLOODDICE": "Dados de Sangue",
     "ITEM_BLOODDICE_NAME": "Dados de Sangue",
