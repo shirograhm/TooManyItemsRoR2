@@ -199,7 +199,7 @@
     "VOIDHEART": "Corazón profanado",
     "ITEM_VOIDHEART_NAME": "Corazón profanado",
     "ITEM_VOIDHEART_PICKUP": "Obtienes daño base teniendo en cuenta tu vida máxima.",
-    "ITEM_VOIDHEART_DESC": "Obtienes <style=cIsHealth>{Health Increase} de HP</style>. Además, ganas un <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% por stack)</style></style> de tu vida máxima como <style=cIsDamage>daño BASE</style>.",
+    "ITEM_VOIDHEART_DESC": "Obtienes <style=cIsHealth>{Health Increase} de HP</style>. Además, ganas un <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling Extra Stacks}% por stack)</style></style> de tu vida máxima como <style=cIsDamage>daño BASE</style>.",
     "ITEM_VOIDHEART_LORE": "",
     "SHADOWCREST": "Escudo de Sombras",
     "ITEM_SHADOWCREST_NAME": "Escudo de Sombras",

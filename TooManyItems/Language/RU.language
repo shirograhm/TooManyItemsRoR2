@@ -194,7 +194,7 @@
     "VOIDHEART": "Осквернённое сердце",
     "ITEM_VOIDHEART_NAME": "Осквернённое сердце",
     "ITEM_VOIDHEART_PICKUP": "Увеличивает базовый урон в зависимости от максимального здоровья.",
-    "ITEM_VOIDHEART_DESC": "Даёт <style=cIsHealth>{Health Increase} ОЗ</style>. Также получите прибавку к <style=cIsDamage>базовому урону</style> в виде <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% за шт.)</style></style> от вашего максимального здоровья.",
+    "ITEM_VOIDHEART_DESC": "Даёт <style=cIsHealth>{Health Increase} ОЗ</style>. Также получите прибавку к <style=cIsDamage>базовому урону</style> в виде <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling Extra Stacks}% за шт.)</style></style> от вашего максимального здоровья.",
     "ITEM_SHADOWCORE_LORE": "",
     "SHADOWCREST": "Теневой Герб",
     "ITEM_SHADOWCREST_NAME": "Теневой Герб",

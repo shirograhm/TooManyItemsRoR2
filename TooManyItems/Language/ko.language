@@ -199,7 +199,7 @@
     "VOIDHEART": "타락한 심장",
     "ITEM_VOIDHEART_NAME": "타락한 심장",
     "ITEM_VOIDHEART_PICKUP": "최대 체력에 비례하여 기본 피해를 얻습니다.",
-    "ITEM_VOIDHEART_DESC": "<style=cIsHealth>{Health Increase} HP</style>를 얻습니다. 그리고 최대 체력의 <style=cIsHealth>{Bonus Damage Scaling}%<style=cStack>(중첩당 +{Bonus Damage Scaling}%)</style> </style><style=cIsDamage>기본 피해량</style>을 얻습니다.",
+    "ITEM_VOIDHEART_DESC": "<style=cIsHealth>{Health Increase} HP</style>를 얻습니다. 그리고 최대 체력의 <style=cIsHealth>{Bonus Damage Scaling}%<style=cStack>(중첩당 +{Bonus Damage Scaling Extra Stacks}%)</style> </style><style=cIsDamage>기본 피해량</style>을 얻습니다.",
     "ITEM_VOIDHEART_LORE": "",
     "SHADOWCREST": "그림자 문장",
     "ITEM_SHADOWCREST_NAME": "그림자 문장",

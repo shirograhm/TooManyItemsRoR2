@@ -199,7 +199,7 @@
     "VOIDHEART": "汚れた心",
     "ITEM_VOIDHEART_NAME": "汚れた心",
     "ITEM_VOIDHEART_PICKUP": "最大体力に応じて基礎ダメージを得る。",
-    "ITEM_VOIDHEART_DESC": "<style=cIsHealth>HPが{Health Increase}</style>増加する。さらに、最大体力の<style=cIsHealth>{Bonus Damage Scaling}%<style=cStack>（スタックごとに+{Bonus Damage Scaling}%）</style></style>を<style=cIsDamage>基礎ダメージ</style>として獲得する。すべての鋼の心を破損する。",
+    "ITEM_VOIDHEART_DESC": "<style=cIsHealth>HPが{Health Increase}</style>増加する。さらに、最大体力の<style=cIsHealth>{Bonus Damage Scaling}%<style=cStack>（スタックごとに+{Bonus Damage Scaling Extra Stacks}%）</style></style>を<style=cIsDamage>基礎ダメージ</style>として獲得する。すべての鋼の心を破損する。",
     "ITEM_VOIDHEART_LORE": "",
     "SHADOWCREST": "シャドウクレスト",
     "ITEM_SHADOWCREST_NAME": "シャドウクレスト",

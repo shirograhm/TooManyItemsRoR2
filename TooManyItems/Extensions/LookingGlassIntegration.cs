@@ -370,7 +370,15 @@ namespace TooManyItems.Extensions
                         new("Base Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            return [master && master.GetBody() ? VoidHeart.CalculateDamageBonus(master.GetBody(), itemCount) : 0f];
+                            List<float> values = [];
+
+                            if (master && master.GetBody())
+                                values.Add(VoidHeart.CalculateDamageBonus(master.GetBody(), itemCount));
+                            else
+                                // Show current stack value if we can't get the actual value
+                                values.Add(Utilities.GetLinearStacking(VoidHeart.multiplierPerStack, VoidHeart.multiplierPerExtraStack, itemCount));
+
+                            return values;
                         });
             }
 

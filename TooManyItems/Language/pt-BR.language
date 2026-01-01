@@ -198,7 +198,7 @@
     "VOIDHEART": "Coração Definhado",
     "ITEM_VOIDHEART_NAME": "Coração Definhado",
     "ITEM_VOIDHEART_PICKUP": "Ganhe dano BASE baseado sua vida máxima.",
-    "ITEM_VOIDHEART_DESC": "Ganhe <style=cIsHealth>{Health Increase} de HP</style> na primeira vez que pegar este item. Também, ganhe <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% por acúmulo)</style></style> de sua vida máxima como <style=cIsDamage>dano BASE</style>.",
+    "ITEM_VOIDHEART_DESC": "Ganhe <style=cIsHealth>{Health Increase} de HP</style> na primeira vez que pegar este item. Também, ganhe <style=cIsHealth>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling Extra Stacks}% por acúmulo)</style></style> de sua vida máxima como <style=cIsDamage>dano BASE</style>.",
     "ITEM_VOIDHEART_LORE": "",
     "SHADOWCREST": "Escudo da Sombras",
     "ITEM_SHADOWCREST_NAME": "Escudo da Sombras",

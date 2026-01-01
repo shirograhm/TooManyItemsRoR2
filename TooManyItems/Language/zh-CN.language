@@ -194,7 +194,7 @@
     "VOIDHEART": "污秽之心",
     "ITEM_VOIDHEART_NAME": "污秽之心",
     "ITEM_VOIDHEART_PICKUP": "根据你的最大生命值获得基础伤害。",
-    "ITEM_VOIDHEART_DESC": "获得 <style=cIsHealth>{Health Increase} 最大生命值</style>。获得 <style=cIsDamage>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling}% 每层)</style></style> 最大生命值的基础伤害。",
+    "ITEM_VOIDHEART_DESC": "获得 <style=cIsHealth>{Health Increase} 最大生命值</style>。获得 <style=cIsDamage>{Bonus Damage Scaling}% <style=cStack>(+{Bonus Damage Scaling Extra Stacks}% 每层)</style></style> 最大生命值的基础伤害。",
     "ITEM_VOIDHEART_LORE": "",
     "SHADOWCREST": "暗影波纹",
     "ITEM_SHADOWCREST_NAME": "暗影波纹",
