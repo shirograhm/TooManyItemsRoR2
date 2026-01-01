@@ -168,7 +168,7 @@
     "BLOODDICE": "Dados de Sangre",
     "ITEM_BLOODDICE_NAME": "Dados de Sangre",
     "ITEM_BLOODDICE_PICKUP": "Al matar enemigos obtienes vida permanente.",
-    "ITEM_BLOODDICE_DESC": "Al matar enemigos, ganas permanentemente <style=cIsHealth>{Min Gain}-{Max Gain} de HP</style>, hasta un máximo de <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} por stack)</style> de HP</style>.",
+    "ITEM_BLOODDICE_DESC": "Al matar enemigos, ganas permanentemente <style=cIsHealth>{Min Gain}-{Max Gain} de HP</style>, hasta un máximo de <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Extra Item} por stack)</style> de HP</style>.",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "Canicas de Vidrio",
     "ITEM_GLASSMARBLES_NAME": "Canicas de Vidrio",

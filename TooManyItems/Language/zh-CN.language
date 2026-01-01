@@ -163,7 +163,7 @@
     "BLOODDICE": "血骰子",
     "ITEM_BLOODDICE_NAME": "血骰子",
     "ITEM_BLOODDICE_PICKUP": "杀戮时获得永久生命值。",
-    "ITEM_BLOODDICE_DESC": "杀死敌人时，获得 <style=cIsHealth>{Min Gain}-{Max Gain} 最大生命值</style>，最多获得 <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} 每层)</style> 最大生命值</style>。",
+    "ITEM_BLOODDICE_DESC": "杀死敌人时，获得 <style=cIsHealth>{Min Gain}-{Max Gain} 最大生命值</style>，最多获得 <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Extra Item} 每层)</style> 最大生命值</style>。",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "玻璃弹珠",
     "ITEM_GLASSMARBLES_NAME": "玻璃弹珠",

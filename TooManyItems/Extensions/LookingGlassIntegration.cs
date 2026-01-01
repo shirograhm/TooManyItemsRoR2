@@ -54,7 +54,7 @@ namespace TooManyItems.Extensions
                         ], (master, itemCount) =>
                         {
                             if (!master || !master.inventory || !master.inventory.GetComponent<BloodDice.Statistics>())
-                                return [Utilities.GetLinearStacking(BloodDice.maxHealthPerStack.Value, itemCount)];
+                                return [BloodDice.CalculateMaxHealthCap(itemCount)];
 
                             return [master.inventory.GetComponent<BloodDice.Statistics>().PermanentHealth];
                         });

@@ -168,7 +168,7 @@
     "BLOODDICE": "血のサイコロ",
     "ITEM_BLOODDICE_NAME": "血のサイコロ",
     "ITEM_BLOODDICE_PICKUP": "敵を倒すたびに不安定に最大HPが増える",
-    "ITEM_BLOODDICE_DESC": "敵を倒すたびに永続的なHPを<style=cIsHealth>{Min Gain}-{Max Gain} HP</style>の間で得て、最大<style=cIsHealth>{Maximum Health Per Item}<style=cStack>（スタックごとに）{Maximum Health Per Item}</style>HP</style>を得る。",
+    "ITEM_BLOODDICE_DESC": "敵を倒すたびに永続的なHPを<style=cIsHealth>{Min Gain}-{Max Gain} HP</style>の間で得て、最大<style=cIsHealth>{Maximum Health Per Item}<style=cStack>（スタックごとに+{Maximum Health Per Extra Item}）</style>HP</style>を得る。",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "ガラスのビーダマ",
     "ITEM_GLASSMARBLES_NAME": "ガラスのビーダマ",

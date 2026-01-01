@@ -168,7 +168,7 @@
     "BLOODDICE": "피의 주사위",
     "ITEM_BLOODDICE_NAME": "피의 주사위",
     "ITEM_BLOODDICE_PICKUP": "적 처치 시 영구 체력을 획득합니다",
-    "ITEM_BLOODDICE_DESC": "적 처치 시, 영구적으로 <style=cIsHealth>{Min Gain}-{Max Gain} HP</style>을 획득하며, 최대 <style=cIsHealth>{Maximum Health Per Item}<style=cStack>(중첩당 +{Maximum Health Per Item})</style>HP</style>까지 증가합니다.",
+    "ITEM_BLOODDICE_DESC": "적 처치 시, 영구적으로 <style=cIsHealth>{Min Gain}-{Max Gain} HP</style>을 획득하며, 최대 <style=cIsHealth>{Maximum Health Per Item}<style=cStack>(중첩당 +{Maximum Health Per Extra Item})</style>HP</style>까지 증가합니다.",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "유리 구슬",
     "ITEM_GLASSMARBLES_NAME": "유리 구슬",

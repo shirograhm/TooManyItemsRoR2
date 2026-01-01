@@ -168,7 +168,7 @@
     "BLOODDICE": "Dados de Sangue",
     "ITEM_BLOODDICE_NAME": "Dados de Sangue",
     "ITEM_BLOODDICE_PICKUP": "Ganhe vida permanente ao abater inimigos.",
-    "ITEM_BLOODDICE_DESC": "Abater inimigos concede permanentemente <style=cIsHealth>{Min Gain}-{Max Gain} de HP</style>, até um máximo de <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} por acúmulo)</style> de HP</style>.",
+    "ITEM_BLOODDICE_DESC": "Abater inimigos concede permanentemente <style=cIsHealth>{Min Gain}-{Max Gain} de HP</style>, até um máximo de <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Extra Item} por acúmulo)</style> de HP</style>.",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "Bolinhas de Gude",
     "ITEM_GLASSMARBLES_NAME": "Bolinhas de Gude",

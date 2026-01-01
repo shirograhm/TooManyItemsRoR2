@@ -168,7 +168,7 @@
     "BLOODDICE": "Blood Dice",
     "ITEM_BLOODDICE_NAME": "Blood Dice",
     "ITEM_BLOODDICE_PICKUP": "Gain permanent health on-kill.",
-    "ITEM_BLOODDICE_DESC": "On-kill, <u>permanently</u> gain <style=cIsHealth>{Min Gain}-{Max Gain} max health</style>, up to a maximum of <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} per stack)</style></style>.",
+    "ITEM_BLOODDICE_DESC": "On-kill, <u>permanently</u> gain <style=cIsHealth>{Min Gain}-{Max Gain} max health</style>, up to a maximum of <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Extra Item} per stack)</style></style>.",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "Glass Marbles",
     "ITEM_GLASSMARBLES_NAME": "Glass Marbles",

@@ -163,7 +163,7 @@
     "BLOODDICE": "Кровавые кости",
     "ITEM_BLOODDICE_NAME": "Кровавые кости",
     "ITEM_BLOODDICE_PICKUP": "Навсегда получите случайную прибавку к здоровью при убийстве.",
-    "ITEM_BLOODDICE_DESC": "При убийстве получите прибавку от <style=cIsHealth>{Min Gain} до {Max Gain} единиц ОЗ</style>, к максимальному здоровью, вплоть до <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Item} за шт.)</style> ОЗ</style>.",
+    "ITEM_BLOODDICE_DESC": "При убийстве получите прибавку от <style=cIsHealth>{Min Gain} до {Max Gain} единиц ОЗ</style>, к максимальному здоровью, вплоть до <style=cIsHealth>{Maximum Health Per Item} <style=cStack>(+{Maximum Health Per Extra Item} за шт.)</style> ОЗ</style>.",
     "ITEM_BLOODDICE_LORE": "",
     "GLASSMARBLES": "Стеклянные шарики",
     "ITEM_GLASSMARBLES_NAME": "Стеклянные шарики",
