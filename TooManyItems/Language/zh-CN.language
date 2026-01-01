@@ -168,7 +168,7 @@
     "GLASSMARBLES": "玻璃弹珠",
     "ITEM_GLASSMARBLES_NAME": "玻璃弹珠",
     "ITEM_GLASSMARBLES_PICKUP": "每升一级获得基础伤害。",
-    "ITEM_GLASSMARBLES_DESC": "每升一级额外获得 <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase} 每层)</style> 基础伤害。",
+    "ITEM_GLASSMARBLES_DESC": "每升一级额外获得 <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase Extra Stacks} 每层)</style> 基础伤害。",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "黄金马蹄铁",
     "ITEM_HORSESHOE_NAME": "黄金马蹄铁",

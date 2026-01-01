@@ -173,7 +173,7 @@
     "GLASSMARBLES": "Bolinhas de Gude",
     "ITEM_GLASSMARBLES_NAME": "Bolinhas de Gude",
     "ITEM_GLASSMARBLES_PICKUP": "Ganhe dano por nível.",
-    "ITEM_GLASSMARBLES_DESC": "Ganhe <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase} por acúmulo)</style> de dano por nível.",
+    "ITEM_GLASSMARBLES_DESC": "Ganhe <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase Extra Stacks} por acúmulo)</style> de dano por nível.",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "Ferradura Dourada",
     "ITEM_HORSESHOE_NAME": "Ferradura Dourada",

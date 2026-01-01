@@ -173,7 +173,7 @@
     "GLASSMARBLES": "유리 구슬",
     "ITEM_GLASSMARBLES_NAME": "유리 구슬",
     "ITEM_GLASSMARBLES_PICKUP": "레벨 당 피해량이 증가합니다.",
-    "ITEM_GLASSMARBLES_DESC": "레벨당 <style=cIsDamage>{Damage Increase}</style><style=cStack>(중첩당 +{Damage Increase})</style>공격력이 증가합니다.",
+    "ITEM_GLASSMARBLES_DESC": "레벨당 <style=cIsDamage>{Damage Increase}</style><style=cStack>(중첩당 +{Damage Increase Extra Stacks})</style>공격력이 증가합니다.",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "황금 편자",
     "ITEM_HORSESHOE_NAME": "황금 편자",

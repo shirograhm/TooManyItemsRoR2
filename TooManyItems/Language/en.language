@@ -173,7 +173,7 @@
     "GLASSMARBLES": "Glass Marbles",
     "ITEM_GLASSMARBLES_NAME": "Glass Marbles",
     "ITEM_GLASSMARBLES_PICKUP": "Gain damage per level.",
-    "ITEM_GLASSMARBLES_DESC": "Gain <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase} per stack)</style> damage per level.",
+    "ITEM_GLASSMARBLES_DESC": "Gain <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase Extra Stacks} per stack)</style> damage per level.",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "Golden Horseshoe",
     "ITEM_HORSESHOE_NAME": "Golden Horseshoe",

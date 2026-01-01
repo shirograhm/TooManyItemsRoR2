@@ -173,7 +173,7 @@
     "GLASSMARBLES": "Canicas de Vidrio",
     "ITEM_GLASSMARBLES_NAME": "Canicas de Vidrio",
     "ITEM_GLASSMARBLES_PICKUP": "Obtienes daño por nivel.",
-    "ITEM_GLASSMARBLES_DESC": "Obtienes <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase} por stack)</style> de daño por nivel.",
+    "ITEM_GLASSMARBLES_DESC": "Obtienes <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase Extra Stacks} por stack)</style> de daño por nivel.",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "Pata de Caballo Dorada",
     "ITEM_HORSESHOE_NAME": "Pata de Caballo Dorada",

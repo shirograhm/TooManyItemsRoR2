@@ -168,7 +168,7 @@
     "GLASSMARBLES": "Стеклянные шарики",
     "ITEM_GLASSMARBLES_NAME": "Стеклянные шарики",
     "ITEM_GLASSMARBLES_PICKUP": "Увеличивают базовый урон за каждый уровень персонажа.",
-    "ITEM_GLASSMARBLES_DESC": "Увеличивают базовый урон на <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase} за шт.)</style> за каждый уровень персонажа.",
+    "ITEM_GLASSMARBLES_DESC": "Увеличивают базовый урон на <style=cIsDamage>{Damage Increase}</style> <style=cStack>(+{Damage Increase Extra Stacks} за шт.)</style> за каждый уровень персонажа.",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "Золотая подкова",
     "ITEM_HORSESHOE_NAME": "Золотая подкова",

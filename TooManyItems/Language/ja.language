@@ -173,7 +173,7 @@
     "GLASSMARBLES": "ガラスのビーダマ",
     "ITEM_GLASSMARBLES_NAME": "ガラスのビーダマ",
     "ITEM_GLASSMARBLES_PICKUP": "レベルに応じて基礎ダメージが増加する。",
-    "ITEM_GLASSMARBLES_DESC": "基礎ダメージが1レベルにつき<style=cIsDamage>{Damage Increase}</style><style=cStack>（スタックごとに+{Damage Increase}）</style>増加する。",
+    "ITEM_GLASSMARBLES_DESC": "基礎ダメージが1レベルにつき<style=cIsDamage>{Damage Increase}</style><style=cStack>（スタックごとに+{Damage Increase Extra Stacks}）</style>増加する。",
     "ITEM_GLASSMARBLES_LORE": "",
     "HORSESHOE": "金の蹄鉄",
     "ITEM_HORSESHOE_NAME": "金の蹄鉄",

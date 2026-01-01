@@ -165,8 +165,14 @@ namespace TooManyItems.Extensions
                         new("Base Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            // Check for master body level, otherwise return per-level value
-                            return [master && master.GetBody() ? GlassMarbles.damagePerLevelPerStack * itemCount * master.GetBody().level : GlassMarbles.damagePerLevelPerStack * itemCount];
+                            List<float> values = [];
+
+                            if (master && master.GetBody())
+                                values.Add(Utilities.GetLinearStacking(GlassMarbles.damagePerLevelPerStack.Value, GlassMarbles.damagePerLevelPerExtraStack.Value, itemCount) * master.GetBody().level);
+                            else
+                                values.Add(Utilities.GetLinearStacking(GlassMarbles.damagePerLevelPerStack.Value, GlassMarbles.damagePerLevelPerExtraStack.Value, itemCount));
+
+                            return values;
                         });
                 if (HolyWater.isEnabled.Value)
                     RegisterStatsForItem(HolyWater.itemDef, [
