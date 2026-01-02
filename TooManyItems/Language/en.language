@@ -25,7 +25,7 @@
     "EQUIPMENT_TATTEREDSCROLL_NAME": "Tattered Scroll",
     "EQUIPMENT_TATTEREDSCROLL_PICKUP": "Curse nearby enemies when activated. Killing cursed enemies drops treasure.",
     "EQUIPMENT_TATTEREDSCROLL_DESC": "On activation, curse enemies within a <style=cIsUtility>{Curse Distance}m</style> radius for <style=cIsUtility>{Curse Duration} seconds</style>. Killing a cursed enemy drops a <style=cHumanObjective>treasure pickup</style> that grants <style=cHumanObjective>{Gold Granted} gold</style>, <style=cIsUtility>scaling with difficulty</style>.",
-    "EQUIPMENT_TATTEREDSCROLL_LORE": "",
+    "EQUIPMENT_TATTEREDSCROLL_LORE": "\"I found this old scroll tucked behind a loose panel in the outpost wall. The edges crumble if you breathe too hard, and most of the ink has wandered off over the years, but a few symbols remain. They don't match any script I know. They don't even look like they were written; moreso... grown?\n\nI am still trying to make sense of them. Every time I think I've spotted a pattern, it slips away, like the shapes rearrange themselves the moment I look back. Maybe I'm imagining it. Maybe it's just age and weathering playing tricks on me. Still, I can't shake the feeling that whoever made this wanted it to be found, even if they didn't want it to be understood.\n\nI'll keep it with me a little longer. Just to see if anything changes.\"\n\n- Lost Journal, recovered from Petrichor V",
 
     "AMNESIA": "Amnesia",
     "ITEM_AMNESIA_NAME": "Amnesia",
@@ -184,7 +184,7 @@
     "ITEM_IRONHEART_NAME": "Iron Heart",
     "ITEM_IRONHEART_PICKUP": "Deal damage on-hit based on your max health.",
     "ITEM_IRONHEART_DESC": "Gain <style=cIsHealth>{Health Increase} max health</style>. Deal <style=cIsHealth>{On-Hit Damage Scaling}%</style> <style=cStack>(+{On-Hit Damage Scaling Extra Stacks}% per stack)</style> of your <style=cIsHealth>max health</style> as bonus <style=cIsDamage>on-hit damage</style>.",
-    "ITEM_IRONHEART_LORE": "",
+    "ITEM_IRONHEART_LORE": "<style=cStack><b>Audio transcription recovered from signal echoes. Minor corruption detected. Assigning generic tokens.</b></style>\n\n[Metal clinking]\n\nVOICE 1: You, uh, you sure that's safe to wear?\n\nVOICE 2: Safe? No. But it's sturdy. Stronger than anything else we've got left.\n\nVOICE 1: It looks heavy.\n\nVOICE 2: It is. That's the point. If somethi— ... —you alive out here, you want to feel it. Remind— ... —re still moving.\n\n[Short pause]\n\nVOICE 1: Doesn't it hurt?\n\nVOICE 2: Only when I stop.\n\n<style=cStack><b>End of requested transcript.</b></style>",
     "PERMAFROST": "Permafrost",
     "ITEM_PERMAFROST_NAME": "Permafrost",
     "ITEM_PERMAFROST_PICKUP": "Skill damage has a chance to freeze enemies. Deal bonus damage to frozen enemies.",
