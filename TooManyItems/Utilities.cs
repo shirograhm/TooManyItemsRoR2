@@ -155,6 +155,16 @@ namespace TooManyItems
             return baseValue + extraValue * (count - 1);
         }
 
+        public static int GetLinearStacking(int baseValue, int count)
+        {
+            return GetLinearStacking(baseValue, baseValue, count);
+        }
+
+        public static int GetLinearStacking(int baseValue, int extraValue, int count)
+        {
+            return baseValue + extraValue * (count - 1);
+        }
+
         public static float GetExponentialStacking(float percent, int count)
         {
             return GetExponentialStacking(percent, percent, count);
@@ -202,12 +212,6 @@ namespace TooManyItems
             EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
         }
 
-        public static bool IsItemTierRandomizable(ItemTier tier)
-        {
-            return tier == ItemTier.Tier1 || tier == ItemTier.Tier2 || tier == ItemTier.Tier3 || tier == ItemTier.Lunar ||
-                tier == ItemTier.VoidTier1 || tier == ItemTier.VoidTier2 || tier == ItemTier.VoidTier3 || tier == ItemTier.Boss;
-        }
-
         public static bool IsItemIndexScrap(ItemIndex itemIndex)
         {
             return itemIndex == RoR2Content.Items.ScrapWhite.itemIndex || itemIndex == RoR2Content.Items.ScrapGreen.itemIndex || itemIndex == RoR2Content.Items.ScrapRed.itemIndex;
@@ -215,8 +219,6 @@ namespace TooManyItems
 
         public static ItemIndex GetRandomItemOfTier(ItemTier tier)
         {
-            if (!IsItemTierRandomizable(tier)) throw new Exception("Invalid tier " + tier.ToString() + " called for random item.");
-
             switch (tier)
             {
                 case ItemTier.Tier1:

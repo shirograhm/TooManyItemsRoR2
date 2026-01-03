@@ -27,6 +27,62 @@ namespace TooManyItems.Items.Lunar
             "Duration of invulnerability after revival in seconds.",
             ["ITEM_AMNESIA_DESC"]
         );
+        public static ConfigurableValue<bool> canRerollTier1 = new(
+            "Item: Amnesia",
+            "Rerolls White Items",
+            true,
+            "Whether or not this item rerolls white items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollTier2 = new(
+            "Item: Amnesia",
+            "Rerolls Green Items",
+            true,
+            "Whether or not this item rerolls green items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollTier3 = new(
+            "Item: Amnesia",
+            "Rerolls Red Items",
+            true,
+            "Whether or not this item rerolls red items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollBoss = new(
+            "Item: Amnesia",
+            "Rerolls Boss Items",
+            true,
+            "Whether or not this item rerolls boss items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollVoidTier1 = new(
+            "Item: Amnesia",
+            "Rerolls Voided White Items",
+            true,
+            "Whether or not this item rerolls voided white items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollVoidTier2 = new(
+            "Item: Amnesia",
+            "Rerolls Voided Green Items",
+            true,
+            "Whether or not this item rerolls voided green items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollVoidTier3 = new(
+            "Item: Amnesia",
+            "Rerolls Voided Red Items",
+            true,
+            "Whether or not this item rerolls voided red items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static ConfigurableValue<bool> canRerollLunar = new(
+            "Item: Amnesia",
+            "Rerolls Lunar Items",
+            false,
+            "Whether or not this item rerolls lunar items.",
+            ["ITEM_AMNESIA_DESC"]
+        );
 
         internal static void Init()
         {
@@ -82,7 +138,7 @@ namespace TooManyItems.Items.Lunar
                             depletedDef.itemIndex,
                             CharacterMasterNotificationQueue.TransformationType.Default
                         );
-                        // Dont apply await (run synchronously to avoid issues with death state)
+                        // Dont apply await (run asynchronously to avoid issues with death state)
                         RandomizePlayerItems(master);
                     }
                 }
@@ -91,39 +147,52 @@ namespace TooManyItems.Items.Lunar
 
         public static async Task RandomizePlayerItems(CharacterMaster master)
         {
-            Dictionary<ItemTier, int> tierCounts = [];
+            List<(ItemTier, int)> stackCounts = [];
 
-            var itemStacks = master.inventory.permanentItemStacks;
+            ItemCollection itemStacks = master.inventory.permanentItemStacks;
             int immuneDurationMillis = Mathf.RoundToInt(invulnerabilityDuration.Value * 1000f);
-            int durationPerItem = immuneDurationMillis / 2 / itemStacks.GetTotalItemStacks();
+            int durationPerItem = immuneDurationMillis / itemStacks.GetTotalItemStacks();
 
             for (int i = 0; i < ItemCatalog.itemCount; i++)
             {
                 ItemIndex itemIndex = (ItemIndex)i;
                 ItemTier itemTier = ItemCatalog.GetItemDef(itemIndex).tier;
 
-                if (!Utilities.IsItemTierRandomizable(itemTier)) continue;
+                // check for configs
+                if (!IsItemTierRandomizable(itemTier)) continue;
+                // Don't reroll scrap or the Amnesia item itself
                 if (itemIndex == itemDef.itemIndex || Utilities.IsItemIndexScrap(itemIndex)) continue;
 
                 int count = itemStacks.GetStackValue(itemIndex);
                 if (count > 0)
                 {
-                    if (!tierCounts.ContainsKey(itemTier)) tierCounts[itemTier] = 0;
-                    tierCounts[itemTier] += count;
                     master.inventory.RemoveItemPermanent(itemIndex, count);
-                    await Task.Delay(Math.Max(Mathf.RoundToInt(durationPerItem), 1));
+                    await Task.Delay(Math.Max(Mathf.RoundToInt(durationPerItem / 2), 1));
+                    // Store the stack info for later
+                    stackCounts.Add((itemTier, count));
                 }
             }
-            foreach (ItemTier tier in tierCounts.Keys)
+            foreach ((ItemTier, int) entry in stackCounts)
             {
-                if (!Utilities.IsItemTierRandomizable(tier)) continue;
-
-                for (int i = 0; i < tierCounts[tier]; i++)
-                {
-                    master.inventory.GiveItemPermanent(Utilities.GetRandomItemOfTier(tier));
-                    await Task.Delay(Math.Max(Mathf.RoundToInt(durationPerItem), 1));
-                }
+                master.inventory.GiveItemPermanent(Utilities.GetRandomItemOfTier(entry.Item1), entry.Item2);
+                await Task.Delay(Math.Max(Mathf.RoundToInt(durationPerItem / 2), 1));
             }
+        }
+
+        public static bool IsItemTierRandomizable(ItemTier tier)
+        {
+            return tier switch
+            {
+                ItemTier.Tier1 => canRerollTier1.Value,
+                ItemTier.Tier2 => canRerollTier2.Value,
+                ItemTier.Tier3 => canRerollTier3.Value,
+                ItemTier.Lunar => canRerollLunar.Value,
+                ItemTier.VoidTier1 => canRerollVoidTier1.Value,
+                ItemTier.VoidTier2 => canRerollVoidTier2.Value,
+                ItemTier.VoidTier3 => canRerollVoidTier3.Value,
+                ItemTier.Boss => canRerollBoss.Value,
+                _ => false,
+            };
         }
     }
 }
