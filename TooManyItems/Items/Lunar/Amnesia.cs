@@ -12,6 +12,7 @@ namespace TooManyItems.Items.Lunar
     {
         public static ItemDef itemDef;
         public static ItemDef depletedDef;
+        public static ItemDef forgottenDef;
 
         public static ConfigurableValue<bool> isEnabled = new(
             "Item: Amnesia",
@@ -79,16 +80,24 @@ namespace TooManyItems.Items.Lunar
         public static ConfigurableValue<bool> canRerollLunar = new(
             "Item: Amnesia",
             "Rerolls Lunar Items",
-            false,
+            true,
             "Whether or not this item rerolls lunar items.",
             ["ITEM_AMNESIA_DESC"]
         );
+        public static ConfigurableValue<float> forgottenRerollChance = new(
+            "Item: Amnesia",
+            "Forget Item Chance",
+            20f,
+            "Percent chance the rerolled stack is forgotten instead.",
+            ["ITEM_AMNESIA_DESC"]
+        );
+        public static float percentForgottenRerollChance = forgottenRerollChance.Value / 100f;
 
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("Amnesia", [ItemTag.AIBlacklist, ItemTag.BrotherBlacklist, ItemTag.Utility], ItemTier.Lunar);
             depletedDef = ItemManager.GenerateItem("DepletedAmnesia", [ItemTag.AIBlacklist, ItemTag.BrotherBlacklist, ItemTag.CommandArtifactBlacklist, ItemTag.SacrificeBlacklist, ItemTag.DevotionBlacklist], ItemTier.NoTier);
-
+            forgottenDef = ItemManager.GenerateItem("ForgottenItem", [ItemTag.AIBlacklist, ItemTag.BrotherBlacklist, ItemTag.CommandArtifactBlacklist, ItemTag.SacrificeBlacklist, ItemTag.DevotionBlacklist], ItemTier.NoTier);
             Hooks();
         }
 
@@ -103,7 +112,7 @@ namespace TooManyItems.Items.Lunar
                     CharacterMaster master = damageReport.victimBody.master;
                     Vector3 deathPosition = damageReport.damageInfo.position;
 
-                    int count = master.inventory.GetItemCountEffective(itemDef);
+                    int count = master.inventory.GetItemCountPermanent(itemDef);
                     if (count > 0)
                     {
                         Vector3 vector = deathPosition;
@@ -123,11 +132,17 @@ namespace TooManyItems.Items.Lunar
                             {
                                 obj.initialStateType = obj.mainStateType;
                             }
-                            if (rezEffectPrefab)
-                            {
-                                EffectManager.SpawnEffect(rezEffectPrefab, new EffectData { origin = vector, rotation = master.bodyInstanceObject.transform.rotation }, transmit: true);
-                            }
+                            if (rezEffectPrefab) EffectManager.SpawnEffect(rezEffectPrefab, new EffectData { origin = vector, rotation = master.bodyInstanceObject.transform.rotation }, transmit: true);
                         }
+
+                        // Send chat message
+                        Chat.SubjectFormatChatMessage subjectFormatChatMessage = new()
+                        {
+                            subjectAsCharacterBody = master.GetBody(),
+                            baseToken = "AMNESIA_REVIVE_MESSAGE",
+                            paramTokens = [master.playerControllerId.ToString()]
+                        };
+                        Chat.SendBroadcastChat(subjectFormatChatMessage);
 
                         // Consume stack of Amnesia and Randomize items
                         master.inventory.RemoveItemPermanent(itemDef, 1);
@@ -174,7 +189,25 @@ namespace TooManyItems.Items.Lunar
             }
             foreach ((ItemTier, int) entry in stackCounts)
             {
-                master.inventory.GiveItemPermanent(Utilities.GetRandomItemOfTier(entry.Item1), entry.Item2);
+                ItemIndex newItemIndex = Utilities.GetRandomItemOfTier(entry.Item1);
+
+                int forgottenCount = 0;
+                for (int i = 0; i < entry.Item2; i++)
+                {
+                    if (Util.CheckRoll(forgottenRerollChance.Value))
+                    {
+                        forgottenCount++;
+                        CharacterMasterNotificationQueue.PushItemTransformNotification(
+                            master,
+                            newItemIndex,
+                            forgottenDef.itemIndex,
+                            CharacterMasterNotificationQueue.TransformationType.Default
+                        );
+                        master.inventory.GiveItemPermanent(forgottenDef.itemIndex, 1);
+                        await Task.Delay(Math.Max(Mathf.RoundToInt(durationPerItem / 2), 1));
+                    }
+                }
+                master.inventory.GiveItemPermanent(newItemIndex, entry.Item2 - forgottenCount);
                 await Task.Delay(Math.Max(Mathf.RoundToInt(durationPerItem / 2), 1));
             }
         }
