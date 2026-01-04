@@ -28,16 +28,10 @@ namespace TooManyItems.Extensions
                 {
                     RegisterStatsForItem(Amnesia.itemDef, [
                         new("Lives Left: ", ItemStatsDef.ValueType.Healing, ItemStatsDef.MeasurementUnits.Number)
-                        ], (master, count) =>
-                        {
-                            return [count];
-                        });
+                        ], (master, count) => { return [count]; });
                     RegisterStatsForItem(Amnesia.depletedDef, [
                         new("Lives Lived: ", ItemStatsDef.ValueType.Death, ItemStatsDef.MeasurementUnits.Number)
-                        ], (master, count) =>
-                        {
-                            return [count];
-                        });
+                        ], (master, count) => { return [count]; });
                 }
 
                 if (AncientCoin.isEnabled.Value)
@@ -54,7 +48,8 @@ namespace TooManyItems.Extensions
                         ], (master, itemCount) =>
                         {
                             if (!master || !master.inventory || !master.inventory.GetComponent<BloodDice.Statistics>())
-                                return [Utilities.GetLinearStacking(BloodDice.maxHealthPerStack.Value, itemCount)];
+                                // Return the current cap if we can't get the actual permanent health
+                                return [BloodDice.CalculateMaxHealthCap(itemCount)];
 
                             return [master.inventory.GetComponent<BloodDice.Statistics>().PermanentHealth];
                         });
@@ -63,14 +58,14 @@ namespace TooManyItems.Extensions
                         new("Cooldown Reduction: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(BottleCap.specialCDRPercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(BottleCap.percentSpecialCDR, BottleCap.percentSpecialCDRExtraStacks, itemCount)];
                         });
                 if (BrassKnuckles.isEnabled.Value)
                     RegisterStatsForItem(BrassKnuckles.itemDef, [
                         new("Bonus Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetLinearStacking(BrassKnuckles.heavyHitBonusPercent, itemCount)];
+                            return [Utilities.GetLinearStacking(BrassKnuckles.percentHeavyHitBonus, BrassKnuckles.percentHeavyHitBonusExtraStacks, itemCount)];
                         });
                 if (BreadLoaf.isEnabled.Value)
                     RegisterStatsForItem(BreadLoaf.itemDef, [
@@ -93,7 +88,7 @@ namespace TooManyItems.Extensions
                         new("Damage Dealt: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            List<float> values = [Utilities.GetLinearStacking(BrokenMask.burnDamagePercent, itemCount)];
+                            List<float> values = [Utilities.GetLinearStacking(BrokenMask.percentBurnDamage, BrokenMask.percentBurnDamageExtraStacks, itemCount)];
 
                             if (master && master.inventory && master.inventory.GetComponent<BrokenMask.Statistics>())
                                 values.Add(master.inventory.GetComponent<BrokenMask.Statistics>().TotalDamageDealt);
@@ -122,28 +117,28 @@ namespace TooManyItems.Extensions
                         new("Burn Damage: ", ItemStatsDef.ValueType.Health, ItemStatsDef.MeasurementUnits.PercentHealth)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetReverseExponentialStacking(Crucifix.maxHealthBurnAmountPercent, Crucifix.maxHealthBurnAmountReductionPercent, itemCount)];
+                            return [Utilities.GetReverseExponentialStacking(Crucifix.percentMaxHealthBurnAmount, Crucifix.percentMaxHealthBurnAmountReduction, itemCount)];
                         });
                 if (DebitCard.isEnabled.Value)
                     RegisterStatsForItem(DebitCard.itemDef, [
                         new("Rebate: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(DebitCard.rebatePercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(DebitCard.percentRebate, DebitCard.percentRebateExtraStacks, itemCount)];
                         });
                 if (DoubleDown.isEnabled.Value)
                     RegisterStatsForItem(DoubleDown.itemDef, [
                         new("Total DoT Damage: ", ItemStatsDef.ValueType.Death, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetReverseExponentialStacking(DoubleDown.upFrontDamagePercent, DoubleDown.upFrontDamageReductionPercent, itemCount)];
+                            return [Utilities.GetReverseExponentialStacking(DoubleDown.percentUpFrontDamage, DoubleDown.percentUpFrontDamageReductionPerStack, itemCount)];
                         });
                 if (EdibleGlue.isEnabled.Value)
                     RegisterStatsForItem(EdibleGlue.itemDef, [
                         new("Slow Range: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Meters)
                         ], (master, itemCount) =>
                         {
-                            return [EdibleGlue.GetSlowRadius(itemCount)];
+                            return [Utilities.GetLinearStacking(EdibleGlue.slowRadiusInitialStack.Value, EdibleGlue.slowRadiusPerExtraStack.Value, itemCount)];
                         });
                 if (Epinephrine.isEnabled.Value)
                     RegisterStatsForItem(Epinephrine.itemDef, [
@@ -165,8 +160,15 @@ namespace TooManyItems.Extensions
                         new("Base Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            // Check for master body level, otherwise return per-level value
-                            return [master && master.GetBody() ? GlassMarbles.damagePerLevelPerStack * itemCount * master.GetBody().level : GlassMarbles.damagePerLevelPerStack * itemCount];
+                            List<float> values = [];
+                            float baseAmount = Utilities.GetLinearStacking(GlassMarbles.damagePerLevelPerStack.Value, GlassMarbles.damagePerLevelPerExtraStack.Value, itemCount);
+
+                            if (master && master.GetBody())
+                                values.Add(baseAmount * master.GetBody().level);
+                            else
+                                values.Add(baseAmount);
+
+                            return values;
                         });
                 if (HolyWater.isEnabled.Value)
                     RegisterStatsForItem(HolyWater.itemDef, [
@@ -213,7 +215,7 @@ namespace TooManyItems.Extensions
                         new("Damage Dealt: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            List<float> values = [Utilities.GetLinearStacking(IronHeart.multiplierPerStack, itemCount)];
+                            List<float> values = [Utilities.GetLinearStacking(IronHeart.multiplierPerStack, IronHeart.multiplierPerExtraStack, itemCount)];
                             if (master && master.inventory && master.inventory.GetComponent<IronHeart.Statistics>())
                                 values.Add(master.inventory.GetComponent<IronHeart.Statistics>().TotalDamageDealt);
                             else
@@ -226,7 +228,7 @@ namespace TooManyItems.Extensions
                         new("Damage Reduction: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(MilkCarton.eliteDamageReductionPercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(MilkCarton.percentEliteDamageReduction, MilkCarton.percentEliteDamageReductionExtraStacks, itemCount)];
                         });
                 if (MagnifyingGlass.isEnabled.Value)
                     RegisterStatsForItem(MagnifyingGlass.itemDef, [
@@ -237,8 +239,8 @@ namespace TooManyItems.Extensions
                             return
                             [
                                 // Use luck from master if possible
-                                master ? Utilities.GetChanceAfterLuck(MagnifyingGlass.analyzeChancePercent, master.luck) : MagnifyingGlass.analyzeChancePercent,
-                                Utilities.GetLinearStacking(MagnifyingGlass.damageTakenBonusPercent, itemCount)
+                                master ? Utilities.GetChanceAfterLuck(MagnifyingGlass.percentAnalyzeChance, master.luck) : MagnifyingGlass.percentAnalyzeChance,
+                                Utilities.GetLinearStacking(MagnifyingGlass.percentDamageTakenBonus, MagnifyingGlass.percentDamageTakenBonusExtraStacks, itemCount)
                             ];
                         });
                 if (PaperPlane.isEnabled.Value)
@@ -246,7 +248,7 @@ namespace TooManyItems.Extensions
                         new("Bonus Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [PaperPlane.damageBonusPercent * itemCount];
+                            return [Utilities.GetLinearStacking(PaperPlane.percentDamageBonus, PaperPlane.percentDamageBonusExtraStacks, itemCount)];
                         });
                 if (Permafrost.isEnabled.Value)
                     RegisterStatsForItem(Permafrost.itemDef, [
@@ -257,8 +259,8 @@ namespace TooManyItems.Extensions
                             return
                             [
                                 // Check if we can calculate using luck
-                                master ? Utilities.GetChanceAfterLuck(Permafrost.freezeChancePercent, master.luck) : Permafrost.freezeChancePercent,
-                                Utilities.GetLinearStacking(Permafrost.frozenDamageMultiplierPercent, Permafrost.frozenDamageMultiplierExtraStacksPercent, itemCount),
+                                master ? Utilities.GetChanceAfterLuck(Permafrost.percentFreezeChance, master.luck) : Permafrost.percentFreezeChance,
+                                Utilities.GetLinearStacking(Permafrost.percentFrozenDamageMultiplier, Permafrost.percentFrozenDamageMultiplierExtraStacks, itemCount),
                             ];
                         });
                 if (Photodiode.isEnabled.Value)
@@ -273,7 +275,7 @@ namespace TooManyItems.Extensions
                         new("Movement Speed: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetLinearStacking(PropellerHat.movespeedBonusPercent, itemCount)];
+                            return [Utilities.GetLinearStacking(PropellerHat.percentMovespeedBonus, PropellerHat.percentMovespeedBonusExtraStacks, itemCount)];
                         });
                 if (RedBlueGlasses.isEnabled.Value)
                     RegisterStatsForItem(RedBlueGlasses.itemDef, [
@@ -283,8 +285,8 @@ namespace TooManyItems.Extensions
                         {
                             return
                             [
-                                Utilities.GetLinearStacking(RedBlueGlasses.critChancePercent, itemCount),
-                                Utilities.GetLinearStacking(RedBlueGlasses.critDamagePercent, itemCount)
+                                Utilities.GetLinearStacking(RedBlueGlasses.percentCritChance, RedBlueGlasses.percentCritChanceExtraStacks, itemCount),
+                                Utilities.GetLinearStacking(RedBlueGlasses.percentCritDamage, RedBlueGlasses.percentCritDamageExtraStacks, itemCount)
                             ];
                         });
                 if (RubberDucky.isEnabled.Value)
@@ -292,7 +294,7 @@ namespace TooManyItems.Extensions
                         new("Bonus Armor: ", ItemStatsDef.ValueType.Armor, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetLinearStacking(RubberDucky.armorPerStack, itemCount)];
+                            return [Utilities.GetLinearStacking(RubberDucky.armorPerStack.Value, RubberDucky.armorPerExtraStack.Value, itemCount)];
                         });
                 if (RustedTrowel.isEnabled.Value)
                     RegisterStatsForItem(RustedTrowel.itemDef, [
@@ -303,6 +305,7 @@ namespace TooManyItems.Extensions
                             List<float> values = [RustedTrowel.CalculateCooldownInSec(itemCount)];
 
                             if (master && master.inventory && master.inventory.GetComponent<RustedTrowel.Statistics>())
+                                // Display actual healing done if possible
                                 values.Add(master.inventory.GetComponent<RustedTrowel.Statistics>().TotalHealingDone);
                             else
                                 values.Add(RustedTrowel.healingPerStack.Value);
@@ -314,7 +317,7 @@ namespace TooManyItems.Extensions
                         new("Missing Health Regen: ", ItemStatsDef.ValueType.Healing, ItemStatsDef.MeasurementUnits.Percentage)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(ShadowCrest.regenPerSecondPercent, itemCount)];
+                            return [Utilities.GetHyperbolicStacking(ShadowCrest.percentRegenPerSecond, ShadowCrest.percentRegenPerSecondExtraStacks, itemCount)];
                         });
                 if (SoulRing.isEnabled.Value)
                     RegisterStatsForItem(SoulRing.itemDef, [
@@ -326,7 +329,7 @@ namespace TooManyItems.Extensions
                             if (master && master.inventory && master.inventory.GetComponent<SoulRing.Statistics>())
                                 values.Add(master.inventory.GetComponent<SoulRing.Statistics>().HealthRegen);
                             else
-                                values.Add(Utilities.GetLinearStacking(SoulRing.maxRegenOnFirstStack, SoulRing.maxRegenForExtraStacks, itemCount));
+                                values.Add(Utilities.GetLinearStacking(SoulRing.maxRegenOnFirstStack.Value, SoulRing.maxRegenForExtraStacks.Value, itemCount));
 
                             return values;
                         });
@@ -342,7 +345,7 @@ namespace TooManyItems.Extensions
                                 values.Add(master.inventory.GetComponent<SpiritStone.Statistics>().PermanentShield);
                             else
                                 // Show current stack value if we can't get the actual value
-                                values.Add(Utilities.GetLinearStacking(SpiritStone.shieldPerKill.Value, itemCount));
+                                values.Add(Utilities.GetLinearStacking(SpiritStone.shieldPerKill.Value, SpiritStone.shieldPerKillExtraStacks, itemCount));
 
                             return values;
                         });
@@ -352,10 +355,11 @@ namespace TooManyItems.Extensions
                         new("Bonus Duration: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Seconds)
                         ], (master, itemCount) =>
                         {
+                            float baseChance = Utilities.GetLinearStacking(Thumbtack.percentBleedChance, Thumbtack.percentBleedChanceExtraStacks, itemCount);
                             return
                             [
-                                master ? Utilities.GetChanceAfterLuck(Thumbtack.bleedChancePercent * itemCount, master.luck) : Thumbtack.bleedChancePercent * itemCount,
-                                Utilities.GetLinearStacking(Thumbtack.bleedDurationBonus.Value, itemCount),
+                                master ? Utilities.GetChanceAfterLuck(baseChance, master.luck) : baseChance,
+                                Utilities.GetLinearStacking(Thumbtack.bleedDurationBonus.Value, Thumbtack.bleedDurationBonusExtraStacks.Value, itemCount),
                             ];
                         });
                 if (VoidHeart.isEnabled.Value)
@@ -363,7 +367,15 @@ namespace TooManyItems.Extensions
                         new("Base Damage: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            return [master && master.GetBody() ? VoidHeart.CalculateDamageBonus(master.GetBody(), itemCount) : 0f];
+                            List<float> values = [];
+
+                            if (master && master.GetBody())
+                                values.Add(VoidHeart.CalculateDamageBonus(master.GetBody(), itemCount));
+                            else
+                                // Show current stack value if we can't get the actual value
+                                values.Add(Utilities.GetLinearStacking(VoidHeart.multiplierPerStack, VoidHeart.multiplierPerExtraStack, itemCount));
+
+                            return values;
                         });
             }
 

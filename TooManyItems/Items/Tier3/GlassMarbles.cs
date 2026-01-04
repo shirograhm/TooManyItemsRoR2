@@ -20,7 +20,14 @@ namespace TooManyItems.Items.Tier3
             "Item: Glass Marbles",
             "Damage Increase",
             2f,
-            "Amount of base damage gained per level per stack.",
+            "Amount of base damage gained per level per first stack.",
+            ["ITEM_GLASSMARBLES_DESC"]
+        );
+        public static ConfigurableValue<float> damagePerLevelPerExtraStack = new(
+            "Item: Glass Marbles",
+            "Damage Increase Extra Stacks",
+            2f,
+            "Amount of base damage gained per level per extra stack.",
             ["ITEM_GLASSMARBLES_DESC"]
         );
 
@@ -40,8 +47,8 @@ namespace TooManyItems.Items.Tier3
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        args.baseDamageAdd += count * damagePerLevelPerStack.Value;
-                        args.levelDamageAdd += count * damagePerLevelPerStack.Value;
+                        args.baseDamageAdd += Utilities.GetLinearStacking(damagePerLevelPerStack.Value, damagePerLevelPerExtraStack.Value, count);
+                        args.levelDamageAdd += Utilities.GetLinearStacking(damagePerLevelPerStack.Value, damagePerLevelPerExtraStack.Value, count);
                     }
                 }
             };

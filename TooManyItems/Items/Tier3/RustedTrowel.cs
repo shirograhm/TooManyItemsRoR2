@@ -158,15 +158,12 @@ namespace TooManyItems.Items.Tier3
                     {
                         float healing = buffCount * healingPerStack.Value;
                         self.healthComponent.Heal(healing, new ProcChainMask());
-
                         Utilities.SpawnHealEffect(self);
 
                         Statistics stats = self.inventory.GetComponent<Statistics>();
                         stats.TotalHealingDone += healing;
 
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
                         self.SetBuffCount(mulchBuff.buffIndex, 0);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
                     }
                 }
             };
@@ -179,9 +176,7 @@ namespace TooManyItems.Items.Tier3
                     if (itemCount > 0)
                     {
                         int newBuffCount = attackerInfo.body.GetBuffCount(mulchBuff) + itemCount;
-#pragma warning disable Publicizer001 // Accessing a member that was not originally public
                         attackerInfo.body.SetBuffCount(mulchBuff.buffIndex, newBuffCount);
-#pragma warning restore Publicizer001 // Accessing a member that was not originally public
                     }
                 }
             };

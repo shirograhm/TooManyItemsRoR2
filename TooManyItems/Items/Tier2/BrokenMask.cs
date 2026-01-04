@@ -15,7 +15,6 @@ namespace TooManyItems.Items.Tier2
         private static DotController.DotDef burnDotDef;
         private static DotController.DotIndex burnIndex;
 
-        public static DamageAPI.ModdedDamageType damageType;
         public static DamageColorIndex maskDamageColor = DamageColorManager.RegisterDamageColor(Utilities.BROKEN_MASK_COLOR);
 
         // Dealing damage burns enemies for a portion of their max health.
@@ -30,7 +29,14 @@ namespace TooManyItems.Items.Tier2
             "Item: Broken Mask",
             "Percent Burn",
             1.5f,
-            "Burn damage dealt over the duration as a percentage of enemy max health.",
+            "Burn damage dealt over the duration for the first stack as a percentage of enemy max health.",
+            ["ITEM_BROKENMASK_DESC"]
+        );
+        public static ConfigurableValue<float> burnDamageExtraStacks = new(
+            "Item: Broken Mask",
+            "Percent Burn Extra Stacks",
+            1.5f,
+            "Burn damage dealt over the duration for extra stacks as a percentage of enemy max health.",
             ["ITEM_BROKENMASK_DESC"]
         );
         public static ConfigurableValue<int> burnDuration = new(
@@ -40,8 +46,15 @@ namespace TooManyItems.Items.Tier2
             "Total duration of the burn in seconds.",
             ["ITEM_BROKENMASK_DESC"]
         );
-        public static float burnDamagePercent = burnDamage.Value / 100f;
-        public static float burnTickInterval = 0.5f;
+        public static ConfigurableValue<float> burnTickInterval = new(
+            "Item: Broken Mask",
+            "Tick Interval",
+            0.5f,
+            "Keep this a clean divisor of Burn Duration to prevent unpredictable behaviour... or go wild with it, honestly, up to you ¯\\_(ツ)_/¯",
+            ["ITEM_BROKENMASK_DESC"]
+        );
+        public static float percentBurnDamage = burnDamage.Value / 100f;
+        public static float percentBurnDamageExtraStacks = burnDamageExtraStacks.Value / 100f;
 
         public class Statistics : MonoBehaviour
         {
@@ -116,7 +129,6 @@ namespace TooManyItems.Items.Tier2
 
             GenerateDot();
             burnIndex = DotAPI.RegisterDotDef(burnDotDef, BurnBehavior);
-            damageType = DamageAPI.ReserveDamageType();
 
             Hooks();
         }
@@ -126,11 +138,11 @@ namespace TooManyItems.Items.Tier2
             if (dotStack.attackerObject)
             {
                 CharacterBody attackerBody = dotStack.attackerObject.GetComponent<CharacterBody>();
-                if (attackerBody && attackerBody.inventory)
+                if (attackerBody && attackerBody.inventory && self && self.victimHealthComponent)
                 {
                     int count = attackerBody.inventory.GetItemCountEffective(itemDef);
-                    float burnPercentPerTick = burnDamagePercent * burnTickInterval / burnDuration.Value;
-                    dotStack.damage = self.victimBody.healthComponent.fullCombinedHealth * Utilities.GetLinearStacking(burnPercentPerTick, count);
+                    float burnPercentPerTick = Utilities.GetLinearStacking(percentBurnDamage, percentBurnDamageExtraStacks, count) * burnTickInterval.Value / burnDuration.Value;
+                    dotStack.damage = self.victimHealthComponent.fullCombinedHealth * burnPercentPerTick;
 
                     CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                     Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
@@ -149,7 +161,7 @@ namespace TooManyItems.Items.Tier2
                 terminalTimedBuff = null,
                 terminalTimedBuffDuration = 0f,
                 resetTimerOnAdd = true,
-                interval = burnTickInterval
+                interval = burnTickInterval.Value
             };
         }
 
@@ -167,7 +179,7 @@ namespace TooManyItems.Items.Tier2
                 if (vicBody && atkBody && atkBody.inventory)
                 {
                     int count = atkBody.inventory.GetItemCountEffective(itemDef);
-                    if (count > 0 && damageReport.dotType != burnIndex && vicBody.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
+                    if (count > 0 && damageReport.dotType != burnIndex && !Utilities.OnSameTeam(vicBody, atkBody))
                     {
                         InflictDotInfo dotInfo = new()
                         {

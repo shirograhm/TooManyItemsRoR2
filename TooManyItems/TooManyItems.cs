@@ -1,5 +1,6 @@
 using BepInEx;
 using R2API;
+using R2API.Networking;
 using R2API.Utils;
 using RoR2;
 using RoR2.ExpansionManagement;
@@ -20,8 +21,11 @@ using UnityEngine.AddressableAssets;
 namespace TooManyItems
 {
     // Dependencies
+    [BepInDependency(DotAPI.PluginGUID)]
     [BepInDependency(ItemAPI.PluginGUID)]
     [BepInDependency(LanguageAPI.PluginGUID)]
+    [BepInDependency(NetworkingAPI.PluginGUID)]
+    [BepInDependency(PrefabAPI.PluginGUID)]
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
     // Soft Dependencies
     [BepInDependency(LookingGlass.PluginInfo.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]

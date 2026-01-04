@@ -23,7 +23,15 @@ namespace TooManyItems.Items.Tier1
             "Percentage of spent gold refunded as rebate.",
             ["ITEM_DEBITCARD_DESC"]
         );
-        public static float rebatePercent = rebate.Value / 100f;
+        public static ConfigurableValue<float> rebateExtraStacks = new(
+            "Item: Debit Card",
+            "Rebate Extra Stacks",
+            10f,
+            "Percentage of spent gold refunded as rebate for extra stacks.",
+            ["ITEM_DEBITCARD_DESC"]
+        );
+        public static float percentRebate = rebate.Value / 100f;
+        public static float percentRebateExtraStacks = rebateExtraStacks.Value / 100f;
 
         internal static void Init()
         {
@@ -41,11 +49,17 @@ namespace TooManyItems.Items.Tier1
                 CharacterMaster activator = context.activatorMaster;
                 if (activator && activator.hasBody && activator.inventory)
                 {
+                    CharacterBody activatorBody = activator.GetBody();
+
                     int count = activator.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        float refundScaling = Utilities.GetHyperbolicStacking(rebatePercent, count);
-                        activator.GiveMoney(Convert.ToUInt32(moneyCost * refundScaling));
+                        float refundScaling = Utilities.GetHyperbolicStacking(percentRebate, percentRebateExtraStacks, count);
+                        Utilities.SendGoldOrbAndEffect(
+                            Convert.ToUInt32(moneyCost * refundScaling),
+                            context.purchaseInteraction ? context.purchaseInteraction.GetPosition() : activatorBody.corePosition,
+                            activatorBody.mainHurtBox
+                        );
                     }
                 }
             };

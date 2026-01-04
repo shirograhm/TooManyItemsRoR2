@@ -5,6 +5,7 @@ using RoR2.Orbs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TooManyItems.Items.Lunar;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -22,7 +23,7 @@ namespace TooManyItems
         public static List<ItemIndex> allVoidTier1Items;
         public static List<ItemIndex> allVoidTier2Items;
         public static List<ItemIndex> allVoidTier3Items;
-        public static List<ItemIndex> allVoidBossItems;
+        public static List<ItemIndex> allBossItems;
 
         internal static void Init()
         {
@@ -36,7 +37,7 @@ namespace TooManyItems
             allVoidTier1Items = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidTier1).Select(itemDef => itemDef.itemIndex)];
             allVoidTier2Items = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidTier2).Select(itemDef => itemDef.itemIndex)];
             allVoidTier3Items = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidTier3).Select(itemDef => itemDef.itemIndex)];
-            allVoidBossItems = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.VoidBoss).Select(itemDef => itemDef.itemIndex)];
+            allBossItems = [.. ItemCatalog.allItemDefs.Where(itemDef => itemDef.tier == ItemTier.Boss).Select(itemDef => itemDef.itemIndex)];
         }
 
         private class SyncForceRecalculate : INetMessage
@@ -154,6 +155,16 @@ namespace TooManyItems
             return baseValue + extraValue * (count - 1);
         }
 
+        public static int GetLinearStacking(int baseValue, int count)
+        {
+            return GetLinearStacking(baseValue, baseValue, count);
+        }
+
+        public static int GetLinearStacking(int baseValue, int extraValue, int count)
+        {
+            return baseValue + extraValue * (count - 1);
+        }
+
         public static float GetExponentialStacking(float percent, int count)
         {
             return GetExponentialStacking(percent, percent, count);
@@ -201,12 +212,6 @@ namespace TooManyItems
             EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
         }
 
-        public static bool IsItemTierRandomizable(ItemTier tier)
-        {
-            return tier == ItemTier.Tier1 || tier == ItemTier.Tier2 || tier == ItemTier.Tier3 || tier == ItemTier.Lunar ||
-                tier == ItemTier.VoidTier1 || tier == ItemTier.VoidTier2 || tier == ItemTier.VoidTier3;
-        }
-
         public static bool IsItemIndexScrap(ItemIndex itemIndex)
         {
             return itemIndex == RoR2Content.Items.ScrapWhite.itemIndex || itemIndex == RoR2Content.Items.ScrapGreen.itemIndex || itemIndex == RoR2Content.Items.ScrapRed.itemIndex;
@@ -214,8 +219,6 @@ namespace TooManyItems
 
         public static ItemIndex GetRandomItemOfTier(ItemTier tier)
         {
-            if (!IsItemTierRandomizable(tier)) throw new Exception("Invalid tier " + tier.ToString() + " called for random item.");
-
             switch (tier)
             {
                 case ItemTier.Tier1:
@@ -231,8 +234,9 @@ namespace TooManyItems
                     int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Count());
                     return arrayNoScrap3[randomIndex3];
                 case ItemTier.Lunar:
-                    int randomIndexLunar = UnityEngine.Random.Range(0, ItemCatalog.lunarItemList.Count);
-                    return ItemCatalog.lunarItemList[randomIndexLunar];
+                    var arrayNoAmnesia = ItemCatalog.lunarItemList.Where(index => index != Amnesia.itemDef.itemIndex).ToArray();
+                    int randomIndexLunar = UnityEngine.Random.Range(0, arrayNoAmnesia.Count());
+                    return arrayNoAmnesia[randomIndexLunar];
                 case ItemTier.VoidTier1:
                     int randomIndexV1 = UnityEngine.Random.Range(0, allVoidTier1Items.Count());
                     return allVoidTier1Items[randomIndexV1];
@@ -242,6 +246,9 @@ namespace TooManyItems
                 case ItemTier.VoidTier3:
                     int randomIndexV3 = UnityEngine.Random.Range(0, allVoidTier3Items.Count());
                     return allVoidTier3Items[randomIndexV3];
+                case ItemTier.Boss:
+                    int randomIndexBoss = UnityEngine.Random.Range(0, allBossItems.Count());
+                    return allBossItems[randomIndexBoss];
                 default:
                     Log.Error("Invalid tier called for random item.");
                     return ItemIndex.None;

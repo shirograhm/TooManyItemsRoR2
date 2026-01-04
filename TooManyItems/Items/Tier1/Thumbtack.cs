@@ -20,11 +20,17 @@ namespace TooManyItems.Items.Tier1
             "Item: Thumbtack",
             "Bleed Chance",
             4f,
-            "Chance to bleed per stack of this item.",
+            "Chance to bleed for the first stack of this item.",
             ["ITEM_THUMBTACK_DESC"]
         );
-        public static float bleedChancePercent = bleedChance.Value / 100f;
-
+        public static ConfigurableValue<float> bleedChanceExtraStacks = new(
+            "Item: Thumbtack",
+            "Bleed Chance Extra Stacks",
+            4f,
+            "Chance to bleed per extra stack of this item.",
+            ["ITEM_THUMBTACK_DESC"]
+        );
+        // Bleed effect statistics. These follow the base game's standard bleed mechanics.
         public static ConfigurableValue<float> bleedDamage = new(
             "Item: Thumbtack",
             "Bleed Damage",
@@ -32,8 +38,6 @@ namespace TooManyItems.Items.Tier1
             "Base damage dealt as bleed for this item.",
             ["ITEM_THUMBTACK_DESC"]
         );
-        public static float bleedDamagePercent = bleedDamage.Value / 100f;
-
         public static ConfigurableValue<float> bleedDuration = new(
             "Item: Thumbtack",
             "Bleed Duration",
@@ -41,14 +45,23 @@ namespace TooManyItems.Items.Tier1
             "Bleed duration for this item.",
             ["ITEM_THUMBTACK_DESC"]
         );
-
         public static ConfigurableValue<float> bleedDurationBonus = new(
             "Item: Thumbtack",
             "Bonus Bleed Duration",
             0.25f,
-            "How much longer your bleed effects last for each stack of this item.",
+            "How much longer your bleed effects last for the first stack of this item.",
             ["ITEM_THUMBTACK_DESC"]
         );
+        public static ConfigurableValue<float> bleedDurationBonusExtraStacks = new(
+            "Item: Thumbtack",
+            "Bonus Bleed Duration Extra Stacks",
+            0.25f,
+            "How much longer your bleed effects last for each extra stack of this item.",
+            ["ITEM_THUMBTACK_DESC"]
+        );
+        public static float percentBleedChance = bleedChance.Value / 100f;
+        public static float percentBleedChanceExtraStacks = bleedChanceExtraStacks.Value / 100f;
+        public static float percentBleedDamage = bleedDamage.Value / 100f;
 
         internal static void Init()
         {
@@ -69,13 +82,13 @@ namespace TooManyItems.Items.Tier1
                         // If the hit doesn't already apply bleed, and isn't applied by a member of the same team, roll for bleed
                         if (damageInfo.damageType != DamageType.BleedOnHit && attackerInfo.teamIndex != victimInfo.teamIndex)
                         {
-                            if (Util.CheckRoll(bleedChance.Value * itemCount * damageInfo.procCoefficient, attackerInfo.master.luck, attackerInfo.master))
+                            if (Util.CheckRoll(Utilities.GetLinearStacking(bleedChance.Value, bleedChanceExtraStacks.Value, itemCount) * damageInfo.procCoefficient, attackerInfo.master.luck, attackerInfo.master))
                             {
                                 InflictDotInfo info = new()
                                 {
                                     victimObject = victimInfo.gameObject,
                                     attackerObject = attackerInfo.gameObject,
-                                    damageMultiplier = bleedDamagePercent,
+                                    damageMultiplier = percentBleedDamage,
                                     dotIndex = DotController.DotIndex.Bleed,
                                     duration = bleedDuration.Value
                                 };
@@ -101,7 +114,7 @@ namespace TooManyItems.Items.Tier1
                         int itemCount = atkBody.inventory.GetItemCountEffective(itemDef);
                         if (itemCount > 0 && info.dotIndex == DotController.DotIndex.Bleed)
                         {
-                            info.duration += bleedDurationBonus.Value * itemCount;
+                            info.duration += Utilities.GetLinearStacking(bleedDurationBonus.Value, bleedDurationBonusExtraStacks.Value, itemCount);
                         }
                     }
                 }
