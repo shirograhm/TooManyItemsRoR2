@@ -49,11 +49,17 @@ namespace TooManyItems.Items.Tier1
                 CharacterMaster activator = context.activatorMaster;
                 if (activator && activator.hasBody && activator.inventory)
                 {
+                    CharacterBody activatorBody = activator.GetBody();
+
                     int count = activator.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
                         float refundScaling = Utilities.GetHyperbolicStacking(percentRebate, percentRebateExtraStacks, count);
-                        activator.GiveMoney(Convert.ToUInt32(moneyCost * refundScaling));
+                        Utilities.SendGoldOrbAndEffect(
+                            Convert.ToUInt32(moneyCost * refundScaling),
+                            context.purchaseInteraction ? context.purchaseInteraction.GetPosition() : activatorBody.corePosition,
+                            activatorBody.mainHurtBox
+                        );
                     }
                 }
             };

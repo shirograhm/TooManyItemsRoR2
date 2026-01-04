@@ -34,7 +34,7 @@ namespace TooManyItems.Items.Tier1
         public static ConfigurableValue<float> slowDuration = new(
             "Item: Edible Glue",
             "Glue Duration",
-            4f,
+            2.5f,
             "Slow duration.",
             ["ITEM_EDIBLEGLUE_DESC"]
         );
@@ -71,7 +71,7 @@ namespace TooManyItems.Items.Tier1
                             HealthComponent hc = hurtbox.healthComponent;
                             if (hc && hc.body && hc.body.teamComponent && hc.body.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                             {
-                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow60, slowDuration.Value);
+                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
                             }
                         }
                     }
