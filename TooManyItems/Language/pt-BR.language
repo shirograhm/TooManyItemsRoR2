@@ -90,7 +90,7 @@
     "EDIBLEGLUE": "Cola Comestível",
     "ITEM_EDIBLEGLUE_NAME": "Cola Comestível",
     "ITEM_EDIBLEGLUE_PICKUP": "Cause lentidão em inimigos próximos a você ao abatê-los.",
-    "ITEM_EDIBLEGLUE_DESC": "Ao abater, cause lentidão de <style=cIsUtility>60%</style> a inimigos em um raio de <style=cIsUtility>{Slow Radius Initial Stack}m</style> <style=cStack>(+{Slow Radius Extra Stacks}m por acúmulo)</style> durante <style=cIsUtility>{Glue Duration} segundos</style>.",
+    "ITEM_EDIBLEGLUE_DESC": "Ao abater, cause lentidão de <style=cIsUtility>80%</style> a inimigos em um raio de <style=cIsUtility>{Slow Radius Initial Stack}m</style> <style=cStack>(+{Slow Radius Extra Stacks}m por acúmulo)</style> durante <style=cIsUtility>{Glue Duration} segundos</style>.",
     "ITEM_EDIBLEGLUE_LORE": "",
     "MILKCARTON": "Caixa de Leite",
     "ITEM_MILKCARTON_NAME": "Caixa de Leite",

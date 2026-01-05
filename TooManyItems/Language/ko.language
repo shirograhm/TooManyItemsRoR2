@@ -90,7 +90,7 @@
     "EDIBLEGLUE": "식용 접착제",
     "ITEM_EDIBLEGLUE_NAME": "식용 접착제",
     "ITEM_EDIBLEGLUE_PICKUP": "적 처치 시 주변 적들을 느리게 합니다.",
-    "ITEM_EDIBLEGLUE_DESC": "적 처치 시 <style=cIsUtility>{Slow Radius Initial Stack}미터</style><style=cStack>(중첩당 +{Slow Radius Extra Stacks}미터)</style> 내의 적들에게 <style=cIsUtility>{Glue Duration}초 </style>동안 <style=cIsUtility>60%</style> 느리게 합니다.",
+    "ITEM_EDIBLEGLUE_DESC": "적 처치 시 <style=cIsUtility>{Slow Radius Initial Stack}미터</style><style=cStack>(중첩당 +{Slow Radius Extra Stacks}미터)</style> 내의 적들에게 <style=cIsUtility>{Glue Duration}초 </style>동안 <style=cIsUtility>80%</style> 느리게 합니다.",
     "ITEM_EDIBLEGLUE_LORE": "",
     "MILKCARTON": "우유팩",
     "ITEM_MILKCARTON_NAME": "우유팩",
