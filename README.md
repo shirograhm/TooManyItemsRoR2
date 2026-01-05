@@ -5,22 +5,20 @@ Adds 38 new items to Risk of Rain 2!
 ## Issue Reports
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). That is where I check most often. If possible, provide the output log and/or modlist used as it helps me debug faster.
 
-## Mod Compatibility
-Generally compatible with most mods. Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) version 1.5.1 or later.
-
-## DLC Support
+## Mods & DLC Compatibility
+Generally compatible with most mods. Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) version 1.5.1 or later.  
 Survivors of the Void DLC is supported on all versions.  
 Seekers of the Storm DLC is supported for v0.5.0 and later.  
-Alloyed Collective DLC is supported for v0.6.1 and later.
+Alloyed Collective DLC is supported for v0.6.1 and later.  
 
 ## Customization
-###### Config File Location ⇒ [Modded Profile]\\BepInEx\\config\\TooManyItems.cfg
+#### Config File ⇒ ```[Modded Profile]\\BepInEx\\config\\TooManyItems.cfg```
 
 The items in this mod are configurable. To edit, run the game once with the mod installed, then navigate to the TooManyItems.cfg file, edit the values and relaunch the game. If configuration issues persist, don't hesitate to delete the config file and let the mod regenerate it for you.  
 
-<i>**Make sure to enable "Use Custom Values" at the top of the config file, otherwise the mod will ignore your changes.**</i>
+### <i>**Make sure to enable "Use Custom Values" in the ```! Important !``` section so the mod respects your changes.**</i>
 
-## Items & Equipment
+## Content
 <table>
     <tr>
         <td>
@@ -30,7 +28,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Amnesia</b>
         </td>
         <td>
-            Upon death, this item will be consumed and you will return to life with <b>3</b> seconds of invulnerability. On revive, <b>randomize your items</b>.
+            Upon death, this item will be consumed and you will return to life with <b>3</b> seconds of invulnerability. On revive, <b>randomize your items</b>. Randomized items have a <b>20%</b> chance to be <b>forgotten</b>.
         </td>
     </tr>
     <tr>
@@ -316,7 +314,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Edible Glue</b>
         </td>
         <td>
-            On-kill, slow enemies within <b>20m</b> (+10m per stack) by <b>60%</b> for <b>4</b> seconds.
+            On-kill, slow enemies within <b>20m</b> (+10m per stack) by <b>80%</b> for <b>2.5</b> seconds.
         </td>
     </tr>
     <tr>
@@ -437,7 +435,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Totem of Prayer</b>
         </td>
         <td>
-            On activation, grants either <b>100</b> armor, <b>25%</b> BASE damage, <b>75%</b> attack speed, or <b>8%</b> max HP/s regeneration for <b>12</b> seconds. [<i>Cooldown: 80s</i>]
+            On activation, grants either <b>100</b> armor, <b>20%</b> BASE damage, <b>75%</b> attack speed, or <b>8%</b> max HP/s regeneration for <b>12</b> seconds. [<i>Cooldown: 80s</i>]
         </td>
     </tr>
 </table>
@@ -455,5 +453,6 @@ If you would like to help translate this mod, please reach out to me through DM 
     - Portuguese: Poppy (discord)  
     - Japanese: B. (discord)  
     - Korean: Ophiuchus (discord)  
+- **Special Thanks:** mc1030, piegav, JustBro, and Riot Games (*Carving Blade*) for item suggestions
 
 This mod is and will always be 100% free. That being said, if you enjoy the mod and would like to support my general well-being, you can do so [here](https://ko-fi.com/shirograhm).
