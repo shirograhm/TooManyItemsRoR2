@@ -1,7 +1,6 @@
 ﻿using R2API;
 using RoR2;
 using System;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,7 +34,7 @@ namespace TooManyItems.Items.Equip
         public static ConfigurableValue<float> damageIncrease = new(
             "Equipment: Totem of Prayer",
             "Damage Increase",
-            25f,
+            20f,
             "Percent damage increase if rolled.",
             ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
@@ -58,20 +57,14 @@ namespace TooManyItems.Items.Equip
             "Buff Duration",
             12f,
             "Duration of the buff given.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static ConfigurableValue<int> equipCooldown = new(
             "Equipment: Totem of Prayer",
             "Cooldown",
             80,
             "Equipment cooldown.",
-            new List<string>()
-            {
-                "EQUIPMENT_BUFFTOTEM_DESC"
-            }
+            ["EQUIPMENT_BUFFTOTEM_DESC"]
         );
         public static float damageIncreasePercent = damageIncrease.Value / 100f;
         public static float attackSpeedIncreasePercent = attackSpeedIncrease.Value / 100f;

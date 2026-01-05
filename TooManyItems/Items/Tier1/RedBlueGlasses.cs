@@ -23,6 +23,13 @@ namespace TooManyItems.Items.Tier1
             "Amount of crit chance gained per stack.",
             ["ITEM_REDBLUEGLASSES_DESC"]
         );
+        public static ConfigurableValue<float> critChancePerExtraStack = new(
+            "Item: 3D Glasses",
+            "Crit Chance Extra Stacks",
+            6f,
+            "Amount of crit chance gained for extra stacks.",
+            ["ITEM_REDBLUEGLASSES_DESC"]
+        );
         public static ConfigurableValue<float> critDamagePerStack = new(
             "Item: 3D Glasses",
             "Crit Damage",
@@ -30,8 +37,17 @@ namespace TooManyItems.Items.Tier1
             "Amount of crit damage gained per stack.",
             ["ITEM_REDBLUEGLASSES_DESC"]
         );
-        public static float critChancePercent = critChancePerStack.Value / 100f;
-        public static float critDamagePercent = critDamagePerStack.Value / 100f;
+        public static ConfigurableValue<float> critDamagePerExtraStack = new(
+            "Item: 3D Glasses",
+            "Crit Damage Extra Stacks",
+            6f,
+            "Amount of crit damage gained for extra stacks.",
+            ["ITEM_REDBLUEGLASSES_DESC"]
+        );
+        public static float percentCritChance = critChancePerStack.Value / 100f;
+        public static float percentCritChanceExtraStacks = critChancePerExtraStack.Value / 100f;
+        public static float percentCritDamage = critDamagePerStack.Value / 100f;
+        public static float percentCritDamageExtraStacks = critDamagePerExtraStack.Value / 100f;
 
         internal static void Init()
         {
@@ -49,8 +65,8 @@ namespace TooManyItems.Items.Tier1
                     int count = sender.inventory.GetItemCountEffective(itemDef);
                     if (count > 0)
                     {
-                        args.critAdd += count * critChancePerStack.Value;
-                        args.critDamageMultAdd += count * critDamagePercent;
+                        args.critAdd += Utilities.GetLinearStacking(critChancePerStack.Value, critChancePerExtraStack.Value, count);
+                        args.critDamageMultAdd += Utilities.GetLinearStacking(percentCritDamage, percentCritDamageExtraStacks, count);
                     }
                 }
             };

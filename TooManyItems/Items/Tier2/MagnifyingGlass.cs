@@ -36,17 +36,25 @@ namespace TooManyItems.Items.Tier2
             "Item: Magnifying Glass",
             "Damage Taken Bonus",
             18f,
-            "Percent damage taken bonus once Analyzed.",
+            "Percent damage taken bonus once Analyzed for the first stack of this item.",
             ["ITEM_MAGNIFYINGGLASS_DESC"]
         );
-        public static float analyzeChancePercent = analyzeChance.Value / 100f;
-        public static float damageTakenBonusPercent = damageTakenBonus.Value / 100f;
+        public static ConfigurableValue<float> damageTakenBonusExtraStacks = new(
+            "Item: Magnifying Glass",
+            "Damage Taken Bonus Extra Stacks",
+            18f,
+            "Percent damage taken bonus once Analyzed for extra stacks.",
+            ["ITEM_MAGNIFYINGGLASS_DESC"]
+        );
+        public static float percentAnalyzeChance = analyzeChance.Value / 100f;
+        public static float percentDamageTakenBonus = damageTakenBonus.Value / 100f;
+        public static float percentDamageTakenBonusExtraStacks = damageTakenBonusExtraStacks.Value / 100f;
 
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("MagnifyingGlass", [ItemTag.Damage, ItemTag.CanBeTemporary], ItemTier.Tier2);
 
-            analyzedDebuff = ItemManager.GenerateBuff("Analyzed", AssetManager.bundle.LoadAsset<Sprite>("Analyzed.png"), isDebuff: true);
+            analyzedDebuff = ItemManager.GenerateBuff("Analyzed", AssetManager.bundle.LoadAsset<Sprite>("Analyzed.png"), canStack: true, isDebuff: true);
             ContentAddition.AddBuffDef(analyzedDebuff);
 
             Hooks();
@@ -78,7 +86,10 @@ namespace TooManyItems.Items.Tier2
                     {
                         if (Util.CheckRoll(analyzeChance.Value * damageReport.damageInfo.procCoefficient, atkMaster.luck, atkMaster))
                         {
-                            vicBody.AddBuff(analyzedDebuff);
+                            int existingStacks = vicBody.GetBuffCount(analyzedDebuff.buffIndex);
+                            // Only add stacks if the user has more item stacks to prevent accidentally reducing stacks
+                            if (existingStacks < count)
+                                vicBody.SetBuffCount(analyzedDebuff.buffIndex, count);
                         }
                     }
                 }
@@ -90,7 +101,7 @@ namespace TooManyItems.Items.Tier2
                 CharacterBody vicBody = victimInfo.body;
                 if (atkBody && atkBody.inventory && vicBody && vicBody.HasBuff(analyzedDebuff))
                 {
-                    damageInfo.damage *= 1f + damageTakenBonusPercent * atkBody.inventory.GetItemCountEffective(itemDef);
+                    damageInfo.damage *= 1f + Utilities.GetLinearStacking(percentDamageTakenBonus, percentDamageTakenBonusExtraStacks, vicBody.GetBuffCount(analyzedDebuff.buffIndex));
                 }
             };
         }

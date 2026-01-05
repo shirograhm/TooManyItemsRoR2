@@ -1,6 +1,5 @@
 ﻿using RoR2;
 using System;
-using System.Collections.Generic;
 using TooManyItems.Managers;
 using UnityEngine.Networking;
 
@@ -41,10 +40,7 @@ namespace TooManyItems.Items.Tier2
             "Extra Stack Scaling",
             50f,
             "Experience bonus for additional stacks.",
-            new List<string>()
-            {
-                "ITEM_HOLYWATER_DESC"
-            }
+            ["ITEM_HOLYWATER_DESC"]
         );
         public static float extraStacksMultiplierPercent = extraStacksMultiplier.Value / 100f;
 

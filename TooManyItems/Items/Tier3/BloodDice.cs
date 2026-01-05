@@ -47,7 +47,14 @@ namespace TooManyItems.Items.Tier3
             "Item: Blood Dice",
             "Maximum Health Per Item",
             550f,
-            "Maximum amount of permanent health allowed per stack.",
+            "Maximum amount of permanent health allowed per first stack.",
+            ["ITEM_BLOODDICE_DESC"]
+        );
+        public static ConfigurableValue<float> maxHealthPerExtraStack = new(
+            "Item: Blood Dice",
+            "Maximum Health Per Extra Item",
+            550f,
+            "Maximum amount of permanent health allowed per extra stack.",
             ["ITEM_BLOODDICE_DESC"]
         );
 
@@ -122,6 +129,11 @@ namespace TooManyItems.Items.Tier3
             Hooks();
         }
 
+        public static float CalculateMaxHealthCap(int itemCount)
+        {
+            return Utilities.GetLinearStacking(maxHealthPerStack.Value, maxHealthPerExtraStack.Value, itemCount);
+        }
+
         public static void Hooks()
         {
             CharacterMaster.onStartGlobal += (obj) =>
@@ -151,7 +163,7 @@ namespace TooManyItems.Items.Tier3
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
                         // Take Math.min incase item was momentarily dropped or removed from inventory
-                        args.baseHealthAdd += Mathf.Min(component.PermanentHealth, Utilities.GetLinearStacking(maxHealthPerStack.Value, count));
+                        args.baseHealthAdd += Mathf.Min(component.PermanentHealth, CalculateMaxHealthCap(count));
                     }
                 }
             };
@@ -169,9 +181,8 @@ namespace TooManyItems.Items.Tier3
                     {
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();
 
-                        float maxHealthAllowed = Utilities.GetLinearStacking(maxHealthPerStack.Value, count);
                         // Use math.min for health cap
-                        int healthToGain = Math.Min(GetDiceRoll(atkMaster), Mathf.RoundToInt(maxHealthAllowed - component.PermanentHealth));
+                        int healthToGain = Math.Min(GetDiceRoll(atkMaster), Mathf.RoundToInt(CalculateMaxHealthCap(count) - component.PermanentHealth));
                         // Only send orbs if item is not fully stacked
                         if (healthToGain > 0)
                         {
@@ -244,7 +255,7 @@ namespace TooManyItems.Items.Tier3
             {
                 int count = targetInventory.GetItemCountEffective(BloodDice.itemDef);
 
-                float maxHealthAllowed = Utilities.GetLinearStacking(BloodDice.maxHealthPerStack.Value, count);
+                float maxHealthAllowed = BloodDice.CalculateMaxHealthCap(count);
                 BloodDice.Statistics component = targetInventory.GetComponent<BloodDice.Statistics>();
 
                 if (component)

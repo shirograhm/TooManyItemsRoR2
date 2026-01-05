@@ -146,13 +146,15 @@ namespace TooManyItems.Items.Tier2
                     if (count > 0)
                     {
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();
-
-                        float maxRegenAllowed = Utilities.GetLinearStacking(maxRegenOnFirstStack.Value, maxRegenForExtraStacks.Value, count);
-                        float healthRegenToGain = Mathf.Min(healthRegenOnKill.Value, maxRegenAllowed - component.HealthRegen);
-                        // Only send orb if item is not fully stacked
-                        if (healthRegenToGain > 0)
+                        if (component)
                         {
-                            OrbManager.instance.AddOrb(new SoulRingOrb(damageReport, healthRegenToGain));
+                            float maxRegenAllowed = Utilities.GetLinearStacking(maxRegenOnFirstStack.Value, maxRegenForExtraStacks.Value, count);
+                            float healthRegenToGain = Mathf.Min(healthRegenOnKill.Value, maxRegenAllowed - component.HealthRegen);
+                            // Only send orb if item is not fully stacked
+                            if (healthRegenToGain > 0)
+                            {
+                                OrbManager.instance.AddOrb(new SoulRingOrb(damageReport, healthRegenToGain));
+                            }
                         }
                     }
                 }

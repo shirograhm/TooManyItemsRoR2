@@ -30,7 +30,15 @@ namespace TooManyItems.Items.Void
             "Percent of maximum health gained as base damage.",
             ["ITEM_VOIDHEART_DESC"]
         );
+        public static ConfigurableValue<float> percentDamagePerExtraStack = new(
+            "Item: Defiled Heart",
+            "Bonus Damage Scaling Extra Stacks",
+            1.5f,
+            "Percent of maximum health gained as base damage with extra stacks.",
+            ["ITEM_VOIDHEART_DESC"]
+        );
         public static float multiplierPerStack = percentDamagePerStack.Value / 100.0f;
+        public static float multiplierPerExtraStack = percentDamagePerExtraStack.Value / 100.0f;
 
         internal static void Init()
         {
@@ -39,9 +47,9 @@ namespace TooManyItems.Items.Void
             Hooks();
         }
 
-        public static float CalculateDamageBonus(CharacterBody sender, float itemCount)
+        public static float CalculateDamageBonus(CharacterBody sender, int itemCount)
         {
-            return sender.healthComponent.fullCombinedHealth * itemCount * multiplierPerStack;
+            return sender.healthComponent.fullCombinedHealth * Utilities.GetLinearStacking(multiplierPerStack, multiplierPerExtraStack, itemCount);
         }
 
         public static void Hooks()

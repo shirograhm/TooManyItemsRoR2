@@ -147,7 +147,7 @@ namespace TooManyItems.Items.Lunar
                 if (attackerInfo.body && victimInfo.body && attackerInfo.inventory)
                 {
                     int itemCount = attackerInfo.inventory.GetItemCountPermanent(itemDef);
-                    if (itemCount > 0 && attackerInfo.teamComponent.teamIndex != victimInfo.teamComponent.teamIndex)
+                    if (itemCount > 0 && !Utilities.OnSameTeam(attackerInfo.body, victimInfo.body))
                     {
                         // Minimum of 0.01 damage to prevent negative values in LookingGlass
                         float amount = Mathf.Max(victimInfo.body.healthComponent.health * currentHPDamageAsPercent, 0.01f);

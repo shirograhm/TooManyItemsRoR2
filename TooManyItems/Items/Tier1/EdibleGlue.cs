@@ -34,7 +34,7 @@ namespace TooManyItems.Items.Tier1
         public static ConfigurableValue<float> slowDuration = new(
             "Item: Edible Glue",
             "Glue Duration",
-            4f,
+            2.5f,
             "Slow duration.",
             ["ITEM_EDIBLEGLUE_DESC"]
         );
@@ -44,11 +44,6 @@ namespace TooManyItems.Items.Tier1
             itemDef = ItemManager.GenerateItem("EdibleGlue", [ItemTag.Utility, ItemTag.OnKillEffect, ItemTag.CanBeTemporary], ItemTier.Tier1);
 
             Hooks();
-        }
-
-        public static float GetSlowRadius(int itemCount)
-        {
-            return slowRadiusInitialStack.Value + slowRadiusPerExtraStack.Value * (itemCount - 1);
         }
 
         public static void Hooks()
@@ -68,7 +63,7 @@ namespace TooManyItems.Items.Tier1
                             mask = LayerIndex.entityPrecise.mask,
                             origin = atkBody.corePosition,
                             queryTriggerInteraction = QueryTriggerInteraction.Collide,
-                            radius = GetSlowRadius(itemCount)
+                            radius = Utilities.GetLinearStacking(slowRadiusInitialStack.Value, slowRadiusPerExtraStack.Value, itemCount)
                         }.RefreshCandidates().FilterCandidatesByDistinctHurtBoxEntities().GetHurtBoxes();
 
                         foreach (HurtBox hurtbox in hurtboxes)
@@ -76,7 +71,7 @@ namespace TooManyItems.Items.Tier1
                             HealthComponent hc = hurtbox.healthComponent;
                             if (hc && hc.body && hc.body.teamComponent && hc.body.teamComponent.teamIndex != atkBody.teamComponent.teamIndex)
                             {
-                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow60, slowDuration.Value);
+                                hc.body.AddTimedBuff(RoR2Content.Buffs.Slow80, slowDuration.Value);
                             }
                         }
                     }

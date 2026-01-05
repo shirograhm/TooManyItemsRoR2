@@ -22,7 +22,15 @@ namespace TooManyItems.Items.Tier1
             "Percent bonus damage dealt per stack while airborne.",
             ["ITEM_PAPERPLANE_DESC"]
         );
-        public static float damageBonusPercent = damageBonus.Value / 100f;
+        public static ConfigurableValue<float> damageBonusExtraStacks = new(
+            "Item: Paper Plane",
+            "Damage Increase Extra Stacks",
+            15f,
+            "Percent bonus damage dealt with extra stacks while airborne.",
+            ["ITEM_PAPERPLANE_DESC"]
+        );
+        public static float percentDamageBonus = damageBonus.Value / 100f;
+        public static float percentDamageBonusExtraStacks = damageBonusExtraStacks.Value / 100f;
 
         internal static void Init()
         {
@@ -42,7 +50,7 @@ namespace TooManyItems.Items.Tier1
                     int itemCount = attackerInfo.inventory.GetItemCountEffective(itemDef);
                     if (itemCount > 0 && attackerInfo.body.characterMotor && !attackerInfo.body.characterMotor.isGrounded)
                     {
-                        damageInfo.damage *= 1 + itemCount * damageBonusPercent;
+                        damageInfo.damage *= 1 + Utilities.GetLinearStacking(percentDamageBonus, percentDamageBonusExtraStacks, itemCount);
                     }
                 }
             };

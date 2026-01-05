@@ -43,9 +43,9 @@ namespace TooManyItems.Items.Lunar
             "Whether or not the burn caused by Crucifix is stackable.",
             ["ITEM_CRUCIFIX_DESC"]
         );
-        public static float damageReductionPercent = damageReduction.Value / 100f;
-        public static float maxHealthBurnAmountPercent = maxHealthBurnAmount.Value / 100f;
-        public static float maxHealthBurnAmountReductionPercent = maxHealthBurnAmountReduction.Value / 100f;
+        public static float percentDamageReduction = damageReduction.Value / 100f;
+        public static float percentMaxHealthBurnAmount = maxHealthBurnAmount.Value / 100f;
+        public static float percentMaxHealthBurnAmountReduction = maxHealthBurnAmountReduction.Value / 100f;
 
         internal static void Init()
         {
@@ -66,8 +66,8 @@ namespace TooManyItems.Items.Lunar
                 int count = victimInfo.inventory.GetItemCountPermanent(itemDef);
                 if (count > 0 && attackerInfo.body != victimInfo.body)
                 {
-                    damageInfo.damage *= 1 - damageReductionPercent;
-                    float stackedPercentage = Utilities.GetReverseExponentialStacking(maxHealthBurnAmountPercent, maxHealthBurnAmountReductionPercent, count);
+                    damageInfo.damage *= 1 - percentDamageReduction;
+                    float stackedPercentage = Utilities.GetReverseExponentialStacking(percentMaxHealthBurnAmount, percentMaxHealthBurnAmountReduction, count);
 
                     InflictDotInfo dotInfo = new()
                     {
@@ -78,7 +78,7 @@ namespace TooManyItems.Items.Lunar
                         duration = 0f,
                         damageMultiplier = 1f
                     };
-                    if (!isCrucifixBurnStackable) dotInfo.maxStacksFromAttacker = 1;
+                    if (!isCrucifixBurnStackable.Value) dotInfo.maxStacksFromAttacker = 1;
 
                     DotController.InflictDot(ref dotInfo);
                 }
