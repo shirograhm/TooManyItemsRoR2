@@ -19,7 +19,7 @@
     "BUFFTOTEM": "Totem of Prayer",
     "EQUIPMENT_BUFFTOTEM_NAME": "Totem of Prayer",
     "EQUIPMENT_BUFFTOTEM_PICKUP": "Pray to the totem to receive a random buff.",
-    "EQUIPMENT_BUFFTOTEM_DESC": "On activation, gain <style=cEvent>{Armor Increase} armor</style>, <style=cIsDamage>{Damage Increase}% damage</style>, <style=cIsUtility>{Attack Speed Increase}% attack speed</style>, or <style=cIsHealing>{Health Regen Increase}% max HP/s regeneration</style> for <style=cIsUtility>{Buff Duration} seconds</style>.",
+    "EQUIPMENT_BUFFTOTEM_DESC": "On activation, gain <style=cEvent>{Armor Increase} armor</style>, <style=cIsDamage>{Damage Increase}% BASE damage</style>, <style=cIsUtility>{Attack Speed Increase}% attack speed</style>, or <style=cIsHealing>{Health Regen Increase}% max HP/s regeneration</style> for <style=cIsUtility>{Buff Duration} seconds</style>.",
     "EQUIPMENT_BUFFTOTEM_LORE": "<style=cUserSetting><b>LOST & FOUND — DECK 4</b></style>\n\nA small wooden carved totem was discovered near the observation windows. If it belongs to you, please retrieve it. If you are the individual who insisted it was \"keeping watch,\" please note that inanimate objects cannot be assigned security duties. Thank you.",
     "TATTEREDSCROLL": "Tattered Scroll",
     "EQUIPMENT_TATTEREDSCROLL_NAME": "Tattered Scroll",
