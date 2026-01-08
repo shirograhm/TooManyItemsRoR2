@@ -37,6 +37,7 @@
     "ITEM_FORGOTTENITEM_PICKUP": "这件物品已经<style=cLunarObjective>被遗忘了</style>。",
     "ITEM_FORGOTTENITEM_DESC": "这件物品已经<style=cLunarObjective>被遗忘了</style>。",
     "ITEM_FORGOTTENITEM_LORE": "",
+    "AMNESIA_REVIVE_MESSAGE": "<style=cLunarObjective>{0}被人们铭记。</style>",
     "AMNESIA_REVIVE_MESSAGE_1P": "<style=cLunarObjective>{0}被人们铭记。</style>",
     "AMNESIA_REVIVE_MESSAGE_2P": "<style=cLunarObjective>{0}被人们铭记。</style>",
     "AMNESIA_REVIVE_MESSAGE_3P": "<style=cLunarObjective>{0}被人们铭记。</style>",
