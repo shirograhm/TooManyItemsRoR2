@@ -5,6 +5,7 @@ namespace TooManyItems.Extensions
     internal class Integrations
     {
         internal static bool lookingGlassEnabled = false;
+        internal static bool properSaveEnabled = false;
 
         internal static void Init()
         {
@@ -17,6 +18,19 @@ namespace TooManyItems.Extensions
                     Log.Debug("Running code injection for LookingGlass.");
                     LookingGlassIntegration.Init();
                     lookingGlassEnabled = true;
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e);
+                }
+            }
+            if (pluginInfos.ContainsKey(ProperSave.ProperSavePlugin.GUID))
+            {
+                try
+                {
+                    Log.Debug("Running code injection for ProperSave.");
+                    ProperSaveIntegration.Init();
+                    properSaveEnabled = true;
                 }
                 catch (Exception e)
                 {

@@ -2,6 +2,7 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
+using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -87,10 +88,7 @@ namespace TooManyItems.Items.Tier1
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.KillsCounter = killsCounter;
-                        }
+                        component?.KillsCounter = killsCounter;
                     }
                 }
 

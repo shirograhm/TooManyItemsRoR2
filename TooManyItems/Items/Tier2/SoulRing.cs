@@ -3,6 +3,8 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
+using System;
+using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -88,10 +90,7 @@ namespace TooManyItems.Items.Tier2
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.HealthRegen = healthRegen;
-                        }
+                        component?.HealthRegen = healthRegen;
                     }
                 }
 
@@ -129,8 +128,7 @@ namespace TooManyItems.Items.Tier2
                     if (count > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
-
-                        args.baseRegenAdd += component.HealthRegen;
+                        if (component) args.baseRegenAdd += component.HealthRegen;
                     }
                 }
             };

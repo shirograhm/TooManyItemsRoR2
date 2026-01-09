@@ -3,6 +3,8 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
+using System;
+using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -98,10 +100,7 @@ namespace TooManyItems.Items.Lunar
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.PermanentShield = permanentShield;
-                        }
+                        component?.PermanentShield = permanentShield;
                     }
                 }
 
@@ -139,7 +138,7 @@ namespace TooManyItems.Items.Lunar
                     if (itemCount > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
-                        args.baseShieldAdd += component.PermanentShield;
+                        if (component) args.baseShieldAdd += component.PermanentShield;
 
                         args.healthMultAdd -= Utilities.GetExponentialStacking(maxHealthLostPercent, maxHealthLostExtraStackPercent, itemCount);
                     }

@@ -4,6 +4,7 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
 using System;
+using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -103,10 +104,7 @@ namespace TooManyItems.Items.Tier3
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.PermanentHealth = permanentHealth;
-                        }
+                        component?.PermanentHealth = permanentHealth;
                     }
                 }
 
@@ -162,8 +160,12 @@ namespace TooManyItems.Items.Tier3
                     if (count > 0)
                     {
                         Statistics component = sender.inventory.GetComponent<Statistics>();
-                        // Take Math.min incase item was momentarily dropped or removed from inventory
-                        args.baseHealthAdd += Mathf.Min(component.PermanentHealth, CalculateMaxHealthCap(count));
+
+                        if (component)
+                        {
+                            // Take Math.min incase item was momentarily dropped or removed from inventory
+                            args.baseHealthAdd += Mathf.Min(component.PermanentHealth, CalculateMaxHealthCap(count));
+                        }
                     }
                 }
             };
@@ -181,14 +183,17 @@ namespace TooManyItems.Items.Tier3
                     {
                         Statistics component = atkBody.inventory.GetComponent<Statistics>();
 
-                        // Use math.min for health cap
-                        int healthToGain = Math.Min(GetDiceRoll(atkMaster), Mathf.RoundToInt(CalculateMaxHealthCap(count) - component.PermanentHealth));
-                        // Only send orbs if item is not fully stacked
-                        if (healthToGain > 0)
+                        if (component)
                         {
-                            for (int i = 0; i < healthToGain; i++)
+                            // Use math.min for health cap
+                            int healthToGain = Math.Min(GetDiceRoll(atkMaster), Mathf.RoundToInt(CalculateMaxHealthCap(count) - component.PermanentHealth));
+                            // Only send orbs if item is not fully stacked
+                            if (healthToGain > 0)
                             {
-                                OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport, i));
+                                for (int i = 0; i < healthToGain; i++)
+                                {
+                                    OrbManager.instance.AddOrb(new BloodDiceOrb(damageReport, i));
+                                }
                             }
                         }
                     }
