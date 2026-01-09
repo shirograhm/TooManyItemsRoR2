@@ -37,6 +37,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="ItemQualities">
+      <HintPath>libs\ItemQualities.dll</HintPath>
+    </Reference>
+    <Reference Include="ProperSave">
+      <HintPath>libs\ProperSave.dll</HintPath>
+    </Reference>
     <Reference Include="LookingGlass">
       <HintPath>libs\LookingGlass.dll</HintPath>
     </Reference>

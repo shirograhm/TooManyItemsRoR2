@@ -2,6 +2,8 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using System;
+using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -94,10 +96,7 @@ namespace TooManyItems.Items.Lunar
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.TotalDamageDealt = totalDamageDealt;
-                        }
+                        component?.TotalDamageDealt = totalDamageDealt;
                     }
                 }
 
@@ -174,7 +173,7 @@ namespace TooManyItems.Items.Lunar
                         // Damage calculation takes minions into account
                         CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerInfo.body);
                         Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
-                        stats.TotalDamageDealt += amount;
+                        if (stats) stats.TotalDamageDealt += amount;
                     }
                 }
             };

@@ -2,6 +2,8 @@
 using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
+using System;
+using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -90,10 +92,7 @@ namespace TooManyItems.Items.Tier3
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.TotalHealingDone = totalHealingDone;
-                        }
+                        component?.TotalHealingDone = totalHealingDone;
                     }
                 }
 
@@ -161,7 +160,7 @@ namespace TooManyItems.Items.Tier3
                         Utilities.SpawnHealEffect(self);
 
                         Statistics stats = self.inventory.GetComponent<Statistics>();
-                        stats.TotalHealingDone += healing;
+                        if (stats) stats.TotalHealingDone += healing;
 
                         self.SetBuffCount(mulchBuff.buffIndex, 0);
                     }
