@@ -19,14 +19,14 @@ namespace TooManyItems.Items.Tier2
         public static ConfigurableValue<float> damagePerMissing = new(
             "Item: Seal of the Heretic",
             "Damage Increase",
-            0.3f,
+            0.2f,
             "Base damage gained for every 1% missing health.",
             ["ITEM_HERETICSEAL_DESC"]
         );
         public static ConfigurableValue<float> damagePerMissingExtraStacks = new(
             "Item: Seal of the Heretic",
             "Damage Increase Extra Stacks",
-            0.3f,
+            0.2f,
             "Base damage gained for every 1% missing health with extra stacks.",
             ["ITEM_HERETICSEAL_DESC"]
         );
