@@ -101,10 +101,7 @@ namespace TooManyItems.Items.Tier2
                     if (obj != null)
                     {
                         Statistics component = obj.GetComponent<Statistics>();
-                        if (component != null)
-                        {
-                            component.TotalDamageDealt = totalDamageDealt;
-                        }
+                        component?.TotalDamageDealt = totalDamageDealt;
                     }
                 }
 
@@ -146,7 +143,7 @@ namespace TooManyItems.Items.Tier2
 
                     CharacterBody trackerBody = Utilities.GetMinionOwnershipParentBody(attackerBody);
                     Statistics stats = trackerBody.inventory.GetComponent<Statistics>();
-                    stats.TotalDamageDealt += dotStack.damage;
+                    if (stats) stats.TotalDamageDealt += dotStack.damage;
                 }
             }
         }

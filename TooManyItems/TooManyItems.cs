@@ -29,6 +29,7 @@ namespace TooManyItems
     [BepInDependency(RecalculateStatsAPI.PluginGUID)]
     // Soft Dependencies
     [BepInDependency(LookingGlass.PluginInfo.PLUGIN_GUID, BepInDependency.DependencyFlags.SoftDependency)]
+    [BepInDependency(ProperSave.ProperSavePlugin.GUID, BepInDependency.DependencyFlags.SoftDependency)]
     // Compatibility
     [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.EveryoneNeedSameModVersion)]
 
@@ -38,7 +39,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.16";
+        public const string PluginVersion = "0.6.17";
 
         public static PluginInfo PInfo { get; private set; }
 
