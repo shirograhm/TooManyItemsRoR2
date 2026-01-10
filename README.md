@@ -12,7 +12,15 @@ The items in this mod are configurable. To edit, run the game once with the mod 
 
 ### <i>**Make sure to enable "Use Custom Values" in the ```! Important !``` section so the mod respects your changes.**</i>
 
-## Content
+## Mods & DLC Compatibility
+Generally compatible with most mods.  
+Supports integration with [LookingGlass (v1.5.1+)](https://thunderstore.io/package/DropPod/LookingGlass/) and [ProperSave (v3.0.1+)](https://thunderstore.io/package/KingEnderBrine/ProperSave/).  
+
+Survivors of the Void DLC is supported on all versions. Seekers of the Storm DLC is supported for v0.5.0+. Alloyed Collective DLC is supported for v0.6.1+.  
+
+All that being said, I would generally recommend using the most recent version of your mods. This information is mainly here for anyone with compatibility issues.
+
+## Items & Equipment
 <table>
     <tr>
         <td>
@@ -433,14 +441,6 @@ The items in this mod are configurable. To edit, run the game once with the mod 
         </td>
     </tr>
 </table>
-
-## Mods & DLC Compatibility
-Generally compatible with most mods.  
-Supports integration with [LookingGlass (v1.5.1+)](https://thunderstore.io/package/DropPod/LookingGlass/) and [ProperSave (v3.0.1+)](https://thunderstore.io/package/KingEnderBrine/ProperSave/).  
-
-Survivors of the Void DLC is supported on all versions. Seekers of the Storm DLC is supported for v0.5.0+. Alloyed Collective DLC is supported for v0.6.1+.  
-
-All that being said, I would generally recommend using the most recent version of your mods. This information is mainly here for anyone with compatibility issues.
 
 ## Translations
 If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
