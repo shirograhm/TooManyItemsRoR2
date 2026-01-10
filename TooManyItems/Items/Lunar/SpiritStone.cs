@@ -3,8 +3,6 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
-using System;
-using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;

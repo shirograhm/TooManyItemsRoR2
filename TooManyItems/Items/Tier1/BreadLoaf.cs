@@ -2,7 +2,6 @@
 using R2API.Networking.Interfaces;
 using RoR2;
 using System;
-using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
