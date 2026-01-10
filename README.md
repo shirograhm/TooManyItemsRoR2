@@ -5,12 +5,6 @@ Adds 38 new items to Risk of Rain 2!
 ## Issue Reports
 Please report any issues you find (bug, typo, mistranslation, incompatibility with another mod, etc.) on the [github issues tracker](https://github.com/shirograhm/TooManyItemsRoR2/issues). That is where I check most often. If possible, provide the output log and/or modlist used as it helps me debug faster.
 
-## Mods & DLC Compatibility
-Generally compatible with most mods. Supports integration with [LookingGlass](https://thunderstore.io/package/DropPod/LookingGlass/) version 1.5.1 or later.  
-Survivors of the Void DLC is supported on all versions.  
-Seekers of the Storm DLC is supported for v0.5.0 and later.  
-Alloyed Collective DLC is supported for v0.6.1 and later.  
-
 ## Customization
 #### Config File ⇒ ```[Modded Profile]\\BepInEx\\config\\TooManyItems.cfg```
 
@@ -259,7 +253,7 @@ The items in this mod are configurable. To edit, run the game once with the mod 
             <b>Seal of the Heretic</b>
         </td>
         <td>
-            Gain <b>0.3</b> (+0.3 per stack) BASE damage for every <b>1%</b> missing health.
+            Gain <b>0.2</b> (+0.2 per stack) BASE damage for every <b>1%</b> missing health.
         </td>
     </tr>
     <tr>
@@ -439,6 +433,14 @@ The items in this mod are configurable. To edit, run the game once with the mod 
         </td>
     </tr>
 </table>
+
+## Mods & DLC Compatibility
+Generally compatible with most mods.  
+Supports integration with [LookingGlass (v1.5.1+)](https://thunderstore.io/package/DropPod/LookingGlass/) and [ProperSave (v3.0.1+)](https://thunderstore.io/package/KingEnderBrine/ProperSave/).  
+
+Survivors of the Void DLC is supported on all versions. Seekers of the Storm DLC is supported for v0.5.0+. Alloyed Collective DLC is supported for v0.6.1+.  
+
+All that being said, I would generally recommend using the most recent version of your mods. This information is mainly here for anyone with compatibility issues.
 
 ## Translations
 If you would like to help translate this mod, please reach out to me through DM on discord @shirograhm or create a pull request to this repository with the changes. Do not translate anything inside of <> or {}, as those are used to denote font color and stat values.
