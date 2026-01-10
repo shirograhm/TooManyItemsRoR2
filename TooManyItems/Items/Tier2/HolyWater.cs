@@ -60,7 +60,7 @@ namespace TooManyItems.Items.Tier2
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
-                if (atkMaster && vicBody && vicBody.isElite)
+                if (atkMaster && vicBody && vicBody.isElite && vicBody.healthComponent)
                 {
                     atkBody = Utilities.GetMinionOwnershipParentBody(atkBody);
                     if (atkBody && atkBody.inventory)
