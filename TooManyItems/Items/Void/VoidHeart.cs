@@ -49,7 +49,7 @@ namespace TooManyItems.Items.Void
 
         public static float CalculateDamageBonus(CharacterBody sender, int itemCount)
         {
-            return sender.healthComponent.fullCombinedHealth * Utilities.GetLinearStacking(multiplierPerStack, multiplierPerExtraStack, itemCount);
+            return sender.healthComponent.fullHealth * Utilities.GetLinearStacking(multiplierPerStack, multiplierPerExtraStack, itemCount);
         }
 
         public static void Hooks()
