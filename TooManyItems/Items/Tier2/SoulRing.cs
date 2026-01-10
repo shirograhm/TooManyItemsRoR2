@@ -3,8 +3,6 @@ using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
-using System;
-using TooManyItems.Extensions;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -183,6 +181,14 @@ namespace TooManyItems.Items.Tier2
 
             public override void Begin()
             {
+                if (targetBody == null || target == null)
+                {
+                    // prevent division by zero or dereferencing a missing body
+                    base.duration = 0f;
+                    targetInventory = null;
+                    return;
+                }
+
                 base.duration = base.distanceToTarget / speed;
                 EffectData effectData = new()
                 {

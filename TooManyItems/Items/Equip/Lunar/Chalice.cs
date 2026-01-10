@@ -93,7 +93,7 @@ namespace TooManyItems.Items.Equip.Lunar
         private static bool OnUse(EquipmentSlot slot)
         {
             CharacterBody body = slot.characterBody;
-            if (body)
+            if (body && body.healthComponent)
             {
                 float damageToTake = body.healthComponent.health * currentHealthCostPercent;
                 // Escape the method if the activation would kill ourself

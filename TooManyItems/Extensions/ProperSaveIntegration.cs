@@ -1,4 +1,5 @@
 ﻿using RoR2;
+using System;
 using TooManyItems.Items.Lunar;
 using TooManyItems.Items.Tier1;
 using TooManyItems.Items.Tier2;
@@ -66,32 +67,38 @@ namespace TooManyItems.Extensions
                 // TODO: Add a flag to check if the CharacterMaster is the player
                 if (obj && obj.inventory && obj.inventory.gameObject && !ProperSave.Loading.IsLoading)
                 {
-                    ProperSaveDataCollection saveData = ProperSave.Loading.CurrentSave.GetModdedData<ProperSaveDataCollection>(PROPER_SAVE_KEY);
-                    Inventory inventory = obj.inventory;
+                    try
+                    {
+                        ProperSaveDataCollection saveData = ProperSave.Loading.CurrentSave.GetModdedData<ProperSaveDataCollection>(PROPER_SAVE_KEY);
+                        if (saveData == null) return;
 
-                    BloodDice.Statistics bloodDiceStats = inventory.gameObject.GetComponent<BloodDice.Statistics>();
-                    if (bloodDiceStats) bloodDiceStats.PermanentHealth = saveData.BloodDiceHealth;
+                        Inventory inventory = obj.inventory;
 
-                    BreadLoaf.Statistics breadLoafStats = inventory.gameObject.GetComponent<BreadLoaf.Statistics>();
-                    if (breadLoafStats) breadLoafStats.KillsCounter = saveData.BreadLoafKills;
+                        BloodDice.Statistics bloodDiceStats = inventory.gameObject.GetComponent<BloodDice.Statistics>();
+                        if (bloodDiceStats) bloodDiceStats.PermanentHealth = saveData.BloodDiceHealth;
 
-                    BrokenMask.Statistics brokenMaskStats = inventory.gameObject.GetComponent<BrokenMask.Statistics>();
-                    if (brokenMaskStats) brokenMaskStats.TotalDamageDealt = saveData.BrokenMaskDamage;
+                        BreadLoaf.Statistics breadLoafStats = inventory.gameObject.GetComponent<BreadLoaf.Statistics>();
+                        if (breadLoafStats) breadLoafStats.KillsCounter = saveData.BreadLoafKills;
 
-                    CarvingBlade.Statistics carvingBladeStats = inventory.gameObject.GetComponent<CarvingBlade.Statistics>();
-                    if (carvingBladeStats) carvingBladeStats.TotalDamageDealt = saveData.CarvingBladeDamage;
+                        BrokenMask.Statistics brokenMaskStats = inventory.gameObject.GetComponent<BrokenMask.Statistics>();
+                        if (brokenMaskStats) brokenMaskStats.TotalDamageDealt = saveData.BrokenMaskDamage;
 
-                    IronHeart.Statistics ironHeartStats = inventory.gameObject.GetComponent<IronHeart.Statistics>();
-                    if (ironHeartStats) ironHeartStats.TotalDamageDealt = saveData.IronHeartDamage;
+                        CarvingBlade.Statistics carvingBladeStats = inventory.gameObject.GetComponent<CarvingBlade.Statistics>();
+                        if (carvingBladeStats) carvingBladeStats.TotalDamageDealt = saveData.CarvingBladeDamage;
 
-                    SoulRing.Statistics soulRingStats = inventory.gameObject.GetComponent<SoulRing.Statistics>();
-                    if (soulRingStats) soulRingStats.HealthRegen = saveData.SoulRingRegen;
+                        IronHeart.Statistics ironHeartStats = inventory.gameObject.GetComponent<IronHeart.Statistics>();
+                        if (ironHeartStats) ironHeartStats.TotalDamageDealt = saveData.IronHeartDamage;
 
-                    SpiritStone.Statistics spiritStoneStats = inventory.gameObject.GetComponent<SpiritStone.Statistics>();
-                    if (spiritStoneStats) spiritStoneStats.PermanentShield = saveData.SpiritStoneShield;
+                        SoulRing.Statistics soulRingStats = inventory.gameObject.GetComponent<SoulRing.Statistics>();
+                        if (soulRingStats) soulRingStats.HealthRegen = saveData.SoulRingRegen;
 
-                    RustedTrowel.Statistics rustedTrowelStats = inventory.gameObject.GetComponent<RustedTrowel.Statistics>();
-                    if (rustedTrowelStats) rustedTrowelStats.TotalHealingDone = saveData.RustedTrowelHealing;
+                        SpiritStone.Statistics spiritStoneStats = inventory.gameObject.GetComponent<SpiritStone.Statistics>();
+                        if (spiritStoneStats) spiritStoneStats.PermanentShield = saveData.SpiritStoneShield;
+
+                        RustedTrowel.Statistics rustedTrowelStats = inventory.gameObject.GetComponent<RustedTrowel.Statistics>();
+                        if (rustedTrowelStats) rustedTrowelStats.TotalHealingDone = saveData.RustedTrowelHealing;
+                    }
+                    catch (Exception) { }
                 }
             };
         }

@@ -76,6 +76,8 @@ namespace TooManyItems
 
         public static void ForceRecalculate(CharacterBody body)
         {
+            if (body == null) return;
+
             body.RecalculateStats();
             if (NetworkServer.active) new SyncForceRecalculate(body.netId);
         }
@@ -193,6 +195,8 @@ namespace TooManyItems
 
         public static void SpawnHealEffect(CharacterBody self)
         {
+            if (self == null || self.transform == null) return;
+
             EffectData effectData = new()
             {
                 origin = self.transform.position,
@@ -223,30 +227,38 @@ namespace TooManyItems
             {
                 case ItemTier.Tier1:
                     var arrayNoScrap = ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex).ToArray();
-                    int randomIndex = UnityEngine.Random.Range(0, arrayNoScrap.Count());
+                    if (arrayNoScrap.Length == 0) return ItemIndex.None;
+                    int randomIndex = UnityEngine.Random.Range(0, arrayNoScrap.Length);
                     return arrayNoScrap[randomIndex];
                 case ItemTier.Tier2:
                     var arrayNoScrap2 = ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex).ToArray();
-                    int randomIndex2 = UnityEngine.Random.Range(0, arrayNoScrap2.Count());
+                    if (arrayNoScrap2.Length == 0) return ItemIndex.None;
+                    int randomIndex2 = UnityEngine.Random.Range(0, arrayNoScrap2.Length);
                     return arrayNoScrap2[randomIndex2];
                 case ItemTier.Tier3:
                     var arrayNoScrap3 = ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex).ToArray();
-                    int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Count());
+                    if (arrayNoScrap3.Length == 0) return ItemIndex.None;
+                    int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Length);
                     return arrayNoScrap3[randomIndex3];
                 case ItemTier.Lunar:
-                    var arrayNoAmnesia = ItemCatalog.lunarItemList.Where(index => index != Amnesia.itemDef.itemIndex).ToArray();
-                    int randomIndexLunar = UnityEngine.Random.Range(0, arrayNoAmnesia.Count());
+                    var arrayNoAmnesia = ItemCatalog.lunarItemList.Where(index => Amnesia.itemDef == null || index != Amnesia.itemDef.itemIndex).ToArray();
+                    if (arrayNoAmnesia.Length == 0) return ItemIndex.None;
+                    int randomIndexLunar = UnityEngine.Random.Range(0, arrayNoAmnesia.Length);
                     return arrayNoAmnesia[randomIndexLunar];
                 case ItemTier.VoidTier1:
+                    if (allVoidTier1Items == null || allVoidTier1Items.Count == 0) return ItemIndex.None;
                     int randomIndexV1 = UnityEngine.Random.Range(0, allVoidTier1Items.Count());
                     return allVoidTier1Items[randomIndexV1];
                 case ItemTier.VoidTier2:
+                    if (allVoidTier2Items == null || allVoidTier2Items.Count == 0) return ItemIndex.None;
                     int randomIndexV2 = UnityEngine.Random.Range(0, allVoidTier2Items.Count());
                     return allVoidTier2Items[randomIndexV2];
                 case ItemTier.VoidTier3:
+                    if (allVoidTier3Items == null || allVoidTier3Items.Count == 0) return ItemIndex.None;
                     int randomIndexV3 = UnityEngine.Random.Range(0, allVoidTier3Items.Count());
                     return allVoidTier3Items[randomIndexV3];
                 case ItemTier.Boss:
+                    if (allBossItems == null || allBossItems.Count == 0) return ItemIndex.None;
                     int randomIndexBoss = UnityEngine.Random.Range(0, allBossItems.Count());
                     return allBossItems[randomIndexBoss];
                 default:
