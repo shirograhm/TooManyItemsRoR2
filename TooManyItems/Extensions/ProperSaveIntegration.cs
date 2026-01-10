@@ -20,17 +20,30 @@ namespace TooManyItems.Extensions
                     {
                         Inventory inventory = controller.master.inventory;
 
-                        if (InventoryContainsSaveableItem(inventory))
-                        {
-                            float bloodDiceHealth = inventory.GetComponent<BloodDice.Statistics>() ? inventory.GetComponent<BloodDice.Statistics>().PermanentHealth : 0f;
-                            int breadLoafKills = inventory.GetComponent<BreadLoaf.Statistics>() ? inventory.GetComponent<BreadLoaf.Statistics>().KillsCounter : 0;
-                            float brokenMaskDamage = inventory.GetComponent<BrokenMask.Statistics>() ? inventory.GetComponent<BrokenMask.Statistics>().TotalDamageDealt : 0f;
-                            float carvingBladeDamage = inventory.GetComponent<CarvingBlade.Statistics>() ? inventory.GetComponent<CarvingBlade.Statistics>().TotalDamageDealt : 0f;
-                            float ironHeartDamage = inventory.GetComponent<IronHeart.Statistics>() ? inventory.GetComponent<IronHeart.Statistics>().TotalDamageDealt : 0f;
-                            float soulRingRegen = inventory.GetComponent<SoulRing.Statistics>() ? inventory.GetComponent<SoulRing.Statistics>().HealthRegen : 0f;
-                            float spiritStoneShield = inventory.GetComponent<SpiritStone.Statistics>() ? inventory.GetComponent<SpiritStone.Statistics>().PermanentShield : 0f;
-                            float rustedTrowelHealing = inventory.GetComponent<RustedTrowel.Statistics>() ? inventory.GetComponent<RustedTrowel.Statistics>().TotalHealingDone : 0f;
+                        float bloodDiceHealth = inventory.GetComponent<BloodDice.Statistics>() ? inventory.GetComponent<BloodDice.Statistics>().PermanentHealth : 0f;
+                        int breadLoafKills = inventory.GetComponent<BreadLoaf.Statistics>() ? inventory.GetComponent<BreadLoaf.Statistics>().KillsCounter : 0;
+                        float brokenMaskDamage = inventory.GetComponent<BrokenMask.Statistics>() ? inventory.GetComponent<BrokenMask.Statistics>().TotalDamageDealt : 0f;
+                        float carvingBladeDamage = inventory.GetComponent<CarvingBlade.Statistics>() ? inventory.GetComponent<CarvingBlade.Statistics>().TotalDamageDealt : 0f;
+                        float ironHeartDamage = inventory.GetComponent<IronHeart.Statistics>() ? inventory.GetComponent<IronHeart.Statistics>().TotalDamageDealt : 0f;
+                        float soulRingRegen = inventory.GetComponent<SoulRing.Statistics>() ? inventory.GetComponent<SoulRing.Statistics>().HealthRegen : 0f;
+                        float spiritStoneShield = inventory.GetComponent<SpiritStone.Statistics>() ? inventory.GetComponent<SpiritStone.Statistics>().PermanentShield : 0f;
+                        float rustedTrowelHealing = inventory.GetComponent<RustedTrowel.Statistics>() ? inventory.GetComponent<RustedTrowel.Statistics>().TotalHealingDone : 0f;
 
+                        if (dict.TryGetValue(PROPER_SAVE_KEY, out object obj) && obj is ProperSaveDataCollection collection)
+                        {
+                            collection.BloodDiceHealth = bloodDiceHealth;
+                            collection.BreadLoafKills = breadLoafKills;
+                            collection.BrokenMaskDamage = brokenMaskDamage;
+                            collection.CarvingBladeDamage = carvingBladeDamage;
+                            collection.IronHeartDamage = ironHeartDamage;
+                            collection.SoulRingRegen = soulRingRegen;
+                            collection.SpiritStoneShield = spiritStoneShield;
+                            collection.RustedTrowelHealing = rustedTrowelHealing;
+
+                            Log.Debug("Overwriting existing values in ProperSave's data block.");
+                        }
+                        else
+                        {
                             dict.Add(PROPER_SAVE_KEY, new ProperSaveDataCollection(
                                 bloodDiceHealth: bloodDiceHealth,
                                 breadLoafKills: breadLoafKills,
@@ -41,6 +54,8 @@ namespace TooManyItems.Extensions
                                 spiritStoneShield: spiritStoneShield,
                                 rustedTrowelHealing: rustedTrowelHealing
                             ));
+
+                            Log.Debug("Saving a new ProperSave data block.");
                         }
                     }
                 }
@@ -48,34 +63,35 @@ namespace TooManyItems.Extensions
 
             CharacterMaster.onStartGlobal += (obj) =>
             {
-                if (obj && obj.inventory && !ProperSave.Loading.FirstRunStage)
+                // TODO: Add a flag to check if the CharacterMaster is the player
+                if (obj && obj.inventory && obj.inventory.gameObject && !ProperSave.Loading.IsLoading)
                 {
                     ProperSaveDataCollection saveData = ProperSave.Loading.CurrentSave.GetModdedData<ProperSaveDataCollection>(PROPER_SAVE_KEY);
+                    Inventory inventory = obj.inventory;
 
-                    BloodDice.Statistics bloodDiceStats = obj.inventory?.gameObject.GetComponent<BloodDice.Statistics>();
+                    BloodDice.Statistics bloodDiceStats = inventory.gameObject.GetComponent<BloodDice.Statistics>();
                     if (bloodDiceStats) bloodDiceStats.PermanentHealth = saveData.BloodDiceHealth;
 
-                    BreadLoaf.Statistics breadLoafStats = obj.inventory?.gameObject.GetComponent<BreadLoaf.Statistics>();
+                    BreadLoaf.Statistics breadLoafStats = inventory.gameObject.GetComponent<BreadLoaf.Statistics>();
                     if (breadLoafStats) breadLoafStats.KillsCounter = saveData.BreadLoafKills;
 
-                    BrokenMask.Statistics brokenMaskStats = obj.inventory?.gameObject.GetComponent<BrokenMask.Statistics>();
+                    BrokenMask.Statistics brokenMaskStats = inventory.gameObject.GetComponent<BrokenMask.Statistics>();
                     if (brokenMaskStats) brokenMaskStats.TotalDamageDealt = saveData.BrokenMaskDamage;
 
-                    CarvingBlade.Statistics carvingBladeStats = obj.inventory?.gameObject.GetComponent<CarvingBlade.Statistics>();
+                    CarvingBlade.Statistics carvingBladeStats = inventory.gameObject.GetComponent<CarvingBlade.Statistics>();
                     if (carvingBladeStats) carvingBladeStats.TotalDamageDealt = saveData.CarvingBladeDamage;
 
-                    IronHeart.Statistics ironHeartStats = obj.inventory?.gameObject.GetComponent<IronHeart.Statistics>();
+                    IronHeart.Statistics ironHeartStats = inventory.gameObject.GetComponent<IronHeart.Statistics>();
                     if (ironHeartStats) ironHeartStats.TotalDamageDealt = saveData.IronHeartDamage;
 
-                    SoulRing.Statistics soulRingStats = obj.inventory?.gameObject.GetComponent<SoulRing.Statistics>();
+                    SoulRing.Statistics soulRingStats = inventory.gameObject.GetComponent<SoulRing.Statistics>();
                     if (soulRingStats) soulRingStats.HealthRegen = saveData.SoulRingRegen;
 
-                    SpiritStone.Statistics spiritStoneStats = obj.inventory?.gameObject.GetComponent<SpiritStone.Statistics>();
+                    SpiritStone.Statistics spiritStoneStats = inventory.gameObject.GetComponent<SpiritStone.Statistics>();
                     if (spiritStoneStats) spiritStoneStats.PermanentShield = saveData.SpiritStoneShield;
 
-                    RustedTrowel.Statistics rustedTrowelStats = obj.inventory?.gameObject.GetComponent<RustedTrowel.Statistics>();
+                    RustedTrowel.Statistics rustedTrowelStats = inventory.gameObject.GetComponent<RustedTrowel.Statistics>();
                     if (rustedTrowelStats) rustedTrowelStats.TotalHealingDone = saveData.RustedTrowelHealing;
-
                 }
             };
         }
@@ -90,14 +106,6 @@ namespace TooManyItems.Extensions
             public float SoulRingRegen = soulRingRegen;
             public float SpiritStoneShield = spiritStoneShield;
             public float RustedTrowelHealing = rustedTrowelHealing;
-        }
-
-        private static bool InventoryContainsSaveableItem(Inventory inventory)
-        {
-            return
-                inventory.GetItemCountEffective(BloodDice.itemDef) > 0 ||
-                inventory.GetItemCountEffective(SoulRing.itemDef) > 0
-                ;
         }
     }
 }
