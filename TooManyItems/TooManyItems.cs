@@ -17,6 +17,7 @@ using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
+[assembly: HG.Reflection.SearchableAttribute.OptIn]
 namespace TooManyItems
 {
     // Dependencies

@@ -1,10 +1,25 @@
 ﻿using R2API;
 using RoR2;
+using RoR2.Items;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier2
 {
-    internal class HereticSeal
+    public class HereticSealItemBehaviour : BaseItemBodyBehavior
+    {
+        [ItemDefAssociation(useOnServer = true, useOnClient = false)]
+        public static ItemDef GetItemDef()
+        {
+            return HereticSeal.itemDef;
+        }
+
+        public void FixedUpdate()
+        {
+            if (stack > 0) Utilities.ForceRecalculate(body);
+        }
+    }
+
+    public class HereticSeal
     {
         public static ItemDef itemDef;
 
@@ -40,8 +55,6 @@ namespace TooManyItems.Items.Tier2
 
         public static void Hooks()
         {
-            Utilities.AddRecalculateOnFrameHook(itemDef);
-
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender && sender.inventory && sender.healthComponent)

@@ -1,10 +1,25 @@
 ﻿using R2API;
 using RoR2;
+using RoR2.Items;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
 {
-    internal class PropellerHat
+    public class PropellerHatItemBehaviour : BaseItemBodyBehavior
+    {
+        [ItemDefAssociation(useOnServer = true, useOnClient = false)]
+        public static ItemDef GetItemDef()
+        {
+            return PropellerHat.itemDef;
+        }
+
+        public void FixedUpdate()
+        {
+            if (stack > 0) Utilities.ForceRecalculate(body);
+        }
+    }
+
+    public class PropellerHat
     {
         public static ItemDef itemDef;
 
@@ -71,8 +86,6 @@ namespace TooManyItems.Items.Tier1
 
         public static void Hooks()
         {
-            Utilities.AddRecalculateOnFrameHook(itemDef);
-
             RecalculateStatsAPI.GetStatCoefficients += (sender, args) =>
             {
                 if (sender && sender.inventory)

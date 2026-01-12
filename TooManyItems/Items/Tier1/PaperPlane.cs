@@ -1,9 +1,24 @@
 ﻿using RoR2;
+using RoR2.Items;
 using TooManyItems.Managers;
 
 namespace TooManyItems.Items.Tier1
 {
-    internal class PaperPlane
+    public class PaperPlaneItemBehaviour : BaseItemBodyBehavior
+    {
+        [ItemDefAssociation(useOnServer = true, useOnClient = false)]
+        public static ItemDef GetItemDef()
+        {
+            return PaperPlane.itemDef;
+        }
+
+        public void FixedUpdate()
+        {
+            if (stack > 0) Utilities.ForceRecalculate(body);
+        }
+    }
+
+    public class PaperPlane
     {
         public static ItemDef itemDef;
 
@@ -41,8 +56,6 @@ namespace TooManyItems.Items.Tier1
 
         public static void Hooks()
         {
-            Utilities.AddRecalculateOnFrameHook(itemDef);
-
             GameEventManager.BeforeTakeDamage += (damageInfo, attackerInfo, victimInfo) =>
             {
                 if (attackerInfo.inventory != null && attackerInfo.body != null)
