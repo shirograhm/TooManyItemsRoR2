@@ -200,8 +200,8 @@ namespace TooManyItems.Items.Lunar
                 base.duration = base.distanceToTarget / speed;
                 targetInventory = targetBody.inventory;
 
-                var orbEffect = effectPrefab.GetComponent<OrbEffect>();
                 GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VendingMachine/VendingMachineOrbEffect.prefab").WaitForCompletion().InstantiateClone("TooManyItems_SpiritCapsule");
+                OrbEffect orbEffect = effectPrefab.GetComponent<OrbEffect>();
                 if (orbEffect) orbEffect.endEffect = null;
                 EffectData effectData = new()
                 {
