@@ -149,8 +149,8 @@ namespace TooManyItems
             if (Vanity.isEnabled.Value)
                 Vanity.Init();
 
-            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
             InjectVoidItemTramsforms();
+            ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
 
             Log.Message("Finished initializations.");
         }
