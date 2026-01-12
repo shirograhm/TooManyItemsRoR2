@@ -119,7 +119,7 @@ namespace TooManyItems.Items.Equip
 
         private static void SpawnGoldPack(CharacterBody attacker, CharacterBody victim)
         {
-            GameObject goldPackObject = Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BonusMoneyPack"), victim.transform.position, Random.rotation);
+            GameObject goldPackObject = Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BonusMoneyPack").InstantiateClone("TooManyItems_GoldPickup"), victim.transform.position, Random.rotation);
             if (goldPackObject)
             {
                 Collider component = goldPackObject.GetComponent<Collider>();

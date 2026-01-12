@@ -1,4 +1,5 @@
-﻿using R2API.Networking;
+﻿using R2API;
+using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
@@ -202,7 +203,7 @@ namespace TooManyItems
                 origin = self.transform.position,
                 rootObject = self.gameObject
             };
-            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect"), effectData, transmit: true);
+            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect").InstantiateClone("TooManyItems_HealEffect"), effectData, transmit: true);
         }
 
         public static void SendGoldOrbAndEffect(uint goldGain, Vector3 origin, HurtBox target)
@@ -213,7 +214,7 @@ namespace TooManyItems
                 origin = origin,
                 target = target,
             });
-            EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
+            EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact").InstantiateClone("TooManyItems_GoldEffect"), origin, Vector3.up, transmit: true);
         }
 
         public static bool IsItemIndexScrap(ItemIndex itemIndex)

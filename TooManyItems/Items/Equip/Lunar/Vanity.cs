@@ -67,11 +67,11 @@ namespace TooManyItems.Items.Equip.Lunar
             hubrisDebuff = ItemManager.GenerateBuff("Hubris", AssetManager.bundle.LoadAsset<Sprite>("Hubris.png"), canStack: true, isDebuff: true);
             ContentAddition.AddBuffDef(hubrisDebuff);
 
-            vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_vanityTargetIndicator", false);
+            vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_VanityTargetIndicator", false);
             vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utilities.VANITY_COLOR;
             vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utilities.VANITY_COLOR;
 
-            implosionEffectObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteIce/AffixWhiteExplosion.prefab").WaitForCompletion();
+            implosionEffectObject = Addressables.LoadAssetAsync<GameObject>("RoR2/Base/EliteIce/AffixWhiteExplosion.prefab").WaitForCompletion().InstantiateClone("TooManyItems_VanityExplosion");
 
             damageType = DamageAPI.ReserveDamageType();
 

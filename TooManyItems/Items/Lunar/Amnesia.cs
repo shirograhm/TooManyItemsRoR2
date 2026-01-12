@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -124,7 +125,7 @@ namespace TooManyItems.Items.Lunar
                         if (master.GetBody()) master.GetBody().AddTimedBuff(RoR2Content.Buffs.Immune, invulnerabilityDuration.Value);
 
                         // Reset state machines
-                        GameObject rezEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HippoRezEffect");
+                        GameObject rezEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HippoRezEffect").InstantiateClone("TooManyItems_RezEffect");
                         if (master.bodyInstanceObject)
                         {
                             EntityStateMachine[] components = master.bodyInstanceObject.GetComponents<EntityStateMachine>();
