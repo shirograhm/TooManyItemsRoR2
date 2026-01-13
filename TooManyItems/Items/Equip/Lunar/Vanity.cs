@@ -144,10 +144,8 @@ namespace TooManyItems.Items.Equip.Lunar
                 }
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.equipmentSlot && atkBody.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
                 {

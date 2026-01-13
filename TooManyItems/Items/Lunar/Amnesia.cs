@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using TooManyItems.Managers;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems.Items.Lunar
 {
@@ -104,10 +103,8 @@ namespace TooManyItems.Items.Lunar
 
         public static void Hooks()
         {
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 if (damageReport.victimBody && damageReport.victimBody.master)
                 {
                     CharacterMaster master = damageReport.victimBody.master;

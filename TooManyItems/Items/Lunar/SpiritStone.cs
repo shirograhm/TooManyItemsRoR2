@@ -164,10 +164,8 @@ namespace TooManyItems.Items.Lunar
                 return values;
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {

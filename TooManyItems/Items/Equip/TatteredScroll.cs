@@ -71,10 +71,8 @@ namespace TooManyItems.Items.Equip
                 return orig(self, equipDef);
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 if (damageReport.attackerBody && damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
                 {
                     SpawnGoldPack(damageReport.attackerBody, damageReport.victimBody);
