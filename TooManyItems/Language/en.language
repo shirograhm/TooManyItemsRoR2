@@ -14,7 +14,7 @@
     "EQUIPMENT_CHALICE_NAME": "Chalice",
     "EQUIPMENT_CHALICE_PICKUP": "<style=cDeath>Pay a portion of your current health</style> to grant all allies bonus damage and attack speed.",
     "EQUIPMENT_CHALICE_DESC": "<style=cDeath>Pay {Current Health Loss}% of your current health</style> to <style=cWorldEvent>Consecrate</style> yourself and all allies. <style=cWorldEvent>Consecrated</style> units gain <style=cIsDamage>{Consecrate Damage Bonus}% damage</style> and <style=cIsDamage>{Consecrate Attack Speed Bonus}% attack speed</style> for <style=cIsUtility>{Consecrate Duration} seconds</style>.",
-    "EQUIPMENT_CHALICE_LORE": "",
+    "EQUIPMENT_CHALICE_LORE": "\"I found a chalice half-buried in the ash fields today, its metal unmarked by time, its rim cold even under the twin suns. When I held it up, the wind stilled as if waiting for something I had forgotten to say. The interior is dry, but the weight suggests it once held more than liquid; a memory, perhaps, or an intention?\n\nThere is no one left in these valleys, yet still I cannot shake the sense that someone is watching. If I listen closely, I can almost hear a faint ringing from within.\n\nWhoever used it before me is gone beyond reach. Whether they return for it, or whether they left it behind as a warning, I cannot say. But this chalice was not lost. It was placed.\"\n\n- Lost Journal, recovered from Petrichor V",
 
     "BUFFTOTEM": "Totem of Prayer",
     "EQUIPMENT_BUFFTOTEM_NAME": "Totem of Prayer",
@@ -25,7 +25,7 @@
     "EQUIPMENT_TATTEREDSCROLL_NAME": "Tattered Scroll",
     "EQUIPMENT_TATTEREDSCROLL_PICKUP": "Curse nearby enemies when activated. Killing cursed enemies drops treasure.",
     "EQUIPMENT_TATTEREDSCROLL_DESC": "On activation, curse enemies within a <style=cIsUtility>{Curse Distance}m</style> radius for <style=cIsUtility>{Curse Duration} seconds</style>. Killing a cursed enemy drops a <style=cHumanObjective>treasure pickup</style> that grants <style=cHumanObjective>{Gold Granted} gold</style>, <style=cIsUtility>scaling with difficulty</style>.",
-    "EQUIPMENT_TATTEREDSCROLL_LORE": "\"I found this old scroll tucked behind a loose panel in the outpost wall. The edges crumble if you breathe too hard, and most of the ink has wandered off over the years, but a few symbols remain. They don't match any script I know. They don't even look like they were written; moreso... grown?\n\nI am still trying to make sense of them. Every time I think I've spotted a pattern, it slips away, like the shapes rearrange themselves the moment I look back. Maybe I'm imagining it. Maybe it's just age and weathering playing tricks on me. Still, I can't shake the feeling that whoever made this wanted it to be found, even if they didn't want it to be understood.\n\nI'll keep it with me a little longer. Just to see if anything changes.\"\n\n- Lost Journal, recovered from Petrichor V",
+    "EQUIPMENT_TATTEREDSCROLL_LORE": "\"I found this old scroll tucked behind a loose panel in the outpost wall. The edges crumble if you breathe too hard, and most of the ink has wandered off over the years, but a few symbols remain. They don't match any script I know. They don't even look like they were written; moreso... grown?\n\nI am still trying to make sense of them. Every time I think I've spotted a pattern, it slips away, like the shapes rearrange themselves the moment I look back. Maybe I'm imagining it. Maybe it's just my age playing tricks on me. Still, I can't shake the feeling that whoever made this wanted it to be found, even if they didn't want it to be understood.\n\nI'll keep it with me a little longer. Just to see if anything changes.\"\n\n- Lost Journal, recovered from Petrichor V",
 
     "AMNESIA": "Amnesia",
     "ITEM_AMNESIA_NAME": "Amnesia",
@@ -51,7 +51,7 @@
     "ITEM_ANCIENTCOIN_NAME": "Ancient Coin",
     "ITEM_ANCIENTCOIN_PICKUP": "Gain more gold. <style=cDeath>Take more damage.</style>",
     "ITEM_ANCIENTCOIN_DESC": "Gain an additional <style=cHumanObjective>{Gold Multiplier}% <style=cStack>(+{Gold Multiplier}% per stack)</style> gold</style>. <style=cDeath>Take {Damage Multiplier}% <style=cStack>(+{Damage Multiplier}% per stack)</style> more damage.</style>",
-    "ITEM_ANCIENTCOIN_LORE": "",
+    "ITEM_ANCIENTCOIN_LORE": "\"...You see this?\"\n\n\"What, another rock?\"\n\n\"It's a coin, I think. Found it sitting on a root. Like someone left it for me.\"\n\n\"It's warm.\"\n\n\"Yeah. Hasn't cooled down since I picked it up.\"\n\n\"What's that engraving supposed to be?\"\n\n\"I've no idea. The scanner in the lab keeps spitting out timestamps that don't line up. One said 'Before.' Another said 'Again.'\"\n\n\"...That's comforting.\"\n\n-Signal echoes, UES Contact Light",
     "CARVINGBLADE": "Carving Blade",
     "ITEM_CARVINGBLADE_NAME": "Carving Blade",
     "ITEM_CARVINGBLADE_PICKUP": "Deal damage on-hit based on the enemy's <style=cIsHealth>current health</style>. <style=cDeath>You cannot critically strike.</style>",
