@@ -1,10 +1,10 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TooManyItems.Managers;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems.Items.Lunar
 {
@@ -103,10 +103,8 @@ namespace TooManyItems.Items.Lunar
 
         public static void Hooks()
         {
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 if (damageReport.victimBody && damageReport.victimBody.master)
                 {
                     CharacterMaster master = damageReport.victimBody.master;
@@ -124,7 +122,7 @@ namespace TooManyItems.Items.Lunar
                         if (master.GetBody()) master.GetBody().AddTimedBuff(RoR2Content.Buffs.Immune, invulnerabilityDuration.Value);
 
                         // Reset state machines
-                        GameObject rezEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HippoRezEffect");
+                        GameObject rezEffectPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/HippoRezEffect").InstantiateClone("TooManyItems_RezEffect");
                         if (master.bodyInstanceObject)
                         {
                             EntityStateMachine[] components = master.bodyInstanceObject.GetComponents<EntityStateMachine>();

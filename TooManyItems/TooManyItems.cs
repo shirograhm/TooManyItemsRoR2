@@ -5,7 +5,6 @@ using R2API.Utils;
 using RoR2;
 using RoR2.ExpansionManagement;
 using System.Collections.Generic;
-using System.Linq;
 using TooManyItems.Extensions;
 using TooManyItems.Items.Equip;
 using TooManyItems.Items.Equip.Lunar;
@@ -18,6 +17,7 @@ using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
+[assembly: HG.Reflection.SearchableAttribute.OptIn]
 namespace TooManyItems
 {
     // Dependencies
@@ -39,7 +39,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.6.17";
+        public const string PluginVersion = "0.7.0";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -150,40 +150,51 @@ namespace TooManyItems
             if (Vanity.isEnabled.Value)
                 Vanity.Init();
 
+            InjectVoidItemTramsforms();
             ItemCatalog.availability.CallWhenAvailable(Integrations.Init);
-            ItemCatalog.availability.CallWhenAvailable(InjectVoidItemTramsforms);
 
             Log.Message("Finished initializations.");
         }
 
         private void InjectVoidItemTramsforms()
         {
-            On.RoR2.Items.ContagiousItemManager.Init += (orig) =>
-            {
-                List<ItemDef.Pair> newVoidPairs = [];
+            ItemRelationshipProvider provider = ScriptableObject.CreateInstance<ItemRelationshipProvider>();
+            provider.name = "TooManyItems_ContagiousItemProvider";
+            provider.relationshipType = Addressables.LoadAssetAsync<ItemRelationshipType>("RoR2/DLC1/Common/ContagiousItem.asset").WaitForCompletion();
+            provider.relationships = GetContagiousItemRelationships();
 
-                // 3D Glasses => Instakill Glasses
-                if (RedBlueGlasses.isEnabled)
-                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = RedBlueGlasses.itemDef, itemDef2 = DLC1Content.Items.CritGlassesVoid });
-                // Thumbtack => Needletick
-                if (Thumbtack.isEnabled)
-                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = Thumbtack.itemDef, itemDef2 = DLC1Content.Items.BleedOnHitVoid });
-                // Iron Heart => Defiled Heart
-                if (IronHeart.isEnabled && VoidHeart.isEnabled)
-                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = IronHeart.itemDef, itemDef2 = VoidHeart.itemDef });
-                // Seal of the Heretic => Shadow Crest
-                if (HereticSeal.isEnabled && ShadowCrest.isEnabled)
-                    newVoidPairs.Add(new ItemDef.Pair() { itemDef1 = HereticSeal.itemDef, itemDef2 = ShadowCrest.itemDef });
+            if (ContentAddition.AddItemRelationshipProvider(provider))
+                Log.Debug("Successfully injected void item transformations.");
+            else
+                Log.Error("Unable to inject void item transformations.");
+        }
 
-                ItemRelationshipType key = DLC1Content.ItemRelationshipTypes.ContagiousItem;
-                Debug.Log(key);
+        public ItemDef.Pair[] GetContagiousItemRelationships()
+        {
+            List<ItemDef.Pair> newVoidPairs = [];
 
-                ItemDef.Pair[] voidPairs = ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem];
-                ItemCatalog.itemRelationships[DLC1Content.ItemRelationshipTypes.ContagiousItem] = [.. voidPairs.Union(newVoidPairs)];
+            // 3D Glasses => Instakill Glasses
+            if (RedBlueGlasses.isEnabled)
+                newVoidPairs.Add(new ItemDef.Pair
+                {
+                    itemDef1 = RedBlueGlasses.itemDef,
+                    itemDef2 = Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC1/CritGlassesVoid/CritGlassesVoid.asset").WaitForCompletion()
+                });
+            // Thumbtack => Needletick
+            if (Thumbtack.isEnabled)
+                newVoidPairs.Add(new ItemDef.Pair
+                {
+                    itemDef1 = Thumbtack.itemDef,
+                    itemDef2 = Addressables.LoadAssetAsync<ItemDef>("RoR2/DLC1/BleedOnHitVoid/BleedOnHitVoid.asset").WaitForCompletion()
+                });
+            // Iron Heart => Defiled Heart
+            if (IronHeart.isEnabled && VoidHeart.isEnabled)
+                newVoidPairs.Add(new ItemDef.Pair { itemDef1 = IronHeart.itemDef, itemDef2 = VoidHeart.itemDef });
+            // Seal of the Heretic => Shadow Crest
+            if (HereticSeal.isEnabled && ShadowCrest.isEnabled)
+                newVoidPairs.Add(new ItemDef.Pair { itemDef1 = HereticSeal.itemDef, itemDef2 = ShadowCrest.itemDef });
 
-                Debug.Log("Injected void item transformations.");
-                orig();
-            };
+            return [.. newVoidPairs];
         }
     }
 }

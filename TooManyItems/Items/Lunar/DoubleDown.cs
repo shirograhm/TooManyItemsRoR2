@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -65,7 +66,7 @@ namespace TooManyItems.Items.Lunar
 
                             // Spawn a cleanse effect to indicate DoT removal
                             EffectManager.SpawnEffect(
-                                LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect"), new EffectData
+                                LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/CleanseEffect").InstantiateClone("TooManyItems_CleanseEffect"), new EffectData
                                 {
                                     origin = vicBody.corePosition,
                                     rootObject = vicBody.gameObject

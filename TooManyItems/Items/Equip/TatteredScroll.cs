@@ -71,10 +71,8 @@ namespace TooManyItems.Items.Equip
                 return orig(self, equipDef);
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 if (damageReport.attackerBody && damageReport.victimBody && damageReport.victimBody.HasBuff(curseDebuff))
                 {
                     SpawnGoldPack(damageReport.attackerBody, damageReport.victimBody);
@@ -119,7 +117,7 @@ namespace TooManyItems.Items.Equip
 
         private static void SpawnGoldPack(CharacterBody attacker, CharacterBody victim)
         {
-            GameObject goldPackObject = Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BonusMoneyPack"), victim.transform.position, Random.rotation);
+            GameObject goldPackObject = Object.Instantiate(LegacyResourcesAPI.Load<GameObject>("Prefabs/NetworkedObjects/BonusMoneyPack").InstantiateClone("TooManyItems_GoldPickup"), victim.transform.position, Random.rotation);
             if (goldPackObject)
             {
                 Collider component = goldPackObject.GetComponent<Collider>();

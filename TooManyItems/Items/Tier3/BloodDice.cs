@@ -169,10 +169,8 @@ namespace TooManyItems.Items.Tier3
                 }
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkMaster && atkBody && atkBody.inventory)

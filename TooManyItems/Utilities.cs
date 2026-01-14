@@ -1,4 +1,5 @@
-﻿using R2API.Networking;
+﻿using R2API;
+using R2API.Networking;
 using R2API.Networking.Interfaces;
 using RoR2;
 using RoR2.Orbs;
@@ -80,23 +81,6 @@ namespace TooManyItems
 
             body.RecalculateStats();
             if (NetworkServer.active) new SyncForceRecalculate(body.netId);
-        }
-
-        public static void AddRecalculateOnFrameHook(ItemDef def)
-        {
-            On.RoR2.CharacterBody.FixedUpdate += (orig, self) =>
-            {
-                orig(self);
-
-                if (self && self.inventory)
-                {
-                    int count = self.inventory.GetItemCountEffective(def);
-                    if (count > 0)
-                    {
-                        ForceRecalculate(self);
-                    }
-                }
-            };
         }
 
         public static CharacterBody GetMinionOwnershipParentBody(CharacterBody body)
@@ -202,7 +186,7 @@ namespace TooManyItems
                 origin = self.transform.position,
                 rootObject = self.gameObject
             };
-            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect"), effectData, transmit: true);
+            EffectManager.SpawnEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/MedkitHealEffect").InstantiateClone("TooManyItems_HealEffect"), effectData, transmit: true);
         }
 
         public static void SendGoldOrbAndEffect(uint goldGain, Vector3 origin, HurtBox target)
@@ -213,7 +197,7 @@ namespace TooManyItems
                 origin = origin,
                 target = target,
             });
-            EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact"), origin, Vector3.up, transmit: true);
+            EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/CoinImpact").InstantiateClone("TooManyItems_GoldEffect"), origin, Vector3.up, transmit: true);
         }
 
         public static bool IsItemIndexScrap(ItemIndex itemIndex)
@@ -226,22 +210,22 @@ namespace TooManyItems
             switch (tier)
             {
                 case ItemTier.Tier1:
-                    var arrayNoScrap = ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex).ToArray();
+                    ItemIndex[] arrayNoScrap = ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex).ToArray();
                     if (arrayNoScrap.Length == 0) return ItemIndex.None;
                     int randomIndex = UnityEngine.Random.Range(0, arrayNoScrap.Length);
                     return arrayNoScrap[randomIndex];
                 case ItemTier.Tier2:
-                    var arrayNoScrap2 = ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex).ToArray();
+                    ItemIndex[] arrayNoScrap2 = ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex).ToArray();
                     if (arrayNoScrap2.Length == 0) return ItemIndex.None;
                     int randomIndex2 = UnityEngine.Random.Range(0, arrayNoScrap2.Length);
                     return arrayNoScrap2[randomIndex2];
                 case ItemTier.Tier3:
-                    var arrayNoScrap3 = ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex).ToArray();
+                    ItemIndex[] arrayNoScrap3 = ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex).ToArray();
                     if (arrayNoScrap3.Length == 0) return ItemIndex.None;
                     int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Length);
                     return arrayNoScrap3[randomIndex3];
                 case ItemTier.Lunar:
-                    var arrayNoAmnesia = ItemCatalog.lunarItemList.Where(index => Amnesia.itemDef == null || index != Amnesia.itemDef.itemIndex).ToArray();
+                    ItemIndex[] arrayNoAmnesia = ItemCatalog.lunarItemList.Where(index => index != Amnesia.itemDef.itemIndex).ToArray();
                     if (arrayNoAmnesia.Length == 0) return ItemIndex.None;
                     int randomIndexLunar = UnityEngine.Random.Range(0, arrayNoAmnesia.Length);
                     return arrayNoAmnesia[randomIndexLunar];

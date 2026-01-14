@@ -117,10 +117,8 @@ namespace TooManyItems.Items.Tier1
                 obj.inventory?.gameObject.AddComponent<Statistics>();
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {

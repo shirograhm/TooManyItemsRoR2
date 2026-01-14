@@ -1,4 +1,5 @@
-﻿using RoR2;
+﻿using R2API;
+using RoR2;
 using TooManyItems.Managers;
 using UnityEngine;
 
@@ -64,7 +65,7 @@ namespace TooManyItems.Items.Tier2
                         damageInfo.damageType |= DamageType.Stun1s;
                         damageInfo.damageColorIndex = DamageColorIndex.Luminous;
 
-                        EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ImpactStunGrenade"), damageInfo.position, -damageInfo.force, transmit: true);
+                        EffectManager.SimpleImpactEffect(LegacyResourcesAPI.Load<GameObject>("Prefabs/Effects/ImpactEffects/ImpactStunGrenade").InstantiateClone("TooManyItems_StunEffect"), damageInfo.position, -damageInfo.force, transmit: true);
                     }
                 }
             };

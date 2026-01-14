@@ -2,7 +2,6 @@
 using RoR2;
 using TooManyItems.Managers;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace TooManyItems.Items.Tier3
 {
@@ -62,10 +61,8 @@ namespace TooManyItems.Items.Tier3
                 }
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {

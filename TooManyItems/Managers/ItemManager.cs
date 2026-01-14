@@ -87,7 +87,7 @@ namespace TooManyItems.Managers
             // Add item to item dict, with display rules
             ItemDisplayRuleDict displayRules = new(null);
             if (rules != null)
-                foreach (var rule in rules)
+                foreach (DisplayRuleData rule in rules)
                     displayRules.Add(rule.survivorName, GenerateItemDisplayRule(prefab, rule));
 
             ItemAPI.Add(new CustomItem(itemDef, displayRules));

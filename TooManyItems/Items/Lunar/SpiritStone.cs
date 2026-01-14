@@ -13,6 +13,7 @@ namespace TooManyItems.Items.Lunar
     internal class SpiritStone
     {
         public static ItemDef itemDef;
+        public static GameObject capsuleEffectPrefab;
 
         // Killing an enemy grants permanent shield. Lose a percentage of your max health.
         public static ConfigurableValue<bool> isEnabled = new(
@@ -115,6 +116,10 @@ namespace TooManyItems.Items.Lunar
         internal static void Init()
         {
             itemDef = ItemManager.GenerateItem("SpiritStone", [ItemTag.Utility, ItemTag.OnKillEffect], ItemTier.Lunar);
+            capsuleEffectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VendingMachine/VendingMachineOrbEffect.prefab").WaitForCompletion();
+            OrbEffect orbEffect = capsuleEffectPrefab.GetComponent<OrbEffect>();
+            orbEffect.endEffect = null;
+            orbEffect.callArrivalIfTargetIsGone = false;
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
 
@@ -159,10 +164,8 @@ namespace TooManyItems.Items.Lunar
                 return values;
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.inventory)
                 {
@@ -200,16 +203,10 @@ namespace TooManyItems.Items.Lunar
                 base.duration = base.distanceToTarget / speed;
                 targetInventory = targetBody.inventory;
 
-                GameObject effectPrefab = Addressables.LoadAssetAsync<GameObject>("RoR2/DLC1/VendingMachine/VendingMachineOrbEffect.prefab").WaitForCompletion();
-                var orbEffect = effectPrefab.GetComponent<OrbEffect>();
-                if (orbEffect) orbEffect.endEffect = null;
-                EffectData effectData = new()
-                {
-                    origin = origin,
-                    genericFloat = base.duration
-                };
+
+                EffectData effectData = new() { origin = origin, genericFloat = base.duration };
                 effectData.SetHurtBoxReference(target);
-                EffectManager.SpawnEffect(effectPrefab, effectData, transmit: true);
+                EffectManager.SpawnEffect(capsuleEffectPrefab, effectData, transmit: true);
             }
 
             public override void OnArrival()

@@ -83,9 +83,9 @@ namespace TooManyItems.Items.Tier2
                 ignoredBuffDefs.Add(DLC1Content.Buffs.VoidRaidCrabWardWipeFog);
 
                 // Append custom ignored buffs/debuffs from config
-                foreach (var ignoredBuffName in customIgnoredBuffNames.Value.Split(','))
+                foreach (string ignoredBuffName in customIgnoredBuffNames.Value.Split(','))
                 {
-                    var buffIndex = BuffCatalog.FindBuffIndex(ignoredBuffName.Trim());
+                    BuffIndex buffIndex = BuffCatalog.FindBuffIndex(ignoredBuffName.Trim());
                     if (buffIndex != BuffIndex.None)
                     {
                         ignoredBuffDefs.Add(BuffCatalog.GetBuffDef(buffIndex));

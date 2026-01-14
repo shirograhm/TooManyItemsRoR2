@@ -1,5 +1,6 @@
 ﻿using RoR2;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TooManyItems.Managers
 {
@@ -11,6 +12,7 @@ namespace TooManyItems.Managers
         public static event DamageAttackerVictimEventHandler OnHitEnemy;
         public static event DamageAttackerVictimEventHandler BeforeTakeDamage;
         public static event DamageReportEventHandler OnTakeDamage;
+        public static event DamageReportEventHandler OnCharacterDeath;
 
         internal static void Init()
         {
@@ -32,6 +34,13 @@ namespace TooManyItems.Managers
                     GenericCharacterInfo victimInfo = new(victimBody);
                     OnHitEnemy?.Invoke(damageInfo, attackerInfo, victimInfo);
                 }
+            };
+
+            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            {
+                if (!NetworkServer.active) return;
+
+                if (damageReport != null) OnCharacterDeath?.Invoke(damageReport);
             };
         }
 

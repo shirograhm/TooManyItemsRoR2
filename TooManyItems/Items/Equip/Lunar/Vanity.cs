@@ -67,7 +67,7 @@ namespace TooManyItems.Items.Equip.Lunar
             hubrisDebuff = ItemManager.GenerateBuff("Hubris", AssetManager.bundle.LoadAsset<Sprite>("Hubris.png"), canStack: true, isDebuff: true);
             ContentAddition.AddBuffDef(hubrisDebuff);
 
-            vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_vanityTargetIndicator", false);
+            vanityTargetIndicatorPrefab = LegacyResourcesAPI.Load<GameObject>("Prefabs/WoodSpriteIndicator").InstantiateClone("TooManyItems_VanityTargetIndicator", false);
             vanityTargetIndicatorPrefab.GetComponentInChildren<SpriteRenderer>().color = Utilities.VANITY_COLOR;
             vanityTargetIndicatorPrefab.GetComponentInChildren<TMPro.TextMeshPro>().color = Utilities.VANITY_COLOR;
 
@@ -144,10 +144,8 @@ namespace TooManyItems.Items.Equip.Lunar
                 }
             };
 
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterBody atkBody = damageReport.attackerBody;
                 if (atkBody && atkBody.equipmentSlot && atkBody.equipmentSlot.equipmentIndex == equipmentDef.equipmentIndex)
                 {

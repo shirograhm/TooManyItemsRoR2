@@ -1,7 +1,6 @@
 ﻿using RoR2;
 using System;
 using TooManyItems.Managers;
-using UnityEngine.Networking;
 
 namespace TooManyItems.Items.Tier2
 {
@@ -53,10 +52,8 @@ namespace TooManyItems.Items.Tier2
 
         public static void Hooks()
         {
-            GlobalEventManager.onCharacterDeathGlobal += (damageReport) =>
+            GameEventManager.OnCharacterDeath += (damageReport) =>
             {
-                if (!NetworkServer.active) return;
-
                 CharacterMaster atkMaster = damageReport.attackerMaster;
                 CharacterBody atkBody = damageReport.attackerBody;
                 CharacterBody vicBody = damageReport.victimBody;
