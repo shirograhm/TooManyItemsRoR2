@@ -18,6 +18,7 @@ namespace TooManyItems
         public static Color CARVING_BLADE_COLOR = new(0.09f, 0.67f, 0.62f, 1f);
         public static Color PERMAFROST_COLOR = new(0.76f, 0.80f, 0.98f, 1f);
         public static Color IRON_HEART_COLOR = new(0.44f, 0.44f, 0.44f, 1f);
+        public static Color MILK_CARTON_DAMAGE_COLOR = new(0.28f, 0.28f, 0.06f, 1f);
         public static Color TATTERED_SCROLL_COLOR = new(0.80f, 0.78f, 0.57f, 1f);
         public static Color VANITY_COLOR = new(0.53f, 0.44f, 0.77f, 1f);
 
