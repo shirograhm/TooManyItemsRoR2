@@ -93,6 +93,8 @@ namespace TooManyItems
                 Hoodie.Init();
             if (MagnifyingGlass.isEnabled.Value)
                 MagnifyingGlass.Init();
+            if (RubberDucky.isEnabled.Value)
+                RubberDucky.Init();
             if (SoulRing.isEnabled.Value)
                 SoulRing.Init();
 
@@ -115,8 +117,6 @@ namespace TooManyItems
                 PropellerHat.Init();
             if (RedBlueGlasses.isEnabled.Value)
                 RedBlueGlasses.Init();
-            if (RubberDucky.isEnabled.Value)
-                RubberDucky.Init();
             if (Thumbtack.isEnabled)
                 Thumbtack.Init();
 
