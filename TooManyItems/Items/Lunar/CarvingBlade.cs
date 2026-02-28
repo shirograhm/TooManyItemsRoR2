@@ -113,7 +113,6 @@ namespace TooManyItems.Items.Lunar
             itemDef = ItemManager.GenerateItem("CarvingBlade", [ItemTag.Damage], ItemTier.Lunar);
 
             NetworkingAPI.RegisterMessageType<Statistics.Sync>();
-
             damageType = DamageAPI.ReserveDamageType();
 
             Hooks();

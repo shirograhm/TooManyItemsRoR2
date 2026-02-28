@@ -18,6 +18,7 @@ namespace TooManyItems
         public static Color CARVING_BLADE_COLOR = new(0.09f, 0.67f, 0.62f, 1f);
         public static Color PERMAFROST_COLOR = new(0.76f, 0.80f, 0.98f, 1f);
         public static Color IRON_HEART_COLOR = new(0.44f, 0.44f, 0.44f, 1f);
+        public static Color MILK_CARTON_DAMAGE_COLOR = new(0.28f, 0.28f, 0.06f, 1f);
         public static Color TATTERED_SCROLL_COLOR = new(0.80f, 0.78f, 0.57f, 1f);
         public static Color VANITY_COLOR = new(0.53f, 0.44f, 0.77f, 1f);
 
@@ -94,8 +95,8 @@ namespace TooManyItems
 
         public static bool OnSameTeam(CharacterBody body1, CharacterBody body2)
         {
-            if (body1 == null) throw new ArgumentNullException("body1");
-            if (body2 == null) throw new ArgumentNullException("body2");
+            if (body1 == null) return false;
+            if (body2 == null) return false;
             return body1.teamComponent && body2.teamComponent && body1.teamComponent.teamIndex == body2.teamComponent.teamIndex;
         }
 
@@ -210,22 +211,22 @@ namespace TooManyItems
             switch (tier)
             {
                 case ItemTier.Tier1:
-                    ItemIndex[] arrayNoScrap = ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex).ToArray();
+                    ItemIndex[] arrayNoScrap = [.. ItemCatalog.tier1ItemList.Where(index => index != RoR2Content.Items.ScrapWhite.itemIndex)];
                     if (arrayNoScrap.Length == 0) return ItemIndex.None;
                     int randomIndex = UnityEngine.Random.Range(0, arrayNoScrap.Length);
                     return arrayNoScrap[randomIndex];
                 case ItemTier.Tier2:
-                    ItemIndex[] arrayNoScrap2 = ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex).ToArray();
+                    ItemIndex[] arrayNoScrap2 = [.. ItemCatalog.tier2ItemList.Where(index => index != RoR2Content.Items.ScrapGreen.itemIndex)];
                     if (arrayNoScrap2.Length == 0) return ItemIndex.None;
                     int randomIndex2 = UnityEngine.Random.Range(0, arrayNoScrap2.Length);
                     return arrayNoScrap2[randomIndex2];
                 case ItemTier.Tier3:
-                    ItemIndex[] arrayNoScrap3 = ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex).ToArray();
+                    ItemIndex[] arrayNoScrap3 = [.. ItemCatalog.tier3ItemList.Where(index => index != RoR2Content.Items.ScrapRed.itemIndex)];
                     if (arrayNoScrap3.Length == 0) return ItemIndex.None;
                     int randomIndex3 = UnityEngine.Random.Range(0, arrayNoScrap3.Length);
                     return arrayNoScrap3[randomIndex3];
                 case ItemTier.Lunar:
-                    ItemIndex[] arrayNoAmnesia = ItemCatalog.lunarItemList.Where(index => index != Amnesia.itemDef.itemIndex).ToArray();
+                    ItemIndex[] arrayNoAmnesia = [.. ItemCatalog.lunarItemList.Where(index => index != Amnesia.itemDef.itemIndex)];
                     if (arrayNoAmnesia.Length == 0) return ItemIndex.None;
                     int randomIndexLunar = UnityEngine.Random.Range(0, arrayNoAmnesia.Length);
                     return arrayNoAmnesia[randomIndexLunar];

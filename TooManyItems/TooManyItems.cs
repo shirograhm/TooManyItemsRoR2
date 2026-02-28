@@ -39,7 +39,7 @@ namespace TooManyItems
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "shirograhm";
         public const string PluginName = "TooManyItems";
-        public const string PluginVersion = "0.7.0";
+        public const string PluginVersion = "0.7.1";
 
         public static PluginInfo PInfo { get; private set; }
 
@@ -93,6 +93,8 @@ namespace TooManyItems
                 Hoodie.Init();
             if (MagnifyingGlass.isEnabled.Value)
                 MagnifyingGlass.Init();
+            if (RubberDucky.isEnabled.Value)
+                RubberDucky.Init();
             if (SoulRing.isEnabled.Value)
                 SoulRing.Init();
 
@@ -115,8 +117,6 @@ namespace TooManyItems
                 PropellerHat.Init();
             if (RedBlueGlasses.isEnabled.Value)
                 RedBlueGlasses.Init();
-            if (RubberDucky.isEnabled.Value)
-                RubberDucky.Init();
             if (Thumbtack.isEnabled)
                 Thumbtack.Init();
 

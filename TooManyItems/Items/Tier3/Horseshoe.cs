@@ -22,7 +22,7 @@ namespace TooManyItems.Items.Tier3
             "Item: Golden Horseshoe",
             "Stat Points Cap",
             18f,
-            "Max value of stat points a reroll can have. See following configs for scalings.",
+            "Total amount of stat points in each reroll. See following configs for scalings.",
             ["ITEM_HORSESHOE_DESC"]
         );
         public static ConfigurableValue<float> healthPerPoint = new(
@@ -93,7 +93,7 @@ namespace TooManyItems.Items.Tier3
             "Item: Golden Horseshoe",
             "Increase for Additional Stacks",
             30f,
-            "Percent increase to all bonuses given for each additional stack.",
+            "Percent increase to all bonuses given for each additional stack of this item.",
             ["ITEM_HORSESHOE_DESC"]
         );
         public static float extraStackMultiplierPercent = extraStackMultiplier.Value / 100f;
@@ -242,9 +242,9 @@ namespace TooManyItems.Items.Tier3
                 float pointsRemaining = totalPointsCap.Value;
                 while (pointsRemaining > 0)
                 {
-                    float step = 1.8f;
+                    float step = 2.5f;
                     float randomPoints = (float)TooManyItems.RandGen.NextDouble() * step + step;
-                    // Fixed issue where this item would sometimes give very small buffs
+                    // Adding step value fixes the issue where this item would sometimes give very small buffs
                     if (pointsRemaining - randomPoints < step)
                         randomPoints = pointsRemaining;
 

@@ -225,10 +225,18 @@ namespace TooManyItems.Extensions
                         });
                 if (MilkCarton.isEnabled.Value)
                     RegisterStatsForItem(MilkCarton.itemDef, [
-                        new("Damage Reduction: ", ItemStatsDef.ValueType.Utility, ItemStatsDef.MeasurementUnits.Percentage)
+                        new("Damage Retaliation: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Percentage),
+                        new("Damage Dealt: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            return [Utilities.GetHyperbolicStacking(MilkCarton.percentEliteDamageReduction, MilkCarton.percentEliteDamageReductionExtraStacks, itemCount)];
+                            List<float> values = [Utilities.GetLinearStacking(MilkCarton.percentEliteDamageReflection, MilkCarton.percentEliteDamageReflectionExtraStacks, itemCount)];
+
+                            if (master && master.inventory && master.inventory.GetComponent<MilkCarton.Statistics>())
+                                values.Add(master.inventory.GetComponent<MilkCarton.Statistics>().TotalDamageDealt);
+                            else
+                                values.Add(0f);
+
+                            return values;
                         });
                 if (MagnifyingGlass.isEnabled.Value)
                     RegisterStatsForItem(MagnifyingGlass.itemDef, [
