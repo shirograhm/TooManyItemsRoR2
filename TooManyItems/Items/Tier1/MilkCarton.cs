@@ -181,7 +181,7 @@ namespace TooManyItems.Items.Tier1
                         crit = damageReport.victimBody.RollCrit(),
                         damageColorIndex = MilkCarton.damageColor,
                         procChainMask = new ProcChainMask(),
-                        damageType = DamageType.BypassBlock | DamageType.Silent
+                        damageType = DamageType.Silent
                     };
                     damageReport.attackerBody.healthComponent.TakeDamage(proc);
 
