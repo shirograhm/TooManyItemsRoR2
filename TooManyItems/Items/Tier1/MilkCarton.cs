@@ -25,14 +25,14 @@ namespace TooManyItems.Items.Tier1
         public static ConfigurableValue<float> eliteDamageRetaliation = new(
             "Item: Milk Carton",
             "Damage Retaliation",
-            90f,
+            100f,
             "Percent damage retaliated back to elite enemies.",
             ["ITEM_MILKCARTON_DESC"]
         );
         public static ConfigurableValue<float> eliteDamageRetaliationExtraStacks = new(
             "Item: Milk Carton",
             "Damage Retaliation Extra Stacks",
-            90f,
+            100f,
             "Percent damage retaliated back to elite enemies with extra stacks.",
             ["ITEM_MILKCARTON_DESC"]
         );
