@@ -1,5 +1,6 @@
 ﻿using R2API;
 using RoR2;
+using RoR2.Orbs;
 using TooManyItems.Managers;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -95,24 +96,60 @@ namespace TooManyItems.Items.Equip
                 CharacterBody parent = hb.healthComponent.body;
                 if (parent && parent != slot.characterBody && !parent.isPlayerControlled)
                 {
-                    parent.healthComponent.TakeDamage(new DamageInfo
-                    {
-                        damage = slot.characterBody.damage,
-                        attacker = slot.characterBody.gameObject,
-                        inflictor = slot.characterBody.gameObject,
-                        procCoefficient = 0f,
-                        position = parent.corePosition,
-                        crit = false,
-                        damageColorIndex = damageColor,
-                        procChainMask = new ProcChainMask(),
-                        damageType = DamageType.Silent
-                    });
-
-                    parent.AddTimedBuff(curseDebuff, curseDuration.Value);
+                    OrbManager.instance.AddOrb(new CurseOrb(slot.characterBody, parent));
                 }
             }
 
             return true;
+        }
+
+        public class CurseOrb : Orb
+        {
+            private readonly float speed = 25f;
+
+            private readonly CharacterBody sender;
+            private readonly CharacterBody destination;
+
+            public CurseOrb(CharacterBody send, CharacterBody dest)
+            {
+                if (send && dest)
+                {
+                    origin = send ? send.corePosition : Vector3.zero;
+                    if (dest) target = dest.mainHurtBox;
+                }
+
+                sender = send;
+                destination = dest;
+            }
+
+            public override void Begin()
+            {
+                base.duration = base.distanceToTarget / speed;
+                EffectData effectData = new()
+                {
+                    origin = origin,
+                    genericFloat = base.duration
+                };
+                effectData.SetHurtBoxReference(target);
+                EffectManager.SpawnEffect(OrbStorageUtility.Get("Prefabs/Effects/OrbEffects/HauntOrbEffect"), effectData, transmit: true);
+            }
+
+            public override void OnArrival()
+            {
+                destination.healthComponent.TakeDamage(new DamageInfo
+                {
+                    damage = sender.damage,
+                    attacker = sender.gameObject,
+                    inflictor = sender.gameObject,
+                    procCoefficient = 0f,
+                    position = destination.corePosition,
+                    crit = false,
+                    damageColorIndex = damageColor,
+                    procChainMask = new ProcChainMask(),
+                    damageType = DamageType.Silent
+                });
+                destination.AddTimedBuff(curseDebuff, curseDuration.Value);
+            }
         }
 
         private static void SpawnGoldPack(CharacterBody attacker, CharacterBody victim)
