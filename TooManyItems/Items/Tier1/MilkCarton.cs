@@ -22,17 +22,17 @@ namespace TooManyItems.Items.Tier1
             "Whether or not the item is enabled.",
             ["ITEM_MILKCARTON_DESC"]
         );
-        public static ConfigurableValue<float> eliteDamageReflection = new(
+        public static ConfigurableValue<float> eliteDamageRetaliation = new(
             "Item: Milk Carton",
             "Damage Retaliation",
-            50f,
+            90f,
             "Percent damage retaliated back to elite enemies.",
             ["ITEM_MILKCARTON_DESC"]
         );
-        public static ConfigurableValue<float> eliteDamageReflectionExtraStacks = new(
+        public static ConfigurableValue<float> eliteDamageRetaliationExtraStacks = new(
             "Item: Milk Carton",
             "Damage Retaliation Extra Stacks",
-            50f,
+            90f,
             "Percent damage retaliated back to elite enemies with extra stacks.",
             ["ITEM_MILKCARTON_DESC"]
         );
@@ -43,8 +43,8 @@ namespace TooManyItems.Items.Tier1
             "Proc coefficient for the damage retaliation.",
             ["ITEM_MILKCARTON_DESC"]
         );
-        public static float percentEliteDamageReflection = eliteDamageReflection.Value / 100f;
-        public static float percentEliteDamageReflectionExtraStacks = eliteDamageReflectionExtraStacks.Value / 100f;
+        public static float percentEliteDamageRetaliation = eliteDamageRetaliation.Value / 100f;
+        public static float percentEliteDamageRetaliationExtraStacks = eliteDamageRetaliationExtraStacks.Value / 100f;
 
         public class Statistics : MonoBehaviour
         {
@@ -138,7 +138,7 @@ namespace TooManyItems.Items.Tier1
 
         public class MilkCartonOrb : Orb
         {
-            private readonly float speed = 60f;
+            private readonly float speed = 45f;
             private readonly DamageReport damageReport;
 
             public MilkCartonOrb(DamageReport report)
@@ -166,11 +166,11 @@ namespace TooManyItems.Items.Tier1
 
             public override void OnArrival()
             {
-                if (damageReport.victimBody && damageReport.victimBody.inventory)
+                if (damageReport.attackerBody && damageReport.victimBody && damageReport.victimBody.inventory)
                 {
                     int count = damageReport.victimBody.inventory.GetItemCountEffective(MilkCarton.itemDef);
 
-                    float amount = damageReport.damageInfo.damage * Utilities.GetLinearStacking(percentEliteDamageReflection, percentEliteDamageReflectionExtraStacks, count);
+                    float amount = damageReport.damageInfo.damage * Utilities.GetLinearStacking(percentEliteDamageRetaliation, percentEliteDamageRetaliationExtraStacks, count);
                     DamageInfo proc = new()
                     {
                         damage = amount,
@@ -181,7 +181,7 @@ namespace TooManyItems.Items.Tier1
                         crit = damageReport.victimBody.RollCrit(),
                         damageColorIndex = MilkCarton.damageColor,
                         procChainMask = new ProcChainMask(),
-                        damageType = DamageType.BypassBlock
+                        damageType = DamageType.BypassBlock | DamageType.Silent
                     };
                     damageReport.attackerBody.healthComponent.TakeDamage(proc);
 
