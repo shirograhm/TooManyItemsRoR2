@@ -157,7 +157,7 @@
     "RUBBERDUCKY": "橡皮鸭",
     "ITEM_RUBBERDUCKY_NAME": "橡皮鸭",
     "ITEM_RUBBERDUCKY_PICKUP": "获得少量护甲。",
-    "ITEM_RUBBERDUCKY_DESC": "获得 <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} 每层)</style> 护甲</style>。",
+    "ITEM_RUBBERDUCKY_DESC": "获得 <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} 每层)</style> 护甲</style>。Activating the teleporter grants <style=cIsDamage>BASE damage</style> equal to <style=cEvent>{Armor Conversion}% of your armor</style> for <style=cIsUtility>{Conversion Duration} seconds</style>.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "SOULRING": "灵魂之戒",
     "ITEM_SOULRING_NAME": "灵魂之戒",

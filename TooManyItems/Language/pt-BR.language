@@ -162,7 +162,7 @@
     "RUBBERDUCKY": "Patinho de Borracha",
     "ITEM_RUBBERDUCKY_NAME": "Patinho de Borracha",
     "ITEM_RUBBERDUCKY_PICKUP": "Ganhe armadura.",
-    "ITEM_RUBBERDUCKY_DESC": "Ganhe <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} por acúmulo)</style> de armadura</style>.",
+    "ITEM_RUBBERDUCKY_DESC": "Ganhe <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} por acúmulo)</style> de armadura</style>. Activating the teleporter grants <style=cIsDamage>BASE damage</style> equal to <style=cEvent>{Armor Conversion}% of your armor</style> for <style=cIsUtility>{Conversion Duration} seconds</style>.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "SOULRING": "Anel da Alma",
     "ITEM_SOULRING_NAME": "Anel da Alma",

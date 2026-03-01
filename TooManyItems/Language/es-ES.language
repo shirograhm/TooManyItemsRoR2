@@ -162,7 +162,7 @@
     "RUBBERDUCKY": "Patito de Goma",
     "ITEM_RUBBERDUCKY_NAME": "Patito de Goma",
     "ITEM_RUBBERDUCKY_PICKUP": "Obtienes armadura.",
-    "ITEM_RUBBERDUCKY_DESC": "Obtienes <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} por stack)</style> de armadura</style>.",
+    "ITEM_RUBBERDUCKY_DESC": "Obtienes <style=cEvent>{Armor} <style=cStack>(+{Armor Extra Stacks} por stack)</style> de armadura</style>. Activating the teleporter grants <style=cIsDamage>BASE damage</style> equal to <style=cEvent>{Armor Conversion}% of your armor</style> for <style=cIsUtility>{Conversion Duration} seconds</style>.",
     "ITEM_RUBBERDUCKY_LORE": "",
     "SOULRING": "Anillo de Alma",
     "ITEM_SOULRING_NAME": "Anillo de Alma",
