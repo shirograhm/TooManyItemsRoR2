@@ -50,14 +50,14 @@ namespace TooManyItems.Items.Tier2
         public static ConfigurableValue<float> armorConversion = new(
             "Item: Rubber Ducky",
             "Armor Conversion",
-            50f,
+            20f,
             "Percent of armor granted as temporary BASE damage upon activation of the teleporter.",
             ["ITEM_RUBBERDUCKY_DESC"]
         );
         public static ConfigurableValue<float> conversionDuration = new(
             "Item: Rubber Ducky",
             "Conversion Duration",
-            10f,
+            12f,
             "Duration of the damage buff from armor.",
             ["ITEM_RUBBERDUCKY_DESC"]
         );

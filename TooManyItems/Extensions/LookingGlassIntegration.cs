@@ -229,7 +229,7 @@ namespace TooManyItems.Extensions
                         new("Damage Dealt: ", ItemStatsDef.ValueType.Damage, ItemStatsDef.MeasurementUnits.Number)
                         ], (master, itemCount) =>
                         {
-                            List<float> values = [Utilities.GetLinearStacking(MilkCarton.percentEliteDamageReflection, MilkCarton.percentEliteDamageReflectionExtraStacks, itemCount)];
+                            List<float> values = [Utilities.GetLinearStacking(MilkCarton.percentEliteDamageRetaliation, MilkCarton.percentEliteDamageRetaliationExtraStacks, itemCount)];
 
                             if (master && master.inventory && master.inventory.GetComponent<MilkCarton.Statistics>())
                                 values.Add(master.inventory.GetComponent<MilkCarton.Statistics>().TotalDamageDealt);
