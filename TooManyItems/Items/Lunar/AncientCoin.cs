@@ -53,7 +53,8 @@ namespace TooManyItems.Items.Lunar
                 }
             };
 
-            On.RoR2.CharacterMaster.GiveMoney += (orig, self, amount) =>
+            // RoR2 1.5.0: GiveMoney(uint) is obsolete and forwards to GiveMoney(uint, bool bypassStatManager)
+            On.RoR2.CharacterMaster.GiveMoney_uint_bool += (orig, self, amount, bypassStatManager) =>
             {
                 if (self.inventory)
                 {
@@ -64,7 +65,7 @@ namespace TooManyItems.Items.Lunar
                         amount = Convert.ToUInt32(amount * multiplier);
                     }
                 }
-                orig(self, amount);
+                orig(self, amount, bypassStatManager);
             };
         }
     }
