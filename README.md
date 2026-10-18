@@ -376,7 +376,7 @@ All that being said, I would generally recommend using the most recent version o
     </tr>
     <tr>
         <td>
-            <img src="https://i.imgur.com/dEgzWQh.png" alt="Rubber Ducky" width="192"/>
+            <img src="https://i.imgur.com/8BhfhyI.png" alt="Rubber Ducky" width="192"/>
         </td>
         <td>
             <b>Rubber Ducky</b>
